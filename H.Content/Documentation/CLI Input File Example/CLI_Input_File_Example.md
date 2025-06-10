@@ -11,9 +11,9 @@ Example value: 0
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -26,9 +26,9 @@ Example value: wheat and hairy vetch
 
 Type value: Text
 
-Is user provided: Yes
+Does user have to provide value: Yes
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: User defined name 
 
@@ -41,9 +41,9 @@ Example value: 18
 
 Type value: Double (Decimal/Numeric)
 
-Is user provided: Yes 
+Does user have to provide value: Yes 
 
-has default?: No
+Holos has a default value?: No
 
 note: 
 
@@ -56,9 +56,9 @@ Example value: 2024
 
 Type value: Int (Integer/Numeric)
 
-Is user provided: Yes 
+Does user have to provide value: Yes 
 
-has default?: Current year (i.e. 2024) 
+Holos has a default value?: Current year (i.e. 2024) 
 
 note: 
 
@@ -71,9 +71,9 @@ Example value: 1985
 
 Type value: Int (Integer/Numeric)
 
-Is user provided: Yes 
+Does user have to provide value: Yes 
 
-has default?: No
+Holos has a default value?: No
 
 note: Each (row) in input file must correspond to a certain year 
 
@@ -86,9 +86,9 @@ Example value: Wheat
 
 Type value: Text
 
-Is user provided: Yes
+Does user have to provide value: Yes
 
-has default?: No
+Holos has a default value?: No
 
 Possible Values (see table below):
 <br>
@@ -119,9 +119,9 @@ Example value: Reduced
 
 Type value: Enum 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: Wheat 
+Holos has a default value?: Wheat 
 
 note: See GUI for supported list of crop types since not all items in the enum are supported in calculations 
 
@@ -134,9 +134,9 @@ Example value: 0
 
 Type value: Int 
 
-Is user provided: yes 
+Does user have to provide value: yes 
 
-has default?: no 
+Holos has a default value?: no 
 
 note: Each year of a perennial stand must have the year identified in the row of the input file. E.g. a six year perennial stand would have one row with this value set 1 for the first year, 2 for the second year, etc 
 
@@ -149,9 +149,9 @@ Example value: 00000000-0000-0000-0000-000000000000
 
 Type value: GUID 
 
-Is user provided: yes 
+Does user have to provide value: yes 
 
-has default?: no 
+Holos has a default value?: no 
 
 note: Used to group all years of a perennial stand together. Each year in a distinct perennial stand must have this value set. All years in the same perennial stand must have this same ID/value. Can be thought of as a 'group' ID 
 
@@ -164,9 +164,9 @@ Example value: 1
 
 Type value: Int 
 
-Is user provided: ? 
+Does user have to provide value: ? 
 
-has default?: 1
+Holos has a default value?: 1
 
 note: Indicates how long the perennial is grown 
 
@@ -179,9 +179,9 @@ Example value: 0.244
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: Rp Product 
 
@@ -194,9 +194,9 @@ Example value: 0.518
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: Rs Straw 
 
@@ -209,9 +209,9 @@ Example value: 0.147
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: Rr Root 
 
@@ -224,9 +224,9 @@ Example value: 0.091
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: Re Extra-root 
 
@@ -239,9 +239,9 @@ Example value: 0.0263
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: Np Product 
 
@@ -254,9 +254,9 @@ Example value: 0.0082
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: Ns Straw 
 
@@ -269,9 +269,9 @@ Example value: 0.0104
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: Nr Root 
 
@@ -284,9 +284,9 @@ Example value: 0.0104
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: Ne Extra-root 
 
@@ -299,9 +299,9 @@ Example value: 0
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: Indexed by crop type 
 
@@ -314,9 +314,9 @@ Example value: 5
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: 5
+Holos has a default value?: 5
 
 note: Common value for all crop types. Page 74 in algorithm document 
 
@@ -329,9 +329,9 @@ Example value: 0.45
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: 0.45 
+Holos has a default value?: 0.45 
 
 note: Common value for all crop types. Page 37 in algorithm document 
 
@@ -344,9 +344,9 @@ Example value: 2700
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: Look up value from Small Area Database 
 
@@ -359,9 +359,9 @@ Example value: CashCrop
 
 Type value: Enum 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: Depends on crop type. Line 19 in source 
 
@@ -374,9 +374,9 @@ Example value: 87.7608533333333
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: Calculated based on yield. Line 17 in source 
 
@@ -389,9 +389,9 @@ Example value: 0
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Not used/implemented yet. Future version will utilize 
 
@@ -404,9 +404,9 @@ Example value: No
 
 Type value: Enum 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: No 
+Holos has a default value?: No 
 
 note: Not used/implemented yet. Future version will utilize 
 
@@ -419,9 +419,9 @@ Example value: RainFed
 
 Type value: Enum 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: Used to lookup values in Table 7. Line 1290 in source 
 
@@ -434,9 +434,9 @@ Example value: 200
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: Line 35 
 
@@ -449,9 +449,9 @@ Example value: 0.12
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: Look up value by crop type and irrigation amount. Additional logic in source file on line 60 
 
@@ -464,9 +464,9 @@ Example value: 12
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: Look up value by crop type and irrigation amount. Additional logic in source file on line 61 
 
@@ -479,9 +479,9 @@ Example value: 100
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: Line 35 in source. Page 36 in algorithm document has references 
 
@@ -494,9 +494,9 @@ Example value: 100
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: Line 35 in source. Page 36 in algorithm document has references 
 
@@ -509,9 +509,9 @@ Example value: 2
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: Line 35 in source. Page 36 in algorithm document has references 
 
@@ -524,9 +524,9 @@ Example value: No
 
 Type value: Bool 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Should be set if "Number of Pesticide Passes" > 0 
 
@@ -539,9 +539,9 @@ Example value: 0
 
 Type value: Int 
 
-Is user provided: Yes 
+Does user have to provide value: Yes 
 
-has default?: No 
+Holos has a default value?: No 
 
 note: Any value > 0 
 
@@ -554,9 +554,9 @@ Example value: False
 
 Type value: Bool 
 
-Is user provided: Yes 
+Does user have to provide value: Yes 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: Should be set to true if any manure application/amount has been applied to field 
 
@@ -569,9 +569,9 @@ Example value: 0
 
 Type value: Double 
 
-Is user provided: Yes 
+Does user have to provide value: Yes 
 
-has default?: No 
+Holos has a default value?: No 
 
 note: Amount of manure applied to field (kg/ha) 
 
@@ -584,9 +584,9 @@ Example value: NotSelected
 
 Type value: Enum 
 
-Is user provided: Yes 
+Does user have to provide value: Yes 
 
-has default?: No 
+Holos has a default value?: No 
 
 note: See page 201 in algorithm document and table 43 line 113 
 
@@ -599,9 +599,9 @@ Example value: NotSelected
 
 Type value: Enum 
 
-Is user provided: Yes 
+Does user have to provide value: Yes 
 
-has default?: No 
+Holos has a default value?: No 
 
 note: Used for various table lookups 
 
@@ -614,9 +614,9 @@ Example value: NotSelected
 
 Type value: Enum 
 
-Is user provided: Yes 
+Does user have to provide value: Yes 
 
-has default?: No 
+Holos has a default value?: No 
 
 note: Used for various table lookups 
 
@@ -629,9 +629,9 @@ Example value: NotSelected
 
 Type value: Enum 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: "Livestock" 
+Holos has a default value?: "Livestock" 
 
 note: Used to inidcate if manure was source from on farm or imported onto farm 
 
@@ -644,9 +644,9 @@ Example value: False
 
 Type value: Bool 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value?: Yes 
 
 note: See notes in source file on line 449 
 
@@ -659,9 +659,9 @@ Example value: False
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Not used/implemented yet. Future version will utilize 
 
@@ -674,9 +674,9 @@ Example value: 642a2cb7-0321-4395-9ebb-d5743c27c960
 
 Type value: GUID 
 
-Is user provided: No 
+Does user have to provide value: No 
 
-has default?: No 
+Holos has a default value?: No 
 
 note: Unique ID for each field component on the farm 
 
@@ -689,9 +689,9 @@ Example value: Current
 
 Type value: Enum 
 
-Is user provided: No 
+Does user have to provide value: No 
 
-has default?: "Current" 
+Holos has a default value?: "Current" 
 
 note: Used to indicate time period in field history. Leave as "Current" if not sure 
 
@@ -704,9 +704,9 @@ Example value: 1.363
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 0/Calculated 
+Holos has a default value?: 0/Calculated 
 
 note: Used with the ICBM C model. Will be generated when the user imports GUI farm files (0 otherwise). Can be set when creating new (blank) CLI input file(s) 
 
@@ -719,9 +719,9 @@ Example value: 0.8
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: 0/Calculated 
+Holos has a default value?: 0/Calculated 
 
 note: Used with the ICBM C model. Will be generated when the user imports GUI farm files (0 otherwise). Can be set when creating new (blank) CLI input file(s). See section 2.1.1.2 in algorithm document 
 
@@ -734,9 +734,9 @@ Example value: 1.09
 
 Type value: Double 
 
-Is user provided: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
-has default?: 0/Calculated 
+Holos has a default value?: 0/Calculated 
 
 note: Used with the ICBM C model. Will be generated when the user imports GUI farm files (0 otherwise). Can be set when creating new (blank) CLI input file(s). See section 2.1.1.2 in algorithm document 
 
@@ -749,9 +749,9 @@ Example value: 1211.76
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -764,9 +764,9 @@ Example value: 24.2352
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -779,9 +779,9 @@ Example value: 2572.5068852459
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -794,9 +794,9 @@ Example value: 730.035737704918
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -809,9 +809,9 @@ Example value: 451.926885245902
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -824,9 +824,9 @@ Example value: 1
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -839,9 +839,9 @@ Example value: 1650.63391153725
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -854,9 +854,9 @@ Example value: 601.948372142029
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -869,9 +869,9 @@ Example value: 0
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -884,9 +884,9 @@ Example value: 0
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -899,9 +899,9 @@ Example value: 2845.39665493676
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -914,9 +914,9 @@ Example value: 0.2
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -929,9 +929,9 @@ Example value: 0.053
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -944,9 +944,9 @@ Example value: 0
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -959,9 +959,9 @@ Example value: 0
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -974,9 +974,9 @@ Example value: 0
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -989,9 +989,9 @@ Example value: 0.007
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -1004,9 +1004,9 @@ Example value: 3930.08074175535
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -1019,9 +1019,9 @@ Example value: 25797.7873775155
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -1034,9 +1034,9 @@ Example value: 2.39
 
 Type value: Double 
 
-Is user provided: yes 
+Does user have to provide value: yes 
 
-has default?: no 
+Holos has a default value?: no 
 
 note: See table 50 and section 6 in algorithm document 
 
@@ -1049,9 +1049,9 @@ Example value: 0.23
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: no 
+Holos has a default value?: no 
 
 note: See table 51 and section 6 in algorithm document 
 
@@ -1064,9 +1064,9 @@ Example value: Urea
 
 Type value: Enum 
 
-Is user provided: yes 
+Does user have to provide value: yes 
 
-has default?: no 
+Holos has a default value?: no 
 
 note: See GUI for supported list of blends 
 
@@ -1083,9 +1083,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1098,9 +1098,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1113,9 +1113,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1128,9 +1128,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1143,9 +1143,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1158,9 +1158,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1173,9 +1173,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1188,9 +1188,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1203,9 +1203,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1218,9 +1218,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1233,9 +1233,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1248,9 +1248,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1263,9 +1263,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1278,9 +1278,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1293,9 +1293,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1308,9 +1308,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1323,9 +1323,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1338,9 +1338,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1353,9 +1353,9 @@ Example value:
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1368,9 +1368,9 @@ Example value:
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1383,9 +1383,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1398,9 +1398,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1413,9 +1413,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1428,9 +1428,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1443,9 +1443,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1458,9 +1458,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1473,9 +1473,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1488,9 +1488,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1503,9 +1503,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1518,9 +1518,9 @@ Example value:
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1533,9 +1533,9 @@ Example value:
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1548,9 +1548,9 @@ Example value:
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1563,9 +1563,9 @@ Example value:
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1578,9 +1578,9 @@ Example value:
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1593,9 +1593,9 @@ Example value:
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1608,9 +1608,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1623,9 +1623,9 @@ Example value:
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1638,9 +1638,9 @@ Example value:
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1653,9 +1653,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1668,9 +1668,9 @@ Example value:
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1683,9 +1683,9 @@ Example value:
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1698,9 +1698,9 @@ Example value:
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1713,9 +1713,9 @@ Example value:
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1728,9 +1728,9 @@ Example value:
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1743,9 +1743,9 @@ Example value:
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1758,9 +1758,9 @@ Example value:
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1773,9 +1773,9 @@ Example value:
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1788,9 +1788,9 @@ Example value:
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1803,9 +1803,9 @@ Example value:
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1818,9 +1818,9 @@ Example value:
 
 Type value: 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 Source (code, csv?, etc.): 
 
@@ -1837,9 +1837,9 @@ Example value: Beef Stockers & Backgrounders
 
 Type Value: str (from enum) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Should be unique string differentiate from other components/input files 
 
@@ -1852,9 +1852,9 @@ Example value: H.Core.Models.Animals.Beef.BackgroundingComponent
 
 Type Value: str (from enum) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: 
 
@@ -1867,9 +1867,9 @@ Example value: Heifers
 
 Type Value: str (from enum) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Must be unique string differentiate from other animal groups in the same component (e.g. "Bulls group #1") 
 
@@ -1882,9 +1882,9 @@ Example value: BeefBackgrounderHeifer
 
 Type Value: str (from enum) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: See converter class used to convert animal type string names to enumeration values 
 
@@ -1897,9 +1897,9 @@ Example value: Management period #1
 
 Type Value: str 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Must be a unique string within the animal group 
 
@@ -1912,9 +1912,9 @@ Example value: 0
 
 Type Value: int 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Used to group a parent and child group of animals. E.g. a group of lactating cows and a group of beef calves must have the same pairing number. Leave as zero when a parent/child grouping does not exist (most cases). See unit test class for example on setting this value 
 
@@ -1927,9 +1927,9 @@ Example value: 2023-10-01 00:00:00
 
 Type Value: strftime 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Must be set to indicate the start of management period 
 
@@ -1942,9 +1942,9 @@ Example value: 110
 
 Type Value: int 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Must be set to indicate how long the management period lasts 
 
@@ -1957,9 +1957,9 @@ Example value: 100
 
 Type Value: int 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Number of animals in the animal group 
 
@@ -1972,9 +1972,9 @@ Example value: Gestating
 
 Type Value: str (from enum) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Must be set to indicate which stage a group of animals are in the lifecycle of the animal group (i.e. Lactating cows will be at the lactating production stage). This is not used for all animal types 
 
@@ -1987,9 +1987,9 @@ Example value: 0
 
 Type Value: int 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Used to indicate how many young animals (i.e. beef calves) are associated with a parent group. See line 208 of source file on how to use 
 
@@ -2002,9 +2002,9 @@ Example value: False
 
 Type Value: bool 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Use to specify that a group of animals are on a milk diet only. Used when referring to a group of young animals that are suckling/nursing 
 
@@ -2017,9 +2017,9 @@ Example value: 240
 
 Type Value: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Start weight of the animals in a particular management period 
 
@@ -2032,9 +2032,9 @@ Example value: 361
 
 Type Value: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: End weight of the animals in a particular management period 
 
@@ -2047,9 +2047,9 @@ Example value: 1.1
 
 Type Value: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: This will be a value that is calculated based on the start and end weight 
 
@@ -2062,9 +2062,9 @@ Example value: 0
 
 Type Value: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: The amount of milk produced by the group of animals 
 
@@ -2077,9 +2077,9 @@ Example value: 4
 
 Type Value: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 3.71 
+Holos has a default value?: 3.71 
 
 note: Used with dairy components. Old default value was 4but has been changed 
 
@@ -2092,9 +2092,9 @@ Example value: 3.5
 
 Type Value: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: y 
+Holos has a default value?: y 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -2107,9 +2107,9 @@ Example value:
 
 Type Value: Enum 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: No 
+Holos has a default value?: No 
 
 note: Optional input used to calculate enteric CH4. See GUI for supported types 
 
@@ -2122,9 +2122,9 @@ Example value: 0.063
 
 Type Value: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: Yes, based on diet 
+Holos has a default value?: Yes, based on diet 
 
 note: Also known as Ym of diet. See source file for defaults based on diet type 
 
@@ -2137,9 +2137,9 @@ Example value: 0
 
 Type Value: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -2152,9 +2152,9 @@ Example value: 0
 
 Type Value: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Used with some animal types (i.e. swine types). See swine diets in source file for defaults 
 
@@ -2167,9 +2167,9 @@ Example value: 12.28
 
 Type Value: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Crude protein value of diet. See feed ingredient list for values 
 
@@ -2182,9 +2182,9 @@ Example value: 65
 
 Type Value: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Forage value of diet. See feed ingredient list for values 
 
@@ -2197,9 +2197,9 @@ Example value: 68.825
 
 Type Value: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: TDN value of diet. See feed ingredient list tdn values 
 
@@ -2212,9 +2212,9 @@ Example value: 6.57
 
 Type Value: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Ash content of diet. See line 434 for more informtation on how to calculate averages 
 
@@ -2227,9 +2227,9 @@ Example value: 25.825
 
 Type Value: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Starch content of diet 
 
@@ -2242,9 +2242,9 @@ Example value: 3.045
 
 Type Value: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Fat content of diet 
 
@@ -2257,9 +2257,9 @@ Example value: 2.48
 
 Type Value: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Metabolizable energy of diet 
 
@@ -2272,9 +2272,9 @@ Example value: 42.025
 
 Type Value: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Neutral detergent fibre of diet 
 
@@ -2287,9 +2287,9 @@ Example value: 0
 
 Type Value: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Used only for diet/DMI calculations for beef calves. See line 419 
 
@@ -2302,9 +2302,9 @@ Example value: ConfinedNoBarn
 
 Type Value: str (from enum) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Required field used for many calculations. See GUI for correct types when considering a particular animal type 
 
@@ -2317,9 +2317,9 @@ Example value: 1
 
 Type Value: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: See line 134 for default setting 
 
@@ -2332,9 +2332,9 @@ Example value: 1.5
 
 Type Value: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Amount of bedding added. Used in C and N input calculations. See line 52 in source and table 30 
 
@@ -2347,9 +2347,9 @@ Example value: 0.447
 
 Type Value: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: See HousingDetails.cs line 186 
 
@@ -2362,9 +2362,9 @@ Example value: 0.0057
 
 Type Value: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: See HousingDetails.cs line 177 
 
@@ -2377,9 +2377,9 @@ Example value: 9.57
 
 Type Value: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: See HousingDetails.cs line 219 
 
@@ -2392,9 +2392,9 @@ Example value: 0
 
 Type Value: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: See line 74 for defaults 
 
@@ -2407,9 +2407,9 @@ Example value: 0.322
 
 Type Value: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: See line 108 for defaults 
 
@@ -2422,9 +2422,9 @@ Example value: 0.26
 
 Type Value: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Methane conversion factor of manure, not to be consufed with Methane conversion factor of diet (Ym). See line 89 for defaults 
 
@@ -2437,9 +2437,9 @@ Example value: 0.01
 
 Type Value: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: See line 34 for defaults 
 
@@ -2452,9 +2452,9 @@ Example value: 0.005
 
 Type Value: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: See line 34 for defaults 
 
@@ -2467,9 +2467,9 @@ Example value: 0.25
 
 Type Value: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: See line 34 for defaults 
 
@@ -2482,9 +2482,9 @@ Example value: 0.011
 
 Type Value: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: See line 34 for defaults 
 
@@ -2497,9 +2497,9 @@ Example value: 0.035
 
 Type Value: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: See line 55 for defaults 
 
@@ -2512,9 +2512,9 @@ Example value: 8
 
 Type Value: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -2527,9 +2527,9 @@ Example value: 0.19
 
 Type Value: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: Also known as Bo. See line 89 for defaults 
 
@@ -2542,9 +2542,9 @@ Example value: 0
 
 Type Value: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: See line 31 for defaults 
 
@@ -2557,9 +2557,9 @@ Example value: 0.125
 
 Type Value: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: See line 31 for defaults 
 
@@ -2572,9 +2572,9 @@ Example value: 0.28
 
 Type Value: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: See line 31 for defaults 
 
@@ -2587,9 +2587,9 @@ Example value: DeepBedding
 
 Type Value: str (from enum) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 note: Required. See GUI for valid types for particular animal type 
 
@@ -2602,9 +2602,9 @@ Example value: 0.35
 
 Type Value: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 note: For poultry animals only. See line 7 in source 
 
@@ -2621,9 +2621,9 @@ Example value:
 
 Value Type: str (from enum) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2636,9 +2636,9 @@ Example value:
 
 Value Type: str (from enum) 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2651,9 +2651,9 @@ Example value:
 
 Value Type: str (from enum) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2666,9 +2666,9 @@ Example value:
 
 Value Type: str (from enum) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2681,9 +2681,9 @@ Example value:
 
 Value Type: str 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2696,9 +2696,9 @@ Example value:
 
 Value Type: int 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2711,9 +2711,9 @@ Example value:
 
 Value Type: strftime 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2726,9 +2726,9 @@ Example value:
 
 Value Type: int 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2741,9 +2741,9 @@ Example value:
 
 Value Type: int 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2756,9 +2756,9 @@ Example value:
 
 Value Type: str (from enum) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2771,9 +2771,9 @@ Example value:
 
 Value Type: int 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2786,9 +2786,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2801,9 +2801,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2816,9 +2816,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2831,9 +2831,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2846,9 +2846,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2861,9 +2861,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2876,9 +2876,9 @@ Example value:
 
 Value Type: str (from enum) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2891,9 +2891,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2906,9 +2906,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2921,9 +2921,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2936,9 +2936,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2951,9 +2951,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2966,9 +2966,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2981,9 +2981,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -2996,9 +2996,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3011,9 +3011,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3026,9 +3026,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3041,9 +3041,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3056,9 +3056,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3071,9 +3071,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3086,9 +3086,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3101,9 +3101,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3116,9 +3116,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3131,9 +3131,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3146,9 +3146,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3161,9 +3161,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3176,9 +3176,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3191,9 +3191,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3206,9 +3206,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3221,9 +3221,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3236,9 +3236,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3251,9 +3251,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3266,9 +3266,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3281,9 +3281,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3296,9 +3296,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3311,9 +3311,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value?: 
 
 Source (code, csv?, etc.): 
 
@@ -3330,1467 +3330,1467 @@ Example value: 851003
 
 Value type: int 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: N 
+Holos has a default value ?: N 
 
 note: Required. Use GUI map view to get polygon number if needed 
 
 Source (code, csv?, etc.): 
 
 ***
-## YieldAssignmentMethod=
+## YieldAssignmentMethod
 
 Example value: SmallAreaData 
 
 Value type: enum 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: SmallAreaData 
+Holos has a default value ?: SmallAreaData 
 
 note: Used to lookup default yields for a particular year and crop type 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/YieldAssignmentMethod.cs 
 
 ***
-## PolygonNumber=
+## PolygonNumber
 
 Example value: 851003
 
 Value type: int 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Required. Use GUI map view to get polygon number if needed 
 
 Source (code, csv?, etc.): 
 
 ***
-## Latitude=
+## Latitude
 
 Example value: 49.9805772869656 
 
 Value type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Required if using NASA as the source for climate data. Values are determined when user clicks on a location in the GUI 
 
 Source (code, csv?, etc.): 
 
 ***
-## Longitude=
+## Longitude
 
 Example value: -98.0433082580568 
 
 Value type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Required if using NASA as the source for climate data. Values are determined when user clicks on a location in the GUI 
 
 Source (code, csv?, etc.): 
 
 ***
-## CarbonConcentration(kgkg^-1)=
+## CarbonConcentration(kgkg^-1)
 
 Example value: 0.45 
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 0.4 
+Holos has a default value ?: 0.4 
 
 note: See line 90 in source 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/CoreConstants.cs 
 
 ***
-## EmergenceDay=
+## EmergenceDay
 
 Example value: 141
 
 Value type: int 
 
-Is user provided: is used ? 
+Does user have to provide value: is used ? 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used with ICBM carbon model. See line 167 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## RipeningDay=
+## RipeningDay
 
 Example value: 197
 
 Value type: int 
 
-Is user provided: is used ? 
+Does user have to provide value: is used ? 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used with ICBM carbon model. See line 168 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Variance=
+## Variance
 
 Example value: 300
 
 Value type: float? 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used with ICBM carbon model. See line 169 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Alfa=
+## Alfa
 
 Example value: 0.7 
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used with ICBM carbon model. See line 175 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## DecompositionMinimumTemperature(�C)=-3.78
+## DecompositionMinimumTemperature(�C)-3.78
 
 Example value: -3.78 
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used with ICBM carbon model. See line 176 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## DecompositionMaximumTemperature(�C)=
+## DecompositionMaximumTemperature(�C)
 
 Example value: 30
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used with ICBM carbon model. See line 177 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## MoistureResponseFunctionAtSaturation=
+## MoistureResponseFunctionAtSaturation
 
 Example value: 0.42 
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used with ICBM carbon model. See line 178 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## MoistureResponseFunctionAtWiltingPoint=
+## MoistureResponseFunctionAtWiltingPoint
 
 Example value: 0.18 
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used with ICBM carbon model. See line 179 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## PercentageOfProductReturnedToSoilForAnnuals=2
+## PercentageOfProductReturnedToSoilForAnnuals2
 
 Example value: 2
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfStrawReturnedToSoilForAnnuals=100
+## PercentageOfStrawReturnedToSoilForAnnuals100
 
 Example value: 100
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfRootsReturnedToSoilForAnnuals=100
+## PercentageOfRootsReturnedToSoilForAnnuals100
 
 Example value: 100
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductYieldReturnedToSoilForSilageCrops=35
+## PercentageOfProductYieldReturnedToSoilForSilageCrops35
 
 Example value: 35
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfRootsReturnedToSoilForSilageCrops=100
+## PercentageOfRootsReturnedToSoilForSilageCrops100
 
 Example value: 100
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductYieldReturnedToSoilForCoverCrops=100
+## PercentageOfProductYieldReturnedToSoilForCoverCrops100
 
 Example value: 100
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductYieldReturnedToSoilForCoverCropsForage=35
+## PercentageOfProductYieldReturnedToSoilForCoverCropsForage35
 
 Example value: 35
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductYieldReturnedToSoilForCoverCropsProduce=0
+## PercentageOfProductYieldReturnedToSoilForCoverCropsProduce0
 
 Example value: 0
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfStrawReturnedToSoilForCoverCrops=100
+## PercentageOfStrawReturnedToSoilForCoverCrops100
 
 Example value: 100
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfRootsReturnedToSoilForCoverCrops=100
+## PercentageOfRootsReturnedToSoilForCoverCrops100
 
 Example value: 100
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductReturnedToSoilForRootCrops=0
+## PercentageOfProductReturnedToSoilForRootCrops0
 
 Example value: 0
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfStrawReturnedToSoilForRootCrops=100
+## PercentageOfStrawReturnedToSoilForRootCrops100
 
 Example value: 100
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductReturnedToSoilForPerennials=35
+## PercentageOfProductReturnedToSoilForPerennials35
 
 Example value: 35
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfRootsReturnedToSoilForPerennials=100
+## PercentageOfRootsReturnedToSoilForPerennials100
 
 Example value: 100
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductReturnedToSoilForRangelandDueToHarvestLoss=35
+## PercentageOfProductReturnedToSoilForRangelandDueToHarvestLoss35
 
 Example value: 35
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfRootsReturnedToSoilForRangeland=100
+## PercentageOfRootsReturnedToSoilForRangeland100
 
 Example value: 100
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductReturnedToSoilForFodderCorn=35
+## PercentageOfProductReturnedToSoilForFodderCorn35
 
 Example value: 35
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfRootsReturnedToSoilForFodderCorn=100
+## PercentageOfRootsReturnedToSoilForFodderCorn100
 
 Example value: 100
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## DecompositionRateConstantYoungPool=0.8
+## DecompositionRateConstantYoungPool0.8
 
 Example value: 0.8 
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used with ICBM carbon model. See line 221 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## DecompositionRateConstantOldPool=
+## DecompositionRateConstantOldPool
 
 Example value: 0.00605 
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used with ICBM carbon model. See line 222 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## OldPoolCarbonN=
+## OldPoolCarbonN
 
 Example value: 0.1 
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used with both ICBM and IPCC Tier 2 carbon models. See line 224 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## NORatio=
+## NORatio
 
 Example value: 0.1 
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used with both ICBM and IPCC Tier 2 carbon models. See line 227 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## EmissionFactorForLeachingAndRunoff(kgN2O-N(kgN)^-1)=
+## EmissionFactorForLeachingAndRunoff(kgN2O-N(kgN)^-1)
 
 Example value: 0.011 
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used for N2O calculations. See line 228  
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## EmissionFactorForVolatilization(kgN2O-N(kgN)^-1)=
+## EmissionFactorForVolatilization(kgN2O-N(kgN)^-1)
 
 Example value: 0.01 
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used for N2O calculations. See line 229 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## FractionOfNLostByVolatilization=
+## FractionOfNLostByVolatilization
 
 Example value: 0.21 
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used for N2O calculations. See line 232 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## MicrobeDeath=
+## MicrobeDeath
 
 Example value: 0.2 
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used by both ICBM and IPCC Tier carbon models. See line 236 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Denitrification=
+## Denitrification
 
 Example value: 0.5 
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used by both ICBM and IPCC Tier carbon models. See line 237 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Carbonmodellingstrategy=
+## Carbonmodellingstrategy
 
 Example value:  IPCCTier2 
 
 Value type: enum 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Will determine which carbon model will be used (IPCC Tier 2 is the newest C model and is the new default model) 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/CarbonModellingStrategies.cs 
 
 ***
-## RunInPeriodYears=
+## RunInPeriodYears
 
 Example value: 15
 
 Value type: int 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used to indicate how many years will be used when calculating equilibrium soil carbon. Can leave default in most cases. See line 269 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## HumificationCoefficientAboveGround=
+## HumificationCoefficientAboveGround
 
 Example value: 0.125 
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used with ICBM carbon model. See line 217 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## HumificationCoefficientBelowGround=
+## HumificationCoefficientBelowGround
 
 Example value: 0.3 
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used with ICBM carbon model. See line 218 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## HumificationCoefficientManure=
+## HumificationCoefficientManure
 
 Example value: 0.31 
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used with ICBM carbon model. See line 219 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Climatefilename=climate.csv
+## Climatefilenameclimate.csv
 
 Example value: climate.csv 
 
 Value type: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Used when climate acquisition is set to "InputFile" 
 
 Source (code, csv?, etc.): 
 
 ***
-## ClimateDataAcquisition=
+## ClimateDataAcquisition
 
 Example value: NASA 
 
 Value type: enum 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Specifies how Holos will aquire climate data. See source file for more details 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Climate/ClimateProvider.cs 
 
 ***
-## Useclimateparameterinsteadofmanagementfactor=
+## Useclimateparameterinsteadofmanagementfactor
 
 Example value: True 
 
 Value type: bool 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Set to true for most scenarios 
 
 Source (code, csv?, etc.): 
 
 ***
-## EnableCarbonModelling=
+## EnableCarbonModelling
 
 Example value: True 
 
 Value type: bool 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Set to true for most scenarios 
 
 Source (code, csv?, etc.): 
 
 ***
-## JanuaryPrecipitation=
+## JanuaryPrecipitation
 
 Example value: 17.6213 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else. See line 37 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## FebruaryPrecipitation=
+## FebruaryPrecipitation
 
 Example value: 12.8316 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## MarchPrecipitation=
+## MarchPrecipitation
 
 Example value: 22.426 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## AprilPrecipitation=
+## AprilPrecipitation
 
 Example value: 27.4144 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## MayPrecipitation=
+## MayPrecipitation
 
 Example value: 61.5015 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## JunePrecipitation=
+## JunePrecipitation
 
 Example value: 77.9022 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## JulyPrecipitation=
+## JulyPrecipitation
 
 Example value: 57.274 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## AugustPrecipitation=
+## AugustPrecipitation
 
 Example value: 53.0356 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## SeptemberPrecipitation=
+## SeptemberPrecipitation
 
 Example value: 40.4796 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## OctoberPrecipitation=
+## OctoberPrecipitation
 
 Example value: 33.7571 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## NovemberPrecipitation=
+## NovemberPrecipitation
 
 Example value: 23.0151 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## DecemberPrecipitation=
+## DecemberPrecipitation
 
 Example value: 21.4046 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## JanuaryPotentialEvapotranspiration=
+## JanuaryPotentialEvapotranspiration
 
 Example value: 0.0327 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## FebruaryPotentialEvapotranspiration=
+## FebruaryPotentialEvapotranspiration
 
 Example value: 0.0888 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## MarchPotentialEvapotranspiration=
+## MarchPotentialEvapotranspiration
 
 Example value: 3.5731 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## AprilPotentialEvapotranspiration=
+## AprilPotentialEvapotranspiration
 
 Example value: 44.1505 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## MayPotentialEvapotranspiration=
+## MayPotentialEvapotranspiration
 
 Example value: 100.0393 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## JunePotentialEvapotranspiration=
+## JunePotentialEvapotranspiration
 
 Example value: 123.5476 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## JulyPotentialEvapotranspiration=
+## JulyPotentialEvapotranspiration
 
 Example value: 135.7116 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## AugustPotentialEvapotranspiration=
+## AugustPotentialEvapotranspiration
 
 Example value: 120.4341 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## SeptemberPotentialEvapotranspiration=
+## SeptemberPotentialEvapotranspiration
 
 Example value: 66.0041 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## OctoberPotentialEvapotranspiration=
+## OctoberPotentialEvapotranspiration
 
 Example value: 16.8898 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## NovemberPotentialEvapotranspiration=
+## NovemberPotentialEvapotranspiration
 
 Example value: 0.7677 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## DecemberPotentialEvapotranspiration=
+## DecemberPotentialEvapotranspiration
 
 Example value: 0.0252 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## JanuaryMeanTemperature=
+## JanuaryMeanTemperature
 
 Example value: -14.8531 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## FebruaryMeanTemperature=
+## FebruaryMeanTemperature
 
 Example value: -12.4063 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## MarchMeanTemperature=
+## MarchMeanTemperature
 
 Example value: -5.3584 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## AprilMeanTemperature=
+## AprilMeanTemperature
 
 Example value: 3.7295 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## MayMeanTemperature=
+## MayMeanTemperature
 
 Example value: 10.7967 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## JuneMeanTemperature=
+## JuneMeanTemperature
 
 Example value: 16.4886 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## JulyMeanTemperature=
+## JulyMeanTemperature
 
 Example value: 18.8914 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## AugustMeanTemperature=
+## AugustMeanTemperature
 
 Example value: 18.2291 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## SeptemberMeanTemperature=
+## SeptemberMeanTemperature
 
 Example value: 13.2652 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## OctoberMeanTemperature=
+## OctoberMeanTemperature
 
 Example value: 5.6419 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## NovemberMeanTemperature=
+## NovemberMeanTemperature
 
 Example value: -3.5511 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## DecemberMeanTemperature=
+## DecemberMeanTemperature
 
 Example value: -11.9174 
 
 Value type: float 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## Province=
+## Province
 
 Example value: Manitoba 
 
 Value type: enum 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: extracted from slc DB with lat long data 
 
 Source (code, csv?, etc.): 
 
 ***
-## YearOfObservation=
+## YearOfObservation
 
 Example value: 2024
 
 Value type: int 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: Defaults to the current year 
 
 Source (code, csv?, etc.): 
 
 ***
-## EcodistrictID=
+## EcodistrictID
 
 Example value: 851
 
 Value type: int 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: extracted from slc DB with lat long data 
 
 Source (code, csv?, etc.): 
 
 ***
-## SoilGreatGroup=
+## SoilGreatGroup
 
 Example value: Regosol 
 
 Value type: enum 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: extracted from slc DB with lat long data 
 
 Source (code, csv?, etc.): 
 
 ***
-## Soilfunctionalcategory=
+## Soilfunctionalcategory
 
 Example value: Black 
 
 Value type: enum 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
 
 note: deduced following code in Holos 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): H.Core/Enumerations/SoilFunctionalCategory.cs
 
 ***
-## BulkDensity=
+## BulkDensity
 
 Example value: 1.2 
 
 Value type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: Yes
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): H.Core/Providers/Soil/SoilData.cs
 
 ***
-## SoilTexture=
+## SoilTexture
 
 Example value: Fine 
 
 Value type: enum 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: Yes
 
 note: deduced following code in Holos 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): H.Core/Enumerations/SoilTexture.cs
 
 ***
-## SoilPh=
+## SoilPh
 
 Example value: 7.8 
 
 Value type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: Yes
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): H.Core/Providers/Soil/SoilData.cs
 
 ***
-## TopLayerThickness(mm)=
+## TopLayerThickness(mm)
 
 Example value: 200
 
 Value type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: Yes
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): H.Core/Providers/Soil/SoilData.cs
 
 ***
-## ProportionOfSandInSoil=
+## ProportionOfSandInSoil
 
 Example value: 0.2 
 
 Value type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: Yes
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): H.Core/Providers/Soil/SoilData.cs
 
 ***
-## ProportionOfClayInSoil=
+## ProportionOfClayInSoil
 
 Example value: 0.3 
 
 Value type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: Yes
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): H.Core/Providers/Soil/SoilData.cs
 
 ***
-## ProportionOfSoilOrganicCarbon=
+## ProportionOfSoilOrganicCarbon
 
 Example value: 3.1 
 
 Value type: float 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: Yes
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): H.Core/Providers/Soil/SoilData.cs
 
 ***
