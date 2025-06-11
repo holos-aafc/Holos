@@ -4667,7 +4667,9 @@ Value type: enum
 
 Does user have to provide value: x 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible values: NotApplicable, Unknown, MelanicBrunisol, EutricBrunisol, SombricBrunisol, DystricBrunisol, BrownChernozem, DarkBrownChernozem, BlackChernozem, DarkGrayChernozem, TurbicCryosol, StaticCryosol, OrganicCryosol, HumicGleysol, Gleysol, LuvicGleysol, GrayBrownLuvisol, GrayLuvisol, Fibrisol, Mesisol, Humisol, Folisol, HumicPodzol, FerroHumicPodzol, HumoFerricPodzol, Regosol, HumicRegosol, Solonetz, SolodizedSolonetz, Solod, VerticSolonetz, Vertisol, HumicVertisol
 
 note: extracted from slc DB with lat long data 
 
@@ -4682,7 +4684,9 @@ Value type: enum
 
 Does user have to provide value: x 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: NotApplicable, Brown, BrownChernozem, DarkBrown, DarkBrownChernozem, Black, BlackGrayChernozem, Organic, EasternCanada, EnumSoilFunctionalAll, 
 
 note: deduced following code in Holos 
 
@@ -4699,6 +4703,8 @@ Does user have to provide value: x
 
 Holos has a default value ?: Yes
 
+Possible values: 0 < x
+
 note: extracted from slc DB with lat long data 
 
 Source (code, csv?, etc.): H.Core/Providers/Soil/SoilData.cs
@@ -4713,6 +4719,8 @@ Value type: enum
 Does user have to provide value: x 
 
 Holos has a default value ?: Yes
+
+Possible Values: Fine, Medium, Coarse, Unknown
 
 note: deduced following code in Holos 
 
@@ -4729,6 +4737,8 @@ Does user have to provide value: x
 
 Holos has a default value ?: Yes
 
+Possible Values: 0 < x
+
 note: extracted from slc DB with lat long data 
 
 Source (code, csv?, etc.): H.Core/Providers/Soil/SoilData.cs
@@ -4743,6 +4753,8 @@ Value type: float
 Does user have to provide value: x 
 
 Holos has a default value ?: Yes
+
+Possible Values: 0 < x
 
 note: extracted from slc DB with lat long data 
 
@@ -4759,6 +4771,8 @@ Does user have to provide value: x
 
 Holos has a default value ?: Yes
 
+Possible Values: 0 < x < 100
+
 note: extracted from slc DB with lat long data 
 
 Source (code, csv?, etc.): H.Core/Providers/Soil/SoilData.cs
@@ -4774,6 +4788,8 @@ Does user have to provide value: x
 
 Holos has a default value ?: Yes
 
+Possible Values: 0 < x < 100
+
 note: extracted from slc DB with lat long data 
 
 Source (code, csv?, etc.): H.Core/Providers/Soil/SoilData.cs
@@ -4788,6 +4804,8 @@ Value type: float
 Does user have to provide value: x 
 
 Holos has a default value ?: Yes
+
+Possible Values: 0 < x < 100
 
 note: extracted from slc DB with lat long data 
 
