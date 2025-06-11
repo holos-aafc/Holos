@@ -4442,7 +4442,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4457,7 +4459,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4472,7 +4476,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4487,7 +4493,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4502,7 +4510,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4517,7 +4527,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4532,7 +4544,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4547,7 +4561,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4562,7 +4578,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4577,7 +4595,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4592,7 +4612,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4609,6 +4631,8 @@ Does user have to provide value: not used
 
 Holos has a default value ?: 
 
+Possible values: any unrestricted value
+
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
@@ -4624,9 +4648,11 @@ Does user have to provide value: x
 
 Holos has a default value ?: 
 
+Possible values: Alberta, BritishColumbia, Manitoba, NewBrunswick, Newfoundland, NorthwestTerritories, NovaScotia, Ontario, Nunavut, PrinceEdwardIsland, Quebec, Saskatchewan, Yukon
+
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/Province.cs
 
 ***
 ## YearOfObservation
@@ -4637,11 +4663,13 @@ Value type: int
 
 Does user have to provide value: x 
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible values: 1 < x
 
 note: Defaults to the current year 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Infrastructure/ModelBase.cs
 
 ***
 ## EcodistrictID
@@ -4652,11 +4680,13 @@ Value type: int
 
 Does user have to provide value: x 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: 0 < x
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
 ## SoilGreatGroup
@@ -4673,7 +4703,7 @@ Possible values: NotApplicable, Unknown, MelanicBrunisol, EutricBrunisol, Sombri
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/SoilGreatGroupType.cs
 
 ***
 ## Soilfunctionalcategory
@@ -4690,7 +4720,7 @@ Possible Values: NotApplicable, Brown, BrownChernozem, DarkBrown, DarkBrownChern
 
 note: deduced following code in Holos 
 
-Source (code, csv?, etc.): H.Core/Enumerations/SoilFunctionalCategory.cs
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/SoilFunctionalCategory.cs
 
 ***
 ## BulkDensity
@@ -4707,7 +4737,7 @@ Possible values: 0 < x
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): H.Core/Providers/Soil/SoilData.cs
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
 ## SoilTexture
@@ -4724,7 +4754,7 @@ Possible Values: Fine, Medium, Coarse, Unknown
 
 note: deduced following code in Holos 
 
-Source (code, csv?, etc.): H.Core/Enumerations/SoilTexture.cs
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/SoilTexture.cs
 
 ***
 ## SoilPh
@@ -4741,7 +4771,7 @@ Possible Values: 0 < x
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): H.Core/Providers/Soil/SoilData.cs
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
 ## TopLayerThickness(mm)
@@ -4758,7 +4788,7 @@ Possible Values: 0 < x
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): H.Core/Providers/Soil/SoilData.cs
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
 ## ProportionOfSandInSoil
@@ -4775,7 +4805,7 @@ Possible Values: 0 < x < 100
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): H.Core/Providers/Soil/SoilData.cs
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
 ## ProportionOfClayInSoil
@@ -4792,7 +4822,7 @@ Possible Values: 0 < x < 100
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): H.Core/Providers/Soil/SoilData.cs
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
 ## ProportionOfSoilOrganicCarbon
