@@ -4809,6 +4809,6 @@ Possible Values: 0 < x < 100
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/e5b6648b3b016ce0254201f53960fe2154cd7ecc/H.Core/Providers/Soil/SoilData.cs#L162
+Source (code, csv?, etc.): [https://github.com/holos-aafc/Holos/blob/e5b6648b3b016ce0254201f53960fe2154cd7ecc/H.Core/Providers/Soil/SoilData.cs#L162](https://github.com/holos-aafc/Holos/blob/e5b6648b3b016ce0254201f53960fe2154cd7ecc/H.Core/Providers/Soil/SoilData.cs)
 
 ***
