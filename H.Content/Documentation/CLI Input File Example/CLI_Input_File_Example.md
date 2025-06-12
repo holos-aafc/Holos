@@ -3585,234 +3585,266 @@ Example value: 35
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values:
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfRootsReturnedToSoilForSilageCrops100
+## PercentageOfRootsReturnedToSoilForSilageCrops
 
 Example value: 100
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductYieldReturnedToSoilForCoverCrops100
+## PercentageOfProductYieldReturnedToSoilForCoverCrops
 
 Example value: 100
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductYieldReturnedToSoilForCoverCropsForage35
+## PercentageOfProductYieldReturnedToSoilForCoverCropsForage
 
 Example value: 35
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductYieldReturnedToSoilForCoverCropsProduce0
+## PercentageOfProductYieldReturnedToSoilForCoverCropsProduce
 
 Example value: 0
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfStrawReturnedToSoilForCoverCrops100
+## PercentageOfStrawReturnedToSoilForCoverCrops
 
 Example value: 100
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfRootsReturnedToSoilForCoverCrops100
+## PercentageOfRootsReturnedToSoilForCoverCrops
 
 Example value: 100
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductReturnedToSoilForRootCrops0
+## PercentageOfProductReturnedToSoilForRootCrops
 
 Example value: 0
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfStrawReturnedToSoilForRootCrops100
+## PercentageOfStrawReturnedToSoilForRootCrops
 
 Example value: 100
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductReturnedToSoilForPerennials35
+## PercentageOfProductReturnedToSoilForPerennials
 
 Example value: 35
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfRootsReturnedToSoilForPerennials100
+## PercentageOfRootsReturnedToSoilForPerennials
 
 Example value: 100
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values:
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductReturnedToSoilForRangelandDueToHarvestLoss35
+## PercentageOfProductReturnedToSoilForRangelandDueToHarvestLoss
 
 Example value: 35
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values:
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfRootsReturnedToSoilForRangeland100
+## PercentageOfRootsReturnedToSoilForRangeland
 
 Example value: 100
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values:
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductReturnedToSoilForFodderCorn35
+## PercentageOfProductReturnedToSoilForFodderCorn
 
 Example value: 35
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfRootsReturnedToSoilForFodderCorn100
+## PercentageOfRootsReturnedToSoilForFodderCorn
 
 Example value: 100
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## DecompositionRateConstantYoungPool0.8
+## DecompositionRateConstantYoungPool
 
 Example value: 0.8 
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 
 
 note: Used with ICBM carbon model. See line 221 for default 
 
@@ -3825,9 +3857,11 @@ Example value: 0.00605
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values:
 
 note: Used with ICBM carbon model. See line 222 for default 
 
@@ -3840,9 +3874,11 @@ Example value: 0.1
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x
 
 note: Used with both ICBM and IPCC Tier 2 carbon models. See line 224 
 
@@ -3855,9 +3891,11 @@ Example value: 0.1
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values:
 
 note: Used with both ICBM and IPCC Tier 2 carbon models. See line 227 
 
@@ -3870,9 +3908,11 @@ Example value: 0.011
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 
 
 note: Used for N2O calculations. See line 228  
 
@@ -3885,9 +3925,11 @@ Example value: 0.01
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values:
 
 note: Used for N2O calculations. See line 229 
 
@@ -3900,9 +3942,11 @@ Example value: 0.21
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values:
 
 note: Used for N2O calculations. See line 232 
 
@@ -3915,9 +3959,11 @@ Example value: 0.2
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x  
 
 note: Used by both ICBM and IPCC Tier carbon models. See line 236 
 
@@ -3930,9 +3976,11 @@ Example value: 0.5
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x 
 
 note: Used by both ICBM and IPCC Tier carbon models. See line 237 
 
@@ -3945,9 +3993,11 @@ Example value:  IPCCTier2
 
 Value type: enum 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible values: IPCCTier2, ICBM
 
 note: Will determine which carbon model will be used (IPCC Tier 2 is the newest C model and is the new default model) 
 
@@ -3960,9 +4010,11 @@ Example value: 15
 
 Value type: int 
 
-Does user have to provide value: x 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x 
 
 note: Used to indicate how many years will be used when calculating equilibrium soil carbon. Can leave default in most cases. See line 269 
 
@@ -3975,9 +4027,11 @@ Example value: 0.125
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x 
 
 note: Used with ICBM carbon model. See line 217 for default 
 
@@ -3990,9 +4044,11 @@ Example value: 0.3
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x 
 
 note: Used with ICBM carbon model. See line 218 for default 
 
@@ -4005,9 +4061,11 @@ Example value: 0.31
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x 
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible values: 0 < x
 
 note: Used with ICBM carbon model. See line 219 for default 
 
@@ -4022,11 +4080,13 @@ Value type:
 
 Does user have to provide value: x 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: "Any_Valid_Text".csv
 
 note: Used when climate acquisition is set to "InputFile" 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs
 
 ***
 ## ClimateDataAcquisition
@@ -4088,7 +4148,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else. See line 37 
 
@@ -4103,7 +4165,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4118,7 +4182,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4133,7 +4199,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4148,7 +4216,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4163,7 +4233,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4178,7 +4250,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4193,7 +4267,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4208,7 +4284,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4223,7 +4301,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4238,7 +4318,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4253,7 +4335,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4268,7 +4352,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4283,7 +4369,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4298,7 +4386,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4313,7 +4403,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4328,7 +4420,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4343,7 +4437,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4358,7 +4454,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4373,7 +4471,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4388,7 +4488,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4403,7 +4505,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4418,7 +4522,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
@@ -4433,7 +4539,9 @@ Value type: float
 
 Does user have to provide value: not used 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
