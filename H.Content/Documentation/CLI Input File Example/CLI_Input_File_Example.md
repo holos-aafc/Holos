@@ -4035,13 +4035,15 @@ Example value: NASA
 
 Value type: enum 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible Values:  SLC, Custom, NASA, InputFile
 
 note: Specifies how Holos will aquire climate data. See source file for more details 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Climate/ClimateProvider.cs 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Climate/ClimateProvider.cs | https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs
 
 ***
 ## Useclimateparameterinsteadofmanagementfactor
@@ -4052,11 +4054,13 @@ Value type: bool
 
 Does user have to provide value: 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible values: True, False
 
 note: Set to true for most scenarios 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs
 
 ***
 ## EnableCarbonModelling
@@ -4067,11 +4071,13 @@ Value type: bool
 
 Does user have to provide value: 
 
-Holos has a default value ?: 
+Holos has a default value ?: Yes
+
+Possible values: True, False
 
 note: Set to true for most scenarios 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs
 
 ***
 ## JanuaryPrecipitation
