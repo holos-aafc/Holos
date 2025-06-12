@@ -1,0 +1,80 @@
+name: Holos Farm File Checklist
+description: In order for the Holos team to better help you troubleshoot, please fill out all of the relevant information in this form.
+title: "Farm File"
+labels: ["farm-file"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to fill out this troubleshooting form. For additional help, please visit [Holos Documentation](https://github.com/holos-aafc/Holos/tree/main/H.Content/Documentation).
+  
+  - type: textarea
+    id: farm-summary
+    attributes:
+      label: Farm summary
+      description: Provide a brief summary of the model farm you have created. Describe the type of farm and the animals present, including any field components. Provide as much relevant detail as possible.
+      value: | 
+        Example: This farm is a beef production farm with a beef cow-calf operation including bulls and replacement heifers with the cow-calf pairs. It also has backgrounding steers and heifers along with finishing animals. There are thre fields on the farm, one pasture and the other two growing crops. The crops are not used as feed but the animals are on pasture part of the year. No specialty diets were created for any of the cattle. This farm was created within the last 2 weeks using Holos version X (if known).
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue-description
+    attributes:
+      label: Issue description
+      description: Describe the issue you are having with your farm file. Explain what your expectations are and what you are experiencing. Include any error messages or unexpected behavior.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Farm Data Collection Template
+        Please download and fill out the following [**Excel file**](https://github.com/holos-aafc/Holos/blob/main/.github/ISSUE_TEMPLATE/Holos-Farm-File-Checklist.xlsx) with your farms information. This will help us better understand your farm setup and assist you more effectively.
+
+  - type: markdown
+    attributes:
+      value: |
+        ## File Verification and Export
+        
+        ### Farm file
+        For instructions on how to export your farm, please refer to the [User Guide (Exporting Farms)](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md#exporting-farms).
+
+        ### Manure management file
+        Navigate to the **Results** screen and select the [**Manure Management** tab](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md#manure-management). Look for any outliers or missing values, if nothing looks out of place select the **Export to Excel** button. This will generate a .xlsx file containing your manure management data which can be attached to this form.
+
+        ### Detailed emissions report file
+        Navigate to the **Results** screen and select the [**Detailed Emissions Report** tab](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md#detailed-emissions-report). Look for any outliers or missing values, if nothing looks out of place select the **Export to Excel** button. This will generate a .xlsx file containing your emissions data which can be attached to this form.
+
+  - type: markdown
+    attributes:
+      value: |
+        ## File Attachments
+  - type: textarea
+    id: attach-files-here
+    attributes:
+      label: Attach all files here
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: attachment-confirmation
+    attributes:
+      label: File attachments confirmation
+      description: Please confirm you've attached ALL required files
+      options:
+        - label: I've attached the completed Farm Data Collection Template
+        - label: I've attached my Holos farm file (.json)
+        - label: I've attached my manure management data file (.xlsx)
+        - label: I've attached my emissions report file (.xlsx)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/holos-aafc/Holos/blob/main/CODE_OF_CONDUCT.md)
+      options:
+        - label: I agree to follow Holos' Code of Conduct
+          required: true
