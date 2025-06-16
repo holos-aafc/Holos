@@ -11,9 +11,9 @@ Example value: 0
 
 Type value: 
 
-Is user provided: x 
+Does user have to provide value: Yes
 
-has default?: 
+Holos has a default value: No
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -22,13 +22,13 @@ Source (code, csv?, etc.):
 ***
 ## Name
 
-Example value: wheat and hairy vetch 
+Example value: Wheat and hairy vetch 
 
-Type value: Text
+Type value: String (Text)
 
-Is user provided: Yes
+Does user have to provide value: Yes
 
-has default?: Yes 
+Holos has a default value: Yes 
 
 note: User defined name 
 
@@ -41,9 +41,11 @@ Example value: 18
 
 Type value: Double (Decimal/Numeric)
 
-Is user provided: Yes 
+Does user provide have to value: Yes 
 
-has default?: No
+Holos has a default value: No
+
+Valid range of values: (x ≥ 0)
 
 note: 
 
@@ -56,9 +58,9 @@ Example value: 2024
 
 Type value: Int (Integer/Numeric)
 
-Is user provided: Yes 
+Does user provide have to value: Yes 
 
-has default?: Current year (i.e. 2024) 
+Holos has a default value: Current year (i.e. 2024) 
 
 note: 
 
@@ -71,9 +73,11 @@ Example value: 1985
 
 Type value: Int (Integer/Numeric)
 
-Is user provided: Yes 
+Does user provide have to value: Yes 
 
-has default?: No
+Holos has a default value: No
+
+Possible values: 1985-(current year)
 
 note: Each (row) in input file must correspond to a certain year 
 
@@ -86,11 +90,11 @@ Example value: Wheat
 
 Type value: Text
 
-Is user provided: Yes
+Does user provide have to value: Yes
 
-has default?: No
+Holos has a default value: No
 
-Possible Values (see table below):
+Possible values (see table below):
 <br>
 | Oilseeds  | Other field crops  |  Pulse crops | Root crop   | Silage  | Small grain cereals   | Fallow  | Perenial  |
 |---|---|---|---|---|---|---|---|
@@ -117,11 +121,13 @@ Source (code, csv?, etc.):
 
 Example value: Reduced 
 
-Type value: Enum 
+Type value: Text 
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default?: Wheat 
+Holos has a default value: Wheat 
+
+Possible values: No tillage, Reduced tillage, Intensive tillage
 
 note: See GUI for supported list of crop types since not all items in the enum are supported in calculations 
 
@@ -130,13 +136,15 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 ***
 ## YearInPerennialStand
 
-Example value: 0
+Example value: 2018
 
-Type value: Int 
+Type value: Int (Integer/Numeric)
 
-Is user provided: yes 
+Does user provide have to value: Yes 
 
-has default?: no 
+Holos has a default value: No 
+
+Possible values: 1985-(current year)
 
 note: Each year of a perennial stand must have the year identified in the row of the input file. E.g. a six year perennial stand would have one row with this value set 1 for the first year, 2 for the second year, etc 
 
@@ -149,9 +157,11 @@ Example value: 00000000-0000-0000-0000-000000000000
 
 Type value: GUID 
 
-Is user provided: yes 
+Does user provide have to value: Yes 
 
-has default?: no 
+Holos has a default value: No 
+
+Possible values: 
 
 note: Used to group all years of a perennial stand together. Each year in a distinct perennial stand must have this value set. All years in the same perennial stand must have this same ID/value. Can be thought of as a 'group' ID 
 
@@ -162,11 +172,13 @@ Source (code, csv?, etc.):
 
 Example value: 1
 
-Type value: Int 
+Type value: Int (Integer/Numeric)
 
-Is user provided: ? 
+Does user provide have to value: No
 
-has default?: 1
+Holos has a default value: 1
+
+Possible values: 
 
 note: Indicates how long the perennial is grown 
 
@@ -177,11 +189,13 @@ Source (code, csv?, etc.):
 
 Example value: 0.244 
 
-Type value: Double 
+Type value: Double (Decimal/Numeric) 
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value: Yes 
+
+Valid range of values: (0 ≤ x ≤ 1)
 
 note: Rp Product 
 
@@ -192,11 +206,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: 0.518 
 
-Type value: Double 
+Type value: Double (Decimal/Numeric) 
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value: Yes 
+
+Valid range of values: (0 ≤ x ≤ 1)
 
 note: Rs Straw 
 
@@ -207,11 +223,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: 0.147 
 
-Type value: Double 
+Type value: Double (Decimal/Numeric) 
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value: Yes 
+
+Valid range of values: (0 < x < 1)
 
 note: Rr Root 
 
@@ -222,11 +240,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: 0.091 
 
-Type value: Double 
+Type value: Double (Decimal/Numeric) 
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value: Yes 
+
+Valid range of values: (0 ≤ x ≤ 1)
 
 note: Re Extra-root 
 
@@ -237,11 +257,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: 0.0263 
 
-Type value: Double 
+Type value: Double (Decimal/Numeric) 
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value: Yes 
+
+Valid range of values: (x ≥ 0)
 
 note: Np Product 
 
@@ -252,11 +274,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: 0.0082 
 
-Type value: Double 
+Type value: Double (Decimal/Numeric) 
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value: Yes 
+
+Valid range of values: (x ≥ 0)
 
 note: Ns Straw 
 
@@ -267,11 +291,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: 0.0104 
 
-Type value: Double 
+Type value: Double (Decimal/Numeric) 
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value: Yes 
+
+Valid range of values: (x ≥ 0)
 
 note: Nr Root 
 
@@ -282,11 +308,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: 0.0104 
 
-Type value: Double 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value: Yes 
+
+Valid range of values: (x ≥ 0)
 
 note: Ne Extra-root 
 
@@ -297,11 +325,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: 0
 
-Type value: Double 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value: Yes 
+
+Valid range of values: (0 ≤ x ≤ 100)
 
 note: Indexed by crop type 
 
@@ -312,11 +342,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 5
 
-Type value: Double 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: 5
+Holos has a default value: 5
+
+Valid range of values: (x ≥ 0)
 
 note: Common value for all crop types. Page 74 in algorithm document 
 
@@ -327,11 +359,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/raw/refs/heads/ma
 
 Example value: 0.45 
 
-Type value: Double 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: 0.45 
+Holos has a default value: 0.45 
+
+Valid range of values: (x ≥ 0)
 
 note: Common value for all crop types. Page 37 in algorithm document 
 
@@ -342,11 +376,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/raw/refs/heads/ma
 
 Example value: 2700
 
-Type value: Double 
+Type value: Double (Decimal/Numeric) 
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value: Yes
+
+Valid range of values: (x ≥ 0)
 
 note: Look up value from Small Area Database 
 
@@ -357,11 +393,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: CashCrop 
 
-Type value: Enum 
+Type value: Enum (Text)
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value: Yes
+
+Valid values: CashCrop, GreenManure, None, Silage, StubbleGrazing, Swathing
 
 note: Depends on crop type. Line 19 in source 
 
@@ -372,11 +410,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 87.7608533333333 
 
-Type value: Double 
+Type value: Double (Decimal/Numeric)  
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value: Yes
+
+Valid range of values: (x ≥ 0)
 
 note: Calculated based on yield. Line 17 in source 
 
@@ -387,11 +427,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0
 
-Type value: 
+Type value: Double (Decimal/Numeric)  
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Not used/implemented yet. Future version will utilize 
 
@@ -402,11 +444,13 @@ Source (code, csv?, etc.):
 
 Example value: No 
 
-Type value: Enum 
+Type value: Enum (Yes/No)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default?: No 
+Holos has a default value: No 
+
+Valid values: Yes, No
 
 note: Not used/implemented yet. Future version will utilize 
 
@@ -417,11 +461,13 @@ Source (code, csv?, etc.):
 
 Example value: RainFed 
 
-Type value: Enum 
+Type value: Enum (Text)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default?: Yes 
+Holos has a default value: Yes 
+
+Valid values: Rainfed, Irrigated
 
 note: Used to lookup values in Table 7. Line 1290 in source 
 
@@ -432,11 +478,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 200
 
-Type value: Double 
+Type value: Double (Decimal/Numeric) 
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value: Yes
+
+Valid range of values: (x ≥ 0)
 
 note: Line 35 
 
@@ -447,11 +495,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.12 
 
-Type value: Double 
+Type value: Double (Decimal/Numeric)  
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value: Yes
+
+Valid range of values: (0 ≤ x ≤ 1)
 
 note: Look up value by crop type and irrigation amount. Additional logic in source file on line 60 
 
@@ -462,11 +512,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: 12
 
-Type value: Double 
+Type value: Double (Decimal/Numeric)  
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value: Yes 
+
+Valid range of values: (0 ≤ x ≤ 100)
 
 note: Look up value by crop type and irrigation amount. Additional logic in source file on line 61 
 
@@ -477,11 +529,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: 100
 
-Type value: Double 
+Type value: Double (Decimal/Numeric) 
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value: Yes
+
+Valid range of values: (0 ≤ x ≤ 100)
 
 note: Line 35 in source. Page 36 in algorithm document has references 
 
@@ -492,11 +546,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 100
 
-Type value: Double 
+Type value: Double (Decimal/Numeric)  
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value: Yes
+
+Valid range of values: (0 ≤ x ≤ 100)
 
 note: Line 35 in source. Page 36 in algorithm document has references 
 
@@ -507,11 +563,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 2
 
-Type value: Double 
+Type value: Double (Decimal/Numeric) 
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value: Yes
+
+Valid range of values: (0 ≤ x ≤ 100)
 
 note: Line 35 in source. Page 36 in algorithm document has references 
 
@@ -522,11 +580,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: No 
 
-Type value: Bool 
+Type value: Bool (Yes/No)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default?: 
+Holos has a default value:
+
+Valid values: Yes/No
 
 note: Should be set if "Number of Pesticide Passes" > 0 
 
@@ -537,11 +597,13 @@ Source (code, csv?, etc.):
 
 Example value: 0
 
-Type value: Int 
+Type value: Int (Integer/Numeric)
 
-Is user provided: Yes 
+Does user provide have to value: Yes 
 
-has default?: No 
+Holos has a default value: No
+
+Valid range of values: (x ≥ 0)
 
 note: Any value > 0 
 
@@ -552,11 +614,13 @@ Source (code, csv?, etc.):
 
 Example value: False 
 
-Type value: Bool 
+Type value: Bool (True/False)
 
-Is user provided: Yes 
+Does user provide have to value: Yes 
 
-has default?: Yes 
+Holos has a default value: Yes
+
+Valid values: True, False
 
 note: Should be set to true if any manure application/amount has been applied to field 
 
@@ -567,11 +631,13 @@ Source (code, csv?, etc.):
 
 Example value: 0
 
-Type value: Double 
+Type value: Double (Decimal/Numeric) 
 
-Is user provided: Yes 
+Does user provide have to value: Yes 
 
-has default?: No 
+Holos has a default value: No 
+
+Valid values: True/False
 
 note: Amount of manure applied to field (kg/ha) 
 
@@ -582,11 +648,13 @@ Source (code, csv?, etc.):
 
 Example value: NotSelected 
 
-Type value: Enum 
+Type value: Enum (Text)
 
-Is user provided: Yes 
+Does user provide have to value: Yes 
 
-has default?: No 
+Holos has a default value: No 
+
+Valid values: NotSelected, TilledLandSolidSpread, UntilledLandSolidSpread, Slurrybroadcasting, DropHoseBanding, ShallowInjection, DeepInjection
 
 note: See page 201 in algorithm document and table 43 line 113 
 
@@ -597,11 +665,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: NotSelected 
 
-Type value: Enum 
+Type value: Enum (Text)
 
-Is user provided: Yes 
+Does user provide have to value: Yes 
 
-has default?: No 
+Holos has a default value: No 
+
+Valid values: NotSelected, BeefManure, DairyManure, SwineManure, PoultryManure, SheepManure, OtherLivestockManure
 
 note: Used for various table lookups 
 
@@ -612,11 +682,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: NotSelected 
 
-Type value: Enum 
+Type value: Enum (Text)
 
-Is user provided: Yes 
+Does user provide have to value: Yes 
 
-has default?: No 
+Holos has a default value: No 
+
+Valid values: NotSelected, AnaerobicDigster, Composted, CompostIntensive, CompostPassive, DailySpread, DeepBedding, DeepPit, Liquid, LiquidCrust, LiquidSeperated, LiquidNoCrust, Pasture, Range, Paddock, Solid, Slurry, SlurryWithNaturalCrust, SlurryWithoutNaturalCrust, SolidStorage, Custom, PitLagoonNoCover, LiquidWithNaturalCrust, LiquidWithSolidCover, CompostedInVessel, SolidStorageWithOrWithoutLitter
 
 note: Used for various table lookups 
 
@@ -627,11 +699,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: NotSelected 
 
-Type value: Enum 
+Type value: Enum (Text)
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: "Livestock" 
+Holos has a default value: "Livestock" 
+
+Valid values: NotSelected, Livestock, Imported
 
 note: Used to inidcate if manure was source from on farm or imported onto farm 
 
@@ -642,11 +716,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: False 
 
-Type value: Bool 
+Type value: Bool (True/False)
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: Yes 
+Holos has a default value: Yes 
+
+Valid values: True, False
 
 note: See notes in source file on line 449 
 
@@ -657,11 +733,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: False 
 
-Type value: 
+Type value: Bool (True/False)
 
-Is user provided: x 
+Does user provide have to value: No
 
-has default?: 
+Holos has a default value:
+
+Valid values: True, False
 
 note: Not used/implemented yet. Future version will utilize 
 
@@ -674,9 +752,11 @@ Example value: 642a2cb7-0321-4395-9ebb-d5743c27c960
 
 Type value: GUID 
 
-Is user provided: No 
+Does user provide have to value: No 
 
-has default?: No 
+Holos has a default value: No 
+
+Valid values:
 
 note: Unique ID for each field component on the farm 
 
@@ -687,11 +767,13 @@ Source (code, csv?, etc.):
 
 Example value: Current 
 
-Type value: Enum 
+Type value: Enum (Text)
 
-Is user provided: No 
+Does user provide have to value: No 
 
-has default?: "Current" 
+Holos has a default value: "Current" 
+
+Valid values: Past, Current, Future
 
 note: Used to indicate time period in field history. Leave as "Current" if not sure 
 
@@ -702,11 +784,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 1.363 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default?: 0/Calculated 
+Holos has a default value: 0/Calculated 
+
+Valid range of values: (x ≥ 0)
 
 note: Used with the ICBM C model. Will be generated when the user imports GUI farm files (0 otherwise). Can be set when creating new (blank) CLI input file(s) 
 
@@ -717,11 +801,13 @@ Source (code, csv?, etc.):
 
 Example value: 0.8 
 
-Type value: Double 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: 0/Calculated 
+Holos has a default value: 0/Calculated 
+
+Valid range of values: (x ≥ 0)
 
 note: Used with the ICBM C model. Will be generated when the user imports GUI farm files (0 otherwise). Can be set when creating new (blank) CLI input file(s). See section 2.1.1.2 in algorithm document 
 
@@ -732,11 +818,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/raw/refs/heads/ma
 
 Example value: 1.09 
 
-Type value: Double 
+Type value: Double (Decimal/Numeric) 
 
-Is user provided: Default assigned but user can override 
+Does user provide have to value: Default assigned but user can override 
 
-has default?: 0/Calculated 
+Holos has a default value: 0/Calculated 
+
+Valid range of values: (x ≥ 0)
 
 note: Used with the ICBM C model. Will be generated when the user imports GUI farm files (0 otherwise). Can be set when creating new (blank) CLI input file(s). See section 2.1.1.2 in algorithm document 
 
@@ -747,11 +835,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/raw/refs/heads/ma
 
 Example value: 1211.76 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -762,11 +852,13 @@ Source (code, csv?, etc.):
 
 Example value: 24.2352 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -777,11 +869,13 @@ Source (code, csv?, etc.):
 
 Example value: 2572.5068852459 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -792,11 +886,13 @@ Source (code, csv?, etc.):
 
 Example value: 730.035737704918 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -807,11 +903,13 @@ Source (code, csv?, etc.):
 
 Example value: 451.926885245902 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -822,11 +920,13 @@ Source (code, csv?, etc.):
 
 Example value: 1
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -837,11 +937,13 @@ Source (code, csv?, etc.):
 
 Example value: 1650.63391153725 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -852,11 +954,13 @@ Source (code, csv?, etc.):
 
 Example value: 601.948372142029 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -867,11 +971,13 @@ Source (code, csv?, etc.):
 
 Example value: 0
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -882,11 +988,13 @@ Source (code, csv?, etc.):
 
 Example value: 0
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -897,11 +1005,13 @@ Source (code, csv?, etc.):
 
 Example value: 2845.39665493676 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -912,11 +1022,13 @@ Source (code, csv?, etc.):
 
 Example value: 0.2 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -927,11 +1039,13 @@ Source (code, csv?, etc.):
 
 Example value: 0.053 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -942,11 +1056,13 @@ Source (code, csv?, etc.):
 
 Example value: 0
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -957,11 +1073,13 @@ Source (code, csv?, etc.):
 
 Example value: 0
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -972,11 +1090,13 @@ Source (code, csv?, etc.):
 
 Example value: 0
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -987,11 +1107,13 @@ Source (code, csv?, etc.):
 
 Example value: 0.007 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -1002,11 +1124,13 @@ Source (code, csv?, etc.):
 
 Example value: 3930.08074175535 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -1017,11 +1141,13 @@ Source (code, csv?, etc.):
 
 Example value: 25797.7873775155 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -1032,11 +1158,13 @@ Source (code, csv?, etc.):
 
 Example value: 2.39 
 
-Type value: Double 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: yes 
+Does user provide have to value: yes 
 
-has default?: no 
+Holos has a default value: no 
+
+Valid range of values: (x ≥ 0)
 
 note: See table 50 and section 6 in algorithm document 
 
@@ -1047,11 +1175,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: 0.23 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default?: no 
+Holos has a default value: no 
+
+Valid range of values: (x ≥ 0)
 
 note: See table 51 and section 6 in algorithm document 
 
@@ -1062,11 +1192,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: Urea 
 
-Type value: Enum 
+Type value: Enum (Text) 
 
-Is user provided: yes 
+Does user provide have to value: yes 
 
-has default?: no 
+Holos has a default value: no 
+
+Valid values: Urea, Ammonia, UreaAmmoniumNitrate, AmmoniumNitrate, CalciumAmmoniumNitrate, AmmoniumSulphate, MesS15, MonoAmmoniumPhosphate, DiAmmoniumPhosphate, TripleSuperPhosphate, Potash, Npk, CalciumNitrate, AmmoniumNitroSulphate, Custom, Lime, CustomOrganic, AmmoniumNitratePrilled, AmmoniumNitrateGranulated, SuperPhosphate, NpkMixedAcid, NpkNitrophosphate, PotassiumSulphate
 
 note: See GUI for supported list of blends 
 
@@ -1081,26 +1213,28 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 
 
-Type value: 
+Type value: String (Text)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
 
 Source (code, csv?, etc.): 
 
-note: 
+note: User defined name 
 
 ***
 ## ComponentType
 
-Example value: 
+Example value: H.Core.Models.Animals.Dairy.DairyComponent 
 
-Type value: 
+Type value: Enum (String)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
+
+Valid values: H.Core.Models.Animals.Dairy.DairyBullComponent, H.Core.Models.Animals.Dairy.DairyCalfComponent, H.Core.Models.Animals.Dairy.DairyComponent, H.Core.Models.Animals.Dairy.DairyDryComponent, H.Core.Models.Animals.Dairy.DairyHeiferComponent, H.Core.Models.Animals.Dairy.DairyLactatingComponent     
 
 Source (code, csv?, etc.): 
 
@@ -1109,13 +1243,15 @@ note:
 ***
 ## GroupName
 
-Example value: 
+Example value: Heifers
 
-Type value: 
+Type value: Enum (Text)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
+
+Valid values: Heifers, Lactating, Calves, Dry
 
 Source (code, csv?, etc.): 
 
@@ -1124,13 +1260,15 @@ note:
 ***
 ## GroupType
 
-Example value: 
+Example value: DairyHeifers
 
-Type value: 
+Type value: Enum (Text)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
+
+Valid values: Dairy, DairyBulls, DairyDryCow, DairyCalves, DairyHeifers, DairyLactatingCow
 
 Source (code, csv?, etc.): 
 
@@ -1139,13 +1277,15 @@ note:
 ***
 ## ManagementPeriodName
 
-Example value: 
+Example value: Management period #1 
 
-Type value: 
+Type value: String (Text)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
+
+Valid values: Must be a unique string within the animal group 
 
 Source (code, csv?, etc.): 
 
@@ -1154,28 +1294,28 @@ note:
 ***
 ## ManagementPeriodStartDate
 
-Example value: 
+Example value: 2023-10-01 00:00:00 
 
-Type value: 
+Type value: strftime
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
 
 Source (code, csv?, etc.): 
 
-note: 
+note: Must be set to indicate the start of management period 
 
 ***
 ## ManagementPeriodDays
 
-Example value: 
+Example value: 109
 
-Type value: 
+Type value: Int (Integer/Numeric)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
 
 Source (code, csv?, etc.): 
 
@@ -1184,13 +1324,13 @@ note:
 ***
 ## NumberOfAnimals
 
-Example value: 
+Example value: 50
 
-Type value: 
+Type value: Int (Integer/Numeric)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
 
 Source (code, csv?, etc.): 
 
@@ -1199,13 +1339,15 @@ note:
 ***
 ## ProductionStage
 
-Example value: 
+Example value: Lactating
 
-Type value: 
+Type value: Enum (Text)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
+
+Valid values: Gestating, Lactating, Open, Weaning, GrowingAndFinishing, BreedingStock, Weaned
 
 Source (code, csv?, etc.): 
 
@@ -1214,13 +1356,15 @@ note:
 ***
 ## NumberOfYoungAnimals
 
-Example value: 
+Example value: 12
 
-Type value: 
+Type value: Int (Integer/Numeric)
 
-Is user provided: x 
+Does user provide have to value: Yes 
 
-has default ?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -1229,28 +1373,30 @@ note:
 ***
 ## GroupPairingNumber
 
-Example value: 
+Example value: 0 
 
-Type value: 
+Type value: Int (Integer/Numeric)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
 
 Source (code, csv?, etc.): 
 
-note: 
+note: Used to group a parent and child group of animals. E.g. a group of lactating cows and a group of beef calves must have the same pairing number. Leave as zero when a parent/child grouping does not exist (most cases). See unit test class for example on setting this value 
 
 ***
 ## StartWeight(kg)
 
-Example value: 
+Example value: 240
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -1259,13 +1405,15 @@ note:
 ***
 ## EndWeight(kg)
 
-Example value: 
+Example value: 360
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -1274,13 +1422,15 @@ note:
 ***
 ## AverageDailyGain(kg)
 
-Example value: 
+Example value: 1.1
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -1289,13 +1439,15 @@ note:
 ***
 ## MilkProduction
 
-Example value: 
+Example value: 34.7
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -1304,13 +1456,15 @@ note:
 ***
 ## MilkFatContent
 
-Example value: 
+Example value: 3.71
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -1319,13 +1473,15 @@ note:
 ***
 ## MilkProteinContentAsPercentage
 
-Example value: 
+Example value: 3.5
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -1334,13 +1490,15 @@ note:
 ***
 ## DietAdditiveType
 
-Example value: 
+Example value: None
 
-Type value: 
+Type value: Enum (Text)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
+
+Valid values: None, Ionophore, FivePercentFat, IonophorePlusFicePercentFat
 
 Source (code, csv?, etc.): 
 
@@ -1349,13 +1507,15 @@ note:
 ***
 ## MethaneConversionFactorOfDiet(kgCH4(kgCH4)^-1)
 
-Example value: 
+Example value: 0.056
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -3474,7 +3634,7 @@ note: Used with ICBM carbon model. See line 175 for default
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## DecompositionMinimumTemperature(�C)=-3.78
+## DecompositionMinimumTemperature( C)=-3.78
 
 Example value: -3.78 
 
@@ -3489,7 +3649,7 @@ note: Used with ICBM carbon model. See line 176 for default
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## DecompositionMaximumTemperature(�C)=
+## DecompositionMaximumTemperature( C)=
 
 Example value: 30
 
