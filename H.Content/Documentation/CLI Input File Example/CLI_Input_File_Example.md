@@ -3332,11 +3332,11 @@ Value type: int
 
 Does user have to provide value: x 
 
-Holos has a default value ?: N 
+Holos has a default value ?: No
 
 note: Required. Use GUI map view to get polygon number if needed 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
 ## YieldAssignmentMethod
@@ -3345,9 +3345,11 @@ Example value: SmallAreaData
 
 Value type: enum 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: SmallAreaData 
+Holos has a default value ?: yes
+
+Possible Values: Average, Custom, CARValue, InputFile, InputFileThenAverage, SmallAreaData
 
 note: Used to lookup default yields for a particular year and crop type 
 
@@ -3362,22 +3364,26 @@ Value type: int
 
 Does user have to provide value: x 
 
-Holos has a default value ?: 
+Holos has a default value ?: No
+
+Possible Values: any unrestricted value
 
 note: Required. Use GUI map view to get polygon number if needed 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SmallAreaYieldData.cs
 
 ***
 ## Latitude
 
 Example value: 49.9805772869656 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Does user have to provide value: x 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: Any unrestricted value
 
 note: Required if using NASA as the source for climate data. Values are determined when user clicks on a location in the GUI 
 
@@ -3388,11 +3394,13 @@ Source (code, csv?, etc.):
 
 Example value: -98.0433082580568 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Does user have to provide value: x 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: Any unrestricted value
 
 note: Required if using NASA as the source for climate data. Values are determined when user clicks on a location in the GUI 
 
@@ -3405,9 +3413,11 @@ Example value: 0.45
 
 Value type: float 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 0.4 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x 
 
 note: See line 90 in source 
 
@@ -3420,9 +3430,11 @@ Example value: 141
 
 Value type: int 
 
-Does user have to provide value: is used ? 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x 
 
 note: Used with ICBM carbon model. See line 167 for default 
 
@@ -3435,9 +3447,11 @@ Example value: 197
 
 Value type: int 
 
-Does user have to provide value: is used ? 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x 
 
 note: Used with ICBM carbon model. See line 168 for default 
 
@@ -3448,11 +3462,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 300
 
-Value type: float? 
+Value type: double (Decimal/Numeric) 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x 
 
 note: Used with ICBM carbon model. See line 169 for default 
 
@@ -3463,11 +3479,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.7 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x 
 
 note: Used with ICBM carbon model. See line 175 for default 
 
@@ -3478,11 +3496,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: -3.78 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: Any Unrestricted value
 
 note: Used with ICBM carbon model. See line 176 for default 
 
@@ -3493,11 +3513,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 30
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: Any unrestricted value
 
 note: Used with ICBM carbon model. See line 177 for default 
 
@@ -3508,11 +3530,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.42 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x 
 
 note: Used with ICBM carbon model. See line 178 for default 
 
@@ -3523,11 +3547,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.18 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x
 
 note: Used with ICBM carbon model. See line 179 for default 
 
@@ -3538,11 +3564,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 2
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
@@ -3553,11 +3581,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 100
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
@@ -3568,11 +3598,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 100
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Does user have to provide value: 
+Does user have to provide value: x
 
-Holos has a default value ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
@@ -3583,13 +3615,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 35
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
 Holos has a default value ?: yes
 
-Possible Values:
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
@@ -3600,7 +3632,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 100
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3617,7 +3649,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 100
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3634,7 +3666,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 35
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3651,7 +3683,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3668,7 +3700,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 100
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3685,7 +3717,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 100
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3702,7 +3734,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3719,7 +3751,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 100
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3736,7 +3768,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 35
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3753,7 +3785,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 100
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3770,7 +3802,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 35
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3787,7 +3819,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 100
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3804,7 +3836,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 35
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3821,7 +3853,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 100
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3838,7 +3870,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.8 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3855,7 +3887,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.00605 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3872,7 +3904,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.1 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3889,7 +3921,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.1 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3906,7 +3938,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.011 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3923,7 +3955,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.01 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3940,7 +3972,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.21 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3957,7 +3989,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.2 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -3974,7 +4006,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.5 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -4025,7 +4057,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.125 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -4042,7 +4074,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.3 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x
 
@@ -4059,7 +4091,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.31 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x 
 
@@ -4144,7 +4176,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 17.6213 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4161,7 +4193,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 12.8316 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4178,7 +4210,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 22.426 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4195,7 +4227,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 27.4144 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4212,7 +4244,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 61.5015 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4229,7 +4261,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 77.9022 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4246,7 +4278,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 57.274 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4263,7 +4295,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 53.0356 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4280,7 +4312,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 40.4796 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4297,7 +4329,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 33.7571 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4314,7 +4346,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 23.0151 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4331,7 +4363,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 21.4046 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4348,7 +4380,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.0327 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4365,7 +4397,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.0888 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4382,7 +4414,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 3.5731 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4399,7 +4431,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 44.1505 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4416,7 +4448,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 100.0393 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4433,7 +4465,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 123.5476 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4450,7 +4482,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 135.7116 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4467,7 +4499,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 120.4341 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4484,7 +4516,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 66.0041 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4501,7 +4533,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 16.8898 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4518,7 +4550,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.7677 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4535,7 +4567,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.0252 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4552,7 +4584,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: -14.8531 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4569,7 +4601,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: -12.4063 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4586,7 +4618,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: -5.3584 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4603,7 +4635,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 3.7295 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4620,7 +4652,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 10.7967 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4637,7 +4669,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 16.4886 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4654,7 +4686,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 18.8914 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4671,7 +4703,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 18.2291 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4688,7 +4720,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 13.2652 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4705,7 +4737,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 5.6419 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4722,7 +4754,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: -3.5511 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4739,7 +4771,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: -11.9174 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: not used 
 
@@ -4841,7 +4873,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 1.2 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x 
 
@@ -4875,7 +4907,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 7.8 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x 
 
@@ -4892,7 +4924,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 200
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x 
 
@@ -4909,7 +4941,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.2 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x 
 
@@ -4926,7 +4958,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.3 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x 
 
@@ -4943,7 +4975,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 3.1 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
 Does user have to provide value: x 
 
