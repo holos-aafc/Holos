@@ -35,6 +35,7 @@ namespace H.Core.Services.Initialization
 
         private readonly ICropInitializationService _cropInitializationService;
         private readonly IAnimalInitializationService _animalInitializationService;
+        private IInitializationService _initializationServiceImplementation;
 
         #endregion
 
@@ -416,6 +417,51 @@ namespace H.Core.Services.Initialization
         public string InitializeDescription(ManagementPeriod managementPeriod, AnimalGroup animalGroup)
         {
             return _cropInitializationService.InitializeDescription(managementPeriod, animalGroup);
+        }
+
+        public void InitializeBiomassCoefficientProduct(CropViewItem viewItem, Farm farm)
+        {
+            _cropInitializationService.InitializeBiomassCoefficientProduct(viewItem, farm);
+        }
+
+        public void InitializeBiomassCoefficientStraw(CropViewItem viewItem, Farm farm)
+        {
+            _cropInitializationService.InitializeBiomassCoefficientStraw(viewItem, farm);
+        }
+
+        public void InitializeBiomassCoefficientRoots(CropViewItem viewItem, Farm farm)
+        {
+            _cropInitializationService.InitializeBiomassCoefficientRoots(viewItem, farm);
+        }
+
+        public void InitializeBiomassCoefficientExtraroots(CropViewItem viewItem, Farm farm)
+        {
+            _cropInitializationService.InitializeBiomassCoefficientExtraroots(viewItem, farm);
+        }
+
+        public void InitializeNitrogenContentInExtraroots(CropViewItem viewItem, Farm farm)
+        {
+            _cropInitializationService.InitializeNitrogenContentInExtraroots(viewItem, farm);
+        }
+
+        public void InitializeNitrogenContentInRoots(CropViewItem viewItem, Farm farm)
+        {
+            _cropInitializationService.InitializeNitrogenContentInRoots(viewItem, farm);
+        }
+
+        public void InitializeNitrogenContentInStraw(CropViewItem viewItem, Farm farm)
+        {
+            _cropInitializationService.InitializeNitrogenContentInStraw(viewItem, farm);
+        }
+
+        public void InitializeNitrogenContentInProduct(CropViewItem viewItem, Farm farm)
+        {
+            _cropInitializationService.InitializeNitrogenContentInProduct(viewItem, farm);
+        }
+
+        public void InitializeIPCCNitrogenContent(CropViewItem viewItem, Farm farm)
+        {
+            _cropInitializationService.InitializeIPCCNitrogenContent(viewItem, farm);
         }
 
 

@@ -229,5 +229,14 @@ namespace H.Core.Services.Initialization.Crops
         void InitializeNitrogenContent(List<CropViewItem> viewItem, Farm farm);
         void InitializeGrazingViewItems(Farm farm, CropViewItem viewItem, FieldSystemComponent fieldSystemComponent);
         string InitializeDescription(ManagementPeriod managementPeriod, AnimalGroup animalGroup);
+        void InitializeBiomassCoefficientProduct(CropViewItem viewItem, Farm farm);
+        void InitializeBiomassCoefficientStraw(CropViewItem viewItem, Farm farm);
+        void InitializeBiomassCoefficientRoots(CropViewItem viewItem, Farm farm);
+        void InitializeBiomassCoefficientExtraroots(CropViewItem viewItem, Farm farm);
+        void InitializeNitrogenContentInExtraroots(CropViewItem viewItem, Farm farm);
+        void InitializeNitrogenContentInRoots(CropViewItem viewItem, Farm farm);
+        void InitializeNitrogenContentInStraw(CropViewItem viewItem, Farm farm);
+        void InitializeNitrogenContentInProduct(CropViewItem viewItem, Farm farm);
+        void InitializeIPCCNitrogenContent(CropViewItem viewItem, Farm farm);
     }
 }

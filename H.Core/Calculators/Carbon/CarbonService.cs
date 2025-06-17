@@ -106,7 +106,12 @@ namespace H.Core.Calculators.Carbon
         public void AssignInputs(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm,
             List<AnimalComponentEmissionsResults> animalResults)
         {
-            if (this.CanCalculateInputsUsingIpccTier2(viewItem))
+            var strategy = farm.Defaults.CarbonModellingStrategy;
+            var isCliMode = farm.IsCommandLineMode;
+            var isIcbmCli = isCliMode && strategy == CarbonModellingStrategies.ICBM;
+                
+
+            if (this.CanCalculateInputsUsingIpccTier2(viewItem) && !isIcbmCli)
             {
                 _ipccTier2CarbonInputCalculator.AssignInputs(viewItem, farm, animalResults);
             }
@@ -423,6 +428,28 @@ namespace H.Core.Calculators.Carbon
                 // If the CLI user has not entered a value for aboveground, belowground, manure, or digestate C inputs we will need to assign C inputs now before the C model runs
                 if (currentYearViewItem.TotalCarbonInputs == 0)
                 {
+                    // If biomass fractions are 0, assign defaults
+                    if (currentYearViewItem.BiomassCoefficientProduct == 0)
+                    {
+                        _cropInitializationService.InitializeBiomassCoefficientProduct(currentYearViewItem, farm);
+                    }
+
+                    if (currentYearViewItem.BiomassCoefficientStraw == 0)
+                    {
+                        _cropInitializationService.InitializeBiomassCoefficientStraw(currentYearViewItem, farm);
+                    }
+
+                    if (currentYearViewItem.BiomassCoefficientRoots == 0)
+                    {
+                        _cropInitializationService.InitializeBiomassCoefficientRoots(currentYearViewItem, farm);
+                    }
+
+                    if (currentYearViewItem.BiomassCoefficientExtraroot == 0)
+                    {
+                        _cropInitializationService.InitializeBiomassCoefficientExtraroots(currentYearViewItem, farm);
+                    }
+
+                    // If N fractions are 0, assign defaults
                     this.AssignInputsAndLosses(tupleForYear, farm, animalResults);
                 }
             }

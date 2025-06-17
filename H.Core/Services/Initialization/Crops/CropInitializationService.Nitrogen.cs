@@ -48,24 +48,69 @@ namespace H.Core.Services.Initialization.Crops
             }
         }
 
-        public void InitializeNitrogenContent(CropViewItem viewItem, Farm farm)
+        public void InitializeNitrogenContentInProduct(CropViewItem viewItem, Farm farm)
         {
-            // Assign N content values used for the ICBM methodology
             var residueData = this.GetResidueData(farm, viewItem);
             if (residueData != null)
             {
                 // Table has values in grams but unit of display is kg
                 viewItem.NitrogenContentInProduct = residueData.NitrogenContentProduct / 1000;
+            }
+        }
+
+        public void InitializeNitrogenContentInStraw(CropViewItem viewItem, Farm farm)
+        {
+            var residueData = this.GetResidueData(farm, viewItem);
+            if (residueData != null)
+            {
+                // Table has values in grams but unit of display is kg
                 viewItem.NitrogenContentInStraw = residueData.NitrogenContentStraw / 1000;
-                viewItem.NitrogenContentInRoots = residueData.NitrogenContentRoot / 1000;
-                viewItem.NitrogenContentInExtraroot = residueData.NitrogenContentExtraroot / 1000;
 
                 if (viewItem.CropType.IsPerennial())
                 {
                     viewItem.NitrogenContentInStraw = 0;
                 }
             }
+        }
 
+        public void InitializeNitrogenContentInRoots(CropViewItem viewItem, Farm farm)
+        {
+            var residueData = this.GetResidueData(farm, viewItem);
+            if (residueData != null)
+            {
+                // Table has values in grams but unit of display is kg
+                viewItem.NitrogenContentInRoots = residueData.NitrogenContentRoot / 1000;
+            }
+        }
+
+        public void InitializeNitrogenContentInExtraroots(CropViewItem viewItem, Farm farm)
+        {
+            var residueData = this.GetResidueData(farm, viewItem);
+            if (residueData != null)
+            {
+                // Table has values in grams but unit of display is kg
+                viewItem.NitrogenContentInExtraroot = residueData.NitrogenContentExtraroot / 1000;
+            }
+        }
+
+        public void InitializeNitrogenContent(CropViewItem viewItem, Farm farm)
+        {
+            // Assign N content values used for the ICBM methodology
+            var residueData = this.GetResidueData(farm, viewItem);
+            if (residueData != null)
+            {
+                this.InitializeNitrogenContentInProduct(viewItem, farm);
+                this.InitializeNitrogenContentInStraw(viewItem, farm);
+                this.InitializeNitrogenContentInRoots(viewItem, farm);
+                this.InitializeNitrogenContentInExtraroots(viewItem, farm);
+            }
+
+            // Assign N content values used for IPCC Tier 2
+            this.InitializeIPCCNitrogenContent(viewItem, farm);
+        }
+
+        public void InitializeIPCCNitrogenContent(CropViewItem viewItem, Farm farm)
+        {
             // Assign N content values used for IPCC Tier 2
             var cropData = _slopeProviderTable.GetDataByCropType(viewItem.CropType);
 

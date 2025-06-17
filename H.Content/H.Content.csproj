@@ -414,7 +414,7 @@
     <None Include="Resources\Swine_Feed_Ingredient_List.csv" />
     <None Include="Resources\LumCMax_And_KValues_For_Tillage_Practice_Change.csv" />
     <None Include="Resources\NitrogenApplicationRatesForSpringWheatStubbleAndFallowCrops.csv" />
-    <None Include="Resources\Table_17_Beef_And_Dairy_Cattle_Feeding_Activity_Coefficients.csv" />
+    <Content Include="Resources\Table_17_Beef_And_Dairy_Cattle_Feeding_Activity_Coefficients.csv" />
     <None Include="Resources\Table_18_26_Diet_Coefficients_For_Beef_Dairy_Sheep.csv" />
     <None Include="Resources\MCFAndNitrogenOxideEmissionsForBeefDairySwine.csv" />
     <None Include="Resources\LumCMax_And_KValues_For_Fallow_Practice_Change.csv" />
