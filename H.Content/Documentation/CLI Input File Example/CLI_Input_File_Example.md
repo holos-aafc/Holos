@@ -1513,6 +1513,159 @@ Type value: Double (Decimal/Numeric)
 
 Does user provide have to value: Yes
 
+Holos has a default value: Yes, based on diet 
+
+Valid range of values: (x ≥ 0)
+
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/DietProvider.cs 
+
+note: Also known as Ym of diet. See source file for defaults based on diet type 
+
+***
+## MethaneConversionFactorAdjusted(%)
+
+Example value: 0
+
+Type value: Double (Decimal/Numeric)
+
+Does user provide have to value: 
+
+Holos has a default value:
+
+Source (code, csv?, etc.): 
+
+Valid range of values:
+
+note: Deprecated. Do not use. Will be removed in future version 
+
+***
+## FeedIntake(kghead^-1day^-1)
+
+Example value: 0
+
+Type value: Double (Decimal/Numeric)
+
+Does user provide have to value: Yes
+
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
+
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/DietProvider.cs 
+
+note: Used with some animal types (i.e. swine types). See swine diets in source file for defaults 
+
+***
+## CrudeProtein(kgkg^-1)
+
+Example value: 12.28
+
+Type value: Double (Decimal/Numeric)
+
+Does user provide have to value: Yes
+
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
+
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
+
+note: Crude protein value of diet. See feed ingredient list for values 
+
+***
+## AshContentOfDiet(kgkg^-1)
+
+Example value: 6.57 
+
+Type value: Double (Decimal/Numeric)
+
+Does user provide have to value: Yes
+
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
+
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/Diet.cs 
+
+note: Ash content of diet. See line 434 for more information on how to calculate averages 
+
+***
+## Forage(%DM)
+
+Example value: 97
+
+Type value: Double (Decimal/Numeric)
+
+Does user provide have to value: Yes
+
+Holos has a default value:
+
+Valid range of values: (0 ≤ x ≤ 1)
+
+Source (code, csv?, etc.): 
+
+note: 
+
+***
+## TDN(%DM)
+
+Example value: 54.6
+
+Type value: Double (Decimal/Numeric)
+
+Does user provide have to value: Yes
+
+Holos has a default value: 
+
+Valid range of values: (0 ≤ x ≤ 1)
+
+Source (code, csv?, etc.): 
+
+note: 
+
+***
+## Starch(%DM)
+
+Example value: 7.1
+
+Type value: Double (Decimal/Numeric)
+
+Does user provide have to value: Yes
+
+Holos has a default value: 
+
+Valid range of values: (0 ≤ x ≤ 1)
+
+Source (code, csv?, etc.): 
+
+note: 
+
+***
+## Fat(%DM)
+
+Example value: 1.7
+
+Type value: Double (Decimal/Numeric)
+
+Does user provide have to value: Yes
+
+Holos has a default value: 
+
+Valid range of values: (0 ≤ x ≤ 1)
+
+Source (code, csv?, etc.): 
+
+note: 
+
+***
+## ME(MJkg^-1)
+
+Example value: 2
+
+Type value: Double (Decimal/Numeric)
+
+Does user provide have to value: Yes
+
 Holos has a default value:
 
 Valid range of values: (x ≥ 0)
@@ -1522,150 +1675,17 @@ Source (code, csv?, etc.):
 note: 
 
 ***
-## MethaneConversionFactorAdjusted(%)
-
-Example value: 
-
-Type value: 
-
-Is user provided: 
-
-has default ?: 
-
-Source (code, csv?, etc.): 
-
-note: 
-
-***
-## FeedIntake(kghead^-1day^-1)
-
-Example value: 
-
-Type value: 
-
-Is user provided: x 
-
-has default ?: 
-
-Source (code, csv?, etc.): 
-
-note: 
-
-***
-## CrudeProtein(kgkg^-1)
-
-Example value: 
-
-Type value: 
-
-Is user provided: x 
-
-has default ?: 
-
-Source (code, csv?, etc.): 
-
-note: 
-
-***
-## AshContentOfDiet(kgkg^-1)
-
-Example value: 
-
-Type value: 
-
-Is user provided: x 
-
-has default ?: 
-
-Source (code, csv?, etc.): 
-
-note: 
-
-***
-## Forage(%DM)
-
-Example value: 
-
-Type value: 
-
-Is user provided: x 
-
-has default ?: 
-
-Source (code, csv?, etc.): 
-
-note: 
-
-***
-## TDN(%DM)
-
-Example value: 
-
-Type value: 
-
-Is user provided: x 
-
-has default ?: 
-
-Source (code, csv?, etc.): 
-
-note: 
-
-***
-## Starch(%DM)
-
-Example value: 
-
-Type value: 
-
-Is user provided: x 
-
-has default ?: 
-
-Source (code, csv?, etc.): 
-
-note: 
-
-***
-## Fat(%DM)
-
-Example value: 
-
-Type value: 
-
-Is user provided: x 
-
-has default ?: 
-
-Source (code, csv?, etc.): 
-
-note: 
-
-***
-## ME(MJkg^-1)
-
-Example value: 
-
-Type value: 
-
-Is user provided: x 
-
-has default ?: 
-
-Source (code, csv?, etc.): 
-
-note: 
-
-***
 ## NDF(%DM)
 
-Example value: 
+Example value: 53.5
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -1766,11 +1786,13 @@ note:
 
 Example value: 
 
-Type value: 
+Type value: Enum (Text)
 
-Is user provided: x 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
+
+Valid values: FreeStallBarnSolidLitter, FreeStallBarnSlurryScraping, FreeStallBarnFlushing, FreeStallBarnMilkParlourSlurryFlushing, TieStallSolidLitter, TieStallSlurry, DryLot, Pasture
 
 Source (code, csv?, etc.): 
 
@@ -1779,13 +1801,15 @@ note:
 ***
 ## ActivityCoefficientOfFeedingSituation(MJday^-1kg^-1)
 
-Example value: 
+Example value: 0.1700
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value: Yes
 
-has default ?: 
+Holos has a default value:
+
+Valid range of values: (0 ≤ x ≤ 1)
 
 Source (code, csv?, etc.): 
 
@@ -1794,13 +1818,15 @@ note:
 ***
 ## MaintenanceCoefficient(MJday^-1kg^-1)
 
-Example value: 
+Example value: 0.322
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default ?: 
+Holos has a default value:
+
+Valid range of values: (0 ≤ x ≤ 1)
 
 Source (code, csv?, etc.): 
 
@@ -1809,13 +1835,15 @@ note:
 ***
 ## UserDefinedBeddingRate
 
-Example value: 
+Example value: 0
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: x 
+Does user provide have to value: Yes 
 
-has default ?: 
+Holos has a default value:
+
+Valid range of values: (0 ≤ x ≤ 1)
 
 Source (code, csv?, etc.): 
 
@@ -1824,13 +1852,15 @@ note:
 ***
 ## TotalCarbonKilogramsDryMatterForBedding
 
-Example value: 
+Example value: 0.447
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default ?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -1839,13 +1869,15 @@ note:
 ***
 ## TotalNitrogenKilogramsDryMatterForBedding
 
-Example value: 
+Example value: 0.0057 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default ?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -1854,13 +1886,15 @@ note:
 ***
 ## MoistureContentOfBeddingMaterial
 
-Example value: 
+Example value: 9.57 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: x 
+Does user provide have to value: Yes 
 
-has default ?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -1869,13 +1903,15 @@ note:
 ***
 ## MethaneConversionFactorOfManure(kgCH4(kgCH4)^-1)
 
-Example value: 
+Example value: 0.26 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default ?: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -1884,107 +1920,121 @@ note:
 ***
 ## N2ODirectEmissionFactor(kgN2O-N(kgN)^-1)
 
-Example value: 
+Example value: 0.01 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default ?: 
+Holos has a default value:
 
-Source (code, csv?, etc.): 
+Valid range of values: (x ≥ 0)
 
-note: 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
+
+note: See line 34 for defaults 
 
 ***
 ## EmissionFactorVolatilization
 
-Example value: 
+Example value: 0.005 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default ?: 
+Holos has a default value:
 
-Source (code, csv?, etc.): 
+Valid range of values: (x ≥ 0)
 
-note: 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
+
+note: See line 34 for defaults 
 
 ***
 ## VolatilizationFraction
 
-Example value: 
+Example value: 0.25
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default ?: 
+Holos has a default value:
 
-Source (code, csv?, etc.): 
+Valid range of values: (x ≥ 0)
 
-note: 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
+
+note: See line 34 for defaults 
 
 ***
 ## EmissionFactorLeaching
 
-Example value: 
+Example value: 0.011 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default ?: 
+Holos has a default value:
 
-Source (code, csv?, etc.): 
+Valid range of values: (x ≥ 0)
 
-note: 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
+
+note: See line 34 for defaults 
 
 ***
 ## FractionLeaching
 
-Example value: 
+Example value: 0.035 
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default ?: 
+Holos has a default value:
 
-Source (code, csv?, etc.): 
+Valid range of values: (x ≥ 0)
 
-note: 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Ammonia.cs 
+
+note: See line 55 for defaults 
 
 ***
 ## AshContent(%)
 
-Example value: 
+Example value: 8
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default ?: 
+Holos has a default value:
+
+Valid range of values: (0 ≤ x ≤ 100)
 
 Source (code, csv?, etc.): 
 
-note: 
+note: Deprecated. Do not use. Will be removed in future version 
 
 ***
 ## MethaneProducingCapacityOfManure
 
-Example value: 
+Example value: 0.19
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
-Is user provided: 
+Does user provide have to value:
 
-has default ?: 
+Holos has a default value:
 
-Source (code, csv?, etc.): 
+Valid range of values: (x ≥ 0)
 
-note: 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Methane.cs 
+
+note: Also known as Bo. See line 89 for defaults 
 
 ***
 
