@@ -2666,7 +2666,7 @@ note:
 ***
 ## GroupType
 
-Example value: 
+Example value: SheepFeedlot
 
 Value Type: str (from enum) 
 
