@@ -13,7 +13,7 @@ Type value:
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -28,7 +28,7 @@ Type value: Text
 
 Does user have to provide value: Yes
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: User defined name 
 
@@ -43,7 +43,7 @@ Type value: Double (Decimal/Numeric)
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: No
+Holos has a default value: No
 
 note: 
 
@@ -58,7 +58,7 @@ Type value: Int (Integer/Numeric)
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: Current year (i.e. 2024) 
+Holos has a default value: Current year (i.e. 2024) 
 
 note: 
 
@@ -73,7 +73,7 @@ Type value: Int (Integer/Numeric)
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: No
+Holos has a default value: No
 
 note: Each (row) in input file must correspond to a certain year 
 
@@ -88,7 +88,7 @@ Type value: Text
 
 Does user have to provide value: Yes
 
-Holos has a default value?: No
+Holos has a default value: No
 
 Possible Values (see table below):
 <br>
@@ -121,7 +121,7 @@ Type value: Enum
 
 Does user have to provide value: x 
 
-Holos has a default value?: Wheat 
+Holos has a default value: Wheat 
 
 note: See GUI for supported list of crop types since not all items in the enum are supported in calculations 
 
@@ -136,7 +136,7 @@ Type value: Int (Integer/Numeric)
 
 Does user have to provide value: yes 
 
-Holos has a default value?: no 
+Holos has a default value: no 
 
 note: Each year of a perennial stand must have the year identified in the row of the input file. E.g. a six year perennial stand would have one row with this value set 1 for the first year, 2 for the second year, etc 
 
@@ -151,7 +151,7 @@ Type value: GUID
 
 Does user have to provide value: yes 
 
-Holos has a default value?: no 
+Holos has a default value: no 
 
 note: Used to group all years of a perennial stand together. Each year in a distinct perennial stand must have this value set. All years in the same perennial stand must have this same ID/value. Can be thought of as a 'group' ID 
 
@@ -166,7 +166,7 @@ Type value: Int (Integer/Numeric)
 
 Does user have to provide value: ? 
 
-Holos has a default value?: 1
+Holos has a default value: 1
 
 note: Indicates how long the perennial is grown 
 
@@ -181,7 +181,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: Rp Product 
 
@@ -196,7 +196,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: Rs Straw 
 
@@ -211,7 +211,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: Rr Root 
 
@@ -226,7 +226,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: Re Extra-root 
 
@@ -241,7 +241,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: Np Product 
 
@@ -256,7 +256,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: Ns Straw 
 
@@ -271,7 +271,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: Nr Root 
 
@@ -286,7 +286,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: Ne Extra-root 
 
@@ -301,7 +301,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: Indexed by crop type 
 
@@ -316,7 +316,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: 5
+Holos has a default value: 5
 
 note: Common value for all crop types. Page 74 in algorithm document 
 
@@ -331,7 +331,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: 0.45 
+Holos has a default value: 0.45 
 
 note: Common value for all crop types. Page 37 in algorithm document 
 
@@ -346,7 +346,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: Look up value from Small Area Database 
 
@@ -361,7 +361,7 @@ Type value: Enum
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: Depends on crop type. Line 19 in source 
 
@@ -376,7 +376,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: Calculated based on yield. Line 17 in source 
 
@@ -391,7 +391,7 @@ Type value:
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Not used/implemented yet. Future version will utilize 
 
@@ -406,7 +406,7 @@ Type value: Enum
 
 Does user have to provide value: x 
 
-Holos has a default value?: No 
+Holos has a default value: No 
 
 note: Not used/implemented yet. Future version will utilize 
 
@@ -421,7 +421,7 @@ Type value: Enum
 
 Does user have to provide value: x 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: Used to lookup values in Table 7. Line 1290 in source 
 
@@ -436,7 +436,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: Line 35 
 
@@ -451,7 +451,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: Look up value by crop type and irrigation amount. Additional logic in source file on line 60 
 
@@ -466,7 +466,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: Look up value by crop type and irrigation amount. Additional logic in source file on line 61 
 
@@ -481,7 +481,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: Line 35 in source. Page 36 in algorithm document has references 
 
@@ -496,7 +496,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: Line 35 in source. Page 36 in algorithm document has references 
 
@@ -511,7 +511,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: Line 35 in source. Page 36 in algorithm document has references 
 
@@ -526,7 +526,7 @@ Type value: Bool
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Should be set if "Number of Pesticide Passes" > 0 
 
@@ -541,7 +541,7 @@ Type value: Int (Integer/Numeric)
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: No 
+Holos has a default value: No 
 
 note: Any value > 0 
 
@@ -556,7 +556,7 @@ Type value: Bool
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: Should be set to true if any manure application/amount has been applied to field 
 
@@ -571,7 +571,7 @@ Type value: Double
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: No 
+Holos has a default value: No 
 
 note: Amount of manure applied to field (kg/ha) 
 
@@ -586,7 +586,7 @@ Type value: Enum
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: No 
+Holos has a default value: No 
 
 note: See page 201 in algorithm document and table 43 line 113 
 
@@ -601,7 +601,7 @@ Type value: Enum
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: No 
+Holos has a default value: No 
 
 note: Used for various table lookups 
 
@@ -616,7 +616,7 @@ Type value: Enum
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: No 
+Holos has a default value: No 
 
 note: Used for various table lookups 
 
@@ -631,7 +631,7 @@ Type value: Enum
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: "Livestock" 
+Holos has a default value: "Livestock" 
 
 note: Used to inidcate if manure was source from on farm or imported onto farm 
 
@@ -646,7 +646,7 @@ Type value: Bool
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: Yes 
+Holos has a default value: Yes 
 
 note: See notes in source file on line 449 
 
@@ -661,7 +661,7 @@ Type value:
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Not used/implemented yet. Future version will utilize 
 
@@ -676,7 +676,7 @@ Type value: GUID
 
 Does user have to provide value: No 
 
-Holos has a default value?: No 
+Holos has a default value: No 
 
 note: Unique ID for each field component on the farm 
 
@@ -691,7 +691,7 @@ Type value: Enum
 
 Does user have to provide value: No 
 
-Holos has a default value?: "Current" 
+Holos has a default value: "Current" 
 
 note: Used to indicate time period in field history. Leave as "Current" if not sure 
 
@@ -706,7 +706,7 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value?: 0/Calculated 
+Holos has a default value: 0/Calculated 
 
 note: Used with the ICBM C model. Will be generated when the user imports GUI farm files (0 otherwise). Can be set when creating new (blank) CLI input file(s) 
 
@@ -721,7 +721,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: 0/Calculated 
+Holos has a default value: 0/Calculated 
 
 note: Used with the ICBM C model. Will be generated when the user imports GUI farm files (0 otherwise). Can be set when creating new (blank) CLI input file(s). See section 2.1.1.2 in algorithm document 
 
@@ -736,7 +736,7 @@ Type value: Double
 
 Does user have to provide value: Default assigned but user can override 
 
-Holos has a default value?: 0/Calculated 
+Holos has a default value: 0/Calculated 
 
 note: Used with the ICBM C model. Will be generated when the user imports GUI farm files (0 otherwise). Can be set when creating new (blank) CLI input file(s). See section 2.1.1.2 in algorithm document 
 
@@ -751,7 +751,7 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -766,7 +766,7 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -781,7 +781,7 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -796,7 +796,7 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -811,7 +811,7 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -826,7 +826,7 @@ Type value:
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -841,7 +841,7 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -856,7 +856,7 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -871,7 +871,7 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -886,7 +886,7 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -901,7 +901,7 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -916,7 +916,7 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -931,7 +931,7 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -946,7 +946,7 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -961,7 +961,7 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -976,7 +976,7 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -991,7 +991,7 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -1006,7 +1006,7 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -1021,7 +1021,7 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -1036,7 +1036,7 @@ Type value: Double
 
 Does user have to provide value: yes 
 
-Holos has a default value?: no 
+Holos has a default value: no 
 
 note: See table 50 and section 6 in algorithm document 
 
@@ -1051,7 +1051,7 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value?: no 
+Holos has a default value: no 
 
 note: See table 51 and section 6 in algorithm document 
 
@@ -1066,7 +1066,7 @@ Type value: Enum
 
 Does user have to provide value: yes 
 
-Holos has a default value?: no 
+Holos has a default value: no 
 
 note: See GUI for supported list of blends 
 
@@ -1839,7 +1839,7 @@ Type Value: str (from enum)
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Should be unique string differentiate from other components/input files 
 
@@ -1854,7 +1854,7 @@ Type Value: str (from enum)
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: 
 
@@ -1869,7 +1869,7 @@ Type Value: str (from enum)
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Must be unique string differentiate from other animal groups in the same component (e.g. "Bulls group #1") 
 
@@ -1884,7 +1884,7 @@ Type Value: str (from enum)
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: See converter class used to convert animal type string names to enumeration values 
 
@@ -1899,7 +1899,7 @@ Type Value: str
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Must be a unique string within the animal group 
 
@@ -1914,7 +1914,7 @@ Type Value: Int (Integer/Numeric)
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Used to group a parent and child group of animals. E.g. a group of lactating cows and a group of beef calves must have the same pairing number. Leave as zero when a parent/child grouping does not exist (most cases). See unit test class for example on setting this value 
 
@@ -1929,7 +1929,7 @@ Type Value: strftime
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Must be set to indicate the start of management period 
 
@@ -1944,7 +1944,7 @@ Type Value: Int (Integer/Numeric)
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Must be set to indicate how long the management period lasts 
 
@@ -1959,7 +1959,7 @@ Type Value: Int (Integer/Numeric)
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Number of animals in the animal group 
 
@@ -1974,7 +1974,7 @@ Type Value: str (from enum)
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Must be set to indicate which stage a group of animals are in the lifecycle of the animal group (i.e. Lactating cows will be at the lactating production stage). This is not used for all animal types 
 
@@ -1989,7 +1989,7 @@ Type Value: Int (Integer/Numeric)
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Used to indicate how many young animals (i.e. beef calves) are associated with a parent group. See line 208 of source file on how to use 
 
@@ -2004,7 +2004,7 @@ Type Value: bool
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Use to specify that a group of animals are on a milk diet only. Used when referring to a group of young animals that are suckling/nursing 
 
@@ -2019,7 +2019,7 @@ Type Value: float
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Start weight of the animals in a particular management period 
 
@@ -2034,7 +2034,7 @@ Type Value: float
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: End weight of the animals in a particular management period 
 
@@ -2049,7 +2049,7 @@ Type Value: float
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: This will be a value that is calculated based on the start and end weight 
 
@@ -2064,7 +2064,7 @@ Type Value: float
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: The amount of milk produced by the group of animals 
 
@@ -2079,7 +2079,7 @@ Type Value: float
 
 Does user have to provide value: x 
 
-Holos has a default value?: 3.71 
+Holos has a default value: 3.71 
 
 note: Used with dairy components. Old default value was 4but has been changed 
 
@@ -2094,7 +2094,7 @@ Type Value: float
 
 Does user have to provide value: x 
 
-Holos has a default value?: y 
+Holos has a default value: y 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -2109,7 +2109,7 @@ Type Value: Enum
 
 Does user have to provide value: x 
 
-Holos has a default value?: No 
+Holos has a default value: No 
 
 note: Optional input used to calculate enteric CH4. See GUI for supported types 
 
@@ -2124,7 +2124,7 @@ Type Value: float
 
 Does user have to provide value: 
 
-Holos has a default value?: Yes, based on diet 
+Holos has a default value: Yes, based on diet 
 
 note: Also known as Ym of diet. See source file for defaults based on diet type 
 
@@ -2139,7 +2139,7 @@ Type Value: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -2154,7 +2154,7 @@ Type Value: float
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Used with some animal types (i.e. swine types). See swine diets in source file for defaults 
 
@@ -2169,7 +2169,7 @@ Type Value: float
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Crude protein value of diet. See feed ingredient list for values 
 
@@ -2184,7 +2184,7 @@ Type Value: float
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Forage value of diet. See feed ingredient list for values 
 
@@ -2199,7 +2199,7 @@ Type Value: float
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: TDN value of diet. See feed ingredient list tdn values 
 
@@ -2214,7 +2214,7 @@ Type Value: float
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Ash content of diet. See line 434 for more informtation on how to calculate averages 
 
@@ -2229,7 +2229,7 @@ Type Value: float
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Starch content of diet 
 
@@ -2244,7 +2244,7 @@ Type Value: float
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Fat content of diet 
 
@@ -2259,7 +2259,7 @@ Type Value: float
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Metabolizable energy of diet 
 
@@ -2274,7 +2274,7 @@ Type Value: float
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Neutral detergent fibre of diet 
 
@@ -2289,7 +2289,7 @@ Type Value: float
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Used only for diet/DMI calculations for beef calves. See line 419 
 
@@ -2304,7 +2304,7 @@ Type Value: str (from enum)
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Required field used for many calculations. See GUI for correct types when considering a particular animal type 
 
@@ -2319,7 +2319,7 @@ Type Value: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: See line 134 for default setting 
 
@@ -2334,7 +2334,7 @@ Type Value: float
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Amount of bedding added. Used in C and N input calculations. See line 52 in source and table 30 
 
@@ -2349,7 +2349,7 @@ Type Value: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: See HousingDetails.cs line 186 
 
@@ -2364,7 +2364,7 @@ Type Value: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: See HousingDetails.cs line 177 
 
@@ -2379,7 +2379,7 @@ Type Value: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: See HousingDetails.cs line 219 
 
@@ -2394,7 +2394,7 @@ Type Value: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: See line 74 for defaults 
 
@@ -2409,7 +2409,7 @@ Type Value: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: See line 108 for defaults 
 
@@ -2424,7 +2424,7 @@ Type Value: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Methane conversion factor of manure, not to be consufed with Methane conversion factor of diet (Ym). See line 89 for defaults 
 
@@ -2439,7 +2439,7 @@ Type Value: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: See line 34 for defaults 
 
@@ -2454,7 +2454,7 @@ Type Value: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: See line 34 for defaults 
 
@@ -2469,7 +2469,7 @@ Type Value: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: See line 34 for defaults 
 
@@ -2484,7 +2484,7 @@ Type Value: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: See line 34 for defaults 
 
@@ -2499,7 +2499,7 @@ Type Value: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: See line 55 for defaults 
 
@@ -2514,7 +2514,7 @@ Type Value: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -2529,7 +2529,7 @@ Type Value: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Also known as Bo. See line 89 for defaults 
 
@@ -2544,7 +2544,7 @@ Type Value: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: See line 31 for defaults 
 
@@ -2559,7 +2559,7 @@ Type Value: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: See line 31 for defaults 
 
@@ -2574,7 +2574,7 @@ Type Value: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: See line 31 for defaults 
 
@@ -2589,7 +2589,7 @@ Type Value: str (from enum)
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: Required. See GUI for valid types for particular animal type 
 
@@ -2604,7 +2604,7 @@ Type Value: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 note: For poultry animals only. See line 7 in source 
 
@@ -2623,7 +2623,7 @@ Value Type: String (Text)
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: Yes
+Holos has a default value: Yes
 
 Source (code, csv?, etc.): 
 
@@ -2638,7 +2638,7 @@ Value Type: Enum (String)
 
 Does user have to provide value: Yes
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid values: H.Core.Models.Animals.Sheep.SheepComponent, H.Core.Models.Animals.Sheep.RamsComponent, H.Core.Models.Animals.Sheep.SheepFeedlotComponent, H.Core.Models.Animals.Sheep.EwesAndLambsComponent
 
@@ -2655,7 +2655,7 @@ Value Type: Enum (Text)
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid values: Sheep, Sheep Feedlot, Ram, Lambs, Ewes
 
@@ -2672,7 +2672,7 @@ Value Type: str (from enum)
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid values: Sheep, SheepFeedlot, Ram, Ewes, Lambs
 
@@ -2689,7 +2689,7 @@ Value Type: String (Text)
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid values: Must be a unique string within the animal group
 
@@ -2706,7 +2706,7 @@ Value Type: Int (Integer/Numeric)
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -2723,7 +2723,7 @@ Value Type: strftime
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -2738,7 +2738,7 @@ Value Type: Int (Integer/Numeric)
 
 Does user have to provide value: Yes
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -2753,7 +2753,7 @@ Value Type: Int (Integer/Numeric)
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -2768,7 +2768,7 @@ Value Type: Enum (Text)
 
 Does user have to provide value: x 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -2783,7 +2783,7 @@ Value Type: Int (Integer/Numeric)
 
 Does user have to provide value: Yes
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (x ≥ 0)
 
@@ -2800,7 +2800,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: Yes
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (x ≥ 0)
 
@@ -2817,7 +2817,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (x ≥ 0)
 
@@ -2834,7 +2834,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (x ≥ 0)
 
@@ -2851,7 +2851,7 @@ Value Type: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -2866,7 +2866,7 @@ Value Type: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -2881,7 +2881,7 @@ Value Type: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -2896,7 +2896,7 @@ Value Type: Enum (Text)
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid values: None, Ionophore, FivePercentFat, IonophorePlusFicePercentFat
 
@@ -2913,7 +2913,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: Yes
 
-Holos has a default value?: Yes, based on diet
+Holos has a default value: Yes, based on diet
 
 Valid range of values: (x ≥ 0)
 
@@ -2930,7 +2930,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -2945,7 +2945,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: Yes
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (x ≥ 0)
 
@@ -2962,7 +2962,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (x ≥ 0)
 
@@ -2979,7 +2979,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (0 ≤ x ≤ 1)
 
@@ -2996,7 +2996,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: Yes
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (0 ≤ x ≤ 1)
 
@@ -3013,7 +3013,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (x ≥ 0)
 
@@ -3030,7 +3030,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: Yes
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (0 ≤ x ≤ 1)
 
@@ -3047,7 +3047,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (0 ≤ x ≤ 1)
 
@@ -3064,7 +3064,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: Yes
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (x ≥ 0)
 
@@ -3081,7 +3081,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: Yes 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (x ≥ 0)
 
@@ -3098,7 +3098,7 @@ Value Type: float
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -3113,7 +3113,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -3128,7 +3128,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: Yes
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (0 ≤ x ≤ 1)
 
@@ -3145,7 +3145,7 @@ Value Type: flDouble (Decimal/Numeric)oat
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (0 ≤ x ≤ 1)
 
@@ -3162,7 +3162,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: yes
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (0 ≤ x ≤ 1)
 
@@ -3179,7 +3179,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (x ≥ 0)
 
@@ -3196,7 +3196,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (x ≥ 0)
 
@@ -3213,7 +3213,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (x ≥ 0)
 
@@ -3230,7 +3230,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (x ≥ 0)
 
@@ -3247,7 +3247,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (x ≥ 0)
 
@@ -3264,7 +3264,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (x ≥ 0)
 
@@ -3281,7 +3281,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (x ≥ 0)
 
@@ -3298,7 +3298,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (x ≥ 0)
 
@@ -3315,7 +3315,7 @@ Value Type: Double (Decimal/Numeric)
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Valid range of values: (x ≥ 0)
 
@@ -3332,7 +3332,7 @@ Value Type: double (Decimal/Numeric)
 
 Does user have to provide value: 
 
-Holos has a default value?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -3347,7 +3347,7 @@ Value Type: double (Decimal/Numeric)
 
 Does user have to provide value: yes
 
-Holos has a default value?: x
+Holos has a default value: x
 
 Possible Values: 0 < x
 
@@ -3364,7 +3364,7 @@ Value Type: double (Decimal/Numeric)
 
 Does user have to provide value: yes
 
-Holos has a default value?: x
+Holos has a default value: x
 
 Possible Values: 0 < x
 
@@ -3381,7 +3381,7 @@ Value Type: double (Decimal/Numeric)
 
 Does user have to provide value: yes
 
-Holos has a default value?: x
+Holos has a default value: x
 
 Possible Values: 0 < x < 100
 
