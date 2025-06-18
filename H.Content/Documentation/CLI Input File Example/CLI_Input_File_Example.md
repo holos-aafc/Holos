@@ -3774,7 +3774,7 @@ note: Used with ICBM carbon model. See line 175 for default
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## DecompositionMinimumTemperature(�C)-3.78
+## DecompositionMinimumTemperature( C)=-3.78
 
 Example value: -3.78 
 
@@ -3791,7 +3791,7 @@ note: Used with ICBM carbon model. See line 176 for default
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## DecompositionMaximumTemperature(�C)
+## DecompositionMaximumTemperature( C)=
 
 Example value: 30
 
