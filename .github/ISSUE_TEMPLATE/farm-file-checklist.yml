@@ -105,6 +105,19 @@ body:
     validations:
       required: true
 
+  - type: dropdown
+    id: carbon-model
+    attributes:
+      label: Which carbon model was used for this farm?
+      description: |
+          Note: Holos will use the IPCC Tier 2 model by default unless ICBM was selected by the user.
+      options:
+        - IPCC Tier 2
+        - ICBM
+    validations:
+      required: true
+
+
   - type: markdown
     attributes:
       value: |
