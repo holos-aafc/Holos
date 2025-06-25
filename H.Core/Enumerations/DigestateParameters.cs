@@ -26,6 +26,9 @@ namespace H.Core.Enumerations
         OrganicNitrogen,
 
         [LocalizedDescription("EnumTotalCarbon", typeof(Resources))]
-        TotalCarbon
+        TotalCarbon,
+
+        [LocalizedDescription("EnumTotalNitrogen", typeof(Resources))]
+        TotalNitrogen,
     }
 }

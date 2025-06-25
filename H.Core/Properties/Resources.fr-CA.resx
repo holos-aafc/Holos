@@ -6189,4 +6189,10 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
   <data name="KilogramsPerHectareCropWetWeight" xml:space="preserve">
     <value />
   </data>
+  <data name="EnumTotalNitrogen" xml:space="preserve">
+    <value />
+  </data>
+  <data name="EnumFractionNitrogen" xml:space="preserve">
+    <value />
+  </data>
 </root>

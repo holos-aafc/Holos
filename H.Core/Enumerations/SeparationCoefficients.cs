@@ -47,5 +47,11 @@ namespace H.Core.Enumerations
 
         [LocalizedDescription("EnumFractionCarbon", typeof(Resources))]
         FractionCarbon,
+
+        /// <summary>
+        /// Fraction of nitrogen in solid fraction following solid-liquid separation
+        /// </summary>
+        [LocalizedDescription("EnumFractionNitrogen", typeof(Resources))]
+        FractionNitrogen,
     }
 }

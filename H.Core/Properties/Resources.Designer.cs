@@ -2864,6 +2864,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fraction total nitrogen.
+        /// </summary>
+        public static string EnumFractionNitrogen {
+            get {
+                return ResourceManager.GetString("EnumFractionNitrogen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fraction organic nitrogen.
         /// </summary>
         public static string EnumFractionOrganicNitrogen {
@@ -5659,6 +5668,15 @@ namespace H.Core.Properties {
         public static string EnumTotalAmmoniaNitrogen {
             get {
                 return ResourceManager.GetString("EnumTotalAmmoniaNitrogen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total nitrogen.
+        /// </summary>
+        public static string EnumTotalNitrogen {
+            get {
+                return ResourceManager.GetString("EnumTotalNitrogen", resourceCulture);
             }
         }
         
