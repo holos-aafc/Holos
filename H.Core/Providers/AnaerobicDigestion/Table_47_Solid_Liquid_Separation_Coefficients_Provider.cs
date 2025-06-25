@@ -84,7 +84,7 @@ namespace H.Core.Providers.AnaerobicDigestion
                 case DigestateParameters.TotalNitrogen:
                     return new SolidLiquidSeparationCoefficientsData
                     {
-                        SeparationCoefficient = SeparationCoefficients.TotalNitrogen,
+                        SeparationCoefficient = SeparationCoefficients.FractionNitrogen,
                         Centrifuge = 0.41,
                         BeltPress = 0.13,
                     };
