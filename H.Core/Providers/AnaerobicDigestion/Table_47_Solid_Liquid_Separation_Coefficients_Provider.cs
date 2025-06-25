@@ -97,14 +97,6 @@ namespace H.Core.Providers.AnaerobicDigestion
                         BeltPress = 0.32,
                     };
 
-                case DigestateParameters.TotalNitrogen:
-                    return new SolidLiquidSeparationCoefficientsData
-                    {
-                        SeparationCoefficient = SeparationCoefficients.FractionNitrogen,
-                        Centrifuge = 0.41,
-                        BeltPress = 0.13,
-                    };
-
                 default:
                     {
                         Trace.TraceError($"{nameof(Table_47_Solid_Liquid_Separation_Coefficients_Provider)}.{nameof(Table_47_Solid_Liquid_Separation_Coefficients_Provider.GetSolidLiquidSeparationCoefficientInstance)} " +
