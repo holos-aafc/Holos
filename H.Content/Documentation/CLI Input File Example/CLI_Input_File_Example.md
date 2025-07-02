@@ -1228,7 +1228,7 @@ note: User defined name
 
 Example value: H.Core.Models.Animals.Dairy.DairyComponent 
 
-Type value: Enum (String)
+Type value: Enum (Text)
 
 Does user provide have to value: Yes
 
@@ -1296,7 +1296,7 @@ note:
 
 Example value: 2023-10-01 00:00:00 
 
-Type value: strftime
+Type value: strftime (Text)
 
 Does user provide have to value: Yes
 
@@ -1349,9 +1349,9 @@ Holos has a default value:
 
 Valid values: Gestating, Lactating, Open, Weaning, GrowingAndFinishing, BreedingStock, Weaned
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ProductionStages.cs 
 
-note: 
+note: Must be set to indicate which stage a group of animals are in the lifecycle of the animal group (i.e. Lactating cows will be at the lactating production stage). This is not used for all animal types 
 
 ***
 ## NumberOfYoungAnimals
@@ -1366,9 +1366,9 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/AnimalComponentBase.cs 
 
-note: 
+note: Used to indicate how many young animals (i.e. beef calves) are associated with a parent group. See line 208 of source file on how to use 
 
 ***
 ## GroupPairingNumber
@@ -1398,9 +1398,9 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManagementPeriod.cs 
 
-note: 
+note: Start weight of the animals in a particular management period 
 
 ***
 ## EndWeight(kg)
@@ -1415,9 +1415,9 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManagementPeriod.cs 
 
-note: 
+note: End weight of the animals in a particular management period 
 
 ***
 ## AverageDailyGain(kg)
@@ -1747,9 +1747,9 @@ Is user provided:
 
 has default ?: 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
 
-note: 
+note: See line 134 for default setting 
 
 ***
 ## GainCoefficientA
@@ -1784,7 +1784,7 @@ note:
 ***
 ## HousingType
 
-Example value: 
+Example value: FreeStallBarnSolidLitter
 
 Type value: Enum (Text)
 
@@ -1845,9 +1845,9 @@ Holos has a default value:
 
 Valid range of values: (0 ≤ x ≤ 1)
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Bedding.cs, https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Animals/Table_30_Default_Bedding_Material_Composition_Provider.cs 
 
-note: 
+note: Amount of bedding added. Used in C and N input calculations. See line 52 in source and table 30 
 
 ***
 ## TotalCarbonKilogramsDryMatterForBedding
@@ -1862,9 +1862,9 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/HousingDetails.cs 
 
-note: 
+note: See HousingDetails.cs line 186 
 
 ***
 ## TotalNitrogenKilogramsDryMatterForBedding
@@ -2045,11 +2045,11 @@ note: Also known as Bo. See line 89 for defaults
 
 Example value: Beef Stockers & Backgrounders 
 
-Type Value: str (from enum) 
+Type Value: String (Text)
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
-Holos has a default value: 
+Holos has a default value:
 
 note: Should be unique string differentiate from other components/input files 
 
@@ -2060,11 +2060,13 @@ Source (code, csv?, etc.):
 
 Example value: H.Core.Models.Animals.Beef.BackgroundingComponent 
 
-Type Value: str (from enum) 
+Type Value: Enum (Text) 
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid values: H.Core.Models.Animals.Beef.BackgroundingComponent, H.Core.Models.Animals.Beef.CowCalfComponent, H.Core.Models.Animals.Beef.FinishingComponent
 
 note: 
 
@@ -2075,11 +2077,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: Heifers 
 
-Type Value: str (from enum) 
+Type Value: Enum (Text) 
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid values: Bulls, Heifers, Cows, Calves, Steers
 
 note: Must be unique string differentiate from other animal groups in the same component (e.g. "Bulls group #1") 
 
@@ -2090,11 +2094,13 @@ Source (code, csv?, etc.):
 
 Example value: BeefBackgrounderHeifer 
 
-Type Value: str (from enum) 
+Type Value: Enum (Text) 
 
-Does user have to provide value: x 
+Does user provide have to value: Yes 
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid values: BeefBackgrounder, BeefBackgrounderSteer, BeefBackgrounderHeifer, BeefFinishingSteer, BeefFinishingHeifer, Beef, BeefBulls, BeefCalf, BeefCowLactating, BeefCowDry, BeefFinisher, BeefCow
 
 note: See converter class used to convert animal type string names to enumeration values 
 
@@ -2105,11 +2111,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: Management period #1 
 
-Type Value: str 
+Type Value: String (Text)
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid values:
 
 note: Must be a unique string within the animal group 
 
@@ -2122,9 +2130,11 @@ Example value: 0
 
 Type Value: Int (Integer/Numeric)
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values:
 
 note: Used to group a parent and child group of animals. E.g. a group of lactating cows and a group of beef calves must have the same pairing number. Leave as zero when a parent/child grouping does not exist (most cases). See unit test class for example on setting this value 
 
@@ -2135,11 +2145,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core.
 
 Example value: 2023-10-01 00:00:00 
 
-Type Value: strftime 
+Type Value: strftime (Text)
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid values:
 
 note: Must be set to indicate the start of management period 
 
@@ -2152,9 +2164,11 @@ Example value: 110
 
 Type Value: Int (Integer/Numeric)
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Must be set to indicate how long the management period lasts 
 
@@ -2165,13 +2179,15 @@ Source (code, csv?, etc.):
 
 Example value: 100
 
-Type Value: Int (Integer/Numeric)
+Type Value: Int (Integer/Numeric) 
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
-Holos has a default value: 
+Holos has a default value:
 
 note: Number of animals in the animal group 
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -2180,11 +2196,13 @@ Source (code, csv?, etc.):
 
 Example value: Gestating 
 
-Type Value: str (from enum) 
+Type Value: Enum (Text)
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid values: 
 
 note: Must be set to indicate which stage a group of animals are in the lifecycle of the animal group (i.e. Lactating cows will be at the lactating production stage). This is not used for all animal types 
 
@@ -2197,9 +2215,11 @@ Example value: 0
 
 Type Value: Int (Integer/Numeric)
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
 Holos has a default value: 
+
+Valid range of values: (x ≥ 0)
 
 note: Used to indicate how many young animals (i.e. beef calves) are associated with a parent group. See line 208 of source file on how to use 
 
@@ -2210,11 +2230,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: False 
 
-Type Value: bool 
+Type value: Bool (True/False)
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
 Holos has a default value: 
+
+Valid values: True/False
 
 note: Use to specify that a group of animals are on a milk diet only. Used when referring to a group of young animals that are suckling/nursing 
 
@@ -2225,11 +2247,13 @@ Source (code, csv?, etc.):
 
 Example value: 240
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric) 
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
 Holos has a default value: 
+
+Valid range of values: (x ≥ 0)
 
 note: Start weight of the animals in a particular management period 
 
@@ -2240,11 +2264,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 361
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric) 
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
 Holos has a default value: 
+
+Valid range of values: (x ≥ 0)
 
 note: End weight of the animals in a particular management period 
 
@@ -2255,11 +2281,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 1.1 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric) 
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
 Holos has a default value: 
+
+Valid range of values: (x ≥ 0)
 
 note: This will be a value that is calculated based on the start and end weight 
 
@@ -2270,11 +2298,13 @@ Source (code, csv?, etc.):
 
 Example value: 0
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric) 
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
 Holos has a default value: 
+
+Valid range of values: (x ≥ 0)
 
 note: The amount of milk produced by the group of animals 
 
@@ -2285,13 +2315,15 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: 4
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)  
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
-Holos has a default value: 3.71 
+Holos has a default value:  3.71 
 
-note: Used with dairy components. Old default value was 4but has been changed 
+Valid range of values: (x ≥ 0)
+
+note: Used with dairy components. Old default value was 4 but has been changed 
 
 Source (code, csv?, etc.): 
 
@@ -2300,11 +2332,13 @@ Source (code, csv?, etc.):
 
 Example value: 3.5 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)  
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
-Holos has a default value: y 
+Holos has a default value: Yes
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -2313,13 +2347,15 @@ Source (code, csv?, etc.):
 ***
 ## DietAdditiveType
 
-Example value: 
+Example value: None
 
-Type Value: Enum 
+Type Value: Enum (Text) 
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
 Holos has a default value: No 
+
+Valid values: None, TwoPercentFat, FourPercentFat, Inonophore, InonophorePlusTwoPercentFat, InonophorePlusFourPercentFat, Custon, FivePercentFat, InonophorePlusFivePercentFat
 
 note: Optional input used to calculate enteric CH4. See GUI for supported types 
 
@@ -2330,11 +2366,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.063 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)   
 
-Does user have to provide value: 
+Does user provide have to value:
 
 Holos has a default value: Yes, based on diet 
+
+Valid range of values: (x ≥ 0)
 
 note: Also known as Ym of diet. See source file for defaults based on diet type 
 
@@ -2345,11 +2383,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)  
 
-Does user have to provide value: 
+Does user provide have to value:
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -2360,11 +2400,13 @@ Source (code, csv?, etc.):
 
 Example value: 0
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric) 
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Used with some animal types (i.e. swine types). See swine diets in source file for defaults 
 
@@ -2375,11 +2417,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 12.28 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Crude protein value of diet. See feed ingredient list for values 
 
@@ -2390,11 +2434,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: 65
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric) 
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Forage value of diet. See feed ingredient list for values 
 
@@ -2405,11 +2451,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: 68.825 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)  
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: TDN value of diet. See feed ingredient list tdn values 
 
@@ -2420,11 +2468,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: 6.57 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)  
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Ash content of diet. See line 434 for more informtation on how to calculate averages 
 
@@ -2435,11 +2485,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 25.825 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)  
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Starch content of diet 
 
@@ -2450,11 +2502,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: 3.045 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)  
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Fat content of diet 
 
@@ -2465,11 +2519,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: 2.48 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)   
 
-Does user have to provide value: x 
+Does user provide have to value: Yes 
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Metabolizable energy of diet 
 
@@ -2480,11 +2536,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: 42.025 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)    
 
-Does user have to provide value: x 
+Does user provide have to value: Yes 
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Neutral detergent fibre of diet 
 
@@ -2495,11 +2553,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Conte
 
 Example value: 0
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)
 
-Does user have to provide value: x 
+Does user provide have to value: Yes 
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Used only for diet/DMI calculations for beef calves. See line 419 
 
@@ -2510,11 +2570,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: ConfinedNoBarn 
 
-Type Value: str (from enum) 
+Type Value: String (Text)
 
-Does user have to provide value: x 
+Does user provide have to value: Yes 
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid values: ConfinedNoBarn, HousedInBarnSolid, Pasture
 
 note: Required field used for many calculations. See GUI for correct types when considering a particular animal type 
 
@@ -2525,11 +2587,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 1
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric) 
 
-Does user have to provide value: 
+Does user provide have to value: Yes 
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (0 ≤ x ≤ 1)
 
 note: See line 134 for default setting 
 
@@ -2540,11 +2604,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 1.5 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric) 
 
-Does user have to provide value: x 
+Does user provide have to value: Yes 
 
 Holos has a default value: 
+
+Valid range of values: (x ≥ 0)
 
 note: Amount of bedding added. Used in C and N input calculations. See line 52 in source and table 30 
 
@@ -2555,11 +2621,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.447 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric) 
 
-Does user have to provide value: 
+Does user provide have to value:
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: See HousingDetails.cs line 186 
 
@@ -2570,11 +2638,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.0057 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)  
 
-Does user have to provide value: 
+Does user provide have to value:
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: See HousingDetails.cs line 177 
 
@@ -2585,11 +2655,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 9.57 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)   
 
-Does user have to provide value: 
+Does user provide have to value:
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: See HousingDetails.cs line 219 
 
@@ -2600,11 +2672,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)   
 
-Does user have to provide value: 
+Does user provide have to value:
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (0 ≤ x ≤ 1)
 
 note: See line 74 for defaults 
 
@@ -2615,11 +2689,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.322 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)    
 
-Does user have to provide value: 
+Does user provide have to value:
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (0 ≤ x ≤ 1)
 
 note: See line 108 for defaults 
 
@@ -2630,11 +2706,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.26 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)     
 
-Does user have to provide value: 
+Does user provide have to value:
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Methane conversion factor of manure, not to be consufed with Methane conversion factor of diet (Ym). See line 89 for defaults 
 
@@ -2645,11 +2723,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.01 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)   
 
-Does user have to provide value: 
+Does user provide have to value:
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: See line 34 for defaults 
 
@@ -2660,11 +2740,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.005 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)   
 
-Does user have to provide value: 
+Does user provide have to value:
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: See line 34 for defaults 
 
@@ -2675,11 +2757,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.25 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)    
 
-Does user have to provide value: 
+Does user provide have to value:
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: See line 34 for defaults 
 
@@ -2690,11 +2774,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.011 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)    
 
-Does user have to provide value: 
+Does user provide have to value:
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: See line 34 for defaults 
 
@@ -2705,11 +2791,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.035 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)    
 
-Does user have to provide value: 
+Does user provide have to value:
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: See line 55 for defaults 
 
@@ -2720,11 +2808,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 8
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)    
 
-Does user have to provide value: 
+Does user provide have to value:
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -2735,11 +2825,13 @@ Source (code, csv?, etc.):
 
 Example value: 0.19 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)    
 
-Does user have to provide value: 
+Does user provide have to value:
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values: (x ≥ 0)
 
 note: Also known as Bo. See line 89 for defaults 
 
@@ -2750,11 +2842,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)  
 
-Does user have to provide value: 
+Does user provide have to value:
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values:
 
 note: See line 31 for defaults 
 
@@ -2765,11 +2859,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.125 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)  
 
-Does user have to provide value: 
+Does user provide have to value:
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values:
 
 note: See line 31 for defaults 
 
@@ -2780,11 +2876,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.28 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)   
 
-Does user have to provide value: 
+Does user provide have to value:
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values:
 
 note: See line 31 for defaults 
 
@@ -2795,11 +2893,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: DeepBedding 
 
-Type Value: str (from enum) 
+Type Value: Enum (Text)
 
-Does user have to provide value: x 
+Does user provide have to value: Yes
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid values: DeepBedding, SolidStorage, Pasture, CompostPassive, CompostIntensive
 
 note: Required. See GUI for valid types for particular animal type 
 
@@ -2810,11 +2910,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0.35 
 
-Type Value: float 
+Type Value: Double (Decimal/Numeric)  
 
-Does user have to provide value: 
+Does user provide have to value:
 
-Holos has a default value: 
+Holos has a default value:
+
+Valid range of values:
 
 note: For poultry animals only. See line 7 in source 
 
