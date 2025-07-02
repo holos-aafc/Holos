@@ -2213,7 +2213,7 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 0
 
-Type Value: int 
+Type Value: Int (Integer/Numeric)
 
 Does user provide have to value: Yes
 
@@ -2336,7 +2336,7 @@ Type Value: Double (Decimal/Numeric)
 
 Does user provide have to value: Yes
 
-Holos has a default value: y 
+Holos has a default value: Yes
 
 Valid range of values: (x ≥ 0)
 
@@ -2931,11 +2931,11 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 
 
-Value Type: str (from enum) 
+Value Type: String (Text) 
 
-Is user provided: x 
+Does user have to provide value: Yes 
 
-has default?: 
+Holos has a default value: Yes
 
 Source (code, csv?, etc.): 
 
@@ -2944,13 +2944,15 @@ note:
 ***
 ## ComponentType
 
-Example value: 
+Example value: H.Core.Models.Animals.Sheep.SheepComponent
 
-Value Type: str (from enum) 
+Value Type: Enum (String)
 
-Is user provided: 
+Does user have to provide value: Yes
 
-has default?: 
+Holos has a default value: 
+
+Valid values: H.Core.Models.Animals.Sheep.SheepComponent, H.Core.Models.Animals.Sheep.RamsComponent, H.Core.Models.Animals.Sheep.SheepFeedlotComponent, H.Core.Models.Animals.Sheep.EwesAndLambsComponent
 
 Source (code, csv?, etc.): 
 
@@ -2959,13 +2961,15 @@ note:
 ***
 ## GroupName
 
-Example value: 
+Example value: Sheep
 
-Value Type: str (from enum) 
+Value Type: Enum (Text)
 
-Is user provided: x 
+Does user have to provide value: Yes 
 
-has default?: 
+Holos has a default value: 
+
+Valid values: Sheep, Sheep Feedlot, Ram, Lambs, Ewes
 
 Source (code, csv?, etc.): 
 
@@ -2974,13 +2978,15 @@ note:
 ***
 ## GroupType
 
-Example value: 
+Example value: SheepFeedlot
 
 Value Type: str (from enum) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value: 
+
+Valid values: Sheep, SheepFeedlot, Ram, Ewes, Lambs
 
 Source (code, csv?, etc.): 
 
@@ -2989,13 +2995,15 @@ note:
 ***
 ## ManagementPeriodName
 
-Example value: 
+Example value: Management period #1
 
-Value Type: str 
+Value Type: String (Text) 
 
-Is user provided: x 
+Does user have to provide value: Yes 
 
-has default?: 
+Holos has a default value: 
+
+Valid values: Must be a unique string within the animal group
 
 Source (code, csv?, etc.): 
 
@@ -3004,43 +3012,45 @@ note:
 ***
 ## GroupPairingNumber
 
-Example value: 
+Example value: 0
 
-Value Type: int 
+Value Type: Int (Integer/Numeric)
 
-Is user provided: x 
+Does user have to provide value: Yes 
 
-has default?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
-note: 
+note: Used to group a parent and child group of animals. E.g. a group of lactating cows and a group of beef calves must have the same pairing number. Leave as zero when a parent/child grouping does not exist (most cases). See unit test class for example on setting this value
+
+
 
 ***
 ## ManagementPeriodStartDate
 
-Example value: 
+Example value: 2023-10-01 00:00:00
 
 Value Type: strftime 
 
-Is user provided: x 
+Does user have to provide value: Yes 
 
-has default?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
-note: 
+note: Must be set to indicate the start of management period
 
 ***
 ## ManagementPeriodDays
 
-Example value: 
+Example value: 109
 
-Value Type: int 
+Value Type: Int (Integer/Numeric)
 
-Is user provided: x 
+Does user have to provide value: Yes
 
-has default?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -3049,13 +3059,13 @@ note:
 ***
 ## NumberOfAnimals
 
-Example value: 
+Example value: 50
 
-Value Type: int 
+Value Type: Int (Integer/Numeric)
 
-Is user provided: x 
+Does user have to provide value: Yes 
 
-has default?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -3064,13 +3074,13 @@ note:
 ***
 ## ProductionStage
 
-Example value: 
+Example value: Lactating
 
-Value Type: str (from enum) 
+Value Type: Enum (Text) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -3079,13 +3089,15 @@ note:
 ***
 ## NumberOfYoungAnimals
 
-Example value: 
+Example value: 12
 
-Value Type: int 
+Value Type: Int (Integer/Numeric)
 
-Is user provided: x 
+Does user have to provide value: Yes
 
-has default?: 
+Holos has a default value: 
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -3094,13 +3106,15 @@ note:
 ***
 ## StartWeight(kg)
 
-Example value: 
+Example value: 240
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: Yes
 
-has default?: 
+Holos has a default value: 
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -3109,13 +3123,15 @@ note:
 ***
 ## EndWeight(kg)
 
-Example value: 
+Example value: 360
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: Yes 
 
-has default?: 
+Holos has a default value: 
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -3124,13 +3140,15 @@ note:
 ***
 ## AverageDailyGain(kg)
 
-Example value: 
+Example value: 1.1
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: Yes 
 
-has default?: 
+Holos has a default value: 
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -3143,9 +3161,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -3158,9 +3176,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -3173,9 +3191,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -3184,13 +3202,15 @@ note:
 ***
 ## DietAdditiveType
 
-Example value: 
+Example value: None
 
-Value Type: str (from enum) 
+Value Type: Enum (Text) 
 
-Is user provided: x 
+Does user have to provide value: Yes 
 
-has default?: 
+Holos has a default value: 
+
+Valid values: None, Ionophore, FivePercentFat, IonophorePlusFicePercentFat
 
 Source (code, csv?, etc.): 
 
@@ -3199,73 +3219,81 @@ note:
 ***
 ## MethaneConversionFactorOfDiet(kgCH4(kgCH4)^-1)
 
-Example value: 
+Example value: 0.056
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: Yes
 
-has default?: 
+Holos has a default value: Yes, based on diet
 
-Source (code, csv?, etc.): 
+Valid range of values: (x ≥ 0)
 
-note: 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/DietProvider.cs
+
+note: Also known as Ym of diet. See source file for defaults based on diet type
 
 ***
 ## MethaneConversionFactorAdjusted(%)
 
-Example value: 
+Example value: 0
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
-note: 
+note: Deprecated. Do not use. Will be removed in future version
 
 ***
 ## FeedIntake(kghead^-1day^-1)
 
-Example value: 
+Example value: 0
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: Yes
 
-has default?: 
+Holos has a default value: 
 
-Source (code, csv?, etc.): 
+Valid range of values: (x ≥ 0)
 
-note: 
+Source (code, csv?, etc.):  https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/DietProvider.cs
+
+note: Used with some animal types (i.e. swine types). See swine diets in source file for defaults
 
 ***
 ## CrudeProtein(kgkg^-1)
 
-Example value: 
+Example value: 12.28
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: Yes 
 
-has default?: 
+Holos has a default value: 
 
-Source (code, csv?, etc.): 
+Valid range of values: (x ≥ 0)
 
-note: 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
+
+note: Crude protein value of diet. See feed ingredient list for values
 
 ***
 ## Forage(%DM)
 
-Example value: 
+Example value: 97
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: Yes 
 
-has default?: 
+Holos has a default value: 
+
+Valid range of values: (0 ≤ x ≤ 1)
 
 Source (code, csv?, etc.): 
 
@@ -3274,13 +3302,15 @@ note:
 ***
 ## TDN(%DM)
 
-Example value: 
+Example value: 54.6
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: Yes
 
-has default?: 
+Holos has a default value: 
+
+Valid range of values: (0 ≤ x ≤ 1)
 
 Source (code, csv?, etc.): 
 
@@ -3289,28 +3319,32 @@ note:
 ***
 ## AshContentOfDiet(%DM)
 
-Example value: 
+Example value: 6.57
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: Yes 
 
-has default?: 
+Holos has a default value: 
 
-Source (code, csv?, etc.): 
+Valid range of values: (x ≥ 0)
 
-note: 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/Diet.cs
+
+note: Ash content of diet. See line 434 for more information on how to calculate averages
 
 ***
 ## Starch(%DM)
 
-Example value: 
+Example value: 7.1
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: Yes
 
-has default?: 
+Holos has a default value: 
+
+Valid range of values: (0 ≤ x ≤ 1)
 
 Source (code, csv?, etc.): 
 
@@ -3319,13 +3353,15 @@ note:
 ***
 ## Fat(%DM)
 
-Example value: 
+Example value: 1.7
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: Yes 
 
-has default?: 
+Holos has a default value: 
+
+Valid range of values: (0 ≤ x ≤ 1)
 
 Source (code, csv?, etc.): 
 
@@ -3334,13 +3370,15 @@ note:
 ***
 ## ME(MJkg^-1)
 
-Example value: 
+Example value: 2
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: Yes
 
-has default?: 
+Holos has a default value: 
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -3349,13 +3387,15 @@ note:
 ***
 ## NDF(%DM)
 
-Example value: 
+Example value: 53.5 
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: Yes 
 
-has default?: 
+Holos has a default value: 
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -3368,9 +3408,9 @@ Example value:
 
 Value Type: float 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -3381,11 +3421,11 @@ note:
 
 Example value: 
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -3394,13 +3434,15 @@ note:
 ***
 ## ActivityCoefficientOfFeedingSituation(MJday^-1kg^-1)
 
-Example value: 
+Example value: 0.1700
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: Yes
 
-has default?: 
+Holos has a default value: 
+
+Valid range of values: (0 ≤ x ≤ 1)
 
 Source (code, csv?, etc.): 
 
@@ -3409,13 +3451,15 @@ note:
 ***
 ## MaintenanceCoefficient(MJday^-1kg^-1)
 
-Example value: 
+Example value: 0.322
 
-Value Type: float 
+Value Type: flDouble (Decimal/Numeric)oat 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value: 
+
+Valid range of values: (0 ≤ x ≤ 1)
 
 Source (code, csv?, etc.): 
 
@@ -3424,13 +3468,15 @@ note:
 ***
 ## UserDefinedBeddingRate
 
-Example value: 
+Example value: 0
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: yes
 
-has default?: 
+Holos has a default value: 
+
+Valid range of values: (0 ≤ x ≤ 1)
 
 Source (code, csv?, etc.): 
 
@@ -3439,13 +3485,15 @@ note:
 ***
 ## TotalCarbonKilogramsDryMatterForBedding
 
-Example value: 
+Example value: 0.447
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value: 
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -3454,13 +3502,15 @@ note:
 ***
 ## TotalNitrogenKilogramsDryMatterForBedding
 
-Example value: 
+Example value: 0.0057
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value: 
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -3469,13 +3519,15 @@ note:
 ***
 ## MoistureContentOfBeddingMaterial
 
-Example value: 
+Example value: 9.57
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value: 
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -3484,13 +3536,15 @@ note:
 ***
 ## MethaneConversionFactorOfManure(kgCH4(kgCH4)^-1)
 
-Example value: 
+Example value: 0.26
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value: 
+
+Valid range of values: (x ≥ 0)
 
 Source (code, csv?, etc.): 
 
@@ -3499,88 +3553,98 @@ note:
 ***
 ## N2ODirectEmissionFactor(kgN2O-N(kgN)^-1)
 
-Example value: 
+Example value: 0.01
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value: 
 
-Source (code, csv?, etc.): 
+Valid range of values: (x ≥ 0)
 
-note: 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs
+
+note: See line 34 for defaults
 
 ***
 ## EmissionFactorVolatilization
 
-Example value: 
+Example value: 0.005
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value: 
 
-Source (code, csv?, etc.): 
+Valid range of values: (x ≥ 0)
 
-note: 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs
+
+note: See line 34 for defaults
 
 ***
 ## VolatilizationFraction
 
-Example value: 
+Example value: 0.25
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value: 
 
-Source (code, csv?, etc.): 
+Valid range of values: (x ≥ 0)
 
-note: 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs
+
+note: See line 34 for defaults
 
 ***
 ## EmissionFactorLeaching
 
-Example value: 
+Example value: 0.011
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value: 
 
-Source (code, csv?, etc.): 
+Valid range of values: (x ≥ 0)
 
-note: 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs
+
+note: See line 34 for defaults
 
 ***
 ## FractionLeaching
 
-Example value: 
+Example value: 0.035
 
-Value Type: float 
+Value Type: Double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value: 
 
-Source (code, csv?, etc.): 
+Valid range of values: (x ≥ 0)
+
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Ammonia.cs
 
 note: 
 
 ***
 ## AshContent(%)
 
-Example value: 
+Example value: 8.00
 
-Value Type: float 
+Value Type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default?: 
+Holos has a default value: 
 
 Source (code, csv?, etc.): 
 
@@ -3591,43 +3655,49 @@ note:
 
 Example value: 
 
-Value Type: float 
+Value Type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: yes
 
-has default?: 
+Holos has a default value: x
 
-Source (code, csv?, etc.): 
+Possible Values: 0 < x
+
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManureDetails.cs
 
 note: 
 
 ***
 ## ManureExcretionRate
 
-Example value: 
+Example value: 1.23
 
-Value Type: float 
+Value Type: double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: yes
 
-has default?: 
+Holos has a default value: x
 
-Source (code, csv?, etc.): 
+Possible Values: 0 < x
+
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManureDetails.cs
 
 note: 
 
 ***
 ## FractionOfCarbonInManure
 
-Example value: 
+Example value: 6.182
 
-Value Type: float 
+Value Type: double (Decimal/Numeric)
 
-Is user provided: 
+Does user have to provide value: yes
 
-has default?: 
+Holos has a default value: x
 
-Source (code, csv?, etc.): 
+Possible Values: 0 < x < 100
+
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManureDetails.cs
 
 note: 
 
@@ -3640,146 +3710,166 @@ note:
 
 Example value: 851003
 
-Value type: int 
+Value type: Int (Integer/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: N 
+Holos has a default value ?: No
+
+Possible Values:
 
 note: Required. Use GUI map view to get polygon number if needed 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
-## YieldAssignmentMethod=
+## YieldAssignmentMethod
 
 Example value: SmallAreaData 
 
 Value type: enum 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: SmallAreaData 
+Holos has a default value ?: yes
+
+Possible Values: Average, Custom, CARValue, InputFile, InputFileThenAverage, SmallAreaData
 
 note: Used to lookup default yields for a particular year and crop type 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/YieldAssignmentMethod.cs 
 
 ***
-## PolygonNumber=
+## PolygonNumber
 
 Example value: 851003
 
-Value type: int 
+Value type: Int (Integer/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: No
+
+Possible Values: 
 
 note: Required. Use GUI map view to get polygon number if needed 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SmallAreaYieldData.cs
 
 ***
-## Latitude=
+## Latitude
 
 Example value: 49.9805772869656 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: Any unrestricted value
 
 note: Required if using NASA as the source for climate data. Values are determined when user clicks on a location in the GUI 
 
 Source (code, csv?, etc.): 
 
 ***
-## Longitude=
+## Longitude
 
 Example value: -98.0433082580568 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: Any unrestricted value
 
 note: Required if using NASA as the source for climate data. Values are determined when user clicks on a location in the GUI 
 
 Source (code, csv?, etc.): 
 
 ***
-## CarbonConcentration(kgkg^-1)=
+## CarbonConcentration(kgkg^-1)
 
 Example value: 0.45 
 
 Value type: float 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 0.4 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x 
 
 note: See line 90 in source 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/CoreConstants.cs 
 
 ***
-## EmergenceDay=
+## EmergenceDay
 
 Example value: 141
 
-Value type: int 
+Value type: Int (Integer/Numeric)
 
-Is user provided: is used ? 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x 
 
 note: Used with ICBM carbon model. See line 167 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## RipeningDay=
+## RipeningDay
 
 Example value: 197
 
-Value type: int 
+Value type: Int (Integer/Numeric)
 
-Is user provided: is used ? 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x 
 
 note: Used with ICBM carbon model. See line 168 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Variance=
+## Variance
 
 Example value: 300
 
-Value type: float? 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x 
 
 note: Used with ICBM carbon model. See line 169 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Alfa=
+## Alfa
 
 Example value: 0.7 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x 
 
 note: Used with ICBM carbon model. See line 175 for default 
 
@@ -3790,11 +3880,13 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: -3.78 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: Any Unrestricted value
 
 note: Used with ICBM carbon model. See line 176 for default 
 
@@ -3805,1304 +3897,1478 @@ Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/
 
 Example value: 30
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: Any unrestricted value
 
 note: Used with ICBM carbon model. See line 177 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## MoistureResponseFunctionAtSaturation=
+## MoistureResponseFunctionAtSaturation
 
 Example value: 0.42 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x 
 
 note: Used with ICBM carbon model. See line 178 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## MoistureResponseFunctionAtWiltingPoint=
+## MoistureResponseFunctionAtWiltingPoint
 
 Example value: 0.18 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x
 
 note: Used with ICBM carbon model. See line 179 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## PercentageOfProductReturnedToSoilForAnnuals=2
+## PercentageOfProductReturnedToSoilForAnnuals2
 
 Example value: 2
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfStrawReturnedToSoilForAnnuals=100
+## PercentageOfStrawReturnedToSoilForAnnuals100
 
 Example value: 100
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfRootsReturnedToSoilForAnnuals=100
+## PercentageOfRootsReturnedToSoilForAnnuals100
 
 Example value: 100
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductYieldReturnedToSoilForSilageCrops=35
+## PercentageOfProductYieldReturnedToSoilForSilageCrops35
 
 Example value: 35
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfRootsReturnedToSoilForSilageCrops=100
+## PercentageOfRootsReturnedToSoilForSilageCrops
 
 Example value: 100
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductYieldReturnedToSoilForCoverCrops=100
+## PercentageOfProductYieldReturnedToSoilForCoverCrops
 
 Example value: 100
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductYieldReturnedToSoilForCoverCropsForage=35
+## PercentageOfProductYieldReturnedToSoilForCoverCropsForage
 
 Example value: 35
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductYieldReturnedToSoilForCoverCropsProduce=0
+## PercentageOfProductYieldReturnedToSoilForCoverCropsProduce
 
 Example value: 0
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfStrawReturnedToSoilForCoverCrops=100
+## PercentageOfStrawReturnedToSoilForCoverCrops
 
 Example value: 100
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfRootsReturnedToSoilForCoverCrops=100
+## PercentageOfRootsReturnedToSoilForCoverCrops
 
 Example value: 100
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductReturnedToSoilForRootCrops=0
+## PercentageOfProductReturnedToSoilForRootCrops
 
 Example value: 0
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfStrawReturnedToSoilForRootCrops=100
+## PercentageOfStrawReturnedToSoilForRootCrops
 
 Example value: 100
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductReturnedToSoilForPerennials=35
+## PercentageOfProductReturnedToSoilForPerennials
 
 Example value: 35
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfRootsReturnedToSoilForPerennials=100
+## PercentageOfRootsReturnedToSoilForPerennials
 
 Example value: 100
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values:
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductReturnedToSoilForRangelandDueToHarvestLoss=35
+## PercentageOfProductReturnedToSoilForRangelandDueToHarvestLoss
 
 Example value: 35
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values:
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfRootsReturnedToSoilForRangeland=100
+## PercentageOfRootsReturnedToSoilForRangeland
 
 Example value: 100
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values:
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfProductReturnedToSoilForFodderCorn=35
+## PercentageOfProductReturnedToSoilForFodderCorn
 
 Example value: 35
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## PercentageOfRootsReturnedToSoilForFodderCorn=100
+## PercentageOfRootsReturnedToSoilForFodderCorn
 
 Example value: 100
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
-## DecompositionRateConstantYoungPool=0.8
+## DecompositionRateConstantYoungPool
 
 Example value: 0.8 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 
 
 note: Used with ICBM carbon model. See line 221 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## DecompositionRateConstantOldPool=
+## DecompositionRateConstantOldPool
 
 Example value: 0.00605 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values:
 
 note: Used with ICBM carbon model. See line 222 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## OldPoolCarbonN=
+## OldPoolCarbonN
 
 Example value: 0.1 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x
 
 note: Used with both ICBM and IPCC Tier 2 carbon models. See line 224 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## NORatio=
+## NORatio
 
 Example value: 0.1 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values:
 
 note: Used with both ICBM and IPCC Tier 2 carbon models. See line 227 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## EmissionFactorForLeachingAndRunoff(kgN2O-N(kgN)^-1)=
+## EmissionFactorForLeachingAndRunoff(kgN2O-N(kgN)^-1)
 
 Example value: 0.011 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 
 
 note: Used for N2O calculations. See line 228  
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## EmissionFactorForVolatilization(kgN2O-N(kgN)^-1)=
+## EmissionFactorForVolatilization(kgN2O-N(kgN)^-1)
 
 Example value: 0.01 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values:
 
 note: Used for N2O calculations. See line 229 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## FractionOfNLostByVolatilization=
+## FractionOfNLostByVolatilization
 
 Example value: 0.21 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values:
 
 note: Used for N2O calculations. See line 232 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## MicrobeDeath=
+## MicrobeDeath
 
 Example value: 0.2 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x  
 
 note: Used by both ICBM and IPCC Tier carbon models. See line 236 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Denitrification=
+## Denitrification
 
 Example value: 0.5 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x 
 
 note: Used by both ICBM and IPCC Tier carbon models. See line 237 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Carbonmodellingstrategy=
+## Carbonmodellingstrategy
 
 Example value:  IPCCTier2 
 
 Value type: enum 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible values: IPCCTier2, ICBM
 
 note: Will determine which carbon model will be used (IPCC Tier 2 is the newest C model and is the new default model) 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/CarbonModellingStrategies.cs 
 
 ***
-## RunInPeriodYears=
+## RunInPeriodYears
 
 Example value: 15
 
-Value type: int 
+Value type: Int (Integer/Numeric)
 
-Is user provided: x 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x 
 
 note: Used to indicate how many years will be used when calculating equilibrium soil carbon. Can leave default in most cases. See line 269 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## HumificationCoefficientAboveGround=
+## HumificationCoefficientAboveGround
 
 Example value: 0.125 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x 
 
 note: Used with ICBM carbon model. See line 217 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## HumificationCoefficientBelowGround=
+## HumificationCoefficientBelowGround
 
 Example value: 0.3 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible Values: 0 < x 
 
 note: Used with ICBM carbon model. See line 218 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## HumificationCoefficientManure=
+## HumificationCoefficientManure
 
 Example value: 0.31 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible values: 0 < x
 
 note: Used with ICBM carbon model. See line 219 for default 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
-## Climatefilename=climate.csv
+## Climatefilenameclimate.csv
 
 Example value: climate.csv 
 
 Value type: 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: "Any_Valid_Text".csv
 
 note: Used when climate acquisition is set to "InputFile" 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs
 
 ***
-## ClimateDataAcquisition=
+## ClimateDataAcquisition
 
 Example value: NASA 
 
 Value type: enum 
 
-Is user provided: 
+Does user have to provide value: x
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values:  SLC, Custom, NASA, InputFile
 
 note: Specifies how Holos will aquire climate data. See source file for more details 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Climate/ClimateProvider.cs 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Climate/ClimateProvider.cs | https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs
 
 ***
-## Useclimateparameterinsteadofmanagementfactor=
+## Useclimateparameterinsteadofmanagementfactor
 
 Example value: True 
 
 Value type: bool 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible values: True, False
 
 note: Set to true for most scenarios 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs
 
 ***
-## EnableCarbonModelling=
+## EnableCarbonModelling
 
 Example value: True 
 
 Value type: bool 
 
-Is user provided: 
+Does user have to provide value: 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible values: True, False
 
 note: Set to true for most scenarios 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs
 
 ***
-## JanuaryPrecipitation=
+## JanuaryPrecipitation
 
 Example value: 17.6213 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else. See line 37 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## FebruaryPrecipitation=
+## FebruaryPrecipitation
 
 Example value: 12.8316 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## MarchPrecipitation=
+## MarchPrecipitation
 
 Example value: 22.426 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## AprilPrecipitation=
+## AprilPrecipitation
 
 Example value: 27.4144 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## MayPrecipitation=
+## MayPrecipitation
 
 Example value: 61.5015 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## JunePrecipitation=
+## JunePrecipitation
 
 Example value: 77.9022 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## JulyPrecipitation=
+## JulyPrecipitation
 
 Example value: 57.274 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## AugustPrecipitation=
+## AugustPrecipitation
 
 Example value: 53.0356 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## SeptemberPrecipitation=
+## SeptemberPrecipitation
 
 Example value: 40.4796 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## OctoberPrecipitation=
+## OctoberPrecipitation
 
 Example value: 33.7571 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## NovemberPrecipitation=
+## NovemberPrecipitation
 
 Example value: 23.0151 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## DecemberPrecipitation=
+## DecemberPrecipitation
 
 Example value: 21.4046 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## JanuaryPotentialEvapotranspiration=
+## JanuaryPotentialEvapotranspiration
 
 Example value: 0.0327 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## FebruaryPotentialEvapotranspiration=
+## FebruaryPotentialEvapotranspiration
 
 Example value: 0.0888 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## MarchPotentialEvapotranspiration=
+## MarchPotentialEvapotranspiration
 
 Example value: 3.5731 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## AprilPotentialEvapotranspiration=
+## AprilPotentialEvapotranspiration
 
 Example value: 44.1505 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## MayPotentialEvapotranspiration=
+## MayPotentialEvapotranspiration
 
 Example value: 100.0393 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## JunePotentialEvapotranspiration=
+## JunePotentialEvapotranspiration
 
 Example value: 123.5476 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## JulyPotentialEvapotranspiration=
+## JulyPotentialEvapotranspiration
 
 Example value: 135.7116 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## AugustPotentialEvapotranspiration=
+## AugustPotentialEvapotranspiration
 
 Example value: 120.4341 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## SeptemberPotentialEvapotranspiration=
+## SeptemberPotentialEvapotranspiration
 
 Example value: 66.0041 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## OctoberPotentialEvapotranspiration=
+## OctoberPotentialEvapotranspiration
 
 Example value: 16.8898 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## NovemberPotentialEvapotranspiration=
+## NovemberPotentialEvapotranspiration
 
 Example value: 0.7677 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value 
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## DecemberPotentialEvapotranspiration=
+## DecemberPotentialEvapotranspiration
 
 Example value: 0.0252 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## JanuaryMeanTemperature=
+## JanuaryMeanTemperature
 
 Example value: -14.8531 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## FebruaryMeanTemperature=
+## FebruaryMeanTemperature
 
 Example value: -12.4063 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## MarchMeanTemperature=
+## MarchMeanTemperature
 
 Example value: -5.3584 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## AprilMeanTemperature=
+## AprilMeanTemperature
 
 Example value: 3.7295 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## MayMeanTemperature=
+## MayMeanTemperature
 
 Example value: 10.7967 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## JuneMeanTemperature=
+## JuneMeanTemperature
 
 Example value: 16.4886 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## JulyMeanTemperature=
+## JulyMeanTemperature
 
 Example value: 18.8914 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## AugustMeanTemperature=
+## AugustMeanTemperature
 
 Example value: 18.2291 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## SeptemberMeanTemperature=
+## SeptemberMeanTemperature
 
 Example value: 13.2652 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## OctoberMeanTemperature=
+## OctoberMeanTemperature
 
 Example value: 5.6419 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## NovemberMeanTemperature=
+## NovemberMeanTemperature
 
 Example value: -3.5511 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## DecemberMeanTemperature=
+## DecemberMeanTemperature
 
 Example value: -11.9174 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: not used 
+Does user have to provide value: not used 
 
-has default ?: 
+Holos has a default value ?: 
+
+Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
 Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
-## Province=
+## Province
 
 Example value: Manitoba 
 
 Value type: enum 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: 
+
+Possible values: Alberta, BritishColumbia, Manitoba, NewBrunswick, Newfoundland, NorthwestTerritories, NovaScotia, Ontario, Nunavut, PrinceEdwardIsland, Quebec, Saskatchewan, Yukon
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/Province.cs
 
 ***
-## YearOfObservation=
+## YearOfObservation
 
 Example value: 2024
 
-Value type: int 
+Value type: Int (Integer/Numeric)
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: yes
+
+Possible values: 1 < x
 
 note: Defaults to the current year 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Infrastructure/ModelBase.cs
 
 ***
-## EcodistrictID=
+## EcodistrictID
 
 Example value: 851
 
-Value type: int 
+Value type: Int (Integer/Numeric)
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: 0 < x
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
-## SoilGreatGroup=
+## SoilGreatGroup
 
 Example value: Regosol 
 
 Value type: enum 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible values: NotApplicable, Unknown, MelanicBrunisol, EutricBrunisol, SombricBrunisol, DystricBrunisol, BrownChernozem, DarkBrownChernozem, BlackChernozem, DarkGrayChernozem, TurbicCryosol, StaticCryosol, OrganicCryosol, HumicGleysol, Gleysol, LuvicGleysol, GrayBrownLuvisol, GrayLuvisol, Fibrisol, Mesisol, Humisol, Folisol, HumicPodzol, FerroHumicPodzol, HumoFerricPodzol, Regosol, HumicRegosol, Solonetz, SolodizedSolonetz, Solod, VerticSolonetz, Vertisol, HumicVertisol
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/SoilGreatGroupType.cs
 
 ***
-## Soilfunctionalcategory=
+## Soilfunctionalcategory
 
 Example value: Black 
 
 Value type: enum 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: NotApplicable, Brown, BrownChernozem, DarkBrown, DarkBrownChernozem, Black, BlackGrayChernozem, Organic, EasternCanada, EnumSoilFunctionalAll, 
 
 note: deduced following code in Holos 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/SoilFunctionalCategory.cs
 
 ***
-## BulkDensity=
+## BulkDensity
 
 Example value: 1.2 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible values: 0 < x
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
-## SoilTexture=
+## SoilTexture
 
 Example value: Fine 
 
 Value type: enum 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: Fine, Medium, Coarse, Unknown
 
 note: deduced following code in Holos 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/SoilTexture.cs
 
 ***
-## SoilPh=
+## SoilPh
 
 Example value: 7.8 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: 0 < x
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
-## TopLayerThickness(mm)=
+## TopLayerThickness(mm)
 
 Example value: 200
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: 0 < x
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
-## ProportionOfSandInSoil=
+## ProportionOfSandInSoil
 
 Example value: 0.2 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: 0 < x < 100
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
-## ProportionOfClayInSoil=
+## ProportionOfClayInSoil
 
 Example value: 0.3 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: 0 < x < 100
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
-## ProportionOfSoilOrganicCarbon=
+## ProportionOfSoilOrganicCarbon
 
 Example value: 3.1 
 
-Value type: float 
+Value type: double (Decimal/Numeric) 
 
-Is user provided: x 
+Does user have to provide value: x 
 
-has default ?: 
+Holos has a default value ?: Yes
+
+Possible Values: 0 < x < 100
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): 
+Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
