@@ -21,8 +21,10 @@ using H.Core.Models.Animals.Poultry.Chicken;
 using H.Core.Models.Animals.Poultry.Turkey;
 using H.Core.Models.Animals.Sheep;
 using H.Core.Models.Animals.Swine;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Feed;
 using H.Core.Test.Providers.Climate;
+using Microsoft.VisualStudio.TestPlatform.CoreUtilities.Extensions;
 
 namespace H.Core.Test.Services.Animals
 {
@@ -277,6 +279,7 @@ namespace H.Core.Test.Services.Animals
             var cowCalfComponent = new CowCalfComponent();
             cowCalfComponent.Groups.Add(cowCalfGroup);
             _farm.Components.Add(cowCalfComponent);
+            _farm.Components.Add(new FieldSystemComponent());
 
             _managementPeriodService.CowCalfBullGroupManagementPeriod(_farm, cowCalfGroup, _managementPeriod, AnimalGroupOnPropertyChanged);
 
@@ -390,6 +393,7 @@ namespace H.Core.Test.Services.Animals
             var cowComponent = new CowCalfComponent();
             cowComponent.Groups.Add(cowGroup);
             _farm.Components.Add(cowComponent);
+            _farm.Components.Add(new FieldSystemComponent());
 
             _managementPeriodService.CowCalfCowGroupManagementPeriod(_farm, cowGroup, _managementPeriod, AnimalGroupOnPropertyChanged);
 

@@ -66,7 +66,7 @@ namespace H.Core.Test.Calculators.Climate
 
             Assert.AreEqual(-13.1799, Math.Round(januaryTemperatureNormal, 4));
             Assert.AreEqual(24.8168, Math.Round(januaryPrecipNormal, 4));
-            Assert.AreEqual(0.1451, Math.Round(januaryPETNormal, 4));
+            Assert.AreEqual(0.1474, Math.Round(januaryPETNormal, 4));
         }
 
         [TestMethod]

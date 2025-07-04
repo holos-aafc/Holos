@@ -425,6 +425,21 @@ namespace H.Core.Calculators.Carbon
                 var tupleForYear = _fieldComponentHelper.GetAdjoiningYears(viewItems, year);
                 var currentYearViewItem = tupleForYear.CurrentYearViewItem;
 
+                if (currentYearViewItem.Yield == 0)
+                {
+                    _cropInitializationService.InitializeYield(currentYearViewItem, farm);
+                }
+                
+                if (currentYearViewItem.LigninContent == 0)
+                {
+                    _cropInitializationService.InitializeLigninContent(currentYearViewItem, farm);
+                }
+
+                if (currentYearViewItem.MoistureContentOfCropPercentage == 0)
+                {
+                    _cropInitializationService.InitializeMoistureContent(currentYearViewItem, farm);
+                }
+
                 // If the CLI user has not entered a value for aboveground, belowground, manure, or digestate C inputs we will need to assign C inputs now before the C model runs
                 if (currentYearViewItem.TotalCarbonInputs == 0)
                 {

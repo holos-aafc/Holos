@@ -3,6 +3,7 @@ using H.Core.Models.Animals;
 using H.Core.Models;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using H.Core.Models.Animals.Beef;
 
 namespace H.Core.Services.Animals
@@ -129,10 +130,9 @@ namespace H.Core.Services.Animals
                 managementPeriod.NumberOfDays = 183;
                 managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
                 managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
-
                 managementPeriod.SelectedDiet = GetDefaultDietForGroup(farm, managementPeriod.AnimalType, DietType.HighEnergyAndProtein);
-                managementPeriod.HousingDetails.HousingType = HousingType.Pasture;
-                managementPeriod.ManureDetails.StateType = ManureStateType.Pasture;
+
+                this.SetPastureIfPossible(farm, managementPeriod, managementPeriod.AnimalType, ManureStateType.DeepBedding, HousingType.ConfinedNoBarn);
 
                 // Extended fall grazing period
                 managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
@@ -141,10 +141,9 @@ namespace H.Core.Services.Animals
                 managementPeriod.NumberOfDays = 60;
                 managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
                 managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
-
                 managementPeriod.SelectedDiet = GetDefaultDietForGroup(farm, managementPeriod.AnimalType, DietType.MediumEnergyAndProtein);
-                managementPeriod.HousingDetails.HousingType = HousingType.Pasture;
-                managementPeriod.ManureDetails.StateType = ManureStateType.Pasture;
+
+                this.SetPastureIfPossible(farm, managementPeriod, managementPeriod.AnimalType, ManureStateType.DeepBedding, HousingType.ConfinedNoBarn);
             }
         }
 
@@ -274,8 +273,8 @@ namespace H.Core.Services.Animals
 
                 managementPeriod.SelectedDiet =
                     GetDefaultDietForGroup(farm, managementPeriod.AnimalType, DietType.HighEnergyAndProtein);
-                managementPeriod.HousingDetails.HousingType = HousingType.Pasture;
-                managementPeriod.ManureDetails.StateType = ManureStateType.Pasture;
+
+                this.SetPastureIfPossible(farm, managementPeriod, managementPeriod.AnimalType, ManureStateType.DeepBedding, HousingType.ConfinedNoBarn);
 
                 // Extended fall grazing period
                 managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
@@ -292,13 +291,34 @@ namespace H.Core.Services.Animals
 
                 managementPeriod.SelectedDiet = GetDefaultDietForGroup(farm, managementPeriod.AnimalType,
                     DietType.MediumEnergyAndProtein);
-                managementPeriod.HousingDetails.HousingType = HousingType.Pasture;
-                managementPeriod.ManureDetails.StateType = ManureStateType.Pasture;
+
+                this.SetPastureIfPossible(farm, managementPeriod, managementPeriod.AnimalType, ManureStateType.DeepBedding, HousingType.ConfinedNoBarn);
             }
             else
             {
                 var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
                     animalGroupOnPropertyChanged);
+            }
+        }
+
+        private void SetPastureIfPossible(
+            Farm farm, 
+            ManagementPeriod managementPeriod, 
+            AnimalType animalType,
+            ManureStateType alternativeManureType, 
+            HousingType alternativeHousingType)
+        {
+
+            var housingTypes = this.GetValidHousingTypes(farm, managementPeriod, animalType);
+            if (housingTypes.Contains(HousingType.Pasture))
+            {
+                managementPeriod.HousingDetails.HousingType = HousingType.Pasture;
+                managementPeriod.ManureDetails.StateType = ManureStateType.Pasture;
+            }
+            else
+            {
+                managementPeriod.HousingDetails.HousingType = alternativeHousingType;
+                managementPeriod.ManureDetails.StateType = alternativeManureType;
             }
         }
 
