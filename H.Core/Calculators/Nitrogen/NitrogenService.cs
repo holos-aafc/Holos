@@ -191,7 +191,31 @@ namespace H.Core.Calculators.Nitrogen
                 if (currentYearViewItem.CombinedAboveGroundResidueNitrogen == 0 && currentYearViewItem.CombinedBelowGroundResidueNitrogen == 0)
                 {
                     // User has not provided these values, we need to assign the necessary prerequisite values before calculating N inputs
-                    _cropInitializationService.InitializeNitrogenContent(currentYearViewItem, farm);
+                    if (currentYearViewItem.NitrogenContentInProduct == 0)
+                    {
+                        _cropInitializationService.InitializeNitrogenContentInProduct(currentYearViewItem, farm);
+                    }
+
+                    if (currentYearViewItem.NitrogenContentInStraw == 0)
+                    {
+                        _cropInitializationService.InitializeNitrogenContentInStraw(currentYearViewItem, farm);
+                    }
+
+                    if (currentYearViewItem.NitrogenContentInRoots == 0)
+                    {
+                        _cropInitializationService.InitializeNitrogenContentInRoots(currentYearViewItem, farm);
+                    }
+
+                    if (currentYearViewItem.NitrogenContentInExtraroot == 0)
+                    {
+                        _cropInitializationService.InitializeNitrogenContentInExtraroots(currentYearViewItem, farm);
+                    }
+
+                    if (currentYearViewItem.NitrogenContent == 0)
+                    {
+                        _cropInitializationService.InitializeIPCCNitrogenContent(currentYearViewItem, farm);
+                    }
+
                     _cropInitializationService.InitializeNitrogenFixation(currentYearViewItem);
 
                     this.AssignNitrogenInputs(currentYearViewItem, farm, previousYearViewItem);

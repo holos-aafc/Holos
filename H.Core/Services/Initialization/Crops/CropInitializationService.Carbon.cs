@@ -1,6 +1,7 @@
 ﻿using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
+using H.Core.Providers.Carbon;
 using H.Core.Providers.Soil;
 
 namespace H.Core.Services.Initialization.Crops
@@ -40,23 +41,73 @@ namespace H.Core.Services.Initialization.Crops
                 InitializeBiomassCoefficients(viewItem, farm);
             }
         }
-        public void InitializeBiomassCoefficients(CropViewItem viewItem, Farm farm)
+
+        public void InitializeBiomassCoefficientProduct(CropViewItem viewItem, Farm farm)
         {
             var residueData = this.GetResidueData(farm, viewItem);
             if (residueData != null)
             {
                 viewItem.BiomassCoefficientProduct = residueData.RelativeBiomassProduct;
+
+                this.SetBasedOnHarvestMethod(viewItem, residueData);
+            }
+        }
+
+        public void InitializeBiomassCoefficientStraw(CropViewItem viewItem, Farm farm)
+        {
+            var residueData = this.GetResidueData(farm, viewItem);
+            if (residueData != null)
+            {
                 viewItem.BiomassCoefficientStraw = residueData.RelativeBiomassStraw;
+
+                this.SetBasedOnHarvestMethod(viewItem, residueData);
+            }
+        }
+
+        public void InitializeBiomassCoefficientRoots(CropViewItem viewItem, Farm farm)
+        {
+            var residueData = this.GetResidueData(farm, viewItem);
+            if (residueData != null)
+            {
                 viewItem.BiomassCoefficientRoots = residueData.RelativeBiomassRoot;
+
+                this.SetBasedOnHarvestMethod(viewItem, residueData);
+            }
+        }
+
+        public void InitializeBiomassCoefficientExtraroots(CropViewItem viewItem, Farm farm)
+        {
+            var residueData = this.GetResidueData(farm, viewItem);
+            if (residueData != null)
+            {
                 viewItem.BiomassCoefficientExtraroot = residueData.RelativeBiomassExtraroot;
 
-                if (viewItem.HarvestMethod == HarvestMethods.Swathing || viewItem.HarvestMethod == HarvestMethods.GreenManure || viewItem.HarvestMethod == HarvestMethods.Silage)
-                {
-                    viewItem.BiomassCoefficientProduct = residueData.RelativeBiomassProduct + residueData.RelativeBiomassStraw;
-                    viewItem.BiomassCoefficientStraw = 0;
-                    viewItem.BiomassCoefficientRoots = residueData.RelativeBiomassRoot;
-                    viewItem.BiomassCoefficientExtraroot = residueData.RelativeBiomassExtraroot;
-                }
+                this.SetBasedOnHarvestMethod(viewItem, residueData);
+            }
+        }
+
+        private void SetBasedOnHarvestMethod(CropViewItem viewItem, Table_7_Relative_Biomass_Information_Data residueData)
+        {
+            if (viewItem.HarvestMethod == HarvestMethods.Swathing || viewItem.HarvestMethod == HarvestMethods.GreenManure || viewItem.HarvestMethod == HarvestMethods.Silage)
+            {
+                viewItem.BiomassCoefficientProduct = residueData.RelativeBiomassProduct + residueData.RelativeBiomassStraw;
+                viewItem.BiomassCoefficientStraw = 0;
+                viewItem.BiomassCoefficientRoots = residueData.RelativeBiomassRoot;
+                viewItem.BiomassCoefficientExtraroot = residueData.RelativeBiomassExtraroot;
+            }
+        }
+
+        public void InitializeBiomassCoefficients(CropViewItem viewItem, Farm farm)
+        {
+            var residueData = this.GetResidueData(farm, viewItem);
+            if (residueData != null)
+            {
+                this.InitializeBiomassCoefficientProduct(viewItem, farm);
+                this.InitializeBiomassCoefficientStraw(viewItem, farm);
+                this.InitializeBiomassCoefficientRoots(viewItem, farm);
+                this.InitializeBiomassCoefficientExtraroots(viewItem, farm);
+
+                this.SetBasedOnHarvestMethod(viewItem, residueData); 
             }
         }
 

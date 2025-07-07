@@ -215,6 +215,8 @@ namespace H.Core.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to All digestate produced by the anaerobic digestor is separated into liquid and solid amounts by default. To  keep the digestate in a non-separated (raw) state, disable this function by selecting the &quot;No&quot; option below.
+        ///
+        ///Please note: Holos assumes that all digestate (separated and non-separated) available for land application has not undergone a period of post-digester storage and is thus &apos;raw&apos; digestate..
         /// </summary>
         public static string AnaerobicDigestionStepOneText {
             get {
@@ -2858,6 +2860,15 @@ namespace H.Core.Properties {
         public static string EnumFractionMetabolicDMActivePool {
             get {
                 return ResourceManager.GetString("EnumFractionMetabolicDMActivePool", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fraction total nitrogen.
+        /// </summary>
+        public static string EnumFractionNitrogen {
+            get {
+                return ResourceManager.GetString("EnumFractionNitrogen", resourceCulture);
             }
         }
         
@@ -5657,6 +5668,15 @@ namespace H.Core.Properties {
         public static string EnumTotalAmmoniaNitrogen {
             get {
                 return ResourceManager.GetString("EnumTotalAmmoniaNitrogen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total nitrogen.
+        /// </summary>
+        public static string EnumTotalNitrogen {
+            get {
+                return ResourceManager.GetString("EnumTotalNitrogen", resourceCulture);
             }
         }
         
@@ -18610,7 +18630,7 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Total raw digestate remaining after all field applications.
+        ///   Looks up a localized string similar to Total whole raw digestate remaining after all field applications.
         /// </summary>
         public static string TotalRawDigestateRemainingAfterAllFieldApplications {
             get {

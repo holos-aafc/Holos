@@ -207,6 +207,19 @@ namespace H.Core.Services.LandManagement
             {
                 _icbmSoilCarbonCalculator.AnimalComponentEmissionsResults = this.AnimalResults;
 
+                
+                 if (farm.IsCommandLineMode)
+                {
+                    /*
+                     * When in GUI mode, the inputs for the main view items will already have been assigned at AssignCarbonInputs() and AssignNitrogenInputs().
+                     * When in CLI mode, we need to check if there are missing values and process any missing input values before calculating final results
+                     */
+
+                    _carbonService.ProcessCommandLineItems(viewItemsForField.ToList(), farm, this.AnimalResults);
+                    _nitrogenService.ProcessCommandLineItems(viewItemsForField.ToList(), farm);
+                    this.CombineInputsForAllCropsInSameYear(farm, viewItemsForField.ToList());
+                }
+
                 // Create the item with the steady state (equilibrium) values
                 var equilibriumYearResults = _icbmSoilCarbonCalculator.CalculateEquilibriumYear(viewItemsForField, farm, fieldSystemGuid);
 

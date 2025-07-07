@@ -130,10 +130,12 @@ namespace H.Core.Services.Animals
                 }
             }
 
-            if (animalGroup.GroupType.IsPregnantType() && managementPeriod.ProductionStage == ProductionStages.Gestating)
+            if (animalGroup.GroupType.IsPregnantType() && (managementPeriod.ProductionStage == ProductionStages.Gestating || managementPeriod.ProductionStage == ProductionStages.Lactating))
             {
                 var pregnancyCoefficient = _pregnancyCoefficientProvider.GetPregnancyCoefficient(
                     lambRatio: dailyEmissions.LambEweRatio);
+
+                dailyEmissions.PregnancyCoefficient = pregnancyCoefficient;
 
                 dailyEmissions.NetEnergyForPregnancy = this.CalculateNetEnergyForPregnancy(
                     pregnancyCoefficient: pregnancyCoefficient,

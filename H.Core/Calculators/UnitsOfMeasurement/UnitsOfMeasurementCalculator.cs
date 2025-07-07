@@ -176,6 +176,27 @@ namespace H.Core.Calculators.UnitsOfMeasurement
         }
 
         /// <summary>
+        /// Calls GetUnitsOfMeasurementString() in most cases, provides a substitute string if metricUnitsOfMeasurement has encoding issues when exported in text files
+        /// </summary>
+        public string GetPrintFriendlyString(MeasurementSystemType measurementSystem, MetricUnitsOfMeasurement metricUnitsOfMeasurement)
+        {
+            if (measurementSystem == MeasurementSystemType.Metric && metricUnitsOfMeasurement == MetricUnitsOfMeasurement.KilogramsMethane)
+            {
+                return "(kg CH4)";
+            }
+
+            else if (measurementSystem == MeasurementSystemType.Metric && metricUnitsOfMeasurement == MetricUnitsOfMeasurement.KilogramsPerDay)
+            {
+                return "(kg day^-1)";
+            }
+
+            else
+            {
+                return this.GetUnitsOfMeasurementString(measurementSystem, metricUnitsOfMeasurement);
+            }
+        }
+
+        /// <summary>
         /// Based on the measurement type, returns the proper value (metric or imperial) rounded to 4 decimal points
         /// Takes in Metric Units
         /// First argument corresponds to the user inputed measurement system (Metric or Imperial).

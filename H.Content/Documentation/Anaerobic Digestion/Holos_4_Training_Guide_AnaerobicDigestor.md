@@ -144,7 +144,7 @@ Now we can add our first component to the farm. Drag a **Field** component from 
 
 ### Wheat with Cover Crop
 
-Our first field on the farm will grow continuous wheat with a cover crop of hairy vetch. Change the following elements in the **'Field #1'** component.
+Our first field on the farm will grow continuous wheat with a cover crop of hairy vetch. Change the following elements in the **"Field #1"** component (Figure 9).
 
 1. Rename the field to **"Wheat & Hairy Vetch"** in the **Step 1** section of the screen. Change the area of the field to **"18 ha"**.
 
@@ -317,7 +317,7 @@ Next, we can enter data related to the number of animals, diet, manure system, a
     * Select **Pasture/range/paddock** as the housing type.
     * Select **Native Pasture** as the pasture location.
  
-5. Under the **Manure Tab:
+5. Under the **Manure Tab**:
     * Select **Pasture/range/paddock** as the manure handling system.
 
 <br>
@@ -362,7 +362,8 @@ In Holos, the user can apply livestock manure to a field using either manure pro
     * Select **'Solid spread'** as the Application method.
     * Enter **'1,500 kg ha<sup>-1</sup>'** as the amount of manure applied to this field.
 3. Notice the dial which visually shows the **Amount of Stored Manure N Remaining (Beef cattle)(kg N)** on the farm. It will move for any amount of removals/adjustments to the manure produced on-farm. This value will decrease once manure is added to the Anaerobic digestor component.       
-4. Note that both chemical fertilizers and manure applications can be made on the same field
+
+> *Note: Both chemical fertilizers and manure applications can be made on the same field.*
 
 <br>
 
@@ -386,7 +387,7 @@ We can also add additional hay/forage for animals that are grazing on a particul
     - Enter **"July 15, 2025"** as the date.
     - Enter **"Off-farm"** as the **Sources of bales**.
     - Choose **"Native Pasture"** as the field.
-    - Change the **Number of bales** to **"10".
+    - Change the **Number of bales** to **"10"**.
     - Enter **"500"** as the wet bale weight.
     - Keep the moisture content as the default value.
 3. On the field receiving the supplemental forage, there is a chart showing how much forage is still available on the right of the screen for reference.
@@ -431,7 +432,7 @@ All manure produced by animals on the farm can be added to the anaerobic digesto
 
 3. Under **Step 2** click the **'Add'** checkbox to choose the management periods which will be the sources of manure for the digestor. Select both the Heifers and Steers groups. By default, all daily manure (100%) produced by the selected management period is added to the digestor. This daily pertcentage amount can be changed. Adjust the 'Daily percentage of manure added (%) to **"50"**. Leave the 'Use imported manure' choice as **'No'** in this case. 
 
-4. Under **Step 3** we can add both/either 'Crop Residue Substrate' and 'Farm Residue Subsrtate' to the digestor by selecting each button and filling in the respective information.
+4. Under **Step 3** we can add both/either 'Crop Residue Substrate' and 'Farm Residue Substrate' to the digestor by selecting each button and filling in the respective information.
    - Click the 'Add Crop Residue Substrate Type' button and under the **Crop** column choose **"Wheat"**.
    - Add a **Flow rate** of **"100"** (kg wet weight day<sup>-1</sup>)
    - Enter the 'Start date' as **"January 01, 2025"** and the 'End Date' as **"December 31, 2025"**.

@@ -431,7 +431,7 @@ namespace H.Core.Calculators.Carbon
             // Equation 2.6.5-5
             // Equation 2.7.4-5
             this.N2O_NFromOrganicNitrogen =
-                (this.OrganicPool * emissionFactorForOrganicNitrogen)+ ((directN2ONFromLandAppliedManure + directN2ONFromLandAppliedDigestate + directN2ONFromGrazingAnimals + directN2ONFromLandAppliedDigestate) / this.CurrentYearResults.Area);
+                (this.OrganicPool * emissionFactorForOrganicNitrogen)+ ((directN2ONFromLandAppliedManure + directN2ONFromLandAppliedDigestate + directN2ONFromGrazingAnimals) / this.CurrentYearResults.Area);
 
             this.N2O_NFromOrganicNitrogenExcludeRemainingAmounts =
                 (this.OrganicPool * emissionFactorForOrganicNitrogen) + ((directN2ONFromLandAppliedManureExcludingRemaining + directN2ONFromLandAppliedDigestateExludingRemaining + directN2ONFromGrazingAnimals) / this.CurrentYearResults.Area);

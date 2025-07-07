@@ -1,0 +1,207 @@
+name: Holos Farm File Checklist
+description: Help the Holos team troubleshoot your farm file by completing this step-by-step form.
+title: "Farm File"
+labels: ["farm-file"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # Step 1: Farm Summary
+        
+        Thank you for filling out this troubleshooting form. For additional help, visit the [Holos Documentation](https://github.com/holos-aafc/Holos/tree/main/H.Content/Documentation).
+
+  - type: textarea
+    id: farm-summary
+    attributes:
+      label: Farm Summary
+      description: Provide a brief summary of your farm model. Include farm type, number of animals, and any crop or field components.
+      placeholder: Mixed farm with beef cow-calf, replacement heifers, grower-to-finish hogs, and 3 fields (2 crops, 1 pasture). Animals graze seasonally.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        # Step 2: Farm Details
+
+        Please answer the following questions to help us understand your farm structure.
+
+  - type: input
+    id: field-count
+    attributes:
+      label: Number of Fields
+      description: How many fields are included in your farm model?
+      placeholder: 3 fields total, including 2 crops and 1 pasture
+    validations:
+      required: true
+
+  - type: input
+    id: farm-size
+    attributes:
+      label: Total Farm Size
+      description: Enter total farm size (in acres or hectares).
+      placeholder: 120 hectares
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: crop-type
+    attributes:
+      label: Field System Type
+      description: Select the type(s) of field system present on your farm.
+      options:
+        - label: Annual cash crops
+        - label: Perennial grazing
+        - label: Both
+
+
+  - type: checkboxes
+    id: livestock-types
+    attributes:
+      label: Livestock Types
+      description: Select all animal types modeled on your farm.
+      options:
+        - label: Beef production
+        - label: Dairy cattle
+        - label: Swine
+        - label: Sheep
+        - label: Poultry
+        - label: Other livestock
+
+  - type: textarea
+    id: livestock-quantities
+    attributes:
+      label: Livestock Quantities
+      description: Provide the quantity of each livestock type included in your farm model.
+      placeholder: 10 beef cow-calf bulls, 20 replacement heifers, 30 grower-to-finish hogs
+
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: farm-features
+    attributes:
+      label: Common Farm Features
+      description: Check any that apply to your farm.
+      options:
+        - label: Animals graze on pasture
+        - label: Anaerobic digestion (AD) component
+
+  - type: input
+    id: holos-version
+    attributes:
+      label: Holos Version
+      description: What version of Holos are you using? Refer to the [User Guide](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md#finding-the-holos-software-version-number).
+      placeholder: Holos v4.0.1.66
+    validations:
+      required: true
+
+  - type: input
+    id: creation-date
+    attributes:
+      label: Farm File Creation Date
+      description: When was this farm file originally created?
+      placeholder: June 17, 2025
+    validations:
+      required: true
+
+  - type: dropdown
+    id: carbon-model
+    attributes:
+      label: Which carbon model was used for this farm?
+      description: |
+          Note: Holos will use the IPCC Tier 2 model by default unless ICBM was selected by the user.
+      options:
+        - IPCC Tier 2
+        - ICBM
+    validations:
+      required: true
+
+
+  - type: markdown
+    attributes:
+      value: |
+        # Step 3: Describe the Issue
+
+        Help us understand what’s going wrong and what you expected to see.
+
+  - type: textarea
+    id: modeling-intent
+    attributes:
+      label: What are you trying to model?
+      description: Describe your goal. Mention any novel systems or practices you’re experimenting with.
+      placeholder: Trying to model pigs grazing cover crops prior to harvest.
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue-description
+    attributes:
+      label: Issue Description
+      description: What issue are you experiencing? Include error messages, unexpected results, or specific screens you have trouble with.
+      placeholder: Manure emissions seem too low despite high swine numbers. Expected 2x higher.
+    validations:
+      required: true
+
+  - type: textarea
+    id: supporting-screenshot
+    attributes:
+      label: Screenshot Upload (optional)
+      description: If possible, add screenshot(s) to help illustrate the issue.
+      placeholder: Drag and drop your screenshot here.
+
+  - type: markdown
+    attributes:
+      value: |
+        # Step 4: Export and Attach Your Files
+
+        Please export the following files from Holos and attach them below. Detailed instructions can be found in the [User Guide](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md#exporting-farms).
+
+        - Holos farm file (.json)
+        - Manure management .xlsx report
+        - Detailed emissions report .xlsx
+
+        ## How to Export Your Files
+        ### Holos Farm File (.json)
+        For instructions on how to export your farm, please refer to the [**User Guide (Exporting Farms)**](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md#exporting-farms).
+        ### Manure Management Report (.xlsx)
+        Navigate to the **Results** screen and select the [**Manure Management** tab](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md#manure-management), select the **Export to Excel** button, and save the file.
+        ### Detailed Emissions Report (.xlsx)
+        Navigate to the **Results** screen and select the [**Detailed Emissions Report** tab](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md#detailed-emissions-report), select the **Export to Excel** button, and save the file.
+
+  - type: textarea
+    id: attach-files
+    attributes:
+      label: Attach Files Here
+      description: Please drag and drop your exported .json and .xlsx files here to attach them.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: attachment-confirmation
+    attributes:
+      label: File Attachments Confirmation
+      description: Confirm the files you’ve attached.
+      options:
+        - label: Holos farm file (.json)
+          required: true
+        - label: Manure management Excel (.xlsx)
+        - label: Detailed emissions Excel (.xlsx)
+        - label: Optional screenshot
+          
+        
+
+  - type: markdown
+    attributes:
+      value: |
+        # Step 5: Code of Conduct
+
+        Please confirm below that you agree to follow Holos' Code of Conduct: [Code of Conduct](https://github.com/holos-aafc/Holos/blob/main/CODE_OF_CONDUCT.md)
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      options:
+        - label: I agree to follow Holos' Code of Conduct
+          required: true

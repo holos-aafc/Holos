@@ -5505,10 +5505,12 @@
     <value>Total solid digestate remaining after all field applications</value>
   </data>
   <data name="TotalRawDigestateRemainingAfterAllFieldApplications" xml:space="preserve">
-    <value>Total raw digestate remaining after all field applications</value>
+    <value>Total whole raw digestate remaining after all field applications</value>
   </data>
   <data name="AnaerobicDigestionStepOneText" xml:space="preserve">
-    <value>All digestate produced by the anaerobic digestor is separated into liquid and solid amounts by default. To  keep the digestate in a non-separated (raw) state, disable this function by selecting the "No" option below</value>
+    <value>All digestate produced by the anaerobic digestor is separated into liquid and solid amounts by default. To  keep the digestate in a non-separated (raw) state, disable this function by selecting the "No" option below.
+
+Please note: Holos assumes that all digestate (separated and non-separated) available for land application has not undergone a period of post-digester storage and is thus 'raw' digestate.</value>
   </data>
   <data name="AnaerobicDigestionStepTwoText" xml:space="preserve">
     <value>All manure produced by animals on the farm can be added to the anaerobic digestor. Choose which management periods will be selected as the source of manure entering the digestor. To select a management period, click the "Add" checkbox. By default, all daily manure (100%) produced by the selected management period is added to the digestor. This daily percentage amount can be adjusted as needed by adjusting the "Daily manure added to digestor" column.
@@ -6427,5 +6429,11 @@ Please note: emissions related to the deposition or application of livestock man
   </data>
   <data name="KilogramsPerHectareCropWetWeight" xml:space="preserve">
     <value>kg ha^-1 (wet wt)</value>
+  </data>
+  <data name="EnumTotalNitrogen" xml:space="preserve">
+    <value>Total nitrogen</value>
+  </data>
+  <data name="EnumFractionNitrogen" xml:space="preserve">
+    <value>Fraction total nitrogen</value>
   </data>
 </root>

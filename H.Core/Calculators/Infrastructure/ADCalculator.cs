@@ -362,6 +362,10 @@ namespace H.Core.Calculators.Infrastructure
             digestorDailyOutput.FlowRateSolidFraction =
                 rawMaterialCoefficient * digestorDailyOutput.FlowRateOfAllSubstratesInDigestate;
 
+            /*
+             * TS fractions
+             */
+
             var totalSolidsCoefficients =
                 _solidLiquidSeparationCoefficientsProvider.GetSolidLiquidSeparationCoefficientInstance(
                     DigestateParameters.TotalSolids);
@@ -377,6 +381,10 @@ namespace H.Core.Calculators.Infrastructure
             // Equation 4.8.4-4
             digestorDailyOutput.FlowOfTotalSolidsInSolidFraction =
                 totalSolidsCoefficient * digestorDailyOutput.FlowRateOfAllTotalSolidsInDigestate;
+
+            /*
+             * VS fractions
+             */
 
             var volatileSolidsCoefficients =
                 _solidLiquidSeparationCoefficientsProvider.GetSolidLiquidSeparationCoefficientInstance(
@@ -395,6 +403,10 @@ namespace H.Core.Calculators.Infrastructure
                                                                    digestorDailyOutput
                                                                        .FlowRateOfAllVolatileSolidsInDigestate;
 
+            /*
+             * TAN fractions
+             */
+
             var tanCoefficients =
                 _solidLiquidSeparationCoefficientsProvider.GetSolidLiquidSeparationCoefficientInstance(
                     DigestateParameters.TotalAmmoniaNitrogen);
@@ -406,6 +418,10 @@ namespace H.Core.Calculators.Infrastructure
 
             // Equation 4.8.4-10
             digestorDailyOutput.TotalTanSolidFraction = tanCoefficient * digestorDailyOutput.FlowOfAllTanInDigestate;
+
+            /*
+             * Organic N fractions
+             */
 
             var organicNCoefficients =
                 _solidLiquidSeparationCoefficientsProvider.GetSolidLiquidSeparationCoefficientInstance(
@@ -422,14 +438,27 @@ namespace H.Core.Calculators.Infrastructure
             digestorDailyOutput.OrganicNSolidFraction =
                 organicNCoefficient * digestorDailyOutput.FlowRateOfAllOrganicNitrogenInDigestate;
 
-            var totalNitrogenLiquidFraction = digestorDailyOutput.TotalTanLiquidFraction + digestorDailyOutput.OrganicNLiquidFraction;
-            var totalNitrogenSolidFraction = digestorDailyOutput.TotalTanSolidFraction + digestorDailyOutput.OrganicNSolidFraction;
+
+            /*
+             * Nitrogen fractions
+             */
+
+            var nitrogenCoefficients = _solidLiquidSeparationCoefficientsProvider.GetSolidLiquidSeparationCoefficientInstance(DigestateParameters.TotalNitrogen);
+            var nitrogenCoefficient = component.IsCentrifugeType
+                ? nitrogenCoefficients.Centrifuge
+                : nitrogenCoefficients.BeltPress;
+
+            var totalNitrogenInDigestate = digestorDailyOutput.FlowRateOfTotalNitrogenInDigestate;
 
             // Equation 4.8.4-7
-            digestorDailyOutput.TotalNitrogenLiquidFraction = totalNitrogenLiquidFraction;
+            digestorDailyOutput.TotalNitrogenLiquidFraction = (1.0 - nitrogenCoefficient) * totalNitrogenInDigestate;
 
             // Equation 4.8.4-8
-            digestorDailyOutput.TotalNitrogenSolidFraction = totalNitrogenSolidFraction;
+            digestorDailyOutput.TotalNitrogenSolidFraction = nitrogenCoefficient * totalNitrogenInDigestate;
+
+            /*
+             * Carbon fractions
+             */
 
             var carbonCoefficients =
                 _solidLiquidSeparationCoefficientsProvider.GetSolidLiquidSeparationCoefficientInstance(

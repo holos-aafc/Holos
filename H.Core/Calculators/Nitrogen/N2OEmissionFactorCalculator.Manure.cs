@@ -1593,6 +1593,7 @@ return            this.LivestockEmissionConversionFactorsProvider.GetVolatilizat
             var manureStateType = manureApplicationViewItem.ManureStateType;
             var manureApplicationMethod = manureApplicationViewItem.ManureApplicationMethod;
 
+            
             return !manureStateType.IsLiquidManure() ? this.AnimalAmmoniaEmissionFactorProvider.GetAmmoniaEmissionFactorForSolidAppliedManure(tillageType) : this.AnimalAmmoniaEmissionFactorProvider.GetAmmoniaEmissionFactorForLiquidAppliedManure(manureApplicationMethod);
         }
 

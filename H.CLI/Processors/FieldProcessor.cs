@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using H.Core.Calculators.Carbon;
 
 namespace H.CLI.Processors
 {
@@ -52,6 +53,9 @@ namespace H.CLI.Processors
 
             var animalResults = _animalService.GetAnimalResults(farm);
             _fieldResultsService.AnimalResults = animalResults;
+
+
+
 
             var finalResults = _fieldResultsService.CalculateFinalResults(farm);
 
