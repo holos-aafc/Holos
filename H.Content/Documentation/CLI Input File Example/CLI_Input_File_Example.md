@@ -41,7 +41,7 @@ Example value: 18
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value: No
 
@@ -58,7 +58,7 @@ Example value: 2024
 
 Type value: Int (Integer/Numeric)
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value: Current year (i.e. 2024) 
 
@@ -73,7 +73,7 @@ Example value: 1985
 
 Type value: Int (Integer/Numeric)
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value: No
 
@@ -90,7 +90,7 @@ Example value: Wheat
 
 Type value: Text
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: No
 
@@ -123,7 +123,7 @@ Example value: Reduced
 
 Type value: Text 
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: Wheat 
 
@@ -140,7 +140,7 @@ Example value: 2018
 
 Type value: Int (Integer/Numeric)
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value: No 
 
@@ -157,7 +157,7 @@ Example value: 00000000-0000-0000-0000-000000000000
 
 Type value: GUID 
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value: No 
 
@@ -174,7 +174,7 @@ Example value: 1
 
 Type value: Int (Integer/Numeric)
 
-Does user provide have to value: No
+Does user have to provide value: No
 
 Holos has a default value: 1
 
@@ -191,7 +191,7 @@ Example value: 0.244
 
 Type value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: Yes 
 
@@ -208,7 +208,7 @@ Example value: 0.518
 
 Type value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: Yes 
 
@@ -225,7 +225,7 @@ Example value: 0.147
 
 Type value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: Yes 
 
@@ -242,7 +242,7 @@ Example value: 0.091
 
 Type value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: Yes 
 
@@ -259,7 +259,7 @@ Example value: 0.0263
 
 Type value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: Yes 
 
@@ -276,7 +276,7 @@ Example value: 0.0082
 
 Type value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: Yes 
 
@@ -293,7 +293,7 @@ Example value: 0.0104
 
 Type value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: Yes 
 
@@ -310,7 +310,7 @@ Example value: 0.0104
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: Yes 
 
@@ -327,7 +327,7 @@ Example value: 0
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: Yes 
 
@@ -344,7 +344,7 @@ Example value: 5
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: 5
 
@@ -361,7 +361,7 @@ Example value: 0.45
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: 0.45 
 
@@ -378,7 +378,7 @@ Example value: 2700
 
 Type value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: Yes
 
@@ -395,7 +395,7 @@ Example value: CashCrop
 
 Type value: Enum (Text)
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: Yes
 
@@ -412,7 +412,7 @@ Example value: 87.7608533333333
 
 Type value: Double (Decimal/Numeric)  
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: Yes
 
@@ -429,7 +429,7 @@ Example value: 0
 
 Type value: Double (Decimal/Numeric)  
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -446,7 +446,7 @@ Example value: No
 
 Type value: Enum (Yes/No)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: No 
 
@@ -463,7 +463,7 @@ Example value: RainFed
 
 Type value: Enum (Text)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: Yes 
 
@@ -480,7 +480,7 @@ Example value: 200
 
 Type value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: Yes
 
@@ -497,7 +497,7 @@ Example value: 0.12
 
 Type value: Double (Decimal/Numeric)  
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: Yes
 
@@ -514,7 +514,7 @@ Example value: 12
 
 Type value: Double (Decimal/Numeric)  
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: Yes 
 
@@ -531,7 +531,7 @@ Example value: 100
 
 Type value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: Yes
 
@@ -548,7 +548,7 @@ Example value: 100
 
 Type value: Double (Decimal/Numeric)  
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: Yes
 
@@ -565,7 +565,7 @@ Example value: 2
 
 Type value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: Yes
 
@@ -582,7 +582,7 @@ Example value: No
 
 Type value: Bool (Yes/No)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -599,7 +599,7 @@ Example value: 0
 
 Type value: Int (Integer/Numeric)
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value: No
 
@@ -616,7 +616,7 @@ Example value: False
 
 Type value: Bool (True/False)
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value: Yes
 
@@ -633,7 +633,7 @@ Example value: 0
 
 Type value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value: No 
 
@@ -650,7 +650,7 @@ Example value: NotSelected
 
 Type value: Enum (Text)
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value: No 
 
@@ -667,7 +667,7 @@ Example value: NotSelected
 
 Type value: Enum (Text)
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value: No 
 
@@ -684,7 +684,7 @@ Example value: NotSelected
 
 Type value: Enum (Text)
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value: No 
 
@@ -701,7 +701,7 @@ Example value: NotSelected
 
 Type value: Enum (Text)
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: "Livestock" 
 
@@ -718,7 +718,7 @@ Example value: False
 
 Type value: Bool (True/False)
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: Yes 
 
@@ -735,7 +735,7 @@ Example value: False
 
 Type value: Bool (True/False)
 
-Does user provide have to value: No
+Does user have to provide value: No
 
 Holos has a default value:
 
@@ -752,7 +752,7 @@ Example value: 642a2cb7-0321-4395-9ebb-d5743c27c960
 
 Type value: GUID 
 
-Does user provide have to value: No 
+Does user have to provide value: No 
 
 Holos has a default value: No 
 
@@ -769,7 +769,7 @@ Example value: Current
 
 Type value: Enum (Text)
 
-Does user provide have to value: No 
+Does user have to provide value: No 
 
 Holos has a default value: "Current" 
 
@@ -786,7 +786,7 @@ Example value: 1.363
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value: 0/Calculated 
 
@@ -803,7 +803,7 @@ Example value: 0.8
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: 0/Calculated 
 
@@ -820,7 +820,7 @@ Example value: 1.09
 
 Type value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Default assigned but user can override 
+Does user have to provide value: Default assigned but user can override 
 
 Holos has a default value: 0/Calculated 
 
@@ -837,7 +837,7 @@ Example value: 1211.76
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -854,7 +854,7 @@ Example value: 24.2352
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -871,7 +871,7 @@ Example value: 2572.5068852459
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -888,7 +888,7 @@ Example value: 730.035737704918
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -905,7 +905,7 @@ Example value: 451.926885245902
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -922,7 +922,7 @@ Example value: 1
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -939,7 +939,7 @@ Example value: 1650.63391153725
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -956,7 +956,7 @@ Example value: 601.948372142029
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -973,7 +973,7 @@ Example value: 0
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -990,7 +990,7 @@ Example value: 0
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -1007,7 +1007,7 @@ Example value: 2845.39665493676
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -1024,7 +1024,7 @@ Example value: 0.2
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -1041,7 +1041,7 @@ Example value: 0.053
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -1058,7 +1058,7 @@ Example value: 0
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -1075,7 +1075,7 @@ Example value: 0
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -1092,7 +1092,7 @@ Example value: 0
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -1109,7 +1109,7 @@ Example value: 0.007
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -1126,7 +1126,7 @@ Example value: 3930.08074175535
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -1143,7 +1143,7 @@ Example value: 25797.7873775155
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -1160,7 +1160,7 @@ Example value: 2.39
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value: No 
 
@@ -1177,7 +1177,7 @@ Example value: 0.23
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value: No 
 
@@ -1194,7 +1194,7 @@ Example value: Urea
 
 Type value: Enum (Text) 
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value: No 
 
@@ -1215,7 +1215,7 @@ Example value: Dairy heifers
 
 Type value: String (Text)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1230,7 +1230,7 @@ Example value: H.Core.Models.Animals.Dairy.DairyComponent
 
 Type value: Enum (Text)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1248,7 +1248,7 @@ Example value: Heifers
 
 Type value: Enum (Text)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1265,7 +1265,7 @@ Example value: DairyHeifers
 
 Type value: Enum (Text)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1283,7 +1283,7 @@ Example value: Management period #1
 
 Type value: String (Text)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1300,7 +1300,7 @@ Example value: 2023-10-01 00:00:00
 
 Type value: strftime (Text)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1315,7 +1315,7 @@ Example value: 109
 
 Type value: Int (Integer/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1330,7 +1330,7 @@ Example value: 50
 
 Type value: Int (Integer/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1345,7 +1345,7 @@ Example value: Lactating
 
 Type value: Enum (Text)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1362,7 +1362,7 @@ Example value: 12
 
 Type value: Int (Integer/Numeric)
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value:
 
@@ -1379,7 +1379,7 @@ Example value: 0
 
 Type value: Int (Integer/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1394,7 +1394,7 @@ Example value: 240
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1411,7 +1411,7 @@ Example value: 360
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1428,7 +1428,7 @@ Example value: 1.1
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1445,7 +1445,7 @@ Example value: 34.7
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1462,7 +1462,7 @@ Example value: 3.71
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: 3.71
 
@@ -1479,7 +1479,7 @@ Example value: 3.5
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: Yes
 
@@ -1496,7 +1496,7 @@ Example value: None
 
 Type value: Enum (Text)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: No
 
@@ -1513,7 +1513,7 @@ Example value: 0.056
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: Yes, based on diet 
 
@@ -1530,7 +1530,7 @@ Example value: 0
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: 
+Does user have to provide value: 
 
 Holos has a default value:
 
@@ -1547,7 +1547,7 @@ Example value: 0
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1564,7 +1564,7 @@ Example value: 12.28
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1581,7 +1581,7 @@ Example value: 6.57
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1598,7 +1598,7 @@ Example value: 97
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1615,7 +1615,7 @@ Example value: 54.6
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: 
 
@@ -1632,7 +1632,7 @@ Example value: 7.1
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: 
 
@@ -1649,7 +1649,7 @@ Example value: 1.7
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: 
 
@@ -1666,7 +1666,7 @@ Example value: 2
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1683,7 +1683,7 @@ Example value: 53.5
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1700,7 +1700,7 @@ Example value:
 
 Type value: 
 
-Does user provide have to value: 
+Does user have to provide value: 
 
 Holos has a default value: 
 
@@ -1715,7 +1715,7 @@ Example value:
 
 Type value: 
 
-Does user provide have to value: 
+Does user have to provide value: 
 
 Holos has a default value: 
 
@@ -1730,7 +1730,7 @@ Example value: 0
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: 
 
@@ -1747,7 +1747,7 @@ Example value: 1
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: 
 
@@ -1764,7 +1764,7 @@ Example value: 2.10
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: 
+Does user have to provide value: 
 
 Holos has a default value: 
 
@@ -1781,7 +1781,7 @@ Example value: 0.45
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: 
+Does user have to provide value: 
 
 Holos has a default value: 
 
@@ -1798,7 +1798,7 @@ Example value: FreeStallBarnSolidLitter
 
 Type value: Enum (Text)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1815,7 +1815,7 @@ Example value: 0.1700
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -1832,7 +1832,7 @@ Example value: 0.322
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -1849,7 +1849,7 @@ Example value: 1.5
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value:
 
@@ -1866,7 +1866,7 @@ Example value: 0.447
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -1883,7 +1883,7 @@ Example value: 0.0057
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -1900,7 +1900,7 @@ Example value: 9.57
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value:
 
@@ -1917,7 +1917,7 @@ Example value: 0.26
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -1934,7 +1934,7 @@ Example value: 0.01
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -1951,7 +1951,7 @@ Example value: 0.005
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -1968,7 +1968,7 @@ Example value: 0.25
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -1985,7 +1985,7 @@ Example value: 0.011
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2002,7 +2002,7 @@ Example value: 0.035
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2019,7 +2019,7 @@ Example value: 8
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2036,7 +2036,7 @@ Example value: 0.19
 
 Type value: Double (Decimal/Numeric)
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2057,7 +2057,7 @@ Example value: Beef Stockers & Backgrounders
 
 Type Value: String (Text)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -2072,7 +2072,7 @@ Example value: H.Core.Models.Animals.Beef.BackgroundingComponent
 
 Type Value: Enum (Text) 
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -2089,7 +2089,7 @@ Example value: Heifers
 
 Type Value: Enum (Text) 
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -2106,7 +2106,7 @@ Example value: BeefBackgrounderHeifer
 
 Type Value: Enum (Text) 
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value:
 
@@ -2123,7 +2123,7 @@ Example value: Management period #1
 
 Type Value: String (Text)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -2140,7 +2140,7 @@ Example value: 0
 
 Type Value: Int (Integer/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -2157,7 +2157,7 @@ Example value: 2023-10-01 00:00:00
 
 Type Value: strftime (Text)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -2174,7 +2174,7 @@ Example value: 110
 
 Type Value: Int (Integer/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -2191,7 +2191,7 @@ Example value: 100
 
 Type Value: Int (Integer/Numeric) 
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -2208,7 +2208,7 @@ Example value:
 
 Type Value: Enum (Text)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -2225,7 +2225,7 @@ Example value: 0
 
 Type Value: Int (Integer/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: 
 
@@ -2242,7 +2242,7 @@ Example value: False
 
 Type value: Bool (True/False)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: 
 
@@ -2259,7 +2259,7 @@ Example value: 240
 
 Type Value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: 
 
@@ -2276,7 +2276,7 @@ Example value: 361
 
 Type Value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: 
 
@@ -2293,7 +2293,7 @@ Example value: 1.1
 
 Type Value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: 
 
@@ -2310,7 +2310,7 @@ Example value: 0
 
 Type Value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: 
 
@@ -2327,7 +2327,7 @@ Example value: 4
 
 Type Value: Double (Decimal/Numeric)  
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:  3.71 
 
@@ -2344,7 +2344,7 @@ Example value: 3.5
 
 Type Value: Double (Decimal/Numeric)  
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: Yes
 
@@ -2361,7 +2361,7 @@ Example value: None
 
 Type Value: Enum (Text) 
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value: No 
 
@@ -2378,7 +2378,7 @@ Example value: 0.063
 
 Type Value: Double (Decimal/Numeric)   
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value: Yes, based on diet 
 
@@ -2395,7 +2395,7 @@ Example value: 0
 
 Type Value: Double (Decimal/Numeric)  
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2412,7 +2412,7 @@ Example value: 0
 
 Type Value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -2429,7 +2429,7 @@ Example value: 12.28
 
 Type Value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -2446,7 +2446,7 @@ Example value: 65
 
 Type Value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -2463,7 +2463,7 @@ Example value: 68.825
 
 Type Value: Double (Decimal/Numeric)  
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -2480,7 +2480,7 @@ Example value: 6.57
 
 Type Value: Double (Decimal/Numeric)  
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -2497,7 +2497,7 @@ Example value: 25.825
 
 Type Value: Double (Decimal/Numeric)  
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -2514,7 +2514,7 @@ Example value: 3.045
 
 Type Value: Double (Decimal/Numeric)  
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -2531,7 +2531,7 @@ Example value: 2.48
 
 Type Value: Double (Decimal/Numeric)   
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value:
 
@@ -2548,7 +2548,7 @@ Example value: 42.025
 
 Type Value: Double (Decimal/Numeric)    
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value:
 
@@ -2565,7 +2565,7 @@ Example value: 0
 
 Type Value: Double (Decimal/Numeric)
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value:
 
@@ -2582,7 +2582,7 @@ Example value: ConfinedNoBarn
 
 Type Value: String (Text)
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value:
 
@@ -2599,7 +2599,7 @@ Example value: 1
 
 Type Value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value:
 
@@ -2616,7 +2616,7 @@ Example value: 1.5
 
 Type Value: Double (Decimal/Numeric) 
 
-Does user provide have to value: Yes 
+Does user have to provide value: Yes 
 
 Holos has a default value: 
 
@@ -2633,7 +2633,7 @@ Example value: 0.447
 
 Type Value: Double (Decimal/Numeric) 
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2650,7 +2650,7 @@ Example value: 0.0057
 
 Type Value: Double (Decimal/Numeric)  
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2667,7 +2667,7 @@ Example value: 9.57
 
 Type Value: Double (Decimal/Numeric)   
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2684,7 +2684,7 @@ Example value: 0
 
 Type Value: Double (Decimal/Numeric)   
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2701,7 +2701,7 @@ Example value: 0.322
 
 Type Value: Double (Decimal/Numeric)    
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2718,7 +2718,7 @@ Example value: 0.26
 
 Type Value: Double (Decimal/Numeric)     
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2735,7 +2735,7 @@ Example value: 0.01
 
 Type Value: Double (Decimal/Numeric)   
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2752,7 +2752,7 @@ Example value: 0.005
 
 Type Value: Double (Decimal/Numeric)   
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2769,7 +2769,7 @@ Example value: 0.25
 
 Type Value: Double (Decimal/Numeric)    
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2786,7 +2786,7 @@ Example value: 0.011
 
 Type Value: Double (Decimal/Numeric)    
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2803,7 +2803,7 @@ Example value: 0.035
 
 Type Value: Double (Decimal/Numeric)    
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2820,7 +2820,7 @@ Example value: 8
 
 Type Value: Double (Decimal/Numeric)    
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2837,7 +2837,7 @@ Example value: 0.19
 
 Type Value: Double (Decimal/Numeric)    
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2854,7 +2854,7 @@ Example value: 0
 
 Type Value: Double (Decimal/Numeric)  
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2871,7 +2871,7 @@ Example value: 0.125
 
 Type Value: Double (Decimal/Numeric)  
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2888,7 +2888,7 @@ Example value: 0.28
 
 Type Value: Double (Decimal/Numeric)   
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2905,7 +2905,7 @@ Example value: DeepBedding
 
 Type Value: Enum (Text)
 
-Does user provide have to value: Yes
+Does user have to provide value: Yes
 
 Holos has a default value:
 
@@ -2922,7 +2922,7 @@ Example value: 0.35
 
 Type Value: Double (Decimal/Numeric)  
 
-Does user provide have to value:
+Does user have to provide value:
 
 Holos has a default value:
 
