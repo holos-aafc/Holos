@@ -17,7 +17,7 @@ Holos has a default value: No
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## Name
@@ -32,7 +32,7 @@ Holos has a default value: Yes
 
 note: User defined name 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## Area
@@ -49,7 +49,7 @@ Valid range of values: (x ≥ 0)
 
 note: 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## CurrentYear
@@ -64,7 +64,7 @@ Holos has a default value: Current year (i.e. 2024)
 
 note: 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## CropYear
@@ -81,7 +81,7 @@ Possible values: 1985-(current year)
 
 note: Each (row) in input file must correspond to a certain year 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## CropType
@@ -114,7 +114,7 @@ Possible values (see table below):
 
 note: 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## TillageType
@@ -131,7 +131,7 @@ Possible values: No tillage, Reduced tillage, Intensive tillage
 
 note: See GUI for supported list of crop types since not all items in the enum are supported in calculations 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/CropType.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/CropType.cs 
 
 ***
 ## YearInPerennialStand
@@ -148,7 +148,7 @@ Possible values: 1985-(current year)
 
 note: Each year of a perennial stand must have the year identified in the row of the input file. E.g. a six year perennial stand would have one row with this value set 1 for the first year, 2 for the second year, etc 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## PerennialStandID
@@ -165,7 +165,7 @@ Valid values:
 
 note: Used to group all years of a perennial stand together. Each year in a distinct perennial stand must have this value set. All years in the same perennial stand must have this same ID/value. Can be thought of as a 'group' ID 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## PerennialStandLength
@@ -182,7 +182,7 @@ Valid range of values: (x ≥ 0)
 
 note: Indicates how long the perennial is grown 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## BiomassCoefficientProduct
@@ -199,7 +199,7 @@ Valid range of values: (x ≥ 0)
 
 note: Rp Product 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
 
 ***
 ## BiomassCoefficientStraw
@@ -216,7 +216,7 @@ Valid range of values: (x ≥ 0)
 
 note: Rs Straw 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
 
 ***
 ## BiomassCoefficientRoots
@@ -233,7 +233,7 @@ Valid range of values: (x ≥ 0)
 
 note: Rr Root 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
 
 ***
 ## BiomassCoefficientExtraroot
@@ -250,7 +250,7 @@ Valid range of values: (x ≥ 0)
 
 note: Re Extra-root 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
 
 ***
 ## NitrogenContentInProduct
@@ -267,7 +267,7 @@ Valid range of values: (x ≥ 0)
 
 note: Np Product 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
 
 ***
 ## NitrogenContentInStraw
@@ -284,7 +284,7 @@ Valid range of values: (x ≥ 0)
 
 note: Ns Straw 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
 
 ***
 ## NitrogenContentInRoots
@@ -301,7 +301,7 @@ Valid range of values: (x ≥ 0)
 
 note: Nr Root 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
 
 ***
 ## NitrogenContentInExtraroot
@@ -318,7 +318,7 @@ Valid range of values: (x ≥ 0)
 
 note: Ne Extra-root 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv 
 
 ***
 ## NitrogenFixation
@@ -335,7 +335,7 @@ Valid range of values: (0 ≤ x ≤ 100)
 
 note: Indexed by crop type 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Nitrogen/NitogenFixationProvider.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Nitrogen/NitogenFixationProvider.cs 
 
 ***
 ## NitrogenDeposit
@@ -352,7 +352,7 @@ Valid range of values: (x ≥ 0)
 
 note: Common value for all crop types. Page 74 in algorithm document 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 ***
 ## CarbonConcentration
@@ -369,7 +369,7 @@ Valid range of values: (x ≥ 0)
 
 note: Common value for all crop types. Page 37 in algorithm document 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 ***
 ## Yield
@@ -386,7 +386,7 @@ Valid range of values: (x ≥ 0)
 
 note: Look up value from Small Area Database 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/small_area_yields.csv 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/small_area_yields.csv 
 
 ***
 ## HarvestMethod
@@ -403,7 +403,7 @@ Valid values: CashCrop, GreenManure, None, Silage, StubbleGrazing, Swathing
 
 note: Depends on crop type. Line 19 in source 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Harvest.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Harvest.cs 
 
 ***
 ## NitrogenFertilizerRate
@@ -420,7 +420,7 @@ Valid range of values: (x ≥ 0)
 
 note: Calculated based on yield. Line 17 in source 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Fertilizer.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Fertilizer.cs 
 
 ***
 ## PhosphorousFertilizerRate
@@ -437,7 +437,7 @@ Valid range of values: (x ≥ 0)
 
 note: Not used/implemented yet. Future version will utilize 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## IsIrrigated
@@ -454,7 +454,7 @@ Valid values: Yes, No
 
 note: Not used/implemented yet. Future version will utilize 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## IrrigationType
@@ -471,7 +471,7 @@ Valid values: Rainfed, Irrigated
 
 note: Used to lookup values in Table 7. Line 1290 in source 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/LandManagement/Fields/CropViewItem.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/LandManagement/Fields/CropViewItem.cs 
 
 ***
 ## AmountOfIrrigation
@@ -488,7 +488,7 @@ Valid range of values: (x ≥ 0)
 
 note: Line 35 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Water.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Water.cs 
 
 ***
 ## MoistureContentOfCrop
@@ -505,7 +505,7 @@ Valid range of values: (0 ≤ x ≤ 1)
 
 note: Look up value by crop type and irrigation amount. Additional logic in source file on line 60 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv, https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Water.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv, https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Water.cs 
 
 ***
 ## MoistureContentOfCropPercentage
@@ -522,7 +522,7 @@ Valid range of values: (0 ≤ x ≤ 100)
 
 note: Look up value by crop type and irrigation amount. Additional logic in source file on line 61 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv, https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Water.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_7_Relative_Biomass_Information.csv, https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Water.cs 
 
 ***
 ## PercentageOfStrawReturnedToSoil
@@ -539,7 +539,7 @@ Valid range of values: (0 ≤ x ≤ 100)
 
 note: Line 35 in source. Page 36 in algorithm document has references 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs, https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs, https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 ***
 ## PercentageOfRootsReturnedToSoil
@@ -556,7 +556,7 @@ Valid range of values: (0 ≤ x ≤ 100)
 
 note: Line 35 in source. Page 36 in algorithm document has references 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs, https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs, https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 ***
 ## PercentageOfProductYieldReturnedToSoil
@@ -573,7 +573,7 @@ Valid range of values: (0 ≤ x ≤ 100)
 
 note: Line 35 in source. Page 36 in algorithm document has references 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs, https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs, https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 ***
 ## IsPesticideUsed
@@ -590,7 +590,7 @@ Valid values: Yes/No
 
 note: Should be set if "Number of Pesticide Passes" > 0 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## NumberOfPesticidePasses
@@ -607,7 +607,7 @@ Valid range of values: (x ≥ 0)
 
 note: Any value > 0 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## ManureApplied
@@ -624,7 +624,7 @@ Valid values: True, False
 
 note: Should be set to true if any manure application/amount has been applied to field 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## AmountOfManureApplied
@@ -641,7 +641,7 @@ Valid values: True/False
 
 note: Amount of manure applied to field (kg/ha) 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## ManureApplicationType
@@ -658,7 +658,7 @@ Valid values: NotSelected, TilledLandSolidSpread, UntilledLandSolidSpread, Slurr
 
 note: See page 201 in algorithm document and table 43 line 113 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ManureApplicationTypes.cs, https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Animals/Table_43_Beef_Dairy_Default_Emission_Factors_Provider.cs, https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ManureApplicationTypes.cs, https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Animals/Table_43_Beef_Dairy_Default_Emission_Factors_Provider.cs, https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 ***
 ## ManureAnimalSourceType
@@ -675,7 +675,7 @@ Valid values: NotSelected, BeefManure, DairyManure, SwineManure, PoultryManure, 
 
 note: Used for various table lookups 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ManureAnimalSourceTypes.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ManureAnimalSourceTypes.cs 
 
 ***
 ## ManureStateType
@@ -692,7 +692,7 @@ Valid values: NotSelected, AnaerobicDigster, Composted, CompostIntensive, Compos
 
 note: Used for various table lookups 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ManureStateType.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ManureStateType.cs 
 
 ***
 ## ManureLocationSourceType
@@ -709,7 +709,7 @@ Valid values: NotSelected, Livestock, Imported
 
 note: Used to inidcate if manure was source from on farm or imported onto farm 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ManureLocationSourceType.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ManureLocationSourceType.cs 
 
 ***
 ## UnderSownCropsUsed
@@ -726,7 +726,7 @@ Valid values: True, False
 
 note: See notes in source file on line 449 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/LandManagement/Fields/CropViewItem.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/LandManagement/Fields/CropViewItem.cs 
 
 ***
 ## CropIsGrazed
@@ -743,7 +743,7 @@ Valid values: True, False
 
 note: Not used/implemented yet. Future version will utilize 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## FieldSystemComponentGuid
@@ -760,7 +760,7 @@ Valid values:
 
 note: Unique ID for each field component on the farm 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## TimePeriodCategoryString
@@ -777,7 +777,7 @@ Valid values: Past, Current, Future
 
 note: Used to indicate time period in field history. Leave as "Current" if not sure 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/TimePeriodCategory.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/TimePeriodCategory.cs 
 
 ***
 ## ClimateParameter
@@ -794,7 +794,7 @@ Valid range of values: (x ≥ 0)
 
 note: Used with the ICBM C model. Will be generated when the user imports GUI farm files (0 otherwise). Can be set when creating new (blank) CLI input file(s) 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## TillageFactor
@@ -811,7 +811,7 @@ Valid range of values: (x ≥ 0)
 
 note: Used with the ICBM C model. Will be generated when the user imports GUI farm files (0 otherwise). Can be set when creating new (blank) CLI input file(s). See section 2.1.1.2 in algorithm document 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 ***
 ## ManagementFactor
@@ -828,7 +828,7 @@ Valid range of values: (x ≥ 0)
 
 note: Used with the ICBM C model. Will be generated when the user imports GUI farm files (0 otherwise). Can be set when creating new (blank) CLI input file(s). See section 2.1.1.2 in algorithm document 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 ***
 ## PlantCarbonInAgriculturalProduct
@@ -845,7 +845,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## CarbonInputFromProduct
@@ -862,7 +862,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## CarbonInputFromStraw
@@ -879,7 +879,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## CarbonInputFromRoots
@@ -896,7 +896,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## CarbonInputFromExtraroots
@@ -913,7 +913,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## SizeOfFirstRotationForField
@@ -930,7 +930,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## AboveGroundCarbonInput
@@ -947,7 +947,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## BelowGroundCarbonInput
@@ -964,7 +964,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## ManureCarbonInputsPerHectare
@@ -981,7 +981,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## DigestateCarbonInputsPerHectare
@@ -998,7 +998,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## TotalCarbonInputs
@@ -1015,7 +1015,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## Sand
@@ -1032,7 +1032,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## Lignin
@@ -1049,7 +1049,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## WFac
@@ -1066,7 +1066,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## TFac
@@ -1083,7 +1083,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## TotalNitrogenInputsForIpccTier2
@@ -1100,7 +1100,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version     
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## NitrogenContent
@@ -1117,7 +1117,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## AboveGroundResidueDryMatter
@@ -1134,7 +1134,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## BelowGroundResidueDryMatter
@@ -1151,7 +1151,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## FuelEnergy
@@ -1168,7 +1168,7 @@ Valid range of values: (x ≥ 0)
 
 note: See table 50 and section 6 in algorithm document 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_50_Fuel_Energy_Requirement_Estimates_By_Region.csv, https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_50_Fuel_Energy_Requirement_Estimates_By_Region.csv, https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 ***
 ## HerbicideEnergy
@@ -1185,7 +1185,7 @@ Valid range of values: (x ≥ 0)
 
 note: See table 51 and section 6 in algorithm document 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_51_Herbicide_Energy_Requirement_Estimates_By_Region.csv, https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_51_Herbicide_Energy_Requirement_Estimates_By_Region.csv, https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 ***
 ## FertilizerBlend
@@ -1202,7 +1202,7 @@ Valid values: Urea, Ammonia, UreaAmmoniumNitrate, AmmoniumNitrate, CalciumAmmoni
 
 note: See GUI for supported list of blends 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/FertilizerBlends.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/FertilizerBlends.cs 
 
 ***
 
@@ -1219,7 +1219,7 @@ Does user have to provide value: Yes
 
 Holos has a default value:
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: Should be unique string differentiate from other components/input files
 
@@ -1236,7 +1236,7 @@ Holos has a default value:
 
 Valid values: H.Core.Models.Animals.Dairy.DairyBullComponent, H.Core.Models.Animals.Dairy.DairyCalfComponent, H.Core.Models.Animals.Dairy.DairyComponent, H.Core.Models.Animals.Dairy.DairyDryComponent, H.Core.Models.Animals.Dairy.DairyHeiferComponent, H.Core.Models.Animals.Dairy.DairyLactatingComponent     
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/ComponentType.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/ComponentType.cs
 
 
 note: 
@@ -1254,7 +1254,7 @@ Holos has a default value:
 
 Valid values: Heifers, Lactating, Calves, Dry
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: Must be unique string differentiate from other animal groups in the same component (e.g. "Heifers group #1")
 
@@ -1271,7 +1271,7 @@ Holos has a default value:
 
 Valid values: Dairy, DairyBulls, DairyDryCow, DairyCalves, DairyHeifers, DairyLactatingCow
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/AnimalType.cs, https://github.com/holos-aafc/Holos/blob/main/H.Core/Converters/AnimalTypeStringConverter.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/AnimalType.cs, https://github.com/holos-aafc/Holos/blob/main/H.Core/Converters/AnimalTypeStringConverter.cs
 
 note: See converter class used to convert animal type string names to enumeration values
 
@@ -1289,7 +1289,7 @@ Holos has a default value:
 
 Valid values: Must be a unique string within the animal group 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: Must be a unique string within the animal group
 
@@ -1304,7 +1304,7 @@ Does user have to provide value: Yes
 
 Holos has a default value:
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: Must be set to indicate the start of management period 
 
@@ -1319,7 +1319,7 @@ Does user have to provide value: Yes
 
 Holos has a default value:
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: Must be set to indicate how long the management period lasts
 
@@ -1334,7 +1334,7 @@ Does user have to provide value: Yes
 
 Holos has a default value:
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: Number of animals in the animal group
 
@@ -1351,7 +1351,7 @@ Holos has a default value:
 
 Valid values: Gestating, Lactating, Open, Weaning, GrowingAndFinishing, BreedingStock, Weaned
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ProductionStages.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ProductionStages.cs 
 
 note: Must be set to indicate which stage a group of animals are in the lifecycle of the animal group (i.e. Lactating cows will be at the lactating production stage). This is not used for all animal types
 
@@ -1368,7 +1368,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/AnimalComponentBase.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/AnimalComponentBase.cs 
 
 note: Used to indicate how many young animals (i.e. beef calves) are associated with a parent group. See line 208 of source file on how to use 
 
@@ -1383,7 +1383,7 @@ Does user have to provide value: Yes
 
 Holos has a default value:
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core.Test/Models/Animals/Beef/CowCalfComponentTest.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core.Test/Models/Animals/Beef/CowCalfComponentTest.cs
 
 note: Used to group a parent and child group of animals. E.g. a group of lactating cows and a group of beef calves must have the same pairing number. Leave as zero when a parent/child grouping does not exist (most cases). See unit test class for example on setting this value 
 
@@ -1400,7 +1400,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManagementPeriod.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManagementPeriod.cs 
 
 note: Start weight of the animals in a particular management period
 
@@ -1417,7 +1417,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManagementPeriod.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManagementPeriod.cs 
 
 note: End weight of the animals in a particular management period 
 
@@ -1434,7 +1434,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: This will be a value that is calculated based on the start and end weight
 
@@ -1451,7 +1451,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_21_Average_Milk_Production_For_Dairy_Cows_By_Province.csv, https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Animals/Table_21_Average_Milk_Production_Dairy_Cows_Provider.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_21_Average_Milk_Production_For_Dairy_Cows_By_Province.csv, https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Animals/Table_21_Average_Milk_Production_Dairy_Cows_Provider.cs
 
 note: The amount of milk produced by the group of animals
 
@@ -1468,7 +1468,7 @@ Holos has a default value: 3.71
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: Used with dairy components. Old default value was 4.0 but has been changed
 
@@ -1485,7 +1485,7 @@ Holos has a default value: Yes
 
 Valid range of values: (0 ≤ x ≤ 100)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: Deprecated. Do not use. Will be removed in future version
 
@@ -1502,7 +1502,7 @@ Holos has a default value: No
 
 Valid values: None, Ionophore, FivePercentFat, IonophorePlusFicePercentFat
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/DietAdditiveType.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/DietAdditiveType.cs
 
 note: Optional input used to calculate enteric CH4. See GUI for supported types
 
@@ -1519,7 +1519,7 @@ Holos has a default value: Yes, based on diet
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/DietProvider.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/DietProvider.cs 
 
 note: Also known as Ym of diet. See source file for defaults based on diet type 
 
@@ -1534,7 +1534,7 @@ Does user have to provide value:
 
 Holos has a default value:
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 Valid range of values: (0 ≤ x ≤ 100)
 
@@ -1553,7 +1553,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/DietProvider.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/DietProvider.cs 
 
 note: Used with some animal types (i.e. swine types). See swine diets in source file for defaults 
 
@@ -1570,7 +1570,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
 
 note: Crude protein value of diet. See feed ingredient list for values 
 
@@ -1587,7 +1587,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/Diet.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/Diet.cs 
 
 note: Ash content of diet. See line 434 for more information on how to calculate averages 
 
@@ -1604,7 +1604,7 @@ Holos has a default value:
 
 Valid range of values: (0 ≤ x ≤ 100)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
 
 note: Forage value of diet. See feed ingredient list for values
 
@@ -1621,7 +1621,7 @@ Holos has a default value:
 
 Valid range of values: (0 ≤ x ≤ 100)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
 
 note: TDN value of diet. See feed ingredient list tdn values
 
@@ -1638,7 +1638,7 @@ Holos has a default value:
 
 Valid range of values: (0 ≤ x ≤ 100)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
 
 note: Starch content of diet
 
@@ -1655,7 +1655,7 @@ Holos has a default value:
 
 Valid range of values: (0 ≤ x ≤ 100)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
 
 note: Fat content of diet
 
@@ -1672,7 +1672,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
 
 note: Metabolizable energy of diet
 
@@ -1689,7 +1689,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
 
 note: Neutral detergent fibre of diet
 
@@ -1702,24 +1702,26 @@ Type value:
 
 Does user have to provide value: 
 
-Holos has a default value: 
+Holos has a default value: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 4.1.2-2 in [algorithm document](https://github.com/holos-aafc/Holos/blob/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx)
 
-note: 
+note: Deprecated. Do not use. Will be removed in future version
 
 ***
 ## NitrogenExcretionAdjusted(kgkg^-1)
 
-Example value: 
+Example value: 0.95
 
-Type value: 
+Type value: Double (Decimal/Numeric)
 
 Does user have to provide value: 
 
 Holos has a default value: 
 
-Source (code, csv?, etc.): 
+Valid range of values: (0 ≤ x ≤ 1)
+
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Animals/Table_32_Swine_VS_Nitrogen_Excretion_Factors_Provider.cs
 
 note: 
 
@@ -1736,7 +1738,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/Diet.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/Diet.cs 
 
 note: Used only for diet/DMI calculations for beef calves. See line 419 
 
@@ -1753,7 +1755,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
 
 note: See line 134 for default setting 
 
@@ -1770,7 +1772,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: 
 
@@ -1787,7 +1789,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: 
 
@@ -1804,7 +1806,7 @@ Holos has a default value:
 
 Valid values: FreeStallBarnSolidLitter, FreeStallBarnSlurryScraping, FreeStallBarnFlushing, FreeStallBarnMilkParlourSlurryFlushing, TieStallSolidLitter, TieStallSlurry, DryLot, Pasture
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: 
 
@@ -1821,7 +1823,7 @@ Holos has a default value:
 
 Valid range of values: (0 ≤ x ≤ 1)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: 
 
@@ -1838,7 +1840,7 @@ Holos has a default value:
 
 Valid range of values: (0 ≤ x ≤ 1)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs
 
 note: See line 108 for defaults
 
@@ -1855,7 +1857,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Bedding.cs, https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Animals/Table_30_Default_Bedding_Material_Composition_Provider.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Bedding.cs, https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Animals/Table_30_Default_Bedding_Material_Composition_Provider.cs 
 
 note: Amount of bedding added. Used in C and N input calculations. See line 52 in source and table 30 
 
@@ -1872,7 +1874,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/HousingDetails.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/HousingDetails.cs 
 
 note: See HousingDetails.cs line 186 
 
@@ -1889,7 +1891,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/HousingDetails.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/HousingDetails.cs
 
 note: See HousingDetails.cs line 177
 
@@ -1906,7 +1908,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/HousingDetails.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/HousingDetails.cs
 
 note: See HousingDetails.cs line 219
 
@@ -1923,7 +1925,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Methane.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Methane.cs 
 
 note: Methane conversion factor of manure, not to be confused with Methane conversion factor of diet (Ym). See line 89 for defaults 
 
@@ -1940,7 +1942,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
 
 note: See line 34 for defaults 
 
@@ -1957,7 +1959,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
 
 note: See line 34 for defaults 
 
@@ -1974,7 +1976,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
 
 note: See line 34 for defaults 
 
@@ -1991,7 +1993,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
 
 note: See line 34 for defaults 
 
@@ -2008,7 +2010,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Ammonia.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Ammonia.cs 
 
 note: See line 55 for defaults 
 
@@ -2025,7 +2027,7 @@ Holos has a default value:
 
 Valid range of values: (0 ≤ x ≤ 100)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: Deprecated. Do not use. Will be removed in future version 
 
@@ -2042,7 +2044,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Methane.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Methane.cs 
 
 note: Also known as Bo. See line 89 for defaults 
 
@@ -2063,7 +2065,7 @@ Holos has a default value:
 
 note: Should be unique string differentiate from other components/input files 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## ComponentType
@@ -2080,7 +2082,7 @@ Valid values: H.Core.Models.Animals.Beef.BackgroundingComponent, H.Core.Models.A
 
 note: 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/ComponentType.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/ComponentType.cs 
 
 ***
 ## GroupName
@@ -2097,7 +2099,7 @@ Valid values: Bulls, Heifers, Cows, Calves, Steers
 
 note: Must be unique string differentiate from other animal groups in the same component (e.g. "Bulls group #1") 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## GroupType
@@ -2114,7 +2116,7 @@ Valid values: BeefBackgrounder, BeefBackgrounderSteer, BeefBackgrounderHeifer, B
 
 note: See converter class used to convert animal type string names to enumeration values 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/AnimalType.cs, https://github.com/holos-aafc/Holos/blob/main/H.Core/Converters/AnimalTypeStringConverter.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/AnimalType.cs, https://github.com/holos-aafc/Holos/blob/main/H.Core/Converters/AnimalTypeStringConverter.cs 
 
 ***
 ## ManagementPeriodName
@@ -2131,7 +2133,7 @@ Valid values:
 
 note: Must be a unique string within the animal group 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## GroupPairingNumber
@@ -2148,7 +2150,7 @@ Valid range of values:
 
 note: Used to group a parent and child group of animals. E.g. a group of lactating cows and a group of beef calves must have the same pairing number. Leave as zero when a parent/child grouping does not exist (most cases). See unit test class for example on setting this value 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core.Test/Models/Animals/Beef/CowCalfComponentTest.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core.Test/Models/Animals/Beef/CowCalfComponentTest.cs 
 
 ***
 ## ManagementPeriodStartDate
@@ -2165,7 +2167,7 @@ Valid values:
 
 note: Must be set to indicate the start of management period 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## ManagementPeriodDays
@@ -2182,7 +2184,7 @@ Valid range of values: (x ≥ 0)
 
 note: Must be set to indicate how long the management period lasts 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## NumberOfAnimals
@@ -2199,7 +2201,7 @@ note: Number of animals in the animal group
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## ProductionStage
@@ -2208,7 +2210,7 @@ Example value:
 
 Type Value: Enum (Text)
 
-Does user have to provide value: Yes
+Does user have to provide value:
 
 Holos has a default value:
 
@@ -2216,7 +2218,7 @@ Valid values:
 
 note: Must be set to indicate which stage a group of animals are in the lifecycle of the animal group (i.e. Lactating cows will be at the lactating production stage). This is not used for all animal types 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ProductionStages.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ProductionStages.cs 
 
 ***
 ## NumberOfYoungAnimals
@@ -2233,7 +2235,7 @@ Valid range of values: (x ≥ 0)
 
 note: Used to indicate how many young animals (i.e. beef calves) are associated with a parent group. See line 208 of source file on how to use 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/AnimalComponentBase.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/AnimalComponentBase.cs 
 
 ***
 ## AnimalsAreMilkFedOnly
@@ -2250,7 +2252,7 @@ Valid values: True/False
 
 note: Use to specify that a group of animals are on a milk diet only. Used when referring to a group of young animals that are suckling/nursing 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## StartWeight
@@ -2267,7 +2269,7 @@ Valid range of values: (x ≥ 0)
 
 note: Start weight of the animals in a particular management period 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManagementPeriod.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManagementPeriod.cs 
 
 ***
 ## EndWeight
@@ -2284,7 +2286,7 @@ Valid range of values: (x ≥ 0)
 
 note: End weight of the animals in a particular management period 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManagementPeriod.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManagementPeriod.cs 
 
 ***
 ## AverageDailyGain
@@ -2301,7 +2303,7 @@ Valid range of values: (x ≥ 0)
 
 note: This will be a value that is calculated based on the start and end weight 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## MilkProduction
@@ -2318,7 +2320,7 @@ Valid range of values: (x ≥ 0)
 
 note: The amount of milk produced by the group of animals 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_21_Average_Milk_Production_For_Dairy_Cows_By_Province.csv, https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Animals/Table_21_Average_Milk_Production_Dairy_Cows_Provider.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/Table_21_Average_Milk_Production_For_Dairy_Cows_By_Province.csv, https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Animals/Table_21_Average_Milk_Production_Dairy_Cows_Provider.cs 
 
 ***
 ## MilkFatContent
@@ -2335,7 +2337,7 @@ Valid range of values: (x ≥ 0)
 
 note: Used with dairy components. Old default value was 4 but has been changed 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## MilkProteinContentAsPercentage
@@ -2352,7 +2354,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## DietAdditiveType
@@ -2369,7 +2371,7 @@ Valid values: None, TwoPercentFat, FourPercentFat, Inonophore, InonophorePlusTwo
 
 note: Optional input used to calculate enteric CH4. See GUI for supported types 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/DietAdditiveType.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/DietAdditiveType.cs 
 
 ***
 ## MethaneConversionFactorOfDiet
@@ -2386,7 +2388,7 @@ Valid range of values: (x ≥ 0)
 
 note: Also known as Ym of diet. See source file for defaults based on diet type 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/DietProvider.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/DietProvider.cs 
 
 ***
 ## MethaneConversionFactorAdjusted
@@ -2403,7 +2405,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## FeedIntake
@@ -2420,7 +2422,7 @@ Valid range of values: (x ≥ 0)
 
 note: Used with some animal types (i.e. swine types). See swine diets in source file for defaults 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/DietProvider.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/DietProvider.cs 
 
 ***
 ## CrudeProtein
@@ -2437,7 +2439,7 @@ Valid range of values: (x ≥ 0)
 
 note: Crude protein value of diet. See feed ingredient list for values 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
 
 ***
 ## Forage
@@ -2454,7 +2456,7 @@ Valid range of values: (x ≥ 0)
 
 note: Forage value of diet. See feed ingredient list for values 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
 
 ***
 ## TDN
@@ -2471,7 +2473,7 @@ Valid range of values: (x ≥ 0)
 
 note: TDN value of diet. See feed ingredient list tdn values 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
 
 ***
 ## AshContentOfDiet
@@ -2488,7 +2490,7 @@ Valid range of values: (x ≥ 0)
 
 note: Ash content of diet. See line 434 for more informtation on how to calculate averages 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/Diet.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/Diet.cs 
 
 ***
 ## Starch
@@ -2505,7 +2507,7 @@ Valid range of values: (x ≥ 0)
 
 note: Starch content of diet 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
 
 ***
 ## Fat
@@ -2522,7 +2524,7 @@ Valid range of values: (x ≥ 0)
 
 note: Fat content of diet 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
 
 ***
 ## ME
@@ -2539,7 +2541,7 @@ Valid range of values: (x ≥ 0)
 
 note: Metabolizable energy of diet 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
 
 ***
 ## NDF
@@ -2556,7 +2558,7 @@ Valid range of values: (x ≥ 0)
 
 note: Neutral detergent fibre of diet 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
 
 ***
 ## DietaryNetEnergyConcentration
@@ -2573,7 +2575,7 @@ Valid range of values: (x ≥ 0)
 
 note: Used only for diet/DMI calculations for beef calves. See line 419 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/Diet.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/Diet.cs 
 
 ***
 ## HousingType
@@ -2590,7 +2592,7 @@ Valid values: ConfinedNoBarn, HousedInBarnSolid, Pasture
 
 note: Required field used for many calculations. See GUI for correct types when considering a particular animal type 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/HousingType.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/HousingType.cs 
 
 ***
 ## GainCoefficient
@@ -2607,7 +2609,7 @@ Valid range of values: (0 ≤ x ≤ 1)
 
 note: See line 134 for default setting 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
 
 ***
 ## UserDefinedBeddingRate
@@ -2624,7 +2626,7 @@ Valid range of values: (x ≥ 0)
 
 note: Amount of bedding added. Used in C and N input calculations. See line 52 in source and table 30 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Bedding.cs, https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Animals/Table_30_Default_Bedding_Material_Composition_Provider.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Bedding.cs, https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Animals/Table_30_Default_Bedding_Material_Composition_Provider.cs 
 
 ***
 ## TotalCarbonKilogramsDryMatterForBedding
@@ -2641,7 +2643,7 @@ Valid range of values: (x ≥ 0)
 
 note: See HousingDetails.cs line 186 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/HousingDetails.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/HousingDetails.cs 
 
 ***
 ## TotalNitrogenKilogramsDryMatterForBedding
@@ -2658,7 +2660,7 @@ Valid range of values: (x ≥ 0)
 
 note: See HousingDetails.cs line 177 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/HousingDetails.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/HousingDetails.cs 
 
 ***
 ## MoistureContentOfBeddingMaterial
@@ -2675,7 +2677,7 @@ Valid range of values: (x ≥ 0)
 
 note: See HousingDetails.cs line 219 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/HousingDetails.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/HousingDetails.cs 
 
 ***
 ## ActivityCoefficientOfFeedingSituation
@@ -2692,7 +2694,7 @@ Valid range of values: (0 ≤ x ≤ 1)
 
 note: See line 74 for defaults 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
 
 ***
 ## MaintenanceCoefficient
@@ -2709,7 +2711,7 @@ Valid range of values: (0 ≤ x ≤ 1)
 
 note: See line 108 for defaults 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
 
 ***
 ## MethaneConversionFactorOfManure
@@ -2726,7 +2728,7 @@ Valid range of values: (x ≥ 0)
 
 note: Methane conversion factor of manure, not to be consufed with Methane conversion factor of diet (Ym). See line 89 for defaults 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Methane.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Methane.cs 
 
 ***
 ## N2ODirectEmissionFactor
@@ -2743,7 +2745,7 @@ Valid range of values: (x ≥ 0)
 
 note: See line 34 for defaults 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
 
 ***
 ## EmissionFactorVolatilization
@@ -2760,7 +2762,7 @@ Valid range of values: (x ≥ 0)
 
 note: See line 34 for defaults 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
 
 ***
 ## VolatilizationFraction
@@ -2777,7 +2779,7 @@ Valid range of values: (x ≥ 0)
 
 note: See line 34 for defaults 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
 
 ***
 ## EmissionFactorLeaching
@@ -2794,7 +2796,7 @@ Valid range of values: (x ≥ 0)
 
 note: See line 34 for defaults 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs 
 
 ***
 ## FractionLeaching
@@ -2811,7 +2813,7 @@ Valid range of values: (x ≥ 0)
 
 note: See line 55 for defaults 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Ammonia.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Ammonia.cs 
 
 ***
 ## AshContent
@@ -2828,7 +2830,7 @@ Valid range of values: (x ≥ 0)
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## MethaneProducingCapacityOfManure
@@ -2845,7 +2847,7 @@ Valid range of values: (x ≥ 0)
 
 note: Also known as Bo. See line 89 for defaults 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Methane.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Methane.cs 
 
 ***
 ## FractionOfOrganicNitrogenImmobilized
@@ -2856,13 +2858,13 @@ Type Value: Double (Decimal/Numeric)
 
 Does user have to provide value:
 
-Holos has a default value:
+Holos has a default value: 0
 
-Valid range of values:
+Valid range of values: (0 ≤ x ≤ 1)
 
 note: See line 31 for defaults 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Ammonia.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Ammonia.cs 
 
 ***
 ## FractionOfOrganicNitrogenNitrified
@@ -2879,7 +2881,7 @@ Valid range of values:
 
 note: See line 31 for defaults 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Ammonia.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Ammonia.cs 
 
 ***
 ## FractionOfOrganicNitrogenMineralized
@@ -2896,7 +2898,7 @@ Valid range of values:
 
 note: See line 31 for defaults 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Ammonia.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Ammonia.cs 
 
 ***
 ## ManureStateType
@@ -2913,7 +2915,7 @@ Valid values: DeepBedding, SolidStorage, Pasture, CompostPassive, CompostIntensi
 
 note: Required. See GUI for valid types for particular animal type 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ManureStateType.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ManureStateType.cs 
 
 ***
 ## AmmoniaEmissionFactorForManureStorage
@@ -2930,7 +2932,7 @@ Valid range of values:
 
 note: For poultry animals only. See line 7 in source 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Animals/DefaultAmmoniaEmissionFactorsForPoultryManureStorageProvider.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Animals/DefaultAmmoniaEmissionFactorsForPoultryManureStorageProvider.cs 
 
 ***
 
@@ -2947,7 +2949,7 @@ Does user have to provide value: Yes
 
 Holos has a default value: Yes
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: 
 
@@ -2964,7 +2966,7 @@ Holos has a default value:
 
 Valid values: H.Core.Models.Animals.Sheep.SheepComponent, H.Core.Models.Animals.Sheep.RamsComponent, H.Core.Models.Animals.Sheep.SheepFeedlotComponent, H.Core.Models.Animals.Sheep.EwesAndLambsComponent
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: 
 
@@ -2981,7 +2983,7 @@ Holos has a default value:
 
 Valid values: Sheep, Sheep Feedlot, Ram, Lambs, Ewes
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: Must be unique string differentiate from other animal groups in the same component (e.g. "Sheep group #1")
 
@@ -2999,7 +3001,7 @@ Holos has a default value:
 
 Valid values: Sheep, SheepFeedlot, Ram, Ewes, Lambs
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/AnimalType.cs, https://github.com/holos-aafc/Holos/blob/main/H.Core/Converters/AnimalTypeStringConverter.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/AnimalType.cs, https://github.com/holos-aafc/Holos/blob/main/H.Core/Converters/AnimalTypeStringConverter.cs
 
 note: See converter class used to convert animal type string names to enumeration values
 
@@ -3016,7 +3018,7 @@ Holos has a default value:
 
 Valid values: Must be a unique string within the animal group
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: Must be a unique string within the animal group
 
@@ -3031,7 +3033,7 @@ Does user have to provide value: Yes
 
 Holos has a default value: 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core.Test/Models/Animals/Beef/CowCalfComponentTest.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core.Test/Models/Animals/Beef/CowCalfComponentTest.cs
 
 note: Used to group a parent and child group of animals. E.g. a group of lactating cows and a group of beef calves must have the same pairing number. Leave as zero when a parent/child grouping does not exist (most cases). See unit test class for example on setting this value
 
@@ -3048,7 +3050,7 @@ Does user have to provide value: Yes
 
 Holos has a default value: 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: Must be set to indicate the start of management period
 
@@ -3063,7 +3065,7 @@ Does user have to provide value: Yes
 
 Holos has a default value: 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: Must be set to indicate how long the management period lasts
 
@@ -3080,7 +3082,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: Number of animals in the animal group
 
@@ -3097,7 +3099,7 @@ Holos has a default value:
 
 Valid values: Gestating, Lactating
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ProductionStages.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ProductionStages.cs
 
 note: Must be set to indicate which stage a group of animals are in the lifecycle of the animal group (i.e. Lactating cows will be at the lactating production stage). This is not used for all animal types
 
@@ -3114,7 +3116,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/AnimalComponentBase.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/AnimalComponentBase.cs
 
 note: Used to indicate how many young animals (i.e. beef calves) are associated with a parent group. See line 208 of source file on how to use
 
@@ -3131,7 +3133,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManagementPeriod.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManagementPeriod.cs
 
 note: Start weight of the animals in a particular management period
 
@@ -3148,7 +3150,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManagementPeriod.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManagementPeriod.cs
 
 note: End weight of the animals in a particular management period
 
@@ -3165,7 +3167,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: This will be a value that is calculated based on the start and end weight
 
@@ -3182,7 +3184,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: 
 
@@ -3199,7 +3201,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: 
 
@@ -3216,7 +3218,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: 
 
@@ -3233,7 +3235,7 @@ Holos has a default value: No
 
 Valid values: None, Ionophore, FivePercentFat, IonophorePlusFicePercentFat
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/DietAdditiveType.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/DietAdditiveType.cs
 
 note: Optional input used to calculate enteric CH4. See GUI for supported types
 
@@ -3250,7 +3252,7 @@ Holos has a default value: Yes, based on diet
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/DietProvider.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/DietProvider.cs
 
 note: Also known as Ym of diet. See source file for defaults based on diet type
 
@@ -3267,7 +3269,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: Deprecated. Do not use. Will be removed in future version
 
@@ -3284,7 +3286,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.):  https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/DietProvider.cs
+Source (source code file, table, algorithm document, etc.):  https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/DietProvider.cs
 
 note: Used with some animal types (i.e. swine types). See swine diets in source file for defaults
 
@@ -3301,7 +3303,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
 
 note: Crude protein value of diet. See feed ingredient list for values
 
@@ -3318,7 +3320,7 @@ Holos has a default value:
 
 Valid range of values: (0 ≤ x ≤ 100)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
 
 note: Forage value of diet. See feed ingredient list for values
 
@@ -3335,7 +3337,7 @@ Holos has a default value:
 
 Valid range of values: (0 ≤ x ≤ 100)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
 
 note: TDN value of diet. See feed ingredient list tdn values
 
@@ -3352,7 +3354,7 @@ Holos has a default value:
 
 Valid range of values: (0 ≤ x ≤ 100)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/Diet.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Feed/Diet.cs
 
 note: Ash content of diet. See line 434 for more information on how to calculate averages
 
@@ -3369,7 +3371,7 @@ Holos has a default value:
 
 Valid range of values: (0 ≤ x ≤ 100)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
 
 note: Starch content of diet
 
@@ -3386,7 +3388,7 @@ Holos has a default value:
 
 Valid range of values: (0 ≤ x ≤ 100)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
 
 note: Fat content of diet
 
@@ -3403,7 +3405,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
 
 note: Metabolizable energy of diet
 
@@ -3420,7 +3422,7 @@ Holos has a default value:
 
 Valid range of values: (0 ≤ x ≤ 100)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: 
 
@@ -3437,7 +3439,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: 
 
@@ -3454,7 +3456,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: 
 
@@ -3471,7 +3473,7 @@ Holos has a default value:
 
 Valid range of values: (0 ≤ x ≤ 1)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: 
 
@@ -3488,7 +3490,7 @@ Holos has a default value:
 
 Valid range of values: (0 ≤ x ≤ 1)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: 
 
@@ -3505,7 +3507,7 @@ Holos has a default value:
 
 Valid range of values: (0 ≤ x ≤ 1)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: 
 
@@ -3522,7 +3524,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: 
 
@@ -3539,7 +3541,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: 
 
@@ -3556,7 +3558,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: 
 
@@ -3573,7 +3575,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: 
 
@@ -3590,7 +3592,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs
 
 note: See line 34 for defaults
 
@@ -3607,7 +3609,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs
 
 note: See line 34 for defaults
 
@@ -3624,7 +3626,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs
 
 note: See line 34 for defaults
 
@@ -3641,7 +3643,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.EmissionFactors.cs
 
 note: See line 34 for defaults
 
@@ -3658,7 +3660,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Ammonia.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Ammonia.cs
 
 note: 
 
@@ -3675,7 +3677,7 @@ Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 note: 
 
@@ -3692,7 +3694,7 @@ Holos has a default value: Yes
 
 Valid range of values: (x ≥ 0)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManureDetails.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManureDetails.cs
 
 note: 
 
@@ -3709,7 +3711,7 @@ Holos has a default value: Yes
 
 Possible Values: (0 < x)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManureDetails.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManureDetails.cs
 
 note: 
 
@@ -3726,7 +3728,7 @@ Holos has a default value: Yes
 
 Possible Values: (0 < x < 100)
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManureDetails.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Animals/ManureDetails.cs
 
 note: 
 
@@ -3749,7 +3751,7 @@ Possible Values:
 
 note: Required. Use GUI map view to get polygon number if needed 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
 ## YieldAssignmentMethod
@@ -3766,7 +3768,7 @@ Possible Values: Average, Custom, CARValue, InputFile, InputFileThenAverage, Sma
 
 note: Used to lookup default yields for a particular year and crop type 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/YieldAssignmentMethod.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/YieldAssignmentMethod.cs 
 
 ***
 ## PolygonNumber
@@ -3783,7 +3785,7 @@ Possible Values:
 
 note: Required. Use GUI map view to get polygon number if needed 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SmallAreaYieldData.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SmallAreaYieldData.cs
 
 ***
 ## Latitude
@@ -3800,7 +3802,7 @@ Possible Values: Any unrestricted value
 
 note: Required if using NASA as the source for climate data. Values are determined when user clicks on a location in the GUI 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## Longitude
@@ -3817,7 +3819,7 @@ Possible Values: Any unrestricted value
 
 note: Required if using NASA as the source for climate data. Values are determined when user clicks on a location in the GUI 
 
-Source (code, csv?, etc.): 
+Source (source code file, table, algorithm document, etc.): 
 
 ***
 ## CarbonConcentration(kgkg^-1)
@@ -3834,7 +3836,7 @@ Possible Values: 0 < x
 
 note: See line 90 in source 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/CoreConstants.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/CoreConstants.cs 
 
 ***
 ## EmergenceDay
@@ -3851,7 +3853,7 @@ Possible Values: 0 < x
 
 note: Used with ICBM carbon model. See line 167 for default 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## RipeningDay
@@ -3868,7 +3870,7 @@ Possible Values: 0 < x
 
 note: Used with ICBM carbon model. See line 168 for default 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## Variance
@@ -3885,7 +3887,7 @@ Possible Values: 0 < x
 
 note: Used with ICBM carbon model. See line 169 for default 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## Alfa
@@ -3902,7 +3904,7 @@ Possible Values: 0 < x
 
 note: Used with ICBM carbon model. See line 175 for default 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## DecompositionMinimumTemperature( C)=-3.78
@@ -3919,7 +3921,7 @@ Possible Values: Any Unrestricted value
 
 note: Used with ICBM carbon model. See line 176 for default 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## DecompositionMaximumTemperature( C)=
@@ -3936,7 +3938,7 @@ Possible Values: Any unrestricted value
 
 note: Used with ICBM carbon model. See line 177 for default 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## MoistureResponseFunctionAtSaturation
@@ -3953,7 +3955,7 @@ Possible Values: 0 < x
 
 note: Used with ICBM carbon model. See line 178 for default 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## MoistureResponseFunctionAtWiltingPoint
@@ -3970,7 +3972,7 @@ Possible Values: 0 < x
 
 note: Used with ICBM carbon model. See line 179 for default 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## PercentageOfProductReturnedToSoilForAnnuals2
@@ -3987,7 +3989,7 @@ Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
 ## PercentageOfStrawReturnedToSoilForAnnuals100
@@ -4004,7 +4006,7 @@ Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
 ## PercentageOfRootsReturnedToSoilForAnnuals100
@@ -4021,7 +4023,7 @@ Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
 ## PercentageOfProductYieldReturnedToSoilForSilageCrops35
@@ -4038,7 +4040,7 @@ Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
 ## PercentageOfRootsReturnedToSoilForSilageCrops
@@ -4055,7 +4057,7 @@ Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
 ## PercentageOfProductYieldReturnedToSoilForCoverCrops
@@ -4072,7 +4074,7 @@ Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
 ## PercentageOfProductYieldReturnedToSoilForCoverCropsForage
@@ -4089,7 +4091,7 @@ Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
 ## PercentageOfProductYieldReturnedToSoilForCoverCropsProduce
@@ -4106,7 +4108,7 @@ Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
 ## PercentageOfStrawReturnedToSoilForCoverCrops
@@ -4123,7 +4125,7 @@ Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
 ## PercentageOfRootsReturnedToSoilForCoverCrops
@@ -4140,7 +4142,7 @@ Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
 ## PercentageOfProductReturnedToSoilForRootCrops
@@ -4157,7 +4159,7 @@ Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
 ## PercentageOfStrawReturnedToSoilForRootCrops
@@ -4174,7 +4176,7 @@ Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
 ## PercentageOfProductReturnedToSoilForPerennials
@@ -4191,7 +4193,7 @@ Possible Values: 0 < x < 100
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
 ## PercentageOfRootsReturnedToSoilForPerennials
@@ -4208,7 +4210,7 @@ Possible Values:
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
 ## PercentageOfProductReturnedToSoilForRangelandDueToHarvestLoss
@@ -4225,7 +4227,7 @@ Possible Values:
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
 ## PercentageOfRootsReturnedToSoilForRangeland
@@ -4242,7 +4244,7 @@ Possible Values:
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
 ## PercentageOfProductReturnedToSoilForFodderCorn
@@ -4259,7 +4261,7 @@ Possible Values:
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
 ## PercentageOfRootsReturnedToSoilForFodderCorn
@@ -4276,7 +4278,7 @@ Possible Values:
 
 note: Used as a global default. See line 24 on how the default is used. User can override 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Crops/CropInitializationService.Returns.cs 
 
 ***
 ## DecompositionRateConstantYoungPool
@@ -4293,7 +4295,7 @@ Possible Values:
 
 note: Used with ICBM carbon model. See line 221 for default 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## DecompositionRateConstantOldPool
@@ -4310,7 +4312,7 @@ Possible Values:
 
 note: Used with ICBM carbon model. See line 222 for default 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## OldPoolCarbonN
@@ -4327,7 +4329,7 @@ Possible Values: 0 < x
 
 note: Used with both ICBM and IPCC Tier 2 carbon models. See line 224 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## NORatio
@@ -4344,7 +4346,7 @@ Possible Values:
 
 note: Used with both ICBM and IPCC Tier 2 carbon models. See line 227 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## EmissionFactorForLeachingAndRunoff(kgN2O-N(kgN)^-1)
@@ -4361,7 +4363,7 @@ Possible Values:
 
 note: Used for N2O calculations. See line 228  
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## EmissionFactorForVolatilization(kgN2O-N(kgN)^-1)
@@ -4378,7 +4380,7 @@ Possible Values:
 
 note: Used for N2O calculations. See line 229 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## FractionOfNLostByVolatilization
@@ -4395,7 +4397,7 @@ Possible Values:
 
 note: Used for N2O calculations. See line 232 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## MicrobeDeath
@@ -4412,7 +4414,7 @@ Possible Values: 0 < x
 
 note: Used by both ICBM and IPCC Tier carbon models. See line 236 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## Denitrification
@@ -4429,7 +4431,7 @@ Possible Values: 0 < x
 
 note: Used by both ICBM and IPCC Tier carbon models. See line 237 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## Carbonmodellingstrategy
@@ -4446,7 +4448,7 @@ Possible values: IPCCTier2, ICBM
 
 note: Will determine which carbon model will be used (IPCC Tier 2 is the newest C model and is the new default model) 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/CarbonModellingStrategies.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/CarbonModellingStrategies.cs 
 
 ***
 ## RunInPeriodYears
@@ -4463,7 +4465,7 @@ Possible Values: 0 < x
 
 note: Used to indicate how many years will be used when calculating equilibrium soil carbon. Can leave default in most cases. See line 269 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## HumificationCoefficientAboveGround
@@ -4480,7 +4482,7 @@ Possible Values: 0 < x
 
 note: Used with ICBM carbon model. See line 217 for default 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## HumificationCoefficientBelowGround
@@ -4497,7 +4499,7 @@ Possible Values: 0 < x
 
 note: Used with ICBM carbon model. See line 218 for default 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## HumificationCoefficientManure
@@ -4514,7 +4516,7 @@ Possible values: 0 < x
 
 note: Used with ICBM carbon model. See line 219 for default 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs 
 
 ***
 ## Climatefilenameclimate.csv
@@ -4531,7 +4533,7 @@ Possible Values: "Any_Valid_Text".csv
 
 note: Used when climate acquisition is set to "InputFile" 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs
 
 ***
 ## ClimateDataAcquisition
@@ -4548,7 +4550,7 @@ Possible Values:  SLC, Custom, NASA, InputFile
 
 note: Specifies how Holos will aquire climate data. See source file for more details 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Climate/ClimateProvider.cs | https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Climate/ClimateProvider.cs | https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs
 
 ***
 ## Useclimateparameterinsteadofmanagementfactor
@@ -4565,7 +4567,7 @@ Possible values: True, False
 
 note: Set to true for most scenarios 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Defaults.cs
 
 ***
 ## EnableCarbonModelling
@@ -4582,7 +4584,7 @@ Possible values: True, False
 
 note: Set to true for most scenarios 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs
 
 ***
 ## JanuaryPrecipitation
@@ -4599,7 +4601,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else. See line 37 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## FebruaryPrecipitation
@@ -4616,7 +4618,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## MarchPrecipitation
@@ -4633,7 +4635,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## AprilPrecipitation
@@ -4650,7 +4652,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## MayPrecipitation
@@ -4667,7 +4669,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## JunePrecipitation
@@ -4684,7 +4686,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## JulyPrecipitation
@@ -4701,7 +4703,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## AugustPrecipitation
@@ -4718,7 +4720,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## SeptemberPrecipitation
@@ -4735,7 +4737,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## OctoberPrecipitation
@@ -4752,7 +4754,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## NovemberPrecipitation
@@ -4769,7 +4771,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## DecemberPrecipitation
@@ -4786,7 +4788,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## JanuaryPotentialEvapotranspiration
@@ -4803,7 +4805,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## FebruaryPotentialEvapotranspiration
@@ -4820,7 +4822,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## MarchPotentialEvapotranspiration
@@ -4837,7 +4839,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## AprilPotentialEvapotranspiration
@@ -4854,7 +4856,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## MayPotentialEvapotranspiration
@@ -4871,7 +4873,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## JunePotentialEvapotranspiration
@@ -4888,7 +4890,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## JulyPotentialEvapotranspiration
@@ -4905,7 +4907,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## AugustPotentialEvapotranspiration
@@ -4922,7 +4924,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## SeptemberPotentialEvapotranspiration
@@ -4939,7 +4941,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## OctoberPotentialEvapotranspiration
@@ -4956,7 +4958,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## NovemberPotentialEvapotranspiration
@@ -4973,7 +4975,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## DecemberPotentialEvapotranspiration
@@ -4990,7 +4992,7 @@ Possible Values: Any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## JanuaryMeanTemperature
@@ -5007,7 +5009,7 @@ Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## FebruaryMeanTemperature
@@ -5024,7 +5026,7 @@ Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## MarchMeanTemperature
@@ -5041,7 +5043,7 @@ Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## AprilMeanTemperature
@@ -5058,7 +5060,7 @@ Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## MayMeanTemperature
@@ -5075,7 +5077,7 @@ Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## JuneMeanTemperature
@@ -5092,7 +5094,7 @@ Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## JulyMeanTemperature
@@ -5109,7 +5111,7 @@ Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## AugustMeanTemperature
@@ -5126,7 +5128,7 @@ Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## SeptemberMeanTemperature
@@ -5143,7 +5145,7 @@ Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## OctoberMeanTemperature
@@ -5160,7 +5162,7 @@ Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## NovemberMeanTemperature
@@ -5177,7 +5179,7 @@ Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## DecemberMeanTemperature
@@ -5194,7 +5196,7 @@ Possible values: any unrestricted value
 
 note: Can be set and used if climate data acquisition is set to custom. Value will be ignored if climate data acquisition is set to something else 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Models/Farm.cs 
 
 ***
 ## Province
@@ -5211,7 +5213,7 @@ Possible values: Alberta, BritishColumbia, Manitoba, NewBrunswick, Newfoundland,
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/Province.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/Province.cs
 
 ***
 ## YearOfObservation
@@ -5228,7 +5230,7 @@ Possible values: 1 < x
 
 note: Defaults to the current year 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Infrastructure/ModelBase.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Infrastructure/ModelBase.cs
 
 ***
 ## EcodistrictID
@@ -5245,7 +5247,7 @@ Possible Values: 0 < x
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
 ## SoilGreatGroup
@@ -5262,7 +5264,7 @@ Possible values: NotApplicable, Unknown, MelanicBrunisol, EutricBrunisol, Sombri
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/SoilGreatGroupType.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/SoilGreatGroupType.cs
 
 ***
 ## Soilfunctionalcategory
@@ -5279,7 +5281,7 @@ Possible Values: NotApplicable, Brown, BrownChernozem, DarkBrown, DarkBrownChern
 
 note: deduced following code in Holos 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/SoilFunctionalCategory.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/SoilFunctionalCategory.cs
 
 ***
 ## BulkDensity
@@ -5296,7 +5298,7 @@ Possible values: 0 < x
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
 ## SoilTexture
@@ -5313,7 +5315,7 @@ Possible Values: Fine, Medium, Coarse, Unknown
 
 note: deduced following code in Holos 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/SoilTexture.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/SoilTexture.cs
 
 ***
 ## SoilPh
@@ -5330,7 +5332,7 @@ Possible Values: 0 < x
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
 ## TopLayerThickness(mm)
@@ -5347,7 +5349,7 @@ Possible Values: 0 < x
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
 ## ProportionOfSandInSoil
@@ -5364,7 +5366,7 @@ Possible Values: 0 < x < 100
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
 ## ProportionOfClayInSoil
@@ -5381,7 +5383,7 @@ Possible Values: 0 < x < 100
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
 ## ProportionOfSoilOrganicCarbon
@@ -5398,6 +5400,6 @@ Possible Values: 0 < x < 100
 
 note: extracted from slc DB with lat long data 
 
-Source (code, csv?, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Soil/SoilData.cs
 
 ***
