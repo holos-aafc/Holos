@@ -91,7 +91,7 @@ Finally, the CLI will ask which units of measurement will be used.
 4. Type "**1**" for metric and then press "**Enter**"
 
 <p align="center">
-<img src="../../Images/CliTrainingGuide/figure1-4_updated.png" alt="Figure 1-4" width="80%" height="80%"/>
+<img src="../../Images/CliTrainingGuide/figure1-4_updated.png" alt="Figure 1-4"/>
 <br>
 <em>Entering units of measurement, Figure1-4</em>
 </p>
