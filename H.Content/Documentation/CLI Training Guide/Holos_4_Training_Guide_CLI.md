@@ -91,7 +91,7 @@ Finally, the CLI will ask which units of measurement will be used.
 4. Type "**1**" for metric and then press "**Enter**"
 
 <p align="center">
-<img src="../../Images/CliTrainingGuide/figure1-4_updated.png" alt="Figure 1-4" width="80%" height="80%"/>
+<img src="../../Images/CliTrainingGuide/figure1-4_updated.png" alt="Figure 1-4"/>
 <br>
 <em>Entering units of measurement, Figure1-4</em>
 </p>
@@ -156,7 +156,7 @@ In this second demonstration, we will keep most settings between the two farms t
 <em>Second scenario folder location with copied farm folder, Figure1-7b</em>
 </p>
 
-2. To create our second farm, right click on "**My CLI template for export**" folder to and select copy and then paste the content in the same location so that we two folders. Rename the second farm folder to "**Farm 2**".
+2. To create our second farm, right click on "**My CLI template for export**" folder to select copy and then paste the content in the same location so that we two folders. Rename the second farm folder to "**Farm 2**".
 
 <p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-7c.png" alt="Figure 1-7c"/>
