@@ -23,6 +23,7 @@ namespace H.Core.Models.Infrastructure
         private DateTime _startDate;
         private DateTime _endDate;
         private ManureLocationSourceType _sourceType;
+        private double _moistureContentPercentage;
 
         #endregion
 
@@ -170,6 +171,15 @@ namespace H.Core.Models.Infrastructure
         {
             get => _sourceType;
             set => SetProperty(ref _sourceType, value);
+        }
+
+        /// <summary>
+        /// (%)
+        /// </summary>
+        public double MoistureContentPercentage
+        {
+            get => _moistureContentPercentage;
+            set => SetProperty(ref _moistureContentPercentage, value);
         }
 
         #endregion

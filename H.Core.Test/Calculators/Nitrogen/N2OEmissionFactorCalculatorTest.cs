@@ -408,8 +408,19 @@ namespace H.Core.Test.Calculators.Nitrogen
             var stageState = farm.GetFieldSystemDetailsStageState();
             stageState.DetailsScreenViewCropViewItems.Add(viewItem);
             farm.StageStates.Add(stageState);
+
+            var digestateApplication = base.GetTestRawDigestateApplicationViewItem();
             viewItem.DigestateApplicationViewItems.Clear();
-            viewItem.DigestateApplicationViewItems.Add(base.GetTestRawDigestateApplicationViewItem());
+            viewItem.DigestateApplicationViewItems.Add(digestateApplication);
+
+            digestateApplication.DateCreated = viewItem.DateCreated;
+            
+
+            var field = base.GetTestFieldComponent();
+            farm.Components.Add(field);
+
+            viewItem.FieldSystemComponentGuid = field.Guid;
+            field.CropViewItems.Add(viewItem);
 
             _sut.Initialize(farm);
 
@@ -458,8 +469,21 @@ namespace H.Core.Test.Calculators.Nitrogen
             stageState.DetailsScreenViewCropViewItems.Add(viewItem);
             farm.StageStates.Add(stageState);
             viewItem.DigestateApplicationViewItems.Clear();
-            viewItem.DigestateApplicationViewItems.Add(base.GetTestRawDigestateApplicationViewItem());
-            viewItem.DigestateApplicationViewItems.Add(base.GetTestLiquidDigestateApplicationViewItem());
+
+            var digestateApplication = base.GetTestRawDigestateApplicationViewItem();
+            var digestateApplication2 = base.GetTestLiquidDigestateApplicationViewItem();
+
+            digestateApplication.DateCreated = viewItem.DateCreated;
+            digestateApplication2.DateCreated = viewItem.DateCreated;
+
+            viewItem.DigestateApplicationViewItems.Add(digestateApplication2);
+            viewItem.DigestateApplicationViewItems.Add(digestateApplication);
+
+            var field = base.GetTestFieldComponent();
+            farm.Components.Add(field);
+
+            viewItem.FieldSystemComponentGuid = field.Guid;
+            field.CropViewItems.Add(viewItem);
 
             _sut.Initialize(farm);
 

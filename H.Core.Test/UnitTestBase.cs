@@ -142,6 +142,7 @@ namespace H.Core.Test
 
             digestateApplication.DateCreated = DateTime.Now.AddDays(1);
             digestateApplication.DigestateState = DigestateState.Raw;
+            digestateApplication.ManureLocationSourceType = ManureLocationSourceType.Livestock;
             digestateApplication.AmountAppliedPerHectare = 50;
             digestateApplication.AmountOfNitrogenAppliedPerHectare = 50;
 
@@ -156,6 +157,7 @@ namespace H.Core.Test
             digestateApplication.DigestateState = DigestateState.LiquidPhase;
             digestateApplication.AmountAppliedPerHectare = 50;
             digestateApplication.AmountOfNitrogenAppliedPerHectare = 500;
+            digestateApplication.ManureLocationSourceType = ManureLocationSourceType.Livestock;
 
             return digestateApplication;
         }
@@ -410,6 +412,7 @@ namespace H.Core.Test
         public CropViewItem GetTestCropViewItem()
         {
             var cropViewItem = new CropViewItem();
+            cropViewItem.DateCreated = DateTime.Now;
             cropViewItem.CropType = CropType.Wheat;
             cropViewItem.Area = 1;
             cropViewItem.Year = DateTime.Now.Year;

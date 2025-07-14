@@ -747,7 +747,18 @@ namespace H.Core.Calculators.Infrastructure
                      *
                      * Note: TS will be 0 for manure
                      */
-                    substrateFlow.TotalSolidsFlowOfSubstrate = substrateFlow.TotalMassFlowOfSubstrate * (substrateViewItemBase.TotalSolids / 1000.0);
+
+                    var totalSolids = 0d;
+                    if (substrateViewItemBase is CropResidueSubstrateViewItem cropResidueSubstrateViewItem)
+                    {
+                        // Note from Equation 4.8.1-11
+                        var cropTotalSolids = (1.0 - (cropResidueSubstrateViewItem.MoistureContentPercentage / 100.0)) * 1000;
+                        substrateFlow.TotalSolidsFlowOfSubstrate = substrateFlow.TotalMassFlowOfSubstrate * (cropTotalSolids / 1000.0);
+                    }
+                    else
+                    {
+                        substrateFlow.TotalSolidsFlowOfSubstrate = substrateFlow.TotalMassFlowOfSubstrate * (substrateViewItemBase.TotalSolids / 1000.0);
+                    }
 
                     // Equation 4.8.1-12
                     substrateFlow.VolatileSolidsFlowOfSubstrate = substrateViewItemBase.VolatileSolids;
