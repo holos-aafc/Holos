@@ -257,6 +257,12 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateN2ONFromVolatilizationOfFarmSourcedLandAppliedDigestateForField(int year, Farm farm, CropViewItem cropViewItem)
         {
+            var field = farm.GetFieldSystemComponent(cropViewItem.FieldSystemComponentGuid);
+            if (field == null || field.HasLivestockDigestateApplicationsInYear(cropViewItem.Year) == false)
+            {
+                return 0;
+            }
+
             var ammoniaEmissionsFromLandAppliedManure = this.CalculateNH3NLossFromFarmSourcedLandAppliedDigestateForField(farm, cropViewItem, year);
             var emissionFactorForVolatilization = this.GetEmissionFactorForVolatilization(farm, year);
 
