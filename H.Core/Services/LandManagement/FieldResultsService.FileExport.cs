@@ -176,6 +176,11 @@ namespace H.Core.Services.LandManagement
                 Properties.Resources.November + " " + Properties.Resources.LabelWaterEffect + "," +
                 Properties.Resources.December + " " + Properties.Resources.LabelWaterEffect + "," +
 
+                "FracNLeach" + "," +
+                "N2O_EF_SN" + "," +
+                "N2O_EF_CR" + "," +
+                "N2O_EF_ON" + "," +
+
                 Properties.Resources.LabelAboveGroundNitrogenResidueForCrop + "," +
                 Properties.Resources.LabelBelowGroundResidueNitrogenForCrop + "," +
 
@@ -210,6 +215,8 @@ namespace H.Core.Services.LandManagement
                 Properties.Resources.LabelSyntheticInputsBeforeAdjustment + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogen) + "," +
                 //Properties.Resources.LabelAboveGroundNitrogenResidueForCrop + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare) + "," +
                 //Properties.Resources.LabelBelowGroundResidueNitrogenForCrop + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare) + "," +
+
+
                 "Young Pool Aboveground Residue" + "," +
                 "Young Pool Belowground Residue" + "," +
                 Properties.Resources.LabelAboveGroundResiduePool_AGresidueN + _unitsCalculator.GetUnitsOfMeasurementString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare) + "," +
@@ -359,6 +366,11 @@ namespace H.Core.Services.LandManagement
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.October.ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.November.ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.MonthlyIpccTier2WaterFactors.December.ToString(DefaultDecimalOutputFormat)}"));
+
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.FractionOfNitrogenLostByLeachingAndRunoff.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.EF_SN.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.EF_CRN.ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.EF_ON.ToString(DefaultDecimalOutputFormat)}"));
 
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.CombinedAboveGroundResidueNitrogen.ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.CombinedBelowGroundResidueNitrogen.ToString(DefaultDecimalOutputFormat)}"));

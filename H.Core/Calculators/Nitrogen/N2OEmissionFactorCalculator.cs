@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using H.Core.Calculators.Carbon;
+using H.Core.Calculators.Nitrogen.NitrogenService;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -54,7 +55,7 @@ namespace H.Core.Calculators.Nitrogen
 
             _manureService = new ManureService();
             _digestateService = new DigestateService();
-            _nitrogenCalculator = new NitrogenService();
+            _nitrogenCalculator = new NitrogenService.NitrogenService();
             _carbonService = new CarbonService();
             _animalService = new AnimalResultsService();
         }
@@ -123,11 +124,17 @@ namespace H.Core.Calculators.Nitrogen
             }
         }
 
+        /// <summary>
+        /// Equation 2.5.4-1
+        /// </summary>
         public double CalculateBaseEcodistrictFactor(Farm farm, int year)
         {
             return this.CalculateBaseEcodistrictFactor(farm, null, year);
         }
 
+        /// <summary>
+        /// Equation 2.5.4-1
+        /// </summary>
         public double CalculateBaseEcodistrictFactor(
             Farm farm,
             CropViewItem viewItem, 

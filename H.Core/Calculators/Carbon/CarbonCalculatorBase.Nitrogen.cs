@@ -394,6 +394,10 @@ namespace H.Core.Calculators.Carbon
             var emissionFactorForCropResidues = N2OEmissionFactorCalculator.GetEmissionFactorForCropResidues(currentYearResults, farm);
             var emissionFactorForOrganicNitrogen = N2OEmissionFactorCalculator.CalculateOrganicNitrogenEmissionFactor(currentYearResults, farm);
 
+            this.CurrentYearResults.EF_SN = emissionFactorForSyntheticFertilizer;
+            this.CurrentYearResults.EF_CRN = emissionFactorForCropResidues;
+            this.CurrentYearResults.EF_ON = emissionFactorForSyntheticFertilizer;
+
             // Emissions from land applied manure
             var directN2ONFromLandAppliedManure = N2OEmissionFactorCalculator.CalculateDirectN2ONFromFieldAppliedManure(farm, currentYearResults, includeRemainingAmounts: true);
             var directN2ONFromLandAppliedManureExcludingRemaining = N2OEmissionFactorCalculator.CalculateDirectN2ONFromFieldAppliedManure(farm, currentYearResults, includeRemainingAmounts: false);
@@ -783,6 +787,8 @@ namespace H.Core.Calculators.Carbon
             var fractionLeach = icbmNitrogenInputCalculator.CalculateFractionOfNitrogenLostByLeachingAndRunoff(
                 farm.GetGrowingSeasonPrecipitation(currentYearResults.Year),
                 farm.GetGrowingSeasonEvapotranspiration(currentYearResults.Year));
+
+            this.CurrentYearResults.FractionOfNitrogenLostByLeachingAndRunoff = fractionLeach;
 
             var emissionFactorLeaching = farm.Defaults.EmissionFactorForLeachingAndRunoff;
 

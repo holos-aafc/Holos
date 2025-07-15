@@ -22,6 +22,27 @@ namespace H.Core.Models.LandManagement.Fields
         public double NO3NFromManureAndDigestateLeaching;
         public double TotalN2ONFromManureAndDigestateLeaching;
         public double TotalN2ONFromManureAndDigestateLeachingExcludingRemainingAmounts;
+        
+        /// <summary>
+        /// Equation 2.5.4-1
+        ///
+        /// k = SN = Synthetic Nitrogen
+        /// </summary>
+        public double EF_SN;
+
+        /// <summary>
+        /// Equation 2.5.4-1
+        ///
+        /// k = CRN = Crop Residue Nitrogen
+        /// </summary>
+        public double EF_CRN;
+
+        /// <summary>
+        /// Equation 2.5.4-1
+        ///
+        /// k = ON = Organic Nitrogen
+        /// </summary>
+        public double EF_ON;
 
         /// <summary>
         /// (kg C ha^-1)
@@ -583,6 +604,7 @@ namespace H.Core.Models.LandManagement.Fields
         public double MineralPool { get; set; }
         public double YoungPoolAboveGroundResidueN { get; set; }
         public double YoungPoolBelowGroundResidueN { get; set; }
+        public double FractionOfNitrogenLostByLeachingAndRunoff { get; set; }
 
         #endregion
     }
