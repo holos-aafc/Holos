@@ -69,6 +69,7 @@
   <ItemGroup>
     <None Include="..\LICENSE" Pack="true" PackagePath="" />
     <Compile Include="Calculators\Nitrogen\NitrogenService\NitrogenService.Grazing.cs" />
+    <Compile Include="Calculators\Nitrogen\NitrogenService\NitrogenService.CLI.cs" />
     <Compile Include="Enumerations\CalculationMode.cs" />
     <Compile Include="Calculators\Carbon\CarbonService.cs" />
     <Compile Include="Calculators\Carbon\CarbonCalculatorBase.cs" />
