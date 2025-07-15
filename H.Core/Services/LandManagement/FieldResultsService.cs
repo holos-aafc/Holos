@@ -13,6 +13,7 @@ using H.Core.Calculators.Climate;
 using H.Core.Calculators.Economics;
 using H.Core.Calculators.Infrastructure;
 using H.Core.Calculators.Nitrogen;
+using H.Core.Calculators.Nitrogen.NitrogenService;
 using H.Core.Calculators.Tillage;
 using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.Emissions;

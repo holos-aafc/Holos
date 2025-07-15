@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\LICENSE" Pack="true" PackagePath="" />
+    <Compile Include="Calculators\Nitrogen\NitrogenService\NitrogenService.Grazing.cs" />
     <Compile Include="Enumerations\CalculationMode.cs" />
     <Compile Include="Calculators\Carbon\CarbonService.cs" />
     <Compile Include="Calculators\Carbon\CarbonCalculatorBase.cs" />
@@ -99,7 +100,7 @@
     <Compile Include="Calculators\Nitrogen\IICBMNitrogenInputCalculator.cs" />
     <Compile Include="Calculators\Nitrogen\IIPCCNitrogenInputCalculator.cs" />
     <Compile Include="Calculators\Nitrogen\IN2OEmissionFactorCalculator.cs" />
-    <Compile Include="Calculators\Nitrogen\INitrogenService.cs" />
+    <Compile Include="Calculators\Nitrogen\NitrogenService\INitrogenService.cs" />
     <Compile Include="Calculators\Nitrogen\INitrogenInputCalculator.cs" />
     <Compile Include="Calculators\Nitrogen\IPCCNitrogenInputCalculator.cs" />
     <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculator.Manure.cs" />
@@ -107,7 +108,7 @@
     <Compile Include="Calculators\Nitrogen\ICBMNitrogenInputCalculator.cs" />
     <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculator.CropResidues.cs" />
     <Compile Include="Calculators\Nitrogen\N2OEmissionFactorCalculator.Exports.cs" />
-    <Compile Include="Calculators\Nitrogen\NitrogenService.cs" />
+    <Compile Include="Calculators\Nitrogen\NitrogenService\NitrogenService.cs" />
     <Compile Include="Calculators\Nitrogen\NitrogenInputCalculatorBase.cs" />
     <Compile Include="Calculators\Shelterbelt\ShelterbeltCalculator.cs" />
     <Compile Include="Calculators\Tillage\ITillageFactorCalculator.cs" />
@@ -715,7 +716,6 @@
     <Compile Include="Services\Initialization\InitializationService.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.DetailViewItems.cs" />
     <Compile Include="Converters\IPropertyConverter.cs" />
-    <Compile Include="Services\LandManagement\FieldResultsService.Nitrogen.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.cs" />
     <Compile Include="Services\IAnimalComponentHelper.cs" />
     <Compile Include="Services\IFarmResultsService.cs" />

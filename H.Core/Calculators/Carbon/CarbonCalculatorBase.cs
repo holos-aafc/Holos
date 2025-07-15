@@ -7,6 +7,7 @@ using H.Core.Calculators.Nitrogen;
 using H.Core.Services.Animals;
 using H.Core.Enumerations;
 using System.Linq;
+using H.Core.Calculators.Nitrogen.NitrogenService;
 
 namespace H.Core.Calculators.Carbon
 {

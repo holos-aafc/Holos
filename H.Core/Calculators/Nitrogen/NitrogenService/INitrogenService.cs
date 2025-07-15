@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using H.Core.Emissions.Results;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 
-namespace H.Core.Calculators.Nitrogen
+namespace H.Core.Calculators.Nitrogen.NitrogenService
 {
     public interface INitrogenService
     {
@@ -32,5 +33,17 @@ namespace H.Core.Calculators.Nitrogen
 
         void ProcessCommandLineItems(List<CropViewItem> viewItems, Farm farm);
         void AssignNitrogenInputs(AdjoiningYears adjoiningYears, Farm farm);
+
+        /// <summary>
+        /// Equation 5.6.2-1
+        ///
+        /// (kg N ha^-1)
+        /// </summary>
+        double CalculateManureNitrogenInputsFromGrazingAnimals(FieldSystemComponent fieldSystemComponent,
+            CropViewItem cropViewItem,
+            List<AnimalComponentEmissionsResults> results);
+
+        void CalculateManureNitrogenInputByGrazingAnimals(FieldSystemComponent fieldSystemComponent,
+            IEnumerable<AnimalComponentEmissionsResults> results, List<CropViewItem> cropViewItems);
     }
 }

@@ -242,7 +242,7 @@ namespace H.Core.Services.LandManagement
             // Before creating view items for each year, calculate carbon deposited from manure of animals grazing on pasture
             _carbonService.CalculateManureCarbonInputByGrazingAnimals(fieldSystemComponent, this.AnimalResults, viewItems, farm);
 
-            this.CalculateManureNitrogenInputsByGrazingAnimals(fieldSystemComponent, viewItems);
+            _nitrogenService.CalculateManureNitrogenInputByGrazingAnimals(fieldSystemComponent, this.AnimalResults, viewItems);
 
             // Yields must be assigned to all items before we can loop over each year and calculate plant carbon in agricultural product (C_p)
             _initializationService.InitializeYieldForAllYears(

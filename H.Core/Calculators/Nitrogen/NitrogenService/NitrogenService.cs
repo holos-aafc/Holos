@@ -1,24 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using H.Core.Calculators.Carbon;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Services;
+using H.Core.Services.Animals;
 using H.Core.Services.Initialization.Crops;
 
-namespace H.Core.Calculators.Nitrogen
+namespace H.Core.Calculators.Nitrogen.NitrogenService
 {
     /// <summary>
     /// A service class to calculate inputs related to N. This will route calculations to the IPCC Tier 2 or ICBM methodology as required
     /// </summary>
-    public class NitrogenService : INitrogenService
+    public partial class NitrogenService : INitrogenService
     {
         #region Fields
 
         private IFieldComponentHelper _fieldComponentHelper;
         private readonly ICarbonService _carbonService;
+        private readonly IAnimalService _animalService;
 
         private readonly IICBMNitrogenInputCalculator _icbmNitrogenInputCalculator;
         private readonly IIPCCNitrogenInputCalculator _ipccNitrogenInputCalculator;
@@ -32,6 +34,7 @@ namespace H.Core.Calculators.Nitrogen
         public NitrogenService()
         {
             _carbonService = new CarbonService();
+            _animalService = new AnimalResultsService();
             _fieldComponentHelper = new FieldComponentHelper();
 
             _icbmNitrogenInputCalculator = new ICBMNitrogenInputCalculator();
@@ -222,6 +225,8 @@ namespace H.Core.Calculators.Nitrogen
                 }
             }
         }
+
+
 
         #endregion
 

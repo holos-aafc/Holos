@@ -1,33 +1,12 @@
-﻿using System;
+﻿using H.Core.Emissions.Results;
+using H.Core.Models.LandManagement.Fields;
 using System.Collections.Generic;
 using System.Linq;
-using System.Transactions;
-using H.Core.Emissions.Results;
-using H.Core.Enumerations;
-using H.Core.Models;
-using H.Core.Models.LandManagement.Fields;
-using H.Core.Providers.Soil;
-using H.Core.Services.Animals;
-using H.Infrastructure;
 
-namespace H.Core.Services.LandManagement
+namespace H.Core.Calculators.Nitrogen.NitrogenService
 {
-    public partial class FieldResultsService
+    public partial class NitrogenService
     {
-        #region Public Methods
-
-        /// <summary>
-        /// Calculates how much nitrogen added from manure of animals grazing on the field.
-        /// </summary>
-        public void CalculateManureNitrogenInputsByGrazingAnimals(FieldSystemComponent fieldSystemComponent,
-            List<CropViewItem> cropViewItems)
-        {
-            this.CalculateManureNitrogenInputByGrazingAnimals(
-                fieldSystemComponent: fieldSystemComponent,
-                results: this.AnimalResults,
-                cropViewItems);
-        }
-
         /// <summary>
         /// Equation 5.6.2-1
         ///
@@ -49,7 +28,7 @@ namespace H.Core.Services.LandManagement
 
             foreach (var grazingViewItem in grazingItems)
             {
-                var emissionsFromGrazingAnimals =  _animalService.GetGroupEmissionsFromGrazingAnimals(results, grazingViewItem);
+                var emissionsFromGrazingAnimals = _animalService.GetGroupEmissionsFromGrazingAnimals(results, grazingViewItem);
                 foreach (var groupEmissionsByMonth in emissionsFromGrazingAnimals)
                 {
                     totalNitrogenExcretedByAnimals += groupEmissionsByMonth.MonthlyAmountOfNitrogenExcreted;
@@ -72,11 +51,5 @@ namespace H.Core.Services.LandManagement
                 cropViewItem.TotalNitrogenInputFromManureFromAnimalsGrazingOnPasture = this.CalculateManureNitrogenInputsFromGrazingAnimals(fieldSystemComponent, cropViewItem, results.ToList());
             }
         }
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
     }
 }
