@@ -33,6 +33,12 @@ namespace H.CLI.ComponentKeys
 
         public bool IsHeaderOptional(string s)
         {
+            if (s.Equals(Properties.Resources.PastureLocation) ||
+                s.Equals(Properties.Resources.DietName))
+            {
+                return true;
+            }
+
             return false;
         }
 

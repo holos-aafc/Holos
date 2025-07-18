@@ -390,7 +390,15 @@ namespace H.Core.Models.LandManagement.Fields
                 return false;
             }
 
-            var isMatchingLocation = housingDetails.PastureLocation.Name.Equals(this.Name);
+            bool isMatchingLocation = false;
+            if (string.IsNullOrWhiteSpace(housingDetails.PastureLocation.Name) == false)
+            {
+                isMatchingLocation = housingDetails.PastureLocation.Name.Equals(this.Name);
+            }
+            else
+            {
+                isMatchingLocation = housingDetails.PastureLocation.Guid.Equals(this.Guid);
+            }
 
             return isMatchingLocation;
         }

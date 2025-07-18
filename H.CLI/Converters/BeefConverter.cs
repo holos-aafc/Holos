@@ -60,6 +60,7 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.MilkFatContent.ToString(DoubleFormat));
             row.Add(managementPeriod.MilkProteinContentAsPercentage.ToString(DoubleFormat));
 
+            row.Add(managementPeriod.SelectedDiet.Name.ToString());
             row.Add(managementPeriod.DietAdditive.ToString());
             row.Add(managementPeriod.SelectedDiet.MethaneConversionFactor.ToString(DoubleFormat));
             row.Add(managementPeriod.SelectedDiet.MethaneConversionFactorAdjustment.ToString(DoubleFormat));
@@ -82,6 +83,7 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial.ToString(DoubleFormat));
             row.Add(managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation.ToString(DoubleFormat));
             row.Add(managementPeriod.HousingDetails.BaselineMaintenanceCoefficient.ToString(DoubleFormat));
+            row.Add(managementPeriod.HousingDetails.PastureLocation.Guid.ToString());
 
             row.Add(managementPeriod.ManureDetails.MethaneConversionFactor.ToString(DoubleFormat));
             row.Add(managementPeriod.ManureDetails.N2ODirectEmissionFactor.ToString(DoubleFormat));

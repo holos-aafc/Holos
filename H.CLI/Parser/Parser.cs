@@ -106,7 +106,14 @@ namespace H.CLI.Parser
                                 //let the user know ONCE per missing header that he/she is missing an optional header and HOLOS is using a default value instead.
                                 if (row == 1)
                                 {
+                                    var backgroundColor = Console.BackgroundColor;
+                                    var foregroundColor = Console.ForegroundColor;
+
+                                    Console.BackgroundColor = ConsoleColor.Black;
+                                    Console.ForegroundColor = ConsoleColor.Yellow;
                                     Console.WriteLine(String.Format(H.CLI.Properties.Resources.DataMissingOptionalHeader, keyValuePair.Key, file));
+                                    Console.BackgroundColor = backgroundColor;
+                                    Console.ForegroundColor = foregroundColor;
                                 }
                             }
                         }

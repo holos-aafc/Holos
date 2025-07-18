@@ -10,6 +10,7 @@ using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.CLI.ComponentKeys;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Feed;
 
 namespace H.CLI.Converters
@@ -18,7 +19,7 @@ namespace H.CLI.Converters
     {
         #region Fields
 
-        protected const string DoubleFormat = "F4";
+        protected const string DoubleFormat = "F6";
 
         protected readonly ComponentConverterHandler _componentConverterHandler = new ComponentConverterHandler();
 
@@ -123,6 +124,20 @@ namespace H.CLI.Converters
                 IndoorHousingTemperature = inputRow.IndoorBarnTemperature,
             };
 
+            var pastureLocation = new FieldSystemComponent();
+            Guid result;
+            var success = Guid.TryParse(inputRow.PastureLocation, out result);
+            if (success)
+            {
+                pastureLocation.Guid = result;
+            }
+            else
+            {
+                pastureLocation = null;
+            }
+
+            housingDetails.PastureLocation = pastureLocation;
+            
             return housingDetails;
         }
 
@@ -162,6 +177,7 @@ namespace H.CLI.Converters
         {
             var diet = new Diet()
             {
+                Name = inputRow.DietName,
                 CrudeProtein = inputRow.CrudeProtein,
                 Forage = inputRow.Forage,
                 TotalDigestibleNutrient = inputRow.TDN,

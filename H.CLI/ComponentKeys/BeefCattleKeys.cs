@@ -37,6 +37,7 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.MilkFatContent, null);
             base.Keys.Add(Properties.Resources.MilkProteinContentAsPercentage, null);
 
+            base.Keys.Add(Properties.Resources.DietName, null);
             base.Keys.Add(Properties.Resources.DietAdditiveType, null);
             base.Keys.Add(Properties.Resources.MethaneConversionFactorOfDiet, ImperialUnitsOfMeasurement.PoundsMethanePerPoundMethane);
             base.Keys.Add(Properties.Resources.MethaneConversionFactorAdjusted, ImperialUnitsOfMeasurement.Percentage);
@@ -59,6 +60,7 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.MoistureContentOfBeddingMaterial, null);
             base.Keys.Add(Properties.Resources.ActivityCoefficientOfFeedingSituation, ImperialUnitsOfMeasurement.BritishThermalUnitPerDayPerPound);
             base.Keys.Add(Properties.Resources.MaintenanceCoefficient, ImperialUnitsOfMeasurement.BritishThermalUnitPerDayPerPound);
+            base.Keys.Add(Properties.Resources.PastureLocation, null);
 
             base.Keys.Add(Properties.Resources.MethaneConversionFactorOfManure, ImperialUnitsOfMeasurement.PoundsMethanePerPoundMethane);
             base.Keys.Add(Properties.Resources.N2ODirectEmissionFactor, ImperialUnitsOfMeasurement.PoundsN2ONPerPoundN);

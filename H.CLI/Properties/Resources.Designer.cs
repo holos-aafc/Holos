@@ -511,6 +511,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Diet Name.
+        /// </summary>
+        public static string DietName {
+            get {
+                return ResourceManager.GetString("DietName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Direct N2O {0}.
         /// </summary>
         public static string DirectN2O {

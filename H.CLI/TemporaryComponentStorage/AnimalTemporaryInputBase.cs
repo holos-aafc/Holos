@@ -39,6 +39,7 @@ namespace H.CLI.TemporaryComponentStorage
         public DietAdditiveType DietAdditiveType { get; set; }
         public double MethaneConversionFactorOfDiet { get; set; }
         public double MethaneConversionFactorAdjusted { get; set; }
+        public string DietName { get; set; }
         public double CrudeProtein { get; set; }
         public double Forage { get; set; }
         public double TDN { get; set; }
