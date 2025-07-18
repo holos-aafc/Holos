@@ -312,8 +312,8 @@ namespace H.Core.Test.Calculators.Infrastructure
 
             Assert.AreEqual(2, flows.Count);
 
-            Assert.AreEqual(0.5, flows[0].CarbonFlowOfSubstrate);
-            Assert.AreEqual(0.005, flows[1].NitrogenFlowOfSubstrate);
+            Assert.AreEqual(2.5, flows[0].CarbonFlowOfSubstrate);
+            Assert.AreEqual(0.1, flows[1].NitrogenFlowOfSubstrate);
         }
 
         [TestMethod]

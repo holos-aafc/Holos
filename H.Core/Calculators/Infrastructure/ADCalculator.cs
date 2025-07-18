@@ -739,20 +739,35 @@ namespace H.Core.Calculators.Infrastructure
 
                     substrateFlow.FlowRate = substrateViewItemBase.FlowRate;
 
-                    /* Equation 4.8.1-10
+                    /*
+                     * Equation 4.8.1-10
                      */
+
                     substrateFlow.TotalMassFlowOfSubstrate = substrateViewItemBase.FlowRate;
 
-                    /* Equation 4.8.1-11
-                     *
+                    /* 
                      * Note: TS will be 0 for manure
                      */
 
-                    var totalSolids = 0d;
-                    if (substrateViewItemBase is CropResidueSubstrateViewItem cropResidueSubstrateViewItem)
+                    var isCropResidue = substrateViewItemBase is CropResidueSubstrateViewItem;
+                    var isFarmResidue = substrateViewItemBase is FarmResiduesSubstrateViewItem;
+                    var isNonManureResidue = isCropResidue || isFarmResidue;
+
+                    /*
+                     * Total Solids
+                     */
+
+                    // Equation 4.8.1-11
+                    if (isCropResidue)
                     {
-                        // Note from Equation 4.8.1-11
-                        var cropTotalSolids = (1.0 - (cropResidueSubstrateViewItem.MoistureContentPercentage / 100.0)) * 1000;
+                        var moistureContentPercentage = 0d;
+                        if (substrateViewItemBase is CropResidueSubstrateViewItem cropResidueSubstrateViewItem)
+                        {
+                            moistureContentPercentage = cropResidueSubstrateViewItem.MoistureContentPercentage;
+                        }
+
+                        // Note from Equation 4.8.1-11. Only crop residues will use the moisture content correction (not farm residues)
+                        var cropTotalSolids = (1.0 - (moistureContentPercentage / 100.0)) * 1000;
                         substrateFlow.TotalSolidsFlowOfSubstrate = substrateFlow.TotalMassFlowOfSubstrate * (cropTotalSolids / 1000.0);
                     }
                     else
@@ -760,28 +775,63 @@ namespace H.Core.Calculators.Infrastructure
                         substrateFlow.TotalSolidsFlowOfSubstrate = substrateFlow.TotalMassFlowOfSubstrate * (substrateViewItemBase.TotalSolids / 1000.0);
                     }
 
+                    /*
+                     * Volatile Solids
+                     */
+
                     // Equation 4.8.1-12
-                    substrateFlow.VolatileSolidsFlowOfSubstrate = substrateViewItemBase.VolatileSolids;
-                    if (type == SubstrateType.ImportedManure)
+                    if (isNonManureResidue)
                     {
-                        // Equation 4.8.1-29
-                        substrateFlow.VolatileSolidsFlowOfSubstrate = substrateViewItemBase.FlowRate * substrateViewItemBase.VolatileSolidsContent;
+                        substrateFlow.VolatileSolidsFlowOfSubstrate = substrateFlow.TotalSolidsFlowOfSubstrate * (substrateViewItemBase.VolatileSolids / 100.0);
                     }
+                    else
+                    {   // Manure
+                        substrateFlow.VolatileSolidsFlowOfSubstrate = substrateViewItemBase.VolatileSolids;
+                        if (type == SubstrateType.ImportedManure)
+                        {
+                            // Equation 4.8.1-29
+                            substrateFlow.VolatileSolidsFlowOfSubstrate = substrateViewItemBase.FlowRate * substrateViewItemBase.VolatileSolidsContent;
+                        }
+                    }
+
+                    /*
+                     * Nitrogen
+                     */
 
                     // Equation 4.8.1-13
-                    substrateFlow.NitrogenFlowOfSubstrate = (substrateViewItemBase.TotalNitrogen / 1000.0);
-                    if (type == SubstrateType.ImportedManure)
+                    if (isNonManureResidue)
                     {
-                        // Equation 4.8.1-30
-                        substrateFlow.NitrogenFlowOfSubstrate = substrateViewItemBase.FlowRate * (substrateViewItemBase.NitrogenContent / 100.0);
+                        substrateFlow.NitrogenFlowOfSubstrate = substrateViewItemBase.FlowRate * (substrateViewItemBase.TotalNitrogen / 1000.0);
+                    }
+                    else
+                    {
+                        // Manure
+                        substrateFlow.NitrogenFlowOfSubstrate = (substrateViewItemBase.TotalNitrogen / 1000.0);
+                        if (type == SubstrateType.ImportedManure)
+                        {
+                            // Equation 4.8.1-30
+                            substrateFlow.NitrogenFlowOfSubstrate = substrateViewItemBase.FlowRate * (substrateViewItemBase.NitrogenContent / 100.0);
+                        }
                     }
 
+                    /*
+                     * Carbon
+                     */
+
                     // Equation 4.8.1-14
-                    substrateFlow.CarbonFlowOfSubstrate = substrateViewItemBase.TotalCarbon;
-                    if (type == SubstrateType.ImportedManure)
+                    if (isNonManureResidue)
                     {
-                        // Equation 4.8.1-31
-                        substrateFlow.CarbonFlowOfSubstrate = substrateViewItemBase.FlowRate * (substrateViewItemBase.CarbonContent / 100.0);
+                        substrateFlow.CarbonFlowOfSubstrate = substrateViewItemBase.FlowRate * substrateViewItemBase.TotalCarbon;
+                    }
+                    else
+                    {
+                        // Manure
+                        substrateFlow.CarbonFlowOfSubstrate = substrateViewItemBase.TotalCarbon;
+                        if (type == SubstrateType.ImportedManure)
+                        {
+                            // Equation 4.8.1-31
+                            substrateFlow.CarbonFlowOfSubstrate = substrateViewItemBase.FlowRate * (substrateViewItemBase.CarbonContent / 100.0);
+                        }
                     }
 
                     result.Add(substrateFlow);
@@ -915,7 +965,7 @@ namespace H.Core.Calculators.Infrastructure
         /// </summary>
         protected double GetBiodegradableFraction(SubstrateFlowInformation substrateFlowInformation)
         {
-            if (substrateFlowInformation.SubstrateType == SubstrateType.FarmResidues)
+            if (substrateFlowInformation.SubstrateType == SubstrateType.FarmResidues || substrateFlowInformation.SubstrateType == SubstrateType.CropResidues)
             {
                 return 0.23;
             }
