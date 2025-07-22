@@ -289,15 +289,29 @@ namespace H.Core.Calculators.Infrastructure
                 : 0;
 
             // Equation 4.8.3-5 (inner term)
-            substrateFlowRate.TanFlowInDigestate = substrateFlowRate.ExcretedTanInSubstrate +
-                                                   substrateFlowRate.DegradedVolatileSolids *
-                                                   totalNitrogenContentOfVolatileSolids;
+            if (substrateFlowRate.SubstrateType.IsNonManureSubstrate())
+            {
+                substrateFlowRate.TanFlowInDigestate = 0;
+            }
+            else
+            {
+                substrateFlowRate.TanFlowInDigestate = substrateFlowRate.ExcretedTanInSubstrate +
+                                                       substrateFlowRate.DegradedVolatileSolids *
+                                                       totalNitrogenContentOfVolatileSolids;
+            }
 
             // Equation 4.8.3-7 (inner term)
             var organicFlow = 0d;
-            organicFlow = substrateFlowRate.OrganicNitrogenFlowOfSubstrate - 
-                          substrateFlowRate.DegradedVolatileSolids * 
-                          totalNitrogenContentOfVolatileSolids;
+            if (substrateFlowRate.SubstrateType.IsNonManureSubstrate())
+            {
+                organicFlow = 0;
+            }
+            else
+            {
+                organicFlow = substrateFlowRate.OrganicNitrogenFlowOfSubstrate -
+                              substrateFlowRate.DegradedVolatileSolids *
+                              totalNitrogenContentOfVolatileSolids;
+            }
 
             if (organicFlow < 0)
             {
@@ -821,7 +835,7 @@ namespace H.Core.Calculators.Infrastructure
                     // Equation 4.8.1-14
                     if (isNonManureResidue)
                     {
-                        substrateFlow.CarbonFlowOfSubstrate = substrateViewItemBase.FlowRate * substrateViewItemBase.TotalCarbon;
+                        substrateFlow.CarbonFlowOfSubstrate = substrateFlow.TotalSolidsFlowOfSubstrate * substrateViewItemBase.TotalCarbon;
                     }
                     else
                     {

@@ -11,15 +11,6 @@ using H.Infrastructure;
 
 namespace H.Core.Models.Infrastructure
 {
-    public enum SubstrateType
-    {
-        StoredManure,
-        FreshManure,
-        FarmResidues,
-        CropResidues,
-        ImportedManure,
-    }
-
     public class SubstrateFlowInformation : SubstrateViewItemBase
     {
         public AnimalType AnimalType { get; set; }

@@ -112,7 +112,7 @@ namespace H.Core.Services.Animals
         {
             var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
             managementPeriod.Name = H.Core.Properties.Resources.LabelBroodingAndRearingStage;
-            managementPeriod.Start = new DateTime(DateTime.Now.Year, 1, 1);
+            managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 1, 1);
             managementPeriod.NumberOfDays = 210;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
@@ -123,7 +123,7 @@ namespace H.Core.Services.Animals
         {
             var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
             managementPeriod.Name = H.Core.Properties.Resources.LabelBreedingStage;
-            managementPeriod.Start = new DateTime(DateTime.Now.Year, 1, 1);
+            managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 7, 30);
             managementPeriod.NumberOfDays = 168;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
@@ -134,7 +134,7 @@ namespace H.Core.Services.Animals
         {
             var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
             managementPeriod.Name = H.Core.Properties.Resources.LabelBroodingAndRearingStage;
-            managementPeriod.Start = new DateTime(DateTime.Now.Year, 1, 1);
+            managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 1, 1);
             managementPeriod.NumberOfDays = 210;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
@@ -145,7 +145,7 @@ namespace H.Core.Services.Animals
         {
             var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
             managementPeriod.Name = H.Core.Properties.Resources.LabelBreedingStage;
-            managementPeriod.Start = new DateTime(DateTime.Now.Year, 1, 1);
+            managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 7, 30);
             managementPeriod.NumberOfDays = 168;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);

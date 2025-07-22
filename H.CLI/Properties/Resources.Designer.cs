@@ -3626,6 +3626,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Starting SOC Value.
+        /// </summary>
+        public static string Settings_StartingSOCValue {
+            get {
+                return ResourceManager.GetString("Settings_StartingSOCValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Top Layer Thickness.
         /// </summary>
         public static string Settings_TopLayerThickness {
@@ -3640,6 +3649,15 @@ namespace H.CLI.Properties {
         public static string Settings_UseClimateParameterInsteadOfManagementFactor {
             get {
                 return ResourceManager.GetString("Settings_UseClimateParameterInsteadOfManagementFactor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use Custom Starting Soil Organic Carbon Value.
+        /// </summary>
+        public static string Settings_UseCustomStartingSOCValue {
+            get {
+                return ResourceManager.GetString("Settings_UseCustomStartingSOCValue", resourceCulture);
             }
         }
         

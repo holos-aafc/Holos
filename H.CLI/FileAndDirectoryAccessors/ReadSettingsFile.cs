@@ -47,7 +47,6 @@ namespace H.CLI.FileAndDirectoryAccessors
                     }
                 }
             }
-
             catch (FileNotFoundException ex)
             {
                 Console.WriteLine("Message: {0}", ex.Message);
@@ -55,7 +54,5 @@ namespace H.CLI.FileAndDirectoryAccessors
                 throw new FileNotFoundException();
             }
         }
-
-      
     }
 }

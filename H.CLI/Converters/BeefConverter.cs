@@ -83,9 +83,17 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial.ToString(DoubleFormat));
             row.Add(managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation.ToString(DoubleFormat));
             row.Add(managementPeriod.HousingDetails.BaselineMaintenanceCoefficient.ToString(DoubleFormat));
-            row.Add(managementPeriod.HousingDetails.PastureLocation.Guid.ToString());
 
-            row.Add(managementPeriod.ManureDetails.MethaneConversionFactor.ToString(DoubleFormat));
+            if (managementPeriod.HousingDetails.PastureLocation != null)
+            {
+                row.Add(managementPeriod.HousingDetails.PastureLocation.Guid.ToString());
+            }
+            else
+            {
+                row.Add(CLILanguageConstants.NotApplicableString);
+            }
+
+                row.Add(managementPeriod.ManureDetails.MethaneConversionFactor.ToString(DoubleFormat));
             row.Add(managementPeriod.ManureDetails.N2ODirectEmissionFactor.ToString(DoubleFormat));
             row.Add(managementPeriod.ManureDetails.EmissionFactorVolatilization.ToString(DoubleFormat));
             row.Add(managementPeriod.ManureDetails.VolatilizationFraction.ToString(DoubleFormat));

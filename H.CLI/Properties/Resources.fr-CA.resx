@@ -1433,13 +1433,19 @@
   <data name="FinishedCLIRunInTime" xml:space="preserve">
     <value />
   </data>
+  <data name="DietName" xml:space="preserve">
+    <value />
+  </data>
   <data name="ComponentType" xml:space="preserve">
     <value>Type de composant</value>
   </data>
   <data name="Nemf" xml:space="preserve">
     <value>Nemf</value>
   </data>
-  <data name="DietName" xml:space="preserve">
+  <data name="Settings_UseCustomStartingSOCValue" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_StartingSOCValue" xml:space="preserve">
     <value />
   </data>
 </root>

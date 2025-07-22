@@ -1484,4 +1484,10 @@ Would you like to continue using this directory?</value>
   <data name="DietName" xml:space="preserve">
     <value>Diet Name</value>
   </data>
+  <data name="Settings_UseCustomStartingSOCValue" xml:space="preserve">
+    <value>Use Custom Starting Soil Organic Carbon Value</value>
+  </data>
+  <data name="Settings_StartingSOCValue" xml:space="preserve">
+    <value>Starting SOC Value</value>
+  </data>
 </root>

@@ -175,6 +175,16 @@ namespace H.CLI.FileAndDirectoryAccessors
             {
                 farm.GeographicData.DefaultSoilData.SoilFunctionalCategory = (SoilFunctionalCategory)Enum.Parse(typeof(SoilFunctionalCategory), userSettings[Properties.Resources.Settings_SoilFunctionalCategory], true);
             }
+
+            if (userSettings.ContainsKey(Properties.Resources.Settings_UseCustomStartingSOCValue))
+            {
+                farm.UseCustomStartingSoilOrganicCarbon = bool.Parse(userSettings[Properties.Resources.Settings_UseCustomStartingSOCValue]);
+            }
+
+            if (userSettings.ContainsKey(Properties.Resources.Settings_StartingSOCValue))
+            {
+                farm.StartingSoilOrganicCarbon = double.Parse(userSettings[Properties.Resources.Settings_StartingSOCValue]);
+            }
         }
 
         public void GetUserSettingsMenuChoice(string farmDirectoryPath, GeographicDataProvider geographicDataProvider)
