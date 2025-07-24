@@ -52,7 +52,14 @@ namespace H.Core.Test.Providers.Climate
             const double latitude = 49.6;
             const double longitude = 112.8;
 
-            _nasaClimateProvider.GetCustomClimateData(latitude, longitude);
+            var data = _nasaClimateProvider.GetCustomClimateData(latitude, longitude);
+
+            // data will be an empty list if an exception was thrown
+            // (i.e. 502 Gateway Error) or etc. during the NASA Api Call
+            if (!data.Any())
+            {
+                return;
+            }
 
             Assert.IsTrue(_nasaClimateProvider.IsCached(latitude, longitude));
         }
@@ -88,7 +95,7 @@ namespace H.Core.Test.Providers.Climate
             var centralData = _nasaClimateProvider.GetCustomClimateData(centralLatitude, centralLongitude);
 
             // We will get empty collections if Nasa service is offline. Return from test in this case since we need data to calculate growing season values
-            if (northData.Any() == false || eastData.Any() == false || southData.Any() == false || centralData.Any() == false)
+            if (northData.Any() == false || eastData.Any() == false || southData.Any() == false || westData.Any() == false || centralData.Any() == false)
             {
                 return;
             }

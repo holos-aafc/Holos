@@ -53,6 +53,13 @@ namespace H.Core.Test.Calculators.Climate
         [TestMethod]
         public void GetNormalsForAllTwelveMonthsReturnsCorrectValue()
         {
+            // _dailyClimateData will be an empty list if an exception was thrown (i.e. 502 Gateway Error) or etc. during the NASA Api Call
+            // return early in these situations to prevent unhandled exceptions or errors that lead to a failed test
+            if (!_dailyClimateData.Any())
+            {
+                return; 
+            }
+
             var result = _calculator.GetNormalsForAllTwelveMonths(_dailyClimateData, TimeFrame.TwoThousandToCurrent);
 
             var temperatureNormals = result[MonthlyNormalTypes.temperature];
@@ -72,6 +79,13 @@ namespace H.Core.Test.Calculators.Climate
         [TestMethod]
         public void GetTemperatureDataByDailyValueNotReturnNull()
         {
+            // _dailyClimateData will be an empty list if an exception was thrown (i.e. 502 Gateway Error) or etc. during the NASA Api Call
+            // return early in these situations to prevent unhandled exceptions or errors that lead to a failed test
+            if (!_dailyClimateData.Any())
+            {
+                return;
+            }
+
             var result = _calculator.GetTemperatureDataByDailyValues(_dailyClimateData, Enumerations.TimeFrame.TwoThousandToCurrent);
 
             Assert.IsNotNull(result);
@@ -80,6 +94,13 @@ namespace H.Core.Test.Calculators.Climate
         [TestMethod]
         public void GetPrecipitationDataByDailyValueNotReturnNull()
         {
+            // _dailyClimateData will be an empty list if an exception was thrown (i.e. 502 Gateway Error) or etc. during the NASA Api Call
+            // return early in these situations to prevent unhandled exceptions or errors that lead to a failed test
+            if (!_dailyClimateData.Any())
+            {
+                return;
+            }
+
             var result = _calculator.GetPrecipitationDataByDailyValues(_dailyClimateData, Enumerations.TimeFrame.TwoThousandToCurrent);
 
             Assert.IsNotNull(result);
@@ -95,6 +116,14 @@ namespace H.Core.Test.Calculators.Climate
             const double longitude = -80.564;
 
             var customClimateData = _nasaClimateProvider.GetCustomClimateData(latitude, longitude);
+
+            // customClimateData will be an empty list if an exception was thrown (i.e. 502 Gateway Error) or etc. during the NASA Api Call
+            // return early in these situations to prevent unhandled exceptions or errors that lead to a failed test
+            if (!customClimateData.Any())
+            {
+                return;
+            }
+
             var normalsFor1990To2000 = _calculator.GetPrecipitationDataByDailyValues(customClimateData, TimeFrame.TwoThousandToCurrent);
 
             var growingSeasonPrecipitation1990To2000 = normalsFor1990To2000.CalculateGrowingSeasonPrecipitation();

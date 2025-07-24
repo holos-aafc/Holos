@@ -101,7 +101,8 @@ namespace H.Core.Providers.Climate
             var dailyClimateData = _nasaClimateProvider.GetCustomClimateData(latitude, longitude);
             if (dailyClimateData.Any() == false)
             {                
-                // This will happen when timeouts to the NASA API occur
+                // This happens if exceptions are thrown when calling the nasa api (i.e. 502 Gateway Error)
+                // as well as if there are timeouts or empty responses
                 return null;
             }
 

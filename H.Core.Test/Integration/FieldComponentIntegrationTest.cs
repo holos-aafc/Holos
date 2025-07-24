@@ -88,6 +88,14 @@ namespace H.Core.Test.Integration
 
             farm.ClimateData = _climateProvider.Get(49.699498, -112.775813, TimeFrame.NineteenNinetyToTwoThousand); // Lethbridge research station coordinates
 
+            // _climateProvider.Get(...) returns null if the NasaClimateProvider.GetCustomClimateData() call returned an empty list
+            // This happens if there was an exception thrown (i.e. 502 Gateway Error) or etc. during the NASA Api Call 
+            // return early to prevent unhandled exceptions or errors that lead to a failed test
+            if (farm.ClimateData == null )
+            {
+                return;
+            }
+
             // We now have daily climate data going back to 1981 for this location and can access precipitation, evapotranspiration, temperature, etc.
             var climateDataFromLastMonth = farm.ClimateData.DailyClimateData.Single(data => data.Date.Date.Equals(DateTime.Now.Date.Subtract(TimeSpan.FromDays(30))));
             var precipitation30DaysAgo = climateDataFromLastMonth.MeanDailyPrecipitation;
@@ -159,6 +167,15 @@ namespace H.Core.Test.Integration
             _nasaClimateProvider.EndDate = new DateTime(2022, 8, 18);
             var nasaClimateForDate = _nasaClimateProvider.GetCustomClimateData(50.254, -103.867);
             farm.ClimateData = _climateProvider.Get(nasaClimateForDate, TimeFrame.TwoThousandToCurrent);
+
+            // _climateProvider.Get(...) returns null if nasaClimateForDate is an empty list
+            // This happens if there was an exception thrown (i.e. 502 Gateway Error) or etc. during the NASA Api Call
+            // return early to prevent unhandled exceptions or errors that lead to a failed test
+            if (farm.ClimateData == null)
+            {
+                return;
+            }
+
             farm.ClimateAcquisition = Farm.ChosenClimateAcquisition.Custom;
             
             
