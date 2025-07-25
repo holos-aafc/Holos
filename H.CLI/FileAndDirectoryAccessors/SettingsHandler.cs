@@ -129,7 +129,6 @@ namespace H.CLI.FileAndDirectoryAccessors
                 farm.YieldAssignmentMethod = (YieldAssignmentMethod)Enum.Parse(typeof(YieldAssignmentMethod), userSettings[Properties.Resources.Settings_YieldAssignmentMethod], true);
             }
 
-
             farm.Defaults = userDefaults;
 
             // This setting might not exist in old settings files
@@ -184,6 +183,11 @@ namespace H.CLI.FileAndDirectoryAccessors
             if (userSettings.ContainsKey(Properties.Resources.Settings_StartingSOCValue))
             {
                 farm.StartingSoilOrganicCarbon = double.Parse(userSettings[Properties.Resources.Settings_StartingSOCValue]);
+            }
+
+            if (userSettings.ContainsKey(Properties.Resources.Settings_ResidueInputCalculationMethod))
+            {
+                farm.Defaults.ResidueInputCalculationMethod = (ResidueInputCalculationMethod)Enum.Parse(typeof(ResidueInputCalculationMethod), userSettings[Properties.Resources.Settings_ResidueInputCalculationMethod]);
             }
         }
 

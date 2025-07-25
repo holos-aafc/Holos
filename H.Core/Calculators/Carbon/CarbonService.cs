@@ -106,18 +106,50 @@ namespace H.Core.Calculators.Carbon
         public void AssignInputs(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm,
             List<AnimalComponentEmissionsResults> animalResults)
         {
-            var strategy = farm.Defaults.CarbonModellingStrategy;
             var isCliMode = farm.IsCommandLineMode;
-            var isIcbmCli = isCliMode && strategy == CarbonModellingStrategies.ICBM;
-                
+            var residueInputMethod = farm.Defaults.ResidueInputCalculationMethod;
+            var canCalculateInputsUsingIpccTier2 = this.CanCalculateInputsUsingIpccTier2(viewItem);
 
-            if (this.CanCalculateInputsUsingIpccTier2(viewItem) && !isIcbmCli)
+            /*
+             * Currently the CLI supports the option to override the default carbon input calculation method
+             */
+
+            if (isCliMode)
             {
-                _ipccTier2CarbonInputCalculator.AssignInputs(viewItem, farm, animalResults);
+                if (residueInputMethod == ResidueInputCalculationMethod.ICBM)
+                {
+                    // If user specifies ICBM input calculation mode, use ICBM
+                    _icbmCarbonInputCalculator.AssignInputs(previousYear, viewItem, nextYear, farm);
+                }
+                else if (residueInputMethod == ResidueInputCalculationMethod.IPCCTier2 && canCalculateInputsUsingIpccTier2)
+                {
+                    // If user specifies IPCC Tier 2 input calculation mode, use IPCC Tier 2 but only if the crop is supported by IPCC Tier 2
+                    _ipccTier2CarbonInputCalculator.AssignInputs(viewItem, farm, animalResults);
+                }
+                else
+                {
+                    // Default method (fallback)
+                    if (canCalculateInputsUsingIpccTier2)
+                    {
+                        _ipccTier2CarbonInputCalculator.AssignInputs(viewItem, farm, animalResults);
+                    }
+                    else
+                    {
+                        _icbmCarbonInputCalculator.AssignInputs(previousYear, viewItem, nextYear, farm);
+                    }
+                }
             }
             else
             {
-                _icbmCarbonInputCalculator.AssignInputs(previousYear, viewItem, nextYear, farm);
+                // GUI mode
+                if (canCalculateInputsUsingIpccTier2)
+                {
+                    _ipccTier2CarbonInputCalculator.AssignInputs(viewItem, farm, animalResults);
+                }
+                else
+                {
+                    _icbmCarbonInputCalculator.AssignInputs(previousYear, viewItem, nextYear, farm);
+                }
             }
         }
 

@@ -210,6 +210,7 @@ namespace H.CLI.FileAndDirectoryAccessors
             Properties.Resources.Settings_ProportionOfSoilOrganicCarbon  + KeyValuePairSeparator +  Math.Round(geographicData.DefaultSoilData.ProportionOfSoilOrganicCarbon, dataRoundingDecimalPoints).ToString(CLILanguageConstants.culture),
             Properties.Resources.Settings_UseCustomStartingSOCValue + KeyValuePairSeparator +  farm.UseCustomStartingSoilOrganicCarbon.ToString(CLILanguageConstants.culture),
             Properties.Resources.Settings_StartingSOCValue  + KeyValuePairSeparator +  Math.Round(farm.StartingSoilOrganicCarbon, dataRoundingDecimalPoints).ToString(CLILanguageConstants.culture),
+            Properties.Resources.Settings_ResidueInputCalculationMethod  + KeyValuePairSeparator +  farm.Defaults.ResidueInputCalculationMethod,
             };
         }
 

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -919,22 +919,22 @@
     <value>lactation</value>
   </data>
   <data name="LabelNurseryWeanersStarterDiet1" xml:space="preserve">
-    <value>porcelets sevrés (ration de démarrage no 1)</value>
+    <value>porcelets sevrés (ration de démarrage no 1)</value>
   </data>
   <data name="LabelNurseryWeanersStarterDiet2" xml:space="preserve">
-    <value>porcelets sevrés (ration de démarrage no 2)</value>
+    <value>porcelets sevrés (ration de démarrage no 2)</value>
   </data>
   <data name="LabelGrowerFinisherDiet1" xml:space="preserve">
-    <value>ration de croissance/finition no 1</value>
+    <value>ration de croissance/finition no 1</value>
   </data>
   <data name="LabelGrowerFinisherDiet2" xml:space="preserve">
-    <value>ration de croissance/finition no 2</value>
+    <value>ration de croissance/finition no 2</value>
   </data>
   <data name="LabelGrowerFinisherDiet3" xml:space="preserve">
-    <value>ration de croissance/finition no 3</value>
+    <value>ration de croissance/finition no 3</value>
   </data>
   <data name="LabelGrowerFinisherDiet4" xml:space="preserve">
-    <value>ration de croissance/finition no 4</value>
+    <value>ration de croissance/finition no 4</value>
   </data>
   <data name="LabelMediumEnergyProteinDiet" xml:space="preserve">
     <value>protéine à valeur énergétique moyenne</value>
@@ -1270,7 +1270,7 @@
     <value>kWh placement de volaille^-1</value>
   </data>
   <data name="GigaJoulesPer1000Litres" xml:space="preserve">
-    <value>GJ 1000 litres^1</value>
+    <value>GJ 1000 litres^1</value>
   </data>
   <data name="KilogramsNPer1000Litres" xml:space="preserve">
     <value>kg N 1000 portées^1</value>
@@ -1351,7 +1351,7 @@
     <value>$ ha^-1</value>
   </data>
   <data name="MilliEquivalentsPer100g" xml:space="preserve">
-    <value>meq 100 g^-1</value>
+    <value>meq 100 g^-1</value>
   </data>
   <data name="DollarsPerAcre" xml:space="preserve">
     <value>$ ac^-1</value>
@@ -1516,13 +1516,13 @@
     <value>copeau de bois</value>
   </data>
   <data name="EnumEllisEtAlEquation10B" xml:space="preserve">
-    <value>Ellis et al. (2007) Éq. 10 b</value>
+    <value>Ellis et al. (2007) Éq. 10 b</value>
   </data>
   <data name="EnumEllisEtAlEquation12B" xml:space="preserve">
-    <value>Ellis et al. (2007) Éq. 12 b</value>
+    <value>Ellis et al. (2007) Éq. 12 b</value>
   </data>
   <data name="EnumEllisEtAlEquation9B" xml:space="preserve">
-    <value>Ellis et al. (2007) Éq. 9 b</value>
+    <value>Ellis et al. (2007) Éq. 9 b</value>
   </data>
   <data name="EnumEllisEtAlEquationG" xml:space="preserve">
     <value>Ellis et al. (2009) Éq. G</value>
@@ -1549,16 +1549,16 @@
     <value>CO2 lié à l’utilisation d’énergie</value>
   </data>
   <data name="EnumMoraesEtAlDietaryAnimalLevel1" xml:space="preserve">
-    <value>Moraes et al. (2014) : niveau animal (1)</value>
+    <value>Moraes et al. (2014) : niveau animal (1)</value>
   </data>
   <data name="EnumMoraesEtAlDietaryAnimalLevel2" xml:space="preserve">
-    <value>Moraes et al. (2014) : niveau animal (2)</value>
+    <value>Moraes et al. (2014) : niveau animal (2)</value>
   </data>
   <data name="EnumMoraesEtAlDietaryLevel1" xml:space="preserve">
-    <value>Moraes et al. (2014) : niveau alimentaire (1)</value>
+    <value>Moraes et al. (2014) : niveau alimentaire (1)</value>
   </data>
   <data name="EnumMoraesEtAlDietaryLevel2" xml:space="preserve">
-    <value>Moraes et al. (2014) : niveau alimentaire (2)</value>
+    <value>Moraes et al. (2014) : niveau alimentaire (2)</value>
   </data>
   <data name="SlurryWithNaturalCrust" xml:space="preserve">
     <value>fumier liquide ou lisier de porc, recouvert d’une croûte naturelle</value>
@@ -2542,13 +2542,13 @@
     <value>jeunes truies de naissage</value>
   </data>
   <data name="ToolTipGrowerToFinishProductionSystem" xml:space="preserve">
-    <value>Les entreprises d’engraissement-finition élèvent des porcs à l’engrais jusqu’à ce qu'ils atteigent un poids vif de marché d’environ 110-115 kg. Elles ne possèdent aucun reproducteur et achètent des porcelets sevrés.</value>
+    <value>Les entreprises d’engraissement-finition élèvent des porcs à l’engrais jusqu’à ce qu'ils atteigent un poids vif de marché d’environ 110-115 kg. Elles ne possèdent aucun reproducteur et achètent des porcelets sevrés.</value>
   </data>
   <data name="ToolTipFarrowToWeanProductionSystem" xml:space="preserve">
     <value>Les exploitations de naissage (maternités) gardent des truies, des cochettes et parfois des verrats; elles gardent le stock de reproducteurs, mais vendent les porcelets à des pouponnières en isolement ou à des exploitations d'engraissement.</value>
   </data>
   <data name="ToolTipIsoWeanProductionSystem" xml:space="preserve">
-    <value>Les pouponnières en isolement élèvent des porcelets qui ont été sevrés entre 18 et 28 jours. Ces animaux sont gardés séparés des truies et des porcs plus gros pour éviter la transmission de maladies. En général, les porcs séjournent à la pouponnière de 5 à 8 semaines, mais parfois seulement deux semaines.</value>
+    <value>Les pouponnières en isolement élèvent des porcelets qui ont été sevrés entre 18 et 28 jours. Ces animaux sont gardés séparés des truies et des porcs plus gros pour éviter la transmission de maladies. En général, les porcs séjournent à la pouponnière de 5 à 8 semaines, mais parfois seulement deux semaines.</value>
   </data>
   <data name="TooltipRotationComponent" xml:space="preserve">
     <value>Une composante pour créer une rotation des cultures. une seule composante de la rotation des cultures peut être utilisée au lieu de plusieurs composantes de champ.</value>
@@ -2557,13 +2557,13 @@
     <value>Les exploitations de naissage-finition ont des truies reproductrices qu'elles font saillir, prennent soin des portées de porcelets et les élèvent jusqu’à ce qu'ils atteignent un poids de marché.</value>
   </data>
   <data name="ToolTipPulletFarm" xml:space="preserve">
-    <value>Les femelles juvéniles (poulettes) sont transportées des couvoirs vers les fermes de poulettes ou les poulaillers de poulettes dans les exploitations de production d’œufs où elles restent jusqu’à ce qu’elles atteignent l’âge de la reproduction (environ 18 à 20 semaines), après quoi elles sont transportées vers les exploitations de ponte ou les poulaillers.</value>
+    <value>Les femelles juvéniles (poulettes) sont transportées des couvoirs vers les fermes de poulettes ou les poulaillers de poulettes dans les exploitations de production d’œufs où elles restent jusqu’à ce qu’elles atteignent l’âge de la reproduction (environ 18 à 20 semaines), après quoi elles sont transportées vers les exploitations de ponte ou les poulaillers.</value>
   </data>
   <data name="ToolTipChickenMultiplierBreeder" xml:space="preserve">
     <value>Représente la partie reproduction de la production d’oiseaux où les oiseaux qui produisent des œufs pour la reproduction sont gérés; ces œufs sont ensuite envoyés aux couvoirs de reproduction jusqu’à leur éclosion. dans la reproduction-multiplication, les mâles et les femelles adultes sont logés ensemble.</value>
   </data>
   <data name="ToolTipChickenEggProduction" xml:space="preserve">
-    <value>Une fois que les poulettes atteignent l’âge d’environ 18 à 20 semaines, elles sont transférées d’exploitations distinctes de poulettes ou de poulaillers de poulettes d’une exploitation de production d’œufs à des poulaillers de ponte. ces poules produiront des œufs jusqu'à l'âge de 71 semaines tout au plus.</value>
+    <value>Une fois que les poulettes atteignent l’âge d’environ 18 à 20 semaines, elles sont transférées d’exploitations distinctes de poulettes ou de poulaillers de poulettes d’une exploitation de production d’œufs à des poulaillers de ponte. ces poules produiront des œufs jusqu'à l'âge de 71 semaines tout au plus.</value>
   </data>
   <data name="ToolTipTurkeyMultiplierBreeder" xml:space="preserve">
     <value>Représente la partie reproduction de la production d’oiseaux où les oiseaux qui produisent des œufs pour la reproduction sont gérés; ces œufs sont ensuite envoyés aux couvoirs de reproduction jusqu’à leur éclosion. dans la reproduction-multiplication, les dindons mâles et femelles sont logés séparément pendant tout le cycle biologique.</value>
@@ -2572,7 +2572,7 @@
     <value>Les couvoirs reçoivent des œufs fertiles des fermes de reproduction-multiplication, les font éclore puis livrent les oisillons (poussins d’un jour ou dindonneaux) aux fermes de poulettes (poussins femelles seulement), aux poulaillers de poulettes dans les exploitations de ponte ou aux exploitations de production de viande (poussins mâles et femelles, pour le poulet ou le dindon).</value>
   </data>
   <data name="ToolTipChickenMeatProduction" xml:space="preserve">
-    <value>Les poussins qui arrivent dans l’exploitation à partir d’un couvoir de multiplication sont élevés au poids du marché (1 à 4 kg, selon le type d’oiseau et le produit final) après environ 30 à 56 jours (selon le type d’oiseau et le système d’élevage).</value>
+    <value>Les poussins qui arrivent dans l’exploitation à partir d’un couvoir de multiplication sont élevés au poids du marché (1 à 4 kg, selon le type d’oiseau et le produit final) après environ 30 à 56 jours (selon le type d’oiseau et le système d’élevage).</value>
   </data>
   <data name="EnumAverageYield" xml:space="preserve">
     <value>rendement moyen</value>
@@ -2731,7 +2731,7 @@
     <value>avoine (avena sativa)</value>
   </data>
   <data name="EnumPhaceliaPhaceliaTanacetifoliaCVPhaci" xml:space="preserve">
-    <value>phacélie [phacelia tanacetifolia (cv. « Phaci »)]</value>
+    <value>phacélie [phacelia tanacetifolia (cv. « Phaci »)]</value>
   </data>
   <data name="EnumPigeonBean" xml:space="preserve">
     <value>pois cajan </value>
@@ -2761,7 +2761,7 @@
     <value>mélilot jaune (Melilotus officianalis)</value>
   </data>
   <data name="EnumWinterTurnipRapeBrassicaRapaSppOleiferaLCVLargo" xml:space="preserve">
-    <value>navette d'hiver [brassica rapa ssp. oleifera L. (cv. « Largo »)]</value>
+    <value>navette d'hiver [brassica rapa ssp. oleifera L. (cv. « Largo »)]</value>
   </data>
   <data name="EnumWinterWheatTriticumAestivum" xml:space="preserve">
     <value>blé d’hiver (triticum aestivum)</value>
@@ -2908,34 +2908,34 @@
     <value>Tous les groupes d’animaux qui broutent dans ce pâturage sont indiqués ci-dessous. les dates des périodes de pâturage peuvent être modifiées en ajustant la période de gestion des groupes d’animaux.</value>
   </data>
   <data name="LabelAnimalsGrazingOnThisFieldCanBeFedSupplementalForage" xml:space="preserve">
-    <value>les animaux qui broutent dans ce champ peuvent être nourris de foin supplémentaire en cliquant sur le bouton « ajouter du foin supplémentaire ». le foin peut être importé en établissant la « source des balles » à « hors ferme ».</value>
+    <value>les animaux qui broutent dans ce champ peuvent être nourris de foin supplémentaire en cliquant sur le bouton « ajouter du foin supplémentaire ». le foin peut être importé en établissant la « source des balles » à « hors ferme ».</value>
   </data>
   <data name="LabelGrazingAnimalGroup" xml:space="preserve">
     <value>groupe d’animaux de pâturage</value>
   </data>
   <data name="LabelMultipleHarvestsCanBeMadeToThisField" xml:space="preserve">
-    <value>De multiples récoltes peuvent être faites dans ce champ tout au long de l’année. pour ajouter une récolte, cliquez sur « ajouter une date de récolte » pour préciser les détails. le foin récolté peut être utilisé comme aliment supplémentaire pour les animaux de pâturage. allez à l’onglet « broutage » pour ajouter ce supplément. le poids des balles est en poids humide.</value>
+    <value>De multiples récoltes peuvent être faites dans ce champ tout au long de l’année. pour ajouter une récolte, cliquez sur « ajouter une date de récolte » pour préciser les détails. le foin récolté peut être utilisé comme aliment supplémentaire pour les animaux de pâturage. allez à l’onglet « broutage » pour ajouter ce supplément. le poids des balles est en poids humide.</value>
   </data>
   <data name="LabelMultipleFertilizerApplicationsCanBeMadeToThisField" xml:space="preserve">
-    <value>De multiples épandages d’engrais peuvent être faits dans ce champ tout au long de l’année. pour ajouter un épandage d’engrais, cliquez sur « ajouter l’épandage d’un engrais » pour préciser les détails.</value>
+    <value>De multiples épandages d’engrais peuvent être faits dans ce champ tout au long de l’année. pour ajouter un épandage d’engrais, cliquez sur « ajouter l’épandage d’un engrais » pour préciser les détails.</value>
   </data>
   <data name="MessageFertilizerTab" xml:space="preserve">
     <value>Le type et la quantité d’engrais peuvent être entrés ici dans cet onglet. holos proposera un taux d’engrais estimé en fonction du type de culture et du rendement.</value>
   </data>
   <data name="MessageAnnualsGeneralTab" xml:space="preserve">
-    <value>La quantité d’irrigation, l’utilisation de pesticides et le rendement de la culture sélectionnée peuvent être entrés dans cet onglet. vous pouvez entrer des renseignements supplémentaires en cliquant sur le bouton « afficher les renseignements supplémentaires ».</value>
+    <value>La quantité d’irrigation, l’utilisation de pesticides et le rendement de la culture sélectionnée peuvent être entrés dans cet onglet. vous pouvez entrer des renseignements supplémentaires en cliquant sur le bouton « afficher les renseignements supplémentaires ».</value>
   </data>
   <data name="MessagePerennialsGeneralTab" xml:space="preserve">
-    <value>Pour les vivaces, les quantités d’irrigation et de pesticides utilisés peuvent être entrés dans cet onglet. les détails du rendement et de la récolte peuvent être saisis dans l’onglet « récolte ».</value>
+    <value>Pour les vivaces, les quantités d’irrigation et de pesticides utilisés peuvent être entrés dans cet onglet. les détails du rendement et de la récolte peuvent être saisis dans l’onglet « récolte ».</value>
   </data>
   <data name="MessageFallowGeneralTab" xml:space="preserve">
-    <value>Le type de jachère peut être saisi dans cet onglet. vous pouvez entrer des renseignements supplémentaires sur les terres en jachère en cliquant sur le bouton « afficher les renseignements supplémentaires ».</value>
+    <value>Le type de jachère peut être saisi dans cet onglet. vous pouvez entrer des renseignements supplémentaires sur les terres en jachère en cliquant sur le bouton « afficher les renseignements supplémentaires ».</value>
   </data>
   <data name="MessageNoAnimalsGrazingOnThisField" xml:space="preserve">
-    <value>Il n’y a pas de groupes d’animaux qui broutent dans ce champ. les groupes d’animaux qui ont un type de logement de « pâturage » seront affichés ici.</value>
+    <value>Il n’y a pas de groupes d’animaux qui broutent dans ce champ. les groupes d’animaux qui ont un type de logement de « pâturage » seront affichés ici.</value>
   </data>
   <data name="MessageCoverCropsTab" xml:space="preserve">
-    <value>Si une culture de couverture a été cultivée cette année, sélectionnez un type de culture et entrez un rendement pour la culture de couverture. vous pouvez entrer des renseignements supplémentaires sur la culture de couverture en cliquant sur le bouton « afficher les renseignements supplémentaires ».</value>
+    <value>Si une culture de couverture a été cultivée cette année, sélectionnez un type de culture et entrez un rendement pour la culture de couverture. vous pouvez entrer des renseignements supplémentaires sur la culture de couverture en cliquant sur le bouton « afficher les renseignements supplémentaires ».</value>
   </data>
   <data name="MessageResidueTabDescription" xml:space="preserve">
     <value>La page d’onglet Residue (résidus) peut être utilisée pour modifier les coefficients d’allocation de carbone par défaut pour la culture principale. Des détails supplémentaires comme les concentrations d’azote et le pourcentage des végétaux retournés au sol peuvent être entrés ici. Des valeurs par défaut ont été fournies et le modèle les utilisera, sauf si des valeurs personnalisées sont saisies ici.</value>
@@ -3262,19 +3262,19 @@
     <value>canola hybride d’hiver</value>
   </data>
   <data name="LabelAssumed100PercentRootsReturnedPerennial" xml:space="preserve">
-    <value>pour les plantes vivaces, on suppose que 100 % de la biomasse racinaire est retournée l’année de la récolte (cela peut être ajusté).</value>
+    <value>pour les plantes vivaces, on suppose que 100 % de la biomasse racinaire est retournée l’année de la récolte (cela peut être ajusté).</value>
   </data>
   <data name="LabelAssumed30PercentRootsReturnedPerennial" xml:space="preserve">
-    <value>pour les plantes vivaces, on suppose que 30 % de la biomasse racinaire est retournée chaque année avant la récolte (cela peut être ajusté). </value>
+    <value>pour les plantes vivaces, on suppose que 30 % de la biomasse racinaire est retournée chaque année avant la récolte (cela peut être ajusté). </value>
   </data>
   <data name="LabelYearXInYYearPerennialStand" xml:space="preserve">
-    <value>année {0} d’un peuplement vivace de {1} ans</value>
+    <value>année {0} d’un peuplement vivace de {1} ans</value>
   </data>
   <data name="MessageRootTurnOverPerennials" xml:space="preserve">
     <value>On suppose que 30 % de la biomasse racinaire est retournée chaque année avant la récolte, puis 100 % lors de l’élimination des plantes vivaces. Ces chiffres peuvent être modifiés dans la page d’onglet Résidus.</value>
   </data>
   <data name="MessageAllBalesProducedByFarmHaveBeenUsed" xml:space="preserve">
-    <value>toutes les balles de cette ferme ont été utilisées. pour en ajouter d’autres, allez à l’onglet « récolte » pour ajouter une autre récolte, ce qui ajoutera d’autres balles disponibles à la ferme. vous pouvez également changer la « source des balles » à « hors ferme » pour ajouter des balles qui n’ont pas été produites sur cette ferme.</value>
+    <value>toutes les balles de cette ferme ont été utilisées. pour en ajouter d’autres, allez à l’onglet « récolte » pour ajouter une autre récolte, ce qui ajoutera d’autres balles disponibles à la ferme. vous pouvez également changer la « source des balles » à « hors ferme » pour ajouter des balles qui n’ont pas été produites sur cette ferme.</value>
   </data>
   <data name="MessageThisHarvestCannotBeReduced" xml:space="preserve">
     <value>Cette quantité de récolte ne peut pas être réduite parce qu’elle est utilisée comme aliment supplémentaire. pour réduire cette récolte, il faut d’abord mettre à jour les quantités d’aliments supplémentaires pour les animaux qui broutent dans ce champ. la quantité de balles récoltées a été réinitialisée à la valeur précédente.</value>
@@ -3283,7 +3283,7 @@
     <value>Cette récolte ne peut être retirée parce qu’elle est utilisée comme aliment supplémentaire. pour retirer cette récolte, il faut d’abord mettre à jour les quantités d’aliments supplémentaires pour les animaux qui broutent dans ce champ.</value>
   </data>
   <data name="LabelEnterCropHistoryForRotationComponentInstructionalString" xml:space="preserve">
-    <value>cliquez sur le bouton « ajouter une culture » pour ajouter des cultures au premier champ de cette rotation. continuer d’ajouter des cultures jusqu’à ce que la première phase de la rotation ait été inscrite.</value>
+    <value>cliquez sur le bouton « ajouter une culture » pour ajouter des cultures au premier champ de cette rotation. continuer d’ajouter des cultures jusqu’à ce que la première phase de la rotation ait été inscrite.</value>
   </data>
   <data name="LabelEnterTheStartingYearOfThisRotation" xml:space="preserve">
     <value>en commençant par un champ dans la rotation, entrez l’année de début et de fin de cette rotation et la taille du champ.</value>
@@ -3292,7 +3292,7 @@
     <value>modifiez les détails de {0}. ces ajustements seront copiés dans les autres champs de la rotation lorsque {0} a été cultivé.</value>
   </data>
   <data name="TooltipCropEntryStartingPoint" xml:space="preserve">
-    <value>Pour commencer à entrer votre historique des cultures à partir de l’année de début de ce champ, sélectionnez « oui ». pour commencer à entrer votre historique des cultures à partir de l’année de fin de ce champ, sélectionnez « non ».</value>
+    <value>Pour commencer à entrer votre historique des cultures à partir de l’année de début de ce champ, sélectionnez « oui ». pour commencer à entrer votre historique des cultures à partir de l’année de fin de ce champ, sélectionnez « non ».</value>
   </data>
   <data name="TooltipEndYearOfField" xml:space="preserve">
     <value>L’année de fin de ce champ. par défaut, ce sera l’année en cours.</value>
@@ -3301,7 +3301,7 @@
     <value>L’année de fin de cette rotation. par défaut, ce sera l’année en cours.</value>
   </data>
   <data name="TooltipRotationShiftDirection" xml:space="preserve">
-    <value>Pour que les cultures dans la rotation passent à gauche dans tous les champs, sélectionnez « oui ». pour que les cultures dans la rotation passent à droite dans tous les champs, sélectionnez « non ».</value>
+    <value>Pour que les cultures dans la rotation passent à gauche dans tous les champs, sélectionnez « oui ». pour que les cultures dans la rotation passent à droite dans tous les champs, sélectionnez « non ».</value>
   </data>
   <data name="TooltipStartYearOfField" xml:space="preserve">
     <value>L’année de début de ce champ. c’est l’année où les cultures ont été cultivées pour la première fois dans le champ.</value>
@@ -3355,7 +3355,7 @@
     <value>lb n2o</value>
   </data>
   <data name="BTUPer1000Quarts" xml:space="preserve">
-    <value>btu 1000 pte^-1</value>
+    <value>btu 1000 pte^-1</value>
   </data>
   <data name="BTUPerAnimal" xml:space="preserve">
     <value>btu animal^-1</value>
@@ -3415,7 +3415,7 @@
     <value>lb n-nh4 ac^-1</value>
   </data>
   <data name="PoundsNitrogenPer1000Quarts" xml:space="preserve">
-    <value>lb n 1000 pte^-1</value>
+    <value>lb n 1000 pte^-1</value>
   </data>
   <data name="PoundsNitrogenPerAcrePerYear" xml:space="preserve">
     <value>lb n ac^-1 année^-1</value>
@@ -3463,7 +3463,7 @@
     <value>le nombre total de balles dans une ferme peut être augmenté en ajoutant une récolte à n’importe quel champ de cette ferme. la quantité totale de balles entreposées à la ferme sera réduite de la quantité de balles utilisées pour l’alimentation supplémentaire.</value>
   </data>
   <data name="MessageToAddSupplementalHayToGrazingAnimals" xml:space="preserve">
-    <value>pour ajouter du foin supplémentaire aux animaux qui broutent dans ce champ, utilisez l’onglet « récolte » pour ajouter une récolte. après l’ajout d’une récolte, retournez à cet onglet pour nourrir les animaux à l’aide d’un supplément de cette récolte.</value>
+    <value>pour ajouter du foin supplémentaire aux animaux qui broutent dans ce champ, utilisez l’onglet « récolte » pour ajouter une récolte. après l’ajout d’une récolte, retournez à cet onglet pour nourrir les animaux à l’aide d’un supplément de cette récolte.</value>
   </data>
   <data name="EnumOffFarm" xml:space="preserve">
     <value>hors ferme</value>
@@ -3505,7 +3505,7 @@
     <value>lb n-no ac^-1</value>
   </data>
   <data name="MessageAnimalManureTab" xml:space="preserve">
-    <value>Les détails du système de manutention du fumier peuvent être entrés dans cet onglet. pour modifier les renseignements facultatifs sur le système de manutention du fumier, cliquez sur le bouton « afficher les renseignements supplémentaires ».</value>
+    <value>Les détails du système de manutention du fumier peuvent être entrés dans cet onglet. pour modifier les renseignements facultatifs sur le système de manutention du fumier, cliquez sur le bouton « afficher les renseignements supplémentaires ».</value>
   </data>
   <data name="MessageAnimalHousingTab" xml:space="preserve">
     <value>Les renseignements sur le logement des animaux peuvent être entrés dans cet onglet. si les animaux doivent être placés dans un pâturage, assurez-vous qu’au moins une composante de champ a été ajoutée à la ferme, puis réglez le type de logement à pâturage. vous pouvez ensuite préciser dans quel pâturage les animaux doivent être placés.</value>
@@ -3517,7 +3517,7 @@
     <value>Les détails sur la qualité des aliments pour animaux peuvent être ajustés ici. holos fournit un ensemble de régimes par défaut (prédéfinis) que vous pouvez sélectionner.</value>
   </data>
   <data name="MessageAnExceptionHasOccurred" xml:space="preserve">
-    <value>Une erreur inattendue s’est produite dans l’application. les données ont été enregistrées. veuillez cliquer sur « copier dans le presse-papier » et envoyer à aafc.holos.aac@canada.ca. cette étape n’est pas obligatoire, mais elle permet de diagnostiquer la cause de l’erreur.</value>
+    <value>Une erreur inattendue s’est produite dans l’application. les données ont été enregistrées. veuillez cliquer sur « copier dans le presse-papier » et envoyer à aafc.holos.aac@canada.ca. cette étape n’est pas obligatoire, mais elle permet de diagnostiquer la cause de l’erreur.</value>
   </data>
   <data name="LabelUndersown" xml:space="preserve">
     <value>sous-semis</value>
@@ -3724,10 +3724,10 @@
     <value>coûts qui changent ou varient selon la saison, comme l’assurance-récolte et le traitement des semences</value>
   </data>
   <data name="EnumFivePercentFat" xml:space="preserve">
-    <value>5 % de matières grasses</value>
+    <value>5 % de matières grasses</value>
   </data>
   <data name="EnumIonophorePlusFivePercentFat" xml:space="preserve">
-    <value>ionophore + 5 % de matière grasse</value>
+    <value>ionophore + 5 % de matière grasse</value>
   </data>
   <data name="LabelFertilizerApplicationRate" xml:space="preserve">
     <value>dose d'application</value>
@@ -3745,13 +3745,13 @@
     <value>la saison pendant laquelle l’engrais a été appliqué, soit au printemps, soit à l’automne</value>
   </data>
   <data name="ToolTipUpstreamEmissions" xml:space="preserve">
-    <value>Inclut des estimations « en amont » pour les émissions issues des intrants agricoles (p. ex. pertes de CO2 des engrais et production d’herbicide).  Ces valeurs ne sont pas associées aux émissions totales issues de l’exploitation.</value>
+    <value>Inclut des estimations « en amont » pour les émissions issues des intrants agricoles (p. ex. pertes de CO2 des engrais et production d’herbicide).  Ces valeurs ne sont pas associées aux émissions totales issues de l’exploitation.</value>
   </data>
   <data name="ToolTipEnergyCO2Emissions" xml:space="preserve">
     <value>Inclut les émissions issues de l’épandage de fumier, de l’utilisation d’électricité pour les animaux abrités, de l’utilisation de carburant pour la machinerie agricole et de l’irrigation des cultures.  Toutes les émissions figurant dans cette colonne résultent des émissions à l’exploitation.  Les émissions de CO2 en amont sont déclarées de façon distincte.</value>
   </data>
   <data name="ToolTipLandManureTableAmountOfNitrogenFromAppliedManureInfo" xml:space="preserve">
-    <value>la quantité d’azote provenant du fumier épandu. cette valeur dépend de la fraction indiquée sous « fraction n du fumier épandu »</value>
+    <value>la quantité d’azote provenant du fumier épandu. cette valeur dépend de la fraction indiquée sous « fraction n du fumier épandu »</value>
   </data>
   <data name="ToolTipLandManureTableManureHandlingSystemInfo" xml:space="preserve">
     <value>choisissez un système de manutention du fumier. les options dépendent du type de fumier sélectionné.</value>
@@ -3760,7 +3760,7 @@
     <value>sélectionnez le type de fumier épandu</value>
   </data>
   <data name="ToolTipLandManureTableNitrogenFractionOfAppliedManureInfo" xml:space="preserve">
-    <value>le système affiche la fraction d’azote du fumier épandu. le champ aide à calculer la valeur en « quantité d’azote provenant du fumier épandu ».</value>
+    <value>le système affiche la fraction d’azote du fumier épandu. le champ aide à calculer la valeur en « quantité d’azote provenant du fumier épandu ».</value>
   </data>
   <data name="ToolTipLandManureTableOriginOfManureInfo" xml:space="preserve">
     <value>sélectionnez l’origine du fumier. il peut être importé ou provenir des animaux de la ferme</value>
@@ -4295,7 +4295,7 @@
     <value>Moyenne mensuelle des précipitations pour la ferme.</value>
   </data>
   <data name="MessageMonthlySoilN2OBreakdownHeader" xml:space="preserve">
-    <value>Répartition mensuelle des émissions pour l’année. cette répartition peut être ajustée en fonction des résultats de votre ferme. veuillez noter que l’addition de tous les pourcentages mensuels devrait totaliser 100 %.</value>
+    <value>Répartition mensuelle des émissions pour l’année. cette répartition peut être ajustée en fonction des résultats de votre ferme. veuillez noter que l’addition de tous les pourcentages mensuels devrait totaliser 100 %.</value>
   </data>
   <data name="MessageMonthlyTemperatureBreakdownHeader" xml:space="preserve">
     <value>moyenne mensuelle des températures pour la ferme.</value>
@@ -4370,7 +4370,7 @@
     <value>en allaitement</value>
   </data>
   <data name="EnumWeaning" xml:space="preserve">
-    <value>porcelet allaité</value>
+    <value>Porcelet non sevré</value>
   </data>
   <data name="EnumBreedingStock" xml:space="preserve">
     <value>reproducteurs</value>
@@ -4418,7 +4418,7 @@
     <value>stabulationm entravée (litière solide)</value>
   </data>
   <data name="EnumWeaned" xml:space="preserve">
-    <value>sevré/pouponnière</value>
+    <value>Sevré/pouponnière</value>
   </data>
   <data name="LabelLigninContent" xml:space="preserve">
     <value>teneur en lignine</value>
@@ -4628,10 +4628,6 @@
   <data name="TitleAnaerobicDigestionComponent" xml:space="preserve">
     <value>Anaerobic Digestion</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="BTUPerStandardCubicFoot" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="KilogramVolatileSolidsPerCubicMeterPerDay" xml:space="preserve">
     <value>Kg VS m^-3 d^-1</value>
   </data>
@@ -4669,7 +4665,7 @@
     <value>MIBC</value>
   </data>
   <data name="EnumIPCCTier2" xml:space="preserve">
-    <value>GIEC, niveau 2</value>
+    <value>GIEC, niveau 2</value>
   </data>
   <data name="LabelCarbonModellingStrategy" xml:space="preserve">
     <value>stratégie de modélisation du carbone</value>
@@ -4858,25 +4854,25 @@
     <value>ration à base de fourrage de qualité élevée</value>
   </data>
   <data name="GrowerFinisherDiet1Type" xml:space="preserve">
-    <value>Ration de croissance/finition no 1</value>
+    <value>Ration de croissance/finition no 1</value>
   </data>
   <data name="GrowerFinisherDiet2Type" xml:space="preserve">
-    <value>Ration de croissance/finition no 2</value>
+    <value>Ration de croissance/finition no 2</value>
   </data>
   <data name="GrowerFinisherDiet3Type" xml:space="preserve">
-    <value>Ration de croissance/finition no 3</value>
+    <value>Ration de croissance/finition no 3</value>
   </data>
   <data name="GrowerFinisherDiet4Type" xml:space="preserve">
-    <value>Ration de croissance/finition no 4</value>
+    <value>Ration de croissance/finition no 4</value>
   </data>
   <data name="LactationDietType" xml:space="preserve">
     <value>Ration de lactation</value>
   </data>
   <data name="NurseryWeanersStarterDiet1Type" xml:space="preserve">
-    <value>Porcelets sevrés (ration de démarrage no 1)</value>
+    <value>Porcelets sevrés (ration de démarrage no 1)</value>
   </data>
   <data name="NurseryWeanersStarterDiet2Type" xml:space="preserve">
-    <value>Porcelets sevrés (ration de démarrage no 2)</value>
+    <value>Porcelets sevrés (ration de démarrage no 2)</value>
   </data>
   <data name="PoorQualityForageDietType" xml:space="preserve">
     <value>ration à base de fourrage de qualité faible</value>
@@ -4963,7 +4959,7 @@
     <value>La composante Alpaca (alpagas) permet la création et la maintenance des périodes de gestion et d’autres renseignements liés aux alpagas, notamment le nombre d’animaux et des renseignements sur la manutention du fumier.</value>
   </data>
   <data name="ToolTipAnaerobicDigestionComponent" xml:space="preserve">
-    <value>La digestion anaérobie est un processus selon lequel des bactéries dégradent les matières organiques telles que le fumier animal, les biosolides des eaux usées et les déchets alimentaires en l’absence d’oxygène.  Elle produit ainsi deux éléments de valeur : du biogaz et des digestats.</value>
+    <value>La digestion anaérobie est un processus selon lequel des bactéries dégradent les matières organiques telles que le fumier animal, les biosolides des eaux usées et les déchets alimentaires en l’absence d’oxygène.  Elle produit ainsi deux éléments de valeur : du biogaz et des digestats.</value>
   </data>
   <data name="ToolTipBackgroundingComponent" xml:space="preserve">
     <value>Les exploitations de long engraissement et de semi-finition nourrissent des veaux sevrés pour qu’ils prennent du poids avant qu’ils soient envoyés à un parc d’engraissement pour la finition.  La composante Beef Stockers &amp; Backgrounders (bovins de long engraissement et semi-finis) inclut les groupes de génisses et de bouvillons.</value>
@@ -5098,10 +5094,10 @@
     <value>kg N2O</value>
   </data>
   <data name="KilogramsN2OPerField" xml:space="preserve">
-    <value>kg N2O champ^-1</value>
+    <value>kg N2O champ^-1</value>
   </data>
   <data name="KilogramsN2ONPerField" xml:space="preserve">
-    <value>kg N2O N champ^-1</value>
+    <value>kg N2O N champ^-1</value>
   </data>
   <data name="KilogramsNONPerField" xml:space="preserve">
     <value>kg NO-N champ^-1</value>
@@ -5137,7 +5133,7 @@
     <value>Année du rapport</value>
   </data>
   <data name="MessageShelterbeltComponentNotAvailable" xml:space="preserve">
-    <value>Les données sur la zone de rusticité de ce végétal ne sont pas disponibles pour ce polygone.  Par conséquent, la composante pour les exploitations avec brise-vent ne sera pas disponible. Les zones de rusticité des végétaux à l’extérieur de l’intervalle 2A – 4B ne peuvent pas être modélisées par manque de données disponibles.</value>
+    <value>Les données sur la zone de rusticité de ce végétal ne sont pas disponibles pour ce polygone.  Par conséquent, la composante pour les exploitations avec brise-vent ne sera pas disponible. Les zones de rusticité des végétaux à l’extérieur de l’intervalle 2A – 4B ne peuvent pas être modélisées par manque de données disponibles.</value>
   </data>
   <data name="MessageAnimalComponentEmissionsSingleProductionCycle" xml:space="preserve">
     <value>Les résultats pour les animaux ne correspondent qu’à un seul cycle de production.  Pour obtenir la valeur des émissions annuelles, multipliez les résultats par le nombre de cycles de production dans une année.</value>
@@ -5335,7 +5331,7 @@
     <value>total du digestat brut résiduel après tous les épandages au champ</value>
   </data>
   <data name="AnaerobicDigestionStepOneText" xml:space="preserve">
-    <value>Tous les digestats produits par le digesteur anaérobie sont séparés par défaut en quantités liquides et solides. Pour garder le digestat dans un état non séparé (brut), désactivez cette fonction en sélectionnant l’option « Non » ci-dessous.</value>
+    <value>Tous les digestats produits par le digesteur anaérobie sont séparés par défaut en quantités liquides et solides. Pour garder le digestat dans un état non séparé (brut), désactivez cette fonction en sélectionnant l’option « Non » ci-dessous.</value>
   </data>
   <data name="AnaerobicDigestionStepTwoText" xml:space="preserve">
     <value>Tout le fumier produit par les animaux à la ferme peut être ajouté au digesteur anaérobie. Choisissez les périodes de gestion qui seront sélectionnées comme source du fumier entrant dans le digesteur. Pour sélectionner une période de gestion, cochez la case Ajouter. Par défaut, tout (100 %) le fumier quotidien produit durant la période de gestion sélectionnée est ajouté au digesteur. On peut ajuster ce pourcentage quotidien au besoin dans la colonne Pourcentage quotidien du fumier ajouté (%). S’il n’y a pas d’animaux à la ferme, il est possible d’utiliser le fumier importé comme matière première pour le digesteur. Pour ajouter du fumier importé, l’utilisateur doit entrer une quantité quotidienne dans le digesteur et le type de fumier.</value>
@@ -5386,124 +5382,121 @@
     <value>verrats</value>
   </data>
   <data name="LabelActivePool" xml:space="preserve">
-    <value>réservoir actif</value>
+    <value>Bassin actif</value>
   </data>
   <data name="LabelPassivePool" xml:space="preserve">
-    <value>réservoir passif</value>
+    <value>Bassin passif</value>
   </data>
   <data name="LabelSlowPool" xml:space="preserve">
-    <value>réservoir lent</value>
+    <value>Bassin lent</value>
   </data>
   <data name="Date" xml:space="preserve">
     <value>Date</value>
   </data>
   <data name="JulianDay" xml:space="preserve">
-    <value>jour julien</value>
+    <value>Jour julien</value>
   </data>
   <data name="MeanDailyAirTemperature" xml:space="preserve">
-    <value>température quotidienne moyenne de l’air</value>
+    <value>Température quotidienne moyenne de l’air</value>
   </data>
   <data name="MeanDailyPET" xml:space="preserve">
     <value>ETP quotidienne moyenne</value>
   </data>
-  <data name="MeanDailyPrecipitation" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="RelativeHumidity" xml:space="preserve">
-    <value>humidité relative</value>
+    <value>Humidité relative</value>
   </data>
   <data name="SolarRadiation" xml:space="preserve">
-    <value>rayonnement solaire</value>
+    <value>Rayonnement solaire</value>
   </data>
   <data name="Year" xml:space="preserve">
-    <value>année</value>
+    <value>Année</value>
   </data>
   <data name="LabelNumberOfRestDays" xml:space="preserve">
-    <value>nombre de jours de repos entre les cycles de production</value>
+    <value>Nombre de jours de repos entre les cycles de production</value>
   </data>
   <data name="NumberOfRestDaysInCycleDescription" xml:space="preserve">
-    <value>Pour chaque groupe d’animaux, un seul cycle de production par défaut (composé d’une ou de plusieurs périodes de gestion) est fourni dans le tableau ci-dessous. Un certain nombre de jours de repos (non productifs) entre les cycles de production peuvent être saisis s’il y a plus d’un cycle de production par année.</value>
+    <value>Pour chaque groupe d’animaux, un unique cycle de production par défaut (composé d’une ou de plusieurs périodes de gestion) est fourni dans le tableau ci-dessous. Un certain nombre de jours de repos (non productifs) entre les cycles de production peuvent être entrés s’il y a plus d’un cycle de production par année.</value>
   </data>
   <data name="TooltipProductionDays" xml:space="preserve">
-    <value>Au Canada, certains systèmes de production du bétail sont généralement des systèmes « tous à l’intérieur, tous à l’extérieur », où tous les animaux entrent dans le poulailler et en sortent en même temps, avec un certain nombre de jours entre les périodes de production pour nettoyer les installations avant l’arrivée du prochain groupe d’animaux. Ces systèmes comprennent la production de bovins de parc d’engraissement (bouvillons et génisses), de porcs et de volaille. Par conséquent, pour calculer les émissions annuelles totales d’une exploitation d’élevage où il y a plusieurs cycles de production par année, on tient compte du nombre de jours de production par année (à l’exclusion des jours non productifs entre les cycles de production). Les estimations des émissions quotidiennes sont multipliées par le nombre total de jours de production dans une année.</value>
+    <value>Au Canada, les systèmes de production du bétail sont généralement des systèmes à renouvellement intégral, c’est-à-dire que tous les animaux entrent dans l’étable et en sortent en même temps, avec un certain nombre de jours entre les périodes de production pour le nettoyage des installations avant l’arrivée du prochain groupe d’animaux. Ces systèmes concernent entre autres les bovins de parc d’engraissement (bouvillons et génisses), les porcs et la volaille.  Par conséquent, pour calculer les émissions annuelles totales d’une exploitation d’élevage où il y a plusieurs cycles de production par année, le nombre de jours de production par année (à l’exclusion des jours non productifs entre les cycles de production) est pris en compte. Les estimations des émissions quotidiennes sont multipliées par le nombre total de jours de production dans une année.</value>
   </data>
   <data name="EnumGiltDeveloperDietType" xml:space="preserve">
-    <value>développeur des cochettes</value>
+    <value>Développement des truies</value>
   </data>
   <data name="LabelGiltDeveloperDiet" xml:space="preserve">
-    <value>développeur du régime des cochettes</value>
+    <value>Ration de développement des truies</value>
   </data>
   <data name="LabelBoarDiet" xml:space="preserve">
-    <value>régime des verrats</value>
+    <value>Ration pour verrats</value>
   </data>
   <data name="LabelHeatDetection" xml:space="preserve">
-    <value>détection de la chaleur</value>
+    <value>Détection de chaleur</value>
   </data>
   <data name="LabelHogs" xml:space="preserve">
-    <value>porcs</value>
+    <value>Porcs</value>
   </data>
   <data name="ComponentType" xml:space="preserve">
-    <value>Type de composant</value>
+    <value>Type de composante</value>
   </data>
   <data name="LabelTotalManureNitrogenAvailableForLandApplication" xml:space="preserve">
-    <value>quantité totale de N du fumier disponible pour l’épandage au sol</value>
+    <value>Quantité totale de N du fumier disponible pour l’épandage</value>
   </data>
   <data name="EnumAmmoniumNitrateGranulated" xml:space="preserve">
-    <value>Nitrate d’ammonium (granulé)</value>
+    <value>Nitrate d’ammonium (granules)</value>
   </data>
   <data name="EnumAmmoniumNitratePrilled" xml:space="preserve">
-    <value>Nitrate d’ammonium (perlé)</value>
+    <value>Nitrate d’ammonium (billes)</value>
   </data>
   <data name="EnumNpkMixedAcid" xml:space="preserve">
-    <value>NPK (acide mélangé)</value>
+    <value>NPK (acide mixte)</value>
   </data>
   <data name="EnumNpkNitrophosphate" xml:space="preserve">
     <value>NPK (nitrophosphate)</value>
   </data>
   <data name="EnumPotassiumSulphate" xml:space="preserve">
-    <value>sulfate de potassium</value>
+    <value>Sulfate de potassium</value>
   </data>
   <data name="EnumSuperPhosphate" xml:space="preserve">
-    <value>super phosphate</value>
+    <value>Super phosphate</value>
   </data>
   <data name="MessageCalfsAreAssumedToBeUnweaned" xml:space="preserve">
-    <value>On suppose que les veaux de boucherie sont des animaux non sevrés qui sont encore avec leur mère et qui sont nourris entièrement ou partiellement avec du lait; une fois sevrés, les veaux gardés à la ferme devraient passer dans le groupe animal des « génisses de remplacement ».</value>
+    <value>On suppose que les veaux de boucherie sont des animaux non sevrés qui sont encore avec la vache et qui sont entièrement ou partiellement nourris de lait; une fois sevré, tout veau resté à la ferme devrait passer dans le groupe des génisses de remplacement.</value>
   </data>
   <data name="LabelTotalCarbonInput" xml:space="preserve">
-    <value>apport total en carbone</value>
+    <value>Apport de carbone total</value>
   </data>
   <data name="LabelTFac" xml:space="preserve">
-    <value>FacT</value>
+    <value>TFac</value>
   </data>
   <data name="LabelWFac" xml:space="preserve">
-    <value>FacE</value>
+    <value>WFac</value>
   </data>
   <data name="SelectProvince" xml:space="preserve">
     <value>Select Province</value>
   </data>
   <data name="LabelUseConstantIndoorTemperature" xml:space="preserve">
-    <value>utiliser une température intérieure constante</value>
+    <value>Utiliser une température intérieure constante</value>
   </data>
   <data name="ButtonCreateManureExport" xml:space="preserve">
     <value>Créer une exportation de fumier</value>
   </data>
   <data name="ManureExportHeader" xml:space="preserve">
-    <value>Le fumier produit par les animaux de cette ferme peut être exporté hors site. Pour exporter du fumier de cette ferme, cliquez sur le bouton « Exporter du fumier » et précisez la quantité exportée.</value>
+    <value>Le fumier produit par les animaux de cette ferme peut être exporté hors site. Pour exporter du fumier de cette ferme, cliquez sur le bouton Exporter du fumier et précisez la quantité exportée.</value>
   </data>
   <data name="TitleExportManure" xml:space="preserve">
     <value>Export Farm Produced Manure</value>
   </data>
   <data name="LabelAmountOfManureRemainingForExport" xml:space="preserve">
-    <value>quantité de fumier disponible pour l’exportation</value>
+    <value>Quantité de fumier disponible pour l’exportation</value>
   </data>
   <data name="LabelTotalManureExported" xml:space="preserve">
-    <value>fumier total exporté</value>
+    <value>Quantité totale de fumier exportée</value>
   </data>
   <data name="LabelTotalManureProducedOnFarm" xml:space="preserve">
-    <value>fumier total produit à la ferme</value>
+    <value>Quantité totale de fumier produit à la ferme</value>
   </data>
   <data name="TitleManureExportDetails" xml:space="preserve">
-    <value>détails sur l’exportation du fumier</value>
+    <value>Détails sur l’exportation du fumier</value>
   </data>
   <data name="MessageExportingDataWarning" xml:space="preserve">
     <value>Exporting farms. Please do not close this window while data is being exported.</value>
@@ -5522,24 +5515,6 @@
   </data>
   <data name="LabelP2O5" xml:space="preserve">
     <value>P2O5</value>
-  </data>
-  <data name="LabelTotalDirectN2OExcludingRemainingAmounts" xml:space="preserve">
-    <value>N2O direct (à l’exclusion de tout fumier non épandu)</value>
-  </data>
-  <data name="LabelTotalIndirectN2OExcludingRemainingAmounts" xml:space="preserve">
-    <value>N2O indirect (à l’exclusion de tout fumier non épandu)</value>
-  </data>
-  <data name="LabelIndirectNitrousOxideFromOrganicNLeachingExcludingRemaining" xml:space="preserve">
-    <value>N2O-N provenant du lessivage de l’azote organique (à l’exclusion de tout fumier non épandu – lessivage de N2O-N N2O-N_ONleach)</value>
-  </data>
-  <data name="LabelIndirectNitrousOxideFromOrganicNVolatilization" xml:space="preserve">
-    <value>N2O-N de la volatilisation d’azote synthétique (volatilisation de N2O-N N2O-N_SNvolatilization)</value>
-  </data>
-  <data name="LabelIndirectNitrousOxideFromOrganicNVolatilizationNotIncludingRemainingAmounts" xml:space="preserve">
-    <value>N2O-N provenant de la volatilisation d’azote synthétique (à l’exclusion de tout fumier non épandu – volatilisation de N2O-N N2O-N_ONvolatilization)</value>
-  </data>
-  <data name="LabelTotalIndirectNitrousOxideExcludingRemainingAmounts" xml:space="preserve">
-    <value>N2O-N indirect (à l’exclusion de tout fumier non épandu)</value>
   </data>
   <data name="ButtonAddCropResidueSubstrateTypes" xml:space="preserve">
     <value>Ajouter des types de substrat de résidus de cultures</value>
@@ -5563,7 +5538,7 @@
     <value>Effet de l’eau</value>
   </data>
   <data name="LabelMilkFedManagementPeriod" xml:space="preserve">
-    <value>Veaux laitiers nourris au lait</value>
+    <value>Veaux laitiers nourris au lait  Période sans émissions de méthane entérique</value>
   </data>
   <data name="LabelMonth" xml:space="preserve">
     <value>Mois</value>
@@ -5587,15 +5562,15 @@
     <value>La paille est retournée au sol après le pâturage sur chaume</value>
   </data>
   <data name="MessageAnnualDetailedReportMessage" xml:space="preserve">
-    <value>"Les estimations annuelles de Holos pour les composantes du bétail représentent la somme des émissions mensuelles pour un unique cycle de production (tel que défini par l’utilisateur du modèle dans l’écran Sélection des composantes). Par conséquent, si un ou plusieurs groupes d’animaux ont plus d’un cycle de production au cours d’une année civile, multipliez les résultats par le nombre de cycles de production dans l’année pour obtenir une estimation des émissions annuelles réelles liées au logement et à la gestion/l’entreposage du fumier.
+    <value>Les estimations annuelles de Holos pour les composantes du bétail représentent la somme des émissions mensuelles pour un unique cycle de production (tel que défini par l’utilisateur du modèle dans l’écran Sélection des composantes). Par conséquent, si un ou plusieurs groupes d’animaux ont plus d’un cycle de production au cours d’une année civile, multipliez les résultats par le nombre de cycles de production dans l’année pour obtenir une estimation des émissions annuelles réelles liées au logement et à la gestion/l’entreposage du fumier.
 
 Veuillez noter que les émissions liées au dépôt ou à l’application de fumier de bétail dans un champ sont déclarées sous la composante pertinente du champ ou de la rotation.
 
-Veuillez noter que pour chaque composante de champ, les émissions annuelles dans le présent rapport représentent les émissions totales de tous les engrais synthétiques appliqués et de tous les résidus de culture pour l’année civile pertinente, mais comprennent les émissions liées au fumier pour un seul cycle de production seulement."</value>
+Veuillez noter que pour chaque composante de champ, les émissions annuelles dans le présent rapport représentent les émissions totales de tous les engrais synthétiques appliqués et de tous les résidus de culture pour l’année civile pertinente, mais comprennent les émissions liées au fumier pour un seul cycle de production seulement.</value>
   </data>
   <data name="MessageMonthlyDetailedReportMessage" xml:space="preserve">
-    <value>"Les estimations mensuelles de Holos pour les composantes du bétail représentent des estimations mensuelles pour un seul cycle de production. Ainsi, pour obtenir la valeur annuelle des émissions, multipliez les résultats par le nombre de cycles de production dans une année.
-Veuillez noter que les émissions liées au dépôt ou à l’application de fumier de bétail dans un champ sont déclarées sous la composante pertinente du champ ou de la rotation."</value>
+    <value>Les estimations mensuelles de Holos pour les composantes du bétail représentent des estimations mensuelles pour un seul cycle de production. Ainsi, pour obtenir la valeur annuelle des émissions, multipliez les résultats par le nombre de cycles de production dans une année.
+Veuillez noter que les émissions liées au dépôt ou à l’application de fumier de bétail dans un champ sont déclarées sous la composante pertinente du champ ou de la rotation.</value>
   </data>
   <data name="LabelUseFieldLevelSoil" xml:space="preserve">
     <value>Utilisez des données sur le sol propres au champ (elles remplaceront les données sur le sol par défaut utilisées pour l’ensemble de la ferme).</value>
@@ -5619,7 +5594,7 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
     <value>Origine du digestat</value>
   </data>
   <data name="KilogramsWetWeightPerDay" xml:space="preserve">
-    <value>kg wet weight day^-1</value>
+    <value>Poids humide en kg jour -1</value>
   </data>
   <data name="PoundsWetWeightPerDay" xml:space="preserve">
     <value>Poids humide en lb jour -1</value>
@@ -5634,8 +5609,7 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
     <value>Teneur en solides volatils du fumier</value>
   </data>
   <data name="LabelTotalVolumeOfDigestateProduced" xml:space="preserve">
-    <value>Volume total de digestat produit
-</value>
+    <value>Volume total de digestat produit</value>
   </data>
   <data name="LabelFugitiveMethaneLoss" xml:space="preserve">
     <value>Émissions fugitives de CH₄</value>
@@ -5648,156 +5622,6 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
   </data>
   <data name="LabelResetLignin" xml:space="preserve">
     <value>Réinitialiser la teneur en lignine</value>
-  </data>
-  <data name="LabelResetCarbonConcentration" xml:space="preserve">
-    <value>Réinitialiser la concentration de carbone</value>
-  </data>
-  <data name="LabelResetNitrogenFixation" xml:space="preserve">
-    <value>Réinitialiser la fixation de l’azote</value>
-  </data>
-  <data name="LabelResetAnnualEntericMethaneEmissionRate" xml:space="preserve">
-    <value>Réinitialiser le taux annuel d’émission de méthane entérique</value>
-  </data>
-  <data name="LabelResetAnnualExcretionRate" xml:space="preserve">
-    <value>Réinitialiser le taux annuel d’excrétion</value>
-  </data>
-  <data name="LabelResetFeedingActivityCoefficient" xml:space="preserve">
-    <value>Réinitialiser le coefficient d’activité de l’alimentation</value>
-  </data>
-  <data name="LabelResetLivestockCoefficientSheep" xml:space="preserve">
-    <value>Réinitialiser le coefficient du bétail (moutons)</value>
-  </data>
-  <data name="LabelResetManureComposition" xml:space="preserve">
-    <value>Réinitialiser la composition du fumier</value>
-  </data>
-  <data name="LabelResetMilkProduction" xml:space="preserve">
-    <value>Réinitialiser la production de lait</value>
-  </data>
-  <data name="LabelResetWaterIrrigation" xml:space="preserve">
-    <value>Réinitialiser l’irrigation de l’eau</value>
-  </data>
-  <data name="LabelResetAmmoniaEmissionFactorForHousing" xml:space="preserve">
-    <value>Réinitialiser le facteur d’émission de NH₃ (logement)</value>
-  </data>
-  <data name="LabelResetAmmoniaEmissionFactorForLandApplication" xml:space="preserve">
-    <value>Réinitialiser le facteur d’émission de NH3 (épandage)</value>
-  </data>
-  <data name="LabelResetAmmoniaEmissionFactorForManureStorage" xml:space="preserve">
-    <value>Réinitialiser le facteur d’émission de NH₃ (entreposage du fumier)</value>
-  </data>
-  <data name="LabelResetDailyManureMethaneEmissionRate" xml:space="preserve">
-    <value>Réinitialiser les émissions quotidiennes de méthane (CH₄)</value>
-  </data>
-  <data name="LabelResetBarnTemperature" xml:space="preserve">
-    <value>Réinitialiser la température de l’étable</value>
-  </data>
-  <data name="LabelResetBaselineCoefficient" xml:space="preserve">
-    <value>Réinitialiser le coefficient de référence</value>
-  </data>
-  <data name="LabelResetBeddingMaterial" xml:space="preserve">
-    <value>Réinitialiser la litière</value>
-  </data>
-  <data name="LabelResetBeddingMaterialRate" xml:space="preserve">
-    <value>Réinitialiser le taux de litière</value>
-  </data>
-  <data name="LabelResetBiomassCoefficient" xml:space="preserve">
-    <value>Réinitialiser le coefficient de biomasse</value>
-  </data>
-  <data name="LabelResetDailyTanExcretion" xml:space="preserve">
-    <value>Réinitialiser l’excrétion quotidienne d’AAT</value>
-  </data>
-  <data name="LabelResetDefaultEmissionFactors" xml:space="preserve">
-    <value>Réinitialiser les facteurs d’émission par défaut</value>
-  </data>
-  <data name="LabelResetFuelEnergy" xml:space="preserve">
-    <value>Réinitialiser l’énergie du combustible</value>
-  </data>
-  <data name="LabelResetGainCoefficient" xml:space="preserve">
-    <value>Réinitialiser le coefficient de gain</value>
-  </data>
-  <data name="LabelResetHerbicideEnergy" xml:space="preserve">
-    <value>Réinitialiser l’énergie des herbicides</value>
-  </data>
-  <data name="LabelResetLeachingFraction" xml:space="preserve">
-    <value>Réinitialiser les données sur le lessivage</value>
-  </data>
-  <data name="LabelResetManureCompositionData" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="LabelResetManureMineralizationFractions" xml:space="preserve">
-    <value>Réinitialiser les fractions de minéralisation du fumier</value>
-  </data>
-  <data name="LabelResetMethaneProducingCapacityOfManure" xml:space="preserve">
-    <value>Réinitialiser la capacité de production de CH₄</value>
-  </data>
-  <data name="LabelResetMoistureContent" xml:space="preserve">
-    <value>Réinitialiser la teneur en humidité</value>
-  </data>
-  <data name="LabelResetNitrogenContent" xml:space="preserve">
-    <value>Réinitialiser la teneur en azote</value>
-  </data>
-  <data name="LabelResetNitrogenExcretionRate" xml:space="preserve">
-    <value>Réinitialiser le taux d’excrétion d’azote</value>
-  </data>
-  <data name="LabelResetSoilProperties" xml:space="preserve">
-    <value>Réinitialiser les propriétés du sol</value>
-  </data>
-  <data name="LabelResetVolatileSolidsExcretion" xml:space="preserve">
-    <value>Réinitialiser les excrétions solides volatiles</value>
-  </data>
-  <data name="LabelResetPercentageReturns" xml:space="preserve">
-    <value>Réinitialiser les rendements en pourcentage</value>
-  </data>
-  <data name="LabelResetTillageType" xml:space="preserve">
-    <value>Réinitialiser le type de travail du sol</value>
-  </data>
-  <data name="LabelResetFallow" xml:space="preserve">
-    <value>Réinitialiser la jachère</value>
-  </data>
-  <data name="LabelResetYield" xml:space="preserve">
-    <value>Réinitialiser le rendement</value>
-  </data>
-  <data name="LabelResetAmountOfBlendedProduct" xml:space="preserve">
-    <value>Réinitialiser la quantité de produit mélangé</value>
-  </data>
-  <data name="LabelResetAvailableSoilTypes" xml:space="preserve">
-    <value>Réinitialiser les types de sols disponibles</value>
-  </data>
-  <data name="LabelResetBlendData" xml:space="preserve">
-    <value>Réinitialiser les données sur le mélange</value>
-  </data>
-  <data name="LabelResetDefaultSoilForField" xml:space="preserve">
-    <value>Réinitialiser les données par défaut sur le sol pour le champ</value>
-  </data>
-  <data name="LabelResetEconomicDefaults" xml:space="preserve">
-    <value>Réinitialiser les valeurs économiques par défaut</value>
-  </data>
-  <data name="LabelResetFertilizerApplicationMethod" xml:space="preserve">
-    <value>Réinitialiser la méthode d’application de l’engrais</value>
-  </data>
-  <data name="LabelResetHarvestMethod" xml:space="preserve">
-    <value>Réinitialiser la méthode de récolte</value>
-  </data>
-  <data name="LabelResetLumCMaxValues" xml:space="preserve">
-    <value>Réinitialiser les valeurs maximales de C GUT</value>
-  </data>
-  <data name="LabelResetManureApplicationMethod" xml:space="preserve">
-    <value>Réinitialiser la méthode d’application du fumier</value>
-  </data>
-  <data name="LabelResetPerennialDefaults" xml:space="preserve">
-    <value>Réinitialiser les valeurs par défaut pour les plantes vivaces</value>
-  </data>
-  <data name="LabelResetPhosphorusFertilizerRate" xml:space="preserve">
-    <value>Réinitialiser le taux d’engrais phosphaté</value>
-  </data>
-  <data name="LabelResetUserDefaults" xml:space="preserve">
-    <value>Réinitialiser les valeurs par défaut des utilisateurs</value>
-  </data>
-  <data name="LabelResetHarvestLoss" xml:space="preserve">
-    <value>Réinitialiser l’utilisation des pâturages</value>
-  </data>
-  <data name="LabelResetYieldsAllYears" xml:space="preserve">
-    <value>Réinitialiser les rendements pour toutes les années</value>
   </data>
   <data name="MessageResetLigninContent" xml:space="preserve">
     <value>Remet la teneur en lignine de toutes les cultures (pour chaque année) à la valeur par défaut.</value>
@@ -5827,7 +5651,7 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
     <value>Remet les valeurs maximales de C GUT pour chacune des cultures (pour chaque année) à la valeur par défaut.</value>
   </data>
   <data name="MessageResetMoistureContent" xml:space="preserve">
-    <value>Resets the moisture content for each crop (in each year) to the default value</value>
+    <value>Remet la teneur en humidité pour chacune des cultures (pour chaque année) à la valeur par défaut.</value>
   </data>
   <data name="MessageResetNitrogenContent" xml:space="preserve">
     <value>Remet la teneur en azote pour chacune des cultures (pour chaque année) à la valeur par défaut.</value>
@@ -5935,49 +5759,19 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
     <value>Remet le type de litière pour chaque groupe d’animaux (pour chaque année) à la valeur par défaut.</value>
   </data>
   <data name="MessageResetBeddingMaterialRate" xml:space="preserve">
-    <value>Resets the bedding material rate for each animal group (for management period) to the default value</value>
+    <value>Remet le taux de litière pour chaque groupe d’animaux (pour la période de gestion) à la valeur par défaut.</value>
   </data>
   <data name="MessageResetDailyTanExcretion" xml:space="preserve">
     <value>Remet l’excrétion d’AAT pour chaque groupe d’animaux (pour la période de gestion) à la valeur par défaut.</value>
   </data>
   <data name="MessageResetGainCoefficient" xml:space="preserve">
-    <value>Resets the gain coefficient for each animal group (for management period) to the default value</value>
+    <value>Remet le coefficient de gain pour chaque groupe d’animaux (pour la période de gestion) à la valeur par défaut.</value>
   </data>
   <data name="MessageResetLeachingFraction" xml:space="preserve">
-    <value>Resets the leaching fraction for each animal group (for management period) to the default value</value>
+    <value>Remet la fraction du lessivage pour chaque groupe d’animaux (pour la période de gestion) à la valeur par défaut.</value>
   </data>
   <data name="MessageResetNitrogenExcretionRate" xml:space="preserve">
-    <value>Resets the nitrogen excretion rate for each animal group (for management period) to the default value</value>
-  </data>
-  <data name="TitleResetDefaultValues" xml:space="preserve">
-    <value>Réinitialiser les valeurs par défaut</value>
-  </data>
-  <data name="LabelStepOneDefaultValues" xml:space="preserve">
-    <value>Cette fenêtre permet à l’utilisateur de réinitialiser les valeurs par défaut pour les cultures et les animaux. Sélectionnez-la si les nouvelles valeurs par défaut doivent être appliquées à la ferme courante ou à toutes les fermes enregistrées.</value>
-  </data>
-  <data name="LabelAllFarms" xml:space="preserve">
-    <value>Toutes les fermes</value>
-  </data>
-  <data name="LabelSelectedFarm" xml:space="preserve">
-    <value>Ferme sélectionnée</value>
-  </data>
-  <data name="LabelStepTwoDefaultValues" xml:space="preserve">
-    <value>Sélectionnez tous les boutons pour lesquels vous voulez réinitialiser la valeur par défaut.</value>
-  </data>
-  <data name="LabelToggleAllOff" xml:space="preserve">
-    <value>Tout basculer désactivé</value>
-  </data>
-  <data name="LabelToggleAllOn" xml:space="preserve">
-    <value>Tous basculer activé</value>
-  </data>
-  <data name="TitleResetDefaults" xml:space="preserve">
-    <value>Rétablir les valeurs par défaut</value>
-  </data>
-  <data name="LabelAnimals" xml:space="preserve">
-    <value>Animaux</value>
-  </data>
-  <data name="LabelCrops" xml:space="preserve">
-    <value>Culture</value>
+    <value>Remet le taux d’excrétion d’azote pour chaque groupe d’animaux (pour la période de gestion) à la valeur par défaut.</value>
   </data>
   <data name="LabelTotalDirectN2ONFromCropResidueExports" xml:space="preserve">
     <value>N2O-N provenant de résidus de culture exportés</value>
@@ -6019,7 +5813,7 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
     <value>analyse génétique du verrat</value>
   </data>
   <data name="LabelEnterCropHistoryDuringMultiYearModelInstructionalString" xml:space="preserve">
-    <value>cliquez sur le bouton « ajouter une culture » pour décrire les cultures cultivées dans ce champ. entrez une culture pour les champs continus (c.‑à‑d. blé en continu) et la première phase pour la rotation des cultures (c.‑à‑d. blé, jachère). holos utilisera cette entrée pour générer l’historique du champ.</value>
+    <value>cliquez sur le bouton « ajouter une culture » pour décrire les cultures cultivées dans ce champ. entrez une culture pour les champs continus (c.‑à‑d. blé en continu) et la première phase pour la rotation des cultures (c.‑à‑d. blé, jachère). holos utilisera cette entrée pour générer l’historique du champ.</value>
   </data>
   <data name="LabelFarrowingGilts1" xml:space="preserve">
     <value>jeunes truies de naissage</value>
@@ -6085,16 +5879,16 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
     <value>coefficient de gain B</value>
   </data>
   <data name="DescriptorSoilTypeForFarm" xml:space="preserve">
-    <value>L’onglet Sol peut être utilisé pour modifier les propriétés du sol pour l’ensemble de la ferme. Les valeurs par défaut sont indiquées pour le type de sol actuel. Le sol de la ferme peut être personnalisé en modifiant chaque propriété du sol. Pour modifier le type de sol pour le champ en question seulement, allez dans le champ  et sélectionnez l’onglet « Sol » dans le champ.</value>
+    <value>L’onglet Sol peut être utilisé pour modifier les propriétés du sol pour l’ensemble de la ferme. Les valeurs par défaut sont indiquées pour le type de sol actuel. Le sol de la ferme peut être personnalisé en modifiant chaque propriété du sol. Pour modifier le type de sol pour le champ en question seulement, allez dans le champ  et sélectionnez l’onglet « Sol » dans le champ.</value>
   </data>
   <data name="DescriptorSoilTypeForField" xml:space="preserve">
-    <value>L’onglet Sol peut être utilisé pour modifier le type de sol pour le champ en question. Le tableau présente la liste de tous les types de sol disponibles pour le polygone sélectionné. Si un type de sol doit être défini dans le champ, sélectionnez-en un dans la liste. Pour personnaliser le sol, cliquez sur « Custom Mode » et modifiez chaque propriété  du sol pour le champ seulement.</value>
+    <value>L’onglet Sol peut être utilisé pour modifier le type de sol pour le champ en question. Le tableau présente la liste de tous les types de sol disponibles pour le polygone sélectionné. Si un type de sol doit être défini dans le champ, sélectionnez-en un dans la liste. Pour personnaliser le sol, cliquez sur « Custom Mode » et modifiez chaque propriété  du sol pour le champ seulement.</value>
   </data>
   <data name="LabelBulkDensity" xml:space="preserve">
     <value>densité apparente</value>
   </data>
   <data name="LabelHeatDetectionBoars" xml:space="preserve">
-    <value>détection de chaleur des verrats</value>
+    <value>Verrat de détection de la chaleur</value>
   </data>
   <data name="LabelProportionOfClayInSoil" xml:space="preserve">
     <value>proportion d’argile dans le sol</value>
@@ -6144,9 +5938,6 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
   <data name="LabelManureExportedFromFarm" xml:space="preserve">
     <value>Fumier exporté de la ferme</value>
   </data>
-  <data name="LabelCropResidueExports" xml:space="preserve">
-    <value>Exportations de résidus de culture</value>
-  </data>
   <data name="LabelWinterFeeding" xml:space="preserve">
     <value>alimentation en hiver</value>
   </data>
@@ -6181,10 +5972,7 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
     <value>Aucun fumier disponible pour l’exportation en {0}. Sélectionnez une année d’exportation différente ou ajoutez des composantes animales à la ferme pour que le fumier soit produit en {0}.</value>
   </data>
   <data name="KilogramsNH3N3PerHectare" xml:space="preserve">
-    <value>kg NH3-N ha^-1</value>
-  </data>
-  <data name="Beta_B_N" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value>kg NH3-N ha-1</value>
   </data>
   <data name="KilogramsPerHectareCropWetWeight" xml:space="preserve">
     <value />
@@ -6194,5 +5982,206 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
   </data>
   <data name="EnumFractionNitrogen" xml:space="preserve">
     <value />
+  </data>
+  <data name="LabelSelectedFarm" xml:space="preserve">
+    <value>Ferme sélectionnée</value>
+  </data>
+  <data name="LabelStepTwoDefaultValues" xml:space="preserve">
+    <value>Sélectionnez tous les boutons pour lesquels vous voulez réinitialiser la valeur par défaut.</value>
+  </data>
+  <data name="LabelResetAmountOfBlendedProduct" xml:space="preserve">
+    <value>Réinitialiser la quantité de produit mélangé</value>
+  </data>
+  <data name="LabelResetFeedingActivityCoefficient" xml:space="preserve">
+    <value>Réinitialiser le coefficient d’activité de l’alimentation</value>
+  </data>
+  <data name="LabelResetBeddingMaterial" xml:space="preserve">
+    <value>Réinitialiser la litière</value>
+  </data>
+  <data name="LabelResetDefaultSoilForField" xml:space="preserve">
+    <value>Réinitialiser les données par défaut sur le sol pour le champ</value>
+  </data>
+  <data name="LabelToggleAllOff" xml:space="preserve">
+    <value>Tout basculer désactivé</value>
+  </data>
+  <data name="LabelResetManureMineralizationFractions" xml:space="preserve">
+    <value>Réinitialiser les fractions de minéralisation du fumier</value>
+  </data>
+  <data name="LabelResetLeachingFraction" xml:space="preserve">
+    <value>Réinitialiser les données sur le lessivage</value>
+  </data>
+  <data name="LabelResetVolatileSolidsExcretion" xml:space="preserve">
+    <value>Réinitialiser les excrétions solides volatiles</value>
+  </data>
+  <data name="LabelResetAmmoniaEmissionFactorForHousing" xml:space="preserve">
+    <value>Réinitialiser le facteur d’émission de NH₃ (logement)</value>
+  </data>
+  <data name="LabelResetBeddingMaterialRate" xml:space="preserve">
+    <value>Réinitialiser le taux de litière</value>
+  </data>
+  <data name="LabelResetUserDefaults" xml:space="preserve">
+    <value>Réinitialiser les valeurs par défaut des utilisateurs</value>
+  </data>
+  <data name="LabelResetManureApplicationMethod" xml:space="preserve">
+    <value>Réinitialiser la méthode d’application du fumier</value>
+  </data>
+  <data name="LabelResetTillageType" xml:space="preserve">
+    <value>Réinitialiser le type de travail du sol</value>
+  </data>
+  <data name="LabelResetFertilizerApplicationMethod" xml:space="preserve">
+    <value>Réinitialiser la méthode d’application de l’engrais</value>
+  </data>
+  <data name="LabelIndirectNitrousOxideFromOrganicNVolatilization" xml:space="preserve">
+    <value>N2O-N de la volatilisation d’azote synthétique (volatilisation de N2O-N N2O-N_SNvolatilization)</value>
+  </data>
+  <data name="LabelResetFallow" xml:space="preserve">
+    <value>Réinitialiser la jachère</value>
+  </data>
+  <data name="LabelResetYieldsAllYears" xml:space="preserve">
+    <value>Réinitialiser les rendements pour toutes les années</value>
+  </data>
+  <data name="LabelResetMoistureContent" xml:space="preserve">
+    <value>Réinitialiser la teneur en humidité</value>
+  </data>
+  <data name="LabelResetBaselineCoefficient" xml:space="preserve">
+    <value>Réinitialiser le coefficient de référence</value>
+  </data>
+  <data name="TitleResetDefaults" xml:space="preserve">
+    <value>Rétablir les valeurs par défaut</value>
+  </data>
+  <data name="LabelIndirectNitrousOxideFromOrganicNVolatilizationNotIncludingRemainingAmounts" xml:space="preserve">
+    <value>N2O-N provenant de la volatilisation d’azote synthétique (à l’exclusion de tout fumier non épandu – volatilisation de N2O-N N2O-N_ONvolatilization)</value>
+  </data>
+  <data name="LabelResetNitrogenFixation" xml:space="preserve">
+    <value>Réinitialiser la fixation de l’azote</value>
+  </data>
+  <data name="LabelResetMilkProduction" xml:space="preserve">
+    <value>Réinitialiser la production de lait</value>
+  </data>
+  <data name="LabelResetPhosphorusFertilizerRate" xml:space="preserve">
+    <value>Réinitialiser le taux d’engrais phosphaté</value>
+  </data>
+  <data name="LabelResetBiomassCoefficient" xml:space="preserve">
+    <value>Réinitialiser le coefficient de biomasse</value>
+  </data>
+  <data name="LabelResetHarvestLoss" xml:space="preserve">
+    <value>Réinitialiser l’utilisation des pâturages</value>
+  </data>
+  <data name="LabelResetEconomicDefaults" xml:space="preserve">
+    <value>Réinitialiser les valeurs économiques par défaut</value>
+  </data>
+  <data name="LabelResetBarnTemperature" xml:space="preserve">
+    <value>Réinitialiser la température de l’étable</value>
+  </data>
+  <data name="LabelResetDefaultEmissionFactors" xml:space="preserve">
+    <value>Réinitialiser les facteurs d’émission par défaut</value>
+  </data>
+  <data name="LabelTotalIndirectNitrousOxideExcludingRemainingAmounts" xml:space="preserve">
+    <value>N2O-N indirect (à l’exclusion de tout fumier non épandu)</value>
+  </data>
+  <data name="LabelResetGainCoefficient" xml:space="preserve">
+    <value>Réinitialiser le coefficient de gain</value>
+  </data>
+  <data name="LabelResetAmmoniaEmissionFactorForLandApplication" xml:space="preserve">
+    <value>Réinitialiser le facteur d’émission de NH3 (épandage)</value>
+  </data>
+  <data name="LabelResetDailyManureMethaneEmissionRate" xml:space="preserve">
+    <value>Réinitialiser les émissions quotidiennes de méthane (CH₄)</value>
+  </data>
+  <data name="LabelAllFarms" xml:space="preserve">
+    <value>Toutes les fermes</value>
+  </data>
+  <data name="LabelResetNitrogenExcretionRate" xml:space="preserve">
+    <value>Réinitialiser le taux d’excrétion d’azote</value>
+  </data>
+  <data name="LabelCropResidueExports" xml:space="preserve">
+    <value>Exportations de résidus de culture</value>
+  </data>
+  <data name="LabelToggleAllOn" xml:space="preserve">
+    <value>Tous basculer activé</value>
+  </data>
+  <data name="LabelResetPercentageReturns" xml:space="preserve">
+    <value>Réinitialiser les rendements en pourcentage</value>
+  </data>
+  <data name="LabelResetManureComposition" xml:space="preserve">
+    <value>Réinitialiser la composition du fumier</value>
+  </data>
+  <data name="LabelResetFuelEnergy" xml:space="preserve">
+    <value>Réinitialiser l’énergie du combustible</value>
+  </data>
+  <data name="LabelResetSoilProperties" xml:space="preserve">
+    <value>Réinitialiser les propriétés du sol</value>
+  </data>
+  <data name="LabelResetHarvestMethod" xml:space="preserve">
+    <value>Réinitialiser la méthode de récolte</value>
+  </data>
+  <data name="LabelResetPerennialDefaults" xml:space="preserve">
+    <value>Réinitialiser les valeurs par défaut pour les plantes vivaces  </value>
+  </data>
+  <data name="LabelResetLivestockCoefficientSheep" xml:space="preserve">
+    <value>Réinitialiser le coefficient du bétail (moutons)</value>
+  </data>
+  <data name="LabelResetAvailableSoilTypes" xml:space="preserve">
+    <value>Réinitialiser les types de sols disponibles</value>
+  </data>
+  <data name="LabelResetHerbicideEnergy" xml:space="preserve">
+    <value>Réinitialiser l’énergie des herbicides</value>
+  </data>
+  <data name="LabelTotalIndirectN2OExcludingRemainingAmounts" xml:space="preserve">
+    <value>N2O indirect (à l’exclusion de tout fumier non épandu)</value>
+  </data>
+  <data name="LabelCrops" xml:space="preserve">
+    <value>Culture</value>
+  </data>
+  <data name="LabelResetNitrogenContent" xml:space="preserve">
+    <value>Réinitialiser la teneur en azote</value>
+  </data>
+  <data name="LabelResetWaterIrrigation" xml:space="preserve">
+    <value>Réinitialiser l’irrigation de l’eau</value>
+  </data>
+  <data name="LabelResetAnnualExcretionRate" xml:space="preserve">
+    <value>Réinitialiser le taux annuel d’excrétion</value>
+  </data>
+  <data name="LabelStepOneDefaultValues" xml:space="preserve">
+    <value>Cette fenêtre permet à l’utilisateur de réinitialiser les valeurs par défaut pour les cultures et les animaux. Sélectionnez-la si les nouvelles valeurs par défaut doivent être appliquées à la ferme courante ou à toutes les fermes enregistrées.</value>
+  </data>
+  <data name="LabelResetBlendData" xml:space="preserve">
+    <value>Réinitialiser les données sur le mélange</value>
+  </data>
+  <data name="LabelResetYield" xml:space="preserve">
+    <value>Réinitialiser le rendement</value>
+  </data>
+  <data name="MeanDailyPrecipitation" xml:space="preserve">
+    <value>Précipitations quotidiennes moyennes</value>
+  </data>
+  <data name="LabelResetMethaneProducingCapacityOfManure" xml:space="preserve">
+    <value>Réinitialiser la capacité de production de CH₄</value>
+  </data>
+  <data name="LabelResetDailyTanExcretion" xml:space="preserve">
+    <value>Réinitialiser l’excrétion quotidienne d’AAT</value>
+  </data>
+  <data name="TitleResetDefaultValues" xml:space="preserve">
+    <value>Réinitialiser les valeurs par défaut</value>
+  </data>
+  <data name="LabelResetAnnualEntericMethaneEmissionRate" xml:space="preserve">
+    <value>Réinitialiser le taux annuel d’émission de méthane entérique</value>
+  </data>
+  <data name="LabelResetCarbonConcentration" xml:space="preserve">
+    <value>Réinitialiser la concentration de carbone</value>
+  </data>
+  <data name="LabelResetLumCMaxValues" xml:space="preserve">
+    <value>Réinitialiser les valeurs maximales de C GUT</value>
+  </data>
+  <data name="LabelResetAmmoniaEmissionFactorForManureStorage" xml:space="preserve">
+    <value>Réinitialiser le facteur d’émission de NH₃ (entreposage du fumier)</value>
+  </data>
+  <data name="LabelTotalDirectN2OExcludingRemainingAmounts" xml:space="preserve">
+    <value>N2O direct (à l’exclusion de tout fumier non épandu)</value>
+  </data>
+  <data name="LabelAnimals" xml:space="preserve">
+    <value>Animaux</value>
+  </data>
+  <data name="LabelIndirectNitrousOxideFromOrganicNLeachingExcludingRemaining" xml:space="preserve">
+    <value>N2O-N provenant du lessivage de l’azote organique (à l’exclusion de tout fumier non épandu – lessivage de N2O-N N2O-N_ONleach)</value>
   </data>
 </root>

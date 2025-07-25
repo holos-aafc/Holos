@@ -236,6 +236,7 @@
     <Compile Include="Enumerations\ProvinceExtension.cs" />
     <Compile Include="Enumerations\PumpType.cs" />
     <Compile Include="Enumerations\Region.cs" />
+    <Compile Include="Enumerations\ResidueInputCalculationMethod.cs" />
     <Compile Include="Enumerations\ResourceSourceLocation.cs" />
     <Compile Include="Enumerations\Seasons.cs" />
     <Compile Include="Enumerations\SeparationCoefficients.cs" />

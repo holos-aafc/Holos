@@ -1490,4 +1490,7 @@ Would you like to continue using this directory?</value>
   <data name="Settings_StartingSOCValue" xml:space="preserve">
     <value>Starting SOC Value</value>
   </data>
+  <data name="Settings_ResidueInputCalculationMethod" xml:space="preserve">
+    <value>Residue Input Calculation Method</value>
+  </data>
 </root>

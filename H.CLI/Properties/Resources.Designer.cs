@@ -3545,6 +3545,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Residue Input Calculation Method.
+        /// </summary>
+        public static string Settings_ResidueInputCalculationMethod {
+            get {
+                return ResourceManager.GetString("Settings_ResidueInputCalculationMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ripening Day.
         /// </summary>
         public static string Settings_RipeningDay {

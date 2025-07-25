@@ -141,7 +141,7 @@ namespace H.Core.Services.Initialization.Crops
         }
 
         public void InitializeYieldForAllYears(
-            IEnumerable<CropViewItem> cropViewItems, 
+            IEnumerable<CropViewItem> cropViewItems,
             Farm farm,
             FieldSystemComponent fieldSystemComponent)
         {

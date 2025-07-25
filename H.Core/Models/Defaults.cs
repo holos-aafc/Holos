@@ -1,5 +1,6 @@
 ﻿#region Imports
 
+using System.Configuration;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Infrastructure;
@@ -18,6 +19,7 @@ namespace H.Core.Models
         private double _carbonConcentration;
         private TimeFrame _timeFrame;
         private CarbonModellingStrategies _carbonModellingStrategy;
+        private ResidueInputCalculationMethod _residueInputCalculationMethod;
 
         private double _latitude;
         private double _longitude;
@@ -275,6 +277,8 @@ namespace H.Core.Models
             this.DefaultBiodegradableFractionGreenWaste = 0.024;
             this.DefaultBiodegradableFractionSwineManure = 0.024;
             this.DefaultBiodegradableFractionOtherManure = 0.550;
+
+            this.ResidueInputCalculationMethod = ResidueInputCalculationMethod.Default;
         }
 
 
@@ -1004,6 +1008,12 @@ namespace H.Core.Models
         {
             get => _percentageOfStrawReturnedToSoilForPerennials;
             set => SetProperty(ref _percentageOfStrawReturnedToSoilForPerennials, value);
+        }
+
+        public ResidueInputCalculationMethod ResidueInputCalculationMethod
+        {
+            get => _residueInputCalculationMethod;
+            set => SetProperty(ref _residueInputCalculationMethod, value);
         }
 
         #endregion
