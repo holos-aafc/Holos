@@ -32,6 +32,7 @@ namespace H.Core.Services.LandManagement.Soil
             }
 
             _cache = new Dictionary<int, GeographicData>();
+            
         }
 
         #endregion

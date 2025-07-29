@@ -50,6 +50,10 @@ namespace H.CLI.FileAndDirectoryAccessors
             Properties.Resources.Settings_PolygonNumber + KeyValuePairSeparator + farm.PolygonId.ToString(CLILanguageConstants.culture),
             Properties.Resources.Settings_Latitude + KeyValuePairSeparator + farm.Latitude.ToString(CLILanguageConstants.culture),
             Properties.Resources.Settings_Longitude + KeyValuePairSeparator + farm.Longitude.ToString(CLILanguageConstants.culture),
+            Properties.Resources.Settings_UseCustomStartingSOCValue + KeyValuePairSeparator +  farm.UseCustomStartingSoilOrganicCarbon.ToString(CLILanguageConstants.culture),
+            Properties.Resources.Settings_StartingSOCValue  + KeyValuePairSeparator +  Math.Round(farm.StartingSoilOrganicCarbon, dataRoundingDecimalPoints).ToString(CLILanguageConstants.culture),
+            Properties.Resources.Settings_ResidueInputCalculationMethod  + KeyValuePairSeparator +  farm.Defaults.ResidueInputCalculationMethod,
+            Properties.Resources.Settings_SoilDataAcquisitionMethod  + KeyValuePairSeparator +  farm.Defaults.SoilDataAcquisitionMethod,
             Properties.Resources.Settings_CarbonConcentration + UnitsAndKeySeparator +
                                                                 uCalc.GetUnitsOfMeasurementString(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.KilogramPerKilogram) +
                                                                 KeyValuePairSeparator +
@@ -208,10 +212,6 @@ namespace H.CLI.FileAndDirectoryAccessors
             Properties.Resources.Settings_ProportionOfSandInSoil  + KeyValuePairSeparator +  Math.Round(geographicData.DefaultSoilData.ProportionOfSandInSoil, dataRoundingDecimalPoints).ToString(CLILanguageConstants.culture),
             Properties.Resources.Settings_ProportionOfClayInSoil  + KeyValuePairSeparator +  Math.Round(geographicData.DefaultSoilData.ProportionOfClayInSoil, dataRoundingDecimalPoints).ToString(CLILanguageConstants.culture),
             Properties.Resources.Settings_ProportionOfSoilOrganicCarbon  + KeyValuePairSeparator +  Math.Round(geographicData.DefaultSoilData.ProportionOfSoilOrganicCarbon, dataRoundingDecimalPoints).ToString(CLILanguageConstants.culture),
-            Properties.Resources.Settings_UseCustomStartingSOCValue + KeyValuePairSeparator +  farm.UseCustomStartingSoilOrganicCarbon.ToString(CLILanguageConstants.culture),
-            Properties.Resources.Settings_StartingSOCValue  + KeyValuePairSeparator +  Math.Round(farm.StartingSoilOrganicCarbon, dataRoundingDecimalPoints).ToString(CLILanguageConstants.culture),
-            Properties.Resources.Settings_ResidueInputCalculationMethod  + KeyValuePairSeparator +  farm.Defaults.ResidueInputCalculationMethod,
-            Properties.Resources.Settings_SoilDataAcquisitionMethod  + KeyValuePairSeparator +  farm.Defaults.SoilDataAcquisitionMethod,
             };
         }
 

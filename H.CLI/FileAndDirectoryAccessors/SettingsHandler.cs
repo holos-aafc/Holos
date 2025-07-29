@@ -8,6 +8,7 @@ using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Providers;
 using H.Core.Providers.Climate;
+using H.Core.Services.LandManagement.Soil;
 using SharpKml.Dom;
 
 namespace H.CLI.FileAndDirectoryAccessors
@@ -19,6 +20,7 @@ namespace H.CLI.FileAndDirectoryAccessors
         private readonly DirectoryHandler _directoryHandler = new DirectoryHandler();
         private readonly UnitsOfMeasurementCalculator _unitsOfMeasurementCalculator = new UnitsOfMeasurementCalculator();
         private readonly IGeographicDataProvider _geographicDataProvider = new GeographicDataProvider();
+        private readonly ISoilService _soilService;
 
         private readonly IClimateProvider _climateProvider;
 
@@ -36,6 +38,10 @@ namespace H.CLI.FileAndDirectoryAccessors
             {
                 throw new ArgumentNullException(nameof(climateProvider));
             }
+
+            _geographicDataProvider.Initialize();
+            
+            _soilService = new DefaultSoilService(_geographicDataProvider);
         }
 
         #region Public Methods
@@ -153,10 +159,7 @@ namespace H.CLI.FileAndDirectoryAccessors
             this.ApplyClimateData(userSettings, farm);
             this.ApplyGeographicData(userSettings, farm);
 
-            if (userSettings.ContainsKey(Properties.Resources.Settings_SoilFunctionalCategory))
-            {
-                farm.GeographicData.DefaultSoilData.SoilFunctionalCategory = (SoilFunctionalCategory)Enum.Parse(typeof(SoilFunctionalCategory), userSettings[Properties.Resources.Settings_SoilFunctionalCategory], true);
-            }
+
 
             if (userSettings.ContainsKey(Properties.Resources.Settings_UseCustomStartingSOCValue))
             {
@@ -258,10 +261,10 @@ namespace H.CLI.FileAndDirectoryAccessors
             switch (farm.ClimateAcquisition)
             {
                 case Farm.ChosenClimateAcquisition.Custom:
-                {
-                    farm.ClimateData = new ClimateData()
                     {
-                        PrecipitationData =
+                        farm.ClimateData = new ClimateData()
+                        {
+                            PrecipitationData =
                         {
                             January = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
                                 CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters,
@@ -302,7 +305,7 @@ namespace H.CLI.FileAndDirectoryAccessors
                                 double.Parse(userSettings[Properties.Resources.Settings_DecemberPrecipitation]), false),
                         },
 
-                        EvapotranspirationData =
+                            EvapotranspirationData =
                         {
                             January = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
                                 CLIUnitsOfMeasurementConstants.measurementSystem,
@@ -377,7 +380,7 @@ namespace H.CLI.FileAndDirectoryAccessors
                                 false),
                         },
 
-                        TemperatureData =
+                            TemperatureData =
                         {
                             January = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(
                                 CLIUnitsOfMeasurementConstants.measurementSystem,
@@ -434,15 +437,15 @@ namespace H.CLI.FileAndDirectoryAccessors
                                 double.Parse(userSettings[Properties.Resources.Settings_DecemberMeanTemperature]),
                                 false),
                         },
-                    };
+                        };
                         break;
-                }
+                    }
 
                 case Farm.ChosenClimateAcquisition.InputFile:
-                {
-                    farm.ClimateData = _climateProvider.Get(farm.ClimateDataFileName, farm.Defaults.TimeFrame);
-                    break;
-                }
+                    {
+                        farm.ClimateData = _climateProvider.Get(farm.ClimateDataFileName, farm.Defaults.TimeFrame);
+                        break;
+                    }
 
                 default:
                     farm.ClimateData = _climateProvider.Get(farm.Latitude, farm.Longitude, farm.Defaults.TimeFrame);
@@ -465,10 +468,10 @@ namespace H.CLI.FileAndDirectoryAccessors
             switch (farm.Defaults.SoilDataAcquisitionMethod)
             {
                 case SoilDataAcquisitionMethod.Custom:
-                {
-                    userGeographicData = new GeographicData()
                     {
-                        DefaultSoilData =
+                        userGeographicData = new GeographicData()
+                        {
+                            DefaultSoilData =
                         {
                             Province = (Province)Enum.Parse(typeof(Province), userSettings[Properties.Resources.Settings_Province], true),
                             YearOfObservation = int.Parse(userSettings[Properties.Resources.Settings_YearOfObservation]),
@@ -482,21 +485,26 @@ namespace H.CLI.FileAndDirectoryAccessors
                             ProportionOfClayInSoil = double.Parse(userSettings[Properties.Resources.Settings_ProportionOfClayInSoil]),
                             ProportionOfSoilOrganicCarbon = double.Parse(userSettings[Properties.Resources.Settings_ProportionOfSoilOrganicCarbon]),
                         },
-                    };
+                        };
 
-                        break;    
-                }
+                        if (userSettings.ContainsKey(Properties.Resources.Settings_SoilFunctionalCategory))
+                        {
+                            userGeographicData.DefaultSoilData.SoilFunctionalCategory = (SoilFunctionalCategory)Enum.Parse(typeof(SoilFunctionalCategory), userSettings[Properties.Resources.Settings_SoilFunctionalCategory], true);
+                        }
+
+                        farm.GeographicData = userGeographicData;
+
+                        break;
+                    }
 
                 default:
-                {
-                    // Default/SLC
-                    var geographicData = _geographicDataProvider.GetGeographicalData(farm.PolygonId);
-                        // Create new soil service class to reduce duplication with code in map view model
-                        break;
-                }
-            }
+                    {
+                        // Default/SLC
+                        _soilService.SetGeographicalData(farm);
 
-            farm.GeographicData = userGeographicData;
+                        break;
+                    }
+            }
         }
 
         #endregion
