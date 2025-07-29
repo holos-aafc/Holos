@@ -49,7 +49,7 @@ namespace H.Core.Converters
                     return FarmResidueType.TriticaleStraw;
                 case "wheatstraw":
                     return FarmResidueType.WheatStraw;
-                case "sweagesludge":
+                case "sewagesludge":
                     return FarmResidueType.SweageSludge;
                 case "foodwaste":
                     return FarmResidueType.FoodWaste;

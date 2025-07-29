@@ -270,7 +270,17 @@ namespace H.Core.Providers.Climate
         {
             Trace.TraceInformation($"{nameof(NasaClimateProvider)}.{nameof(GetNasaApiString)} : Trying to access NASA API.");
             var webClient = new WebClient();
-            string content = webClient.DownloadString(url);
+            string content = string.Empty;
+
+            try
+            {
+                content = webClient.DownloadString(url);
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError($"{nameof(NasaClimateProvider)}.{nameof(GetNasaApiString)}, {e.Message}");
+            }
+
             if (content != string.Empty)
             {
                 Trace.TraceInformation($"{nameof(NasaClimateProvider)}.{nameof(GetNasaApiString)} : API content downloaded successfully.");
@@ -280,6 +290,7 @@ namespace H.Core.Providers.Climate
                 Trace.TraceError($"{nameof(NasaClimateProvider)}.{nameof(GetNasaApiString)}, API content could not be downloaded.");
                 Trace.TraceError($"{nameof(NasaClimateProvider)}.{nameof(GetNasaApiString)}, API url: {url}");
             }
+
             return content;
         }
 

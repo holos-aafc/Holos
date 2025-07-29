@@ -241,6 +241,7 @@
     <Compile Include="Enumerations\Seasons.cs" />
     <Compile Include="Enumerations\SeparationCoefficients.cs" />
     <Compile Include="Enumerations\SoilCategoryTypeExtensions.cs" />
+    <Compile Include="Enumerations\SoilDataAcquisitionMethod.cs" />
     <Compile Include="Enumerations\SoilDrainageClasses.cs" />
     <Compile Include="Enumerations\SoilFunctionalCategory.cs" />
     <Compile Include="Enumerations\SoilFunctionalCategoryExtensions.cs" />
@@ -737,6 +738,8 @@
     <Compile Include="Services\LandManagement\IrrigationService.cs" />
     <Compile Include="Services\LandManagement\MonthlyManureSpreadingEmissions.cs" />
     <Compile Include="Converters\PropertyConverter.cs" />
+    <Compile Include="Services\LandManagement\Soil\DefaultSoilService.cs" />
+    <Compile Include="Services\LandManagement\Soil\ISoilService.cs" />
     <Compile Include="Services\MonthlyManureSpreadingData.cs" />
     <Compile Include="Services\RotationComponentHelper.cs" />
     <Compile Include="Services\LandManagement\Shelterbelts\ShelterbeltComponentHelper.cs" />

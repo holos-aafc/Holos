@@ -3599,6 +3599,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Soil Data Acquisition Method.
+        /// </summary>
+        public static string Settings_SoilDataAcquisitionMethod {
+            get {
+                return ResourceManager.GetString("Settings_SoilDataAcquisitionMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Soil functional category.
         /// </summary>
         public static string Settings_SoilFunctionalCategory {

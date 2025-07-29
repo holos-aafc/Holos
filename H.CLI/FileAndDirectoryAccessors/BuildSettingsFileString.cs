@@ -211,6 +211,7 @@ namespace H.CLI.FileAndDirectoryAccessors
             Properties.Resources.Settings_UseCustomStartingSOCValue + KeyValuePairSeparator +  farm.UseCustomStartingSoilOrganicCarbon.ToString(CLILanguageConstants.culture),
             Properties.Resources.Settings_StartingSOCValue  + KeyValuePairSeparator +  Math.Round(farm.StartingSoilOrganicCarbon, dataRoundingDecimalPoints).ToString(CLILanguageConstants.culture),
             Properties.Resources.Settings_ResidueInputCalculationMethod  + KeyValuePairSeparator +  farm.Defaults.ResidueInputCalculationMethod,
+            Properties.Resources.Settings_SoilDataAcquisitionMethod  + KeyValuePairSeparator +  farm.Defaults.SoilDataAcquisitionMethod,
             };
         }
 

@@ -20,6 +20,7 @@ namespace H.Core.Models
         private TimeFrame _timeFrame;
         private CarbonModellingStrategies _carbonModellingStrategy;
         private ResidueInputCalculationMethod _residueInputCalculationMethod;
+        private SoilDataAcquisitionMethod _soilDataAcquisitionMethod;
 
         private double _latitude;
         private double _longitude;
@@ -279,6 +280,7 @@ namespace H.Core.Models
             this.DefaultBiodegradableFractionOtherManure = 0.550;
 
             this.ResidueInputCalculationMethod = ResidueInputCalculationMethod.Default;
+            this.SoilDataAcquisitionMethod = SoilDataAcquisitionMethod.Default;
         }
 
 
@@ -1014,6 +1016,15 @@ namespace H.Core.Models
         {
             get => _residueInputCalculationMethod;
             set => SetProperty(ref _residueInputCalculationMethod, value);
+        }
+
+        /// <summary>
+        /// Used with the CLI to specify how soil data should be initialized (by settings file or by SLC database)
+        /// </summary>
+        public SoilDataAcquisitionMethod SoilDataAcquisitionMethod
+        {
+            get => _soilDataAcquisitionMethod;
+            set => SetProperty(ref _soilDataAcquisitionMethod, value);
         }
 
         #endregion

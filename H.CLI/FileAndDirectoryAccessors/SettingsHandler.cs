@@ -8,6 +8,7 @@ using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Providers;
 using H.Core.Providers.Climate;
+using SharpKml.Dom;
 
 namespace H.CLI.FileAndDirectoryAccessors
 {
@@ -17,7 +18,8 @@ namespace H.CLI.FileAndDirectoryAccessors
 
         private readonly DirectoryHandler _directoryHandler = new DirectoryHandler();
         private readonly UnitsOfMeasurementCalculator _unitsOfMeasurementCalculator = new UnitsOfMeasurementCalculator();
-        
+        private readonly IGeographicDataProvider _geographicDataProvider = new GeographicDataProvider();
+
         private readonly IClimateProvider _climateProvider;
 
         public List<int> PolygonIDList { get; set; } = new List<int>();
@@ -149,26 +151,7 @@ namespace H.CLI.FileAndDirectoryAccessors
             }
 
             this.ApplyClimateData(userSettings, farm);
-
-            var userGeographicData = new GeographicData()
-            {
-                DefaultSoilData =
-                {
-                    Province = (Province)Enum.Parse(typeof(Province), userSettings[Properties.Resources.Settings_Province], true),
-                   YearOfObservation = int.Parse(userSettings[Properties.Resources.Settings_YearOfObservation]),
-                   EcodistrictId = int.Parse(userSettings[Properties.Resources.Settings_EcodistrictID]),
-                   SoilGreatGroup =  (SoilGreatGroupType)Enum.Parse(typeof(SoilGreatGroupType), userSettings[Properties.Resources.Settings_SoilGreatGroup], true),
-                   BulkDensity = double.Parse(userSettings[Properties.Resources.Settings_BulkDensity]),
-                   SoilTexture = (SoilTexture)Enum.Parse(typeof(SoilTexture), userSettings[Properties.Resources.Settings_SoilTexture], true),
-                   SoilPh = double.Parse(userSettings[Properties.Resources.Settings_SoilPh]),
-                   TopLayerThickness = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters, double.Parse(userSettings[Properties.Resources.Settings_TopLayerThickness]), false),
-                   ProportionOfSandInSoil = double.Parse(userSettings[Properties.Resources.Settings_ProportionOfSandInSoil]),
-                   ProportionOfClayInSoil = double.Parse(userSettings[Properties.Resources.Settings_ProportionOfClayInSoil]),
-                   ProportionOfSoilOrganicCarbon = double.Parse(userSettings[Properties.Resources.Settings_ProportionOfSoilOrganicCarbon]),
-                },
-            };
-
-            farm.GeographicData = userGeographicData;
+            this.ApplyGeographicData(userSettings, farm);
 
             if (userSettings.ContainsKey(Properties.Resources.Settings_SoilFunctionalCategory))
             {
@@ -465,6 +448,55 @@ namespace H.CLI.FileAndDirectoryAccessors
                     farm.ClimateData = _climateProvider.Get(farm.Latitude, farm.Longitude, farm.Defaults.TimeFrame);
                     break;
             }
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void ApplyGeographicData(Dictionary<string, string> userSettings, Farm farm)
+        {
+            if (userSettings.ContainsKey(Properties.Resources.Settings_SoilDataAcquisitionMethod))
+            {
+                farm.Defaults.SoilDataAcquisitionMethod = (SoilDataAcquisitionMethod)Enum.Parse(typeof(SoilDataAcquisitionMethod), userSettings[Properties.Resources.Settings_SoilDataAcquisitionMethod], true);
+            }
+
+            var userGeographicData = new GeographicData();
+            switch (farm.Defaults.SoilDataAcquisitionMethod)
+            {
+                case SoilDataAcquisitionMethod.Custom:
+                {
+                    userGeographicData = new GeographicData()
+                    {
+                        DefaultSoilData =
+                        {
+                            Province = (Province)Enum.Parse(typeof(Province), userSettings[Properties.Resources.Settings_Province], true),
+                            YearOfObservation = int.Parse(userSettings[Properties.Resources.Settings_YearOfObservation]),
+                            EcodistrictId = int.Parse(userSettings[Properties.Resources.Settings_EcodistrictID]),
+                            SoilGreatGroup =  (SoilGreatGroupType)Enum.Parse(typeof(SoilGreatGroupType), userSettings[Properties.Resources.Settings_SoilGreatGroup], true),
+                            BulkDensity = double.Parse(userSettings[Properties.Resources.Settings_BulkDensity]),
+                            SoilTexture = (SoilTexture)Enum.Parse(typeof(SoilTexture), userSettings[Properties.Resources.Settings_SoilTexture], true),
+                            SoilPh = double.Parse(userSettings[Properties.Resources.Settings_SoilPh]),
+                            TopLayerThickness = _unitsOfMeasurementCalculator.GetUnitsOfMeasurementValue(CLIUnitsOfMeasurementConstants.measurementSystem, MetricUnitsOfMeasurement.Millimeters, double.Parse(userSettings[Properties.Resources.Settings_TopLayerThickness]), false),
+                            ProportionOfSandInSoil = double.Parse(userSettings[Properties.Resources.Settings_ProportionOfSandInSoil]),
+                            ProportionOfClayInSoil = double.Parse(userSettings[Properties.Resources.Settings_ProportionOfClayInSoil]),
+                            ProportionOfSoilOrganicCarbon = double.Parse(userSettings[Properties.Resources.Settings_ProportionOfSoilOrganicCarbon]),
+                        },
+                    };
+
+                        break;    
+                }
+
+                default:
+                {
+                    // Default/SLC
+                    var geographicData = _geographicDataProvider.GetGeographicalData(farm.PolygonId);
+                        // Create new soil service class to reduce duplication with code in map view model
+                        break;
+                }
+            }
+
+            farm.GeographicData = userGeographicData;
         }
 
         #endregion

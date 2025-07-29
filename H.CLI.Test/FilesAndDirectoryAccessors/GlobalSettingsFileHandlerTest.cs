@@ -112,6 +112,9 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             var pathToSettingsFile = @"H.CLI.TestFiles\TestGlobalSettingsHandler";
             directoryHandler.GenerateGlobalSettingsFile(pathToSettingsFile, new Farm() { GeographicData = lethbridgeGeographicData, ClimateData = climatateData});
             reader.ReadGlobalSettings(pathToSettingsFile + @"\farm.settings");
+
+            reader.GlobalSettingsDictionary[Properties.Resources.Settings_SoilDataAcquisitionMethod]= SoilDataAcquisitionMethod.Custom.ToString();
+
             globalSettingsHandler.ApplySettingsFromUserFile(ref applicationData, ref farm, reader.GlobalSettingsDictionary);
 
             Assert.AreEqual(farm.Defaults.Alfa, 0.7);
