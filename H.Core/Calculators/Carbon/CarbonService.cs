@@ -119,7 +119,7 @@ namespace H.Core.Calculators.Carbon
                 if (residueInputMethod == ResidueInputCalculationMethod.ICBM)
                 {
                     // If user specifies ICBM input calculation mode, use ICBM
-                    _icbmCarbonInputCalculator.AssignInputs(previousYear, viewItem, nextYear, farm);
+                    _icbmCarbonInputCalculator.AssignInputs(previousYear, viewItem, nextYear, farm, animalResults);
                 }
                 else if (residueInputMethod == ResidueInputCalculationMethod.IPCCTier2 && canCalculateInputsUsingIpccTier2)
                 {
@@ -135,7 +135,7 @@ namespace H.Core.Calculators.Carbon
                     }
                     else
                     {
-                        _icbmCarbonInputCalculator.AssignInputs(previousYear, viewItem, nextYear, farm);
+                        _icbmCarbonInputCalculator.AssignInputs(previousYear, viewItem, nextYear, farm, animalResults);
                     }
                 }
             }
@@ -148,7 +148,7 @@ namespace H.Core.Calculators.Carbon
                 }
                 else
                 {
-                    _icbmCarbonInputCalculator.AssignInputs(previousYear, viewItem, nextYear, farm);
+                    _icbmCarbonInputCalculator.AssignInputs(previousYear, viewItem, nextYear, farm, animalResults);
                 }
             }
         }

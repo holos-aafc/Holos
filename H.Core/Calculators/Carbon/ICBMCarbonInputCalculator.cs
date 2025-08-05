@@ -2,7 +2,9 @@
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using H.Core.Emissions.Results;
 using H.Core.Services.LandManagement;
 
 namespace H.Core.Calculators.Carbon
@@ -19,12 +21,14 @@ namespace H.Core.Calculators.Carbon
 
         #region Public Methods
 
-        public CropViewItem AssignInputs(
-            CropViewItem previousYearViewItem, 
-            CropViewItem currentYearViewItem, 
-            CropViewItem nextYearViewItem, 
-            Farm farm)
+        public CropViewItem AssignInputs(CropViewItem previousYearViewItem,
+            CropViewItem currentYearViewItem,
+            CropViewItem nextYearViewItem,
+            Farm farm, List<AnimalComponentEmissionsResults> animalResults)
         {
+            manureService.Initialize(farm, animalResults);
+            digestateService.Initialize(farm, animalResults);
+
             var isNonSwathingGrazingScenario = farm.IsNonSwathingGrazingScenario(currentYearViewItem);
 
             currentYearViewItem.PlantCarbonInAgriculturalProduct = this.CalculatePlantCarbonInAgriculturalProduct(
@@ -96,6 +100,7 @@ namespace H.Core.Calculators.Carbon
             }
 
             currentYearViewItem.DigestateCarbonInputsPerHectare = digestateService.GetTotalDigestateCarbonInputsForField(farm, currentYearViewItem.Year, currentYearViewItem);
+            currentYearViewItem.DigestateCarbonInputsPerHectareFromApplicationsOnly = currentYearViewItem.GetTotalCarbonFromAppliedDigestate(ManureLocationSourceType.Livestock) / currentYearViewItem.Area;
 
             currentYearViewItem.TotalCarbonInputs = currentYearViewItem.AboveGroundCarbonInput + currentYearViewItem.BelowGroundCarbonInput + currentYearViewItem.ManureCarbonInputsPerHectare + currentYearViewItem.DigestateCarbonInputsPerHectare;
 

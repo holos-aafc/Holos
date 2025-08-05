@@ -1,4 +1,6 @@
-﻿using H.Core.Models.LandManagement.Fields;
+﻿using System.Collections.Generic;
+using H.Core.Emissions.Results;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
 using H.Core.Services.LandManagement;
 
@@ -238,10 +240,9 @@ namespace H.Core.Calculators.Carbon
             CropViewItem cropViewItem,
             Farm farm);
 
-        CropViewItem AssignInputs(
-            CropViewItem previousYearViewItem, 
-            CropViewItem currentYearViewItem, 
-            CropViewItem nextYearViewItem, 
-            Farm farm);
+        CropViewItem AssignInputs(CropViewItem previousYearViewItem,
+            CropViewItem currentYearViewItem,
+            CropViewItem nextYearViewItem,
+            Farm farm, List<AnimalComponentEmissionsResults> animalResults);
     }
 }

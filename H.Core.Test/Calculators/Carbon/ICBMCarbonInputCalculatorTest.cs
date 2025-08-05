@@ -4,7 +4,9 @@ using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using H.Core.Emissions.Results;
 using H.Core.Providers.Climate;
 using H.Core.Providers.Evapotranspiration;
 using H.Core.Providers.Precipitation;
@@ -85,7 +87,7 @@ namespace H.Core.Test.Calculators.Carbon
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
-                farm: farm);
+                farm: farm, animalResults: new List<AnimalComponentEmissionsResults>());
 
             // Plant C in agricultural product: Cp = 435.6
 
@@ -132,7 +134,7 @@ namespace H.Core.Test.Calculators.Carbon
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: null,
-                farm: farm);
+                farm: farm, animalResults: new List<AnimalComponentEmissionsResults>());
 
             // Plant C in agricultural product: Cp = 403.92
 
@@ -181,7 +183,7 @@ namespace H.Core.Test.Calculators.Carbon
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
-                farm: farm);
+                farm: farm, animalResults: new List<AnimalComponentEmissionsResults>());
 
             // Plant C in agricultural product: Cp = 3011.538
 
@@ -254,7 +256,7 @@ namespace H.Core.Test.Calculators.Carbon
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
-                farm: farm);
+                farm: farm, animalResults: new List<AnimalComponentEmissionsResults>());
 
             //  Plant C in agricultural product for next year: 435.6
 
@@ -331,7 +333,7 @@ namespace H.Core.Test.Calculators.Carbon
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
-                farm: farm);
+                farm: farm, animalResults: new List<AnimalComponentEmissionsResults>());
 
             Assert.AreEqual(10.293, currentYearViewItem.AboveGroundCarbonInput, 3);
         }
@@ -369,7 +371,7 @@ namespace H.Core.Test.Calculators.Carbon
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: null,
-                farm: farm);
+                farm: farm, animalResults: new List<AnimalComponentEmissionsResults>());
 
             // Plant C in agricultural product: Cp = 391.5
 
@@ -426,7 +428,7 @@ namespace H.Core.Test.Calculators.Carbon
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
-                farm: farm);
+                farm: farm, animalResults: new List<AnimalComponentEmissionsResults>());
 
             // Plant C in agricultural product: Cp = 403.92
 
@@ -468,7 +470,7 @@ namespace H.Core.Test.Calculators.Carbon
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: null,
-                farm: farm);
+                farm: farm, animalResults: new List<AnimalComponentEmissionsResults>());
 
             Assert.AreEqual(396, currentYearViewItem.BelowGroundCarbonInput, 3);
         }
@@ -805,7 +807,7 @@ namespace H.Core.Test.Calculators.Carbon
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
-                farm: farm);
+                farm: farm, animalResults: new List<AnimalComponentEmissionsResults>());
 
             // Plant C in agricultural product: Cp = 609.23
 
@@ -852,7 +854,7 @@ namespace H.Core.Test.Calculators.Carbon
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: null,
-                farm: farm);
+                farm: farm, animalResults: new List<AnimalComponentEmissionsResults>());
 
             // Plant C in agricultural product: Cp = 609.23
 
@@ -904,7 +906,7 @@ namespace H.Core.Test.Calculators.Carbon
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
-                farm: farm);
+                farm: farm, animalResults: new List<AnimalComponentEmissionsResults>());
 
             // Plant C in agricultural product: Cp = 396
 
@@ -952,7 +954,7 @@ namespace H.Core.Test.Calculators.Carbon
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: null,
-                farm: farm);
+                farm: farm, animalResults: new List<AnimalComponentEmissionsResults>());
 
             // Plant C in agricultural product: Cp = 396
 
@@ -1005,7 +1007,7 @@ namespace H.Core.Test.Calculators.Carbon
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
-                farm: farm);
+                farm: farm, animalResults: new List<AnimalComponentEmissionsResults>());
 
             // Plant C in agricultural product: Cp = 792
 
@@ -1057,7 +1059,7 @@ namespace H.Core.Test.Calculators.Carbon
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: null,
-                farm: farm);
+                farm: farm, animalResults: new List<AnimalComponentEmissionsResults>());
 
             // Plant C in agricultural product: Cp = 396           
 
@@ -1109,7 +1111,7 @@ namespace H.Core.Test.Calculators.Carbon
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: nextYearViewItem,
-                farm: farm);
+                farm: farm, animalResults: new List<AnimalComponentEmissionsResults>());
 
             Assert.AreEqual(198, currentYearViewItem.AboveGroundCarbonInput, 1);
         }
@@ -1153,7 +1155,7 @@ namespace H.Core.Test.Calculators.Carbon
                 previousYearViewItem: null,
                 currentYearViewItem: currentYearViewItem,
                 nextYearViewItem: null,
-                farm: farm);
+                farm: farm, animalResults: new List<AnimalComponentEmissionsResults>());
 
 
             Assert.AreEqual(104.131479140329, currentYearViewItem.BelowGroundCarbonInput, 3);

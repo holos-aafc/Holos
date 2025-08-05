@@ -710,12 +710,7 @@ namespace H.Core.Calculators.Infrastructure
             foreach (var substrateFlowInformation in dailyFlowRates)
             {
                 this.CalculateDailyBiogasProductionFromSingleSubstrate(substrateFlowInformation);
-
-                if (substrateFlowInformation.SubstrateType != SubstrateType.FarmResidues)
-                {
-                    // These calculate flows from manure only
-                    this.CalculateFlowsInDigestateFromSingleSubstrate(substrateFlowInformation);
-                }
+                this.CalculateFlowsInDigestateFromSingleSubstrate(substrateFlowInformation);
             }
 
             // Sum flows that occur on same day.
@@ -835,7 +830,28 @@ namespace H.Core.Calculators.Infrastructure
                     // Equation 4.8.1-14
                     if (isNonManureResidue)
                     {
-                        substrateFlow.CarbonFlowOfSubstrate = substrateFlow.TotalSolidsFlowOfSubstrate * substrateViewItemBase.TotalCarbon;
+                        var carbonFactor = 0d;
+                        if (substrateViewItemBase is CropResidueSubstrateViewItem cropResidueSubstrateViewItem)
+                        {
+                            carbonFactor = CoreConstants.CarbonConcentration;
+                        }
+                        else if(substrateViewItemBase is FarmResiduesSubstrateViewItem farmResiduesSubstrateViewItem)
+                        {
+                            if (farmResiduesSubstrateViewItem.FarmResidueType == FarmResidueType.SweageSludge)
+                            {
+                                carbonFactor = 0.414;
+                            }
+                            else if (farmResiduesSubstrateViewItem.FarmResidueType == FarmResidueType.FoodWaste)
+                            {
+                                carbonFactor = 0.475;
+                            }
+                            else
+                            {
+                                carbonFactor = substrateViewItemBase.TotalCarbon;
+                            }
+                        }
+                        
+                        substrateFlow.CarbonFlowOfSubstrate = substrateFlow.TotalSolidsFlowOfSubstrate * carbonFactor;
                     }
                     else
                     {

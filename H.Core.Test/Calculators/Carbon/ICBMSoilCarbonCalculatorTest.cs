@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using H.Core.Calculators.Carbon;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
@@ -197,7 +198,7 @@ namespace H.Core.Test.Calculators.Carbon
             cropViewItem.ManagementFactor = 1;
             cropViewItem.FieldSystemComponentGuid = fieldSystemComponent.Guid;
 
-            _soilCarbonInputCalculator.AssignInputs(null, cropViewItem, null, farm);
+            _soilCarbonInputCalculator.AssignInputs(null, cropViewItem, null, farm, new List<AnimalComponentEmissionsResults>());
 
             // ICBM uses the previous year's inputs for residue calculations so we use the view item for both the current year and the previous year
             _sut.CalculateNitrogenAtInterval(cropViewItem, cropViewItem, null, farm, 0);
