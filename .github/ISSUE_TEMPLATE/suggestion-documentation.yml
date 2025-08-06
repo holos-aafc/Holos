@@ -2,7 +2,7 @@ name: Holos Documentation Suggestion
 description: Suggest a change to the Holos documentation.
 labels: ["suggestion", "documentation"]
 assignees:
-  - holos-aafc
+  - aaron-mcpherson
 body:
   - type: markdown
     attributes:
