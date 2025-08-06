@@ -396,7 +396,7 @@ namespace H.Core.Calculators.Carbon
 
             this.CurrentYearResults.EF_SN = emissionFactorForSyntheticFertilizer;
             this.CurrentYearResults.EF_CRN = emissionFactorForCropResidues;
-            this.CurrentYearResults.EF_ON = emissionFactorForSyntheticFertilizer;
+            this.CurrentYearResults.EF_ON = emissionFactorForOrganicNitrogen;
 
             // Emissions from land applied manure
             var directN2ONFromLandAppliedManure = N2OEmissionFactorCalculator.CalculateDirectN2ONFromFieldAppliedManure(farm, currentYearResults, includeRemainingAmounts: true);
