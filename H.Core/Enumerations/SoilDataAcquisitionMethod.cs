@@ -2,6 +2,8 @@
 {
     public enum SoilDataAcquisitionMethod
     {
+        // Use .NET 9
+
         /// <summary>
         /// Default (currently uses SLC method)
         /// </summary>
