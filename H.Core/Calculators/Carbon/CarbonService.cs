@@ -116,6 +116,8 @@ namespace H.Core.Calculators.Carbon
 
             if (isCliMode)
             {
+                // Check for 0 yield in inputs files
+
                 if (residueInputMethod == ResidueInputCalculationMethod.ICBM)
                 {
                     // If user specifies ICBM input calculation mode, use ICBM
