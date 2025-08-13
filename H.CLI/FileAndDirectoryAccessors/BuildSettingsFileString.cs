@@ -46,6 +46,7 @@ namespace H.CLI.FileAndDirectoryAccessors
             {
                 string.Format(Properties.Resources.SettingsFileHeader,farm.PolygonId),
                 Properties.Resources.Settings_YieldAssignmentMethod + KeyValuePairSeparator + farm.YieldAssignmentMethod.ToString(),
+                Properties.Resources.Settings_PathToCustomYieldFile + KeyValuePairSeparator + farm.PathToYieldInputFile,
 
             Properties.Resources.Settings_PolygonNumber + KeyValuePairSeparator + farm.PolygonId.ToString(CLILanguageConstants.culture),
             Properties.Resources.Settings_Latitude + KeyValuePairSeparator + farm.Latitude.ToString(CLILanguageConstants.culture),

@@ -474,8 +474,19 @@ namespace H.Core.Calculators.Carbon
                     _cropInitializationService.InitializeMoistureContent(currentYearViewItem, farm);
                 }
 
-                // If the CLI user has not entered a value for aboveground, belowground, manure, or digestate C inputs we will need to assign C inputs now before the C model runs
-                if (currentYearViewItem.TotalCarbonInputs == 0)
+                /*
+                 * If the CLI user has not entered a value for aboveground or belowground crop residue inputs, we will need to assign C inputs now before the C model runs. The user
+                 * can specify that the CLI should recalculate inputs by setting these two columns to 0. C models can't run without these two inputs (as a minimum) so the must be set
+                 * to non-zero values before running the C models
+                 */
+                var aboveGroundResidueCarbon = currentYearViewItem.AboveGroundCarbonInput;
+                var belowGroundResidueCarbon = currentYearViewItem.BelowGroundCarbonInput;
+                var manureCarbonInput = currentYearViewItem.ManureCarbonInputsPerHectare;
+                var digestateCarbonInput = currentYearViewItem.DigestateCarbonInputsPerHectare;
+
+                var cropResidueInputsNeedRecalculating = aboveGroundResidueCarbon == 0 && belowGroundResidueCarbon == 0;
+                
+                 if (cropResidueInputsNeedRecalculating)
                 {
                     // If biomass fractions are 0, assign defaults
                     if (currentYearViewItem.BiomassCoefficientProduct == 0)

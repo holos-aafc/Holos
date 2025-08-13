@@ -912,13 +912,15 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// Total carbon inputs
+        /// Total carbon inputs from above ground crop residue, below ground crop residue, manure residue, and digestate residues
         /// 
         /// (kg C ha^-1)
         /// </summary>
         public double TotalCarbonInputs { get; set; }
 
         /// <summary>
+        /// Above ground carbon input from crop residues
+        /// 
         /// C_ag 
         /// 
         /// (kg C ha^-1)
@@ -930,6 +932,8 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
+        /// Below ground carbon input from crop residues
+        /// 
         /// C_bg 
         /// 
         /// (kg C ha^-1)
