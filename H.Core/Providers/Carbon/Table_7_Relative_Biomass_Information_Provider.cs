@@ -312,8 +312,6 @@ namespace H.Core.Providers.Carbon
 
                 #endregion
 
-
-
                 yield return residueData;
             }
         }

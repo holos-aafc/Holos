@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 
 namespace H.CLI.KeyConverter
 {
@@ -10,7 +11,7 @@ namespace H.CLI.KeyConverter
         /// </summary>
         public bool ConvertResponseToBool(string key)
         {
-            if (key == "Yes")
+            if (string.Equals(key, "yes", StringComparison.InvariantCultureIgnoreCase) || string.Equals(key, "true", StringComparison.InvariantCultureIgnoreCase))
             {
                 return true;
             }

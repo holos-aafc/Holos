@@ -181,12 +181,9 @@ namespace H.CLI.Processors
                 stringBuilder.Append(viewItem.PercentageOfProductYieldReturnedToSoil + columnSeparator);
                 stringBuilder.Append(viewItem.IsPesticideUsed + columnSeparator);
                 stringBuilder.Append(viewItem.NumberOfPesticidePasses + columnSeparator);
-                stringBuilder.Append(viewItem.ManureApplied + columnSeparator);
-                stringBuilder.Append(viewItem.AmountOfManureApplied + columnSeparator);
-                stringBuilder.Append(viewItem.ManureApplicationType + columnSeparator);
-                stringBuilder.Append(viewItem.ManureAnimalSourceType + columnSeparator);
-                stringBuilder.Append(viewItem.ManureStateType + columnSeparator);
-                stringBuilder.Append(viewItem.ManureLocationSourceType + columnSeparator);
+
+                this.ProcessManureApplications(stringBuilder, viewItem, columnSeparator, fieldSystemComponent);
+
                 stringBuilder.Append(viewItem.UnderSownCropsUsed + columnSeparator);
                 stringBuilder.Append(viewItem.CropIsGrazed + columnSeparator);
                 stringBuilder.Append(viewItem.FieldSystemComponentGuid + columnSeparator);
@@ -238,8 +235,62 @@ namespace H.CLI.Processors
         }
 
         #endregion
+
+        #region Private Methods
+
+        private void ProcessManureApplications(
+            StringBuilder stringBuilder, 
+            CropViewItem viewItem,
+            string columnSeparator, 
+            FieldSystemComponent fieldComponent)
+        {
+            var fieldManureApplicationsInYear = fieldComponent.GetLivestockManureApplicationsInYear(viewItem.Year);
+
+            if (fieldManureApplicationsInYear.Any())
+            {
+                if (fieldManureApplicationsInYear.Count == 1)
+                {
+                    var singleApplication = fieldManureApplicationsInYear[0];
+
+                    var sourceType = singleApplication.AnimalType.GetManureAnimalSource();
+
+                    stringBuilder.Append(true.ToString().ToUpperInvariant() + columnSeparator); // ManureApplied (bool)
+                    stringBuilder.Append(singleApplication.AmountOfManureAppliedPerHectare + columnSeparator);
+                    stringBuilder.Append(singleApplication.ManureApplicationMethod + columnSeparator);
+                    stringBuilder.Append(sourceType + columnSeparator);
+                    stringBuilder.Append(singleApplication.ManureStateType + columnSeparator);
+                    stringBuilder.Append(singleApplication.ManureLocationSourceType + columnSeparator);
+                }
+                else
+                {
+                    /*
+                     * TODO: in the future, append multiple manure application to input file, instead of current approach to take largest application
+                     */
+
+                    var sortedByAmount = fieldManureApplicationsInYear.OrderByDescending(x => x.AmountOfManureAppliedPerHectare);
+                    var firstLargestApplication = sortedByAmount.First();
+
+                    var sourceType = firstLargestApplication.AnimalType.GetManureAnimalSource();
+
+                    stringBuilder.Append(true.ToString().ToUpperInvariant() + columnSeparator); // ManureApplied (bool)
+                    stringBuilder.Append(firstLargestApplication.AmountOfManureAppliedPerHectare + columnSeparator);
+                    stringBuilder.Append(firstLargestApplication.ManureApplicationMethod + columnSeparator);
+                    stringBuilder.Append(sourceType + columnSeparator);
+                    stringBuilder.Append(firstLargestApplication.ManureStateType + columnSeparator);
+                    stringBuilder.Append(firstLargestApplication.ManureLocationSourceType + columnSeparator);
+                }
+            }
+            else
+            {
+                stringBuilder.Append(viewItem.ManureApplied + columnSeparator);
+                stringBuilder.Append(viewItem.AmountOfManureApplied + columnSeparator);
+                stringBuilder.Append(viewItem.ManureApplicationType + columnSeparator);
+                stringBuilder.Append(viewItem.ManureAnimalSourceType + columnSeparator);
+                stringBuilder.Append(viewItem.ManureStateType + columnSeparator);
+                stringBuilder.Append(viewItem.ManureLocationSourceType + columnSeparator);
+            }
+        }
+
+        #endregion
     }
 }
-
-
-

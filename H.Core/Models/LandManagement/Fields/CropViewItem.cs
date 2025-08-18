@@ -1325,6 +1325,21 @@ namespace H.Core.Models.LandManagement.Fields
             return this.CombinedAboveGroundResidueNitrogen + this.CombinedBelowGroundResidueNitrogen;
         }
 
+        public List<ManureApplicationViewItem> GetManureApplicationsByYear(int year)
+        {
+            var result = new List<ManureApplicationViewItem>();
+
+            foreach (var manureApplicationViewItem in this.ManureApplicationViewItems)
+            {
+                if (manureApplicationViewItem.DateOfApplication.Year == year)
+                {
+                    result.Add(manureApplicationViewItem);
+                }
+            }
+
+            return result;
+        }
+
         #endregion
 
         #region Private Methods

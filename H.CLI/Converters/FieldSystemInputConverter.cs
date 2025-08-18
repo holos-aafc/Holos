@@ -1,16 +1,19 @@
-﻿using H.CLI.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Runtime.InteropServices;
-using H.CLI.FileAndDirectoryAccessors;
+﻿using H.CLI.FileAndDirectoryAccessors;
+using H.CLI.Interfaces;
 using H.CLI.TemporaryComponentStorage;
 using H.Core;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers.Animals;
 using H.Core.Providers.Fertilizer;
+using H.Core.Services.Animals;
+using Microsoft.Office.Interop.Excel;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace H.CLI.Converters
 {
@@ -22,6 +25,7 @@ namespace H.CLI.Converters
         #region Fields
         public List<ComponentBase> FieldComponents { get; set; } = new List<ComponentBase>();
         private KeyConverter.KeyConverter _keyConverter = new KeyConverter.KeyConverter();
+        private IManureService _manureService = new ManureService();
 
         #endregion
 
@@ -95,12 +99,8 @@ namespace H.CLI.Converters
                         viewItem.PerennialStandGroupId = rowInput.Guid;
                     }
 
-                    viewItem.ManureApplied = _keyConverter.ConvertResponseToBool(rowInput.ManureApplied.ToString());
-                    viewItem.AmountOfManureApplied = rowInput.AmountOfManureApplied;
-                    viewItem.ManureApplicationType = rowInput.ManureApplicationType;
-                    viewItem.ManureAnimalSourceType = rowInput.ManureAnimalSourceType;
-                    viewItem.ManureLocationSourceType = rowInput.ManureLocationSourceType;
-                    viewItem.ManureStateType = rowInput.ManureStateType;
+                    this.ProcessManureApplications(rowInput, viewItem, farm);
+
                     viewItem.MoistureContentOfCrop = rowInput.MoistureContentOfCrop;
                     viewItem.MoistureContentOfCropPercentage = rowInput.MoistureContentOfCropPercentage;
 
@@ -185,9 +185,55 @@ namespace H.CLI.Converters
                 fieldSystemComponent.StartYear = stageState.DetailsScreenViewCropViewItems.OrderBy(viewItem => viewItem.Year).Select(viewItem => viewItem.Year).Min();
                 FieldComponents.Add(fieldSystemComponent);
             }
-            return FieldComponents;
 
-        } 
+            return FieldComponents;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void ProcessManureApplications(
+            FieldTemporaryInput rowInput, 
+            CropViewItem viewItem, 
+            Farm farm)
+        {
+            viewItem.ManureApplied = _keyConverter.ConvertResponseToBool(rowInput.ManureApplied.ToString());
+            if (viewItem.ManureApplied == false)
+            {
+                return;
+            }
+
+            if (farm.DefaultManureCompositionData.Any() == false)
+            {
+                /*
+                 * We need to lookup N content of manure systems used for field application, ensure we are always using a non-empty collection
+                 */
+
+                var defaultManureCompositionProvider = new Table_6_Manure_Types_Default_Composition_Provider();
+                var allData = defaultManureCompositionProvider.ManureCompositionData;
+
+                farm.DefaultManureCompositionData.AddRange(allData);
+            }
+
+            /*
+             * CLI only supports one manure application each year (GUI supports multiple applications in a single year)
+             */
+
+            var manureApplication = new ManureApplicationViewItem();
+            manureApplication.DateOfApplication = new DateTime(viewItem.Year, 1, 1);
+            manureApplication.AmountOfManureAppliedPerHectare = rowInput.AmountOfManureApplied;
+            manureApplication.ManureApplicationMethod = rowInput.ManureApplicationType;
+            manureApplication.ManureAnimalSourceType = rowInput.ManureAnimalSourceType;
+            manureApplication.ManureLocationSourceType = rowInput.ManureLocationSourceType;
+            manureApplication.ManureStateType = rowInput.ManureStateType;
+
+            var animalType = rowInput.ManureAnimalSourceType.GetComponentCategory().GetAnimalTypeFromComponentCategory();
+            var defaultManure = farm.GetManureCompositionData(manureApplication.ManureStateType, animalType);
+            manureApplication.DefaultManureCompositionData = defaultManure;
+
+            manureApplication.AmountOfNitrogenInManureApplied = viewItem.Area * manureApplication.AmountOfManureAppliedPerHectare * defaultManure.NitrogenContent;
+        }
 
         #endregion
     }
