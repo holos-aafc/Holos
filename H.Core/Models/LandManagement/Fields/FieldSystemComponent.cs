@@ -456,6 +456,8 @@ namespace H.Core.Models.LandManagement.Fields
 
         public List<ManureApplicationViewItem> GetImportedManureApplicationsInYear(int year)
         {
+            
+
             var result = new List<ManureApplicationViewItem>();
 
             foreach (var cropViewItem in this.CropViewItems)
@@ -475,6 +477,22 @@ namespace H.Core.Models.LandManagement.Fields
         public bool HasImportedDigestateApplicationsInYear(int year)
         {
             return this.GetImportedDigestateApplicationsInYear(year).Any();
+        }
+
+        /// <summary>
+        /// Returns a collection of all manure applications on the farm (from both livestock and import sources)
+        /// </summary>
+        public List<ManureApplicationViewItem> GetAllManureApplicationsInYear(int year)
+        {
+            var result = new List<ManureApplicationViewItem>();
+
+            var livestock = this.GetLivestockManureApplicationsInYear(year);
+            result.AddRange(livestock);
+
+            var imports = this.GetImportedManureApplicationsInYear(year);
+            result.AddRange(imports);
+
+            return result;
         }
 
         public List<DigestateApplicationViewItem> GetImportedDigestateApplicationsInYear(int year)

@@ -192,6 +192,9 @@ namespace H.CLI.Converters
 
         #region Private Methods
 
+        /// <summary>
+        /// Read in the Field input file and add manure applications to the farm
+        /// </summary>
         private void ProcessManureApplications(
             FieldTemporaryInput rowInput, 
             CropViewItem viewItem, 
@@ -232,6 +235,9 @@ namespace H.CLI.Converters
             manureApplication.DefaultManureCompositionData = defaultManure;
 
             manureApplication.AmountOfNitrogenInManureApplied = viewItem.Area * manureApplication.AmountOfManureAppliedPerHectare * defaultManure.NitrogenContent;
+            manureApplication.AmountOfNitrogenAppliedPerHectare = manureApplication.AmountOfManureAppliedPerHectare * defaultManure.NitrogenContent;
+
+            viewItem.ManureApplicationViewItems.Add(manureApplication);
         }
 
         #endregion

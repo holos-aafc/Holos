@@ -40,6 +40,38 @@ namespace H.Core.Calculators.Nitrogen
             return result;
         }
 
+        private List<ManureApplicationViewItem> GetManureApplicationViewItems(Farm farm, FieldSystemComponent field, CropViewItem viewItem)
+        {
+            var result = new List<ManureApplicationViewItem>();
+
+            if (farm.IsCommandLineMode)
+            {
+                /*
+                 * When in CLI mode, we only have access to the detail view items and not the original crop collection on the field component. The field processor will
+                 * add any manure applications to the particular detail view item for that year
+                 */
+
+                result.AddRange(viewItem.ManureApplicationViewItems);
+            }
+            else
+            {
+                /*
+                 * When in GUI mode, we have access to the crop collection held by the field component so we access the manure applications using this alternative
+                 * method
+                 */
+
+                var year = viewItem.Year;
+
+                var livestockApplications = field.GetLivestockManureApplicationsInYear(year);
+                var importedApplications = field.GetImportedManureApplicationsInYear(year);
+                
+                result.AddRange(livestockApplications);
+                result.AddRange(importedApplications);
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Equation 4.6.1-2
         /// 
@@ -47,20 +79,15 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double GetTotalManureNitrogenAppliedFromLivestockAndImportsInYear(CropViewItem viewItem, Farm farm)
         {
-            var year = viewItem.Year;
-
             var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
             if (field == null)
             {
                 return 0;
             }
 
+            var allApplications = this.GetManureApplicationViewItems(farm, field, viewItem);
+
             var totalNitrogen = 0d;
-
-            var livestockApplications = field.GetLivestockManureApplicationsInYear(year);
-            var importedApplications = field.GetImportedManureApplicationsInYear(year);
-            var allApplications = livestockApplications.Concat(importedApplications);
-
             foreach (var manureApplication in allApplications)
             {
                 totalNitrogen += manureApplication.AmountOfNitrogenAppliedPerHectare * viewItem.Area;
@@ -71,17 +98,13 @@ namespace H.Core.Calculators.Nitrogen
 
         public double GetTotalManureVolumeAppliedFromLivestockAndImportsInYear(CropViewItem viewItem, Farm farm)
         {
-            var year = viewItem.Year;
-
             var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
             if (field == null)
             {
                 return 0;
             }
 
-            var livestockApplications = field.GetLivestockManureApplicationsInYear(year);
-            var importedApplications = field.GetImportedManureApplicationsInYear(year);
-            var allApplications = livestockApplications.Concat(importedApplications);
+            var allApplications = this.GetManureApplicationViewItems(farm, field, viewItem);
 
             var totalVolume = 0d;
 
@@ -1317,10 +1340,7 @@ namespace H.Core.Calculators.Nitrogen
 
             var result = 0d;
 
-            var year = viewItem.Year;
-            var livestockApplications = field.GetLivestockManureApplicationsInYear(year);
-            var importedApplications = field.GetImportedManureApplicationsInYear(year);
-            var allApplications = livestockApplications.Concat(importedApplications);
+            var allApplications = this.GetManureApplicationViewItems(farm, field, viewItem);
 
             foreach (var manureApplicationViewItem in allApplications)
             {

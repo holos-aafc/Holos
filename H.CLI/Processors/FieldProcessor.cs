@@ -238,18 +238,31 @@ namespace H.CLI.Processors
 
         #region Private Methods
 
+        /// <summary>
+        /// Convert the farm's manure applications to the field into a string representation that can be read by the CLI input system
+        /// </summary>
         private void ProcessManureApplications(
             StringBuilder stringBuilder, 
             CropViewItem viewItem,
             string columnSeparator, 
             FieldSystemComponent fieldComponent)
         {
-            var fieldManureApplicationsInYear = fieldComponent.GetLivestockManureApplicationsInYear(viewItem.Year);
+            // Get both livestock and import source manure applications
+            var fieldManureApplicationsInYear = fieldComponent.GetAllManureApplicationsInYear(viewItem.Year);
+
 
             if (fieldManureApplicationsInYear.Any())
             {
+                /*
+                 * We have at least one manure application
+                 */
+
                 if (fieldManureApplicationsInYear.Count == 1)
                 {
+                    /*
+                     * There is only one manure application made to this field
+                     */
+
                     var singleApplication = fieldManureApplicationsInYear[0];
 
                     var sourceType = singleApplication.AnimalType.GetManureAnimalSource();
@@ -264,7 +277,12 @@ namespace H.CLI.Processors
                 else
                 {
                     /*
-                     * TODO: in the future, append multiple manure application to input file, instead of current approach to take largest application
+                     * TODO: in the future, append multiple manure application to input file, instead of current approach to take the largest application
+                     */
+
+                    /*
+                     * There are multiple manure applications. The CLI can only support adding one manure application to the field in any given year. Strategy right now is to
+                     * take the largest application (by volume applied per hectare) and use that.
                      */
 
                     var sortedByAmount = fieldManureApplicationsInYear.OrderByDescending(x => x.AmountOfManureAppliedPerHectare);
