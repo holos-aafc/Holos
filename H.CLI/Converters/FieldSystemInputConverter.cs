@@ -8,7 +8,6 @@ using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Fertilizer;
 using H.Core.Services.Animals;
-using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
