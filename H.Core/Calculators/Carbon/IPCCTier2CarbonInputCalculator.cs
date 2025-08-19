@@ -109,7 +109,10 @@ namespace H.Core.Calculators.Carbon
                 // Check if the user specified an amount of manure to be applied to the field.
                 if (viewItem.ManureCarbonInputsPerHectare <= 0)
                 {
-                    // If amount is zero, recalculate on behalf of the user
+                    /*
+                     * If amount is zero, recalculate on behalf of the user since they may have a manure application made but not able to determine the total C added.
+                     */
+
                     viewItem.ManureCarbonInputsPerHectare = manureService.GetTotalManureCarbonInputsForField(farm, viewItem.Year, viewItem);
                     viewItem.ManureCarbonInputsFromManureOnly = viewItem.GetTotalCarbonFromAppliedManure() / viewItem.Area;
                 }

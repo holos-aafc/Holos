@@ -519,15 +519,33 @@ namespace H.Core.Services.Animals
             }
 
             var inputsFromLocalManure = 0d;
-            if (field.HasLivestockManureApplicationsInYear(year))
-            {
-                inputsFromLocalManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Livestock);
-            }
-
             var inputsFromImportedManure = 0d;
-            if (field.HasImportedManureApplicationsInYear(year))
+            if (farm.IsCommandLineMode)
             {
+                /*
+                 * When in CLI mode, we only have access to the detail view items and not the original crop collection on the field component. The field processor will
+                 * add any manure applications to the particular detail view item for that year
+                 */
+
+                inputsFromLocalManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Livestock);
                 inputsFromImportedManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Imported);
+            }
+            else
+            {
+                /*
+                 * When in GUI mode, we have access to the crop collection held by the field component so we access the manure applications using this alternative
+                 * method. Also, we should only add items if they have the same year as a view item in the crop collection held by the field
+                 */
+
+                if (field.HasLivestockManureApplicationsInYear(year))
+                {
+                    inputsFromLocalManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Livestock);
+                }
+
+                if (field.HasImportedManureApplicationsInYear(year))
+                {
+                    inputsFromImportedManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Imported);
+                }
             }
 
             var remaining = this.GetTotalCarbonRemainingForField(farm, year, viewItem);
