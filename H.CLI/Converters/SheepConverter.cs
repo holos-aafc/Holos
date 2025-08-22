@@ -76,13 +76,23 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.GainCoefficientA.ToString(DoubleFormat));
             row.Add(managementPeriod.GainCoefficientB.ToString(DoubleFormat));
 
+            row.Add(managementPeriod.HousingDetails.HousingType.ToString());
             row.Add(managementPeriod.HousingDetails.ActivityCeofficientOfFeedingSituation.ToString(DoubleFormat));
             row.Add(managementPeriod.HousingDetails.BaselineMaintenanceCoefficient.ToString(DoubleFormat));
             row.Add(managementPeriod.HousingDetails.UserDefinedBeddingRate.ToString(DoubleFormat));
             row.Add(managementPeriod.HousingDetails.TotalCarbonKilogramsDryMatterForBedding.ToString(DoubleFormat));
             row.Add(managementPeriod.HousingDetails.TotalNitrogenKilogramsDryMatterForBedding.ToString(DoubleFormat));
             row.Add(managementPeriod.HousingDetails.MoistureContentOfBeddingMaterial.ToString(DoubleFormat));
+            if (managementPeriod.HousingDetails.PastureLocation != null)
+            {
+                row.Add(managementPeriod.HousingDetails.PastureLocation.Guid.ToString());
+            }
+            else
+            {
+                row.Add(CLILanguageConstants.NotApplicableString);
+            }
 
+            row.Add(managementPeriod.ManureDetails.StateType.ToString());
             row.Add(managementPeriod.ManureDetails.MethaneConversionFactor.ToString(DoubleFormat));
             row.Add(managementPeriod.ManureDetails.N2ODirectEmissionFactor.ToString(DoubleFormat));
             row.Add(managementPeriod.ManureDetails.EmissionFactorVolatilization.ToString(DoubleFormat));

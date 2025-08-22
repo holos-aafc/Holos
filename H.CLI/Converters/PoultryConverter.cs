@@ -53,6 +53,16 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.NumberOfAnimals.ToString());
             row.Add(managementPeriod.ProductionStage.ToString());
 
+            row.Add(managementPeriod.HousingDetails.HousingType.ToString());
+            if (managementPeriod.HousingDetails.PastureLocation != null)
+            {
+                row.Add(managementPeriod.HousingDetails.PastureLocation.Guid.ToString());
+            }
+            else
+            {
+                row.Add(CLILanguageConstants.NotApplicableString);
+            }
+            row.Add(managementPeriod.ManureDetails.StateType.ToString());
             row.Add(managementPeriod.ManureDetails.YearlyManureMethaneRate.ToString(CultureInfo.InvariantCulture));
             row.Add(managementPeriod.ManureDetails.NitrogenExretionRate.ToString(CultureInfo.InvariantCulture));
             row.Add(managementPeriod.ManureDetails.YearlyEntericMethaneRate.ToString(CultureInfo.InvariantCulture));
