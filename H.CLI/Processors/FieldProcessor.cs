@@ -54,9 +54,6 @@ namespace H.CLI.Processors
             var animalResults = _animalService.GetAnimalResults(farm);
             _fieldResultsService.AnimalResults = animalResults;
 
-
-
-
             var finalResults = _fieldResultsService.CalculateFinalResults(farm);
 
             var farmName = farm.Name + Properties.Resources.Results;
@@ -185,7 +182,9 @@ namespace H.CLI.Processors
                 this.ProcessManureApplications(stringBuilder, viewItem, columnSeparator, fieldSystemComponent);
 
                 stringBuilder.Append(viewItem.UnderSownCropsUsed + columnSeparator);
-                stringBuilder.Append(viewItem.CropIsGrazed + columnSeparator);
+
+                this.ProcessGrazingViewItems(stringBuilder, viewItem, columnSeparator, fieldSystemComponent);
+
                 stringBuilder.Append(viewItem.FieldSystemComponentGuid + columnSeparator);
                 stringBuilder.Append(viewItem.TimePeriodCategoryString + columnSeparator);
                 stringBuilder.Append(viewItem.ClimateParameter + columnSeparator);
@@ -238,6 +237,18 @@ namespace H.CLI.Processors
 
         #region Private Methods
 
+
+        private void ProcessGrazingViewItems(
+            StringBuilder stringBuilder,
+            CropViewItem viewItem,
+            string columnSeparator,
+            FieldSystemComponent fieldComponent)
+        {
+            var grazingViewItemsInYear = fieldComponent.GetGrazingViewItemsInYear(viewItem.Year);
+            var cropIsGrazed = grazingViewItemsInYear.Any();
+            stringBuilder.Append(cropIsGrazed.ToString().ToUpperInvariant() + columnSeparator);
+        }
+
         /// <summary>
         /// Convert the farm's manure applications to the field into a string representation that can be read by the CLI input system
         /// </summary>
@@ -249,7 +260,6 @@ namespace H.CLI.Processors
         {
             // Get both livestock and import source manure applications
             var fieldManureApplicationsInYear = fieldComponent.GetAllManureApplicationsInYear(viewItem.Year);
-
 
             if (fieldManureApplicationsInYear.Any())
             {

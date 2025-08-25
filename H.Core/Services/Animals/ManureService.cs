@@ -527,8 +527,16 @@ namespace H.Core.Services.Animals
                  * add any manure applications to the particular detail view item for that year
                  */
 
-                inputsFromLocalManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Livestock);
-                inputsFromImportedManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Imported);
+                if (viewItem.IsRunInPeriodItem)
+                {
+                    inputsFromLocalManure = 0;
+                    inputsFromImportedManure = 0;
+                }
+                else
+                {
+                    inputsFromLocalManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Livestock);
+                    inputsFromImportedManure = viewItem.GetTotalCarbonFromAppliedManure(ManureLocationSourceType.Imported);
+                }
             }
             else
             {

@@ -85,7 +85,7 @@ namespace H.CLI.Converters
                     viewItem.Year = rowInput.CropYear;
                     viewItem.HarvestMethod = rowInput.HarvestMethod;
                     viewItem.UnderSownCropsUsed = _keyConverter.ConvertResponseToBool(rowInput.UnderSownCropsUsed.ToString());
-                    viewItem.CropIsGrazed = _keyConverter.ConvertResponseToBool(rowInput.CropIsGrazed.ToString());
+
                     viewItem.NumberOfPesticidePasses = rowInput.NumberOfPesticidePasses;
                     viewItem.IsPesticideUsed = rowInput.IsPesticideUsed;
                     viewItem.PhaseNumber = rowInput.PhaseNumber;
@@ -99,6 +99,7 @@ namespace H.CLI.Converters
                     }
 
                     this.ProcessManureApplications(rowInput, viewItem, farm);
+                    
 
                     viewItem.MoistureContentOfCrop = rowInput.MoistureContentOfCrop;
                     viewItem.MoistureContentOfCropPercentage = rowInput.MoistureContentOfCropPercentage;
@@ -170,6 +171,8 @@ namespace H.CLI.Converters
                         };
                     }
 
+                    this.ProcessGrazingItems(rowInput, viewItem, farm);
+
                     fieldSystemComponent.Guid = viewItem.FieldSystemComponentGuid;
 
                     stageState.DetailsScreenViewCropViewItems.Add(viewItem);
@@ -191,6 +194,40 @@ namespace H.CLI.Converters
         #endregion
 
         #region Private Methods
+
+        /// <summary>
+        /// Read in the Field input file and add grazing items to the farm
+        /// </summary>
+        private void ProcessGrazingItems(
+            FieldTemporaryInput rowInput,
+            CropViewItem viewItem,
+            Farm farm)
+        {
+            viewItem.CropIsGrazed = _keyConverter.ConvertResponseToBool(rowInput.CropIsGrazed.ToString());
+            if (viewItem.CropIsGrazed == false)
+            {
+                return;
+            }
+
+            /*
+             * CLI only supports one grazing item each year (GUI supports multiple applications in a single year)
+             */
+
+            var grazingViewItem = new GrazingViewItem();
+            grazingViewItem.Start = new DateTime(viewItem.Year, 1, 1);
+
+            if (viewItem.CropType.IsPerennial())
+            {
+                // TODO: add in new column to write the MC from grazing items. Read that new column instead of hardcoding 80
+                grazingViewItem.MoistureContentAsPercentage = 80;
+            }
+            else
+            {
+                grazingViewItem.MoistureContentAsPercentage = rowInput.MoistureContentOfCropPercentage;
+            }
+
+            viewItem.GrazingViewItems.Add(grazingViewItem);
+        }
 
         /// <summary>
         /// Read in the Field input file and add manure applications to the farm

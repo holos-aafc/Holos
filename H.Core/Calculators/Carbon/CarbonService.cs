@@ -479,6 +479,7 @@ namespace H.Core.Calculators.Carbon
                  * can specify that the CLI should recalculate inputs by setting these two columns to 0. C models can't run without these two inputs (as a minimum) so the must be set
                  * to non-zero values before running the C models
                  */
+
                 var aboveGroundResidueCarbon = currentYearViewItem.AboveGroundCarbonInput;
                 var belowGroundResidueCarbon = currentYearViewItem.BelowGroundCarbonInput;
                 var manureCarbonInput = currentYearViewItem.ManureCarbonInputsPerHectare;

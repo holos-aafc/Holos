@@ -358,7 +358,7 @@ namespace H.Core.Calculators.Carbon
                 equilibriumBelowGroundInput = viewItemsInRotation.Average(x => x.CombinedBelowGroundInput);
 
                 // Equation 2.1.3-3
-                equilibriumManureInput = viewItemsInRotation.Average(x => x.CombinedManureInput);
+                equilibriumManureInput =  viewItemsInRotation.Average(x => x.CombinedManureInput);
                 equilibriumDigestateInput = viewItemsInRotation.Average(x => x.CombinedDigestateInput);
 
                 equilibriumClimateParameter = viewItemsInRotation.Average(x => x.ClimateParameter);
@@ -408,7 +408,7 @@ namespace H.Core.Calculators.Carbon
                         averageAboveGroundCarbonInput: result.CombinedAboveGroundInput,
                         youngPoolDecompositionRate: farm.Defaults.DecompositionRateConstantYoungPool,
                         climateParameter: climateOrManagementFactor);
-            }
+            } 
             else
             {
 

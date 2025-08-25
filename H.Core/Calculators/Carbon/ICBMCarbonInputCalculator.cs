@@ -106,6 +106,7 @@ namespace H.Core.Calculators.Carbon
 
             return currentYearViewItem;
         }
+
         public double CalculatePlantCarbonInAgriculturalProduct(
             CropViewItem previousYearViewItem, 
             CropViewItem currentYearViewItem, 

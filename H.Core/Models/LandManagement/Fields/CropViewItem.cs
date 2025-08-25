@@ -1218,6 +1218,11 @@ namespace H.Core.Models.LandManagement.Fields
             set => SetProperty(ref _belowgroundNitrogenInputs, value);
         }
 
+        /// <summary>
+        /// Indicates if this item is part of the run-in/spin-up period
+        /// </summary>
+        public bool IsRunInPeriodItem { get; set; }
+
         #endregion
 
         #region Public Methods

@@ -456,8 +456,6 @@ namespace H.Core.Models.LandManagement.Fields
 
         public List<ManureApplicationViewItem> GetImportedManureApplicationsInYear(int year)
         {
-            
-
             var result = new List<ManureApplicationViewItem>();
 
             foreach (var cropViewItem in this.CropViewItems)
@@ -467,6 +465,24 @@ namespace H.Core.Models.LandManagement.Fields
                     if (importedManureApplicationViewItem.ManureLocationSourceType == ManureLocationSourceType.Imported && importedManureApplicationViewItem.DateOfApplication.Year == year)
                     {
                         result.Add(importedManureApplicationViewItem);
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public List<GrazingViewItem> GetGrazingViewItemsInYear(int year)
+        {
+            var result = new List<GrazingViewItem>();
+
+            foreach (var cropViewItem in this.CropViewItems)
+            {
+                foreach (var grazingViewItem in cropViewItem.GrazingViewItems)
+                {
+                    if (grazingViewItem.Start.Year == year)
+                    {
+                        result.Add(grazingViewItem);
                     }
                 }
             }

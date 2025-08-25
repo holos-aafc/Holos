@@ -106,19 +106,28 @@ namespace H.Core.Calculators.Carbon
             }
             else
             {
-                // Check if the user specified an amount of manure to be applied to the field.
-                if (viewItem.ManureCarbonInputsPerHectare <= 0)
+                if (viewItem.IsRunInPeriodItem)
                 {
-                    /*
-                     * If amount is zero, recalculate on behalf of the user since they may have a manure application made but not able to determine the total C added.
-                     */
-
-                    viewItem.ManureCarbonInputsPerHectare = manureService.GetTotalManureCarbonInputsForField(farm, viewItem.Year, viewItem);
-                    viewItem.ManureCarbonInputsFromManureOnly = viewItem.GetTotalCarbonFromAppliedManure() / viewItem.Area;
+                    // Don't include manure C inputs for run in period items so that run in period total C inputs will be consistent with GUI total C inputs
+                    viewItem.ManureCarbonInputsPerHectare = 0;
+                    viewItem.ManureCarbonInputsFromManureOnly = 0;
                 }
                 else
                 {
-                    // User has specified a non-zero amount of manure in the field input file so we leave those amounts alone (don't overwrite)
+                    // Check if the user specified an amount of manure to be applied to the field.
+                    if (viewItem.ManureCarbonInputsPerHectare <= 0)
+                    {
+                        /*
+                         * If amount is zero, recalculate on behalf of the user since they may have a manure application made but not able to determine the total C added.
+                         */
+
+                        viewItem.ManureCarbonInputsPerHectare = manureService.GetTotalManureCarbonInputsForField(farm, viewItem.Year, viewItem);
+                        viewItem.ManureCarbonInputsFromManureOnly = viewItem.GetTotalCarbonFromAppliedManure() / viewItem.Area;
+                    }
+                    else
+                    {
+                        // User has specified a non-zero amount of manure in the field input file so we leave those amounts alone (don't overwrite)
+                    }
                 }
             }
 
