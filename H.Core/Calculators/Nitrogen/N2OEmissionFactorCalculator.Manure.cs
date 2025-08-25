@@ -40,38 +40,6 @@ namespace H.Core.Calculators.Nitrogen
             return result;
         }
 
-        private List<ManureApplicationViewItem> GetManureApplicationViewItems(Farm farm, FieldSystemComponent field, CropViewItem viewItem)
-        {
-            var result = new List<ManureApplicationViewItem>();
-
-            if (farm.IsCommandLineMode)
-            {
-                /*
-                 * When in CLI mode, we only have access to the detail view items and not the original crop collection on the field component. The field processor will
-                 * add any manure applications to the particular detail view item for that year
-                 */
-
-                result.AddRange(viewItem.ManureApplicationViewItems);
-            }
-            else
-            {
-                /*
-                 * When in GUI mode, we have access to the crop collection held by the field component so we access the manure applications using this alternative
-                 * method
-                 */
-
-                var year = viewItem.Year;
-
-                var livestockApplications = field.GetLivestockManureApplicationsInYear(year);
-                var importedApplications = field.GetImportedManureApplicationsInYear(year);
-                
-                result.AddRange(livestockApplications);
-                result.AddRange(importedApplications);
-            }
-
-            return result;
-        }
-
         /// <summary>
         /// Equation 4.6.1-2
         /// 
@@ -85,7 +53,7 @@ namespace H.Core.Calculators.Nitrogen
                 return 0;
             }
 
-            var allApplications = this.GetManureApplicationViewItems(farm, field, viewItem);
+            var allApplications = _manureService.GetManureApplicationViewItems(farm, field, viewItem);
 
             var totalNitrogen = 0d;
             foreach (var manureApplication in allApplications)
@@ -104,7 +72,7 @@ namespace H.Core.Calculators.Nitrogen
                 return 0;
             }
 
-            var allApplications = this.GetManureApplicationViewItems(farm, field, viewItem);
+            var allApplications = _manureService.GetManureApplicationViewItems(farm, field, viewItem);
 
             var totalVolume = 0d;
 
@@ -1340,7 +1308,7 @@ namespace H.Core.Calculators.Nitrogen
 
             var result = 0d;
 
-            var allApplications = this.GetManureApplicationViewItems(farm, field, viewItem);
+            var allApplications = _manureService.GetManureApplicationViewItems(farm, field, viewItem);
 
             foreach (var manureApplicationViewItem in allApplications)
             {
