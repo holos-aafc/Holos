@@ -99,39 +99,7 @@ namespace H.Core.Calculators.Carbon
             // Note that eq. 2.2.3-4 is the residue for the entire field, we report per ha on the details screen so we divide by the area here
             viewItem.BelowGroundCarbonInput = (viewItem.BelowGroundResidueDryMatter * BelowGroundCarbonContent) / viewItem.Area;
 
-            if (farm.IsCommandLineMode == false)
-            {
-                viewItem.ManureCarbonInputsPerHectare = manureService.GetTotalManureCarbonInputsForField(farm, viewItem.Year, viewItem);
-                viewItem.ManureCarbonInputsFromManureOnly = viewItem.GetTotalCarbonFromAppliedManure() / viewItem.Area;
-            }
-            else
-            {
-                if (viewItem.IsRunInPeriodItem)
-                {
-                    // Don't include manure C inputs for run in period items so that run in period total C inputs will be consistent with GUI total C inputs
-                    viewItem.ManureCarbonInputsPerHectare = 0;
-                    viewItem.ManureCarbonInputsFromManureOnly = 0;
-                }
-                else
-                {
-                    // Check if the user specified an amount of manure to be applied to the field.
-                    if (viewItem.ManureCarbonInputsPerHectare <= 0)
-                    {
-                        /*
-                         * If amount is zero, recalculate on behalf of the user since they may have a manure application made but not able to determine the total C added.
-                         */
-
-                        viewItem.ManureCarbonInputsPerHectare = manureService.GetTotalManureCarbonInputsForField(farm, viewItem.Year, viewItem);
-                        viewItem.ManureCarbonInputsFromManureOnly = viewItem.GetTotalCarbonFromAppliedManure() / viewItem.Area;
-                    }
-                    else
-                    {
-                        // User has specified a non-zero amount of manure in the field input file so we leave those amounts alone (don't overwrite)
-                    }
-                }
-            }
-
-            viewItem.ManureCarbonInputsPerHectare += viewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
+            this.AssignManureCarbonInputs(viewItem, farm, animalComponentEmissionsResults);
 
             viewItem.DigestateCarbonInputsPerHectare = digestateService.GetTotalDigestateCarbonInputsForField(farm, viewItem.Year, viewItem);
             viewItem.DigestateCarbonInputsPerHectareFromApplicationsOnly = viewItem.GetTotalCarbonFromAppliedDigestate(ManureLocationSourceType.Livestock) / viewItem.Area;

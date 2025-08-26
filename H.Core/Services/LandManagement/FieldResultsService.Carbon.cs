@@ -240,7 +240,6 @@ namespace H.Core.Services.LandManagement
             {
                 _icbmSoilCarbonCalculator.AnimalComponentEmissionsResults = this.AnimalResults;
 
-                
                  if (farm.IsCommandLineMode)
                 {
                     /*

@@ -27,5 +27,7 @@ namespace H.Core.Calculators.Carbon
             CropViewItem currentYearViewItem,
             CropViewItem nextYearViewItems,
             Farm farm);
+
+        void AssignManureCarbonInputs(CropViewItem viewItem, Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults);
     }
 }

@@ -168,7 +168,7 @@ namespace H.CLI.Processors
                 stringBuilder.Append(viewItem.CarbonConcentration + columnSeparator);
                 stringBuilder.Append(viewItem.Yield + columnSeparator);
                 stringBuilder.Append(viewItem.HarvestMethod + columnSeparator);
-                stringBuilder.Append((fertilizerApplication != null ? fertilizerApplication.AmountOfBlendedProductApplied : 0.0) + columnSeparator);
+                stringBuilder.Append((fertilizerApplication != null ? fertilizerApplication.AmountOfNitrogenApplied : 0.0) + columnSeparator);
                 stringBuilder.Append(viewItem.PhosphorusFertilizerRate + columnSeparator);
                 stringBuilder.Append(viewItem.IsIrrigated + columnSeparator);
                 stringBuilder.Append(viewItem.IrrigationType + columnSeparator);

@@ -25,6 +25,7 @@ namespace H.CLI.Converters
         public List<ComponentBase> FieldComponents { get; set; } = new List<ComponentBase>();
         private KeyConverter.KeyConverter _keyConverter = new KeyConverter.KeyConverter();
         private IManureService _manureService = new ManureService();
+        private Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider _blendsProvider = new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider();
 
         #endregion
 
@@ -100,7 +101,6 @@ namespace H.CLI.Converters
 
                     this.ProcessManureApplications(rowInput, viewItem, farm);
                     
-
                     viewItem.MoistureContentOfCrop = rowInput.MoistureContentOfCrop;
                     viewItem.MoistureContentOfCropPercentage = rowInput.MoistureContentOfCropPercentage;
 
@@ -160,15 +160,20 @@ namespace H.CLI.Converters
                     // CLI only supports 1 fertilizer application for now
                     if (rowInput.NitrogenFertilizerRate > 0)
                     {
-                        var fertilizerBlend = new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data() { FertilizerBlend = rowInput.FertilizerBlend };
+                        var blendData = _blendsProvider.GetData(rowInput.FertilizerBlend);
+                        var amountOfProduct = (rowInput.NitrogenFertilizerRate / (blendData.PercentageNitrogen / 100.0));
+
                         viewItem.FertilizerApplicationViewItems = new ObservableCollection<FertilizerApplicationViewItem>()
                         {
                             new FertilizerApplicationViewItem()
                             {
-                                FertilizerBlendData = fertilizerBlend,
-                                AmountOfBlendedProductApplied = rowInput.NitrogenFertilizerRate
+                                FertilizerBlendData = blendData,
+                                AmountOfNitrogenApplied = rowInput.NitrogenFertilizerRate,
+                                AmountOfBlendedProductApplied = amountOfProduct,
                             }
                         };
+
+                        viewItem.NitrogenFertilizerRate = rowInput.NitrogenFertilizerRate;
                     }
 
                     this.ProcessGrazingItems(rowInput, viewItem, farm);

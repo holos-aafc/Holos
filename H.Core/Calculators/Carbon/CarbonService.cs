@@ -482,8 +482,6 @@ namespace H.Core.Calculators.Carbon
 
                 var aboveGroundResidueCarbon = currentYearViewItem.AboveGroundCarbonInput;
                 var belowGroundResidueCarbon = currentYearViewItem.BelowGroundCarbonInput;
-                var manureCarbonInput = currentYearViewItem.ManureCarbonInputsPerHectare;
-                var digestateCarbonInput = currentYearViewItem.DigestateCarbonInputsPerHectare;
 
                 var cropResidueInputsNeedRecalculating = aboveGroundResidueCarbon == 0 && belowGroundResidueCarbon == 0;
                 
@@ -510,9 +508,29 @@ namespace H.Core.Calculators.Carbon
                         _cropInitializationService.InitializeBiomassCoefficientExtraroots(currentYearViewItem, farm);
                     }
 
-                    // If N fractions are 0, assign defaults
+                    // Recalculate residue inputs
                     this.AssignInputsAndLosses(tupleForYear, farm, animalResults);
                 }
+
+                var needsManureInputsRecalculated = (currentYearViewItem.ManureCarbonInputsPerHectare == 0) && (currentYearViewItem.ManureApplicationViewItems.Count > 0);
+                if (needsManureInputsRecalculated)
+                {
+                    var residueInputMethod = farm.Defaults.ResidueInputCalculationMethod;
+
+                    if (residueInputMethod == ResidueInputCalculationMethod.ICBM)
+                    {
+                        _icbmCarbonInputCalculator.AssignManureInputs(tupleForYear.PreviousYearViewItem, tupleForYear.CurrentYearViewItem, currentYearViewItem, farm, animalResults);
+
+                    }
+                    else
+                    {
+                        _ipccTier2CarbonInputCalculator.AssignManureCarbonInputs(currentYearViewItem, farm, animalResults);
+                    }
+
+                    currentYearViewItem.TotalCarbonInputs += currentYearViewItem.ManureCarbonInputsPerHectare;
+                }
+
+                var digestateCarbonInput = currentYearViewItem.DigestateCarbonInputsPerHectare;
             }
         }
 
