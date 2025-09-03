@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
@@ -238,5 +240,17 @@ namespace H.Core.Services.Initialization.Crops
         void InitializeNitrogenContentInStraw(CropViewItem viewItem, Farm farm);
         void InitializeNitrogenContentInProduct(CropViewItem viewItem, Farm farm);
         void InitializeIPCCNitrogenContent(CropViewItem viewItem, Farm farm);
+        void AssignPerennialRootsReturned(IEnumerable<CropViewItem> list);
+
+        IEnumerable<IGrouping<Guid, CropViewItem>> AssignPerennialStandIds(
+            IEnumerable<CropViewItem> viewItems, 
+            FieldSystemComponent fieldSystemComponent);
+
+        void AssignPerennialStandPositionalYears(
+            IEnumerable<CropViewItem> viewItems,
+            FieldSystemComponent fieldSystemComponent);
+
+        void AssignPerennialViewItemsDescription(IEnumerable<CropViewItem> viewItems);
+        void AssignTillageToFinalYearOfPerennialStands(IEnumerable<CropViewItem> viewItems);
     }
 }

@@ -1,12 +1,14 @@
-﻿using H.Core.Models;
+﻿using H.Core.Calculators.Carbon;
+using H.Core.Enumerations;
+using H.Core.Models;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Services.Initialization;
+using H.Core.Services.Initialization.Crops;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using H.Core.Calculators.Carbon;
-using H.Core.Enumerations;
-using H.Core.Models.LandManagement.Fields;
-using H.Core.Services.Initialization.Crops;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace H.Core.Test.Services.Initialization
 {
@@ -60,6 +62,132 @@ namespace H.Core.Test.Services.Initialization
         #endregion
 
         #region Tests
+
+        [TestMethod]
+        public void AssignPerennialStandIdsConsidersCoverCrop()
+        {
+            var crops = new List<CropViewItem>()
+            {
+                new CropViewItem() {CropType = CropType.Lentils, Year = 2019}, // Main crop grown
+                new CropViewItem() {CropType = CropType.AlfalfaMedicagoSativaL, Year = 2019, IsSecondaryCrop = true}, // Cover crop used in same year
+                new CropViewItem() {CropType = CropType.TameLegume, Year = 2020},
+                new CropViewItem() {CropType = CropType.None, Year = 2020, IsSecondaryCrop = true},
+            };
+
+            var component = new FieldSystemComponent() { CropViewItems = new ObservableCollection<CropViewItem>(crops) };
+
+            var result = _cropsInitializationService.AssignPerennialStandIds(
+                viewItems: crops, fieldSystemComponent: component);
+
+            Assert.AreEqual(1, result.Count());
+        }
+
+        [TestMethod]
+        public void AssignPerennialStandPositionalYears()
+        {
+            var guid = Guid.NewGuid();
+
+            var crops = new List<CropViewItem>()
+            {
+                new CropViewItem() {CropType = CropType.Wheat, Year = 2019, PerennialStandGroupId = guid},
+                new CropViewItem() {CropType = CropType.TameLegume, Year = 2019, IsSecondaryCrop = true, PerennialStandGroupId = guid},
+                new CropViewItem() {CropType = CropType.TameLegume, Year = 2020, PerennialStandGroupId = guid},
+                new CropViewItem() {CropType = CropType.TameLegume, Year = 2020, IsSecondaryCrop = true, PerennialStandGroupId = guid},
+                new CropViewItem() {CropType = CropType.TameLegume, Year = 2021, PerennialStandGroupId = guid},
+            };
+
+            var component = new FieldSystemComponent() { CropViewItems = new ObservableCollection<CropViewItem>(crops) };
+
+            _cropsInitializationService.AssignPerennialStandPositionalYears(
+                viewItems: crops, fieldSystemComponent: component);
+        }
+
+
+        [TestMethod]
+        public void AssignPerennialStandIdsConsidersOnlyPerennials()
+        {
+            var crops = new List<CropViewItem>()
+            {
+                new CropViewItem() {CropType = CropType.Lentils, Year = 2019},
+            };
+
+            var component = new FieldSystemComponent() { CropViewItems = new ObservableCollection<CropViewItem>(crops) };
+
+            var result = _cropsInitializationService.AssignPerennialStandIds(
+                viewItems: crops, fieldSystemComponent: component);
+
+            Assert.AreEqual(0, result.Count());
+        }
+
+        [TestMethod]
+        public void AssignPerennialStandIdsAppliesCorrectIdsWhenUndersownCropsUsed()
+        {
+            // User has entered lentil, (haygrass (undersown)), (haygrass) as the sequence. Need to consider different stand ids when undersown crops
+            // are used since we want different stand ids not the same stand id for all items in the sequence. The second HayGrass stand should have a different
+            // id than the first stand.
+
+            var crops = new List<CropViewItem>()
+            {
+                new CropViewItem() {CropType = CropType.Lentils, Year = 2000},
+                new CropViewItem() {CropType = CropType.TameGrass, Year = 2000, UnderSownCropsUsed = true, IsSecondaryCrop = true},
+                new CropViewItem() {CropType = CropType.TameGrass, Year = 2001},
+                new CropViewItem() {CropType = CropType.None, Year = 2001, IsSecondaryCrop = true},
+                new CropViewItem() {CropType = CropType.Lentils, Year = 2002},
+                new CropViewItem() {CropType = CropType.TameGrass, Year = 2002, UnderSownCropsUsed = true, IsSecondaryCrop = true},
+                new CropViewItem() {CropType = CropType.TameGrass, Year = 2003},
+                new CropViewItem() {CropType = CropType.None, Year = 2003, IsSecondaryCrop = true},
+            };
+
+            var component = new FieldSystemComponent() { CropViewItems = new ObservableCollection<CropViewItem>(crops) };
+
+            var result = _cropsInitializationService.AssignPerennialStandIds(crops, component);
+
+            Assert.AreEqual(2, result.Count());
+
+            // Ensure all view items in same stand have the same stand GUID
+            foreach (var group in result)
+            {
+                var key = group.Key;
+
+                Assert.IsTrue(group.All(x => x.PerennialStandGroupId == key));
+            }
+        }
+
+        [TestMethod]
+        public void AssignPerennialStandIds()
+        {
+            var crops = new List<CropViewItem>()
+            {
+                new CropViewItem() {CropType = CropType.TameLegume, Year = 2000},
+                new CropViewItem() {CropType = CropType.TameLegume, Year = 2000, IsSecondaryCrop = true},
+                new CropViewItem() {CropType = CropType.TameLegume, Year = 2001},
+                new CropViewItem() {CropType = CropType.TameLegume, Year = 2001, IsSecondaryCrop = true},
+                new CropViewItem() {CropType = CropType.ForageForSeed, Year = 2002},
+                new CropViewItem() {CropType = CropType.ForageForSeed, Year = 2002, IsSecondaryCrop = true},
+                new CropViewItem() {CropType = CropType.ForageForSeed, Year = 2003},
+                new CropViewItem() {CropType = CropType.ForageForSeed, Year = 2003, IsSecondaryCrop = true},
+                new CropViewItem() {CropType = CropType.Barley, Year = 2004},
+                new CropViewItem() {CropType = CropType.None, Year = 2004, IsSecondaryCrop = true},
+                new CropViewItem() {CropType = CropType.TameMixed, Year = 2005},
+                new CropViewItem() {CropType = CropType.TameMixed, Year = 2005, IsSecondaryCrop = true},
+                new CropViewItem() {CropType = CropType.TameMixed, Year = 2006},
+                new CropViewItem() {CropType = CropType.TameMixed, Year = 2006, IsSecondaryCrop = true},
+            };
+
+            var component = new FieldSystemComponent() { CropViewItems = new ObservableCollection<CropViewItem>(crops) };
+
+            var result = _cropsInitializationService.AssignPerennialStandIds(crops, component);
+
+            Assert.AreEqual(3, result.Count());
+
+            // Ensure all view items in same stand have the same stand GUID
+            foreach (var group in result)
+            {
+                var key = group.Key;
+
+                Assert.IsTrue(group.All(x => x.PerennialStandGroupId == key));
+            }
+        }
 
         [TestMethod]
         public void InitializeCropDefaultTest()
