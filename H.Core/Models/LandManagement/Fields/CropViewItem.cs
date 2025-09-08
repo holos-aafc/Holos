@@ -912,15 +912,13 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// Total carbon inputs from above ground crop residue, below ground crop residue, manure residue, and digestate residues
+        /// Total carbon inputs
         /// 
         /// (kg C ha^-1)
         /// </summary>
         public double TotalCarbonInputs { get; set; }
 
         /// <summary>
-        /// Above ground carbon input from crop residues
-        /// 
         /// C_ag 
         /// 
         /// (kg C ha^-1)
@@ -932,8 +930,6 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// Below ground carbon input from crop residues
-        /// 
         /// C_bg 
         /// 
         /// (kg C ha^-1)
@@ -1218,11 +1214,6 @@ namespace H.Core.Models.LandManagement.Fields
             set => SetProperty(ref _belowgroundNitrogenInputs, value);
         }
 
-        /// <summary>
-        /// Indicates if this item is part of the run-in/spin-up period
-        /// </summary>
-        public bool IsRunInPeriodItem { get; set; }
-
         #endregion
 
         #region Public Methods
@@ -1328,21 +1319,6 @@ namespace H.Core.Models.LandManagement.Fields
         public double CombinedResidueNitrogen()
         {
             return this.CombinedAboveGroundResidueNitrogen + this.CombinedBelowGroundResidueNitrogen;
-        }
-
-        public List<ManureApplicationViewItem> GetManureApplicationsByYear(int year)
-        {
-            var result = new List<ManureApplicationViewItem>();
-
-            foreach (var manureApplicationViewItem in this.ManureApplicationViewItems)
-            {
-                if (manureApplicationViewItem.DateOfApplication.Year == year)
-                {
-                    result.Add(manureApplicationViewItem);
-                }
-            }
-
-            return result;
         }
 
         #endregion

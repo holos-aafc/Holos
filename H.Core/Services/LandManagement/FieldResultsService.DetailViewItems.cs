@@ -423,12 +423,6 @@ namespace H.Core.Services.LandManagement
 
             this.SetRunInPeriodTillageType(mainCrops, runInPeriodItems, farm);
 
-            // All of these items belong to the run-in period. The CLI will use this information
-            foreach (var runInPeriodItem in runInPeriodItems)
-            {
-                runInPeriodItem.IsRunInPeriodItem = true;
-            }
-
             return runInPeriodItems.OrderBy(x => x.Year).ToList();
         }
 

@@ -47,8 +47,7 @@ namespace H.Core.Calculators.UnitsOfMeasurement
         #endregion
 
         #region Fields
-
-        private int roundingDigits = CoreConstants.DefaultRoundingPrecision;
+        private int roundingDigits = 4;
         private readonly bool _isMetric;
         private string _kilogramsPerHectareString;
         private const double YardsToMetersFactor = 0.9144;

@@ -121,15 +121,15 @@ On the Component Selection screen in the 'Fertilizer' and 'Manure' tabs, there a
 - Broadcast: fertilizer is spread uniformly across the field where it remains on the soil surface
 - Incorporated: surface-applied fertilizer is incorporated into the soil to limit ammonia (NH3) volatilization. More likely in reduced tillage systems  
 - Partially injected (shallow injection): fertilizer is injected below the soil surface in vertical slots approx. 2-5 cm deep (by knifing or disking), after which the slots are closed. More likely in no-till systems. Can take place with solid, liquid and gaseous fertilizers. Banding and side-dressing are alternative naming conventions
-- Fully injected (deep injection): fertilizer is injected below the soil surface into slots approx. 5-20 cm deep (by knifing or disking) after which the slots are closed. More likely in conventional systems. Can take place with solid, liquid and gaseous fertilizers. Banding and side-dressing are alternative naming conventions
+- Fully injected (deep injection) - fertilizer is injected below the soil surface into slots approx. 5-20 cm deep (by knifing or disking) after which the slots are closed. More likely in conventional systems. Can take place with solid, liquid and gaseous fertilizers. Banding and side-dressing are alternative naming conventions
 
 ***For manure application:***
-- Solid spread (intensive tillage): solid manure is spread on the soil surface and fully incorporated with a tillage implement
-- Solid spread (no tillage or reduced tillage): solid manure is spread on the soil surface with shallow or no incorporation
-- Slurry broadcasting: liquid manure is broadcast on the soil surface with partial or no incorporation with a tillage implement
-- Drop hose banding: liquid manure is pumped from hoses that are dragged along the soil surface, which apply the manure in bands along the soil below the crop canopy; these systems are primarily designed for grassland 
-- Shallow injection: manure is applied below the soil surface in vertical slots approx. 2-5 cm deep, leaving the surface of the manure band exposed 
-- Deep injection: manure is injected below the soil surface into slots approx. 5-20 cm deep; in some cases, press wheels or rollers fitted behind the tines cover the slots
+- Solid spread (intensive tillage) - solid manure is spread on the soil surface and fully incorporated with a tillage implement
+- Solid spread (no tillage or reduced tillage) - solid manure is spread on the soil surface with shallow or no incorporation
+- Slurry broadcasting - liquid manure is broadcast on the soil surface with partial or no incorporation with a tillage implement
+- Drop hose banding - liquid manure is pumped from hoses that are dragged along the soil surface, which apply the manure in bands along the soil below the crop canopy; these systems are primarily designed for grassland 
+- Shallow injection - manure is applied below the soil surface in vertical slots approx. 2-5 cm deep, leaving the surface of the manure band exposed 
+- Deep injection - manure is injected below the soil surface into slots approx. 5-20 cm deep; in some cases, press wheels or rollers fitted behind the tines cover the slots
 
 Sources: BC Ministry of Agriculture (2015) Nutrient Management Factsheet - Efficient Liquid Manure Application Systems; B. Ellert (AAFC, pers. comm., 2024)
 
@@ -245,26 +245,6 @@ To modify one of the default diets in Holos for a specific animal group and mana
 
 ### 10. How can I model dairy cattle that spend part of the day on pasture and the rest of the day in the barn?
 To model dairy cattle that divide their day between different housing systems, the model user can split the number of cattle in the relevant dairy cattle group(s) to create different groups that are housed in different housing systems, with the number of animals in each group representative of the proportion of time spend in each housing type. For example, if a group of 120 lactating dairy cows spends 8 hours on pasture and 16 hours in the barn in a typical day, this group could be split into two separate groups of 40 cows that spend all of their time on pasture (with the relevant diet, housing type and manure management system) and 80 cows that spend all of their time in the barn (with the relevant diet, housing type and manure management system). The model user can adjust the number of animals, diet, housing and manure management settings, etc., as appropriate to reflect where and for how long the cows spend their time, eat, urinate/defecate, etc.
-
-
-### 11. How are the manure management options in the Holos interface defined?
-On the 'Manure' tab for a livestock component or animal type, the 'Manure handling system' options are defined as follows:
-
-- Pasture/range/paddock: the manure from pasture and range grazing animals is allowed to lie as deposited, and is not managed.
-- Deep bedding: as manure accumulates, bedding is continually added to absorb moisture over a production cycle and possibly for as long as 6 to 12 months. This manure management system also is known as a bedded pack manure management system and may be combined with a dry lot or pasture. Manure may undergo periods where animals are present and are actively mixing the manure, or periods in which the pack is undisturbed. 
-- Solid storage (stockpiled): the storage of manure, typically for a period of several months, in unconfined piles or stacks. Manure is able to be stacked due to the presence of a sufficient amount of bedding material or loss of moisture by evaporation. Solid stores can be covered or compacted. In some cases, bulking agent or additives are added.
-- Compost - passive windrow: composting in windrows with infrequent turning for mixing and aeration, with or without runoff/leaching. 
-- Compost - intensive windrow: composting in windrows with regular (at least daily) turning for mixing and aeration, with or without runoff/leaching containment.
-- Daily spread: manure is routinely removed from a confinement facility and is applied to cropland or pasture within 24 hours of excretion.
-- Liquid/slurry with natural crust: manure is stored as excreted or with some minimal addition of water or bedding material in tanks or ponds outside the animal housing. Manure is removed and spread on fields once or more in a calendar year. Manure is agitated before removal from the tank/ponds to ensure that most of the VS are removed from the tank.
-- Liquid/slurry with no natural crust: manure is stored as excreted or with some minimal addition of water or bedding material in tanks or ponds outside the animal housing. Manure is removed and spread on fields once or more in a calendar year. Manure is agitated before removal from the tank/ponds to ensure that most of the VS are removed from the tank.
-- Liquid/slurry with solid cover: manure is stored as excreted or with some minimal addition of water or bedding material in tanks or ponds outside the animal housing. Manure is removed and spread on fields once or more in a calendar year. Manure is agitated before removal from the tank/ponds to ensure that most of the VS are removed from the tank.
-- Deep pit under barn: collection and storage of manure usually with little or no added water typically below a slatted floor in an enclosed animal confinement facility, usually for periods less than one year. Manure may be pumped out of the storage to a secondary storage tank multiple times in one year, or stored and applied directly to fields. It is assumed that VS removal rates on tank emptying are >90%. 
-- Composted in-vessel: composting, typically in an enclosed channel, with forced aeration and continuous mixing.
-- Solid storage (for poultry, with litter): similar to cattle and swine deep bedding except usually not combined with a dry lot or pasture. Typically used for all poultry breeder flocks, for alternative systems for layers and for the production of meat type chickens (broilers) and other fowl. Litter and manure are left in place with added bedding during the poultry production cycle and cleaned between poultry cycles, typically 5 to 9 weeks in productive systems and greater in lower productivity systems.
-- Solid storage (for poultry, without litter): may be similar to open pits in enclosed animal confinement facilities or may be designed and operated to dry the manure as it accumulates. The latter is known as a high-rise manure management system and is a form of passive windrow composting when designed and operated properly. Some intensive poultry farms installed the manure belt under the cage, where the manure is dried inside housing.
-
-Source: Table 10.18 (Volume 4: Agriculture, Forestry and Other Land Use) in IPCC (2019) 2019 Refinement to the 2006 IPCC Guidelines for National Greenhouse Gas Inventories, Calvo Buendia, E., Tanabe, K., Kranjc, A., Baasansuren, J., Fukuda, M., Ngarize S., Osako, A., Pyrozhenko, Y., Shermanau, P. and Federici, S. (eds). Published: IPCC, Switzerland.
 
 
 ---

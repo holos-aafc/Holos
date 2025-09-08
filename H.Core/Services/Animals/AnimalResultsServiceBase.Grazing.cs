@@ -179,7 +179,7 @@ namespace H.Core.Services.Animals
                     emissionFactorForLeaching: 0.011,
                     nitrogenBeddingRate: 0);
 
-                groupEmissionsByDay.ManureNitrateLeachingEmission = this.CalculateNitrateLeaching(
+                groupEmissionsByDay.ManureNitrateLeachingEmission = this.CalculateManureLeachingNitrogenEmissionRate(
                     nitrogenExcretionRate: groupEmissionsByDay.NitrogenExcretionRate,
                     leachingFraction: managementPeriod.ManureDetails.LeachingFraction,
                     emissionFactorForLeaching: managementPeriod.ManureDetails.EmissionFactorLeaching,

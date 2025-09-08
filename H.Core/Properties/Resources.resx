@@ -6436,7 +6436,4 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="EnumFractionNitrogen" xml:space="preserve">
     <value>Fraction total nitrogen</value>
   </data>
-  <data name="KilogramsN2ONPerHeadPerDay" xml:space="preserve">
-    <value>kg N2O-N head^-1 day^-1</value>
-  </data>
 </root>

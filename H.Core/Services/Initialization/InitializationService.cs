@@ -464,30 +464,6 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeIPCCNitrogenContent(viewItem, farm);
         }
 
-        public void AssignPerennialRootsReturned(IEnumerable<CropViewItem> list)
-        {
-            _cropInitializationService.AssignPerennialRootsReturned(list);
-        }
-
-        public IEnumerable<IGrouping<Guid, CropViewItem>> AssignPerennialStandIds(IEnumerable<CropViewItem> viewItems, FieldSystemComponent fieldSystemComponent)
-        {
-            return _cropInitializationService.AssignPerennialStandIds(viewItems, fieldSystemComponent);
-        }
-
-        public void AssignPerennialStandPositionalYears(IEnumerable<CropViewItem> viewItems, FieldSystemComponent fieldSystemComponent)
-        {
-            _cropInitializationService.AssignPerennialStandPositionalYears(viewItems, fieldSystemComponent);
-        }
-
-        public void AssignPerennialViewItemsDescription(IEnumerable<CropViewItem> viewItems)
-        {
-            _cropInitializationService.AssignPerennialViewItemsDescription(viewItems);
-        }
-
-        public void AssignTillageToFinalYearOfPerennialStands(IEnumerable<CropViewItem> viewItems)
-        {
-            _cropInitializationService.AssignTillageToFinalYearOfPerennialStands(viewItems);
-        }
 
         public void InitializeDailyManureMethaneEmissionRate(Farm farm)
         {

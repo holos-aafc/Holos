@@ -180,6 +180,5 @@ namespace H.Core.Services.Animals
         List<AnimalType> GetValidManureForDigestorImports();
         double GetTotalNitrogenFromExportedManure(ManureExportViewItem exportViewItem);
         double GetTotalNitrogenAppliedToAllFields(int year, AnimalType animalType);
-        List<ManureApplicationViewItem> GetManureApplicationViewItems(Farm farm, FieldSystemComponent field, CropViewItem viewItem);
     }
 }

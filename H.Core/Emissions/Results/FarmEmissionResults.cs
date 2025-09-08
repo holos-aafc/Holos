@@ -47,8 +47,6 @@ namespace H.Core.Emissions.Results
             public double FecalNitrogenExcretion { get; set; }
             public double AmountOfNitrogenAddedFromBedding { get; set; }
             public double ManureDirectN2ONEmission { get; set; }
-            public double LeachingFraction { get; set; }
-            public double ManureN2ONLeachingRate { get; set; }
             public double ManureN2ONLeachingEmission { get; set; }
             public double ManureNitrateLeachingEmission { get; set; }
             public double StartWeight { get; set; }
@@ -529,8 +527,6 @@ namespace H.Core.Emissions.Results
                                 FecalNitrogenExcretion = groupEmissionsByDay.FecalNitrogenExcretion,
                                 AmountOfNitrogenAddedFromBedding = groupEmissionsByDay.AmountOfNitrogenAddedFromBedding,
                                 ManureDirectN2ONEmission = groupEmissionsByDay.ManureDirectN2ONEmission,
-                                ManureN2ONLeachingRate = groupEmissionsByDay.ManureNitrogenLeachingRate,
-                                LeachingFraction = groupEmissionsByDay.LeachingFraction,
                                 ManureN2ONLeachingEmission = groupEmissionsByDay.ManureN2ONLeachingEmission,
                                 ManureNitrateLeachingEmission = groupEmissionsByDay.ManureNitrateLeachingEmission,
                                 VolatileSolidsProduced = groupEmissionsByDay.VolatileSolidsProduced,
@@ -704,8 +700,6 @@ namespace H.Core.Emissions.Results
                 nameof(dailyPrint.FecalNitrogenExcretion) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogen) + "," +
                 nameof(dailyPrint.AmountOfNitrogenAddedFromBedding) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogen) + "," +
                 nameof(dailyPrint.ManureDirectN2ONEmission) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON) + "," +
-                nameof(dailyPrint.LeachingFraction) + "," +
-                nameof(dailyPrint.ManureN2ONLeachingRate) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerHeadPerDay) + "," +
                 nameof(dailyPrint.ManureN2ONLeachingEmission) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON) + "," +
                 nameof(dailyPrint.ManureNitrateLeachingEmission) + "," + // could not find (kg NO3-N) MetricUnitsOfMeasurement Enum
                 nameof(dailyPrint.VolatileSolidsProduced) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramsPerDay) + "," +
@@ -750,8 +744,7 @@ namespace H.Core.Emissions.Results
             Farm farm,
             bool exportedFromGui)
         {
-            var DefaultDecimalOutputFormat = "F" + CoreConstants.DefaultRoundingPrecision;
-
+            const string DefaultDecimalOutputFormat = "F4";
             // Adding unit conversions later 
             stringBuilder.Append(String.Format("\"{0}\",", item.Component?.ToString(culture)));
             stringBuilder.Append(String.Format("\"{0}\",", item.AnimalGroup?.ToString(culture)));
@@ -789,8 +782,6 @@ namespace H.Core.Emissions.Results
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogen, item.FecalNitrogenExcretion, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogen, item.AmountOfNitrogenAddedFromBedding, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON, item.ManureDirectN2ONEmission, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{item.LeachingFraction.ToString(DefaultDecimalOutputFormat)}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ONPerHeadPerDay, item.ManureN2ONLeachingRate, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON, item.ManureN2ONLeachingEmission, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{item.ManureNitrateLeachingEmission.ToString(DefaultDecimalOutputFormat)}")); // could not find (kg NO3-N) MetricUnitsOfMeasurement Enum
             stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.KilogramsPerDay, item.VolatileSolidsProduced, exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));

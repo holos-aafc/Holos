@@ -36,41 +36,9 @@ namespace H.Core.Services.LandManagement
         /// </summary>
         public void CalculateFactors(CropViewItem viewItem, Farm farm)
         {
-            if (farm.IsCommandLineMode)
-            {
-                /*
-                 * In CLI
-                 *
-                 * These factors can never be zero.
-                 *
-                 * If they are not zero, don't overwrite them so that we use what was in the input files.
-                 */
-
-                if (viewItem.ClimateParameter == 0)
-                {
-                    viewItem.ClimateParameter = _climateService.CalculateClimateParameter(viewItem, farm);
-                }
-
-                if (viewItem.TillageFactor == 0)
-                {
-                    viewItem.TillageFactor = this.CalculateTillageFactor(viewItem, farm);
-                }
-
-                if (viewItem.ManagementFactor == 0)
-                {
-                    viewItem.ManagementFactor = this.CalculateManagementFactor(viewItem.ClimateParameter, viewItem.TillageFactor);
-                }
-            }
-            else
-            {
-                /*
-                 * In GUI
-                 */
-
-                viewItem.ClimateParameter = _climateService.CalculateClimateParameter(viewItem, farm);
-                viewItem.TillageFactor = this.CalculateTillageFactor(viewItem, farm);
-                viewItem.ManagementFactor = this.CalculateManagementFactor(viewItem.ClimateParameter, viewItem.TillageFactor);
-            }
+            viewItem.ClimateParameter = _climateService.CalculateClimateParameter(viewItem, farm);
+            viewItem.TillageFactor = this.CalculateTillageFactor(viewItem, farm);
+            viewItem.ManagementFactor = this.CalculateManagementFactor(viewItem.ClimateParameter, viewItem.TillageFactor);
         }
 
         /// <summary>
@@ -217,7 +185,6 @@ namespace H.Core.Services.LandManagement
 
                     _carbonService.ProcessCommandLineItems(viewItemsForField.ToList(), farm, this.AnimalResults);
                     _nitrogenService.ProcessCommandLineItems(viewItemsForField.ToList(), farm);
-                    this.CalculateFactors(viewItemsForField.ToList(), farm);
                     this.CombineInputsForAllCropsInSameYear(farm, viewItemsForField.ToList());
                 }
 
@@ -240,6 +207,7 @@ namespace H.Core.Services.LandManagement
             {
                 _icbmSoilCarbonCalculator.AnimalComponentEmissionsResults = this.AnimalResults;
 
+                
                  if (farm.IsCommandLineMode)
                 {
                     /*
@@ -249,7 +217,6 @@ namespace H.Core.Services.LandManagement
 
                     _carbonService.ProcessCommandLineItems(viewItemsForField.ToList(), farm, this.AnimalResults);
                     _nitrogenService.ProcessCommandLineItems(viewItemsForField.ToList(), farm);
-                    this.CalculateFactors(viewItemsForField.ToList(), farm);
                     this.CombineInputsForAllCropsInSameYear(farm, viewItemsForField.ToList());
                 }
 

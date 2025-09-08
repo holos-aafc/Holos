@@ -112,7 +112,6 @@ namespace H.Core.Services.LandManagement.Soil
             geographicData.DefaultSoilData = defaultSoilData;
 
             farm.GeographicData = geographicData;
-            farm.Province = geographicData.DefaultSoilData.Province;
         }
 
         public bool HasValidSoilData(Farm farm)

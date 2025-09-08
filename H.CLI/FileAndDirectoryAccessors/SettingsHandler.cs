@@ -137,11 +137,6 @@ namespace H.CLI.FileAndDirectoryAccessors
                 farm.YieldAssignmentMethod = (YieldAssignmentMethod)Enum.Parse(typeof(YieldAssignmentMethod), userSettings[Properties.Resources.Settings_YieldAssignmentMethod], true);
             }
 
-            if (userSettings.ContainsKey(Properties.Resources.Settings_PathToCustomYieldFile))
-            {
-                farm.PathToYieldInputFile = userSettings[Properties.Resources.Settings_PathToCustomYieldFile];
-            }
-
             farm.Defaults = userDefaults;
 
             // This setting might not exist in old settings files
@@ -163,6 +158,8 @@ namespace H.CLI.FileAndDirectoryAccessors
 
             this.ApplyClimateData(userSettings, farm);
             this.ApplyGeographicData(userSettings, farm);
+
+
 
             if (userSettings.ContainsKey(Properties.Resources.Settings_UseCustomStartingSOCValue))
             {

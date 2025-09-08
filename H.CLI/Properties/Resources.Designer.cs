@@ -3338,15 +3338,6 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Path To Custom Yield Input File.
-        /// </summary>
-        public static string Settings_PathToCustomYieldFile {
-            get {
-                return ResourceManager.GetString("Settings_PathToCustomYieldFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Percentage Of Product Returned To Soil For Annuals.
         /// </summary>
         public static string Settings_PercentageOfProductReturnedToSoilForAnnuals {

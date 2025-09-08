@@ -5402,9 +5402,6 @@
   <data name="MeanDailyPET" xml:space="preserve">
     <value>ETP quotidienne moyenne</value>
   </data>
-  <data name="MeanDailyPrecipitation" xml:space="preserve">
-    <value>Précipitations quotidiennes moyennes</value>
-  </data>
   <data name="RelativeHumidity" xml:space="preserve">
     <value>Humidité relative</value>
   </data>
@@ -5519,24 +5516,6 @@
   <data name="LabelP2O5" xml:space="preserve">
     <value>P2O5</value>
   </data>
-  <data name="LabelTotalDirectN2OExcludingRemainingAmounts" xml:space="preserve">
-    <value>N2O direct (à l’exclusion de tout fumier non épandu)</value>
-  </data>
-  <data name="LabelTotalIndirectN2OExcludingRemainingAmounts" xml:space="preserve">
-    <value>N2O indirect (à l’exclusion de tout fumier non épandu)</value>
-  </data>
-  <data name="LabelIndirectNitrousOxideFromOrganicNLeachingExcludingRemaining" xml:space="preserve">
-    <value>N2O-N provenant du lessivage de l’azote organique (à l’exclusion de tout fumier non épandu – lessivage de N2O-N N2O-N_ONleach)</value>
-  </data>
-  <data name="LabelIndirectNitrousOxideFromOrganicNVolatilization" xml:space="preserve">
-    <value>N2O-N de la volatilisation d’azote synthétique (volatilisation de N2O-N N2O-N_SNvolatilization)</value>
-  </data>
-  <data name="LabelIndirectNitrousOxideFromOrganicNVolatilizationNotIncludingRemainingAmounts" xml:space="preserve">
-    <value>N2O-N provenant de la volatilisation d’azote synthétique (à l’exclusion de tout fumier non épandu – volatilisation de N2O-N N2O-N_ONvolatilization)</value>
-  </data>
-  <data name="LabelTotalIndirectNitrousOxideExcludingRemainingAmounts" xml:space="preserve">
-    <value>N2O-N indirect (à l’exclusion de tout fumier non épandu)</value>
-  </data>
   <data name="ButtonAddCropResidueSubstrateTypes" xml:space="preserve">
     <value>Ajouter des types de substrat de résidus de cultures</value>
   </data>
@@ -5643,153 +5622,6 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
   </data>
   <data name="LabelResetLignin" xml:space="preserve">
     <value>Réinitialiser la teneur en lignine</value>
-  </data>
-  <data name="LabelResetCarbonConcentration" xml:space="preserve">
-    <value>Réinitialiser la concentration de carbone</value>
-  </data>
-  <data name="LabelResetNitrogenFixation" xml:space="preserve">
-    <value>Réinitialiser la fixation de l’azote</value>
-  </data>
-  <data name="LabelResetAnnualEntericMethaneEmissionRate" xml:space="preserve">
-    <value>Réinitialiser le taux annuel d’émission de méthane entérique</value>
-  </data>
-  <data name="LabelResetAnnualExcretionRate" xml:space="preserve">
-    <value>Réinitialiser le taux annuel d’excrétion</value>
-  </data>
-  <data name="LabelResetFeedingActivityCoefficient" xml:space="preserve">
-    <value>Réinitialiser le coefficient d’activité de l’alimentation</value>
-  </data>
-  <data name="LabelResetLivestockCoefficientSheep" xml:space="preserve">
-    <value>Réinitialiser le coefficient du bétail (moutons)</value>
-  </data>
-  <data name="LabelResetManureComposition" xml:space="preserve">
-    <value>Réinitialiser la composition du fumier</value>
-  </data>
-  <data name="LabelResetMilkProduction" xml:space="preserve">
-    <value>Réinitialiser la production de lait</value>
-  </data>
-  <data name="LabelResetWaterIrrigation" xml:space="preserve">
-    <value>Réinitialiser l’irrigation de l’eau</value>
-  </data>
-  <data name="LabelResetAmmoniaEmissionFactorForHousing" xml:space="preserve">
-    <value>Réinitialiser le facteur d’émission de NH₃ (logement)</value>
-  </data>
-  <data name="LabelResetAmmoniaEmissionFactorForLandApplication" xml:space="preserve">
-    <value>Réinitialiser le facteur d’émission de NH3 (épandage)</value>
-  </data>
-  <data name="LabelResetAmmoniaEmissionFactorForManureStorage" xml:space="preserve">
-    <value>Réinitialiser le facteur d’émission de NH₃ (entreposage du fumier)</value>
-  </data>
-  <data name="LabelResetDailyManureMethaneEmissionRate" xml:space="preserve">
-    <value>Réinitialiser les émissions quotidiennes de méthane (CH₄)</value>
-  </data>
-  <data name="LabelResetBarnTemperature" xml:space="preserve">
-    <value>Réinitialiser la température de l’étable</value>
-  </data>
-  <data name="LabelResetBaselineCoefficient" xml:space="preserve">
-    <value>Réinitialiser le coefficient de référence</value>
-  </data>
-  <data name="LabelResetBeddingMaterial" xml:space="preserve">
-    <value>Réinitialiser la litière</value>
-  </data>
-  <data name="LabelResetBeddingMaterialRate" xml:space="preserve">
-    <value>Réinitialiser le taux de litière</value>
-  </data>
-  <data name="LabelResetBiomassCoefficient" xml:space="preserve">
-    <value>Réinitialiser le coefficient de biomasse</value>
-  </data>
-  <data name="LabelResetDailyTanExcretion" xml:space="preserve">
-    <value>Réinitialiser l’excrétion quotidienne d’AAT</value>
-  </data>
-  <data name="LabelResetDefaultEmissionFactors" xml:space="preserve">
-    <value>Réinitialiser les facteurs d’émission par défaut</value>
-  </data>
-  <data name="LabelResetFuelEnergy" xml:space="preserve">
-    <value>Réinitialiser l’énergie du combustible</value>
-  </data>
-  <data name="LabelResetGainCoefficient" xml:space="preserve">
-    <value>Réinitialiser le coefficient de gain</value>
-  </data>
-  <data name="LabelResetHerbicideEnergy" xml:space="preserve">
-    <value>Réinitialiser l’énergie des herbicides</value>
-  </data>
-  <data name="LabelResetLeachingFraction" xml:space="preserve">
-    <value>Réinitialiser les données sur le lessivage</value>
-  </data>
-  <data name="LabelResetManureMineralizationFractions" xml:space="preserve">
-    <value>Réinitialiser les fractions de minéralisation du fumier</value>
-  </data>
-  <data name="LabelResetMethaneProducingCapacityOfManure" xml:space="preserve">
-    <value>Réinitialiser la capacité de production de CH₄</value>
-  </data>
-  <data name="LabelResetMoistureContent" xml:space="preserve">
-    <value>Réinitialiser la teneur en humidité</value>
-  </data>
-  <data name="LabelResetNitrogenContent" xml:space="preserve">
-    <value>Réinitialiser la teneur en azote</value>
-  </data>
-  <data name="LabelResetNitrogenExcretionRate" xml:space="preserve">
-    <value>Réinitialiser le taux d’excrétion d’azote</value>
-  </data>
-  <data name="LabelResetSoilProperties" xml:space="preserve">
-    <value>Réinitialiser les propriétés du sol</value>
-  </data>
-  <data name="LabelResetVolatileSolidsExcretion" xml:space="preserve">
-    <value>Réinitialiser les excrétions solides volatiles</value>
-  </data>
-  <data name="LabelResetPercentageReturns" xml:space="preserve">
-    <value>Réinitialiser les rendements en pourcentage</value>
-  </data>
-  <data name="LabelResetTillageType" xml:space="preserve">
-    <value>Réinitialiser le type de travail du sol</value>
-  </data>
-  <data name="LabelResetFallow" xml:space="preserve">
-    <value>Réinitialiser la jachère</value>
-  </data>
-  <data name="LabelResetYield" xml:space="preserve">
-    <value>Réinitialiser le rendement</value>
-  </data>
-  <data name="LabelResetAmountOfBlendedProduct" xml:space="preserve">
-    <value>Réinitialiser la quantité de produit mélangé</value>
-  </data>
-  <data name="LabelResetAvailableSoilTypes" xml:space="preserve">
-    <value>Réinitialiser les types de sols disponibles</value>
-  </data>
-  <data name="LabelResetBlendData" xml:space="preserve">
-    <value>Réinitialiser les données sur le mélange</value>
-  </data>
-  <data name="LabelResetDefaultSoilForField" xml:space="preserve">
-    <value>Réinitialiser les données par défaut sur le sol pour le champ</value>
-  </data>
-  <data name="LabelResetEconomicDefaults" xml:space="preserve">
-    <value>Réinitialiser les valeurs économiques par défaut</value>
-  </data>
-  <data name="LabelResetFertilizerApplicationMethod" xml:space="preserve">
-    <value>Réinitialiser la méthode d’application de l’engrais</value>
-  </data>
-  <data name="LabelResetHarvestMethod" xml:space="preserve">
-    <value>Réinitialiser la méthode de récolte</value>
-  </data>
-  <data name="LabelResetLumCMaxValues" xml:space="preserve">
-    <value>Réinitialiser les valeurs maximales de C GUT</value>
-  </data>
-  <data name="LabelResetManureApplicationMethod" xml:space="preserve">
-    <value>Réinitialiser la méthode d’application du fumier</value>
-  </data>
-  <data name="LabelResetPerennialDefaults" xml:space="preserve">
-    <value>Réinitialiser les valeurs par défaut pour les plantes vivaces  </value>
-  </data>
-  <data name="LabelResetPhosphorusFertilizerRate" xml:space="preserve">
-    <value>Réinitialiser le taux d’engrais phosphaté</value>
-  </data>
-  <data name="LabelResetUserDefaults" xml:space="preserve">
-    <value>Réinitialiser les valeurs par défaut des utilisateurs</value>
-  </data>
-  <data name="LabelResetHarvestLoss" xml:space="preserve">
-    <value>Réinitialiser l’utilisation des pâturages</value>
-  </data>
-  <data name="LabelResetYieldsAllYears" xml:space="preserve">
-    <value>Réinitialiser les rendements pour toutes les années</value>
   </data>
   <data name="MessageResetLigninContent" xml:space="preserve">
     <value>Remet la teneur en lignine de toutes les cultures (pour chaque année) à la valeur par défaut.</value>
@@ -5940,36 +5772,6 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
   </data>
   <data name="MessageResetNitrogenExcretionRate" xml:space="preserve">
     <value>Remet le taux d’excrétion d’azote pour chaque groupe d’animaux (pour la période de gestion) à la valeur par défaut.</value>
-  </data>
-  <data name="TitleResetDefaultValues" xml:space="preserve">
-    <value>Réinitialiser les valeurs par défaut</value>
-  </data>
-  <data name="LabelStepOneDefaultValues" xml:space="preserve">
-    <value>Cette fenêtre permet à l’utilisateur de réinitialiser les valeurs par défaut pour les cultures et les animaux. Sélectionnez-la si les nouvelles valeurs par défaut doivent être appliquées à la ferme courante ou à toutes les fermes enregistrées.</value>
-  </data>
-  <data name="LabelAllFarms" xml:space="preserve">
-    <value>Toutes les fermes</value>
-  </data>
-  <data name="LabelSelectedFarm" xml:space="preserve">
-    <value>Ferme sélectionnée</value>
-  </data>
-  <data name="LabelStepTwoDefaultValues" xml:space="preserve">
-    <value>Sélectionnez tous les boutons pour lesquels vous voulez réinitialiser la valeur par défaut.</value>
-  </data>
-  <data name="LabelToggleAllOff" xml:space="preserve">
-    <value>Tout basculer désactivé</value>
-  </data>
-  <data name="LabelToggleAllOn" xml:space="preserve">
-    <value>Tous basculer activé</value>
-  </data>
-  <data name="TitleResetDefaults" xml:space="preserve">
-    <value>Rétablir les valeurs par défaut</value>
-  </data>
-  <data name="LabelAnimals" xml:space="preserve">
-    <value>Animaux</value>
-  </data>
-  <data name="LabelCrops" xml:space="preserve">
-    <value>Culture</value>
   </data>
   <data name="LabelTotalDirectN2ONFromCropResidueExports" xml:space="preserve">
     <value>N2O-N provenant de résidus de culture exportés</value>
@@ -6136,9 +5938,6 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
   <data name="LabelManureExportedFromFarm" xml:space="preserve">
     <value>Fumier exporté de la ferme</value>
   </data>
-  <data name="LabelCropResidueExports" xml:space="preserve">
-    <value>Exportations de résidus de culture</value>
-  </data>
   <data name="LabelWinterFeeding" xml:space="preserve">
     <value>alimentation en hiver</value>
   </data>
@@ -6184,8 +5983,205 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
   <data name="EnumFractionNitrogen" xml:space="preserve">
     <value />
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="KilogramsN2ONPerHeadPerDay" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="LabelSelectedFarm" xml:space="preserve">
+    <value>Ferme sélectionnée</value>
+  </data>
+  <data name="LabelStepTwoDefaultValues" xml:space="preserve">
+    <value>Sélectionnez tous les boutons pour lesquels vous voulez réinitialiser la valeur par défaut.</value>
+  </data>
+  <data name="LabelResetAmountOfBlendedProduct" xml:space="preserve">
+    <value>Réinitialiser la quantité de produit mélangé</value>
+  </data>
+  <data name="LabelResetFeedingActivityCoefficient" xml:space="preserve">
+    <value>Réinitialiser le coefficient d’activité de l’alimentation</value>
+  </data>
+  <data name="LabelResetBeddingMaterial" xml:space="preserve">
+    <value>Réinitialiser la litière</value>
+  </data>
+  <data name="LabelResetDefaultSoilForField" xml:space="preserve">
+    <value>Réinitialiser les données par défaut sur le sol pour le champ</value>
+  </data>
+  <data name="LabelToggleAllOff" xml:space="preserve">
+    <value>Tout basculer désactivé</value>
+  </data>
+  <data name="LabelResetManureMineralizationFractions" xml:space="preserve">
+    <value>Réinitialiser les fractions de minéralisation du fumier</value>
+  </data>
+  <data name="LabelResetLeachingFraction" xml:space="preserve">
+    <value>Réinitialiser les données sur le lessivage</value>
+  </data>
+  <data name="LabelResetVolatileSolidsExcretion" xml:space="preserve">
+    <value>Réinitialiser les excrétions solides volatiles</value>
+  </data>
+  <data name="LabelResetAmmoniaEmissionFactorForHousing" xml:space="preserve">
+    <value>Réinitialiser le facteur d’émission de NH₃ (logement)</value>
+  </data>
+  <data name="LabelResetBeddingMaterialRate" xml:space="preserve">
+    <value>Réinitialiser le taux de litière</value>
+  </data>
+  <data name="LabelResetUserDefaults" xml:space="preserve">
+    <value>Réinitialiser les valeurs par défaut des utilisateurs</value>
+  </data>
+  <data name="LabelResetManureApplicationMethod" xml:space="preserve">
+    <value>Réinitialiser la méthode d’application du fumier</value>
+  </data>
+  <data name="LabelResetTillageType" xml:space="preserve">
+    <value>Réinitialiser le type de travail du sol</value>
+  </data>
+  <data name="LabelResetFertilizerApplicationMethod" xml:space="preserve">
+    <value>Réinitialiser la méthode d’application de l’engrais</value>
+  </data>
+  <data name="LabelIndirectNitrousOxideFromOrganicNVolatilization" xml:space="preserve">
+    <value>N2O-N de la volatilisation d’azote synthétique (volatilisation de N2O-N N2O-N_SNvolatilization)</value>
+  </data>
+  <data name="LabelResetFallow" xml:space="preserve">
+    <value>Réinitialiser la jachère</value>
+  </data>
+  <data name="LabelResetYieldsAllYears" xml:space="preserve">
+    <value>Réinitialiser les rendements pour toutes les années</value>
+  </data>
+  <data name="LabelResetMoistureContent" xml:space="preserve">
+    <value>Réinitialiser la teneur en humidité</value>
+  </data>
+  <data name="LabelResetBaselineCoefficient" xml:space="preserve">
+    <value>Réinitialiser le coefficient de référence</value>
+  </data>
+  <data name="TitleResetDefaults" xml:space="preserve">
+    <value>Rétablir les valeurs par défaut</value>
+  </data>
+  <data name="LabelIndirectNitrousOxideFromOrganicNVolatilizationNotIncludingRemainingAmounts" xml:space="preserve">
+    <value>N2O-N provenant de la volatilisation d’azote synthétique (à l’exclusion de tout fumier non épandu – volatilisation de N2O-N N2O-N_ONvolatilization)</value>
+  </data>
+  <data name="LabelResetNitrogenFixation" xml:space="preserve">
+    <value>Réinitialiser la fixation de l’azote</value>
+  </data>
+  <data name="LabelResetMilkProduction" xml:space="preserve">
+    <value>Réinitialiser la production de lait</value>
+  </data>
+  <data name="LabelResetPhosphorusFertilizerRate" xml:space="preserve">
+    <value>Réinitialiser le taux d’engrais phosphaté</value>
+  </data>
+  <data name="LabelResetBiomassCoefficient" xml:space="preserve">
+    <value>Réinitialiser le coefficient de biomasse</value>
+  </data>
+  <data name="LabelResetHarvestLoss" xml:space="preserve">
+    <value>Réinitialiser l’utilisation des pâturages</value>
+  </data>
+  <data name="LabelResetEconomicDefaults" xml:space="preserve">
+    <value>Réinitialiser les valeurs économiques par défaut</value>
+  </data>
+  <data name="LabelResetBarnTemperature" xml:space="preserve">
+    <value>Réinitialiser la température de l’étable</value>
+  </data>
+  <data name="LabelResetDefaultEmissionFactors" xml:space="preserve">
+    <value>Réinitialiser les facteurs d’émission par défaut</value>
+  </data>
+  <data name="LabelTotalIndirectNitrousOxideExcludingRemainingAmounts" xml:space="preserve">
+    <value>N2O-N indirect (à l’exclusion de tout fumier non épandu)</value>
+  </data>
+  <data name="LabelResetGainCoefficient" xml:space="preserve">
+    <value>Réinitialiser le coefficient de gain</value>
+  </data>
+  <data name="LabelResetAmmoniaEmissionFactorForLandApplication" xml:space="preserve">
+    <value>Réinitialiser le facteur d’émission de NH3 (épandage)</value>
+  </data>
+  <data name="LabelResetDailyManureMethaneEmissionRate" xml:space="preserve">
+    <value>Réinitialiser les émissions quotidiennes de méthane (CH₄)</value>
+  </data>
+  <data name="LabelAllFarms" xml:space="preserve">
+    <value>Toutes les fermes</value>
+  </data>
+  <data name="LabelResetNitrogenExcretionRate" xml:space="preserve">
+    <value>Réinitialiser le taux d’excrétion d’azote</value>
+  </data>
+  <data name="LabelCropResidueExports" xml:space="preserve">
+    <value>Exportations de résidus de culture</value>
+  </data>
+  <data name="LabelToggleAllOn" xml:space="preserve">
+    <value>Tous basculer activé</value>
+  </data>
+  <data name="LabelResetPercentageReturns" xml:space="preserve">
+    <value>Réinitialiser les rendements en pourcentage</value>
+  </data>
+  <data name="LabelResetManureComposition" xml:space="preserve">
+    <value>Réinitialiser la composition du fumier</value>
+  </data>
+  <data name="LabelResetFuelEnergy" xml:space="preserve">
+    <value>Réinitialiser l’énergie du combustible</value>
+  </data>
+  <data name="LabelResetSoilProperties" xml:space="preserve">
+    <value>Réinitialiser les propriétés du sol</value>
+  </data>
+  <data name="LabelResetHarvestMethod" xml:space="preserve">
+    <value>Réinitialiser la méthode de récolte</value>
+  </data>
+  <data name="LabelResetPerennialDefaults" xml:space="preserve">
+    <value>Réinitialiser les valeurs par défaut pour les plantes vivaces  </value>
+  </data>
+  <data name="LabelResetLivestockCoefficientSheep" xml:space="preserve">
+    <value>Réinitialiser le coefficient du bétail (moutons)</value>
+  </data>
+  <data name="LabelResetAvailableSoilTypes" xml:space="preserve">
+    <value>Réinitialiser les types de sols disponibles</value>
+  </data>
+  <data name="LabelResetHerbicideEnergy" xml:space="preserve">
+    <value>Réinitialiser l’énergie des herbicides</value>
+  </data>
+  <data name="LabelTotalIndirectN2OExcludingRemainingAmounts" xml:space="preserve">
+    <value>N2O indirect (à l’exclusion de tout fumier non épandu)</value>
+  </data>
+  <data name="LabelCrops" xml:space="preserve">
+    <value>Culture</value>
+  </data>
+  <data name="LabelResetNitrogenContent" xml:space="preserve">
+    <value>Réinitialiser la teneur en azote</value>
+  </data>
+  <data name="LabelResetWaterIrrigation" xml:space="preserve">
+    <value>Réinitialiser l’irrigation de l’eau</value>
+  </data>
+  <data name="LabelResetAnnualExcretionRate" xml:space="preserve">
+    <value>Réinitialiser le taux annuel d’excrétion</value>
+  </data>
+  <data name="LabelStepOneDefaultValues" xml:space="preserve">
+    <value>Cette fenêtre permet à l’utilisateur de réinitialiser les valeurs par défaut pour les cultures et les animaux. Sélectionnez-la si les nouvelles valeurs par défaut doivent être appliquées à la ferme courante ou à toutes les fermes enregistrées.</value>
+  </data>
+  <data name="LabelResetBlendData" xml:space="preserve">
+    <value>Réinitialiser les données sur le mélange</value>
+  </data>
+  <data name="LabelResetYield" xml:space="preserve">
+    <value>Réinitialiser le rendement</value>
+  </data>
+  <data name="MeanDailyPrecipitation" xml:space="preserve">
+    <value>Précipitations quotidiennes moyennes</value>
+  </data>
+  <data name="LabelResetMethaneProducingCapacityOfManure" xml:space="preserve">
+    <value>Réinitialiser la capacité de production de CH₄</value>
+  </data>
+  <data name="LabelResetDailyTanExcretion" xml:space="preserve">
+    <value>Réinitialiser l’excrétion quotidienne d’AAT</value>
+  </data>
+  <data name="TitleResetDefaultValues" xml:space="preserve">
+    <value>Réinitialiser les valeurs par défaut</value>
+  </data>
+  <data name="LabelResetAnnualEntericMethaneEmissionRate" xml:space="preserve">
+    <value>Réinitialiser le taux annuel d’émission de méthane entérique</value>
+  </data>
+  <data name="LabelResetCarbonConcentration" xml:space="preserve">
+    <value>Réinitialiser la concentration de carbone</value>
+  </data>
+  <data name="LabelResetLumCMaxValues" xml:space="preserve">
+    <value>Réinitialiser les valeurs maximales de C GUT</value>
+  </data>
+  <data name="LabelResetAmmoniaEmissionFactorForManureStorage" xml:space="preserve">
+    <value>Réinitialiser le facteur d’émission de NH₃ (entreposage du fumier)</value>
+  </data>
+  <data name="LabelTotalDirectN2OExcludingRemainingAmounts" xml:space="preserve">
+    <value>N2O direct (à l’exclusion de tout fumier non épandu)</value>
+  </data>
+  <data name="LabelAnimals" xml:space="preserve">
+    <value>Animaux</value>
+  </data>
+  <data name="LabelIndirectNitrousOxideFromOrganicNLeachingExcludingRemaining" xml:space="preserve">
+    <value>N2O-N provenant du lessivage de l’azote organique (à l’exclusion de tout fumier non épandu – lessivage de N2O-N N2O-N_ONleach)</value>
   </data>
 </root>
