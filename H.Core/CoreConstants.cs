@@ -17,6 +17,7 @@ namespace H.Core
         #region Constants
 
         public const int DefaultNumberOfDecimalPlaces = 3;
+        public const int DefaultRoundingPrecision = 8;
 
         /// <summary>
         /// Converts from N2O-N to N2O

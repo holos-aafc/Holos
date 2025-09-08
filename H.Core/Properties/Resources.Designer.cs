@@ -7535,6 +7535,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to kg N2O-N head^-1 day^-1.
+        /// </summary>
+        public static string KilogramsN2ONPerHeadPerDay {
+            get {
+                return ResourceManager.GetString("KilogramsN2ONPerHeadPerDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to kg N2O-N ha^-1.
         /// </summary>
         public static string KilogramsN2ONPerHectare {

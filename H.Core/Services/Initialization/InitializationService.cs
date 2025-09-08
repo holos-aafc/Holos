@@ -489,7 +489,6 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.AssignTillageToFinalYearOfPerennialStands(viewItems);
         }
 
-
         public void InitializeDailyManureMethaneEmissionRate(Farm farm)
         {
             _animalInitializationService.InitializeDailyManureMethaneEmissionRate(farm);

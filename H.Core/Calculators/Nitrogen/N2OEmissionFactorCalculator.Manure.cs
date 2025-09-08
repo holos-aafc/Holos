@@ -353,6 +353,7 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
+        /// Equation 4.6.2-3
         /// Equation 4.6.2-12
         /// Equation 4.6.2-20
         ///
@@ -378,6 +379,7 @@ namespace H.Core.Calculators.Nitrogen
             var animalType = manureApplicationViewItem.AnimalType;
             if (animalType.IsBeefCattleType() || animalType.IsDairyCattleType())
             {
+                // Equation 4.6.2-3
                 var adjustedAmmoniaEmissionFactor = this.GetAdjustedAmmoniaEmissionFactor(farm, viewItem, manureApplicationViewItem);
                 var tanUsed = _manureService.GetAmountOfTanUsedDuringLandApplication(viewItem, manureApplicationViewItem);
                 result = tanUsed * adjustedAmmoniaEmissionFactor;
@@ -387,7 +389,7 @@ namespace H.Core.Calculators.Nitrogen
                 var landApplicationFactors = this.GetLandApplicationFactors(farm, manureApplicationViewItem);
                 var nitrogenUsed = manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare * viewItem.Area;
 
-                // 4.6.2-12
+                // Equation 4.6.2-12
                 result = nitrogenUsed * landApplicationFactors.VolatilizationFraction;
             }
             else

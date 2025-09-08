@@ -862,10 +862,11 @@ namespace H.Core.Services.Animals
         {
             var amount = 0d;
 
-            var tank = _manureTanks.SingleOrDefault(x => x.AnimalType == animalType && x.Year == year);
-            if (tank != null)
+            // Amounts on pasture can't be exported
+            var tanks = _manureTanks.Where(x => x.AnimalType == animalType && x.Year == year && x.ManureStateType != ManureStateType.Pasture);
+            foreach (var manureTank in tanks)
             {
-                amount = tank.VolumeRemainingInTank;
+                amount += manureTank.VolumeRemainingInTank;
             }
 
             return amount;

@@ -276,5 +276,8 @@ namespace H.Core.Enumerations
 
         [LocalizedDescription("KilogramsPerHectareCropWetWeight", typeof(Resources))]
         KilogramsPerHectareCropWetWeight,
+
+        [LocalizedDescription("KilogramsN2ONPerHeadPerDay", typeof(Resources))]
+        KilogramsN2ONPerHeadPerDay,
     }
 }

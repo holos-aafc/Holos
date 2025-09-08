@@ -1641,7 +1641,7 @@ namespace H.Core.Services.Animals
 
         /// <summary>
         /// Equation 4.3.6-1
-        /// Equation 5.4.4-4
+        /// Equation 5.4.4-1
         /// </summary>
         /// <param name="nitrogenExcretionRate">N excretion rate (kg N2O-N head^-1 day^-1)</param>
         /// <param name="leachingFraction">Leaching fraction</param>
