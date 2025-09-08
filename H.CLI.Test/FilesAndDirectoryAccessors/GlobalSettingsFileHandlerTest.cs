@@ -204,7 +204,6 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             reader.ReadGlobalSettings(pathToUserChoice3SettingsFile + @"\Farm.settings");
 
             Assert.AreEqual(reader.GlobalSettingsDictionary["January Mean Temperature"], "-6.17026481");
-
         }
 
     }
