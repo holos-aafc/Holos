@@ -28,7 +28,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
             var settingsfilePath = @"H.CLI.TestFiles\ReadGlobalSettingsTest\farm.settings";
             var reader = new ReadSettingsFile();
             reader.ReadGlobalSettings(settingsfilePath);
-            Assert.AreEqual(reader.GlobalSettingsDictionary.Count, 101);
+            Assert.AreEqual(reader.GlobalSettingsDictionary.Count, 102);
             Assert.AreEqual(reader.GlobalSettingsDictionary["Ripening Day"],"197");
             Assert.AreEqual(reader.GlobalSettingsDictionary["Alfa"], "0.7");
         }

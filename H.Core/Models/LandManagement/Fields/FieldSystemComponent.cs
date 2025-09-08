@@ -472,9 +472,43 @@ namespace H.Core.Models.LandManagement.Fields
             return result;
         }
 
+        public List<GrazingViewItem> GetGrazingViewItemsInYear(int year)
+        {
+            var result = new List<GrazingViewItem>();
+
+            foreach (var cropViewItem in this.CropViewItems)
+            {
+                foreach (var grazingViewItem in cropViewItem.GrazingViewItems)
+                {
+                    if (grazingViewItem.Start.Year == year)
+                    {
+                        result.Add(grazingViewItem);
+                    }
+                }
+            }
+
+            return result;
+        }
+
         public bool HasImportedDigestateApplicationsInYear(int year)
         {
             return this.GetImportedDigestateApplicationsInYear(year).Any();
+        }
+
+        /// <summary>
+        /// Returns a collection of all manure applications on the farm (from both livestock and import sources)
+        /// </summary>
+        public List<ManureApplicationViewItem> GetAllManureApplicationsInYear(int year)
+        {
+            var result = new List<ManureApplicationViewItem>();
+
+            var livestock = this.GetLivestockManureApplicationsInYear(year);
+            result.AddRange(livestock);
+
+            var imports = this.GetImportedManureApplicationsInYear(year);
+            result.AddRange(imports);
+
+            return result;
         }
 
         public List<DigestateApplicationViewItem> GetImportedDigestateApplicationsInYear(int year)

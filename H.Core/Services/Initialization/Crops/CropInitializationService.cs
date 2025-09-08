@@ -41,6 +41,7 @@ namespace H.Core.Services.Initialization.Crops
         private readonly Table_9_Nitrogen_Lignin_Content_In_Crops_Provider _slopeProviderTable;
         private readonly IrrigationService _irrigationService;
         private readonly Table_60_Utilization_Rates_For_Livestock_Grazing_Provider _utilizationRatesForLivestockGrazingProvider;
+        private readonly ICustomFileYieldProvider _customFileYieldProvider = new CustomFileYieldProvider();
         private readonly IManureService _manureService;
 
         private static readonly SmallAreaYieldProvider _smallAreaYieldProvider;

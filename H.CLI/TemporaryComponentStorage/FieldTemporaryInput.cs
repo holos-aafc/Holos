@@ -123,8 +123,7 @@ namespace H.CLI.TemporaryComponentStorage
                     return;
                 }
 
-                //var convertedBoolean = bool.Parse(value);
-                var convertedBoolean = value.ToLower(new CultureInfo("en-CA")) == "yes";
+                var convertedBoolean = value.ToLower(new CultureInfo("en-CA")) == "true";
                 propertyInfo.SetValue(this, Convert.ChangeType(convertedBoolean, propertyInfo.PropertyType, CLILanguageConstants.culture), null);
 
                 return;

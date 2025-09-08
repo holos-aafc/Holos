@@ -99,13 +99,7 @@ namespace H.Core.Calculators.Carbon
             // Note that eq. 2.2.3-4 is the residue for the entire field, we report per ha on the details screen so we divide by the area here
             viewItem.BelowGroundCarbonInput = (viewItem.BelowGroundResidueDryMatter * BelowGroundCarbonContent) / viewItem.Area;
 
-            if (farm.IsCommandLineMode == false)
-            {
-                viewItem.ManureCarbonInputsPerHectare = manureService.GetTotalManureCarbonInputsForField(farm, viewItem.Year, viewItem);
-                viewItem.ManureCarbonInputsFromManureOnly = viewItem.GetTotalCarbonFromAppliedManure() / viewItem.Area;
-            }
-
-            viewItem.ManureCarbonInputsPerHectare += viewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
+            this.AssignManureCarbonInputs(viewItem, farm, animalComponentEmissionsResults);
 
             viewItem.DigestateCarbonInputsPerHectare = digestateService.GetTotalDigestateCarbonInputsForField(farm, viewItem.Year, viewItem);
             viewItem.DigestateCarbonInputsPerHectareFromApplicationsOnly = viewItem.GetTotalCarbonFromAppliedDigestate(ManureLocationSourceType.Livestock) / viewItem.Area;

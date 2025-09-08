@@ -92,12 +92,7 @@ namespace H.Core.Calculators.Carbon
                 cropViewItem: currentYearViewItem,
                 farm: farm);
 
-            currentYearViewItem.ManureCarbonInputsPerHectare = manureService.GetTotalManureCarbonInputsForField(farm, currentYearViewItem.Year, currentYearViewItem);
-
-            if (farm.CropHasGrazingAnimals(currentYearViewItem))
-            {
-                currentYearViewItem.ManureCarbonInputsPerHectare += currentYearViewItem.TotalCarbonInputFromManureFromAnimalsGrazingOnPasture;
-            }
+            this.AssignManureInputs(previousYearViewItem, currentYearViewItem, nextYearViewItem, farm, animalResults);
 
             currentYearViewItem.DigestateCarbonInputsPerHectare = digestateService.GetTotalDigestateCarbonInputsForField(farm, currentYearViewItem.Year, currentYearViewItem);
             currentYearViewItem.DigestateCarbonInputsPerHectareFromApplicationsOnly = currentYearViewItem.GetTotalCarbonFromAppliedDigestate(ManureLocationSourceType.Livestock) / currentYearViewItem.Area;
@@ -106,6 +101,13 @@ namespace H.Core.Calculators.Carbon
 
             return currentYearViewItem;
         }
+
+        public void AssignManureInputs(CropViewItem previousYearViewItem, CropViewItem currentYearViewItem,
+            CropViewItem nextYearViewItem, Farm farm, List<AnimalComponentEmissionsResults> animalResults)
+        {
+            base.AssignManureCarbonInputs(currentYearViewItem, farm, animalResults);
+        }
+
         public double CalculatePlantCarbonInAgriculturalProduct(
             CropViewItem previousYearViewItem, 
             CropViewItem currentYearViewItem, 

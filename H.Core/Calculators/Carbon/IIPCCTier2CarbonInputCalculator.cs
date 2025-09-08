@@ -9,5 +9,8 @@ namespace H.Core.Calculators.Carbon
     {
         bool CanCalculateInputsForCrop(CropViewItem cropViewItem);
         void AssignInputs(CropViewItem viewItem, Farm farm, List<AnimalComponentEmissionsResults> animalResults);
+
+        void AssignManureCarbonInputs(CropViewItem viewItem, Farm farm,
+            List<AnimalComponentEmissionsResults> animalComponentEmissionsResults);
     }
 }

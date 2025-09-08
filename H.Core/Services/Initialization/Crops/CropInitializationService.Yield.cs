@@ -90,6 +90,19 @@ namespace H.Core.Services.Initialization.Crops
             {
                 var results = new List<CustomUserYieldData>();
 
+                // In the GUI the reading of the custom yield input file begins on the details screen. Must read the file when in CLI mode otherwise CustomYieldData will be an empty collection
+                if (farm.IsCommandLineMode)
+                {
+                    if (_customFileYieldProvider.HasExpectedInputFormat(farm.PathToYieldInputFile))
+                    {
+                        farm.GeographicData.CustomYieldData = _customFileYieldProvider.GetYieldData(farm.PathToYieldInputFile);
+                    }
+                    else
+                    {
+                        Trace.TraceError($"{nameof(CropInitializationService)}.{nameof(InitializeYieldForYear)}: yield input file was not in the expected format");
+                    }
+                }
+
                 foreach (var customYieldItem in farm.GeographicData.CustomYieldData)
                 {
                     var yearMatch = customYieldItem.Year == viewItem.Year;
@@ -263,13 +276,14 @@ namespace H.Core.Services.Initialization.Crops
             var province = farm.Province;
 
             // No small area data exists for years > 2018, take average of last 10 years as placeholder values when considering these years
-            const int NoDataYear = 2018;
+            const int NoDataAfterYear = 2018;
+            const int NoDataBeforeYear = 1971;
             const int NumberOfYearsInAverage = 10;
-            if (viewItem.Year > NoDataYear)
+            if (viewItem.Year > NoDataAfterYear)
             {
-                var startYear = NoDataYear - NumberOfYearsInAverage;
+                var startYear = NoDataAfterYear - NumberOfYearsInAverage;
                 var yields = new List<double>();
-                for (int year = startYear; year <= NoDataYear; year++)
+                for (int year = startYear; year <= NoDataAfterYear; year++)
                 {
                     var smallAreaYieldData = _smallAreaYieldProvider.GetData(
                         year: year,

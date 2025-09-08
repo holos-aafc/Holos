@@ -202,8 +202,10 @@ namespace H.Core.Services.LandManagement
         {
             var upstreamEmissions = 0.0;
 
+            var filteredItems = viewItem.FertilizerApplicationViewItems.Where(x => x.FertilizerBlendData.FertilizerBlend != FertilizerBlends.CustomOrganic && x.FertilizerBlendData.FertilizerBlend != FertilizerBlends.Lime).ToList();
+
             // There are no upstream emissions associated with organic fertilizer applications
-            foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems.Where(x => x.FertilizerBlendData.FertilizerBlend != FertilizerBlends.CustomOrganic && x.FertilizerBlendData.FertilizerBlend != FertilizerBlends.Lime))
+            foreach (var fertilizerApplicationViewItem in filteredItems)
             {
                 var blendEmissions = _carbonFootprintForFertilizerBlendsProvider.GetData(fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend);
 

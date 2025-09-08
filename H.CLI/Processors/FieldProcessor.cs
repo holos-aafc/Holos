@@ -54,9 +54,6 @@ namespace H.CLI.Processors
             var animalResults = _animalService.GetAnimalResults(farm);
             _fieldResultsService.AnimalResults = animalResults;
 
-
-
-
             var finalResults = _fieldResultsService.CalculateFinalResults(farm);
 
             var farmName = farm.Name + Properties.Resources.Results;
@@ -146,6 +143,8 @@ namespace H.CLI.Processors
                     viewItem.TillageFactor = _fieldResultsService.CalculateTillageFactor(viewItem, farm);
                 }
 
+                var fertilizerApplication = viewItem.FertilizerApplicationViewItems.FirstOrDefault();
+
                 stringBuilder.Append(viewItem.PhaseNumber + columnSeparator);
                 stringBuilder.Append(fieldSystemComponent.Name + columnSeparator);
                 stringBuilder.Append(viewItem.Area + columnSeparator);
@@ -169,7 +168,7 @@ namespace H.CLI.Processors
                 stringBuilder.Append(viewItem.CarbonConcentration + columnSeparator);
                 stringBuilder.Append(viewItem.Yield + columnSeparator);
                 stringBuilder.Append(viewItem.HarvestMethod + columnSeparator);
-                stringBuilder.Append(viewItem.NitrogenFertilizerRate + columnSeparator);
+                stringBuilder.Append((fertilizerApplication != null ? fertilizerApplication.AmountOfNitrogenApplied : 0.0) + columnSeparator);
                 stringBuilder.Append(viewItem.PhosphorusFertilizerRate + columnSeparator);
                 stringBuilder.Append(viewItem.IsIrrigated + columnSeparator);
                 stringBuilder.Append(viewItem.IrrigationType + columnSeparator);
@@ -181,14 +180,13 @@ namespace H.CLI.Processors
                 stringBuilder.Append(viewItem.PercentageOfProductYieldReturnedToSoil + columnSeparator);
                 stringBuilder.Append(viewItem.IsPesticideUsed + columnSeparator);
                 stringBuilder.Append(viewItem.NumberOfPesticidePasses + columnSeparator);
-                stringBuilder.Append(viewItem.ManureApplied + columnSeparator);
-                stringBuilder.Append(viewItem.AmountOfManureApplied + columnSeparator);
-                stringBuilder.Append(viewItem.ManureApplicationType + columnSeparator);
-                stringBuilder.Append(viewItem.ManureAnimalSourceType + columnSeparator);
-                stringBuilder.Append(viewItem.ManureStateType + columnSeparator);
-                stringBuilder.Append(viewItem.ManureLocationSourceType + columnSeparator);
+
+                this.ProcessManureApplications(stringBuilder, viewItem, columnSeparator, fieldSystemComponent);
+
                 stringBuilder.Append(viewItem.UnderSownCropsUsed + columnSeparator);
-                stringBuilder.Append(viewItem.CropIsGrazed + columnSeparator);
+
+                this.ProcessGrazingViewItems(stringBuilder, viewItem, columnSeparator, fieldSystemComponent);
+
                 stringBuilder.Append(viewItem.FieldSystemComponentGuid + columnSeparator);
                 stringBuilder.Append(viewItem.TimePeriodCategoryString + columnSeparator);
                 stringBuilder.Append(viewItem.ClimateParameter + columnSeparator);
@@ -216,7 +214,6 @@ namespace H.CLI.Processors
                 stringBuilder.Append(viewItem.FuelEnergy + columnSeparator);
                 stringBuilder.Append(viewItem.HerbicideEnergy + columnSeparator);
 
-                var fertilizerApplication = viewItem.FertilizerApplicationViewItems.FirstOrDefault();
                 if (fertilizerApplication != null && fertilizerApplication.FertilizerBlendData != null)
                 {
                     stringBuilder.Append(fertilizerApplication.FertilizerBlendData.FertilizerBlend + columnSeparator);
@@ -238,8 +235,91 @@ namespace H.CLI.Processors
         }
 
         #endregion
+
+        #region Private Methods
+
+
+        private void ProcessGrazingViewItems(
+            StringBuilder stringBuilder,
+            CropViewItem viewItem,
+            string columnSeparator,
+            FieldSystemComponent fieldComponent)
+        {
+            var grazingViewItemsInYear = fieldComponent.GetGrazingViewItemsInYear(viewItem.Year);
+            var cropIsGrazed = grazingViewItemsInYear.Any();
+            stringBuilder.Append(cropIsGrazed.ToString().ToUpperInvariant() + columnSeparator);
+        }
+
+        /// <summary>
+        /// Convert the farm's manure applications to the field into a string representation that can be read by the CLI input system
+        /// </summary>
+        private void ProcessManureApplications(
+            StringBuilder stringBuilder, 
+            CropViewItem viewItem,
+            string columnSeparator, 
+            FieldSystemComponent fieldComponent)
+        {
+            // Get both livestock and import source manure applications
+            var fieldManureApplicationsInYear = fieldComponent.GetAllManureApplicationsInYear(viewItem.Year);
+
+            if (fieldManureApplicationsInYear.Any())
+            {
+                /*
+                 * We have at least one manure application
+                 */
+
+                if (fieldManureApplicationsInYear.Count == 1)
+                {
+                    /*
+                     * There is only one manure application made to this field
+                     */
+
+                    var singleApplication = fieldManureApplicationsInYear[0];
+
+                    var sourceType = singleApplication.AnimalType.GetManureAnimalSource();
+
+                    stringBuilder.Append(true.ToString().ToUpperInvariant() + columnSeparator); // ManureApplied (bool)
+                    stringBuilder.Append(singleApplication.AmountOfManureAppliedPerHectare + columnSeparator);
+                    stringBuilder.Append(singleApplication.ManureApplicationMethod + columnSeparator);
+                    stringBuilder.Append(sourceType + columnSeparator);
+                    stringBuilder.Append(singleApplication.ManureStateType + columnSeparator);
+                    stringBuilder.Append(singleApplication.ManureLocationSourceType + columnSeparator);
+                }
+                else
+                {
+                    /*
+                     * TODO: in the future, append multiple manure application to input file, instead of current approach to take the largest application
+                     */
+
+                    /*
+                     * There are multiple manure applications. The CLI can only support adding one manure application to the field in any given year. Strategy right now is to
+                     * take the largest application (by volume applied per hectare) and use that.
+                     */
+
+                    var sortedByAmount = fieldManureApplicationsInYear.OrderByDescending(x => x.AmountOfManureAppliedPerHectare);
+                    var firstLargestApplication = sortedByAmount.First();
+
+                    var sourceType = firstLargestApplication.AnimalType.GetManureAnimalSource();
+
+                    stringBuilder.Append(true.ToString().ToUpperInvariant() + columnSeparator); // ManureApplied (bool)
+                    stringBuilder.Append(firstLargestApplication.AmountOfManureAppliedPerHectare + columnSeparator);
+                    stringBuilder.Append(firstLargestApplication.ManureApplicationMethod + columnSeparator);
+                    stringBuilder.Append(sourceType + columnSeparator);
+                    stringBuilder.Append(firstLargestApplication.ManureStateType + columnSeparator);
+                    stringBuilder.Append(firstLargestApplication.ManureLocationSourceType + columnSeparator);
+                }
+            }
+            else
+            {
+                stringBuilder.Append(viewItem.ManureApplied + columnSeparator);
+                stringBuilder.Append(viewItem.AmountOfManureApplied + columnSeparator);
+                stringBuilder.Append(viewItem.ManureApplicationType + columnSeparator);
+                stringBuilder.Append(viewItem.ManureAnimalSourceType + columnSeparator);
+                stringBuilder.Append(viewItem.ManureStateType + columnSeparator);
+                stringBuilder.Append(viewItem.ManureLocationSourceType + columnSeparator);
+            }
+        }
+
+        #endregion
     }
 }
-
-
-

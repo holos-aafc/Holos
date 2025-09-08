@@ -47,20 +47,15 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double GetTotalManureNitrogenAppliedFromLivestockAndImportsInYear(CropViewItem viewItem, Farm farm)
         {
-            var year = viewItem.Year;
-
             var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
             if (field == null)
             {
                 return 0;
             }
 
+            var allApplications = _manureService.GetManureApplicationViewItems(farm, field, viewItem);
+
             var totalNitrogen = 0d;
-
-            var livestockApplications = field.GetLivestockManureApplicationsInYear(year);
-            var importedApplications = field.GetImportedManureApplicationsInYear(year);
-            var allApplications = livestockApplications.Concat(importedApplications);
-
             foreach (var manureApplication in allApplications)
             {
                 totalNitrogen += manureApplication.AmountOfNitrogenAppliedPerHectare * viewItem.Area;
@@ -71,17 +66,13 @@ namespace H.Core.Calculators.Nitrogen
 
         public double GetTotalManureVolumeAppliedFromLivestockAndImportsInYear(CropViewItem viewItem, Farm farm)
         {
-            var year = viewItem.Year;
-
             var field = farm.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
             if (field == null)
             {
                 return 0;
             }
 
-            var livestockApplications = field.GetLivestockManureApplicationsInYear(year);
-            var importedApplications = field.GetImportedManureApplicationsInYear(year);
-            var allApplications = livestockApplications.Concat(importedApplications);
+            var allApplications = _manureService.GetManureApplicationViewItems(farm, field, viewItem);
 
             var totalVolume = 0d;
 
@@ -362,6 +353,7 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         /// <summary>
+        /// Equation 4.6.2-3
         /// Equation 4.6.2-12
         /// Equation 4.6.2-20
         ///
@@ -387,6 +379,7 @@ namespace H.Core.Calculators.Nitrogen
             var animalType = manureApplicationViewItem.AnimalType;
             if (animalType.IsBeefCattleType() || animalType.IsDairyCattleType())
             {
+                // Equation 4.6.2-3
                 var adjustedAmmoniaEmissionFactor = this.GetAdjustedAmmoniaEmissionFactor(farm, viewItem, manureApplicationViewItem);
                 var tanUsed = _manureService.GetAmountOfTanUsedDuringLandApplication(viewItem, manureApplicationViewItem);
                 result = tanUsed * adjustedAmmoniaEmissionFactor;
@@ -396,7 +389,7 @@ namespace H.Core.Calculators.Nitrogen
                 var landApplicationFactors = this.GetLandApplicationFactors(farm, manureApplicationViewItem);
                 var nitrogenUsed = manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare * viewItem.Area;
 
-                // 4.6.2-12
+                // Equation 4.6.2-12
                 result = nitrogenUsed * landApplicationFactors.VolatilizationFraction;
             }
             else
@@ -1317,10 +1310,7 @@ namespace H.Core.Calculators.Nitrogen
 
             var result = 0d;
 
-            var year = viewItem.Year;
-            var livestockApplications = field.GetLivestockManureApplicationsInYear(year);
-            var importedApplications = field.GetImportedManureApplicationsInYear(year);
-            var allApplications = livestockApplications.Concat(importedApplications);
+            var allApplications = _manureService.GetManureApplicationViewItems(farm, field, viewItem);
 
             foreach (var manureApplicationViewItem in allApplications)
             {
