@@ -93,10 +93,6 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\H.CLI\H.CLI.csproj">
-      <Project>{7a9469d6-b913-49db-b85f-319fd195c212}</Project>
-      <Name>H.CLI</Name>
-    </ProjectReference>
     <ProjectReference Include="..\H.Content\H.Content.csproj">
       <Project>{272EDE97-F58A-42A9-828D-8B3524E390EB}</Project>
       <Name>H.Content</Name>

@@ -88,7 +88,6 @@
     <Compile Include="Emissions\GroupEmissionsByMonthTest.cs" />
     <Compile Include="Emissions\Results\AnimalGroupEmissionsResultTest.cs" />
     <Compile Include="GeographicDataProviderTest.cs" />
-    <Compile Include="Integration\FieldComponentIntegrationTest.cs" />
     <Compile Include="Models\Animals\Beef\CowCalfComponentTest.cs" />
     <Compile Include="Models\Animals\Swine\FarrowToFinishViewModelTest.cs" />
     <Compile Include="Models\LandManagement\Fields\CropViewItemTest.cs" />
@@ -213,10 +212,6 @@
     <None Include="Services\OCR\tesseract_test2.pdf" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\H.CLI\H.CLI.csproj">
-      <Project>{7A9469D6-B913-49DB-B85F-319FD195C212}</Project>
-      <Name>H.CLI</Name>
-    </ProjectReference>
     <ProjectReference Include="..\H.Content\H.Content.csproj">
       <Project>{272ede97-f58a-42a9-828d-8b3524e390eb}</Project>
       <Name>H.Content</Name>
