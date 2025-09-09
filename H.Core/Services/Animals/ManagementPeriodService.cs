@@ -5,7 +5,7 @@ using H.Core.Models.Animals;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Feed;
 using H.Core.Services.Initialization;
-using Prism.Regions;
+using Prism.Navigation.Regions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

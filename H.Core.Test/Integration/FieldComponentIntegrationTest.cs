@@ -17,7 +17,6 @@ using H.Core.Services;
 using H.Core.Services.Animals;
 using H.Core.Services.LandManagement;
 using Prism.Events;
-using Prism.Interactivity.DefaultPopupWindows;
 using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Nitrogen;
 
