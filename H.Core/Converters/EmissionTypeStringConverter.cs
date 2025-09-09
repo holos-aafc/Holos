@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using H.Core.Enumerations;
 
 namespace H.Core.Converters
@@ -12,7 +7,7 @@ namespace H.Core.Converters
     {
         public EmissionTypes Convert(string input)
         {
-            switch (this.GetLowerCase(input))
+            switch (GetLowerCase(input))
             {
                 case "entericmethane":
                     return EmissionTypes.EntericMethane;
@@ -54,7 +49,8 @@ namespace H.Core.Converters
                     return EmissionTypes.NonFossilCH4;
                 default:
                 {
-                    Trace.TraceError($"{nameof(EmissionTypeStringConverter)}.{nameof(EmissionTypeStringConverter.Convert)}: unknown emissions type: {input} returning {EmissionTypes.EntericMethane}");
+                    Trace.TraceError(
+                        $"{nameof(EmissionTypeStringConverter)}.{nameof(Convert)}: unknown emissions type: {input} returning {EmissionTypes.EntericMethane}");
                     return EmissionTypes.EntericMethane;
                 }
             }

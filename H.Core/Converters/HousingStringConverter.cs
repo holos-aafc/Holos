@@ -8,7 +8,7 @@ namespace H.Core.Converters
     {
         public HousingType Convert(string input)
         {
-            switch (this.GetLettersAsLowerCase(input))
+            switch (GetLettersAsLowerCase(input))
             {
                 case "confinednobarn":
                     return HousingType.ConfinedNoBarn;
@@ -29,14 +29,9 @@ namespace H.Core.Converters
                 case "drylot":
                     return HousingType.DryLot;
                 case "grazingkmd":
-                    if (input == "Grazing < 3km/d")
-                    {
-                        return HousingType.GrazingUnder3km;
-                    }
-                    else
-                    {
-                        return HousingType.GrazingOver3km;
-                    }
+                    if (input == "Grazing < 3km/d") return HousingType.GrazingUnder3km;
+
+                    return HousingType.GrazingOver3km;
                 case "confined":
                     return HousingType.Confined;
                 case "flatpasture":

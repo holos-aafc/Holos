@@ -1,6 +1,4 @@
-﻿#region Imports
-
-#endregion
+﻿using H.Core.Properties;
 
 namespace H.Core.Models.Animals.Beef
 {
@@ -12,31 +10,11 @@ namespace H.Core.Models.Animals.Beef
 
         public FinishingComponent()
         {
-            this.ComponentNameDisplayString = Properties.Resources.TitleFinishingComponentDisplayString;
-            this.ComponentDescriptionString = Properties.Resources.ToolTipFinishingComponent;
-            this.ComponentCategory = ComponentCategory.BeefProduction;
-            this.ComponentType = ComponentType.Finishing;
+            ComponentNameDisplayString = Resources.TitleFinishingComponentDisplayString;
+            ComponentDescriptionString = Resources.ToolTipFinishingComponent;
+            ComponentCategory = ComponentCategory.BeefProduction;
+            ComponentType = ComponentType.Finishing;
         }
-
-        #endregion
-
-        #region Fields        
-
-        #endregion
-
-        #region Properties        
-
-        #endregion
-
-        #region Public Methods
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
-
-        #region Event Handlers
 
         #endregion
     }

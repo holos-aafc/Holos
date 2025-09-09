@@ -3,24 +3,23 @@
     public class FractionOfOrganicNitrogenMineralizedData
     {
         /// <summary>
-        /// Mineralization of organic N (fecal N and bedding N)
-        ///
-        /// (unitless)
+        ///     Mineralization of organic N (fecal N and bedding N)
+        ///     (unitless)
         /// </summary>
         public double FractionMineralized { get; set; }
 
         /// <summary>
-        /// (unitless)
+        ///     (unitless)
         /// </summary>
         public double FractionImmobilized { get; set; }
 
         /// <summary>
-        /// (unitless)
+        ///     (unitless)
         /// </summary>
         public double FractionNitrified { get; set; }
 
         /// <summary>
-        /// (unitless)
+        ///     (unitless)
         /// </summary>
         public double FractionDenitrified { get; set; }
 

@@ -8,7 +8,7 @@ namespace H.Core.Converters
     {
         public TillageType Convert(string input)
         {
-            switch (this.GetLettersAsLowerCase(input))
+            switch (GetLettersAsLowerCase(input))
             {
                 case "notill":
                 case "nt":
@@ -20,8 +20,6 @@ namespace H.Core.Converters
                 case "it":
                 case "conventional":
                     return TillageType.Intensive;
-                default:
-                    break;
             }
 
             throw new Exception(string.Format(Resources.ExceptionUnknownTillageType, "input"));

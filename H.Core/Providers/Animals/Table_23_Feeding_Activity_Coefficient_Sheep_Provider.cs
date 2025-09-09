@@ -1,11 +1,11 @@
-﻿using H.Core.Enumerations;
+﻿using System.Diagnostics;
+using H.Core.Enumerations;
 using H.Core.Tools;
-using System.Diagnostics;
 
 namespace H.Core.Providers.Animals
 {
     /// <summary>
-    /// Table 23. Feeding activity coefficients for sheep.
+    ///     Table 23. Feeding activity coefficients for sheep.
     /// </summary>
     public class Table_23_Feeding_Activity_Coefficient_Sheep_Provider : IFeedingActivityCoefficientProvider
     {
@@ -18,35 +18,34 @@ namespace H.Core.Providers.Animals
         {
             switch (housingType)
             {
-                
                 case HousingType.HousedEwes: // Footnote 1
+                {
+                    return new Table_17_Cattle_Feeding_Activity_Coefficient_Data
                     {
-                        return new Table_17_Cattle_Feeding_Activity_Coefficient_Data()
-                        {
-                            FeedingActivityCoefficient = 0.0096,
-                        };
-                    }
-                
+                        FeedingActivityCoefficient = 0.0096
+                    };
+                }
+
                 case HousingType.Confined: // Footnote 2
+                {
+                    return new Table_17_Cattle_Feeding_Activity_Coefficient_Data
                     {
-                    return new Table_17_Cattle_Feeding_Activity_Coefficient_Data()
-                    {
-                        FeedingActivityCoefficient = 0.0067,
+                        FeedingActivityCoefficient = 0.0067
                     };
                 }
 
                 case HousingType.Pasture:
                 case HousingType.FlatPasture:
                 {
-                    return new Table_17_Cattle_Feeding_Activity_Coefficient_Data()
+                    return new Table_17_Cattle_Feeding_Activity_Coefficient_Data
                     {
-                        FeedingActivityCoefficient = 0.0107,
+                        FeedingActivityCoefficient = 0.0107
                     };
                 }
 
                 case HousingType.HillyPastureOrOpenRange:
                 {
-                    return new Table_17_Cattle_Feeding_Activity_Coefficient_Data()
+                    return new Table_17_Cattle_Feeding_Activity_Coefficient_Data
                     {
                         FeedingActivityCoefficient = 0.024
                     };
@@ -54,14 +53,14 @@ namespace H.Core.Providers.Animals
 
                 default:
                 {
-                    var defaultValue = new Table_17_Cattle_Feeding_Activity_Coefficient_Data()
+                    var defaultValue = new Table_17_Cattle_Feeding_Activity_Coefficient_Data
                     {
                         FeedingActivityCoefficient = 0
                     };
 
-                    Trace.TraceError($"{nameof(Table_23_Feeding_Activity_Coefficient_Sheep_Provider.GetByHousing)}" +
-                    $" unable to get data for housing type: {housingType}." +
-                    $" Returning default value of {defaultValue}.");
+                    Trace.TraceError($"{nameof(GetByHousing)}" +
+                                     $" unable to get data for housing type: {housingType}." +
+                                     $" Returning default value of {defaultValue}.");
                     return defaultValue;
                 }
             }
@@ -71,6 +70,7 @@ namespace H.Core.Providers.Animals
 
         // Footnote 1: Animals are confined due to pregnancy in final trimester (50 days) (IPCC, 2019)
         // Footnote 2: Animals housed for fattening
+
         #endregion
     }
 }

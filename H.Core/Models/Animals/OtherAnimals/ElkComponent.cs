@@ -1,4 +1,5 @@
-﻿using H.Infrastructure;
+﻿using H.Core.Properties;
+using H.Infrastructure;
 
 namespace H.Core.Models.Animals.OtherAnimals
 {
@@ -8,31 +9,11 @@ namespace H.Core.Models.Animals.OtherAnimals
 
         public ElkComponent()
         {
-            this.ComponentNameDisplayString = ComponentType.Elk.GetDescription();
-            this.ComponentDescriptionString = Properties.Resources.ToolTipElkComponent;
-            this.ComponentCategory = ComponentCategory.OtherLivestock;
-            this.ComponentType = ComponentType.Elk;
+            ComponentNameDisplayString = ComponentType.Elk.GetDescription();
+            ComponentDescriptionString = Resources.ToolTipElkComponent;
+            ComponentCategory = ComponentCategory.OtherLivestock;
+            ComponentType = ComponentType.Elk;
         }
-
-        #endregion
-
-        #region Fields
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
-        #region Public Methods
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
-
-        #region Event Handlers
 
         #endregion
     }

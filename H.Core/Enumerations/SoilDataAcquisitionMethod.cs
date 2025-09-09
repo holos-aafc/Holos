@@ -5,18 +5,18 @@
         // Use .NET 9
 
         /// <summary>
-        /// Default (currently uses SLC method)
+        ///     Default (currently uses SLC method)
         /// </summary>
         Default = 0,
 
         /// <summary>
-        /// Get data from SLC database according to polygon ID
+        ///     Get data from SLC database according to polygon ID
         /// </summary>
         SLC,
 
         /// <summary>
-        /// Read data from settings file
+        ///     Read data from settings file
         /// </summary>
-        Custom,
+        Custom
     }
 }

@@ -6,30 +6,17 @@ namespace H.Core.Models
     {
         public static AnimalType GetAnimalTypeFromComponentCategory(this ComponentCategory category)
         {
-            if (category == ComponentCategory.BeefProduction)
-            {
-                return AnimalType.Beef;
-            }
-            else if (category == ComponentCategory.Dairy)
-            {
-                return AnimalType.Dairy;
-            }
-            else if (category == ComponentCategory.Swine)
-            {
-                return AnimalType.Swine;
-            }
-            else if(category == ComponentCategory.Sheep)
-            {
-                return AnimalType.Sheep;
-            }
-            else if (category == ComponentCategory.Poultry)
-            {
-                return AnimalType.Poultry;
-            }
-            else
-            {
-                return AnimalType.OtherLivestock;
-            }
+            if (category == ComponentCategory.BeefProduction) return AnimalType.Beef;
+
+            if (category == ComponentCategory.Dairy) return AnimalType.Dairy;
+
+            if (category == ComponentCategory.Swine) return AnimalType.Swine;
+
+            if (category == ComponentCategory.Sheep) return AnimalType.Sheep;
+
+            if (category == ComponentCategory.Poultry) return AnimalType.Poultry;
+
+            return AnimalType.OtherLivestock;
         }
 
         public static bool isAnimalComponent(this ComponentCategory category)
@@ -46,7 +33,6 @@ namespace H.Core.Models
 
                 default:
                     return false;
-
             }
         }
     }

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
@@ -12,22 +9,13 @@ using H.Infrastructure;
 namespace H.Core.Providers.Economics
 {
     /// <summary>
-    /// Table 59. Feed costs for beef
+    ///     Table 59. Feed costs for beef
     /// </summary>
     public class Feed_Costs_For_Beef_Provider
     {
         #region Fields
 
         private readonly DietTypeStringConverter _dietTypeStringConverter;
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Contains a list of <see cref="Feed_Costs_For_Beef_Data"/> as read from the .csv file. Each item in the list represents a row in the .csv file.
-        /// </summary>
-        public List<Feed_Costs_For_Beef_Data> FeedCostsForBeefData { get; private set; }
 
         #endregion
 
@@ -41,13 +29,26 @@ namespace H.Core.Providers.Economics
 
         #endregion
 
+        #region Properties
+
+        /// <summary>
+        ///     Contains a list of <see cref="Feed_Costs_For_Beef_Data" /> as read from the .csv file. Each item in the list
+        ///     represents a row in the .csv file.
+        /// </summary>
+        public List<Feed_Costs_For_Beef_Data> FeedCostsForBeefData { get; }
+
+        #endregion
+
         #region Public Methods
 
         /// <summary>
-        /// Get a single instance of <see cref="Feed_Costs_For_Beef_Data"/> based on a specific Diet Type.
+        ///     Get a single instance of <see cref="Feed_Costs_For_Beef_Data" /> based on a specific Diet Type.
         /// </summary>
         /// <param name="dietType">The Diet Type for which we need the beef feed cost.</param>
-        /// <returns>An instance of <see cref="Feed_Costs_For_Beef_Data"/> representing a row in the .csv file. If nothing is found, returns null.</returns>
+        /// <returns>
+        ///     An instance of <see cref="Feed_Costs_For_Beef_Data" /> representing a row in the .csv file. If nothing is
+        ///     found, returns null.
+        /// </returns>
         public Feed_Costs_For_Beef_Data GetFeedCostByDietType(DietType dietType)
         {
             var data = FeedCostsForBeefData.Find(diet => diet.DietType == dietType);
@@ -70,7 +71,7 @@ namespace H.Core.Providers.Economics
         {
             var fileData = new List<Feed_Costs_For_Beef_Data>();
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
-            IEnumerable<string[]> fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.BeefFeedCost);
+            var fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.BeefFeedCost);
 
             foreach (var line in fileLines.Skip(1))
             {
@@ -80,7 +81,7 @@ namespace H.Core.Providers.Economics
                 fileData.Add(new Feed_Costs_For_Beef_Data
                 {
                     DietType = dietType,
-                    Cost = cost,
+                    Cost = cost
                 });
             }
 

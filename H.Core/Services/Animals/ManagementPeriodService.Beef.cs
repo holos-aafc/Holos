@@ -1,16 +1,16 @@
-﻿using H.Core.Enumerations;
-using H.Core.Models.Animals;
-using H.Core.Models;
-using System;
+﻿using System;
 using System.ComponentModel;
-using System.Linq;
-using H.Core.Models.Animals.Beef;
+using H.Core.Enumerations;
+using H.Core.Models;
+using H.Core.Models.Animals;
+using H.Core.Properties;
 
 namespace H.Core.Services.Animals
 {
     public partial class ManagementPeriodService
     {
         #region Public Methods
+
         // Finishing
         public void FinishingSteerGroupManagementPeriod(Farm farm, AnimalGroup animalGroup,
             ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
@@ -29,14 +29,16 @@ namespace H.Core.Services.Animals
             }
         }
 
-        public void FinishingHeiferGroupManagementPeriod(Farm farm, AnimalGroup animalGroup, ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
+        public void FinishingHeiferGroupManagementPeriod(Farm farm, AnimalGroup animalGroup,
+            ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
             if (farm.IsBasicMode || farm.IsAdvancedMode)
             {
-                var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
-            managementPeriod.NumberOfAnimals = 49;
-            FinisherManagementPeriodConfiguration(farm, managementPeriod);
-            managementPeriod.PeriodDailyGain = 1;
+                var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
+                    animalGroupOnPropertyChanged);
+                managementPeriod.NumberOfAnimals = 49;
+                FinisherManagementPeriodConfiguration(farm, managementPeriod);
+                managementPeriod.PeriodDailyGain = 1;
             }
             else
             {
@@ -46,25 +48,28 @@ namespace H.Core.Services.Animals
         }
 
         // Backgrounders 
-        public void BackgrounderSteerGroupManagementPeriod(Farm farm, AnimalGroup animalGroup, ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
+        public void BackgrounderSteerGroupManagementPeriod(Farm farm, AnimalGroup animalGroup,
+            ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
             if (farm.IsBasicMode || farm.IsAdvancedMode)
             {
                 // First period
-                var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
-            managementPeriod.NumberOfAnimals = 50;
+                var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
+                    animalGroupOnPropertyChanged);
+                managementPeriod.NumberOfAnimals = 50;
 
-            managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 10, 1);
-            managementPeriod.NumberOfDays = 109;
-            managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
-            managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
+                managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 10, 1);
+                managementPeriod.NumberOfDays = 109;
+                managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
+                managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
 
-            // Set start and end weight after setting the start and end dates
-            _initializationService.InitializeStartAndEndWeightsForCattle(managementPeriod);
+                // Set start and end weight after setting the start and end dates
+                _initializationService.InitializeStartAndEndWeightsForCattle(managementPeriod);
 
-            managementPeriod.SelectedDiet = GetDefaultDietForGroup(farm, managementPeriod.AnimalType, DietType.MediumGrowth);
-            managementPeriod.HousingDetails.HousingType = HousingType.ConfinedNoBarn;
-            managementPeriod.ManureDetails.StateType = ManureStateType.DeepBedding;
+                managementPeriod.SelectedDiet =
+                    GetDefaultDietForGroup(farm, managementPeriod.AnimalType, DietType.MediumGrowth);
+                managementPeriod.HousingDetails.HousingType = HousingType.ConfinedNoBarn;
+                managementPeriod.ManureDetails.StateType = ManureStateType.DeepBedding;
             }
             else
             {
@@ -73,25 +78,28 @@ namespace H.Core.Services.Animals
             }
         }
 
-        public void BackgrounderHeifersGroupManagementPeriod(Farm farm, AnimalGroup animalGroup, ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
+        public void BackgrounderHeifersGroupManagementPeriod(Farm farm, AnimalGroup animalGroup,
+            ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
             if (farm.IsBasicMode || farm.IsAdvancedMode)
             {
                 // First period
-                var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
-            managementPeriod.NumberOfAnimals = 50;
+                var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
+                    animalGroupOnPropertyChanged);
+                managementPeriod.NumberOfAnimals = 50;
 
-            managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 10, 1);
-            managementPeriod.NumberOfDays = 109;
-            managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
-            managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
+                managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 10, 1);
+                managementPeriod.NumberOfDays = 109;
+                managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
+                managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
 
-            // Set start and end weight after setting the start and end dates
-            _initializationService.InitializeStartAndEndWeightsForCattle(managementPeriod);
+                // Set start and end weight after setting the start and end dates
+                _initializationService.InitializeStartAndEndWeightsForCattle(managementPeriod);
 
-            managementPeriod.SelectedDiet = GetDefaultDietForGroup(farm, managementPeriod.AnimalType, DietType.MediumGrowth);
-            managementPeriod.HousingDetails.HousingType = HousingType.ConfinedNoBarn;
-            managementPeriod.ManureDetails.StateType = ManureStateType.DeepBedding;
+                managementPeriod.SelectedDiet =
+                    GetDefaultDietForGroup(farm, managementPeriod.AnimalType, DietType.MediumGrowth);
+                managementPeriod.HousingDetails.HousingType = HousingType.ConfinedNoBarn;
+                managementPeriod.ManureDetails.StateType = ManureStateType.DeepBedding;
             }
             else
             {
@@ -101,14 +109,16 @@ namespace H.Core.Services.Animals
         }
 
         // Cow calf
-        public void CowCalfBullGroupManagementPeriod(Farm farm, AnimalGroup animalGroup, ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
+        public void CowCalfBullGroupManagementPeriod(Farm farm, AnimalGroup animalGroup,
+            ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
             if (farm.IsBasicMode || farm.IsAdvancedMode)
-            { 
+            {
                 // Winter feeding period
-                var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+                var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
+                    animalGroupOnPropertyChanged);
                 managementPeriod.NumberOfAnimals = 4;
-                managementPeriod.Name = H.Core.Properties.Resources.LabelWinterFeeding;
+                managementPeriod.Name = Resources.LabelWinterFeeding;
 
                 managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 1, 1);
                 managementPeriod.NumberOfDays = 119;
@@ -117,33 +127,41 @@ namespace H.Core.Services.Animals
 
                 // Set start and end weight after setting the start and end dates
                 _initializationService.InitializeStartAndEndWeightsForCattle(managementPeriod);
-                managementPeriod.PeriodDailyGain = (managementPeriod.EndWeight - managementPeriod.StartWeight) / managementPeriod.Duration.TotalDays;
+                managementPeriod.PeriodDailyGain = (managementPeriod.EndWeight - managementPeriod.StartWeight) /
+                                                   managementPeriod.Duration.TotalDays;
 
-                managementPeriod.SelectedDiet = GetDefaultDietForGroup(farm, managementPeriod.AnimalType, DietType.MediumEnergyAndProtein);
+                managementPeriod.SelectedDiet = GetDefaultDietForGroup(farm, managementPeriod.AnimalType,
+                    DietType.MediumEnergyAndProtein);
                 managementPeriod.HousingDetails.HousingType = HousingType.ConfinedNoBarn;
                 managementPeriod.ManureDetails.StateType = ManureStateType.DeepBedding;
 
                 // Summer grazing period
-                managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
-                managementPeriod.Name = H.Core.Properties.Resources.LabelSummerGrazing;
+                managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
+                    animalGroupOnPropertyChanged);
+                managementPeriod.Name = Resources.LabelSummerGrazing;
                 managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 5, 1);
                 managementPeriod.NumberOfDays = 183;
                 managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
                 managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
-                managementPeriod.SelectedDiet = GetDefaultDietForGroup(farm, managementPeriod.AnimalType, DietType.HighEnergyAndProtein);
+                managementPeriod.SelectedDiet =
+                    GetDefaultDietForGroup(farm, managementPeriod.AnimalType, DietType.HighEnergyAndProtein);
 
-                this.SetPastureIfPossible(farm, managementPeriod, managementPeriod.AnimalType, ManureStateType.DeepBedding, HousingType.ConfinedNoBarn);
+                SetPastureIfPossible(farm, managementPeriod, managementPeriod.AnimalType, ManureStateType.DeepBedding,
+                    HousingType.ConfinedNoBarn);
 
                 // Extended fall grazing period
-                managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
-                managementPeriod.Name = H.Core.Properties.Resources.LabelExtendedFallGrazing;
+                managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
+                    animalGroupOnPropertyChanged);
+                managementPeriod.Name = Resources.LabelExtendedFallGrazing;
                 managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 11, 1);
                 managementPeriod.NumberOfDays = 60;
                 managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
                 managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
-                managementPeriod.SelectedDiet = GetDefaultDietForGroup(farm, managementPeriod.AnimalType, DietType.MediumEnergyAndProtein);
+                managementPeriod.SelectedDiet = GetDefaultDietForGroup(farm, managementPeriod.AnimalType,
+                    DietType.MediumEnergyAndProtein);
 
-                this.SetPastureIfPossible(farm, managementPeriod, managementPeriod.AnimalType, ManureStateType.DeepBedding, HousingType.ConfinedNoBarn);
+                SetPastureIfPossible(farm, managementPeriod, managementPeriod.AnimalType, ManureStateType.DeepBedding,
+                    HousingType.ConfinedNoBarn);
             }
         }
 
@@ -165,19 +183,22 @@ namespace H.Core.Services.Animals
             managementPeriod.HousingDetails.HousingType = HousingType.ConfinedNoBarn;
         }
 
-        public void CowCalfCalfGroupManagementPeriod(Farm farm, AnimalGroup animalGroup, ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
+        public void CowCalfCalfGroupManagementPeriod(Farm farm, AnimalGroup animalGroup,
+            ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
             if (farm.IsBasicMode || farm.IsAdvancedMode)
             {
                 // Milk fed period
-                var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+                var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
+                    animalGroupOnPropertyChanged);
                 managementPeriod.NumberOfAnimals = 102;
                 managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 3, 1);
                 managementPeriod.NumberOfDays = 60;
                 managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
                 managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
 
-                managementPeriod.SelectedDiet = GetDefaultDietForGroup(farm, managementPeriod.AnimalType, DietType.MediumEnergyAndProtein);
+                managementPeriod.SelectedDiet = GetDefaultDietForGroup(farm, managementPeriod.AnimalType,
+                    DietType.MediumEnergyAndProtein);
 
                 // Set start and end weight after setting the start and end dates
                 _initializationService.InitializeStartAndEndWeightsForCattle(managementPeriod);
@@ -190,14 +211,16 @@ namespace H.Core.Services.Animals
                 managementPeriod.AnimalsAreMilkFedOnly = true;
 
                 // Grazing with cows - not milk fed
-                managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+                managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
+                    animalGroupOnPropertyChanged);
                 managementPeriod.NumberOfAnimals = 102;
                 managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 5, 1);
                 managementPeriod.NumberOfDays = 152;
                 managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
                 managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
 
-                managementPeriod.SelectedDiet = GetDefaultDietForGroup(farm, managementPeriod.AnimalType, DietType.HighEnergyAndProtein);
+                managementPeriod.SelectedDiet =
+                    GetDefaultDietForGroup(farm, managementPeriod.AnimalType, DietType.HighEnergyAndProtein);
                 managementPeriod.PeriodDailyGain = 1;
                 managementPeriod.HousingDetails.HousingType = HousingType.ConfinedNoBarn;
                 managementPeriod.ManureDetails.StateType = ManureStateType.DeepBedding;
@@ -210,7 +233,8 @@ namespace H.Core.Services.Animals
             }
         }
 
-        public void CowCalfCowGroupManagementPeriod(Farm farm, AnimalGroup animalGroup, ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
+        public void CowCalfCowGroupManagementPeriod(Farm farm, AnimalGroup animalGroup,
+            ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
             if (farm.IsBasicMode || farm.IsAdvancedMode)
             {
@@ -221,7 +245,7 @@ namespace H.Core.Services.Animals
                 managementPeriod.MilkProteinContentAsPercentage = 3.38;
                 managementPeriod.NumberOfAnimals = 120;
 
-                managementPeriod.Name = H.Core.Properties.Resources.LabelWinterFeedingDry;
+                managementPeriod.Name = Resources.LabelWinterFeedingDry;
                 managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 1, 1);
                 managementPeriod.NumberOfDays = 59;
                 managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
@@ -244,7 +268,7 @@ namespace H.Core.Services.Animals
 
                 _initializationService.InitializeMilkProduction(managementPeriod, farm.DefaultSoilData);
 
-                managementPeriod.Name = H.Core.Properties.Resources.LabelWinterFeedingLactating;
+                managementPeriod.Name = Resources.LabelWinterFeedingLactating;
                 managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 3, 1);
                 managementPeriod.NumberOfDays = 61;
                 managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
@@ -263,7 +287,7 @@ namespace H.Core.Services.Animals
                     animalGroupOnPropertyChanged);
                 managementPeriod.AnimalType = AnimalType.BeefCowLactating;
                 managementPeriod.NumberOfAnimals = 120;
-                managementPeriod.Name = H.Core.Properties.Resources.LabelSummerGrazing;
+                managementPeriod.Name = Resources.LabelSummerGrazing;
                 managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 5, 1);
                 managementPeriod.NumberOfDays = 183;
                 managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
@@ -274,14 +298,15 @@ namespace H.Core.Services.Animals
                 managementPeriod.SelectedDiet =
                     GetDefaultDietForGroup(farm, managementPeriod.AnimalType, DietType.HighEnergyAndProtein);
 
-                this.SetPastureIfPossible(farm, managementPeriod, managementPeriod.AnimalType, ManureStateType.DeepBedding, HousingType.ConfinedNoBarn);
+                SetPastureIfPossible(farm, managementPeriod, managementPeriod.AnimalType, ManureStateType.DeepBedding,
+                    HousingType.ConfinedNoBarn);
 
                 // Extended fall grazing period
                 managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
                     animalGroupOnPropertyChanged);
                 managementPeriod.AnimalType = AnimalType.BeefCowDry;
                 managementPeriod.NumberOfAnimals = 120;
-                managementPeriod.Name = H.Core.Properties.Resources.LabelExtendedFallGrazing;
+                managementPeriod.Name = Resources.LabelExtendedFallGrazing;
                 managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 11, 1);
                 managementPeriod.NumberOfDays = 60;
                 managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
@@ -292,7 +317,8 @@ namespace H.Core.Services.Animals
                 managementPeriod.SelectedDiet = GetDefaultDietForGroup(farm, managementPeriod.AnimalType,
                     DietType.MediumEnergyAndProtein);
 
-                this.SetPastureIfPossible(farm, managementPeriod, managementPeriod.AnimalType, ManureStateType.DeepBedding, HousingType.ConfinedNoBarn);
+                SetPastureIfPossible(farm, managementPeriod, managementPeriod.AnimalType, ManureStateType.DeepBedding,
+                    HousingType.ConfinedNoBarn);
             }
             else
             {
@@ -302,14 +328,13 @@ namespace H.Core.Services.Animals
         }
 
         private void SetPastureIfPossible(
-            Farm farm, 
-            ManagementPeriod managementPeriod, 
+            Farm farm,
+            ManagementPeriod managementPeriod,
             AnimalType animalType,
-            ManureStateType alternativeManureType, 
+            ManureStateType alternativeManureType,
             HousingType alternativeHousingType)
         {
-
-            var housingTypes = this.GetValidHousingTypes(farm, managementPeriod, animalType);
+            var housingTypes = GetValidHousingTypes(farm, managementPeriod, animalType);
             if (housingTypes.Contains(HousingType.Pasture))
             {
                 managementPeriod.HousingDetails.HousingType = HousingType.Pasture;
@@ -332,9 +357,11 @@ namespace H.Core.Services.Animals
 
             // Set start and end weight after setting the start and end dates
             _initializationService.InitializeStartAndEndWeightsForCattle(managementPeriod);
-            managementPeriod.PeriodDailyGain = (managementPeriod.EndWeight - managementPeriod.StartWeight) / managementPeriod.Duration.TotalDays;
+            managementPeriod.PeriodDailyGain = (managementPeriod.EndWeight - managementPeriod.StartWeight) /
+                                               managementPeriod.Duration.TotalDays;
 
-            managementPeriod.SelectedDiet = GetDefaultDietForGroup(farm, managementPeriod.AnimalType, DietType.BarleyGrainBased);
+            managementPeriod.SelectedDiet =
+                GetDefaultDietForGroup(farm, managementPeriod.AnimalType, DietType.BarleyGrainBased);
             managementPeriod.HousingDetails.HousingType = HousingType.ConfinedNoBarn;
             managementPeriod.ManureDetails.StateType = ManureStateType.DeepBedding;
             return managementPeriod;

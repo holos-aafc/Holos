@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Windows.Navigation;
 using H.Core.Calculators.Shelterbelt;
 using H.Core.Enumerations;
 using H.Infrastructure;
@@ -9,7 +8,7 @@ using H.Infrastructure;
 namespace H.Core.Models.LandManagement.Shelterbelt
 {
     /// <summary>
-    /// This class exists for saving information relevant to the shelterbelt details screen.
+    ///     This class exists for saving information relevant to the shelterbelt details screen.
     /// </summary>
     public class TrannumData : ModelBase
     {
@@ -17,7 +16,7 @@ namespace H.Core.Models.LandManagement.Shelterbelt
 
         private void OnCircumferenceDataPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            this.RaisePropertyChanged(nameof(this.CircumferenceData));
+            RaisePropertyChanged(nameof(CircumferenceData));
         }
 
         #endregion
@@ -55,31 +54,32 @@ namespace H.Core.Models.LandManagement.Shelterbelt
 
         #region Constructors
 
-            /// <summary>
-            /// This is NOT the way to construct TrannumDatas. Pass in a shelterbeltcomponent, rowData and treegroupdata, and year instead.
-            /// </summary>
+        /// <summary>
+        ///     This is NOT the way to construct TrannumDatas. Pass in a shelterbeltcomponent, rowData and treegroupdata, and year
+        ///     instead.
+        /// </summary>
         public TrannumData()
         {
-            this.RowLength = 100;
-            this.TreeCount = 1;
-            this.TreeSpecies = TreeSpecies.Caragana;
-            this.CircumferenceData = new CircumferenceData();
-            this.Year = DateTime.Now.Year;
-            this.AboveGroundCarbonStocksPerTree = 0.0; //need to decide when this gets generated
-            this.BelowGroundCarbonKgPerTree = 0.0; //need to decide when this gets generated
-            this.ShelterbeltName = "Shelterbelt";
-            this.RowName = "Row";
-            this.TreeGroupName = "Treetype";
+            RowLength = 100;
+            TreeCount = 1;
+            TreeSpecies = TreeSpecies.Caragana;
+            CircumferenceData = new CircumferenceData();
+            Year = DateTime.Now.Year;
+            AboveGroundCarbonStocksPerTree = 0.0; //need to decide when this gets generated
+            BelowGroundCarbonKgPerTree = 0.0; //need to decide when this gets generated
+            ShelterbeltName = "Shelterbelt";
+            RowName = "Row";
+            TreeGroupName = "Treetype";
             //There are no Guids to connect, but could end up needing to be able to check that later?
-            this.ShelterbeltGuid = Guid.NewGuid();
-            this.RowGuid = Guid.NewGuid();
-            this.TreeGroupGuid = Guid.NewGuid();
-            this.SharedConstruction();
+            ShelterbeltGuid = Guid.NewGuid();
+            RowGuid = Guid.NewGuid();
+            TreeGroupGuid = Guid.NewGuid();
+            SharedConstruction();
         }
 
         /// <summary>
-        /// Generate a Trannum with all of its properties filled in from a corresponding set of components, along with the year
-        /// of the trannum.
+        ///     Generate a Trannum with all of its properties filled in from a corresponding set of components, along with the year
+        ///     of the trannum.
         /// </summary>
         /// <param name="shelterbeltComponent">The shelterbelt this trannum represents.</param>
         /// <param name="row">The row this trannum represents.</param>
@@ -88,92 +88,74 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         public TrannumData(ShelterbeltComponent shelterbeltComponent, RowData row, TreeGroupData treeGroup, double year)
         {
             if (shelterbeltComponent == null || row == null || treeGroup == null)
-            {
                 throw new Exception(nameof(TrannumData) + "'s constructor cannot be passed null values.");
-            }
 
             if (year < treeGroup.PlantYear || year > treeGroup.CutYear)
-            {
                 throw new Exception(nameof(TrannumData) +
                                     " the year passed to the constructor was outside the lifespan of the treegroup.");
-            }
 
-            this.TreeGroupData = treeGroup;
+            TreeGroupData = treeGroup;
 
             //Simple copying
-            this.YearOfObservation = shelterbeltComponent.YearOfObservation;            
-            this.TreeSpecies = treeGroup.TreeSpecies;
-            this.CircumferenceData = new CircumferenceData(treeGroup.CircumferenceData); //Cannot be a reference to the same copy.
-            this.Year = year;
+            YearOfObservation = shelterbeltComponent.YearOfObservation;
+            TreeSpecies = treeGroup.TreeSpecies;
+            CircumferenceData =
+                new CircumferenceData(treeGroup.CircumferenceData); //Cannot be a reference to the same copy.
+            Year = year;
             if (shelterbeltComponent.NameIsFromUser)
-            {
-                this.ShelterbeltName = shelterbeltComponent.Name;
-            }
+                ShelterbeltName = shelterbeltComponent.Name;
             else
-            {
-                this.ShelterbeltName = shelterbeltComponent.GetCorrectName();
-            }
+                ShelterbeltName = shelterbeltComponent.GetCorrectName();
             if (row.NameIsFromUser)
-            {
-                this.RowName = row.Name;
-            }
+                RowName = row.Name;
             else
-            {
-                this.RowName = row.GetCorrectName();
-            }
+                RowName = row.GetCorrectName();
 
             if (treeGroup.NameIsFromUser)
-            {
-                this.TreeGroupName = treeGroup.Name;
-            }
+                TreeGroupName = treeGroup.Name;
             else
-            {
-                this.TreeGroupName = treeGroup.GetCorrectName();
-            }
-            this.ShelterbeltGuid = shelterbeltComponent.Guid;
-            this.RowGuid = row.Guid;
-            this.TreeGroupGuid = treeGroup.Guid;
+                TreeGroupName = treeGroup.GetCorrectName();
+            ShelterbeltGuid = shelterbeltComponent.Guid;
+            RowGuid = row.Guid;
+            TreeGroupGuid = treeGroup.Guid;
 
-            List<double> livetrees = new List<double>();
-            List<double> plantedtrees = new List<double>();
+            var livetrees = new List<double>();
+            var plantedtrees = new List<double>();
             foreach (var treegroup in row.TreeGroupData)
             {
                 livetrees.Add(treegroup.LiveTreeCount);
                 plantedtrees.Add(treegroup.PlantedTreeCount);
             }
 
-            this.PercentMortality = _shelterbeltCalculator.CalculatePercentMortalityOfALinearPlanting(plantedtrees, livetrees);
+            PercentMortality =
+                _shelterbeltCalculator.CalculatePercentMortalityOfALinearPlanting(plantedtrees, livetrees);
 
             var mortalityLow = _shelterbeltCalculator.CalculateMortalityLow(PercentMortality);
             var mortalityHigh = _shelterbeltCalculator.CalculateMortalityHigh(mortalityLow);
 
-            this.RowLength = row.Length;
+            RowLength = row.Length;
 
-            this.PercentMortalityLow = mortalityLow;
-            this.PercentMortalityHigh = mortalityHigh;
-            this.HardinessZone = shelterbeltComponent.HardinessZone;
-            this.EcodistrictId = shelterbeltComponent.EcoDistrictId;
-            this.Age = (int)(this.Year - treeGroup.PlantYear) + 1;
+            PercentMortalityLow = mortalityLow;
+            PercentMortalityHigh = mortalityHigh;
+            HardinessZone = shelterbeltComponent.HardinessZone;
+            EcodistrictId = shelterbeltComponent.EcoDistrictId;
+            Age = (int)(Year - treeGroup.PlantYear) + 1;
 
             // Assume all trees died in first year
-            if (this.Age == 1)
-            {
-                this.TreeCount = treeGroup.PlantedTreeCount;
-            }
+            if (Age == 1)
+                TreeCount = treeGroup.PlantedTreeCount;
             else
-            {
                 // For all other years, we use the number of trees that have lived past the first year
-                this.TreeCount = treeGroup.PlantedTreeCount * (100 - this.PercentMortality) / 100.0;
-            }
+                TreeCount = treeGroup.PlantedTreeCount * (100 - PercentMortality) / 100.0;
 
-            this.TreeSpacing = _shelterbeltCalculator.CalculateTreeSpacing(this.RowLength, this.TreeCount);
+            TreeSpacing = _shelterbeltCalculator.CalculateTreeSpacing(RowLength, TreeCount);
 
-            this.SharedConstruction();
+            SharedConstruction();
         }
 
         private void SharedConstruction()
         {
-            this.Name = "Tree Annum";
+            Name = "Tree Annum";
         }
 
         #endregion
@@ -181,14 +163,16 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         #region Properties
 
         /// <summary>
-        /// Will be used to lookup growth data for trees located in Saskatchewan. Trees outside of Saskatchewan will use the hardiness zone
-        /// to lookup growth data.
+        ///     Will be used to lookup growth data for trees located in Saskatchewan. Trees outside of Saskatchewan will use the
+        ///     hardiness zone
+        ///     to lookup growth data.
         /// </summary>
         public int EcodistrictId { get; set; }
 
         /// <summary>
-        /// Will be used to lookup growth data for trees located outside of Saskatchewan. Trees located in Saskatchewan will use a ecodistrict to
-        /// cluster id mapping to lookup growth data.
+        ///     Will be used to lookup growth data for trees located outside of Saskatchewan. Trees located in Saskatchewan will
+        ///     use a ecodistrict to
+        ///     cluster id mapping to lookup growth data.
         /// </summary>
         public HardinessZone HardinessZone { get; set; }
 
@@ -196,161 +180,147 @@ namespace H.Core.Models.LandManagement.Shelterbelt
 
         public double RowLength
         {
-            get { return _rowLength; }
-            set { this.SetProperty(ref _rowLength, value); }
+            get => _rowLength;
+            set => SetProperty(ref _rowLength, value);
         }
 
         public double TreeSpacing
         {
-            get { return _treeSpacing; }
-            set { this.SetProperty(ref _treeSpacing, value); }
+            get => _treeSpacing;
+            set => SetProperty(ref _treeSpacing, value);
         }
 
         public double TreeCount
         {
-            get { return _treeCount; }
-            set { this.SetProperty(ref _treeCount, value); }
+            get => _treeCount;
+            set => SetProperty(ref _treeCount, value);
         }
 
         public TreeSpecies TreeSpecies
         {
-            get { return _treeSpecies; }
-            set { this.SetProperty(ref _treeSpecies, value); }
+            get => _treeSpecies;
+            set => SetProperty(ref _treeSpecies, value);
         }
 
         public CircumferenceData CircumferenceData
         {
-            get { return _circumferenceData; }
+            get => _circumferenceData;
             set
             {
                 if (_circumferenceData != null)
-                {
-                    _circumferenceData.PropertyChanged -= this.OnCircumferenceDataPropertyChanged;
-                }
+                    _circumferenceData.PropertyChanged -= OnCircumferenceDataPropertyChanged;
 
-                this.SetProperty(ref _circumferenceData, value);
+                SetProperty(ref _circumferenceData, value);
                 if (_circumferenceData != null)
-                {
-                    _circumferenceData.PropertyChanged += this.OnCircumferenceDataPropertyChanged;
-                }
+                    _circumferenceData.PropertyChanged += OnCircumferenceDataPropertyChanged;
             }
         }
 
         public double Year
         {
-            get { return _year; }
-            set { this.SetProperty(ref _year, value); }
+            get => _year;
+            set => SetProperty(ref _year, value);
         }
 
         public double AboveGroundCarbonStocksPerTree
         {
-            get { return _aboveGroundCarbonKgPerTree; }
-            set { this.SetProperty(ref _aboveGroundCarbonKgPerTree, value); }
+            get => _aboveGroundCarbonKgPerTree;
+            set => SetProperty(ref _aboveGroundCarbonKgPerTree, value);
         }
 
         public double BelowGroundCarbonKgPerTree
         {
-            get { return _belowGroundCarbonKgPerTree; }
-            set { this.SetProperty(ref _belowGroundCarbonKgPerTree, value); }
+            get => _belowGroundCarbonKgPerTree;
+            set => SetProperty(ref _belowGroundCarbonKgPerTree, value);
         }
 
         public string ShelterbeltName
         {
-            get { return _shelterbeltName; }
-            set { this.SetProperty(ref _shelterbeltName, value); }
+            get => _shelterbeltName;
+            set => SetProperty(ref _shelterbeltName, value);
         }
 
         public string RowName
         {
-            get { return _rowName; }
-            set { this.SetProperty(ref _rowName, value); }
+            get => _rowName;
+            set => SetProperty(ref _rowName, value);
         }
 
         public string TreeGroupName
         {
-            get { return _treeGroupName; }
-            set { this.SetProperty(ref _treeGroupName, value); }
+            get => _treeGroupName;
+            set => SetProperty(ref _treeGroupName, value);
         }
 
         public Guid ShelterbeltGuid
         {
-            get { return _shelterbeltGuid; }
-            set { this.SetProperty(ref _shelterbeltGuid, value); }
+            get => _shelterbeltGuid;
+            set => SetProperty(ref _shelterbeltGuid, value);
         }
 
         public Guid RowGuid
         {
-            get { return _rowGuid; }
-            set { this.SetProperty(ref _rowGuid, value); }
+            get => _rowGuid;
+            set => SetProperty(ref _rowGuid, value);
         }
 
         public Guid TreeGroupGuid
         {
-            get { return _treeGroupGuid; }
-            set { this.SetProperty(ref _treeGroupGuid, value); }
+            get => _treeGroupGuid;
+            set => SetProperty(ref _treeGroupGuid, value);
         }
 
         /// <summary>
-        /// Percent mortality of an entire row of trees
-        ///
-        /// (%)
+        ///     Percent mortality of an entire row of trees
+        ///     (%)
         /// </summary>
         public double PercentMortality
         {
-            get
-            {
-                return _percentMortality;
-            }
-            set
-            {
-                SetProperty(ref _percentMortality, value);
-            }
+            get => _percentMortality;
+            set => SetProperty(ref _percentMortality, value);
         }
 
         public double PercentMortalityHigh
         {
-            get { return _percentMortalityHigh; }
-            set {SetProperty(ref _percentMortalityHigh, value); }
+            get => _percentMortalityHigh;
+            set => SetProperty(ref _percentMortalityHigh, value);
         }
 
         public double PercentMortalityLow
         {
-            get { return _percentMortalityLow; }
-            set {SetProperty(ref _percentMortalityLow, value); }
+            get => _percentMortalityLow;
+            set => SetProperty(ref _percentMortalityLow, value);
         }
 
         public int Age
         {
-            get { return _age; }
-            set {SetProperty(ref _age, value); }
+            get => _age;
+            set => SetProperty(ref _age, value);
         }
 
         /// <summary>
-        /// The total biomass of a single tree (includes aboveground and belowground)
-        ///
-        /// (kg)
+        ///     The total biomass of a single tree (includes aboveground and belowground)
+        ///     (kg)
         /// </summary>
         public double TotalBiomassPerTree
         {
-            get { return _totalBiomassPerTree; }
-            set { SetProperty(ref _totalBiomassPerTree, value); }
+            get => _totalBiomassPerTree;
+            set => SetProperty(ref _totalBiomassPerTree, value);
         }
 
         /// <summary>
-        /// Total carbon per tree (includes aboveground and belowground) per standard length
-        ///
-        /// (kg C km^-1)
+        ///     Total carbon per tree (includes aboveground and belowground) per standard length
+        ///     (kg C km^-1)
         /// </summary>
-        public double TotalLivingCarbonPerTreeTypePerStandardLength 
+        public double TotalLivingCarbonPerTreeTypePerStandardLength
         {
-            get { return _totalLivingCarbonPerTreeTypePerStandardLength; }
-            set { SetProperty(ref _totalLivingCarbonPerTreeTypePerStandardLength, value); }
+            get => _totalLivingCarbonPerTreeTypePerStandardLength;
+            set => SetProperty(ref _totalLivingCarbonPerTreeTypePerStandardLength, value);
         }
 
         /// <summary>
-        /// Total biomass of all trees in the same row of the same species
-        ///
-        /// (kg)
+        ///     Total biomass of all trees in the same row of the same species
+        ///     (kg)
         /// </summary>
         public double TotalLivingBiomassForAllTreesOfSameType
         {
@@ -359,9 +329,8 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         }
 
         /// <summary>
-        /// Total biomass of all trees in the same row of the same species per standard planting (i.e. 1 km)
-        ///
-        /// (kg km^-1)
+        ///     Total biomass of all trees in the same row of the same species per standard planting (i.e. 1 km)
+        ///     (kg km^-1)
         /// </summary>
         public double TotalLivingBiomassPerTreeTypePerStandardLength
         {
@@ -370,19 +339,19 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         }
 
         /// <summary>
-        /// (kg C km^-1 year^-1)
+        ///     (kg C km^-1 year^-1)
         /// </summary>
         public double EstimatedDeadOrganicMatterBasedOnRealGrowth { get; set; }
 
         public double RealGrowthRatio { get; set; }
 
         /// <summary>
-        /// (kg C km^-1)
+        ///     (kg C km^-1)
         /// </summary>
         public double EstimatedTotalLivingBiomassCarbonBasedOnRealGrowth { get; set; }
 
         /// <summary>
-        /// Used to determine if biomass/carbon values from lookup tables will use the hardiness zone or ecodistrict.
+        ///     Used to determine if biomass/carbon values from lookup tables will use the hardiness zone or ecodistrict.
         /// </summary>
         public bool CanLookupByEcodistrict { get; set; }
 
@@ -392,22 +361,15 @@ namespace H.Core.Models.LandManagement.Shelterbelt
 
         public string GenerateAutonym()
         {
-            return this.TreeGroupName + " - " + this.Year;
+            return TreeGroupName + " - " + Year;
         }
 
         public string GetCorrectName()
         {
-            if (this.NameIsFromUser)
-            {
-                return this.Name;
-            }
+            if (NameIsFromUser) return Name;
 
-            return this.GenerateAutonym();
+            return GenerateAutonym();
         }
-
-        #endregion
-
-        #region Private Methods
 
         #endregion
     }

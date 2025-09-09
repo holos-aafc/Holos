@@ -1,35 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
-using H.Core.Providers.Climate;
-using H.Core.Providers.Plants;
 using H.Infrastructure;
 
 namespace H.Core.Providers.Animals
 {
     /// <summary>
-    /// Table 41. Parameter values for pullets, broilers (incl. roasters) and layers for the estimation of Nexcretion_rate
+    ///     Table 41. Parameter values for pullets, broilers (incl. roasters) and layers for the estimation of Nexcretion_rate
     /// </summary>
     public class Table_41_Poultry_NExcretionRate_Parameter_Values_Provider
     {
         #region Fields
 
-        private static AnimalTypeStringConverter _animalTypeStringConverter;
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// A list containing all the data read from the .csv file for Table_41.
-        /// </summary>
-        public static List<Table_41_Poultry_NExcretionRate_Parameter_Values_Data> PoultryParameterValueData { get;  }
+        private static readonly AnimalTypeStringConverter _animalTypeStringConverter;
 
         #endregion
 
@@ -41,30 +27,36 @@ namespace H.Core.Providers.Animals
             PoultryParameterValueData = ReadFile();
         }
 
-        public Table_41_Poultry_NExcretionRate_Parameter_Values_Provider()
-        {
-        }
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///     A list containing all the data read from the .csv file for Table_41.
+        /// </summary>
+        public static List<Table_41_Poultry_NExcretionRate_Parameter_Values_Data> PoultryParameterValueData { get; }
 
         #endregion
 
         #region Public Methods
 
         /// <summary>
-        /// Looks through the available data for Nitrogen Excretion Rate Parameter Values based on the animal type specified.
+        ///     Looks through the available data for Nitrogen Excretion Rate Parameter Values based on the animal type specified.
         /// </summary>
         /// <param name="animalType">The type of animal (poultry) for which data values are required.</param>
-        /// <returns>Returns an instance of <see cref="Table_41_Poultry_NExcretionRate_Parameter_Values_Data"/> based on the animal specified.
-        /// If nothing is found, returns an empty instance.</returns>
+        /// <returns>
+        ///     Returns an instance of <see cref="Table_41_Poultry_NExcretionRate_Parameter_Values_Data" /> based on the animal
+        ///     specified.
+        ///     If nothing is found, returns an empty instance.
+        /// </returns>
         public Table_41_Poultry_NExcretionRate_Parameter_Values_Data GetParameterValues(AnimalType animalType)
         {
             var data = PoultryParameterValueData.Find(x => x.AnimalType == animalType);
 
-            if (data != null)
-            {
-                return data;
-            }
+            if (data != null) return data;
 
-            Trace.TraceError($"{nameof(Table_41_Poultry_NExcretionRate_Parameter_Values_Provider)}.{nameof(GetParameterValues)}: No data for '{animalType.GetDescription()}'");
+            Trace.TraceError(
+                $"{nameof(Table_41_Poultry_NExcretionRate_Parameter_Values_Provider)}.{nameof(GetParameterValues)}: No data for '{animalType.GetDescription()}'");
 
             return new Table_41_Poultry_NExcretionRate_Parameter_Values_Data();
         }
@@ -73,7 +65,7 @@ namespace H.Core.Providers.Animals
 
         #region Private Methods
 
-        public List<Table_41_Poultry_NExcretionRate_Parameter_Values_Data>  GetData()
+        public List<Table_41_Poultry_NExcretionRate_Parameter_Values_Data> GetData()
         {
             return PoultryParameterValueData;
         }
@@ -81,7 +73,7 @@ namespace H.Core.Providers.Animals
         private static List<Table_41_Poultry_NExcretionRate_Parameter_Values_Data> ReadFile()
         {
             var fileData = new List<Table_41_Poultry_NExcretionRate_Parameter_Values_Data>();
-            IEnumerable<string[]> fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.PoultryNExcretionParameterValues);
+            var fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.PoultryNExcretionParameterValues);
 
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
 
@@ -89,8 +81,9 @@ namespace H.Core.Providers.Animals
             {
                 if (string.IsNullOrWhiteSpace(line[0]))
                 {
-                    Trace.Write($"{nameof(Table_41_Poultry_NExcretionRate_Parameter_Values_Provider)}.{nameof(ReadFile)}" +
-                                $" - File: {nameof(CsvResourceNames.PoultryNExcretionParameterValues)} : first cell of the line is empty. Exiting loop to stop reading more lines inside .csv file.");
+                    Trace.Write(
+                        $"{nameof(Table_41_Poultry_NExcretionRate_Parameter_Values_Provider)}.{nameof(ReadFile)}" +
+                        $" - File: {nameof(CsvResourceNames.PoultryNExcretionParameterValues)} : first cell of the line is empty. Exiting loop to stop reading more lines inside .csv file.");
                     break;
                 }
 
@@ -116,7 +109,7 @@ namespace H.Core.Providers.Animals
                     EggProduction = eggProduction,
                     FinalWeight = finalWeight,
                     InitialWeight = initialWeight,
-                    ProductionPeriod = productionPeriod,
+                    ProductionPeriod = productionPeriod
                 });
             }
 

@@ -7,32 +7,30 @@ using H.Infrastructure;
 namespace H.Core.Providers.Plants
 {
     /// <summary>
-    /// Table 7
+    ///     Table 7
     /// </summary>
     public class CropFactorsProvider_Table7
     {
-        #region Fields
-        
-        private readonly CropTypeStringConverter _cropTypeStringConverter = new CropTypeStringConverter();
-        private readonly List<CropFactorsData> _cache;
-        
-        #endregion
-        
         #region Constructors
+
         public CropFactorsProvider_Table7()
         {
             _cache = BuildCache();
         }
+
         #endregion
 
         #region Public Methods
+
         public List<CropFactorsData> GetCropFactors()
         {
             return _cache;
         }
+
         #endregion
 
         #region Private Methods
+
         private List<CropFactorsData> BuildCache()
         {
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
@@ -63,6 +61,14 @@ namespace H.Core.Providers.Plants
 
             return result;
         }
+
+        #endregion
+
+        #region Fields
+
+        private readonly CropTypeStringConverter _cropTypeStringConverter = new CropTypeStringConverter();
+        private readonly List<CropFactorsData> _cache;
+
         #endregion
     }
 }

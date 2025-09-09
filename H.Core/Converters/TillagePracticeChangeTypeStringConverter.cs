@@ -1,6 +1,6 @@
-﻿using H.Core.Enumerations;
+﻿using System;
+using H.Core.Enumerations;
 using H.Core.Properties;
-using System;
 
 namespace H.Core.Converters
 {
@@ -8,7 +8,7 @@ namespace H.Core.Converters
     {
         public TillagePracticeChangeType Convert(string input)
         {
-            switch (this.GetLettersAsLowerCase(input))
+            switch (GetLettersAsLowerCase(input))
             {
                 case "intensetoreduced":
                     return TillagePracticeChangeType.IntenseToReduced;
@@ -23,9 +23,8 @@ namespace H.Core.Converters
                 case "nonetointense":
                     return TillagePracticeChangeType.NoneToIntense;
                 default:
-                     throw new Exception(String.Format(Resources.NotAValidTillageChangeType, input));
+                    throw new Exception(string.Format(Resources.NotAValidTillageChangeType, input));
             }
         }
-
     }
 }

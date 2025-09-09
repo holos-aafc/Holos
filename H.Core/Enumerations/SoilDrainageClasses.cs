@@ -4,7 +4,7 @@ using H.Infrastructure;
 namespace H.Core.Enumerations
 {
     /// <summary>
-    /// http://sis.agr.gc.ca/cansis/nsdb/soil/v2/snt/drainage.html
+    ///     http://sis.agr.gc.ca/cansis/nsdb/soil/v2/snt/drainage.html
     /// </summary>
     public enum SoilDrainageClasses
     {
@@ -33,6 +33,6 @@ namespace H.Core.Enumerations
         NotApplicable,
 
         [LocalizedDescription("Unknown", typeof(Resources))]
-        Unknown,
+        Unknown
     }
 }

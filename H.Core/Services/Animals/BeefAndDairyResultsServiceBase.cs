@@ -1,8 +1,8 @@
-﻿using H.Core.Emissions.Results;
-using H.Core.Models.Animals;
-using H.Core.Models;
-using System;
+﻿using System;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
+using H.Core.Models;
+using H.Core.Models.Animals;
 
 namespace H.Core.Services.Animals
 {
@@ -13,41 +13,37 @@ namespace H.Core.Services.Animals
             AnimalGroup animalGroup,
             DateTime dateTime,
             GroupEmissionsByDay previousDaysEmissions,
-            double temperature, 
+            double temperature,
             Farm farm)
         {
             if (animalGroup.GroupType.IsDairyCattleType())
-            {
-                dailyEmissions.FractionOfNitrogenExcretedInUrine = this.GetFractionOfNitrogenExcretedInUrineForDairy(
-                    crudeProteinContent: managementPeriod.SelectedDiet.CrudeProteinContent,
-                    animalType: animalGroup.GroupType);
-            }
+                dailyEmissions.FractionOfNitrogenExcretedInUrine = GetFractionOfNitrogenExcretedInUrineForDairy(
+                    managementPeriod.SelectedDiet.CrudeProteinContent,
+                    animalGroup.GroupType);
             else
-            {
                 // No equation for this when considering beef cattle as it is a lookup table in algorithm document
-                dailyEmissions.FractionOfNitrogenExcretedInUrine = base.GetFractionOfNitrogenExcretedInUrine(
-                    crudeProteinInDiet: managementPeriod.SelectedDiet.CrudeProteinContent);
-            }
+                dailyEmissions.FractionOfNitrogenExcretedInUrine = GetFractionOfNitrogenExcretedInUrine(
+                    managementPeriod.SelectedDiet.CrudeProteinContent);
 
             dailyEmissions.TanExcretionRate = CalculateTANExcretionRate(
-                nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
-                fractionOfNitrogenExcretedInUrine: dailyEmissions.FractionOfNitrogenExcretedInUrine);
+                dailyEmissions.NitrogenExcretionRate,
+                dailyEmissions.FractionOfNitrogenExcretedInUrine);
 
             dailyEmissions.TanExcretion = CalculateTANExcretion(
-                tanExcretionRate: dailyEmissions.TanExcretionRate,
-                numberOfAnimals: managementPeriod.NumberOfAnimals);
+                dailyEmissions.TanExcretionRate,
+                managementPeriod.NumberOfAnimals);
 
             dailyEmissions.FecalNitrogenExcretionRate = CalculateFecalNitrogenExcretionRate(
-                nitrogenExcretionRate: dailyEmissions.NitrogenExcretionRate,
-                tanExcretionRate: dailyEmissions.TanExcretionRate);
+                dailyEmissions.NitrogenExcretionRate,
+                dailyEmissions.TanExcretionRate);
 
             dailyEmissions.FecalNitrogenExcretion = CalculateFecalNitrogenExcretion(
-                fecalNitrogenExcretionRate: dailyEmissions.FecalNitrogenExcretionRate,
-                numberOfAnimals: managementPeriod.NumberOfAnimals);
+                dailyEmissions.FecalNitrogenExcretionRate,
+                managementPeriod.NumberOfAnimals);
 
             dailyEmissions.OrganicNitrogenInStoredManure = CalculateOrganicNitrogenInStoredManure(
-                totalNitrogenExcretedThroughFeces: dailyEmissions.FecalNitrogenExcretion,
-                amountOfNitrogenAddedFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding);
+                dailyEmissions.FecalNitrogenExcretion,
+                dailyEmissions.AmountOfNitrogenAddedFromBedding);
 
             /*
              * Ammonia (NH3) from housing
@@ -58,9 +54,10 @@ namespace H.Core.Services.Animals
                 var housingTemperature = temperature;
                 if (managementPeriod.AnimalType.IsDairyCattleType())
                 {
-                    if (managementPeriod.HousingDetails.UseCustomIndoorHousingTemperature == false && farm.ClimateData.BarnTemperatureData != null)
+                    if (managementPeriod.HousingDetails.UseCustomIndoorHousingTemperature == false &&
+                        farm.ClimateData.BarnTemperatureData != null)
                     {
-                        var month = (Months) dateTime.Month;
+                        var month = (Months)dateTime.Month;
                         housingTemperature = farm.ClimateData.BarnTemperatureData.GetValueByMonth(month);
                     }
                     else
@@ -69,112 +66,109 @@ namespace H.Core.Services.Animals
                     }
                 }
 
-                var isIndoorDairyHousing = managementPeriod.HousingDetails.HousingType.IsIndoorHousing() && managementPeriod.AnimalType.IsDairyCattleType();
-                dailyEmissions.AmbientAirTemperatureAdjustmentForHousing = CalculateAmbientTemperatureAdjustmentForIndoorHousing(
-                    dailyTemperature: housingTemperature,
-                    isDairyIndoorHousing: isIndoorDairyHousing);
+                var isIndoorDairyHousing = managementPeriod.HousingDetails.HousingType.IsIndoorHousing() &&
+                                           managementPeriod.AnimalType.IsDairyCattleType();
+                dailyEmissions.AmbientAirTemperatureAdjustmentForHousing =
+                    CalculateAmbientTemperatureAdjustmentForIndoorHousing(
+                        housingTemperature,
+                        isIndoorDairyHousing);
             }
             else
             {
                 dailyEmissions.AmbientAirTemperatureAdjustmentForHousing = CalculateAmbientTemperatureAdjustmentNoBarn(
-                    temperature: temperature);
+                    temperature);
             }
 
             var ammoniaEmissionFactorForHousingType = _defaultEmissionFactorsProvider.GetEmissionFactorByHousing(
-                housingType: managementPeriod.HousingDetails.HousingType);
+                managementPeriod.HousingDetails.HousingType);
 
             dailyEmissions.AdjustedAmmoniaEmissionFactorForHousing = CalculateAdjustedEmissionFactorHousing(
-                emissionFactor: ammoniaEmissionFactorForHousingType,
-                temperatureAdjustment: dailyEmissions.AmbientAirTemperatureAdjustmentForHousing);
+                ammoniaEmissionFactorForHousingType,
+                dailyEmissions.AmbientAirTemperatureAdjustmentForHousing);
 
-            base.CalculateAmmoniaInHousing(dailyEmissions, managementPeriod, dailyEmissions.AdjustedAmmoniaEmissionFactorForHousing);
+            CalculateAmmoniaInHousing(dailyEmissions, managementPeriod,
+                dailyEmissions.AdjustedAmmoniaEmissionFactorForHousing);
 
             dailyEmissions.TanEnteringStorageSystem = CalculateTanFlowingIntoStorageEachDay(
-                tanExcretion: dailyEmissions.TanExcretion,
-                ammoniaLostFromHousing: dailyEmissions.AmmoniaConcentrationInHousing);
+                dailyEmissions.TanExcretion,
+                dailyEmissions.AmmoniaConcentrationInHousing);
 
-            dailyEmissions.AdjustedAmountOfTanFlowingIntoStorageEachDay = CalculateAdjustedAmountOfTanFlowingIntoStorageEachDay(
-                tanEnteringStorageSystem: dailyEmissions.TanEnteringStorageSystem,
-                fractionOfTanImmobilizedToOrganicNitrogen: managementPeriod.ManureDetails.FractionOfOrganicNitrogenImmobilized,
-                fractionOfTanNitrifiedDuringManureStorage: managementPeriod.ManureDetails.FractionOfOrganicNitrogenNitrified,
-                nitrogenExcretedThroughFeces: dailyEmissions.FecalNitrogenExcretion,
-                fractionOfOrganicNitrogenMineralizedAsTanDuringManureStorage: managementPeriod.ManureDetails.FractionOfOrganicNitrogenMineralized,
-                beddingNitrogen: dailyEmissions.AmountOfNitrogenAddedFromBedding);
+            dailyEmissions.AdjustedAmountOfTanFlowingIntoStorageEachDay =
+                CalculateAdjustedAmountOfTanFlowingIntoStorageEachDay(
+                    dailyEmissions.TanEnteringStorageSystem,
+                    managementPeriod.ManureDetails.FractionOfOrganicNitrogenImmobilized,
+                    managementPeriod.ManureDetails.FractionOfOrganicNitrogenNitrified,
+                    dailyEmissions.FecalNitrogenExcretion,
+                    managementPeriod.ManureDetails.FractionOfOrganicNitrogenMineralized,
+                    dailyEmissions.AmountOfNitrogenAddedFromBedding);
 
             if (managementPeriod.ManureDetails.StateType.IsSolidManure())
             {
                 if (animalGroup.GroupType.IsBeefCattleType())
-                {
-                    dailyEmissions.AmbientAirTemperatureAdjustmentForStorage = this.CalculateTemperatureAdjustmentForBeefCattleSolidStoredManure(
-                        temperature: temperature);
-                }
+                    dailyEmissions.AmbientAirTemperatureAdjustmentForStorage =
+                        CalculateTemperatureAdjustmentForBeefCattleSolidStoredManure(
+                            temperature);
                 else
-                {
-                    dailyEmissions.AmbientAirTemperatureAdjustmentForStorage = this.CalculateTemperatureAdjustmentForDairyCattleSolidStoredManure(
-                        temperature: temperature);
-                }
+                    dailyEmissions.AmbientAirTemperatureAdjustmentForStorage =
+                        CalculateTemperatureAdjustmentForDairyCattleSolidStoredManure(
+                            temperature);
             }
             else
             {
-                dailyEmissions.AmbientAirTemperatureAdjustmentForStorage = this.CalculateStorageTemperatureAdjustmentForLiquidManure(
-                    temperature: temperature);
+                dailyEmissions.AmbientAirTemperatureAdjustmentForStorage =
+                    CalculateStorageTemperatureAdjustmentForLiquidManure(
+                        temperature);
             }
 
-            dailyEmissions.AdjustedAmmoniaEmissionFactorForStorage = base.CalculateAdjustedAmmoniaEmissionFactorStoredManure(
-                ambientTemperatureAdjustmentStorage: dailyEmissions.AmbientAirTemperatureAdjustmentForStorage,
-                ammoniaEmissionFactorStorage: managementPeriod.ManureDetails.AmmoniaEmissionFactorForManureStorage);
+            dailyEmissions.AdjustedAmmoniaEmissionFactorForStorage = CalculateAdjustedAmmoniaEmissionFactorStoredManure(
+                dailyEmissions.AmbientAirTemperatureAdjustmentForStorage,
+                managementPeriod.ManureDetails.AmmoniaEmissionFactorForManureStorage);
 
-            dailyEmissions.AmmoniaLostFromStorage = base.CalculateAmmoniaLossFromStoredManure(
+            dailyEmissions.AmmoniaLostFromStorage = CalculateAmmoniaLossFromStoredManure(
                 dailyEmissions.AdjustedAmountOfTanFlowingIntoStorageEachDay,
                 dailyEmissions.AdjustedAmmoniaEmissionFactorForStorage);
 
             dailyEmissions.AmmoniaEmissionsFromStorageSystem = CoreConstants.ConvertToNH3(
-                amountOfNH3N: dailyEmissions.AmmoniaLostFromStorage);
+                dailyEmissions.AmmoniaLostFromStorage);
 
-            dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay = this.CalculateAdjustedAmountOfTANEnteringStorage(
-                amountOfTANFlowingIntoStorageEachDay: dailyEmissions.AdjustedAmountOfTanFlowingIntoStorageEachDay, 
-                adjustedAmmoniaLossFromStorage: dailyEmissions.AmmoniaLostFromStorage);
+            dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay = CalculateAdjustedAmountOfTANEnteringStorage(
+                dailyEmissions.AdjustedAmountOfTanFlowingIntoStorageEachDay,
+                dailyEmissions.AmmoniaLostFromStorage);
 
             dailyEmissions.AccumulatedTanInStorageOnDay = CalculateAmountOfTanInStorageOnDay(
-                tanInStorageOnPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedTanInStorageOnDay,
-                flowOfTanEnteringStorage: dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay);
+                previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedTanInStorageOnDay,
+                dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay);
 
-            dailyEmissions.AdjustedAmmoniaFromStorage = this.CalculateAdjustedAmmoniaFromStorage(dailyEmissions, managementPeriod);
+            dailyEmissions.AdjustedAmmoniaFromStorage =
+                CalculateAdjustedAmmoniaFromStorage(dailyEmissions, managementPeriod);
 
             /*
              * Volatilization
              */
 
             if (managementPeriod.ManureDetails.UseCustomVolatilizationFraction)
-            {
                 dailyEmissions.FractionOfManureVolatilized = managementPeriod.ManureDetails.VolatilizationFraction;
-            }
             else
-            {
-                dailyEmissions.FractionOfManureVolatilized = this.CalculateFractionOfManureVolatilized(
-                    ammoniaEmissionsFromHousing: dailyEmissions.AmmoniaConcentrationInHousing,
-                    ammoniaEmissionsFromStorage: dailyEmissions.AmmoniaLostFromStorage,
-                    amountOfNitrogenExcreted: dailyEmissions.AmountOfNitrogenExcreted,
-                    amountOfNitrogenFromBedding: dailyEmissions.AmountOfNitrogenAddedFromBedding);
-            }
+                dailyEmissions.FractionOfManureVolatilized = CalculateFractionOfManureVolatilized(
+                    dailyEmissions.AmmoniaConcentrationInHousing,
+                    dailyEmissions.AmmoniaLostFromStorage,
+                    dailyEmissions.AmountOfNitrogenExcreted,
+                    dailyEmissions.AmountOfNitrogenAddedFromBedding);
 
-            if (managementPeriod.HousingDetails.HousingType.IsPasture())
-            {
-                dailyEmissions.FractionOfManureVolatilized = 0;
-            }
+            if (managementPeriod.HousingDetails.HousingType.IsPasture()) dailyEmissions.FractionOfManureVolatilized = 0;
 
-            base.CalculateVolatilizationEmissions(dailyEmissions, managementPeriod);
+            CalculateVolatilizationEmissions(dailyEmissions, managementPeriod);
 
             /*
              * Leaching
              */
 
-            base.CalculateLeachingEmissions(dailyEmissions, managementPeriod);
+            CalculateLeachingEmissions(dailyEmissions, managementPeriod);
         }
 
         /// <summary>
-        /// Equation 4.3.1-1
-        /// Equation 4.3.1-2
+        ///     Equation 4.3.1-1
+        ///     Equation 4.3.1-2
         /// </summary>
         /// <param name="crudeProteinContent">The crude protein of the diet (fraction)</param>
         /// <param name="animalType">The type of dairy animal</param>
@@ -186,39 +180,32 @@ namespace H.Core.Services.Animals
             var result = 0.0;
 
             if (animalType.IsLactatingType())
-            {
                 result = 3.296 * crudeProteinContent + 0.0084;
-            }
             else
-            {
                 result = -19.26 * Math.Pow(crudeProteinContent, 2) + 6.62 * crudeProteinContent + 0.022;
-            }
 
-            if (result < 0)
-            {
-                return 0;
-            }
+            if (result < 0) return 0;
 
-            if (result > 1)
-            {
-                return 1;
-            }
+            if (result > 1) return 1;
 
             return result;
         }
 
         /// <summary>
-        /// Equation 4.3.2-3
+        ///     Equation 4.3.2-3
         /// </summary>
         /// <param name="temperature">Average daily outdoor temperature (°C)</param>
-        /// <returns>Ambient temperature-based adjustments used to correct default NH3 emission factors for manure storage (compost, stockpile/deep bedding)</returns>
+        /// <returns>
+        ///     Ambient temperature-based adjustments used to correct default NH3 emission factors for manure storage
+        ///     (compost, stockpile/deep bedding)
+        /// </returns>
         public double CalculateTemperatureAdjustmentForBeefCattleSolidStoredManure(double temperature)
         {
             return Math.Pow(1.041, temperature + 2) / Math.Pow(1.041, 15);
         }
 
         /// <summary>
-        /// Equation 4.3.2-4
+        ///     Equation 4.3.2-4
         /// </summary>
         /// <param name="temperature">Average daily outdoor temperature (°C)</param>
         /// <returns>Temperature adjustment for solid manure</returns>
@@ -228,7 +215,7 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Equation 4.3.2-5
+        ///     Equation 4.3.2-5
         /// </summary>
         /// <param name="temperature">Average daily outdoor temperature (°C)</param>
         /// <returns>Temperature adjustment for liquid manure</returns>

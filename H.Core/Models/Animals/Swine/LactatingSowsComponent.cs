@@ -8,9 +8,9 @@ namespace H.Core.Models.Animals.Swine
 
         public LactatingSowsComponent()
         {
-            this.ComponentNameDisplayString = ComponentType.SwineLactatingSows.GetDescription();
-            this.ComponentCategory = ComponentCategory.Swine;
-            this.ComponentType = ComponentType.SwineLactatingSows;
+            ComponentNameDisplayString = ComponentType.SwineLactatingSows.GetDescription();
+            ComponentCategory = ComponentCategory.Swine;
+            ComponentType = ComponentType.SwineLactatingSows;
         }
 
         #endregion

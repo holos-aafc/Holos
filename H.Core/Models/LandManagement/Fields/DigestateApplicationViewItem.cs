@@ -1,12 +1,21 @@
 ﻿using System;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
-using H.Infrastructure;
 
 namespace H.Core.Models.LandManagement.Fields
 {
     public class DigestateApplicationViewItem : ManureItemBase
     {
+        #region Constructors
+
+        public DigestateApplicationViewItem()
+        {
+            DateCreated = DateTime.Now;
+            DigestateState = DigestateState.Raw;
+        }
+
+        #endregion
+
         #region Fields
 
         private DigestateState _digestateState;
@@ -15,16 +24,6 @@ namespace H.Core.Models.LandManagement.Fields
         private double _amountOfCarbonAppliedPerHectare;
 
         private bool _attemptToGoOverMaximum;
-
-        #endregion
-
-        #region Constructors
-
-        public DigestateApplicationViewItem()
-        {
-            base.DateCreated = DateTime.Now;
-            this.DigestateState = DigestateState.Raw;
-        }
 
         #endregion
 
@@ -37,9 +36,8 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// Amount of digestate applied
-        ///
-        /// (kg ha^-1)
+        ///     Amount of digestate applied
+        ///     (kg ha^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramsPerHectare)]
         public double AmountAppliedPerHectare
@@ -49,17 +47,13 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// Amount of C applied
-        ///
-        /// (kg C ha^-1)
+        ///     Amount of C applied
+        ///     (kg C ha^-1)
         /// </summary>
         public double AmountOfCarbonAppliedPerHectare
         {
             get => _amountOfCarbonAppliedPerHectare;
-            set
-            {
-                SetProperty(ref _amountOfCarbonAppliedPerHectare, value);
-            } 
+            set => SetProperty(ref _amountOfCarbonAppliedPerHectare, value);
         }
 
         public bool AttemptedToGoOverMaximum
@@ -67,10 +61,6 @@ namespace H.Core.Models.LandManagement.Fields
             get => _attemptToGoOverMaximum;
             set => SetProperty(ref _attemptToGoOverMaximum, value);
         }
-
-        #endregion
-
-        #region Public Method
 
         #endregion
     }

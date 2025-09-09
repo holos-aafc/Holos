@@ -1,7 +1,6 @@
 ﻿using H.Core.Enumerations;
-using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
-using System.Collections.Generic;
+using H.Core.Models.LandManagement.Fields;
 
 namespace H.Core.Services.Initialization.Crops
 {
@@ -11,10 +10,7 @@ namespace H.Core.Services.Initialization.Crops
 
         public void InitializePerennialDefaults(Farm farm)
         {
-            foreach (var viewItem in farm.GetAllCropViewItems())
-            {
-                this.InitializePerennialDefaults(viewItem, farm);
-            }
+            foreach (var viewItem in farm.GetAllCropViewItems()) InitializePerennialDefaults(viewItem, farm);
         }
 
 
@@ -25,12 +21,12 @@ namespace H.Core.Services.Initialization.Crops
                 viewItem.TillageType = TillageType.NoTill;
                 viewItem.PastTillageType = TillageType.NoTill;
                 viewItem.FertilizerApplicationMethodology = FertilizerApplicationMethodologies.Broadcast;
-                viewItem.ForageUtilizationRate = _utilizationRatesForLivestockGrazingProvider.GetUtilizationRate(viewItem.CropType);
+                viewItem.ForageUtilizationRate =
+                    _utilizationRatesForLivestockGrazingProvider.GetUtilizationRate(viewItem.CropType);
                 viewItem.TotalBiomassHarvest = viewItem.DefaultYield;
                 viewItem.IsNativeGrassland = viewItem.CropType == CropType.RangelandNative;
             }
         }
-
 
         #endregion
     }

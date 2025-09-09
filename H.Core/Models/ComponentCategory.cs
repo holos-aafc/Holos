@@ -1,31 +1,32 @@
-﻿using H.Infrastructure;
+﻿using H.Core.Properties;
+using H.Infrastructure;
 
 namespace H.Core.Models
 {
     public enum ComponentCategory
     {
-        [LocalizedDescription("EnumLandManagement", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumLandManagement", typeof(Resources))]
         LandManagement,
 
-        [LocalizedDescription("EnumBeefProduction", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumBeefProduction", typeof(Resources))]
         BeefProduction,
 
-        [LocalizedDescription("EnumDairy", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumDairy", typeof(Resources))]
         Dairy,
 
-        [LocalizedDescription("EnumSwine", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumSwine", typeof(Resources))]
         Swine,
 
-        [LocalizedDescription("EnumPoultry", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumPoultry", typeof(Resources))]
         Poultry,
 
-        [LocalizedDescription("EnumOtherLivestock", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumOtherLivestock", typeof(Resources))]
         OtherLivestock,
 
-        [LocalizedDescription("EnumSheep", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumSheep", typeof(Resources))]
         Sheep,
 
-        [LocalizedDescription("EnumInfrastructure", typeof(Properties.Resources))]
-        Infrastructure,
+        [LocalizedDescription("EnumInfrastructure", typeof(Resources))]
+        Infrastructure
     }
 }

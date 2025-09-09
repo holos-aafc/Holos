@@ -4,6 +4,6 @@
     {
         precipitation,
         evapotranspiration,
-        temperature,
+        temperature
     }
 }

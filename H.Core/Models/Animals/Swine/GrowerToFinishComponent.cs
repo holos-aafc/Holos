@@ -1,9 +1,9 @@
-﻿using H.Infrastructure;
+﻿using H.Core.Properties;
 
 namespace H.Core.Models.Animals.Swine
 {
     /// <summary>
-    /// Represents a "Grower-to-finish" swine production system
+    ///     Represents a "Grower-to-finish" swine production system
     /// </summary>
     public class GrowerToFinishComponent : AnimalComponentBase
     {
@@ -11,10 +11,10 @@ namespace H.Core.Models.Animals.Swine
 
         public GrowerToFinishComponent()
         {
-            this.ComponentNameDisplayString = H.Core.Properties.Resources.TitleGrowerToFinish;
-            this.ComponentCategory = ComponentCategory.Swine;
-            this.ComponentType = ComponentType.SwineGrowers;
-            this.ComponentDescriptionString = H.Core.Properties.Resources.ToolTipGrowerToFinishProductionSystem;
+            ComponentNameDisplayString = Resources.TitleGrowerToFinish;
+            ComponentCategory = ComponentCategory.Swine;
+            ComponentType = ComponentType.SwineGrowers;
+            ComponentDescriptionString = Resources.ToolTipGrowerToFinishProductionSystem;
         }
 
         #endregion

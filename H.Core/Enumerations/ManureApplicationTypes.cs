@@ -4,7 +4,7 @@ using H.Infrastructure;
 namespace H.Core.Enumerations
 {
     /// <summary>
-    /// Methods of applying manure to a field
+    ///     Methods of applying manure to a field
     /// </summary>
     public enum ManureApplicationTypes
     {
@@ -21,13 +21,13 @@ namespace H.Core.Enumerations
         OptionC,
 
         /// <summary>
-        /// Also known as 'Solid spread (intensive tillage)'
+        ///     Also known as 'Solid spread (intensive tillage)'
         /// </summary>
         [LocalizedDescription("EnumTilledLandSolidSpread", typeof(Resources))]
         TilledLandSolidSpread,
 
         /// <summary>
-        /// Also known as 'Solid spread (no tillage or reduced tillage)'
+        ///     Also known as 'Solid spread (no tillage or reduced tillage)'
         /// </summary>
         [LocalizedDescription("EnumUntilledLandSolidSpread", typeof(Resources))]
         UntilledLandSolidSpread,
@@ -42,6 +42,6 @@ namespace H.Core.Enumerations
         ShallowInjection,
 
         [LocalizedDescription("EnumDeepInjection", typeof(Resources))]
-        DeepInjection,
+        DeepInjection
     }
 }

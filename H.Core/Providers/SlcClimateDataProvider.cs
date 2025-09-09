@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using H.Content;
 using H.Core.Enumerations;
@@ -21,48 +22,6 @@ namespace H.Core.Providers
     /// </summary>
     public class SlcClimateDataProvider : ProviderBase, ISlcClimateProvider
     {
-        // With the added SLC data this new private class is necessary so that we can simplify data processing and get rid of anonymous types which cannot be passed out of functions
-        private class SlcIntermediateClimateData
-        {
-            public int PolygonId { get; set; }
-            public int Month { get; set; }
-            public double AverageTemperature { get; set; }
-            public double Precipitation { get; set; }
-            public double PotentialEvapotranspiration { get; set; }
-        }
-
-        #region Fields
-
-        private readonly List<TemperatureData> _temperatureDataList;
-        private readonly List<PrecipitationData> _precipitationDataList;
-        private readonly List<EvapotranspirationData> _evapotranspirationDataList;
-
-        // A dictionary keyed by the time, mapped to temp, precipitation, and PET for that timeframe
-        private Dictionary<TimeFrame, Tuple<List<TemperatureData>, List<PrecipitationData>, List<EvapotranspirationData>>> SlcListsGroupedByTimeFrame = new Dictionary<TimeFrame, Tuple<List<TemperatureData>, List<PrecipitationData>, List<EvapotranspirationData>>>();
-
-        // Lists for the appropriate timeframe these will get handed to 'SlcListsGroupedByTimeFrame' in 'BuildListsGroupedByTimeFrame'
-        private readonly List<TemperatureData> _temperatureData1950_1980List;
-        private readonly List<TemperatureData> _temperatureData1960_1990List;
-        private readonly List<TemperatureData> _temperatureData1970_2000List;
-        private readonly List<TemperatureData> _temperatureData1980_2010List;
-        private readonly List<TemperatureData> _temperatureData1990_2017List;
-
-        private readonly List<PrecipitationData> _precipitationData1950_1980List;
-        private readonly List<PrecipitationData> _precipitationData1960_1990List;
-        private readonly List<PrecipitationData> _precipitationData1970_2000List;
-        private readonly List<PrecipitationData> _precipitationData1980_2010List;
-        private readonly List<PrecipitationData> _precipitationData1990_2017List;
-
-        private readonly List<EvapotranspirationData> _evapotranspirationData1950_1980List;
-        private readonly List<EvapotranspirationData> _evapotranspirationData1960_1990List;
-        private readonly List<EvapotranspirationData> _evapotranspirationData1970_2000List;
-        private readonly List<EvapotranspirationData> _evapotranspirationData1980_2010List;
-        private readonly List<EvapotranspirationData> _evapotranspirationData1990_2017List;
-
-        private readonly Dictionary<Tuple<int, TimeFrame>, ClimateData> _cache = new Dictionary<Tuple<int, TimeFrame>, ClimateData>();
-
-        #endregion
-
         #region Constructors
 
         public SlcClimateDataProvider()
@@ -91,12 +50,55 @@ namespace H.Core.Providers
             _evapotranspirationData1980_2010List = new List<EvapotranspirationData>();
             _evapotranspirationData1990_2017List = new List<EvapotranspirationData>();
 
-            this.ReadFiles();
+            ReadFiles();
         }
 
         #endregion
 
-        #region Properties
+        // With the added SLC data this new private class is necessary so that we can simplify data processing and get rid of anonymous types which cannot be passed out of functions
+        private class SlcIntermediateClimateData
+        {
+            public int PolygonId { get; set; }
+            public int Month { get; set; }
+            public double AverageTemperature { get; set; }
+            public double Precipitation { get; set; }
+            public double PotentialEvapotranspiration { get; set; }
+        }
+
+        #region Fields
+
+        private readonly List<TemperatureData> _temperatureDataList;
+        private readonly List<PrecipitationData> _precipitationDataList;
+        private readonly List<EvapotranspirationData> _evapotranspirationDataList;
+
+        // A dictionary keyed by the time, mapped to temp, precipitation, and PET for that timeframe
+        private readonly
+            Dictionary<TimeFrame, Tuple<List<TemperatureData>, List<PrecipitationData>, List<EvapotranspirationData>>>
+            SlcListsGroupedByTimeFrame =
+                new Dictionary<TimeFrame,
+                    Tuple<List<TemperatureData>, List<PrecipitationData>, List<EvapotranspirationData>>>();
+
+        // Lists for the appropriate timeframe these will get handed to 'SlcListsGroupedByTimeFrame' in 'BuildListsGroupedByTimeFrame'
+        private readonly List<TemperatureData> _temperatureData1950_1980List;
+        private readonly List<TemperatureData> _temperatureData1960_1990List;
+        private readonly List<TemperatureData> _temperatureData1970_2000List;
+        private readonly List<TemperatureData> _temperatureData1980_2010List;
+        private readonly List<TemperatureData> _temperatureData1990_2017List;
+
+        private readonly List<PrecipitationData> _precipitationData1950_1980List;
+        private readonly List<PrecipitationData> _precipitationData1960_1990List;
+        private readonly List<PrecipitationData> _precipitationData1970_2000List;
+        private readonly List<PrecipitationData> _precipitationData1980_2010List;
+        private readonly List<PrecipitationData> _precipitationData1990_2017List;
+
+        private readonly List<EvapotranspirationData> _evapotranspirationData1950_1980List;
+        private readonly List<EvapotranspirationData> _evapotranspirationData1960_1990List;
+        private readonly List<EvapotranspirationData> _evapotranspirationData1970_2000List;
+        private readonly List<EvapotranspirationData> _evapotranspirationData1980_2010List;
+        private readonly List<EvapotranspirationData> _evapotranspirationData1990_2017List;
+
+        private readonly Dictionary<Tuple<int, TimeFrame>, ClimateData> _cache =
+            new Dictionary<Tuple<int, TimeFrame>, ClimateData>();
 
         #endregion
 
@@ -118,25 +120,23 @@ namespace H.Core.Providers
             if (!HasDataForPolygonId(polygonId, timeFrame))
             {
                 //we don't have climate data for the polygon
-                Trace.TraceInformation($"{nameof(SlcClimateDataProvider)}.{nameof(GetClimateData)}: {currentPolygonId} is not associated with any SLC climate data. Asking user for another polygon to get data from.");
+                Trace.TraceInformation(
+                    $"{nameof(SlcClimateDataProvider)}.{nameof(GetClimateData)}: {currentPolygonId} is not associated with any SLC climate data. Asking user for another polygon to get data from.");
                 return new ClimateData();
             }
 
             var key = new Tuple<int, TimeFrame>(currentPolygonId, timeFrame);
-            if (_cache.ContainsKey(key))
-            {
-                return _cache[key];
-            }
+            if (_cache.ContainsKey(key)) return _cache[key];
 
-            var evapotranspirationData = this.GetEvapotranspirationDataByPolygonId(polygonId, timeFrame);
-            var precipitationData = this.GetPrecipitationDataByPolygonId(polygonId, timeFrame);
-            var temperatureData = this.GetTemperatureDataByPolygonId(polygonId, timeFrame);
+            var evapotranspirationData = GetEvapotranspirationDataByPolygonId(polygonId, timeFrame);
+            var precipitationData = GetPrecipitationDataByPolygonId(polygonId, timeFrame);
+            var temperatureData = GetTemperatureDataByPolygonId(polygonId, timeFrame);
 
-            var result = new ClimateData()
+            var result = new ClimateData
             {
                 EvapotranspirationData = evapotranspirationData,
                 PrecipitationData = precipitationData,
-                TemperatureData = temperatureData,
+                TemperatureData = temperatureData
             };
 
             _cache.Add(key, result);
@@ -145,7 +145,8 @@ namespace H.Core.Providers
         }
 
         /// <summary>
-        /// Get PET for polygon by timeframe.  If you pass in an invalid timeframe it looks in the original ClimateNormalsByPolygon file
+        ///     Get PET for polygon by timeframe.  If you pass in an invalid timeframe it looks in the original
+        ///     ClimateNormalsByPolygon file
         /// </summary>
         /// <param name="polygonId">the polygon to get data for</param>
         /// <param name="timeFrame">the time frame to select data from</param>
@@ -172,22 +173,22 @@ namespace H.Core.Providers
                     result = SlcListsGroupedByTimeFrame[timeFrame].Item3.SingleOrDefault(x => x.PolygonId == polygonId);
                     break;
                 default:
-                    Trace.TraceError($"{nameof(SlcClimateDataProvider)}.{nameof(GetEvapotranspirationDataByPolygonId)}: No SLC normals for '{timeFrame}' found. Defaulting to original SLC data.");
+                    Trace.TraceError(
+                        $"{nameof(SlcClimateDataProvider)}.{nameof(GetEvapotranspirationDataByPolygonId)}: No SLC normals for '{timeFrame}' found. Defaulting to original SLC data.");
                     result = _evapotranspirationDataList.SingleOrDefault(x => x.PolygonId == polygonId);
                     break;
             }
-            if (result != null)
-            {
-                return result;
-            }
 
-            Trace.TraceError($"{nameof(SlcClimateDataProvider)}.{nameof(GetEvapotranspirationDataByPolygonId)}. Evapotranspiration not found for polygon '{polygonId}'. Returning 0 for all values.");
+            if (result != null) return result;
+
+            Trace.TraceError(
+                $"{nameof(SlcClimateDataProvider)}.{nameof(GetEvapotranspirationDataByPolygonId)}. Evapotranspiration not found for polygon '{polygonId}'. Returning 0 for all values.");
 
             return new EvapotranspirationData();
         }
 
         /// <summary>
-        /// Get precipitation data for a polygon by timeframe
+        ///     Get precipitation data for a polygon by timeframe
         /// </summary>
         /// <param name="polygonId">Polygon to get data for</param>
         /// <param name="timeFrame">the time frame to get data for</param>
@@ -213,22 +214,22 @@ namespace H.Core.Providers
                     result = SlcListsGroupedByTimeFrame[timeFrame].Item2.SingleOrDefault(x => x.PolygonId == polygonId);
                     break;
                 default:
-                    Trace.TraceError($"{nameof(SlcClimateDataProvider)}.{nameof(GetPrecipitationDataByPolygonId)}: No SLC normals for '{timeFrame}' found. Defaulting to original SLC data.");
+                    Trace.TraceError(
+                        $"{nameof(SlcClimateDataProvider)}.{nameof(GetPrecipitationDataByPolygonId)}: No SLC normals for '{timeFrame}' found. Defaulting to original SLC data.");
                     result = _precipitationDataList.SingleOrDefault(x => x.PolygonId == polygonId);
                     break;
             }
-            if (result != null)
-            {
-                return result;
-            }
 
-            Trace.TraceError($"{nameof(SlcClimateDataProvider)}.{nameof(GetPrecipitationDataByPolygonId)}. Precipitation not found for polygon '{polygonId}'. Returning 0 for all values.");
+            if (result != null) return result;
+
+            Trace.TraceError(
+                $"{nameof(SlcClimateDataProvider)}.{nameof(GetPrecipitationDataByPolygonId)}. Precipitation not found for polygon '{polygonId}'. Returning 0 for all values.");
 
             return new PrecipitationData();
         }
 
         /// <summary>
-        /// Get temperature data for a polygon by timeframe
+        ///     Get temperature data for a polygon by timeframe
         /// </summary>
         /// <param name="polygonId">Polygon to get data for</param>
         /// <param name="timeFrame">time frame to get data for</param>
@@ -254,32 +255,48 @@ namespace H.Core.Providers
                     result = SlcListsGroupedByTimeFrame[timeFrame].Item1.SingleOrDefault(x => x.PolygonId == polygonId);
                     break;
                 default:
-                    Trace.TraceError($"{nameof(SlcClimateDataProvider)}.{nameof(GetTemperatureDataByPolygonId)}: No SLC normals for '{timeFrame}' found. Defaulting to original SLC data.");
+                    Trace.TraceError(
+                        $"{nameof(SlcClimateDataProvider)}.{nameof(GetTemperatureDataByPolygonId)}: No SLC normals for '{timeFrame}' found. Defaulting to original SLC data.");
                     result = _temperatureDataList.SingleOrDefault(x => x.PolygonId == polygonId);
                     break;
             }
-            if (result != null)
-            {
-                return result;
-            }
-            else
-            {
-                Trace.TraceError($"{nameof(SlcClimateDataProvider)}.{nameof(GetTemperatureDataByPolygonId)}. Temperature not found for polygon '{polygonId}'. Returning 0 for all values.");
 
-                return new TemperatureData();
-            }
+            if (result != null) return result;
+
+            Trace.TraceError(
+                $"{nameof(SlcClimateDataProvider)}.{nameof(GetTemperatureDataByPolygonId)}. Temperature not found for polygon '{polygonId}'. Returning 0 for all values.");
+
+            return new TemperatureData();
         }
+
         #endregion
 
         #region Private Methods
+
         private void BuildSlcListsGroupedByTimeFrame()
         {
-            SlcListsGroupedByTimeFrame[TimeFrame.NineteenFiftyToNineteenEighty] = new Tuple<List<TemperatureData>, List<PrecipitationData>, List<EvapotranspirationData>>(_temperatureData1950_1980List, _precipitationData1950_1980List, _evapotranspirationData1950_1980List);
-            SlcListsGroupedByTimeFrame[TimeFrame.NineteenSixtyToNineteenNinety] = new Tuple<List<TemperatureData>, List<PrecipitationData>, List<EvapotranspirationData>>(_temperatureData1960_1990List, _precipitationData1960_1990List, _evapotranspirationData1960_1990List);
-            SlcListsGroupedByTimeFrame[TimeFrame.NineteenSeventyToTwoThousand] = new Tuple<List<TemperatureData>, List<PrecipitationData>, List<EvapotranspirationData>>(_temperatureData1970_2000List, _precipitationData1970_2000List, _evapotranspirationData1970_2000List);
-            SlcListsGroupedByTimeFrame[TimeFrame.NineteenEightyToTwoThousandTen] = new Tuple<List<TemperatureData>, List<PrecipitationData>, List<EvapotranspirationData>>(_temperatureData1980_2010List, _precipitationData1980_2010List, _evapotranspirationData1980_2010List);
-            SlcListsGroupedByTimeFrame[TimeFrame.NineteenNinetyToTwoThousandSeventeen] = new Tuple<List<TemperatureData>, List<PrecipitationData>, List<EvapotranspirationData>>(_temperatureData1990_2017List, _precipitationData1990_2017List, _evapotranspirationData1990_2017List);
+            SlcListsGroupedByTimeFrame[TimeFrame.NineteenFiftyToNineteenEighty] =
+                new Tuple<List<TemperatureData>, List<PrecipitationData>, List<EvapotranspirationData>>(
+                    _temperatureData1950_1980List, _precipitationData1950_1980List,
+                    _evapotranspirationData1950_1980List);
+            SlcListsGroupedByTimeFrame[TimeFrame.NineteenSixtyToNineteenNinety] =
+                new Tuple<List<TemperatureData>, List<PrecipitationData>, List<EvapotranspirationData>>(
+                    _temperatureData1960_1990List, _precipitationData1960_1990List,
+                    _evapotranspirationData1960_1990List);
+            SlcListsGroupedByTimeFrame[TimeFrame.NineteenSeventyToTwoThousand] =
+                new Tuple<List<TemperatureData>, List<PrecipitationData>, List<EvapotranspirationData>>(
+                    _temperatureData1970_2000List, _precipitationData1970_2000List,
+                    _evapotranspirationData1970_2000List);
+            SlcListsGroupedByTimeFrame[TimeFrame.NineteenEightyToTwoThousandTen] =
+                new Tuple<List<TemperatureData>, List<PrecipitationData>, List<EvapotranspirationData>>(
+                    _temperatureData1980_2010List, _precipitationData1980_2010List,
+                    _evapotranspirationData1980_2010List);
+            SlcListsGroupedByTimeFrame[TimeFrame.NineteenNinetyToTwoThousandSeventeen] =
+                new Tuple<List<TemperatureData>, List<PrecipitationData>, List<EvapotranspirationData>>(
+                    _temperatureData1990_2017List, _precipitationData1990_2017List,
+                    _evapotranspirationData1990_2017List);
         }
+
         private void ReadFiles()
         {
             //add the timeframe lists to the dictionary
@@ -287,14 +304,20 @@ namespace H.Core.Providers
 
             //read the info from file
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
-            var fileLines1950 = CsvResourceReader.GetFileLines(CsvResourceNames.ClimateNormalsByPolygon1950_1980).Skip(1).ToList();
-            var fileLines1960 = CsvResourceReader.GetFileLines(CsvResourceNames.ClimateNormalsByPolygon1960_1990).Skip(1).ToList();
-            var fileLines1970 = CsvResourceReader.GetFileLines(CsvResourceNames.ClimateNormalsByPolygon1970_2000).Skip(1).ToList();
-            var fileLines1980 = CsvResourceReader.GetFileLines(CsvResourceNames.ClimateNormalsByPolygon1980_2010).Skip(1).ToList();
-            var fileLines1990 = CsvResourceReader.GetFileLines(CsvResourceNames.ClimateNormalsByPolygon1990_2017).Skip(1).ToList();
+            var fileLines1950 = CsvResourceReader.GetFileLines(CsvResourceNames.ClimateNormalsByPolygon1950_1980)
+                .Skip(1).ToList();
+            var fileLines1960 = CsvResourceReader.GetFileLines(CsvResourceNames.ClimateNormalsByPolygon1960_1990)
+                .Skip(1).ToList();
+            var fileLines1970 = CsvResourceReader.GetFileLines(CsvResourceNames.ClimateNormalsByPolygon1970_2000)
+                .Skip(1).ToList();
+            var fileLines1980 = CsvResourceReader.GetFileLines(CsvResourceNames.ClimateNormalsByPolygon1980_2010)
+                .Skip(1).ToList();
+            var fileLines1990 = CsvResourceReader.GetFileLines(CsvResourceNames.ClimateNormalsByPolygon1990_2017)
+                .Skip(1).ToList();
 
             // the old file to read
-            var originalSLCFileLines = CsvResourceReader.GetFileLines(CsvResourceNames.ClimateNormalsByPolygon).Skip(1).ToList();
+            var originalSLCFileLines = CsvResourceReader.GetFileLines(CsvResourceNames.ClimateNormalsByPolygon).Skip(1)
+                .ToList();
 
             //the intermediate climate data for each timeframe
             var projections1950 = MakeProjections(cultureInfo, fileLines1950);
@@ -336,16 +359,18 @@ namespace H.Core.Providers
             //populate the original lists related to the old normals file
             PopulateOriginalClimateLists(projectionsGroupedByPolygonId);
 
-            this.IsInitialized = true;
+            IsInitialized = true;
 
             Trace.TraceInformation($"{nameof(SlcClimateDataProvider)} has been initialized.");
         }
 
         /// <summary>
-        /// populate the lists of normals (temperature, precipitation, evapotranspiration) connected to the old climate file not bound by a specific timeframe
+        ///     populate the lists of normals (temperature, precipitation, evapotranspiration) connected to the old climate file
+        ///     not bound by a specific timeframe
         /// </summary>
         /// <param name="projectionsGroupedByPolygonId">intermediate climate data grouped by polygon id</param>
-        private void PopulateOriginalClimateLists(IEnumerable<IGrouping<int, SlcIntermediateClimateData>> projectionsGroupedByPolygonId)
+        private void PopulateOriginalClimateLists(
+            IEnumerable<IGrouping<int, SlcIntermediateClimateData>> projectionsGroupedByPolygonId)
         {
             foreach (var grouping in projectionsGroupedByPolygonId)
             {
@@ -415,11 +440,13 @@ namespace H.Core.Providers
         }
 
         /// <summary>
-        /// Create the Temp, precipitation and evapotranspiration data for each list of each timeframe. These are the climate normals
+        ///     Create the Temp, precipitation and evapotranspiration data for each list of each timeframe. These are the climate
+        ///     normals
         /// </summary>
         /// <param name="timeFrame">time frame to determine which list to populate</param>
         /// <param name="projectionsGroupedByPolygonId">list of intermediate climate data grouped by polygonId</param>
-        private void PopulateListsByTimeFrame(TimeFrame timeFrame, IEnumerable<IGrouping<int, SlcIntermediateClimateData>> projectionsGroupedByPolygonId)
+        private void PopulateListsByTimeFrame(TimeFrame timeFrame,
+            IEnumerable<IGrouping<int, SlcIntermediateClimateData>> projectionsGroupedByPolygonId)
         {
             foreach (var grouping in projectionsGroupedByPolygonId)
             {
@@ -488,39 +515,41 @@ namespace H.Core.Providers
         }
 
         /// <summary>
-        /// Create a 'list' of intermediate climate data used to create the final climate data
+        ///     Create a 'list' of intermediate climate data used to create the final climate data
         /// </summary>
         /// <param name="cultureInfo">the culture info</param>
         /// <param name="fileLines">file contents read from resources</param>
         /// <returns>IEnumerable of the intermediate climate data</returns>
-        private IEnumerable<SlcIntermediateClimateData> MakeProjections(System.Globalization.CultureInfo cultureInfo, List<string[]> fileLines)
+        private IEnumerable<SlcIntermediateClimateData> MakeProjections(CultureInfo cultureInfo,
+            List<string[]> fileLines)
         {
             return from line in fileLines
-                   select new SlcIntermediateClimateData
-                   {
-                       PolygonId = int.Parse(line.ElementAt(0), cultureInfo),
-                       Month = int.Parse(line.ElementAt(1), cultureInfo),
-                       AverageTemperature = double.Parse(line.ElementAt(2), cultureInfo),
-                       Precipitation = double.Parse(line.ElementAt(3), cultureInfo),
-                       PotentialEvapotranspiration = double.Parse(line.ElementAt(4), cultureInfo)
-                   };
+                select new SlcIntermediateClimateData
+                {
+                    PolygonId = int.Parse(line.ElementAt(0), cultureInfo),
+                    Month = int.Parse(line.ElementAt(1), cultureInfo),
+                    AverageTemperature = double.Parse(line.ElementAt(2), cultureInfo),
+                    Precipitation = double.Parse(line.ElementAt(3), cultureInfo),
+                    PotentialEvapotranspiration = double.Parse(line.ElementAt(4), cultureInfo)
+                };
         }
 
         //this has to be different than MakeProjections() b/c the original SLC file has 2 extra datapoints called Tmax and Tmin which are located
         //in column 2 and 3 thus offsetting the relevant data that the original file has with the new files from 1950-2017
-        private IEnumerable<SlcIntermediateClimateData> MakeOldProjections(System.Globalization.CultureInfo cultureInfo, List<string[]> originalSLCFileLines)
+        private IEnumerable<SlcIntermediateClimateData> MakeOldProjections(CultureInfo cultureInfo,
+            List<string[]> originalSLCFileLines)
         {
             return from line in originalSLCFileLines
-                   select new SlcIntermediateClimateData
-                   {
-                       PolygonId = int.Parse(line.ElementAt(0), cultureInfo),
-                       Month = int.Parse(line.ElementAt(1), cultureInfo),
-                       AverageTemperature = double.Parse(line.ElementAt(4), cultureInfo),
-                       Precipitation = double.Parse(line.ElementAt(5), cultureInfo),
-                       PotentialEvapotranspiration = double.Parse(line.ElementAt(6), cultureInfo)
-                   };
-
+                select new SlcIntermediateClimateData
+                {
+                    PolygonId = int.Parse(line.ElementAt(0), cultureInfo),
+                    Month = int.Parse(line.ElementAt(1), cultureInfo),
+                    AverageTemperature = double.Parse(line.ElementAt(4), cultureInfo),
+                    Precipitation = double.Parse(line.ElementAt(5), cultureInfo),
+                    PotentialEvapotranspiration = double.Parse(line.ElementAt(6), cultureInfo)
+                };
         }
+
         #endregion
     }
 }

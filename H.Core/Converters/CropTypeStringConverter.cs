@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using H.Core.Enumerations;
-using H.Core.Properties;
 
 namespace H.Core.Converters
 {
@@ -20,12 +18,9 @@ namespace H.Core.Converters
         {
             CropType result;
 
-            if (Cache.ContainsKey(input))
-            {
-                return Cache[input];
-            }
+            if (Cache.ContainsKey(input)) return Cache[input];
 
-            switch (this.GetLettersAsLowerCase(input))
+            switch (GetLettersAsLowerCase(input))
             {
                 case "alfalfaseed":
                     result = CropType.AlfalfaSeed;
@@ -840,19 +835,20 @@ namespace H.Core.Converters
                     break;
 
                 default:
-                    {
-                        Trace.TraceError($"{nameof(CropTypeStringConverter)}: Crop type '{input}' not mapped, returning default value.");
+                {
+                    Trace.TraceError(
+                        $"{nameof(CropTypeStringConverter)}: Crop type '{input}' not mapped, returning default value.");
 
-                        result = CropType.NotSelected;
+                    result = CropType.NotSelected;
 
-                        break;
-                    }
+                    break;
+                }
             }
 
             Cache.Add(input, result);
 
             return result;
-        } 
+        }
 
         #endregion
     }

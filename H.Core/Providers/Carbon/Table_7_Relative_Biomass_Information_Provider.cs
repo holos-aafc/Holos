@@ -16,15 +16,15 @@ using H.Infrastructure;
 namespace H.Core.Providers.Carbon
 {
     /// <summary>
-    /// This implements multiple tables.
-    /// <para>Table 7a: Relative biomass allocation coefficients for different crops in the Holos model.</para>
-    /// <para>Table 7b: Relative biomass lignin and nitrogen contents</para>
+    ///     This implements multiple tables.
+    ///     <para>Table 7a: Relative biomass allocation coefficients for different crops in the Holos model.</para>
+    ///     <para>Table 7b: Relative biomass lignin and nitrogen contents</para>
     /// </summary>
     public class Table_7_Relative_Biomass_Information_Provider : IResidueDataProvider
     {
         #region Fields
 
-        private List<Table_7_Relative_Biomass_Information_Data> _data;
+        private readonly List<Table_7_Relative_Biomass_Information_Data> _data;
 
         #endregion
 
@@ -33,12 +33,8 @@ namespace H.Core.Providers.Carbon
         public Table_7_Relative_Biomass_Information_Provider()
         {
             HTraceListener.AddTraceListener();
-            _data = this.GetData().ToList();
+            _data = GetData().ToList();
         }
-
-        #endregion
-
-        #region Properties
 
         #endregion
 
@@ -49,16 +45,13 @@ namespace H.Core.Providers.Carbon
             var result = new Table_46_Biogas_Methane_Production_CropResidue_Data();
 
             var data = _data.FirstOrDefault(x => x.CropType == cropType);
-            if (data != null)
-            {
-                result = data.BiomethaneData;
-            }
+            if (data != null) result = data.BiomethaneData;
 
             return result;
         }
 
         /// <summary>
-        /// Get residue values for a specified set of crop parameters
+        ///     Get residue values for a specified set of crop parameters
         /// </summary>
         /// <param name="irrigationType">Irrigation</param>
         /// <param name="totalWaterInputs">The total water from irrigation and precipitation (mm)</param>
@@ -67,53 +60,40 @@ namespace H.Core.Providers.Carbon
         /// <param name="province"></param>
         /// <returns></returns>
         public Table_7_Relative_Biomass_Information_Data GetResidueData(
-            IrrigationType irrigationType, 
-            double totalWaterInputs, 
-            CropType cropType, 
-            SoilFunctionalCategory soilFunctionalCategory, 
+            IrrigationType irrigationType,
+            double totalWaterInputs,
+            CropType cropType,
+            SoilFunctionalCategory soilFunctionalCategory,
             Province province)
         {
             if (cropType == CropType.NotSelected || cropType.IsFallow())
-            {
                 return new Table_7_Relative_Biomass_Information_Data();
-            }
 
             if (cropType.IsGrassland())
-            {
                 // Only have values for grassland (native). If type is grassland (broken) or grassland (seeded), return values for grassland (native)
                 cropType = CropType.RangelandNative;
-            }
 
             var byCropType = _data.Where(x => x.CropType == cropType).ToList();
             if (byCropType.Any() == false)
             {
-                Trace.TraceError($"{nameof(Table_7_Relative_Biomass_Information_Provider)}.{nameof(this.GetResidueData)}: unknown crop type: '{cropType.GetDescription()}'. Returning default values.");
+                Trace.TraceError(
+                    $"{nameof(Table_7_Relative_Biomass_Information_Provider)}.{nameof(GetResidueData)}: unknown crop type: '{cropType.GetDescription()}'. Returning default values.");
 
                 return new Table_7_Relative_Biomass_Information_Data();
             }
 
-            if (byCropType.Count() == 1)
-            {
-                return byCropType.First();
-            }
+            if (byCropType.Count() == 1) return byCropType.First();
 
             var firstItem = byCropType.First();
             if (firstItem.IrrigationUpperRangeLimit > 0)
-            {
-                return byCropType.Single(x => totalWaterInputs >= x.IrrigationLowerRangeLimit && totalWaterInputs < x.IrrigationUpperRangeLimit);
-            }
+                return byCropType.Single(x =>
+                    totalWaterInputs >= x.IrrigationLowerRangeLimit && totalWaterInputs < x.IrrigationUpperRangeLimit);
 
-            if (firstItem.IrrigationType != null)
-            {
-                return byCropType.Single(x => x.IrrigationType == irrigationType);
-            }
+            if (firstItem.IrrigationType != null) return byCropType.Single(x => x.IrrigationType == irrigationType);
 
             // Potato is a special case
             var byProvince = byCropType.SingleOrDefault(x => x.Province != null && x.Province == province);
-            if (byProvince != null)
-            {
-                return byProvince;
-            }
+            if (byProvince != null) return byProvince;
 
             // Return the 'Canada' entry
             return byCropType.SingleOrDefault(residueData => residueData.Province == null);
@@ -132,32 +112,23 @@ namespace H.Core.Providers.Carbon
                 var residueData = new Table_7_Relative_Biomass_Information_Data();
 
                 var cropTypeColumn = line[1];
-                if (string.IsNullOrWhiteSpace(cropTypeColumn))
-                {
-                    continue;
-                }
+                if (string.IsNullOrWhiteSpace(cropTypeColumn)) continue;
 
                 residueData.CropType = cropTypeStringConverter.Convert(cropTypeColumn);
-                if (residueData.CropType == CropType.NotSelected)
-                {
-                    continue;
-                }
+                if (residueData.CropType == CropType.NotSelected) continue;
 
                 var irrigationTypeColumn = line[2].Trim();
                 if (irrigationTypeColumn.Equals("rainfed", StringComparison.InvariantCultureIgnoreCase))
-                {
                     residueData.IrrigationType = IrrigationType.RainFed;
-                }
 
                 if (irrigationTypeColumn.Equals("irrigated", StringComparison.InvariantCultureIgnoreCase))
-                {
                     residueData.IrrigationType = IrrigationType.Irrigated;
-                }
 
                 if (irrigationTypeColumn.Contains("<"))
                 {
                     // Lower range
-                    var irrigationString = irrigationTypeColumn.Replace("<", string.Empty).Replace("mm", String.Empty).Trim();
+                    var irrigationString = irrigationTypeColumn.Replace("<", string.Empty).Replace("mm", string.Empty)
+                        .Trim();
                     var upperRangeLimit = double.Parse(irrigationString, cultureInfo);
 
                     residueData.IrrigationLowerRangeLimit = 0;
@@ -167,7 +138,8 @@ namespace H.Core.Providers.Carbon
                 if (irrigationTypeColumn.Contains(">"))
                 {
                     // Upper range
-                    var irrigationString = irrigationTypeColumn.Replace(">", string.Empty).Replace("mm", String.Empty).Trim();
+                    var irrigationString = irrigationTypeColumn.Replace(">", string.Empty).Replace("mm", string.Empty)
+                        .Trim();
                     var lowerRangeLimit = double.Parse(irrigationString, cultureInfo);
 
                     residueData.IrrigationLowerRangeLimit = lowerRangeLimit;
@@ -177,7 +149,8 @@ namespace H.Core.Providers.Carbon
                 if (irrigationTypeColumn.Contains("-"))
                 {
                     // Irrigation is a range
-                    var tokens = irrigationTypeColumn.Replace("mm", string.Empty).Split(new[] { '-' }).Select(x => x.Trim()).ToArray();
+                    var tokens = irrigationTypeColumn.Replace("mm", string.Empty).Split('-').Select(x => x.Trim())
+                        .ToArray();
                     var lowerRange = double.Parse(tokens[0], cultureInfo);
                     var upperRange = double.Parse(tokens[1], cultureInfo);
 
@@ -219,27 +192,19 @@ namespace H.Core.Providers.Carbon
 
                 var carbonInProductColumn = line[5];
                 if (string.IsNullOrWhiteSpace(carbonInProductColumn) == false)
-                {
                     residueData.RelativeBiomassProduct = double.Parse(carbonInProductColumn, cultureInfo);
-                }
 
                 var carbonInStrawColumn = line[6];
                 if (string.IsNullOrWhiteSpace(carbonInStrawColumn) == false)
-                {
                     residueData.RelativeBiomassStraw = double.Parse(carbonInStrawColumn, cultureInfo);
-                }
 
                 var carbonInRootsColumn = line[7];
                 if (string.IsNullOrWhiteSpace(carbonInRootsColumn) == false)
-                {
                     residueData.RelativeBiomassRoot = double.Parse(carbonInRootsColumn, cultureInfo);
-                }
 
                 var carbonInExudateColumn = line[8];
                 if (string.IsNullOrWhiteSpace(carbonInExudateColumn) == false)
-                {
                     residueData.RelativeBiomassExtraroot = double.Parse(carbonInExudateColumn, cultureInfo);
-                }
 
                 #endregion
 
@@ -247,15 +212,11 @@ namespace H.Core.Providers.Carbon
 
                 var nitrogenInProductColumn = line[11];
                 if (string.IsNullOrWhiteSpace(nitrogenInProductColumn) == false)
-                {
                     residueData.NitrogenContentProduct = double.Parse(nitrogenInProductColumn, cultureInfo);
-                }
 
                 var nitrogenInStrawColumn = line[12];
                 if (string.IsNullOrWhiteSpace(nitrogenInStrawColumn) == false)
-                {
                     residueData.NitrogenContentStraw = double.Parse(nitrogenInStrawColumn, cultureInfo);
-                }
 
                 var nitrogenInRootsColumn = line[13];
                 if (string.IsNullOrWhiteSpace(nitrogenInRootsColumn) == false)
@@ -268,11 +229,9 @@ namespace H.Core.Providers.Carbon
 
                 #region Lignin content parsing
 
-                string ligninContentColumn = line[16];
+                var ligninContentColumn = line[16];
                 if (!string.IsNullOrWhiteSpace(ligninContentColumn))
-                {
                     residueData.LigninContent = double.Parse(ligninContentColumn, cultureInfo);
-                }
 
                 #endregion
 
@@ -282,42 +241,31 @@ namespace H.Core.Providers.Carbon
 
                 var biomethanePotential = line[17];
                 if (!string.IsNullOrWhiteSpace(biomethanePotential))
-                {
                     residueData.BiomethaneData.BioMethanePotential = double.Parse(biomethanePotential, cultureInfo);
-                }
 
                 var methaneFraction = line[18];
                 if (!string.IsNullOrWhiteSpace(methaneFraction))
-                {
                     residueData.BiomethaneData.MethaneFraction = double.Parse(methaneFraction, cultureInfo);
-                }
 
                 var volatileSolids = line[19];
                 if (!string.IsNullOrWhiteSpace(volatileSolids))
-                {
                     residueData.BiomethaneData.VolatileSolids = double.Parse(volatileSolids, cultureInfo);
-                }
 
                 var totalSolids = line[20];
                 if (!string.IsNullOrWhiteSpace(totalSolids))
-                {
                     residueData.BiomethaneData.TotalSolids = double.Parse(totalSolids, cultureInfo);
-                }
 
                 var totalNitrogen = line[21];
                 if (!string.IsNullOrWhiteSpace(totalNitrogen))
-                {
                     residueData.BiomethaneData.TotalNitrogen = double.Parse(totalNitrogen, cultureInfo);
-                }
 
                 #endregion
-
 
 
                 yield return residueData;
             }
         }
 
-        #endregion      
+        #endregion
     }
 }

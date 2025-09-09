@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using H.Core.Enumerations;
 using H.Infrastructure;
 
@@ -12,6 +9,47 @@ namespace H.Core.Providers.Economics
 {
     public class CropEconomicData : ModelBase
     {
+        #region Constructors
+
+        public CropEconomicData()
+        {
+            FixedCostHandled = false;
+
+
+            //this.PropertiesUserCanUpdate = new List<string>()
+            //{
+            //    nameof(ExpectedMarketPrice),
+            //}.Concat(this.VariableProperties).ToList();
+
+            PropertyChanged -= OnPropertyChanged;
+            PropertyChanged += OnPropertyChanged;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void SetFixedCostByMeasurementSystem(MeasurementSystemType measurementSystem, double fixedCost)
+        {
+            if (measurementSystem == MeasurementSystemType.Metric)
+                TotalFixedCostPerUnit = fixedCost * AcresPerHectare;
+            else
+                TotalFixedCostPerUnit = fixedCost;
+        }
+
+        #endregion
+
+        #region Event Handlers
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (sender is CropEconomicData cropEconomicData)
+            {
+            }
+        }
+
+        #endregion
+
         #region Fields
 
         private double _expectedMarketPrice;
@@ -68,24 +106,6 @@ namespace H.Core.Providers.Economics
 
         #endregion
 
-        #region Constructors
-
-        public CropEconomicData()
-        {
-            this.FixedCostHandled = false;
-
-
-            //this.PropertiesUserCanUpdate = new List<string>()
-            //{
-            //    nameof(ExpectedMarketPrice),
-            //}.Concat(this.VariableProperties).ToList();
-
-            this.PropertyChanged -= OnPropertyChanged;
-            this.PropertyChanged += OnPropertyChanged;
-        }
-
-        #endregion
-
         #region Properties
 
         public string DataSourceUrl
@@ -107,47 +127,55 @@ namespace H.Core.Providers.Economics
         }
 
         /// <summary>
-        /// bu, lb, or t the unit associated with <see cref="ExpectedMarketPrice"/> <see cref="ExpectedYieldPerAcre"/> <see cref="BreakEvenYield"/>
-        /// all other costs are $/acre
+        ///     bu, lb, or t the unit associated with <see cref="ExpectedMarketPrice" /> <see cref="ExpectedYieldPerAcre" />
+        ///     <see cref="BreakEvenYield" />
+        ///     all other costs are $/acre
         /// </summary>
         public EconomicMeasurementUnits Unit
         {
             get => _unit;
             set => SetProperty(ref _unit, value);
         }
+
         public double CropSalesPerAcre
         {
             get => _cropSalesPerAcre;
             set => SetProperty(ref _cropSalesPerAcre, value);
         }
+
         public string FertilizerBlend
         {
             get => _fertilizerBlend;
             set => SetProperty(ref _fertilizerBlend, value);
         }
+
         public double PumpingCosts
         {
             get => _pumpingCosts;
             set => SetProperty(ref _pumpingCosts, value);
         }
+
         public double TotalCost
         {
             get => _totalCost;
             set => SetProperty(ref _totalCost, value);
         }
+
         /// <summary>
-        /// amount a particular crop contributes to fixed costs and return to management and equity.
+        ///     amount a particular crop contributes to fixed costs and return to management and equity.
         /// </summary>
         public double ContributionMargin
         {
             get => _contributionMargin;
             set => SetProperty(ref _contributionMargin, value);
         }
+
         public double TotalCostPerUnit
         {
             get => _totalCostPerUnit;
             set => SetProperty(ref _totalCostPerUnit, value);
         }
+
         public double BreakEvenYield
         {
             get => _breakEvenYield;
@@ -155,7 +183,7 @@ namespace H.Core.Providers.Economics
         }
 
         /// <summary>
-        /// Dollars per unit (lb, bu, t)
+        ///     Dollars per unit (lb, bu, t)
         /// </summary>
         public double ExpectedMarketPrice
         {
@@ -164,7 +192,7 @@ namespace H.Core.Providers.Economics
         }
 
         /// <summary>
-        /// The CropType that we have economic data for on file
+        ///     The CropType that we have economic data for on file
         /// </summary>
         public CropType CropType
         {
@@ -173,7 +201,7 @@ namespace H.Core.Providers.Economics
         }
 
         /// <summary>
-        /// The CropType of the encapsulating CropViewItem.
+        ///     The CropType of the encapsulating CropViewItem.
         /// </summary>
         public CropType ViewItemCropType
         {
@@ -266,6 +294,7 @@ namespace H.Core.Providers.Economics
             get => _operatingInterest;
             set => SetProperty(ref _operatingInterest, value);
         }
+
         public Province Province
         {
             get => _province;
@@ -304,7 +333,6 @@ namespace H.Core.Providers.Economics
 
         public List<string> PropertiesUserCanUpdate { get; }
 
-        
 
         public bool IsUserDefined
         {
@@ -318,7 +346,7 @@ namespace H.Core.Providers.Economics
 
         public void SetUserDefinedVariableCostPerUnit()
         {
-            var variableProperties = new List<string>()
+            var variableProperties = new List<string>
             {
                 nameof(SeedCleaningAndTreatment),
                 nameof(Fertilizer),
@@ -331,13 +359,13 @@ namespace H.Core.Providers.Economics
                 nameof(CustomWork),
                 nameof(Labour),
                 nameof(Utilities),
-                nameof(OperatingInterest),
+                nameof(OperatingInterest)
             };
 
             var props = GetType().GetProperties().Where(propInfo => variableProperties.Contains(propInfo.Name));
             var numbers = props.Select(prop => (double)prop.GetValue(this));
             var sum = numbers.Sum();
-            this.TotalVariableCostPerUnit = sum;
+            TotalVariableCostPerUnit = sum;
         }
 
         public void SetUserDefinedFixedCostPerUnit(MeasurementSystemType measurementSystem)
@@ -345,53 +373,58 @@ namespace H.Core.Providers.Economics
             switch (Province)
             {
                 case Province.Alberta:
-                    switch (this.SoilFunctionalCategory)
+                    switch (SoilFunctionalCategory)
                     {
-                        case SoilFunctionalCategory.Black when this.ViewItemCropType.IsAnnual() && !this.ViewItemCropType.IsSilageCrop():
-                            this.SetFixedCostByMeasurementSystem(measurementSystem, AlbertaBlackCropFixedCost);
+                        case SoilFunctionalCategory.Black
+                            when ViewItemCropType.IsAnnual() && !ViewItemCropType.IsSilageCrop():
+                            SetFixedCostByMeasurementSystem(measurementSystem, AlbertaBlackCropFixedCost);
                             break;
                         case SoilFunctionalCategory.Black:
-                            this.SetFixedCostByMeasurementSystem(measurementSystem, AlbertaBlackForageFixedCost);
+                            SetFixedCostByMeasurementSystem(measurementSystem, AlbertaBlackForageFixedCost);
                             break;
-                        case SoilFunctionalCategory.Brown when this.ViewItemCropType.IsAnnual() && !this.ViewItemCropType.IsSilageCrop():
-                            this.SetFixedCostByMeasurementSystem(measurementSystem, AlbertaBrownCropFixedCost);
+                        case SoilFunctionalCategory.Brown
+                            when ViewItemCropType.IsAnnual() && !ViewItemCropType.IsSilageCrop():
+                            SetFixedCostByMeasurementSystem(measurementSystem, AlbertaBrownCropFixedCost);
                             break;
                         case SoilFunctionalCategory.Brown:
-                            this.SetFixedCostByMeasurementSystem(measurementSystem, AlbertaBrownForageFixedCost);
+                            SetFixedCostByMeasurementSystem(measurementSystem, AlbertaBrownForageFixedCost);
                             break;
-                        case SoilFunctionalCategory.DarkBrown when this.ViewItemCropType.IsAnnual() && !this.ViewItemCropType.IsSilageCrop():
-                            this.SetFixedCostByMeasurementSystem(measurementSystem, AlbertaDarkBrownCropFixedCost);
+                        case SoilFunctionalCategory.DarkBrown
+                            when ViewItemCropType.IsAnnual() && !ViewItemCropType.IsSilageCrop():
+                            SetFixedCostByMeasurementSystem(measurementSystem, AlbertaDarkBrownCropFixedCost);
                             break;
                         case SoilFunctionalCategory.DarkBrown:
-                            this.SetFixedCostByMeasurementSystem(measurementSystem, AlbertaDarkBrownForageFixedCost);
+                            SetFixedCostByMeasurementSystem(measurementSystem, AlbertaDarkBrownForageFixedCost);
                             break;
 
                         default:
-                            Trace.TraceError($"{nameof(CropEconomicData)}.{nameof(SetUserDefinedFixedCostPerUnit)}: '{this.SoilFunctionalCategory}' not handled for {this.Province}. Setting TotalFixed cost to 0.");
+                            Trace.TraceError(
+                                $"{nameof(CropEconomicData)}.{nameof(SetUserDefinedFixedCostPerUnit)}: '{SoilFunctionalCategory}' not handled for {Province}. Setting TotalFixed cost to 0.");
                             break;
                     }
 
                     break;
 
                 case Province.Manitoba:
-                    this.SetFixedCostByMeasurementSystem(measurementSystem, ManitobaAvgCropFixedCost);
+                    SetFixedCostByMeasurementSystem(measurementSystem, ManitobaAvgCropFixedCost);
                     break;
 
                 case Province.Saskatchewan:
                     switch (SoilFunctionalCategory)
                     {
                         case SoilFunctionalCategory.Black:
-                            this.SetFixedCostByMeasurementSystem(measurementSystem, SaskBlackAvgFixedCost);
+                            SetFixedCostByMeasurementSystem(measurementSystem, SaskBlackAvgFixedCost);
                             break;
                         case SoilFunctionalCategory.Brown:
-                            this.SetFixedCostByMeasurementSystem(measurementSystem, SaskBrownAvgFixedCost);
+                            SetFixedCostByMeasurementSystem(measurementSystem, SaskBrownAvgFixedCost);
                             break;
                         case SoilFunctionalCategory.DarkBrown:
-                            this.SetFixedCostByMeasurementSystem(measurementSystem, SaskDarkBrownAvgFixedCost);
+                            SetFixedCostByMeasurementSystem(measurementSystem, SaskDarkBrownAvgFixedCost);
                             break;
 
                         default:
-                            Trace.TraceError($"{nameof(CropEconomicData)}.{nameof(SetUserDefinedFixedCostPerUnit)}: '{this.SoilFunctionalCategory}' not handled for {this.Province}. Setting TotalFixed cost to 0.");
+                            Trace.TraceError(
+                                $"{nameof(CropEconomicData)}.{nameof(SetUserDefinedFixedCostPerUnit)}: '{SoilFunctionalCategory}' not handled for {Province}. Setting TotalFixed cost to 0.");
                             break;
                     }
 
@@ -399,37 +432,10 @@ namespace H.Core.Providers.Economics
 
                 //TODO: is there something else we can do to calculate FixedCosts for other provinces?
                 default:
-                    Trace.TraceError($"{nameof(CropEconomicData)}.{nameof(SetUserDefinedFixedCostPerUnit)}: cannot provide TotalFixedCostPerUnit for {this.Province}. Defaulting to 0");
-                    this.TotalFixedCostPerUnit = 0;
+                    Trace.TraceError(
+                        $"{nameof(CropEconomicData)}.{nameof(SetUserDefinedFixedCostPerUnit)}: cannot provide TotalFixedCostPerUnit for {Province}. Defaulting to 0");
+                    TotalFixedCostPerUnit = 0;
                     break;
-            }
-
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private void SetFixedCostByMeasurementSystem(MeasurementSystemType measurementSystem, double fixedCost)
-        {
-            if (measurementSystem == MeasurementSystemType.Metric)
-            {
-                this.TotalFixedCostPerUnit = fixedCost * AcresPerHectare;
-            }
-            else
-            {
-                this.TotalFixedCostPerUnit = fixedCost;
-            }
-        }
-
-        #endregion
-
-        #region Event Handlers
-
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (sender is CropEconomicData cropEconomicData)
-            {
             }
         }
 

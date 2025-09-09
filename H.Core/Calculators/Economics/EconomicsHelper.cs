@@ -10,19 +10,6 @@ namespace H.Core.Calculators.Economics
 {
     public class EconomicsHelper : UnitsOfMeasurementCalculator
     {
-        #region Fields
-
-        #endregion
-
-        #region Constructors
-
-        public EconomicsHelper()
-        {
-
-        }
-
-        #endregion
-
         #region Public Methods
 
         public void ConvertValuesToMetricIfNecessary(CropEconomicData economicData, Farm farm)
@@ -33,7 +20,7 @@ namespace H.Core.Calculators.Economics
             //we don't need to convert and this is just a safety catch incase this gets called incorrectly
             if (farm.MeasurementSystemType == MeasurementSystemType.Imperial || economicData.IsConverted) return;
 
-            var dollarsPerAcreProps = new List<string>()
+            var dollarsPerAcreProps = new List<string>
             {
                 nameof(economicData.CropSalesPerAcre),
                 nameof(economicData.SeedCleaningAndTreatment),
@@ -52,11 +39,10 @@ namespace H.Core.Calculators.Economics
                 nameof(economicData.PumpingCosts),
                 nameof(economicData.HerbicideCost),
                 nameof(economicData.TotalFixedCostPerUnit),
-                nameof(economicData.TotalVariableCostPerUnit),
+                nameof(economicData.TotalVariableCostPerUnit)
             };
 
             foreach (var prop in economicData.GetType().GetProperties())
-            {
                 //convert only certain values that are reported in $/acre originally
                 if (dollarsPerAcreProps.Contains(prop.Name))
                 {
@@ -64,7 +50,6 @@ namespace H.Core.Calculators.Economics
                     var convertedValue = currentValue * AcresPerHectare;
                     prop.SetValue(economicData, convertedValue);
                 }
-            }
 
             ConvertExpectedMarketPriceToMetricIfNecessary(economicData, farm);
             economicData.IsInitialized = true;
@@ -72,7 +57,7 @@ namespace H.Core.Calculators.Economics
         }
 
         /// <summary>
-        /// this can only apply to Expected Market Price since production costs are reported in $/acre
+        ///     this can only apply to Expected Market Price since production costs are reported in $/acre
         /// </summary>
         /// <param name="economicData">the current crop economic data</param>
         /// <param name="farm">the active farm</param>
@@ -83,16 +68,20 @@ namespace H.Core.Calculators.Economics
             switch (economicData.Unit)
             {
                 case EconomicMeasurementUnits.Bushel:
-                    economicData.ExpectedMarketPrice = this.ConvertMarketPriceFromDollarsPerBushelToDollarsPerKilogram(economicData);
+                    economicData.ExpectedMarketPrice =
+                        ConvertMarketPriceFromDollarsPerBushelToDollarsPerKilogram(economicData);
                     break;
                 case EconomicMeasurementUnits.Pound:
-                    economicData.ExpectedMarketPrice = this.ConvertMarketPriceFromDollarsPerPoundToDollarsPerKilogram(economicData);
+                    economicData.ExpectedMarketPrice =
+                        ConvertMarketPriceFromDollarsPerPoundToDollarsPerKilogram(economicData);
                     break;
                 case EconomicMeasurementUnits.Tonne:
-                    economicData.ExpectedMarketPrice = this.ConvertMarketPriceFromDollarsPerTonneToDollarsPerKilogram(economicData);
+                    economicData.ExpectedMarketPrice =
+                        ConvertMarketPriceFromDollarsPerTonneToDollarsPerKilogram(economicData);
                     break;
                 case EconomicMeasurementUnits.HundredWeight:
-                    economicData.ExpectedMarketPrice = ConvertMarketPriceFromDollarsPerHundredWeightToDollarsKilogram(economicData);
+                    economicData.ExpectedMarketPrice =
+                        ConvertMarketPriceFromDollarsPerHundredWeightToDollarsKilogram(economicData);
                     break;
                 case EconomicMeasurementUnits.None:
                     break;
@@ -106,40 +95,34 @@ namespace H.Core.Calculators.Economics
         private double ConvertMarketPriceFromDollarsPerHundredWeightToDollarsKilogram(CropEconomicData economicData)
         {
             if (economicData.Unit == EconomicMeasurementUnits.HundredWeight)
-            {
                 return economicData.ExpectedMarketPrice / KgPerHundredWeight;
-            }
 
             throw new Exception($"{economicData.Unit} is not of type {EconomicMeasurementUnits.HundredWeight}");
         }
+
         private double ConvertMarketPriceFromDollarsPerBushelToDollarsPerKilogram(CropEconomicData economicData)
         {
             if (economicData.Unit == EconomicMeasurementUnits.Bushel)
-            {
                 return ConvertMarketPriceFromDollarsPerBushelToDollarsPerTonne(economicData) / 1000;
-            }
 
             throw new Exception($"{economicData.Unit} is not of type {EconomicMeasurementUnits.Tonne}");
         }
+
         private double ConvertMarketPriceFromDollarsPerTonneToDollarsPerKilogram(CropEconomicData economicData)
         {
             if (economicData.Unit == EconomicMeasurementUnits.Tonne)
-            {
                 return economicData.ExpectedMarketPrice / KgPerTonne;
-            }
 
             throw new Exception($"{economicData.Unit} is not of type {EconomicMeasurementUnits.Tonne}");
         }
 
         private double ConvertMarketPriceFromDollarsPerPoundToDollarsPerKilogram(CropEconomicData economicData)
         {
-            if (economicData.Unit == EconomicMeasurementUnits.Pound)
-            {
-                return economicData.ExpectedMarketPrice * LbsPerKg;
-            }
+            if (economicData.Unit == EconomicMeasurementUnits.Pound) return economicData.ExpectedMarketPrice * LbsPerKg;
 
             throw new Exception($"{economicData.Unit} is not of type {EconomicMeasurementUnits.Pound}");
         }
+
         protected double ConvertMarketPriceFromDollarsPerBushelToDollarsPerTonne(CropEconomicData economicData)
         {
             if (economicData.Unit == EconomicMeasurementUnits.Bushel)

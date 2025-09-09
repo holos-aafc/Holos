@@ -1,6 +1,5 @@
 ﻿#region Imports
 
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Prism.Mvvm;
 
@@ -12,6 +11,17 @@ namespace H.Core.Models
     /// </summary>
     public class ApplicationData : BindableBase
     {
+        #region Constructors
+
+        public ApplicationData()
+        {
+            GlobalSettings = new GlobalSettings();
+            Farms = new ObservableCollection<Farm>();
+            DisplayUnitStrings = new DisplayUnitStrings();
+        }
+
+        #endregion
+
         #region Fields
 
         private GlobalSettings _globalSettings;
@@ -20,48 +30,25 @@ namespace H.Core.Models
 
         #endregion
 
-        #region Constructors
-
-        public ApplicationData()
-        {
-            this.GlobalSettings = new GlobalSettings();
-            this.Farms = new ObservableCollection<Farm>();
-            this.DisplayUnitStrings = new DisplayUnitStrings();
-        }
-
-        #endregion
-
         #region Properties
 
         public GlobalSettings GlobalSettings
         {
-            get { return _globalSettings; }
-            set { this.SetProperty(ref _globalSettings, value); }
+            get => _globalSettings;
+            set => SetProperty(ref _globalSettings, value);
         }
 
         public ObservableCollection<Farm> Farms
         {
-            get { return _farms; }
-            set { this.SetProperty(ref _farms, value); }
+            get => _farms;
+            set => SetProperty(ref _farms, value);
         }
 
         public DisplayUnitStrings DisplayUnitStrings
         {
-            get { return _displayDisplayUnitStrings; }
-            set { SetProperty(ref _displayDisplayUnitStrings, value); }
+            get => _displayDisplayUnitStrings;
+            set => SetProperty(ref _displayDisplayUnitStrings, value);
         }
-
-        #endregion
-
-        #region Public Methods
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
-
-        #region Event Handlers
 
         #endregion
     }

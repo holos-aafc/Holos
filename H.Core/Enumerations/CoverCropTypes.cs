@@ -2,7 +2,7 @@
 using H.Infrastructure;
 
 namespace H.Core.Enumerations
-{    
+{
     public enum CoverCropTypes
     {
         [LocalizedDescription("EnumOptionA", typeof(Resources))]

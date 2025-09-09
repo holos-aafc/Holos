@@ -3,21 +3,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using System.Windows.Navigation;
 using AutoMapper;
-using AutoMapper.Execution;
 using H.Core.Calculators.Economics;
 using H.Core.Calculators.Infrastructure;
 using H.Core.Calculators.Nitrogen;
-using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.Emissions.Results;
-using H.Core.Enumerations;
 using H.Core.Events;
 using H.Core.Models;
-using H.Core.Models.Animals;
-using H.Core.Models.Infrastructure;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models.Results;
 using H.Core.Providers;
@@ -29,81 +21,39 @@ using H.Core.Providers.Precipitation;
 using H.Core.Providers.Soil;
 using H.Core.Providers.Temperature;
 using H.Core.Services.Animals;
-using H.Core.Services.Initialization;
 using H.Core.Services.LandManagement;
-using H.Infrastructure;
+using Microsoft.Extensions.Logging.Abstractions;
 using Prism.Events;
 
 namespace H.Core.Services
 {
     public class FarmResultsService : IFarmResultsService
     {
-        #region Fields
-
-        private readonly IManureService _manureService;
-
-        private readonly IFieldComponentHelper _fieldComponentHelper = new FieldComponentHelper();
-        private readonly IAnimalComponentHelper _animalComponentHelper = new AnimalComponentHelper();
-        private readonly IAnaerobicDigestionComponentHelper _anaerobicDigestionComponentHelper = new AnaerobicDigestionComponentHelper();
-
-        private readonly IFieldResultsService _fieldResultsService;
-        private readonly IAnimalService _animalResultsService;
-        private readonly IADCalculator _adCalculator;
-
-        private readonly IMapper _farmMapper;
-        private readonly IMapper _defaultsMapper;
-        private readonly IMapper _detailsScreenCropViewItemMapper;
-        private readonly IMapper _dailyClimateDataMapper;
-        private readonly IMapper _soilDataMapper;
-        private readonly IMapper _customYieldDataMapper;
-        private readonly IMapper _climateDataMapper;
-        private readonly IMapper _geographicDataMapper;
-
-        private readonly IEventAggregator _eventAggregator;
-
-        private readonly EconomicsCalculator _economicsCalculator;
-        private IN2OEmissionFactorCalculator _n2OEmissionFactorCalculator;
-
-        #endregion
-
         #region Constructors
-        public FarmResultsService(IEventAggregator eventAggregator, IFieldResultsService fieldResultsService, IADCalculator adCalculator, IManureService manureService, IAnimalService animalService, IN2OEmissionFactorCalculator n2OEmissionFactorCalculator)
+
+        public FarmResultsService(IEventAggregator eventAggregator, IFieldResultsService fieldResultsService,
+            IADCalculator adCalculator, IManureService manureService, IAnimalService animalService,
+            IN2OEmissionFactorCalculator n2OEmissionFactorCalculator)
         {
             if (n2OEmissionFactorCalculator != null)
-            {
-                _n2OEmissionFactorCalculator = n2OEmissionFactorCalculator; 
-            }
+                _n2OEmissionFactorCalculator = n2OEmissionFactorCalculator;
             else
-            {
                 throw new ArgumentNullException(nameof(n2OEmissionFactorCalculator));
-            }
 
             if (animalService != null)
-            {
                 _animalResultsService = animalService;
-            }
             else
-            {
                 throw new ArgumentNullException(nameof(animalService));
-            }
 
             if (manureService != null)
-            {
                 _manureService = manureService;
-            }
             else
-            {
                 throw new ArgumentNullException(nameof(manureService));
-            }
 
             if (adCalculator != null)
-            {
                 _adCalculator = adCalculator;
-            }
             else
-            {
                 throw new ArgumentNullException(nameof(adCalculator));
-            }
 
             if (fieldResultsService != null)
             {
@@ -116,13 +66,9 @@ namespace H.Core.Services
             }
 
             if (eventAggregator != null)
-            {
                 _eventAggregator = eventAggregator;
-            }
             else
-            {
                 throw new ArgumentNullException(nameof(eventAggregator));
-            }
 
             #region Farm Mapping
 
@@ -144,7 +90,7 @@ namespace H.Core.Services
                 x.CreateMap<DefaultManureCompositionData, DefaultManureCompositionData>();
 
                 x.CreateMap<Diet, Diet>();
-            });
+            }, new NullLoggerFactory());
 
             _farmMapper = farmMapperConfiguration.CreateMapper();
 
@@ -152,7 +98,8 @@ namespace H.Core.Services
 
             #region Defaults
 
-            var defaultMapperConfiguration = new MapperConfiguration(x => { x.CreateMap<Defaults, Defaults>(); });
+            var defaultMapperConfiguration =
+                new MapperConfiguration(x => { x.CreateMap<Defaults, Defaults>(); }, new NullLoggerFactory());
 
             _defaultsMapper = defaultMapperConfiguration.CreateMapper();
 
@@ -160,10 +107,8 @@ namespace H.Core.Services
 
             #region Details Screen
 
-            var detailsScreenCropViewItemMapperConfiguration = new MapperConfiguration(x =>
-                {
-                    x.CreateMap<CropViewItem, CropViewItem>();
-                });
+            var detailsScreenCropViewItemMapperConfiguration =
+                new MapperConfiguration(x => { x.CreateMap<CropViewItem, CropViewItem>(); }, new NullLoggerFactory());
 
             _detailsScreenCropViewItemMapper = detailsScreenCropViewItemMapperConfiguration.CreateMapper();
 
@@ -179,14 +124,13 @@ namespace H.Core.Services
                 x.CreateMap<ClimateData, ClimateData>()
                     .ForMember(y => y.DailyClimateData, z => z.Ignore())
                     .ForMember(y => y.Guid, z => z.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _climateDataMapper = climateDataMapper.CreateMapper();
 
-            var dailyclimateDataMapper = new MapperConfiguration(x =>
-            {
-                x.CreateMap<DailyClimateData, DailyClimateData>();
-            });
+            var dailyclimateDataMapper =
+                new MapperConfiguration(x => { x.CreateMap<DailyClimateData, DailyClimateData>(); },
+                    new NullLoggerFactory());
 
             _dailyClimateDataMapper = dailyclimateDataMapper.CreateMapper();
 
@@ -201,21 +145,18 @@ namespace H.Core.Services
                     .ForMember(y => y.DefaultSoilData, z => z.Ignore())
                     .ForMember(y => y.CustomYieldData, z => z.Ignore())
                     .ForMember(y => y.Guid, z => z.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _geographicDataMapper = geographicDataMapper.CreateMapper();
 
-            var soilDataMapper = new MapperConfiguration(x =>
-            {
-                x.CreateMap<SoilData, SoilData>();
-            });
+            var soilDataMapper =
+                new MapperConfiguration(x => { x.CreateMap<SoilData, SoilData>(); }, new NullLoggerFactory());
 
             _soilDataMapper = soilDataMapper.CreateMapper();
 
-            var customYieldMapper = new MapperConfiguration(x =>
-            {
-                x.CreateMap<CustomUserYieldData, CustomUserYieldData>();
-            });
+            var customYieldMapper =
+                new MapperConfiguration(x => { x.CreateMap<CustomUserYieldData, CustomUserYieldData>(); },
+                    new NullLoggerFactory());
 
             _customYieldDataMapper = customYieldMapper.CreateMapper();
 
@@ -230,10 +171,40 @@ namespace H.Core.Services
 
         #endregion
 
+        #region Fields
+
+        private readonly IManureService _manureService;
+
+        private readonly IFieldComponentHelper _fieldComponentHelper = new FieldComponentHelper();
+        private readonly IAnimalComponentHelper _animalComponentHelper = new AnimalComponentHelper();
+
+        private readonly IAnaerobicDigestionComponentHelper _anaerobicDigestionComponentHelper =
+            new AnaerobicDigestionComponentHelper();
+
+        private readonly IFieldResultsService _fieldResultsService;
+        private readonly IAnimalService _animalResultsService;
+        private readonly IADCalculator _adCalculator;
+
+        private readonly IMapper _farmMapper;
+        private readonly IMapper _defaultsMapper;
+        private readonly IMapper _detailsScreenCropViewItemMapper;
+        private readonly IMapper _dailyClimateDataMapper;
+        private readonly IMapper _soilDataMapper;
+        private readonly IMapper _customYieldDataMapper;
+        private readonly IMapper _climateDataMapper;
+        private readonly IMapper _geographicDataMapper;
+
+        private readonly IEventAggregator _eventAggregator;
+
+        private readonly EconomicsCalculator _economicsCalculator;
+        private readonly IN2OEmissionFactorCalculator _n2OEmissionFactorCalculator;
+
+        #endregion
+
         #region Public Methods
 
         /// <summary>
-        /// Calculates final results for a farm.
+        ///     Calculates final results for a farm.
         /// </summary>
         public FarmEmissionResults CalculateFarmEmissionResults(Farm farm)
         {
@@ -241,17 +212,15 @@ namespace H.Core.Services
             farmResults.Farm = farm;
 
             if (farm.PolygonId == 0)
-            {
                 // Error
                 return farmResults;
-            }
 
-            Trace.TraceInformation($"{nameof(FarmResultsService)}.{nameof(CalculateFarmEmissionResults)}: calculating results for farm: '{farm.Name}'");
+            Trace.TraceInformation(
+                $"{nameof(FarmResultsService)}.{nameof(CalculateFarmEmissionResults)}: calculating results for farm: '{farm.Name}'");
 
             if (farm.Components.Any() == false)
-            {
-                Trace.TraceInformation($"{nameof(FarmResultsService)}.{nameof(CalculateFarmEmissionResults)}: no components for farm: '{farm.Name}' found.");
-            }
+                Trace.TraceInformation(
+                    $"{nameof(FarmResultsService)}.{nameof(CalculateFarmEmissionResults)}: no components for farm: '{farm.Name}' found.");
 
             // Field results will use animal results to calculate indirect emissions from land applied manure. We will need to reset the animal component calculation state here.
             farm.ResetAnimalResults();
@@ -263,22 +232,24 @@ namespace H.Core.Services
 
             //var a = farmResults.GetDailyPrint();
 
-            farmResults.AnaerobicDigestorResults.AddRange(this.CalculateAdResults(farm, animalResults.ToList()));
+            farmResults.AnaerobicDigestorResults.AddRange(CalculateAdResults(farm, animalResults.ToList()));
 
-            farmResults.FinalFieldResultViewItems.AddRange(this.CalculateFieldResults(farm));
+            farmResults.FinalFieldResultViewItems.AddRange(CalculateFieldResults(farm));
 
             // Manure calculations - must be calculated after both field and animal results have been calculated.
             _manureService.Initialize(farm, animalResults);
 
-            farmResults.ManureExportResultsViewItems.AddRange(this.CalculateManureExportEmissions(farm));
+            farmResults.ManureExportResultsViewItems.AddRange(CalculateManureExportEmissions(farm));
 
             // Economics
             farmResults.EconomicResultsViewItems.AddRange(_economicsCalculator.CalculateCropResults(farmResults));
             farmResults.EconomicsProfit = _economicsCalculator.GetTotalProfit(farmResults.EconomicResultsViewItems);
 
-            _eventAggregator.GetEvent<FarmResultsCalculatedEvent>().Publish(new FarmResultsCalculatedEventArgs() { FarmEmissionResults = farmResults });
+            _eventAggregator.GetEvent<FarmResultsCalculatedEvent>().Publish(new FarmResultsCalculatedEventArgs
+                { FarmEmissionResults = farmResults });
 
-            Trace.TraceInformation($"{nameof(FarmResultsService)}.{nameof(CalculateFarmEmissionResults)}: results for farm: '{farm.Name}' calculated. {farmResults.ToString()}");
+            Trace.TraceInformation(
+                $"{nameof(FarmResultsService)}.{nameof(CalculateFarmEmissionResults)}: results for farm: '{farm.Name}' calculated. {farmResults}");
 
             return farmResults;
         }
@@ -291,14 +262,22 @@ namespace H.Core.Services
             {
                 var manureExportResultItem = new ManureExportResultViewItem
                 {
-                    DateOfExport = manureExportViewItem.DateOfExport,
+                    DateOfExport = manureExportViewItem.DateOfExport
                 };
 
-                manureExportResultItem.DirectN2ON = _n2OEmissionFactorCalculator.CalculateTotalDirectN2ONFromExportedManure(farm, manureExportViewItem);
-                manureExportResultItem.IndirectN2ON = _n2OEmissionFactorCalculator.CalculateTotalIndirectN2ONFromExportedManure(farm, manureExportViewItem);
-                manureExportResultItem.NitrateLeachedEmissions = _n2OEmissionFactorCalculator.CalculateTotalNitrateLeachedFromExportedManure(farm, manureExportViewItem);
-                manureExportResultItem.VolatilizationEmissions = _n2OEmissionFactorCalculator.CalculateVolatilizationEmissionsFromExportedManure(farm, manureExportViewItem);
-                manureExportResultItem.AdjustedVolatilizationEmissions = _n2OEmissionFactorCalculator.CalculateAdjustedNH3NLossFromManureExports(farm, manureExportViewItem);
+                manureExportResultItem.DirectN2ON =
+                    _n2OEmissionFactorCalculator.CalculateTotalDirectN2ONFromExportedManure(farm, manureExportViewItem);
+                manureExportResultItem.IndirectN2ON =
+                    _n2OEmissionFactorCalculator.CalculateTotalIndirectN2ONFromExportedManure(farm,
+                        manureExportViewItem);
+                manureExportResultItem.NitrateLeachedEmissions =
+                    _n2OEmissionFactorCalculator.CalculateTotalNitrateLeachedFromExportedManure(farm,
+                        manureExportViewItem);
+                manureExportResultItem.VolatilizationEmissions =
+                    _n2OEmissionFactorCalculator.CalculateVolatilizationEmissionsFromExportedManure(farm,
+                        manureExportViewItem);
+                manureExportResultItem.AdjustedVolatilizationEmissions =
+                    _n2OEmissionFactorCalculator.CalculateAdjustedNH3NLossFromManureExports(farm, manureExportViewItem);
 
                 result.Add(manureExportResultItem);
             }
@@ -321,22 +300,20 @@ namespace H.Core.Services
             return finalFieldResults;
         }
 
-        public List<DigestorDailyOutput> CalculateAdResults(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
+        public List<DigestorDailyOutput> CalculateAdResults(Farm farm,
+            List<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
         {
             return _adCalculator.CalculateResults(farm, animalComponentEmissionsResults);
         }
 
         /// <summary>
-        /// Calculates final results for a collection of farms.
+        ///     Calculates final results for a collection of farms.
         /// </summary>
         public List<FarmEmissionResults> CalculateFarmEmissionResults(IEnumerable<Farm> farms)
         {
             var result = new List<FarmEmissionResults>();
 
-            foreach (var farm in farms)
-            {
-                result.Add(this.CalculateFarmEmissionResults(farm));
-            }
+            foreach (var farm in farms) result.Add(CalculateFarmEmissionResults(farm));
 
             return result;
         }
@@ -345,10 +322,7 @@ namespace H.Core.Services
         {
             var result = new List<Farm>();
 
-            foreach (var farm in farms)
-            {
-                result.Add(this.ReplicateFarm(farm));
-            }
+            foreach (var farm in farms) result.Add(ReplicateFarm(farm));
 
             return result;
         }
@@ -369,7 +343,7 @@ namespace H.Core.Services
 
             #region Animal Components
 
-            foreach (var animalComponent in farm.AnimalComponents.Cast<AnimalComponentBase>())
+            foreach (var animalComponent in farm.AnimalComponents)
             {
                 var replicatedAnimalComponent = _animalComponentHelper.ReplicateAnimalComponent(animalComponent);
 
@@ -387,10 +361,10 @@ namespace H.Core.Services
 
                 var originalFieldGuid = fieldSystemComponent.Guid;
                 var replicatedFieldGuid = replicatedFieldSystemComponent.Guid;
-                foreach (var managementPeriod in farm.GetAllManagementPeriods().Where(x => x.HousingDetails.PastureLocation != null && x.HousingDetails.PastureLocation.Guid.Equals(originalFieldGuid)))
-                {
+                foreach (var managementPeriod in farm.GetAllManagementPeriods().Where(x =>
+                             x.HousingDetails.PastureLocation != null &&
+                             x.HousingDetails.PastureLocation.Guid.Equals(originalFieldGuid)))
                     managementPeriod.HousingDetails.PastureLocation.Guid = replicatedFieldGuid;
-                }
 
                 replicatedFarm.Components.Add(replicatedFieldSystemComponent);
             }
@@ -401,7 +375,9 @@ namespace H.Core.Services
 
             foreach (var anaerobicDigestionComponent in farm.AnaerobicDigestionComponents)
             {
-                var replicatedAnaerobicDigestionComponent = _anaerobicDigestionComponentHelper.Replicate(anaerobicDigestionComponent, replicatedFarm.AnimalComponents);
+                var replicatedAnaerobicDigestionComponent =
+                    _anaerobicDigestionComponentHelper.Replicate(anaerobicDigestionComponent,
+                        replicatedFarm.AnimalComponents);
 
                 replicatedFarm.Components.Add(replicatedAnaerobicDigestionComponent);
             }
@@ -410,12 +386,14 @@ namespace H.Core.Services
 
             #region StageStates
 
-            foreach (var fieldSystemDetailsStageState in farm.StageStates.OfType<FieldSystemDetailsStageState>().ToList())
+            foreach (var fieldSystemDetailsStageState in farm.StageStates.OfType<FieldSystemDetailsStageState>()
+                         .ToList())
             {
                 var stageState = new FieldSystemDetailsStageState();
                 replicatedFarm.StageStates.Add(stageState);
 
-                foreach (var detailsScreenViewCropViewItem in fieldSystemDetailsStageState.DetailsScreenViewCropViewItems)
+                foreach (var detailsScreenViewCropViewItem in fieldSystemDetailsStageState
+                             .DetailsScreenViewCropViewItems)
                 {
                     var viewItem = new CropViewItem();
 

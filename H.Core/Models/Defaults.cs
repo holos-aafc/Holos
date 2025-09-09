@@ -1,6 +1,5 @@
 ﻿#region Imports
 
-using System.Configuration;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Infrastructure;
@@ -14,6 +13,139 @@ namespace H.Core.Models
     /// </summary>
     public class Defaults : ModelBase
     {
+        #region Constructors
+
+        public Defaults()
+        {
+            TimeFrame = TimeFrame.TwoThousandToCurrent;
+
+            DefaultTillageTypeForFallow = TillageType.NoTill;
+
+            CarbonConcentration = CoreConstants.CarbonConcentration;
+            NumberOfYearsInCarRegionAverage = 3;
+
+            // Default location is Lethbridge, AB
+            Latitude = 49.69999;
+            Longitude = -112.81856;
+
+            EmergenceDay = 141;
+            RipeningDay = 197;
+            Variance = 300;
+
+            EmergenceDayForPerennials = 75;
+            RipeningDayForPerennnials = 300;
+            VarianceForPerennials = 1500;
+
+            Alfa = 0.7;
+            DecompositionMinimumTemperature = -3.78;
+            DecompositionMaximumTemperature = 30;
+            MoistureResponseFunctionAtSaturation = 0.42;
+            MoistureResponseFunctionAtWiltingPoint = 0.18;
+
+            // Annual crops
+            PercentageOfProductReturnedToSoilForAnnuals = 2;
+            PercentageOfStrawReturnedToSoilForAnnuals = 100;
+            PercentageOfRootsReturnedToSoilForAnnuals = 100;
+
+            // Silage crops
+            PercentageOfProductYieldReturnedToSoilForSilageCrops = 2;
+            PercentageOfRootsReturnedToSoilForSilageCrops = 100;
+
+            // Cover crops
+            PercentageOfProductYieldReturnedToSoilForCoverCrops = 100;
+            PercentageOfProductYieldReturnedToSoilForCoverCropsForage = 35;
+            PercentageOfProductYieldReturnedToSoilForCoverCropsProduce = 0;
+            PercentageOfStrawReturnedToSoilForCoverCrops = 100;
+            PercetageOfRootsReturnedToSoilForCoverCrops = 100;
+
+            // Root crops
+            PercentageOfProductReturnedToSoilForRootCrops = 0;
+            PercentageOfStrawReturnedToSoilForRootCrops = 100;
+
+            // Perennial crops
+            PercentageOfProductReturnedToSoilForPerennials = 35;
+            PercentageOfStrawReturnedToSoilForPerennials = 0;
+            PercentageOfRootsReturnedToSoilForPerennials = 100;
+            EstablishmentGrowthFactorPercentageForPerennials = 50;
+            DefaultSupplementalFeedingLossPercentage = 20;
+
+            // Rangeland
+            PercentageOfProductReturnedToSoilForRangelandDueToHarvestLoss = 35;
+            PercentageOfProductReturnedToSoilForRangelandDueToGrazingLoss = CoreConstants.ValueNotDetermined;
+            PercentageOfRootsReturnedToSoilForRangeland = 100;
+
+            // Fodder corn
+            PercentageOfProductReturnedToSoilForFodderCorn = 35;
+            PercentageOfRootsReturnedToSoilForFodderCorn = 100;
+
+            HumificationCoefficientAboveGround = 0.125;
+            HumificationCoefficientBelowGround = 0.3;
+            HumificationCoefficientManure = 0.31;
+
+            DecompositionRateConstantYoungPool = 0.8;
+            DecompositionRateConstantOldPool = 0.00605;
+
+            OldPoolCarbonN = 0.1; // 1/10
+            SlowCarbonN = 0.05; // 1/20
+            ActiveCarbonN = 0.025; // 1/40
+            NORatio = 0.1;
+            EmissionFactorForLeachingAndRunoff = 0.011; // Updated to IPCC 2019 value
+            EmissionFactorForVolatilization = 0.01;
+            CustomN2OEmissionFactor = 0.003;
+
+            FractionOfNLostByVolatilization = 0.21;
+            OtherAnimalsVolitilizationFraction = 0.2;
+            PoultryVolitilizationFraction = 0.4;
+
+            MicrobeDeath = 0.2;
+            Denitrification = 0.5;
+            FertilizerEfficiency = 0.5;
+            FTopo = 14.03;
+            DefaultNitrogenFixation = 0.7;
+
+            UseClimateParameterInsteadOfManagementFactor = true;
+
+            // Energy
+            ConversionOfElectricityToCo2 = 0.2;
+            ConversionOfGjOfDieselToCo2 = 70;
+            ConversionOfGjForHerbicideProduction = 5.8;
+            NitrogenFertilizerConversionFactor = 3.59;
+            PhosphorusFertilizerConversionFactor = 0.5699;
+            ConversionOfAreaIrrigated = 367;
+            ElectricityHousedBeef = 65.7;
+            ElectricityDairy = 968;
+            ElectricitySwine = 1.06;
+            ElectricityPoultry = 2.88;
+            LiquidManureSpreading = 0.0248;
+            SolidManureSpreading = 0.0248;
+
+            LiquidManureSwineConcentrationEnergy = 3.5;
+            LiquidManureDairyConcentrationEnergy = 3.4;
+            LiquidManurePoultryConcentrationEnergy = 6;
+
+            SolidManureSwineConcentrationEnergy = 8;
+            SolidManureDairyConcentrationEnergy = 5;
+            SolidManurePoultryConcentrationEnergy = 24.1;
+            SolidManureBeefConcentrationEnergy = 10;
+            SolidManureSheepConcentrationEnergy = 10;
+
+            // Previous run-in period of 5 years was too small and resulted in very high starting/equilibrium states. Using a higher value is needed.
+            DefaultRunInPeriod = 15;
+            RunInPeriodTillageType = TillageType.Reduced;
+            CarbonModellingStrategy = CarbonModellingStrategies.IPCCTier2;
+
+            // AD
+            DefaultBiodegradableFractionDairyManure = 0.025;
+            DefaultBiodegradableFractionGreenWaste = 0.024;
+            DefaultBiodegradableFractionSwineManure = 0.024;
+            DefaultBiodegradableFractionOtherManure = 0.550;
+
+            ResidueInputCalculationMethod = ResidueInputCalculationMethod.Default;
+            SoilDataAcquisitionMethod = SoilDataAcquisitionMethod.Default;
+        }
+
+        #endregion
+
         #region Fields
 
         private double _carbonConcentration;
@@ -103,7 +235,7 @@ namespace H.Core.Models
         private double _customN2OEmissionFactor;
 
         private bool _useCustomN2OEmissionFactor;
-        
+
         private EquilibriumCalculationStrategies _equilibriumCalculationStrategy;
 
         // Energy
@@ -152,572 +284,430 @@ namespace H.Core.Models
 
         #endregion
 
-        #region Constructors
-
-        public Defaults()
-        {
-            this.TimeFrame = TimeFrame.TwoThousandToCurrent;
-
-            this.DefaultTillageTypeForFallow = TillageType.NoTill;
-
-            this.CarbonConcentration = CoreConstants.CarbonConcentration;
-            this.NumberOfYearsInCarRegionAverage = 3;
-
-            // Default location is Lethbridge, AB
-            this.Latitude = 49.69999;
-            this.Longitude = -112.81856;
-
-            this.EmergenceDay = 141;
-            this.RipeningDay = 197;
-            this.Variance = 300;
-
-            this.EmergenceDayForPerennials = 75;
-            this.RipeningDayForPerennnials = 300;
-            this.VarianceForPerennials = 1500;
-
-            this.Alfa = 0.7;
-            this.DecompositionMinimumTemperature = -3.78;
-            this.DecompositionMaximumTemperature = 30;
-            this.MoistureResponseFunctionAtSaturation = 0.42;
-            this.MoistureResponseFunctionAtWiltingPoint = 0.18;
-
-            // Annual crops
-            this.PercentageOfProductReturnedToSoilForAnnuals = 2;
-            this.PercentageOfStrawReturnedToSoilForAnnuals = 100;
-            this.PercentageOfRootsReturnedToSoilForAnnuals = 100;
-
-            // Silage crops
-            this.PercentageOfProductYieldReturnedToSoilForSilageCrops = 2;
-            this.PercentageOfRootsReturnedToSoilForSilageCrops = 100;
-
-            // Cover crops
-            this.PercentageOfProductYieldReturnedToSoilForCoverCrops = 100;
-            this.PercentageOfProductYieldReturnedToSoilForCoverCropsForage = 35;
-            this.PercentageOfProductYieldReturnedToSoilForCoverCropsProduce = 0;
-            this.PercentageOfStrawReturnedToSoilForCoverCrops = 100;
-            this.PercetageOfRootsReturnedToSoilForCoverCrops = 100;
-
-            // Root crops
-            this.PercentageOfProductReturnedToSoilForRootCrops = 0;
-            this.PercentageOfStrawReturnedToSoilForRootCrops = 100;
-
-            // Perennial crops
-            this.PercentageOfProductReturnedToSoilForPerennials = 35;
-            this.PercentageOfStrawReturnedToSoilForPerennials = 0;
-            this.PercentageOfRootsReturnedToSoilForPerennials = 100;
-            this.EstablishmentGrowthFactorPercentageForPerennials = 50;
-            this.DefaultSupplementalFeedingLossPercentage = 20;
-
-            // Rangeland
-            this.PercentageOfProductReturnedToSoilForRangelandDueToHarvestLoss = 35;
-            this.PercentageOfProductReturnedToSoilForRangelandDueToGrazingLoss = CoreConstants.ValueNotDetermined;
-            this.PercentageOfRootsReturnedToSoilForRangeland = 100;
-
-            // Fodder corn
-            this.PercentageOfProductReturnedToSoilForFodderCorn = 35;
-            this.PercentageOfRootsReturnedToSoilForFodderCorn = 100;
-
-            this.HumificationCoefficientAboveGround = 0.125;
-            this.HumificationCoefficientBelowGround = 0.3;
-            this.HumificationCoefficientManure = 0.31;
-
-            this.DecompositionRateConstantYoungPool = 0.8;
-            this.DecompositionRateConstantOldPool = 0.00605;
-
-            this.OldPoolCarbonN = 0.1;      // 1/10
-            this.SlowCarbonN = 0.05;        // 1/20
-            this.ActiveCarbonN = 0.025;     // 1/40
-            this.NORatio = 0.1;
-            this.EmissionFactorForLeachingAndRunoff = 0.011; // Updated to IPCC 2019 value
-            this.EmissionFactorForVolatilization = 0.01;
-            this.CustomN2OEmissionFactor = 0.003;
-
-            this.FractionOfNLostByVolatilization = 0.21;
-            this.OtherAnimalsVolitilizationFraction = 0.2;
-            this.PoultryVolitilizationFraction = 0.4;
-
-            this.MicrobeDeath = 0.2;
-            this.Denitrification = 0.5;
-            this.FertilizerEfficiency = 0.5;
-            this.FTopo = 14.03;
-            this.DefaultNitrogenFixation = 0.7;
-
-            this.UseClimateParameterInsteadOfManagementFactor = true;
-
-            // Energy
-            this.ConversionOfElectricityToCo2 = 0.2;
-            this.ConversionOfGjOfDieselToCo2 = 70;
-            this.ConversionOfGjForHerbicideProduction = 5.8;
-            this.NitrogenFertilizerConversionFactor = 3.59;
-            this.PhosphorusFertilizerConversionFactor = 0.5699;
-            this.ConversionOfAreaIrrigated = 367;
-            this.ElectricityHousedBeef = 65.7;
-            this.ElectricityDairy = 968;
-            this.ElectricitySwine = 1.06;
-            this.ElectricityPoultry = 2.88;
-            this.LiquidManureSpreading = 0.0248;
-            this.SolidManureSpreading = 0.0248;
-
-            this.LiquidManureSwineConcentrationEnergy = 3.5;
-            this.LiquidManureDairyConcentrationEnergy = 3.4;
-            this.LiquidManurePoultryConcentrationEnergy = 6;
-
-            this.SolidManureSwineConcentrationEnergy = 8;
-            this.SolidManureDairyConcentrationEnergy = 5;
-            this.SolidManurePoultryConcentrationEnergy = 24.1;
-            this.SolidManureBeefConcentrationEnergy = 10;
-            this.SolidManureSheepConcentrationEnergy = 10;
-
-            // Previous run-in period of 5 years was too small and resulted in very high starting/equilibrium states. Using a higher value is needed.
-            this.DefaultRunInPeriod = 15;
-            this.RunInPeriodTillageType = TillageType.Reduced;
-            this.CarbonModellingStrategy = CarbonModellingStrategies.IPCCTier2;
-
-            // AD
-            this.DefaultBiodegradableFractionDairyManure = 0.025;
-            this.DefaultBiodegradableFractionGreenWaste = 0.024;
-            this.DefaultBiodegradableFractionSwineManure = 0.024;
-            this.DefaultBiodegradableFractionOtherManure = 0.550;
-
-            this.ResidueInputCalculationMethod = ResidueInputCalculationMethod.Default;
-            this.SoilDataAcquisitionMethod = SoilDataAcquisitionMethod.Default;
-        }
-
-
-        #endregion
-
         #region Properties
 
         /// <summary>
-        /// Indicates if the system should display/output run in period items when displaying final results
+        ///     Indicates if the system should display/output run in period items when displaying final results
         /// </summary>
         public bool OutputRunInPeriodItems { get; set; }
 
         public CarbonModellingStrategies CarbonModellingStrategy
         {
             get => _carbonModellingStrategy;
-            set => SetProperty(ref _carbonModellingStrategy, value, () => 
-            {
-                base.RaisePropertyChanged(nameof(this.UseICBMStrategy));
-            }
+            set => SetProperty(ref _carbonModellingStrategy, value,
+                () => { RaisePropertyChanged(nameof(UseICBMStrategy)); }
             );
         }
 
-        public bool UseICBMStrategy
-        {
-            get
-            {
-                return this.CarbonModellingStrategy == CarbonModellingStrategies.ICBM;
-            }
-        }
+        public bool UseICBMStrategy => CarbonModellingStrategy == CarbonModellingStrategies.ICBM;
 
         /// <summary>
-        /// The period of time in which climate normals are calculated from a set of daily climate data values
+        ///     The period of time in which climate normals are calculated from a set of daily climate data values
         /// </summary>
         public TimeFrame TimeFrame
         {
-            get { return _timeFrame; }
-            set { SetProperty(ref _timeFrame, value); }
+            get => _timeFrame;
+            set => SetProperty(ref _timeFrame, value);
         }
 
         public bool UseClimateParameterInsteadOfManagementFactor
         {
-            get { return _useClimateParameterInsteadOfManagementFactor; }
-            set { SetProperty(ref _useClimateParameterInsteadOfManagementFactor, value); }
+            get => _useClimateParameterInsteadOfManagementFactor;
+            set => SetProperty(ref _useClimateParameterInsteadOfManagementFactor, value);
         }
 
         /// <summary>
-        /// (kg kg^-1)
+        ///     (kg kg^-1)
         /// </summary>
         public double CarbonConcentration
         {
-            get { return _carbonConcentration; }
-            set { this.SetProperty(ref _carbonConcentration, value); }
+            get => _carbonConcentration;
+            set => SetProperty(ref _carbonConcentration, value);
         }
+
         public double Latitude
         {
-            get { return _latitude; }
-            set { this.SetProperty(ref _latitude, value); }
+            get => _latitude;
+            set => SetProperty(ref _latitude, value);
         }
+
         public double Longitude
         {
-            get { return _longitude; }
-            set { this.SetProperty(ref _longitude, value); }
+            get => _longitude;
+            set => SetProperty(ref _longitude, value);
         }
 
         public int EmergenceDay
         {
-            get { return _emergenceDay; }
-            set { this.SetProperty(ref _emergenceDay, value); }
+            get => _emergenceDay;
+            set => SetProperty(ref _emergenceDay, value);
         }
 
         public int RipeningDay
         {
-            get { return _ripeningDay; }
-            set { this.SetProperty(ref _ripeningDay, value); }
+            get => _ripeningDay;
+            set => SetProperty(ref _ripeningDay, value);
         }
 
         public double Variance
         {
-            get { return _variance; }
-            set { this.SetProperty(ref _variance, value); }
+            get => _variance;
+            set => SetProperty(ref _variance, value);
         }
 
         public double Alfa
         {
-            get { return _alfa; }
-            set { this.SetProperty(ref _alfa, value); }
+            get => _alfa;
+            set => SetProperty(ref _alfa, value);
         }
 
         public double DecompositionMinimumTemperature
         {
-            get { return _decompositionMinimumTemperature; }
-            set { this.SetProperty(ref _decompositionMinimumTemperature, value); }
+            get => _decompositionMinimumTemperature;
+            set => SetProperty(ref _decompositionMinimumTemperature, value);
         }
 
         public double DecompositionMaximumTemperature
         {
-            get { return _decompositionMaximumTemperature; }
-            set { this.SetProperty(ref _decompositionMaximumTemperature, value); }
+            get => _decompositionMaximumTemperature;
+            set => SetProperty(ref _decompositionMaximumTemperature, value);
         }
 
         public double MoistureResponseFunctionAtSaturation
         {
-            get { return _moistureResponseFunctionAtSaturation; }
-            set { this.SetProperty(ref _moistureResponseFunctionAtSaturation, value); }
+            get => _moistureResponseFunctionAtSaturation;
+            set => SetProperty(ref _moistureResponseFunctionAtSaturation, value);
         }
 
         public double MoistureResponseFunctionAtWiltingPoint
         {
-            get { return _moistureResponseFunctionAtWiltingPoint; }
-            set { this.SetProperty(ref _moistureResponseFunctionAtWiltingPoint, value); }
+            get => _moistureResponseFunctionAtWiltingPoint;
+            set => SetProperty(ref _moistureResponseFunctionAtWiltingPoint, value);
         }
 
         public double PercentageOfProductReturnedToSoilForAnnuals
         {
-            get { return _percentageOfProductReturnedToSoilForAnnuals; }
-            set { this.SetProperty(ref _percentageOfProductReturnedToSoilForAnnuals, value); }
+            get => _percentageOfProductReturnedToSoilForAnnuals;
+            set => SetProperty(ref _percentageOfProductReturnedToSoilForAnnuals, value);
         }
 
         public double PercentageOfStrawReturnedToSoilForAnnuals
         {
-            get { return _percentageOfStrawReturnedToSoilForAnnuals; }
-            set { this.SetProperty(ref _percentageOfStrawReturnedToSoilForAnnuals, value); }
+            get => _percentageOfStrawReturnedToSoilForAnnuals;
+            set => SetProperty(ref _percentageOfStrawReturnedToSoilForAnnuals, value);
         }
 
         public double PercentageOfRootsReturnedToSoilForAnnuals
         {
-            get { return _percentageOfRootsReturnedToSoilForAnnuals; }
-            set { this.SetProperty(ref _percentageOfRootsReturnedToSoilForAnnuals, value); }
+            get => _percentageOfRootsReturnedToSoilForAnnuals;
+            set => SetProperty(ref _percentageOfRootsReturnedToSoilForAnnuals, value);
         }
 
         public double PercentageOfProductReturnedToSoilForPerennials
         {
-            get { return _percentageOfProductReturnedToSoilForPerennials; }
-            set { this.SetProperty(ref _percentageOfProductReturnedToSoilForPerennials, value); }
+            get => _percentageOfProductReturnedToSoilForPerennials;
+            set => SetProperty(ref _percentageOfProductReturnedToSoilForPerennials, value);
         }
 
         public double PercentageOfRootsReturnedToSoilForPerennials
         {
-            get { return _percentageOfRootsReturnedToSoilForPerennials; }
-            set { this.SetProperty(ref _percentageOfRootsReturnedToSoilForPerennials, value); }
+            get => _percentageOfRootsReturnedToSoilForPerennials;
+            set => SetProperty(ref _percentageOfRootsReturnedToSoilForPerennials, value);
         }
 
         public double PercentageOfProductReturnedToSoilForFodderCorn
         {
-            get { return _percentageOfProductReturnedToSoilForFodderCorn; }
-            set { this.SetProperty(ref _percentageOfProductReturnedToSoilForFodderCorn, value); }
+            get => _percentageOfProductReturnedToSoilForFodderCorn;
+            set => SetProperty(ref _percentageOfProductReturnedToSoilForFodderCorn, value);
         }
 
         public double PercentageOfRootsReturnedToSoilForFodderCorn
         {
-            get { return _percentageOfRootsReturnedToSoilForFodderCorn; }
-            set { this.SetProperty(ref _percentageOfRootsReturnedToSoilForFodderCorn, value); }
+            get => _percentageOfRootsReturnedToSoilForFodderCorn;
+            set => SetProperty(ref _percentageOfRootsReturnedToSoilForFodderCorn, value);
         }
 
         public double PercentageOfProductReturnedToSoilForRootCrops
         {
-            get { return _percentageOfProductReturnedToSoilForRootCrops; }
-            set { this.SetProperty(ref _percentageOfProductReturnedToSoilForRootCrops, value); }
+            get => _percentageOfProductReturnedToSoilForRootCrops;
+            set => SetProperty(ref _percentageOfProductReturnedToSoilForRootCrops, value);
         }
 
         public double PercentageOfStrawReturnedToSoilForRootCrops
         {
-            get { return _percentageOfStrawReturnedToSoilForRootCrops; }
-            set { this.SetProperty(ref _percentageOfStrawReturnedToSoilForRootCrops, value); }
+            get => _percentageOfStrawReturnedToSoilForRootCrops;
+            set => SetProperty(ref _percentageOfStrawReturnedToSoilForRootCrops, value);
         }
 
         public double HumificationCoefficientAboveGround
         {
-            get { return _humificationCoefficientAboveGround; }
-            set { this.SetProperty(ref _humificationCoefficientAboveGround, value); }
+            get => _humificationCoefficientAboveGround;
+            set => SetProperty(ref _humificationCoefficientAboveGround, value);
         }
 
         public double HumificationCoefficientBelowGround
         {
-            get { return _humificationCoefficientBelowGround; }
-            set { this.SetProperty(ref _humificationCoefficientBelowGround, value); }
+            get => _humificationCoefficientBelowGround;
+            set => SetProperty(ref _humificationCoefficientBelowGround, value);
         }
 
         public double DecompositionRateConstantYoungPool
         {
-            get { return _decompositionRateConstantYoungPool; }
-            set { this.SetProperty(ref _decompositionRateConstantYoungPool, value); }
+            get => _decompositionRateConstantYoungPool;
+            set => SetProperty(ref _decompositionRateConstantYoungPool, value);
         }
 
         public double DecompositionRateConstantOldPool
         {
-            get { return _decompositionRateConstantOldPool; }
-            set { this.SetProperty(ref _decompositionRateConstantOldPool, value); }
+            get => _decompositionRateConstantOldPool;
+            set => SetProperty(ref _decompositionRateConstantOldPool, value);
         }
 
         public double HumificationCoefficientManure
         {
-            get { return _humificationCoefficientManure; }
-            set { this.SetProperty(ref _humificationCoefficientManure, value); }
+            get => _humificationCoefficientManure;
+            set => SetProperty(ref _humificationCoefficientManure, value);
         }
 
         public double PercentageOfProductYieldReturnedToSoilForSilageCrops
         {
-            get { return _percentageOfProductYieldReturnedToSoilForSilageCrops; }
-            set { this.SetProperty(ref _percentageOfProductYieldReturnedToSoilForSilageCrops, value); }
+            get => _percentageOfProductYieldReturnedToSoilForSilageCrops;
+            set => SetProperty(ref _percentageOfProductYieldReturnedToSoilForSilageCrops, value);
         }
 
         public double PercentageOfRootsReturnedToSoilForSilageCrops
         {
-            get { return _percentageOfRootsReturnedToSoilForSilageCrops; }
-            set { this.SetProperty(ref _percentageOfRootsReturnedToSoilForSilageCrops, value); }
+            get => _percentageOfRootsReturnedToSoilForSilageCrops;
+            set => SetProperty(ref _percentageOfRootsReturnedToSoilForSilageCrops, value);
         }
 
         public double PercentageOfProductYieldReturnedToSoilForCoverCrops
         {
-            get { return _percentageOfProductYieldReturnedToSoilForCoverCrops; }
-            set { this.SetProperty(ref _percentageOfProductYieldReturnedToSoilForCoverCrops, value); }
+            get => _percentageOfProductYieldReturnedToSoilForCoverCrops;
+            set => SetProperty(ref _percentageOfProductYieldReturnedToSoilForCoverCrops, value);
         }
 
         public double PercentageOfProductYieldReturnedToSoilForCoverCropsForage
         {
-            get { return _percentageOfProductYieldReturnedToSoilForCoverCropsForage; }
-            set { this.SetProperty(ref _percentageOfProductYieldReturnedToSoilForCoverCropsForage, value); }
+            get => _percentageOfProductYieldReturnedToSoilForCoverCropsForage;
+            set => SetProperty(ref _percentageOfProductYieldReturnedToSoilForCoverCropsForage, value);
         }
 
         public double PercentageOfProductYieldReturnedToSoilForCoverCropsProduce
         {
-            get { return _percentageOfProductYieldReturnedToSoilForCoverCropsProduce; }
-            set { this.SetProperty(ref _percentageOfProductYieldReturnedToSoilForCoverCropsProduce, value); }
+            get => _percentageOfProductYieldReturnedToSoilForCoverCropsProduce;
+            set => SetProperty(ref _percentageOfProductYieldReturnedToSoilForCoverCropsProduce, value);
         }
 
         public double PercentageOfStrawReturnedToSoilForCoverCrops
         {
-            get { return _percentageOfStrawReturnedToSoilForCoverCrops; }
-            set { this.SetProperty(ref _percentageOfStrawReturnedToSoilForCoverCrops, value); }
+            get => _percentageOfStrawReturnedToSoilForCoverCrops;
+            set => SetProperty(ref _percentageOfStrawReturnedToSoilForCoverCrops, value);
         }
 
         public double PercetageOfRootsReturnedToSoilForCoverCrops
         {
-            get { return _percetageOfRootsReturnedToSoilForCoverCrops; }
-            set { this.SetProperty(ref _percetageOfRootsReturnedToSoilForCoverCrops, value); }
+            get => _percetageOfRootsReturnedToSoilForCoverCrops;
+            set => SetProperty(ref _percetageOfRootsReturnedToSoilForCoverCrops, value);
         }
 
         public double PercentageOfProductReturnedToSoilForRangelandDueToHarvestLoss
         {
-            get { return _percentageOfProductReturnedToSoilForRangelandDueToHarvestLoss; }
-            set { this.SetProperty(ref _percentageOfProductReturnedToSoilForRangelandDueToHarvestLoss, value); }
+            get => _percentageOfProductReturnedToSoilForRangelandDueToHarvestLoss;
+            set => SetProperty(ref _percentageOfProductReturnedToSoilForRangelandDueToHarvestLoss, value);
         }
 
         public double PercentageOfProductReturnedToSoilForRangelandDueToGrazingLoss
         {
-            get { return _percentageOfProductReturnedToSoilForRangelandDueToGrazingLoss; }
-            set { this.SetProperty(ref _percentageOfProductReturnedToSoilForRangelandDueToGrazingLoss, value); }
+            get => _percentageOfProductReturnedToSoilForRangelandDueToGrazingLoss;
+            set => SetProperty(ref _percentageOfProductReturnedToSoilForRangelandDueToGrazingLoss, value);
         }
 
         public double PercentageOfRootsReturnedToSoilForRangeland
         {
-            get { return _percentageOfRootsReturnedToSoilForRangeland; }
-            set { this.SetProperty(ref _percentageOfRootsReturnedToSoilForRangeland, value); }
+            get => _percentageOfRootsReturnedToSoilForRangeland;
+            set => SetProperty(ref _percentageOfRootsReturnedToSoilForRangeland, value);
         }
 
         /// <summary>
-        /// Section 2.3.3
+        ///     Section 2.3.3
         /// </summary>
         public double OldPoolCarbonN
         {
-            get { return _oldPoolCarbonN; }
-            set { this.SetProperty(ref _oldPoolCarbonN, value); }
+            get => _oldPoolCarbonN;
+            set => SetProperty(ref _oldPoolCarbonN, value);
         }
 
         /// <summary>
-        /// Section 2.3.4.1
+        ///     Section 2.3.4.1
         /// </summary>
         public double NORatio
         {
-            get { return _NORatio; }
-            set { this.SetProperty(ref _NORatio, value); }
+            get => _NORatio;
+            set => SetProperty(ref _NORatio, value);
         }
 
         /// <summary>
-        /// EF_leach
-        ///
-        /// (kg N2O-N (kg N)^-1)
+        ///     EF_leach
+        ///     (kg N2O-N (kg N)^-1)
         /// </summary>
         public double EmissionFactorForLeachingAndRunoff
         {
-            get { return _emissionFactorForLeachingAndRunoff; }
-            set { this.SetProperty(ref _emissionFactorForLeachingAndRunoff, value); }
+            get => _emissionFactorForLeachingAndRunoff;
+            set => SetProperty(ref _emissionFactorForLeachingAndRunoff, value);
         }
 
         /// <summary>
-        /// EF_volatilization (IPCC 2006)
-        /// Section 2.3.5.3
+        ///     EF_volatilization (IPCC 2006)
+        ///     Section 2.3.5.3
         /// </summary>
         public double EmissionFactorForVolatilization
         {
-            get { return _emissionFactorForVolatilization; }
-            set { this.SetProperty(ref _emissionFactorForVolatilization, value); }
+            get => _emissionFactorForVolatilization;
+            set => SetProperty(ref _emissionFactorForVolatilization, value);
         }
 
         /// <summary>
-        /// Frac_volatilizationsoil
-        ///
-        /// (IPCC 2019)
+        ///     Frac_volatilizationsoil
+        ///     (IPCC 2019)
         /// </summary>
         public double FractionOfNLostByVolatilization
         {
-            get { return _fractionOfNLostByVolatilization; }
-            set { this.SetProperty(ref _fractionOfNLostByVolatilization, value); }
+            get => _fractionOfNLostByVolatilization;
+            set => SetProperty(ref _fractionOfNLostByVolatilization, value);
         }
 
         /// <summary>
-        /// Section 2.3.6.3
+        ///     Section 2.3.6.3
         /// </summary>
         public double MicrobeDeath
         {
-            get { return _microbeDeath; }
-            set { this.SetProperty(ref _microbeDeath, value); }
+            get => _microbeDeath;
+            set => SetProperty(ref _microbeDeath, value);
         }
 
         /// <summary>
-        /// Section 2.3.6.3
+        ///     Section 2.3.6.3
         /// </summary>
         public double Denitrification
         {
-            get { return _denitrification; }
-            set { this.SetProperty(ref _denitrification, value); }
+            get => _denitrification;
+            set => SetProperty(ref _denitrification, value);
         }
 
         public double FertilizerEfficiency
         {
-            get { return _fertilizerEfficiency; }
-            set { SetProperty(ref _fertilizerEfficiency, value); }
+            get => _fertilizerEfficiency;
+            set => SetProperty(ref _fertilizerEfficiency, value);
         }
 
         public double FTopo
         {
-            get { return _fTopo; }
-            set { SetProperty(ref _fTopo, value); }
+            get => _fTopo;
+            set => SetProperty(ref _fTopo, value);
         }
 
         public double OtherAnimalsVolitilizationFraction
         {
-            get { return _otherAnimalsVolitilizationFraction; }
-            set { SetProperty(ref _otherAnimalsVolitilizationFraction, value); }
+            get => _otherAnimalsVolitilizationFraction;
+            set => SetProperty(ref _otherAnimalsVolitilizationFraction, value);
         }
 
         public double PoultryVolitilizationFraction
         {
-            get { return _poultryVolitilizationFraction; }
-            set { SetProperty(ref _poultryVolitilizationFraction, value); }
+            get => _poultryVolitilizationFraction;
+            set => SetProperty(ref _poultryVolitilizationFraction, value);
         }
 
         public int EmergenceDayForPerennials
         {
-            get { return _emergenceDayForPerennials; }
-            set { SetProperty(ref _emergenceDayForPerennials, value); }
+            get => _emergenceDayForPerennials;
+            set => SetProperty(ref _emergenceDayForPerennials, value);
         }
 
         public int RipeningDayForPerennnials
         {
-            get { return _ripeningDayForPerennnials; }
-            set { SetProperty(ref _ripeningDayForPerennnials, value); }
+            get => _ripeningDayForPerennnials;
+            set => SetProperty(ref _ripeningDayForPerennnials, value);
         }
 
         public double VarianceForPerennials
         {
-            get { return _varianceForPerennials; }
-            set { SetProperty(ref _varianceForPerennials, value); }
+            get => _varianceForPerennials;
+            set => SetProperty(ref _varianceForPerennials, value);
         }
 
         public EquilibriumCalculationStrategies EquilibriumCalculationStrategy
         {
-            get { return _equilibriumCalculationStrategy; }
-            set { SetProperty(ref _equilibriumCalculationStrategy, value); }
+            get => _equilibriumCalculationStrategy;
+            set => SetProperty(ref _equilibriumCalculationStrategy, value);
         }
 
         public int NumberOfYearsInCarRegionAverage
         {
-            get { return _numberOfYearsInCarRegionAverage; }
-            set { SetProperty(ref _numberOfYearsInCarRegionAverage, value); }
+            get => _numberOfYearsInCarRegionAverage;
+            set => SetProperty(ref _numberOfYearsInCarRegionAverage, value);
         }
 
         /// <summary>
-        /// (kg CO2 kWh^-1)
+        ///     (kg CO2 kWh^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramsCO2PerKiloWattHour)]
         public double ConversionOfElectricityToCo2
         {
-            get { return _conversionOfElectricityToCO2; }
-            set { SetProperty(ref _conversionOfElectricityToCO2, value); }
+            get => _conversionOfElectricityToCO2;
+            set => SetProperty(ref _conversionOfElectricityToCO2, value);
         }
 
         /// <summary>
-        /// (kg CO2 GJ^-1)
+        ///     (kg CO2 GJ^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramsCO2PerGigaJoule)]
         public double ConversionOfGjOfDieselToCo2
         {
-            get { return _conversionOfGJOfDieselToCO2; }
-            set { SetProperty(ref _conversionOfGJOfDieselToCO2, value); }
+            get => _conversionOfGJOfDieselToCO2;
+            set => SetProperty(ref _conversionOfGJOfDieselToCO2, value);
         }
 
         /// <summary>
-        /// (kg CO2 GJ^-1)
+        ///     (kg CO2 GJ^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramsCO2PerGigaJoule)]
         public double ConversionOfGjForHerbicideProduction
         {
-            get { return _conversionOfGJForHerbicideProduction; }
-            set { SetProperty(ref _conversionOfGJForHerbicideProduction, value); }
+            get => _conversionOfGJForHerbicideProduction;
+            set => SetProperty(ref _conversionOfGJForHerbicideProduction, value);
         }
 
         /// <summary>
-        /// (kg CO2 (kg N)^-1)
+        ///     (kg CO2 (kg N)^-1)
         /// </summary>
         public double NitrogenFertilizerConversionFactor
         {
-            get { return _nitrogenFertilizerConversionFactor; }
-            set { SetProperty(ref _nitrogenFertilizerConversionFactor, value); }
+            get => _nitrogenFertilizerConversionFactor;
+            set => SetProperty(ref _nitrogenFertilizerConversionFactor, value);
         }
 
         /// <summary>
-        /// (kg CO2 (kg P2O5)^-1)
+        ///     (kg CO2 (kg P2O5)^-1)
         /// </summary>
         public double PhosphorusFertilizerConversionFactor
         {
-            get { return _phosphorusFertilizerConversionFactor; }
-            set { SetProperty(ref _phosphorusFertilizerConversionFactor, value); }
+            get => _phosphorusFertilizerConversionFactor;
+            set => SetProperty(ref _phosphorusFertilizerConversionFactor, value);
         }
 
         /// <summary>
-        /// (kg CO2 (kg P2O5)^-1)
+        ///     (kg CO2 (kg P2O5)^-1)
         /// </summary>
         public double PotassiumConversionFactor
         {
-            get { return _potassiumConversionFactor; }
-            set { SetProperty(ref _potassiumConversionFactor, value); }
+            get => _potassiumConversionFactor;
+            set => SetProperty(ref _potassiumConversionFactor, value);
         }
 
         /// <summary>
-        /// User can indicate if a custom nitrogen fertilizer conversion factor should be used.
+        ///     User can indicate if a custom nitrogen fertilizer conversion factor should be used.
         /// </summary>
         public bool UseCustomNitrogenFertilizerConversionFactor
         {
@@ -726,7 +716,7 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        /// User can indicate if a custom phosphorus fertilizer conversion factor should be used.
+        ///     User can indicate if a custom phosphorus fertilizer conversion factor should be used.
         /// </summary>
         public bool UseCustomPhosphorusFertilizerConversionFactor
         {
@@ -735,7 +725,7 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        /// User can indicate if a custom potassium conversion factor should be used.
+        ///     User can indicate if a custom potassium conversion factor should be used.
         /// </summary>
         public bool UseCustomPotassiumConversionFactor
         {
@@ -744,7 +734,7 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        /// Allow the user to set a custom N2O emission factor instead of calculated value (Eq. 2.5.1-8)
+        ///     Allow the user to set a custom N2O emission factor instead of calculated value (Eq. 2.5.1-8)
         /// </summary>
         public bool UseCustomN2OEmissionFactor
         {
@@ -753,9 +743,8 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        /// Custom user-specified N2O emission factor. Overrides calculated value from Eq. 2.5.1-8
-        /// 
-        /// (kg N2O-N kg^-1 N)
+        ///     Custom user-specified N2O emission factor. Overrides calculated value from Eq. 2.5.1-8
+        ///     (kg N2O-N kg^-1 N)
         /// </summary>
         public double CustomN2OEmissionFactor
         {
@@ -764,127 +753,126 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        /// (kg CO2 ha^-1)
+        ///     (kg CO2 ha^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramsPerHectare)]
         public double ConversionOfAreaIrrigated
         {
-            get { return _conversionOfAreaIrrigated; }
-            set { SetProperty(ref _conversionOfAreaIrrigated, value); }
+            get => _conversionOfAreaIrrigated;
+            set => SetProperty(ref _conversionOfAreaIrrigated, value);
         }
 
         /// <summary>
-        /// (kWh cattle^-1)
+        ///     (kWh cattle^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KiloWattHourPerAnimal)]
         public double ElectricityHousedBeef
         {
-            get { return _electricityHousedBeef; }
-            set { SetProperty(ref _electricityHousedBeef, value); }
+            get => _electricityHousedBeef;
+            set => SetProperty(ref _electricityHousedBeef, value);
         }
 
         /// <summary>
-        /// (kWh dairy^-1)
+        ///     (kWh dairy^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KiloWattHourPerAnimal)]
         public double ElectricityDairy
         {
-            get { return _electricityDairy; }
-            set { SetProperty(ref _electricityDairy, value); }
+            get => _electricityDairy;
+            set => SetProperty(ref _electricityDairy, value);
         }
 
         /// <summary>
-        /// (kWh pig^-1)
+        ///     (kWh pig^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KiloWattHourPerAnimal)]
         public double ElectricitySwine
         {
-            get { return _electricitySwine; }
-            set { SetProperty(ref _electricitySwine, value); }
+            get => _electricitySwine;
+            set => SetProperty(ref _electricitySwine, value);
         }
 
         /// <summary>
-        /// (kWh poultry^-1)
+        ///     (kWh poultry^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilowattHourPerPoultryPlacement)]
         public double ElectricityPoultry
         {
-            get { return _electricityPoultry; }
-            set { SetProperty(ref _electricityPoultry, value); }
+            get => _electricityPoultry;
+            set => SetProperty(ref _electricityPoultry, value);
         }
 
         /// <summary>
-        /// (GJ 1000 litre^1)
+        ///     (GJ 1000 litre^1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.GigaJoulesPer1000Litres)]
         public double LiquidManureSpreading
         {
-            get { return _liquidManureSpreading; }
-            set { SetProperty(ref _liquidManureSpreading, value); }
+            get => _liquidManureSpreading;
+            set => SetProperty(ref _liquidManureSpreading, value);
         }
 
         /// <summary>
-        /// (GJ 1000 litre^1)
+        ///     (GJ 1000 litre^1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.GigaJoulesPer1000Litres)]
         public double SolidManureSpreading
         {
-            get { return _solidManureSpreading; }
-            set { SetProperty(ref _solidManureSpreading, value); }
+            get => _solidManureSpreading;
+            set => SetProperty(ref _solidManureSpreading, value);
         }
 
         public double LiquidManureSwineConcentrationEnergy
         {
-            get { return _liquidManureSwineConcentrationEnergy; }
-            set { SetProperty(ref _liquidManureSwineConcentrationEnergy, value); }
+            get => _liquidManureSwineConcentrationEnergy;
+            set => SetProperty(ref _liquidManureSwineConcentrationEnergy, value);
         }
 
         public double LiquidManureDairyConcentrationEnergy
         {
-            get { return _liquidManureDairyConcentrationEnergy; }
-            set { SetProperty(ref _liquidManureDairyConcentrationEnergy, value); }
+            get => _liquidManureDairyConcentrationEnergy;
+            set => SetProperty(ref _liquidManureDairyConcentrationEnergy, value);
         }
 
         public double LiquidManurePoultryConcentrationEnergy
         {
-            get { return _liquidManurePoultryConcentrationEnergy; }
-            set { SetProperty(ref _liquidManurePoultryConcentrationEnergy, value); }
+            get => _liquidManurePoultryConcentrationEnergy;
+            set => SetProperty(ref _liquidManurePoultryConcentrationEnergy, value);
         }
 
         public double SolidManureSwineConcentrationEnergy
         {
-            get { return _solidManureSwineConcentrationEnergy; }
-            set { SetProperty(ref _solidManureSwineConcentrationEnergy, value); }
+            get => _solidManureSwineConcentrationEnergy;
+            set => SetProperty(ref _solidManureSwineConcentrationEnergy, value);
         }
 
         public double SolidManureDairyConcentrationEnergy
         {
-            get { return _solidManureDairyConcentrationEnergy; }
-            set { SetProperty(ref _solidManureDairyConcentrationEnergy, value); }
+            get => _solidManureDairyConcentrationEnergy;
+            set => SetProperty(ref _solidManureDairyConcentrationEnergy, value);
         }
 
         public double SolidManurePoultryConcentrationEnergy
         {
-            get { return _solidManurePoultryConcentrationEnergy; }
-            set { SetProperty(ref _solidManurePoultryConcentrationEnergy, value); }
+            get => _solidManurePoultryConcentrationEnergy;
+            set => SetProperty(ref _solidManurePoultryConcentrationEnergy, value);
         }
 
         public double SolidManureBeefConcentrationEnergy
         {
-            get { return _solidManureBeefConcentrationEnergy; }
-            set { SetProperty(ref _solidManureBeefConcentrationEnergy, value); }
+            get => _solidManureBeefConcentrationEnergy;
+            set => SetProperty(ref _solidManureBeefConcentrationEnergy, value);
         }
 
         public double SolidManureSheepConcentrationEnergy
         {
-            get { return _solidManureSheepConcentrationEnergy; }
-            set { SetProperty(ref _solidManureSheepConcentrationEnergy, value); }
+            get => _solidManureSheepConcentrationEnergy;
+            set => SetProperty(ref _solidManureSheepConcentrationEnergy, value);
         }
 
         /// <summary>
-        /// Used when calculating above ground inputs for perennials
-        ///
-        /// (%)
+        ///     Used when calculating above ground inputs for perennials
+        ///     (%)
         /// </summary>
         public double EstablishmentGrowthFactorPercentageForPerennials
         {
@@ -892,13 +880,8 @@ namespace H.Core.Models
             set => SetProperty(ref _establishmentGrowthFactorPercentageForPerennials, value);
         }
 
-        public double EstablishmentGrowthFactorFractionForPerennials
-        {
-            get
-            {
-                return this.EstablishmentGrowthFactorPercentageForPerennials / 100;
-            }
-        }
+        public double EstablishmentGrowthFactorFractionForPerennials =>
+            EstablishmentGrowthFactorPercentageForPerennials / 100;
 
         public TillageType DefaultTillageTypeForFallow
         {
@@ -907,9 +890,8 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        /// The amount of feed that is lost when grazing animals are fed a supplemental forage/feed while grazing on pasture
-        ///
-        /// (%)
+        ///     The amount of feed that is lost when grazing animals are fed a supplemental forage/feed while grazing on pasture
+        ///     (%)
         /// </summary>
         public double DefaultSupplementalFeedingLossPercentage
         {
@@ -918,21 +900,21 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        /// Default run in period in years for IPCC Tier 2 carbon model
+        ///     Default run in period in years for IPCC Tier 2 carbon model
         /// </summary>
-        public int DefaultRunInPeriod 
-        { 
-            get => _defaultRunInPeriod; 
-            set => SetProperty (ref _defaultRunInPeriod, value); 
+        public int DefaultRunInPeriod
+        {
+            get => _defaultRunInPeriod;
+            set => SetProperty(ref _defaultRunInPeriod, value);
         }
 
         /// <summary>
-        /// The type of pump used for irrigation in the farm. Can be changed by the user in the User Settings menu of the UI.
+        ///     The type of pump used for irrigation in the farm. Can be changed by the user in the User Settings menu of the UI.
         /// </summary>
         public PumpType DefaultPumpType
         {
             get => _defaulPumpType;
-            set => SetProperty (ref _defaulPumpType, value);
+            set => SetProperty(ref _defaulPumpType, value);
         }
 
         public double PumpEmissionFactor
@@ -940,17 +922,11 @@ namespace H.Core.Models
             get
             {
                 if (DefaultPumpType == PumpType.ElectricPump)
-                {
-                    _pumpEmissionsFactor =  0.266;
-                }
+                    _pumpEmissionsFactor = 0.266;
                 else if (DefaultPumpType == PumpType.NaturalGasPump)
-                {
                     _pumpEmissionsFactor = 1.145;
-                }
                 else
-                {
                     _pumpEmissionsFactor = 1;
-                }
 
                 return _pumpEmissionsFactor;
             }
@@ -964,28 +940,28 @@ namespace H.Core.Models
 
         #region AD
 
-        public double DefaultBiodegradableFractionDairyManure 
-        { 
-            get => _defaultBiodegradableFractionDairyManure; 
-            set => SetProperty(ref _defaultBiodegradableFractionDairyManure, value); 
+        public double DefaultBiodegradableFractionDairyManure
+        {
+            get => _defaultBiodegradableFractionDairyManure;
+            set => SetProperty(ref _defaultBiodegradableFractionDairyManure, value);
         }
 
-        public double DefaultBiodegradableFractionSwineManure 
-        { 
-            get => _defaultBiodegradableFractionSwineManure; 
-            set => SetProperty(ref _defaultBiodegradableFractionSwineManure, value); 
+        public double DefaultBiodegradableFractionSwineManure
+        {
+            get => _defaultBiodegradableFractionSwineManure;
+            set => SetProperty(ref _defaultBiodegradableFractionSwineManure, value);
         }
 
-        public double DefaultBiodegradableFractionOtherManure 
-        { 
-            get => _defaultBiodegradableFractionOtherManure; 
-            set => SetProperty(ref _defaultBiodegradableFractionOtherManure, value); 
+        public double DefaultBiodegradableFractionOtherManure
+        {
+            get => _defaultBiodegradableFractionOtherManure;
+            set => SetProperty(ref _defaultBiodegradableFractionOtherManure, value);
         }
 
-        public double DefaultBiodegradableFractionGreenWaste 
-        { 
-            get => _defaultBiodegradableFractionGreenWaste; 
-            set => SetProperty(ref _defaultBiodegradableFractionGreenWaste, value); 
+        public double DefaultBiodegradableFractionGreenWaste
+        {
+            get => _defaultBiodegradableFractionGreenWaste;
+            set => SetProperty(ref _defaultBiodegradableFractionGreenWaste, value);
         }
 
         public double DefaultNitrogenFixation
@@ -1019,25 +995,13 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        /// Used with the CLI to specify how soil data should be initialized (by settings file or by SLC database)
+        ///     Used with the CLI to specify how soil data should be initialized (by settings file or by SLC database)
         /// </summary>
         public SoilDataAcquisitionMethod SoilDataAcquisitionMethod
         {
             get => _soilDataAcquisitionMethod;
             set => SetProperty(ref _soilDataAcquisitionMethod, value);
         }
-
-        #endregion
-
-        #region Public Methods
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
-
-        #region Event Handlers
 
         #endregion
     }

@@ -1,21 +1,22 @@
 ﻿#region Imports
 
 using System;
-using System.Windows.Input;
 using H.Core.Enumerations;
 using H.Core.Properties;
 
 #endregion
 
-namespace H.Core.Converters {
+namespace H.Core.Converters
+{
     /// <summary>
     /// </summary>
-    public class FeedIngredientStringConverter : ConverterBase {
+    public class FeedIngredientStringConverter : ConverterBase
+    {
         #region Public Methods
 
         public IngredientType Convert(string input)
         {
-            input = this.GetLettersAsLowerCase(input);
+            input = GetLettersAsLowerCase(input);
             switch (input)
             {
                 case "alfalfacubes":
@@ -980,26 +981,6 @@ namespace H.Core.Converters {
                     throw new Exception(string.Format(Resources.ExceptionUnknowFeedTypeString, input));
             }
         }
-
-        #endregion
-
-        #region Constructors
-
-        #endregion
-
-        #region Fields
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
-
-        #region Event Handlers
 
         #endregion
     }

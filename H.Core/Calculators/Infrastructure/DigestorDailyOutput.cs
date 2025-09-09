@@ -14,12 +14,12 @@ namespace H.Core.Calculators.Infrastructure
          */
 
         /// <summary>
-        /// (kg VS day^-1)
+        ///     (kg VS day^-1)
         /// </summary>
         public double TotalFlowOfDegradedVolatileSolids { get; set; }
 
         /// <summary>
-        /// (kg day^-1)
+        ///     (kg day^-1)
         /// </summary>
         public double FlowRateOfAllSubstratesInDigestate { get; set; }
 
@@ -30,7 +30,7 @@ namespace H.Core.Calculators.Infrastructure
         public double FlowRateOfTotalNitrogenInDigestate { get; set; }
 
         /// <summary>
-        /// The total TAN from all substrates
+        ///     The total TAN from all substrates
         /// </summary>
         public double FlowOfAllTanInDigestate { get; set; }
 
@@ -43,12 +43,12 @@ namespace H.Core.Calculators.Infrastructure
          */
 
         /// <summary>
-        /// (kg day^-1)
+        ///     (kg day^-1)
         /// </summary>
         public double FlowRateLiquidFraction { get; set; }
 
         /// <summary>
-        /// (kg day^-1)
+        ///     (kg day^-1)
         /// </summary>
         public double FlowRateSolidFraction { get; set; }
 
@@ -81,42 +81,42 @@ namespace H.Core.Calculators.Infrastructure
          */
 
         /// <summary>
-        /// (Nm^3 day^-1)
+        ///     (Nm^3 day^-1)
         /// </summary>
         public double TotalMethaneProduction { get; set; }
 
         /// <summary>
-        /// (Nm^3 day^-1)
+        ///     (Nm^3 day^-1)
         /// </summary>
         public double TotalBiogasProduction { get; set; }
 
         /// <summary>
-        /// (Nm^3 day^-1)
+        ///     (Nm^3 day^-1)
         /// </summary>
         public double TotalCarbonDioxideProduction { get; set; }
 
         /// <summary>
-        /// (Nm^3 day^-1)
+        ///     (Nm^3 day^-1)
         /// </summary>
         public double TotalRecoverableMethane { get; set; }
 
         /// <summary>
-        /// (kWh day^-1)
+        ///     (kWh day^-1)
         /// </summary>
         public double TotalPrimaryEnergyProduction { get; set; }
 
         /// <summary>
-        /// (kWh day^-1)
+        ///     (kWh day^-1)
         /// </summary>
         public double ElectricityProduction { get; set; }
 
         /// <summary>
-        /// (kWh day^-1)
+        ///     (kWh day^-1)
         /// </summary>
         public double HeatProduced { get; set; }
 
         /// <summary>
-        /// (kWh day^-1)
+        ///     (kWh day^-1)
         /// </summary>
         public double MethaneToGrid { get; set; }
 
@@ -125,17 +125,17 @@ namespace H.Core.Calculators.Infrastructure
          */
 
         /// <summary>
-        /// (kg day^-1)
+        ///     (kg day^-1)
         /// </summary>
         public double MethaneEmissionsDuringStorage { get; set; }
 
         /// <summary>
-        /// (kg day^-1)
+        ///     (kg day^-1)
         /// </summary>
         public double N2OEmissionsDuringStorage { get; set; }
 
         /// <summary>
-        /// (kg day^-1)
+        ///     (kg day^-1)
         /// </summary>
         public double AmmoniaEmissionsDuringStorage { get; set; }
 
@@ -144,7 +144,7 @@ namespace H.Core.Calculators.Infrastructure
          */
 
         /// <summary>
-        /// (kg day^-1)
+        ///     (kg day^-1)
         /// </summary>
         public double TotalAmountRawDigestateAvailableForLandApplication { get; set; }
 
@@ -156,13 +156,25 @@ namespace H.Core.Calculators.Infrastructure
         public double TotalAmountRawDigestateAvailableForLandApplicationFromLiquidFraction { get; set; }
         public double TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromLiquidFraction { get; set; }
         public double TotalAmountOfTanInRawDigestateAvailalbleForLandApplicationFromLiquidFraction { get; set; }
-        public double TotalAmountOfOrganicNitrogenInRawDigestateAvailableForLandApplicationFromLiquidFraction { get; set; }
+
+        public double TotalAmountOfOrganicNitrogenInRawDigestateAvailableForLandApplicationFromLiquidFraction
+        {
+            get;
+            set;
+        }
+
         public double TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromLiquidFraction { get; set; }
 
         public double TotalAmountRawDigestateAvailableForLandApplicationFromSolidFraction { get; set; }
         public double TotalAmountOfNitrogenInRawDigestateAvailableForLandApplicationFromSolidFraction { get; set; }
         public double TotalAmountOfTanInRawDigestateAvailalbleForLandApplicationFromSolidFraction { get; set; }
-        public double TotalAmountOfOrganicNitrogenInRawDigestateAvailableForLandApplicationFromSolidFraction { get; set; }
+
+        public double TotalAmountOfOrganicNitrogenInRawDigestateAvailableForLandApplicationFromSolidFraction
+        {
+            get;
+            set;
+        }
+
         public double TotalAmountOfCarbonInRawDigestateAvailableForLandApplicationFromSolidFraction { get; set; }
 
         public double TotalAmountOfStoredDigestateAvailableForLandApplication { get; set; }
@@ -170,12 +182,12 @@ namespace H.Core.Calculators.Infrastructure
         public double TotalAmountOfStoredDigestateAvailableForLandApplicationSolidFraction { get; set; }
 
         /// <summary>
-        /// (kg N day^-1)
+        ///     (kg N day^-1)
         /// </summary>
         public double TotalNitrogenInDigestateAvailableForLandApplication { get; set; }
 
         /// <summary>
-        /// (kg C day^-1)
+        ///     (kg C day^-1)
         /// </summary>
         public double TotalCarbonInDigestateAvailableForLandApplication { get; set; }
 

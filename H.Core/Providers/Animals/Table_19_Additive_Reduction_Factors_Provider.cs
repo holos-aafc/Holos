@@ -1,36 +1,29 @@
-using System.Collections.Generic;
-using System.Linq;
-using H.Content;
 using H.Core.Enumerations;
-using H.Infrastructure;
 
 namespace H.Core.Providers.Animals
 {
     /// <summary>
-    /// Table 19. Additive reduction factors for beef cattle and dairy cattle.
+    ///     Table 19. Additive reduction factors for beef cattle and dairy cattle.
     /// </summary>
     public class Table_19_Additive_Reduction_Factors_Provider : IAdditiveReductionFactorsProvider
     {
         /// <summary>
-        /// Footnote 1
+        ///     Footnote 1
         /// </summary>
         /// <param name="additiveType">Type of diet additive</param>
         /// <param name="numberOfDays">Number of days animals are fed the additive</param>
         /// <param name="fat">The % fat for beef diets, and the % EE for dairy diets</param>
         /// <returns></returns>
         public double GetAdditiveReductionFactor(
-            DietAdditiveType additiveType, 
-            double numberOfDays, 
+            DietAdditiveType additiveType,
+            double numberOfDays,
             double fat)
         {
-            if (numberOfDays <= 0)
-            {
-                return 0;
-            }
+            if (numberOfDays <= 0) return 0;
 
             switch (additiveType)
             {
-                case DietAdditiveType.TwoPercentFat:                
+                case DietAdditiveType.TwoPercentFat:
                     return 10;
 
                 case DietAdditiveType.FourPercentFat:
@@ -44,7 +37,7 @@ namespace H.Core.Providers.Animals
 
                 case DietAdditiveType.InonophorePlusFourPercentFat:
                     return 20 + 0.5 * 20 * 30 / numberOfDays;
-                
+
                 case DietAdditiveType.FivePercentFat: // Footnote 3
                     return 5 * (fat <= 6 ? fat : 6); // Up to 6 % added fat is possible
 

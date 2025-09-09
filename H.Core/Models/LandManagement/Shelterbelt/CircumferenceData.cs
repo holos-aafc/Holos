@@ -11,17 +11,10 @@ namespace H.Core.Models.LandManagement.Shelterbelt
     {
         #region Fields
 
-        private ShelterbeltCalculator ShelterbeltCalculator = new ShelterbeltCalculator();
+        private readonly ShelterbeltCalculator ShelterbeltCalculator = new ShelterbeltCalculator();
 
         private bool _circumferenceGenerationOverriden;
         private double _userCircumference;
-
-        /// <summary>
-        /// Rows represent the difference trees under measurement (trees in viewmodel)
-        /// Specific cells in the table represent the trunks making up the tree being measured (trunks in viewmodel)
-        /// That is, the trunks at breat heigh, or 30cm for caragana.
-        /// </summary>
-        private List<List<double>> _table;
 
         #endregion
 
@@ -30,13 +23,13 @@ namespace H.Core.Models.LandManagement.Shelterbelt
 
         public CircumferenceData()
         {
-            _table = new List<List<double>>();
-            this.InvalidRows = new Stack<int>();
-            this.ValidRows = new List<bool>();
-            this.InvalidColumns = new List<Stack<int>>();
-            this.ValidColumns = new List<List<bool>>();
-            this.QuickAccessRows = new List<int>();
-            this.QuickAccessColumns = new List<List<int>>();
+            Table = new List<List<double>>();
+            InvalidRows = new Stack<int>();
+            ValidRows = new List<bool>();
+            InvalidColumns = new List<Stack<int>>();
+            ValidColumns = new List<List<bool>>();
+            QuickAccessRows = new List<int>();
+            QuickAccessColumns = new List<List<int>>();
         }
 
         public CircumferenceData(CircumferenceData source)
@@ -46,13 +39,13 @@ namespace H.Core.Models.LandManagement.Shelterbelt
             _circumferenceGenerationOverriden = source._circumferenceGenerationOverriden;
             _userCircumference = source._userCircumference;
 
-            _table = this.DeepCopy(source._table);
-            this.ValidRows = this.DeepCopy(source.ValidRows);
-            this.QuickAccessRows = this.DeepCopy(source.QuickAccessRows);
-            this.InvalidRows = this.DeepCopy(source.InvalidRows);
-            this.ValidColumns = this.DeepCopy(source.ValidColumns);
-            this.QuickAccessColumns = this.DeepCopy(source.QuickAccessColumns);
-            this.InvalidColumns = this.DeepCopy(source.InvalidColumns);
+            Table = DeepCopy(source.Table);
+            ValidRows = DeepCopy(source.ValidRows);
+            QuickAccessRows = DeepCopy(source.QuickAccessRows);
+            InvalidRows = DeepCopy(source.InvalidRows);
+            ValidColumns = DeepCopy(source.ValidColumns);
+            QuickAccessColumns = DeepCopy(source.QuickAccessColumns);
+            InvalidColumns = DeepCopy(source.InvalidColumns);
         }
 
         #endregion
@@ -62,11 +55,12 @@ namespace H.Core.Models.LandManagement.Shelterbelt
 
         #region needed for saving HOLOS' saving functionality to work - do not use
 
-        public List<List<double>> Table
-        {
-            get { return _table; }
-            set { _table = value; }
-        }
+        /// <summary>
+        ///     Rows represent the difference trees under measurement (trees in viewmodel)
+        ///     Specific cells in the table represent the trunks making up the tree being measured (trunks in viewmodel)
+        ///     That is, the trunks at breat heigh, or 30cm for caragana.
+        /// </summary>
+        public List<List<double>> Table { get; set; }
 
         public List<bool> ValidRows { get; set; }
 
@@ -84,10 +78,7 @@ namespace H.Core.Models.LandManagement.Shelterbelt
 
         #region ViewModel Interactions
 
-        public int WeChanged //dummy for telling if get-methods will deliver a different result
-        {
-            get { return 0; }
-        }
+        public int WeChanged => 0; //dummy for telling if get-methods will deliver a different result
 
         #endregion
 
@@ -96,32 +87,29 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         //This section is not coupled to WeChanged
         public double UserCircumference
         {
-            get { return _userCircumference; }
-            set { this.SetProperty(ref _userCircumference, value); }
+            get => _userCircumference;
+            set => SetProperty(ref _userCircumference, value);
         }
 
-        public double GeneratedCircumference
-        {
-            get { return this.GetCircumference(); }
-        }
+        public double GeneratedCircumference => GetCircumference();
 
         public bool CircumferenceGenerationOverriden
         {
-            get { return _circumferenceGenerationOverriden; }
+            get => _circumferenceGenerationOverriden;
             set
             {
-                this.SetProperty(ref _circumferenceGenerationOverriden, value);
-                this.RaisePropertyChanged(nameof(this.CircumferenceGenerationNotOverriden));
+                SetProperty(ref _circumferenceGenerationOverriden, value);
+                RaisePropertyChanged(nameof(CircumferenceGenerationNotOverriden));
             }
         }
 
         public bool CircumferenceGenerationNotOverriden
         {
-            get { return !_circumferenceGenerationOverriden; }
+            get => !_circumferenceGenerationOverriden;
             set
             {
-                this.SetProperty(ref _circumferenceGenerationOverriden, !value);
-                this.RaisePropertyChanged(nameof(this.CircumferenceGenerationOverriden));
+                SetProperty(ref _circumferenceGenerationOverriden, !value);
+                RaisePropertyChanged(nameof(CircumferenceGenerationOverriden));
             }
         }
 
@@ -137,17 +125,14 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         public List<int> GetTreeIndices()
         {
             //RebuildQuickAccessInformation();
-            return this.QuickAccessRows;
+            return QuickAccessRows;
         }
 
         public List<int> GetTrunkIndices(int tree)
         {
-            if (tree < this.ValidRows.Count && this.ValidRows[tree])
-            {
-                return this.QuickAccessColumns[tree];
-            }
+            if (tree < ValidRows.Count && ValidRows[tree]) return QuickAccessColumns[tree];
 
-            throw new IndexOutOfRangeException(nameof(CircumferenceData) + "." + nameof(this.GetTrunkIndices) +
+            throw new IndexOutOfRangeException(nameof(CircumferenceData) + "." + nameof(GetTrunkIndices) +
                                                " attempted to access list of valid trunks at invalid tree.");
         }
 
@@ -157,26 +142,26 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         public int NewTree()
         {
             int location;
-            if (this.InvalidRows.Count == 0)
+            if (InvalidRows.Count == 0)
             {
-                _table.Add(new List<double>());
-                this.InvalidColumns.Add(new Stack<int>());
-                this.ValidRows.Add(true);
-                this.ValidColumns.Add(new List<bool>());
-                location = _table.Count - 1;
+                Table.Add(new List<double>());
+                InvalidColumns.Add(new Stack<int>());
+                ValidRows.Add(true);
+                ValidColumns.Add(new List<bool>());
+                location = Table.Count - 1;
             }
             else
             {
-                location = this.InvalidRows.Peek();
-                this.InvalidRows.Pop();
-                _table[location] = new List<double>();
-                this.InvalidColumns[location] = new Stack<int>();
-                this.ValidRows[location] = true;
-                this.ValidColumns[location] = new List<bool>();
+                location = InvalidRows.Peek();
+                InvalidRows.Pop();
+                Table[location] = new List<double>();
+                InvalidColumns[location] = new Stack<int>();
+                ValidRows[location] = true;
+                ValidColumns[location] = new List<bool>();
             }
 
-            this.RebuildQuickAccessInformation(); //Can specialize to make more efficient here
-            this.RaiseCircumferenceGenerationChangesAndToggleUserCircumferenceOverride();
+            RebuildQuickAccessInformation(); //Can specialize to make more efficient here
+            RaiseCircumferenceGenerationChangesAndToggleUserCircumferenceOverride();
             return location;
         }
 
@@ -184,114 +169,101 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         public int NewTrunk(int tree)
         {
             int location;
-            if (this.InvalidColumns[tree]
+            if (InvalidColumns[tree]
                     .Count == 0)
             {
-                _table[tree]
+                Table[tree]
                     .Add(0.0);
-                this.ValidColumns[tree]
+                ValidColumns[tree]
                     .Add(true);
-                location = _table[tree]
-                               .Count - 1;
+                location = Table[tree]
+                    .Count - 1;
             }
             else
             {
-                location = this.InvalidColumns[tree]
-                               .Peek();
-                this.InvalidColumns[tree]
+                location = InvalidColumns[tree]
+                    .Peek();
+                InvalidColumns[tree]
                     .Pop();
-                _table[tree][location] = 0.0;
-                this.ValidColumns[tree][location] = true;
+                Table[tree][location] = 0.0;
+                ValidColumns[tree][location] = true;
             }
 
-            this.RebuildQuickAccessInformation(); //Can specialize to make more efficient here
-            this.RaiseCircumferenceGenerationChangesAndToggleUserCircumferenceOverride();
+            RebuildQuickAccessInformation(); //Can specialize to make more efficient here
+            RaiseCircumferenceGenerationChangesAndToggleUserCircumferenceOverride();
             return location;
         }
 
         public void RemoveTree(int tree)
         {
-            this.InvalidRows.Push(tree);
-            _table[tree] = null;
-            this.InvalidColumns[tree] = null;
-            this.ValidColumns[tree] = null;
-            this.ValidRows[tree] = false;
-            this.RebuildQuickAccessInformation();
-            this.RaiseCircumferenceGenerationChangesAndToggleUserCircumferenceOverride();
+            InvalidRows.Push(tree);
+            Table[tree] = null;
+            InvalidColumns[tree] = null;
+            ValidColumns[tree] = null;
+            ValidRows[tree] = false;
+            RebuildQuickAccessInformation();
+            RaiseCircumferenceGenerationChangesAndToggleUserCircumferenceOverride();
         }
 
         public void RemoveTrunk(int tree, int trunk)
         {
-            this.InvalidColumns[tree]
+            InvalidColumns[tree]
                 .Push(trunk);
-            this.ValidColumns[tree][trunk] = false;
-            this.RebuildQuickAccessInformation();
-            this.RaiseCircumferenceGenerationChangesAndToggleUserCircumferenceOverride();
+            ValidColumns[tree][trunk] = false;
+            RebuildQuickAccessInformation();
+            RaiseCircumferenceGenerationChangesAndToggleUserCircumferenceOverride();
         }
 
         public double GetTrunkCircumference(int tree, int trunk)
         {
-            if (tree < this.ValidRows.Count && this.ValidRows[tree] && trunk < this.ValidColumns[tree]
-                                                                                   .Count && this.ValidColumns[tree][trunk])
-            {
-                return _table[tree][trunk];
-            }
+            if (tree < ValidRows.Count && ValidRows[tree] && trunk < ValidColumns[tree]
+                    .Count && ValidColumns[tree][trunk])
+                return Table[tree][trunk];
 
-            throw new IndexOutOfRangeException(nameof(CircumferenceData) + "." + nameof(this.GetTrunkCircumference) +
+            throw new IndexOutOfRangeException(nameof(CircumferenceData) + "." + nameof(GetTrunkCircumference) +
                                                " was asked for a nonexistent trunk's circumference.");
         }
 
         public void SetTrunkCircumference(int tree, int trunk, double circumference)
         {
-            if (tree < this.ValidRows.Count && this.ValidRows[tree] && trunk < this.ValidColumns[tree]
-                                                                                   .Count && this.ValidColumns[tree][trunk])
+            if (tree < ValidRows.Count && ValidRows[tree] && trunk < ValidColumns[tree]
+                    .Count && ValidColumns[tree][trunk])
             {
-                _table[tree][trunk] = circumference;
-                this.RaiseCircumferenceGenerationChangesAndToggleUserCircumferenceOverride();
+                Table[tree][trunk] = circumference;
+                RaiseCircumferenceGenerationChangesAndToggleUserCircumferenceOverride();
             }
             else
             {
-                throw new IndexOutOfRangeException(nameof(CircumferenceData) + "." + nameof(this.SetTrunkCircumference) +
+                throw new IndexOutOfRangeException(nameof(CircumferenceData) + "." + nameof(SetTrunkCircumference) +
                                                    " was asked to record a nonexistent trunk's circumference.");
             }
         }
 
         public double GetTreeCircumference(int tree)
         {
-            if (tree < this.ValidRows.Count && this.ValidRows[tree])
+            if (tree < ValidRows.Count && ValidRows[tree])
             {
-                if (this.QuickAccessColumns[tree]
+                if (QuickAccessColumns[tree]
                         .Count == 0)
-                {
                     return 0.0; //The room taken up by no trunks
-                }
 
-                List<double> circumferences = new List<double>();
+                var circumferences = new List<double>();
 
-                foreach (int index in this.QuickAccessColumns[tree])
-                {
-                    circumferences.Add(_table[tree][index]);
-                }
+                foreach (var index in QuickAccessColumns[tree]) circumferences.Add(Table[tree][index]);
 
                 return ShelterbeltCalculator.CalculateTreeCircumference(circumferences);
             }
 
-            throw new IndexOutOfRangeException(nameof(CircumferenceData) + "." + nameof(this.GetTreeCircumference) +
+            throw new IndexOutOfRangeException(nameof(CircumferenceData) + "." + nameof(GetTreeCircumference) +
                                                " was asked to calculate the circumference of a nonexistent tree.");
         }
 
         public double GetCircumference()
         {
-            if (this.QuickAccessRows.Count == 0)
-            {
-                return 0.0; //room taken up by no trees
-            }
+            if (QuickAccessRows.Count == 0) return 0.0; //room taken up by no trees
 
             var list = new List<double>();
-            foreach (var row in this.QuickAccessRows)
-            {
-                list.Add(this.GetTreeCircumference(row));
-            }
+            foreach (var row in QuickAccessRows) list.Add(GetTreeCircumference(row));
 
             var meanCircumference = ShelterbeltCalculator.CalculateAverageCircumference(list);
             return meanCircumference;
@@ -299,37 +271,33 @@ namespace H.Core.Models.LandManagement.Shelterbelt
 
         public bool SingleTree()
         {
-            return _table.Count - this.InvalidRows.Count == 1;
+            return Table.Count - InvalidRows.Count == 1;
         }
 
         public bool SingleTrunk(int tree)
         {
-            if (tree < this.ValidRows.Count && this.ValidRows[tree])
-            {
-                return _table[tree]
-                           .Count - this.InvalidColumns[tree]
-                                        .Count == 1;
-            }
+            if (tree < ValidRows.Count && ValidRows[tree])
+                return Table[tree]
+                    .Count - InvalidColumns[tree]
+                    .Count == 1;
 
-            throw new IndexOutOfRangeException(nameof(CircumferenceData) + "." + nameof(this.SingleTrunk) +
+            throw new IndexOutOfRangeException(nameof(CircumferenceData) + "." + nameof(SingleTrunk) +
                                                " was enquired as the whethere there was exactly one trunk on a tree.");
         }
 
         public int TreeCount()
         {
-            return _table.Count - this.InvalidRows.Count;
+            return Table.Count - InvalidRows.Count;
         }
 
         public int TrunkCount(int tree)
         {
-            if (tree < this.ValidRows.Count && this.ValidRows[tree])
-            {
-                return _table[tree]
-                           .Count - this.InvalidColumns[tree]
-                                        .Count;
-            }
+            if (tree < ValidRows.Count && ValidRows[tree])
+                return Table[tree]
+                    .Count - InvalidColumns[tree]
+                    .Count;
 
-            throw new IndexOutOfRangeException(nameof(CircumferenceData) + "." + nameof(this.TrunkCount) +
+            throw new IndexOutOfRangeException(nameof(CircumferenceData) + "." + nameof(TrunkCount) +
                                                " was enquired about the number of trunks on a tree.");
         }
 
@@ -340,40 +308,36 @@ namespace H.Core.Models.LandManagement.Shelterbelt
 
         private void RaiseCircumferenceGenerationChangesAndToggleUserCircumferenceOverride()
         {
-            this.RaisePropertyChanged(nameof(this.WeChanged));
-            this.RaisePropertyChanged(nameof(this.GeneratedCircumference));
+            RaisePropertyChanged(nameof(WeChanged));
+            RaisePropertyChanged(nameof(GeneratedCircumference));
 
             //This line tacked on as afterthought to cause it to toggle when user changes anything
             //within the circumference data other than the master circumferece/user field
-            this.CircumferenceGenerationOverriden = false;
+            CircumferenceGenerationOverriden = false;
         }
 
         private void RebuildQuickAccessInformation()
         {
-            this.QuickAccessRows.Clear();
-            for (var i = 0; i < this.ValidRows.Count; ++i)
-            {
-                if (this.ValidRows[i])
+            QuickAccessRows.Clear();
+            for (var i = 0; i < ValidRows.Count; ++i)
+                if (ValidRows[i])
                 {
-                    this.QuickAccessRows.Add(i);
-                    this.QuickAccessColumns.Add(new List<int>());
-                    this.QuickAccessColumns[i]
+                    QuickAccessRows.Add(i);
+                    QuickAccessColumns.Add(new List<int>());
+                    QuickAccessColumns[i]
                         .Clear();
                     for (var j = 0;
-                        j < this.ValidColumns[i]
-                                .Count;
-                        ++j)
-                    {
-                        this.QuickAccessColumns[i]
+                         j < ValidColumns[i]
+                             .Count;
+                         ++j)
+                        QuickAccessColumns[i]
                             .Add(j);
-                    }
                 }
-            }
         }
 
         /// <summary>
-        /// For multilevel lists containing primitive types
-        /// C# chooses the most specific overload
+        ///     For multilevel lists containing primitive types
+        ///     C# chooses the most specific overload
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="source"></param>
@@ -382,7 +346,6 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         {
             var result = new List<List<T>>();
             foreach (var a in source)
-            {
                 if (a == null)
                 {
                     result.Add(null);
@@ -391,19 +354,16 @@ namespace H.Core.Models.LandManagement.Shelterbelt
                 {
                     result.Add(new List<T>());
                     foreach (var b in a)
-                    {
                         result.Last()
-                              .Add(b);
-                    }
+                            .Add(b);
                 }
-            }
 
             return result;
         }
 
         /// <summary>
-        /// For multilevel lists containing primitive types
-        /// C# chooses the most specific overload
+        ///     For multilevel lists containing primitive types
+        ///     C# chooses the most specific overload
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="source"></param>
@@ -413,7 +373,6 @@ namespace H.Core.Models.LandManagement.Shelterbelt
             var result = new List<Stack<T>>();
             var midStack = new Stack<T>();
             foreach (var a in source)
-            {
                 if (a == null)
                 {
                     result.Add(null);
@@ -423,24 +382,19 @@ namespace H.Core.Models.LandManagement.Shelterbelt
                     result.Add(new Stack<T>());
                     midStack.Clear();
                     foreach (var b in a) //1, 2, 3, 4, 5....
-                    {
                         midStack.Push(b);
-                    }
 
                     foreach (var b in midStack) //...5, 4, 3, 2, 1
-                    {
                         result.Last()
-                              .Push(b);
-                    }
+                            .Push(b);
                 }
-            }
 
             return result;
         }
 
         /// <summary>
-        /// For multilevel lists containing primitive types
-        /// C# chooses the most specific overload
+        ///     For multilevel lists containing primitive types
+        ///     C# chooses the most specific overload
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="source"></param>
@@ -449,23 +403,17 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         {
             var result = new Stack<T>();
             var midStack = new Stack<T>();
-            foreach (var a in source)
-            {
-                midStack.Push(a);
-            }
+            foreach (var a in source) midStack.Push(a);
 
-            foreach (var a in midStack)
-            {
-                result.Push(a);
-            }
+            foreach (var a in midStack) result.Push(a);
 
             return result;
         }
 
         /// <summary>
-        /// For multilevel lists containing primitive types
-        /// C# chooses the most specific overload
-        /// This is the least specific overload.
+        ///     For multilevel lists containing primitive types
+        ///     C# chooses the most specific overload
+        ///     This is the least specific overload.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="source"></param>
@@ -473,18 +421,10 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         private List<T> DeepCopy<T>(List<T> source)
         {
             var result = new List<T>();
-            foreach (var a in source)
-            {
-                result.Add(a);
-            }
+            foreach (var a in source) result.Add(a);
 
             return result;
         }
-
-        #endregion
-
-
-        #region Event Handlers
 
         #endregion
     }

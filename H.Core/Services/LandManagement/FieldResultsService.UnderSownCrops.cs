@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Properties;
 
 namespace H.Core.Services.LandManagement
 {
@@ -12,15 +13,11 @@ namespace H.Core.Services.LandManagement
             IEnumerable<CropViewItem> viewItems)
         {
             foreach (var cropViewItem in viewItems)
-            {
-                if (cropViewItem.CropType.IsPerennial() && 
-                    cropViewItem.IsSecondaryCrop && 
+                if (cropViewItem.CropType.IsPerennial() &&
+                    cropViewItem.IsSecondaryCrop &&
                     cropViewItem.YearInPerennialStand == 1)
-                {
                     // Perennial description will be set at this point so append here
-                    cropViewItem.Description += $" ({H.Core.Properties.Resources.LabelUndersown})";
-                }
-            }
+                    cropViewItem.Description += $" ({Resources.LabelUndersown})";
         }
 
         #endregion
@@ -31,7 +28,7 @@ namespace H.Core.Services.LandManagement
             IEnumerable<CropViewItem> viewItems,
             FieldSystemComponent fieldSystemComponent)
         {
-            this.AssignUndersownCropViewItemsDescription(viewItems);
+            AssignUndersownCropViewItemsDescription(viewItems);
         }
 
         #endregion

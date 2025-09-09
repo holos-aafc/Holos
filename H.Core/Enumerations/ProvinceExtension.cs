@@ -1,35 +1,19 @@
-﻿#region Imports
-#endregion
-
-namespace H.Core.Enumerations
+﻿namespace H.Core.Enumerations
 {
     /// <summary>
     /// </summary>
     public static class ProvinceExtension
     {
-        #region Constructors
-
-        #endregion
-
-        #region Fields
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
         #region Public Methods
 
         /// <summary>
-        /// Get the province neighbour if possible.
+        ///     Get the province neighbour if possible.
         /// </summary>
         /// <param name="province">Province to get the neighbour for</param>
         /// <returns>Either the neighbouring province if it exists or the original province if no neighbour exists</returns>
         public static Province GetNeigbouringProvince(this Province province)
         {
             if (province.IsPrairieProvince())
-            {
                 switch (province)
                 {
                     case Province.Alberta:
@@ -39,10 +23,10 @@ namespace H.Core.Enumerations
                     case Province.Manitoba:
                         return Province.Saskatchewan;
                 }
-            }
 
             return province;
         }
+
         public static Region GetRegion(this Province province)
         {
             if (province == Province.Alberta ||
@@ -51,9 +35,7 @@ namespace H.Core.Enumerations
                 province == Province.Saskatchewan ||
                 province == Province.NorthwestTerritories ||
                 province == Province.Nunavut)
-            {
                 return Region.WesternCanada;
-            }
 
             return Region.EasternCanada;
         }
@@ -69,14 +51,6 @@ namespace H.Core.Enumerations
         {
             return province.IsPrairieProvince() || province == Province.Ontario;
         }
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
-
-        #region Event Handlers
 
         #endregion
     }

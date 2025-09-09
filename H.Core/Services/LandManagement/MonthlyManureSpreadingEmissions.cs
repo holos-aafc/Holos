@@ -1,9 +1,16 @@
-﻿using H.Core.Models.Results;
-
-namespace H.Core.Services.LandManagement
+﻿namespace H.Core.Services.LandManagement
 {
     public class MonthlyManureSpreadingEmissions : MonthlyManureSpreadingData
     {
+        #region Properties
+
+        /// <summary>
+        ///     (kg CO2)
+        /// </summary>
+        public double TotalEmissions { get; set; }
+
+        #endregion
+
         #region Constructors
 
         public MonthlyManureSpreadingEmissions()
@@ -12,18 +19,9 @@ namespace H.Core.Services.LandManagement
 
         public MonthlyManureSpreadingEmissions(MonthlyManureSpreadingData monthlyManureSpreadingData)
         {
-            base.Year = monthlyManureSpreadingData.Year;
-            base.Month = monthlyManureSpreadingData.Month;
+            Year = monthlyManureSpreadingData.Year;
+            Month = monthlyManureSpreadingData.Month;
         }
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// (kg CO2)
-        /// </summary>
-        public double TotalEmissions { get; set; } 
 
         #endregion
     }

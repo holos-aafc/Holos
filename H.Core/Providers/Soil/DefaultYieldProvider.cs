@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using H.Content;
 using H.Core.Converters;
@@ -11,11 +11,14 @@ using H.Infrastructure;
 namespace H.Core.Providers.Soil
 {
     /// <summary>
-    /// Taken from worksheet 'AB Each CAR by YR all CROPs' of file
+    ///     Taken from worksheet 'AB Each CAR by YR all CROPs' of file
     /// </summary>
     public class DefaultYieldProvider
     {
-        public DefaultYieldTableData DefaultValueForGetRowByCarIdYearAndCropType = new DefaultYieldTableData()
+        private static readonly CropTypeStringConverter _cropTypeConverter = new CropTypeStringConverter();
+        private readonly List<DefaultYieldTableData> _cachedData;
+
+        public DefaultYieldTableData DefaultValueForGetRowByCarIdYearAndCropType = new DefaultYieldTableData
         {
             PrId = 0,
             CarId = 0,
@@ -38,13 +41,10 @@ namespace H.Core.Providers.Soil
             PPYield = 0
         };
 
-        private static readonly CropTypeStringConverter _cropTypeConverter = new CropTypeStringConverter();
-        private List<DefaultYieldTableData> _cachedData;
-
         public DefaultYieldProvider()
         {
             HTraceListener.AddTraceListener();
-            this._cachedData = this.GetData();
+            _cachedData = GetData();
         }
 
         private List<DefaultYieldTableData> GetData()
@@ -87,11 +87,11 @@ namespace H.Core.Providers.Soil
                     var yield = double.Parse(line[10], cultureInfo);
                     var yldLbs = double.Parse(line[11], cultureInfo);
                     var eYield = double.Parse(line[12], cultureInfo);
-                    var prodN = double.TryParse(line[13], System.Globalization.NumberStyles.Float, cultureInfo, out i) ? i : -99;
-                    var prdLbs = double.TryParse(line[14], System.Globalization.NumberStyles.Float, cultureInfo, out i) ? i : -99;
+                    var prodN = double.TryParse(line[13], NumberStyles.Float, cultureInfo, out i) ? i : -99;
+                    var prdLbs = double.TryParse(line[14], NumberStyles.Float, cultureInfo, out i) ? i : -99;
                     var eProdN = double.Parse(line[15], cultureInfo);
-                    var nYield = double.TryParse(line[16], System.Globalization.NumberStyles.Float, cultureInfo, out i) ? i : -99;
-                    var nYldLbs = double.TryParse(line[17], System.Globalization.NumberStyles.Float, cultureInfo, out i) ? i : -99;
+                    var nYield = double.TryParse(line[16], NumberStyles.Float, cultureInfo, out i) ? i : -99;
+                    var nYldLbs = double.TryParse(line[17], NumberStyles.Float, cultureInfo, out i) ? i : -99;
                     var nEYield = double.Parse(line[18], cultureInfo);
                     var pPYield = double.Parse(line[19].Replace("%", ""), cultureInfo);
 
@@ -135,31 +135,32 @@ namespace H.Core.Providers.Soil
             var listByCarId = _cachedData.Where(x => x.CarId == carId);
             if (listByCarId.Any() == false)
             {
-                Trace.TraceError($"{nameof(DefaultYieldProvider)}.{nameof(DefaultYieldProvider.GetRowByCarIdYearAndCropType)}" +
-                    $" unable to get row for carID: {carId}, year: {year}, crop type: {cropType}." +
-                    $" Returning default value of {DefaultValueForGetRowByCarIdYearAndCropType}.");
+                Trace.TraceError($"{nameof(DefaultYieldProvider)}.{nameof(GetRowByCarIdYearAndCropType)}" +
+                                 $" unable to get row for carID: {carId}, year: {year}, crop type: {cropType}." +
+                                 $" Returning default value of {DefaultValueForGetRowByCarIdYearAndCropType}.");
                 return DefaultValueForGetRowByCarIdYearAndCropType;
             }
 
             var listByYear = listByCarId.Where(x => x.Year == year);
             if (listByYear.Any() == false)
             {
-                Trace.TraceError($"{nameof(DefaultYieldProvider)}.{nameof(DefaultYieldProvider.GetRowByCarIdYearAndCropType)}" +
-                    $" unable to get row for carID: {carId}, year: {year}, crop type: {cropType}." +
-                    $" Returning default value of {DefaultValueForGetRowByCarIdYearAndCropType}.");
+                Trace.TraceError($"{nameof(DefaultYieldProvider)}.{nameof(GetRowByCarIdYearAndCropType)}" +
+                                 $" unable to get row for carID: {carId}, year: {year}, crop type: {cropType}." +
+                                 $" Returning default value of {DefaultValueForGetRowByCarIdYearAndCropType}.");
                 return DefaultValueForGetRowByCarIdYearAndCropType;
             }
 
             var listByCrop = listByCarId.Where(x => x.CropType == cropType);
             if (listByCrop.Any() == false)
             {
-                Trace.TraceError($"{nameof(DefaultYieldProvider)}.{nameof(DefaultYieldProvider.GetRowByCarIdYearAndCropType)}" +
-                    $" unable to get row for carID: {carId}, year: {year}, crop type: {cropType}." +
-                    $" Returning default value of {DefaultValueForGetRowByCarIdYearAndCropType}.");
+                Trace.TraceError($"{nameof(DefaultYieldProvider)}.{nameof(GetRowByCarIdYearAndCropType)}" +
+                                 $" unable to get row for carID: {carId}, year: {year}, crop type: {cropType}." +
+                                 $" Returning default value of {DefaultValueForGetRowByCarIdYearAndCropType}.");
                 return DefaultValueForGetRowByCarIdYearAndCropType;
             }
 
-            return _cachedData.FirstOrDefault(x => x.CarId.Equals(carId) && x.Year.Equals(year) && x.CropType.Equals(cropType));
+            return _cachedData.FirstOrDefault(x =>
+                x.CarId.Equals(carId) && x.Year.Equals(year) && x.CropType.Equals(cropType));
         }
     }
 }

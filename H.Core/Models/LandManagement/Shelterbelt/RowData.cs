@@ -6,7 +6,7 @@ using H.Infrastructure;
 namespace H.Core.Models.LandManagement.Shelterbelt
 {
     /// <summary>
-    /// Represents one row of trees in a shelterbelt.
+    ///     Represents one row of trees in a shelterbelt.
     /// </summary>
     public class RowData : ModelBase
     {
@@ -18,7 +18,7 @@ namespace H.Core.Models.LandManagement.Shelterbelt
 
             //Assign Default Values
             _length = 100;
-            this.Name = "Row";
+            Name = "Row";
         }
 
         #endregion
@@ -37,20 +37,20 @@ namespace H.Core.Models.LandManagement.Shelterbelt
 
         public double Length
         {
-            get { return _length; }
-            set { this.SetProperty(ref _length, value); }
+            get => _length;
+            set => SetProperty(ref _length, value);
         }
 
         public ObservableCollection<TreeGroupData> TreeGroupData
         {
-            get { return _treeGroupData; }
-            set { this.SetProperty(ref _treeGroupData, value); }
+            get => _treeGroupData;
+            set => SetProperty(ref _treeGroupData, value);
         }
 
         public Guid ParentShelterbeltComponent
         {
-            get { return _parentShelterbeltComponent; }
-            set { this.SetProperty(ref _parentShelterbeltComponent, value); }
+            get => _parentShelterbeltComponent;
+            set => SetProperty(ref _parentShelterbeltComponent, value);
         }
 
         #endregion
@@ -62,26 +62,22 @@ namespace H.Core.Models.LandManagement.Shelterbelt
             var genauto = "";
             var woke = false;
             var seen = new Dictionary<string, bool>();
-            for (var i = 0; i < this.TreeGroupData.Count; ++i)
+            for (var i = 0; i < TreeGroupData.Count; ++i)
             {
                 bool saw;
-                seen.TryGetValue(this.TreeGroupData[i]
-                                     .GetCorrectName(), out saw);
+                seen.TryGetValue(TreeGroupData[i]
+                    .GetCorrectName(), out saw);
                 if (!saw)
                 {
                     if (woke)
-                    {
                         genauto += ", ";
-                    }
                     else
-                    {
                         woke = true;
-                    }
 
-                    genauto += this.TreeGroupData[i]
-                                   .GetCorrectName();
-                    seen[this.TreeGroupData[i]
-                             .GetCorrectName()] = true;
+                    genauto += TreeGroupData[i]
+                        .GetCorrectName();
+                    seen[TreeGroupData[i]
+                        .GetCorrectName()] = true;
                 }
             }
 
@@ -90,36 +86,25 @@ namespace H.Core.Models.LandManagement.Shelterbelt
 
         public string GetCorrectName()
         {
-            if (this.NameIsFromUser)
-            {
-                return this.Name;
-            }
+            if (NameIsFromUser) return Name;
 
-            return this.GenerateAutonym();
+            return GenerateAutonym();
         }
 
         public TreeGroupData NewTreeGroupData()
         {
             var a = new TreeGroupData();
-            a.ParentRowData = this.Guid;
-            a.GrandParentShelterbeltComponent = this.ParentShelterbeltComponent;
-            a.YearOfObservation = this.YearOfObservation;            
+            a.ParentRowData = Guid;
+            a.GrandParentShelterbeltComponent = ParentShelterbeltComponent;
+            a.YearOfObservation = YearOfObservation;
             _treeGroupData.Add(a);
             return a;
         }
 
         public void RemoveTreeGroupData(TreeGroupData treeGroupData)
         {
-            this.TreeGroupData.Remove(treeGroupData);
+            TreeGroupData.Remove(treeGroupData);
         }
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
-
-        #region Event Handlers
 
         #endregion
     }

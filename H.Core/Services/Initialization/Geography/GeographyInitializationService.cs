@@ -27,10 +27,7 @@ namespace H.Core.Services.Initialization.Geography
         public void InitializeGeography(Farm farm)
         {
             var geographicData = _geographicDataProvider.GetGeographicalData(farm.PolygonId);
-            if (geographicData.DefaultSoilData == null)
-            {
-                geographicData.DefaultSoilData = new SoilData();
-            }
+            if (geographicData.DefaultSoilData == null) geographicData.DefaultSoilData = new SoilData();
 
             farm.GeographicData = geographicData;
         }

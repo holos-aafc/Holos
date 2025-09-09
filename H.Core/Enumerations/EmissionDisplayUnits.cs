@@ -4,7 +4,7 @@ using H.Infrastructure;
 namespace H.Core.Enumerations
 {
     /// <summary>
-    /// Used in combo boxes to allow user to show results in different units
+    ///     Used in combo boxes to allow user to show results in different units
     /// </summary>
     public enum EmissionDisplayUnits
     {
@@ -42,6 +42,6 @@ namespace H.Core.Enumerations
         PoundsCH4,
 
         [LocalizedDescription("EnumLbsN2O", typeof(Resources))]
-        PoundsN2O,
+        PoundsN2O
     }
 }

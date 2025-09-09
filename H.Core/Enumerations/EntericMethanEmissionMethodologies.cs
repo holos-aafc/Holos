@@ -29,7 +29,7 @@ namespace H.Core.Enumerations
         MillsEtAl,
 
         [LocalizedDescription("EnumNuiEtAl", typeof(Resources))]
-        NuiEtAl,
+        NuiEtAl
 
         //[LocalizedDescription("EnumEscobarBahamondesEtAlHighForage", typeof(Resources))]
         //EscobarBahamondesEtAlHighForage,
@@ -51,7 +51,6 @@ namespace H.Core.Enumerations
 
         //[LocalizedDescription("EnumMoraesEtAlDietaryAnimalLevel2", typeof(Resources))]
         //MoraesEtAlDietaryAnimalLevel2,
-
 
 
         //[LocalizedDescription("EnumEscobarBahamondesEtAlMediumForage", typeof(Resources))]

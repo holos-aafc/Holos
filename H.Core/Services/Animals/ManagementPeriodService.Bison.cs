@@ -1,6 +1,6 @@
-﻿using H.Core.Models.Animals;
+﻿using System.ComponentModel;
 using H.Core.Models;
-using System.ComponentModel;
+using H.Core.Models.Animals;
 
 namespace H.Core.Services.Animals
 {
@@ -8,7 +8,8 @@ namespace H.Core.Services.Animals
     {
         #region Public Methods
 
-        public void BisonManagementPeriod(Farm farm, AnimalGroup animalGroup, ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
+        public void BisonManagementPeriod(Farm farm, AnimalGroup animalGroup, ManagementPeriod bindingManagementPeriod,
+            PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
             AddOtherManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
                 animalGroupOnPropertyChanged);

@@ -8,24 +8,31 @@ namespace H.Core.Providers.Plants
     public class SoilCarbonEmissionsProvider
     {
         #region Fields
-        private List<SoilCarbonEmissionsData> _cache;
+
+        private readonly List<SoilCarbonEmissionsData> _cache;
+
         #endregion
 
         #region Constructors
+
         public SoilCarbonEmissionsProvider()
         {
             _cache = BuildCache();
         }
+
         #endregion
 
         #region Public Methods
+
         public List<SoilCarbonEmissionsData> GetSoilCarbonEmissions()
         {
             return _cache;
         }
+
         #endregion
 
         #region Private Methods
+
         private List<SoilCarbonEmissionsData> BuildCache()
         {
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
@@ -86,6 +93,7 @@ namespace H.Core.Providers.Plants
 
             return result;
         }
+
         #endregion
     }
 }

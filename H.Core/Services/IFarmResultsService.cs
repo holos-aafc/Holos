@@ -7,12 +7,11 @@ namespace H.Core.Services
 {
     public interface IFarmResultsService
     {
+        bool CropEconomicDataApplied { get; set; }
         Farm ReplicateFarm(Farm farm);
         List<Farm> ReplicateFarms(IEnumerable<Farm> farms);
         FarmEmissionResults CalculateFarmEmissionResults(Farm farm);
         List<FarmEmissionResults> CalculateFarmEmissionResults(IEnumerable<Farm> farms);
-
-        bool CropEconomicDataApplied { get; set; }
         List<CropViewItem> CalculateFieldResults(Farm farm);
     }
 }

@@ -1,8 +1,10 @@
 ﻿using H.Core.Properties;
 using H.Infrastructure;
 
-namespace H.Core.Enumerations {
-    public enum IngredientType {
+namespace H.Core.Enumerations
+{
+    public enum IngredientType
+    {
         [LocalizedDescription("AlfalfaCubes", typeof(FeedNameResources))]
         AlfalfaCubes,
 
@@ -253,7 +255,8 @@ namespace H.Core.Enumerations {
         [LocalizedDescription("CornDistillersDriedGrainsSolublesGreaterThanTenPercentOil", typeof(FeedNameResources))]
         CornDistillersDriedGrainsSolublesGreaterThanTenPercentOil,
 
-        [LocalizedDescription("CornDistillersDriedGrainsSolublesGreaterThanSixAndLessThanNinePercentOil", typeof(FeedNameResources))]
+        [LocalizedDescription("CornDistillersDriedGrainsSolublesGreaterThanSixAndLessThanNinePercentOil",
+            typeof(FeedNameResources))]
         CornDistillersDriedGrainsSolublesGreaterThanSixAndLessThanNinePercentOil,
 
         [LocalizedDescription("CornDistillersDriedGrainsSolublesLessThanFourPercentOil", typeof(FeedNameResources))]
@@ -832,7 +835,7 @@ namespace H.Core.Enumerations {
 
         [LocalizedDescription("PeanutMealExpelled", typeof(FeedNameResources))]
         PeanutMealExpelled,
-            
+
         [LocalizedDescription("PeanutMealMech", typeof(FeedNameResources))]
         PeanutMealMech,
 

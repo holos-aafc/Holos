@@ -5,7 +5,7 @@
         #region Public Methods
 
         /// <summary>
-        /// (N)
+        ///     (N)
         /// </summary>
         public static bool IsNitrogenFertilizer(this FertilizerBlends fertilizerBlend)
         {
@@ -33,7 +33,7 @@
         }
 
         /// <summary>
-        /// (P2O5)
+        ///     (P2O5)
         /// </summary>
         public static bool IsPhosphorusFertilizer(this FertilizerBlends fertilizerBlend)
         {
@@ -42,7 +42,7 @@
                 case FertilizerBlends.DiAmmoniumPhosphate:
                 case FertilizerBlends.TripleSuperPhosphate:
                 case FertilizerBlends.SuperPhosphate:
-                    {
+                {
                     return true;
                 }
 
@@ -52,7 +52,7 @@
         }
 
         /// <summary>
-        /// (K2O)
+        ///     (K2O)
         /// </summary>
         public static bool IsPotassiumFertilizer(this FertilizerBlends fertilizerBlend)
         {
@@ -63,7 +63,7 @@
                 case FertilizerBlends.NpkMixedAcid:
                 case FertilizerBlends.NpkNitrophosphate:
                 case FertilizerBlends.PotassiumSulphate:
-                    {
+                {
                     return true;
                 }
 

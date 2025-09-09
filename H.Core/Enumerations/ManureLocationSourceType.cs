@@ -15,6 +15,6 @@ namespace H.Core.Enumerations
         Imported,
 
         [LocalizedDescription("EnumOnFarmAnaerobicDigestor", typeof(Resources))]
-        OnFarmAnaerobicDigestor,
+        OnFarmAnaerobicDigestor
     }
 }

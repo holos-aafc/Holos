@@ -4,11 +4,21 @@ using H.Infrastructure;
 namespace H.Core.Providers.Animals
 {
     /// <summary>
-    /// A class to describe the various concentrations of N, C, and P found in manure. Nitrogen concentrations will be in (kg N (1000 L)^-1) for both
-    /// solid and liquid manure. Class represents one row from table 9.
+    ///     A class to describe the various concentrations of N, C, and P found in manure. Nitrogen concentrations will be in
+    ///     (kg N (1000 L)^-1) for both
+    ///     solid and liquid manure. Class represents one row from table 9.
     /// </summary>
     public class DefaultManureCompositionData : ModelBase
     {
+        #region Public Methods
+
+        public override string ToString()
+        {
+            return $"{nameof(ManureStateType)}: {ManureStateType}, {nameof(AnimalType)}: {AnimalType}";
+        }
+
+        #endregion
+
         #region Fields
 
         private double _nitrogenFraction;
@@ -38,32 +48,30 @@ namespace H.Core.Providers.Animals
             set => SetProperty(ref _manureStateType, value);
         }
 
-        public string ManureStateTypeString => this.ManureStateType.GetDescription();
+        public string ManureStateTypeString => ManureStateType.GetDescription();
 
         /// <summary>
-        /// %
+        ///     %
         /// </summary>
-        public double MoistureContent 
+        public double MoistureContent
         {
             get => _moistureContent;
             set => SetProperty(ref _moistureContent, value);
         }
 
         /// <summary>
-        /// (% wet weight)
-        ///
-        /// Expressed as a percentage
-        ///
-        /// TODO: rename this to NitrogenPercentage
+        ///     (% wet weight)
+        ///     Expressed as a percentage
+        ///     TODO: rename this to NitrogenPercentage
         /// </summary>
-        public double NitrogenFraction 
+        public double NitrogenFraction
         {
             get => _nitrogenFraction;
-            set => SetProperty(ref _nitrogenFraction, value, () => { this.NitrogenContent = value / 100.0;});
+            set => SetProperty(ref _nitrogenFraction, value, () => { NitrogenContent = value / 100.0; });
         }
 
         /// <summary>
-        /// Proportion of N in manure (fraction)
+        ///     Proportion of N in manure (fraction)
         /// </summary>
         public double NitrogenContent
         {
@@ -72,20 +80,18 @@ namespace H.Core.Providers.Animals
         }
 
         /// <summary>
-        /// (% wet weight)
-        ///
-        /// Expressed as a percentage
-        ///
-        /// TODO: rename this to CarbonPercentage
+        ///     (% wet weight)
+        ///     Expressed as a percentage
+        ///     TODO: rename this to CarbonPercentage
         /// </summary>
-        public double CarbonFraction 
+        public double CarbonFraction
         {
             get => _carbonFraction;
-            set => SetProperty(ref _carbonFraction, value, () => { this.CarbonContent = value / 100.0;});
+            set => SetProperty(ref _carbonFraction, value, () => { CarbonContent = value / 100.0; });
         }
 
         /// <summary>
-        /// Proportion of C in manure (fraction)
+        ///     Proportion of C in manure (fraction)
         /// </summary>
         public double CarbonContent
         {
@@ -94,20 +100,18 @@ namespace H.Core.Providers.Animals
         }
 
         /// <summary>
-        /// (% wet weight)
-        ///
-        /// Expressed as a percentage
-        ///
-        /// TODO: rename this to PhosphorusPercentage
+        ///     (% wet weight)
+        ///     Expressed as a percentage
+        ///     TODO: rename this to PhosphorusPercentage
         /// </summary>
-        public double PhosphorusFraction 
+        public double PhosphorusFraction
         {
             get => _phosphorusFraction;
-            set => SetProperty(ref _phosphorusFraction, value, () => { this.PhosphorusContent = value / 100.0;});
+            set => SetProperty(ref _phosphorusFraction, value, () => { PhosphorusContent = value / 100.0; });
         }
 
         /// <summary>
-        /// Proportion of P in manure (fraction)
+        ///     Proportion of P in manure (fraction)
         /// </summary>
         public double PhosphorusContent
         {
@@ -122,11 +126,11 @@ namespace H.Core.Providers.Animals
         }
 
         /// <summary>
-        /// A value returned for solid or liquid concentrations will have the same unit of measurement
-        /// 
-        /// (kg N (1000 L)^-1)
+        ///     A value returned for solid or liquid concentrations will have the same unit of measurement
+        ///     (kg N (1000 L)^-1)
         /// </summary>
-        public double NitrogenConcentrationOfManure {
+        public double NitrogenConcentrationOfManure
+        {
             get => _nitrogenConcentrationOfManure;
             set => SetProperty(ref _nitrogenConcentrationOfManure, value);
         }
@@ -138,32 +142,22 @@ namespace H.Core.Providers.Animals
         }
 
         /// <summary>
-        /// VS content (% wet weight)
-        ///
-        /// Expressed as a percentage
+        ///     VS content (% wet weight)
+        ///     Expressed as a percentage
         /// </summary>
         public double VolatileSolidsFraction
         {
             get => _volatileSolidsFraction;
-            set => SetProperty(ref _volatileSolidsFraction, value, () => this.VolatileSolidsContent = value / 100.0);
+            set => SetProperty(ref _volatileSolidsFraction, value, () => VolatileSolidsContent = value / 100.0);
         }
 
         /// <summary>
-        /// VS content (% wet weight)
+        ///     VS content (% wet weight)
         /// </summary>
         public double VolatileSolidsContent
         {
             get => _volatileSolidsContent;
             set => SetProperty(ref _volatileSolidsContent, value);
-        }
-
-        #endregion
-
-        #region Public Methods
-
-        public override string ToString()
-        {
-            return $"{nameof(ManureStateType)}: {ManureStateType}, {nameof(AnimalType)}: {AnimalType}";
         }
 
         #endregion

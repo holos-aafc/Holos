@@ -3,30 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
-using H.Infrastructure;
 
 namespace H.Core.Models
 {
     /// <summary>
-    /// A storage tank for a particular type of manure (beef, dairy, etc.)
+    ///     A storage tank for a particular type of manure (beef, dairy, etc.)
     /// </summary>
     public class ManureTank : StorageTankBase
     {
-        #region Fields
-
-        private Dictionary<int, List<GroupEmissionsByDay>> _dailyResults;
-
-        private ManureStateType _manureStateType;
-        private AnimalType _animalType;
-
-        #endregion
-
         #region Constructors
 
         public ManureTank()
         {
             _dailyResults = new Dictionary<int, List<GroupEmissionsByDay>>();
         }
+
+        #endregion
+
+        #region Fields
+
+        private readonly Dictionary<int, List<GroupEmissionsByDay>> _dailyResults;
+
+        private ManureStateType _manureStateType;
+        private AnimalType _animalType;
 
         #endregion
 
@@ -64,7 +63,7 @@ namespace H.Core.Models
             }
             else
             {
-                _dailyResults[dayOfYear] = new List<GroupEmissionsByDay>() {groupEmissionsByDay};
+                _dailyResults[dayOfYear] = new List<GroupEmissionsByDay> { groupEmissionsByDay };
             }
         }
 
@@ -81,10 +80,6 @@ namespace H.Core.Models
 
             return result;
         }
-
-        #endregion
-
-        #region Event Handlers
 
         #endregion
     }

@@ -6,10 +6,9 @@ namespace H.Core.Models.Animals.Poultry
     {
         public PoultryLayersWetComponent()
         {
-            this.ComponentNameDisplayString = ComponentType.PoultryLayersWet.GetDescription();
-            this.ComponentCategory = ComponentCategory.Poultry;
-            this.ComponentType = ComponentType.PoultryLayersWet;
+            ComponentNameDisplayString = ComponentType.PoultryLayersWet.GetDescription();
+            ComponentCategory = ComponentCategory.Poultry;
+            ComponentType = ComponentType.PoultryLayersWet;
         }
     }
 }
-

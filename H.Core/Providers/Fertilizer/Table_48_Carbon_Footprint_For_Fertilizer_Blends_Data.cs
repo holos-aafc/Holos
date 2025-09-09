@@ -6,6 +6,25 @@ namespace H.Core.Providers.Fertilizer
 {
     public class Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data : ModelBase
     {
+        #region Contructors
+
+        public Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data()
+        {
+            ApplicationDate = DateTime.Now;
+        }
+
+        #endregion
+
+        #region Methods
+
+        public override string ToString()
+        {
+            return
+                $"{base.ToString()}, {nameof(ApplicationDate)}: {ApplicationDate}, {nameof(FertilizerBlend)}: {FertilizerBlend}, {nameof(PercentageNitrogen)}: {PercentageNitrogen}, {nameof(PercentagePhosphorus)}: {PercentagePhosphorus}, {nameof(PercentagePotassium)}: {PercentagePotassium}";
+        }
+
+        #endregion
+
         #region Fields
 
         private FertilizerBlends _fertilizerBlend;
@@ -21,15 +40,6 @@ namespace H.Core.Providers.Fertilizer
 
         #endregion
 
-        #region Contructors
-
-        public Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data()
-        {
-            this.ApplicationDate = DateTime.Now;
-        }
-
-        #endregion
-
         #region Properties
 
         public DateTime ApplicationDate
@@ -39,9 +49,8 @@ namespace H.Core.Providers.Fertilizer
         }
 
         /// <summary>
-        /// Percentage of N contained in the blend
-        /// 
-        /// (%)
+        ///     Percentage of N contained in the blend
+        ///     (%)
         /// </summary>
         public double PercentageNitrogen
         {
@@ -50,9 +59,8 @@ namespace H.Core.Providers.Fertilizer
         }
 
         /// <summary>
-        /// Percentage of P contained in the blend
-        /// 
-        /// (%)
+        ///     Percentage of P contained in the blend
+        ///     (%)
         /// </summary>
         public double PercentagePhosphorus
         {
@@ -61,9 +69,8 @@ namespace H.Core.Providers.Fertilizer
         }
 
         /// <summary>
-        /// Percentage of K contained in the blend
-        /// 
-        /// (%)
+        ///     Percentage of K contained in the blend
+        ///     (%)
         /// </summary>
         public double PercentagePotassium
         {
@@ -72,9 +79,8 @@ namespace H.Core.Providers.Fertilizer
         }
 
         /// <summary>
-        /// Percentage of S contained in the blend
-        /// 
-        /// (%)
+        ///     Percentage of S contained in the blend
+        ///     (%)
         /// </summary>
         public double PercentageSulphur
         {
@@ -83,9 +89,8 @@ namespace H.Core.Providers.Fertilizer
         }
 
         /// <summary>
-        /// These are upstream emissions - not from farm
-        /// 
-        /// (kg CO2eq kg product^-1)
+        ///     These are upstream emissions - not from farm
+        ///     (kg CO2eq kg product^-1)
         /// </summary>
         public double CarbonDioxideEmissionsAtTheGate
         {
@@ -94,9 +99,8 @@ namespace H.Core.Providers.Fertilizer
         }
 
         /// <summary>
-        /// These are emission from the farm
-        /// 
-        /// (kg CO2eq kg product^-1)
+        ///     These are emission from the farm
+        ///     (kg CO2eq kg product^-1)
         /// </summary>
         public double ApplicationEmissions
         {
@@ -108,15 +112,6 @@ namespace H.Core.Providers.Fertilizer
         {
             get => _fertilizerBlend;
             set => SetProperty(ref _fertilizerBlend, value);
-        }
-
-        #endregion
-
-        #region Methods
-
-        public override string ToString()
-        {
-            return $"{base.ToString()}, {nameof(ApplicationDate)}: {ApplicationDate}, {nameof(FertilizerBlend)}: {FertilizerBlend}, {nameof(PercentageNitrogen)}: {PercentageNitrogen}, {nameof(PercentagePhosphorus)}: {PercentagePhosphorus}, {nameof(PercentagePotassium)}: {PercentagePotassium}";
         }
 
         #endregion

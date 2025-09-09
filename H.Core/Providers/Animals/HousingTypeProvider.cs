@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Navigation;
 using H.Core.Enumerations;
 
 namespace H.Core.Providers.Animals
@@ -9,45 +8,36 @@ namespace H.Core.Providers.Animals
         public List<HousingType> GetValidHousingTypes(AnimalType animalType)
         {
             if (animalType.IsPoultryType())
-            {
-                return new List<HousingType>()
+                return new List<HousingType>
                 {
-                    HousingType.HousedInBarn,
+                    HousingType.HousedInBarn
                 };
-            }
 
             if (animalType.IsSwineType())
-            {
-                return new List<HousingType>()
+                return new List<HousingType>
                 {
                     HousingType.HousedInBarn,
-                    HousingType.Pasture,
+                    HousingType.Pasture
                 };
-            }
 
             if (animalType.IsSheepType())
-            {
-                return new List<HousingType>()
+                return new List<HousingType>
                 {
                     HousingType.Confined,
                     HousingType.Pasture,
-                    HousingType.HousedEwes,
+                    HousingType.HousedEwes
                 };
-            }
 
             if (animalType.IsOtherAnimalType())
-            {
-                return new List<HousingType>()
+                return new List<HousingType>
                 {
                     HousingType.HousedInBarn,
                     HousingType.ConfinedNoBarn,
-                    HousingType.Pasture,
+                    HousingType.Pasture
                 };
-            }
 
             if (animalType.IsDairyCattleType())
-            {
-                return new List<HousingType>()
+                return new List<HousingType>
                 {
                     HousingType.FreeStallBarnSolidLitter,
                     HousingType.FreeStallBarnSlurryScraping,
@@ -59,19 +49,16 @@ namespace H.Core.Providers.Animals
                     HousingType.TieStallSlurry,
 
                     HousingType.DryLot,
-                    HousingType.Pasture,
+                    HousingType.Pasture
                 };
-            }
 
             if (animalType.IsBeefCattleType())
-            {
-                return new List<HousingType>()
+                return new List<HousingType>
                 {
                     HousingType.ConfinedNoBarn,
                     HousingType.HousedInBarnSolid,
-                    HousingType.Pasture,
+                    HousingType.Pasture
                 };
-            }
 
             return new List<HousingType>();
         }

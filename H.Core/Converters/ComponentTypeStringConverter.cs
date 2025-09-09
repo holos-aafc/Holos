@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Runtime.InteropServices;
-using H.Core.Enumerations;
 using H.Core.Models;
 
 namespace H.Core.Converters
@@ -9,7 +7,7 @@ namespace H.Core.Converters
     {
         public ComponentType Convert(string input)
         {
-            var cleanedInput = base.GetLettersAsLowerCase(input);
+            var cleanedInput = GetLettersAsLowerCase(input);
             switch (cleanedInput)
             {
                 case "backgrounding":
@@ -29,7 +27,8 @@ namespace H.Core.Converters
 
                 default:
                 {
-                    Trace.TraceError($"{nameof(ComponentTypeStringConverter)}.{nameof(ComponentTypeStringConverter.Convert)}: unknown component type {input}. Returning {ComponentType.Backgrounding}");
+                    Trace.TraceError(
+                        $"{nameof(ComponentTypeStringConverter)}.{nameof(Convert)}: unknown component type {input}. Returning {ComponentType.Backgrounding}");
 
                     return ComponentType.Backgrounding;
                 }

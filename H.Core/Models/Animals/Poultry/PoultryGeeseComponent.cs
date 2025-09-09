@@ -6,9 +6,9 @@ namespace H.Core.Models.Animals.Poultry
     {
         public PoultryGeeseComponent()
         {
-            this.ComponentNameDisplayString = ComponentType.PoultryGeese.GetDescription();
-            this.ComponentCategory = ComponentCategory.Poultry;
-            this.ComponentType = ComponentType.PoultryGeese;
+            ComponentNameDisplayString = ComponentType.PoultryGeese.GetDescription();
+            ComponentCategory = ComponentCategory.Poultry;
+            ComponentType = ComponentType.PoultryGeese;
         }
     }
 }

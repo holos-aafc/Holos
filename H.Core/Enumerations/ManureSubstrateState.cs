@@ -9,6 +9,6 @@ namespace H.Core.Enumerations
         Fresh,
 
         [LocalizedDescription("EnumStoredManure", typeof(Resources))]
-        Stored,
+        Stored
     }
 }

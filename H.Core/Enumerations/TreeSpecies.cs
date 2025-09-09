@@ -27,6 +27,6 @@ namespace H.Core.Enumerations
         AverageDeciduous,
 
         [LocalizedDescription("AverageConifer", typeof(Resources))]
-        AverageConifer,
+        AverageConifer
     }
 }

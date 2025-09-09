@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using H.Core.Enumerations;
 
 namespace H.Core.Converters
@@ -12,7 +7,7 @@ namespace H.Core.Converters
     {
         public ModelParameters Convert(string input)
         {
-            switch(this.GetLowerCase(input))
+            switch (GetLowerCase(input))
             {
                 case "tillfac":
                     return ModelParameters.TillageModifier;
@@ -55,9 +50,10 @@ namespace H.Core.Converters
 
                 case "tmax":
                     return ModelParameters.MaximumAvgTemperature;
-    
+
                 default:
-                    Trace.TraceError($"{nameof(ModelParameterStringConverter)}.{nameof(ModelParameterStringConverter.Convert)}: unknown model parameter: {input}");
+                    Trace.TraceError(
+                        $"{nameof(ModelParameterStringConverter)}.{nameof(Convert)}: unknown model parameter: {input}");
                     return ModelParameters.TillageModifier;
             }
         }

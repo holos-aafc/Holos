@@ -15,6 +15,6 @@ namespace H.Core.Enumerations
         Fall,
 
         [LocalizedDescription("EnumWinter", typeof(Resources))]
-        Winter,
+        Winter
     }
 }

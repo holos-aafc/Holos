@@ -8,13 +8,13 @@ namespace H.Core.Services
     public interface ITimePeriodHelper
     {
         List<Tuple<DateTime, DateTime>> GetTimePeriodOpenings(IEnumerable<ITimePeriodItem> itemsInTimePeriod,
-                                                              DateTime minimumDate, DateTime maximumDate);
+            DateTime minimumDate, DateTime maximumDate);
 
         Tuple<DateTime, DateTime> GetFirstTimePeriodOpening(IEnumerable<ITimePeriodItem> itemsInTimePeriod,
-                                                            DateTime minimumDate, DateTime maximumDate);
+            DateTime minimumDate, DateTime maximumDate);
 
         bool TimePeriodHasOpenings(IEnumerable<ITimePeriodItem> itemsInTimePeriod, DateTime minimumDate,
-                                   DateTime maximumDate);
+            DateTime maximumDate);
 
         IEnumerable<TimePeriodHelper.MonthlyObject> GetMonthsBetweenDates(DateTime start, TimeSpan duration);
         IEnumerable<TimePeriodHelper.MonthlyObject> GetMonthsBetweenDates(DateTime start, DateTime end);

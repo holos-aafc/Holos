@@ -48,7 +48,7 @@ namespace H.Core.Enumerations
         AmmoniumNitroSulphate,
 
         /// <summary>
-        /// Custom synthetic (there is also a custom organic)
+        ///     Custom synthetic (there is also a custom organic)
         /// </summary>
         [LocalizedDescription("EnumCustomSynthetic", typeof(Resources))]
         Custom,
@@ -57,7 +57,7 @@ namespace H.Core.Enumerations
         Lime,
 
         /// <summary>
-        /// Custom organic
+        ///     Custom organic
         /// </summary>
         [LocalizedDescription("EnumCustomOrganic", typeof(Resources))]
         CustomOrganic,
@@ -78,6 +78,6 @@ namespace H.Core.Enumerations
         NpkNitrophosphate,
 
         [LocalizedDescription("EnumPotassiumSulphate", typeof(Resources))]
-        PotassiumSulphate,
+        PotassiumSulphate
     }
 }

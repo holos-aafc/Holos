@@ -8,9 +8,9 @@ namespace H.Core.Models.Animals.Swine
 
         public DrySowsComponent()
         {
-            this.ComponentNameDisplayString = ComponentType.SwineDrySows.GetDescription();
-            this.ComponentCategory = ComponentCategory.Swine;
-            this.ComponentType = ComponentType.SwineDrySows;
+            ComponentNameDisplayString = ComponentType.SwineDrySows.GetDescription();
+            ComponentCategory = ComponentCategory.Swine;
+            ComponentType = ComponentType.SwineDrySows;
         }
 
         #endregion

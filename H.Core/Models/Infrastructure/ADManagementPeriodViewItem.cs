@@ -1,5 +1,4 @@
 ﻿using H.Core.Models.Animals;
-using H.Infrastructure;
 
 namespace H.Core.Models.Infrastructure
 {
@@ -15,7 +14,7 @@ namespace H.Core.Models.Infrastructure
 
         public ADManagementPeriodViewItem()
         {
-            this.DailyPercentageOfManureAdded = 100;
+            DailyPercentageOfManureAdded = 100;
         }
 
         #endregion
@@ -32,25 +31,19 @@ namespace H.Core.Models.Infrastructure
 
         public bool IsSelected
         {
-            get { return _isSelected;}
-            set { SetProperty(ref _isSelected, value); }
+            get => _isSelected;
+            set => SetProperty(ref _isSelected, value);
         }
 
         /// <summary>
-        /// Percentage
+        ///     Percentage
         /// </summary>
         public double DailyPercentageOfManureAdded { get; set; }
 
         /// <summary>
-        /// Fraction
+        ///     Fraction
         /// </summary>
-        public double DailyFractionOfManureAdded 
-        {
-            get
-            {
-                return this.DailyPercentageOfManureAdded / 100.0;
-            }
-        }
+        public double DailyFractionOfManureAdded => DailyPercentageOfManureAdded / 100.0;
 
         #endregion
     }

@@ -7,7 +7,7 @@ using H.Core.Tools;
 namespace H.Core.Providers.Animals
 {
     /// <summary>
-    /// Table 40
+    ///     Table 40
     /// </summary>
     public class NitrogenConcentrationLiquidManureProvider
     {
@@ -25,47 +25,39 @@ namespace H.Core.Providers.Animals
 
             _data = new List<NitrogenConcentrationOfLiquidManureTableData>();
 
-            _data.Add(new NitrogenConcentrationOfLiquidManureTableData()
+            _data.Add(new NitrogenConcentrationOfLiquidManureTableData
             {
                 AnimalType = AnimalType.Swine,
                 NitrogenConcentration = 3.5
             });
 
-            _data.Add(new NitrogenConcentrationOfLiquidManureTableData()
+            _data.Add(new NitrogenConcentrationOfLiquidManureTableData
             {
                 AnimalType = AnimalType.Dairy,
                 NitrogenConcentration = 3.4
             });
 
-            _data.Add(new NitrogenConcentrationOfLiquidManureTableData()
+            _data.Add(new NitrogenConcentrationOfLiquidManureTableData
             {
                 AnimalType = AnimalType.Poultry,
                 NitrogenConcentration = 6.0
             });
-        } 
+        }
 
         #endregion
 
         public NitrogenConcentrationOfLiquidManureTableData GetData(AnimalType animalType)
         {
-            if (animalType.IsSwineType())
-            {
-                return _data.First(data => data.AnimalType == AnimalType.Swine);
-            }
+            if (animalType.IsSwineType()) return _data.First(data => data.AnimalType == AnimalType.Swine);
 
-            if (animalType.IsDairyCattleType())
-            {
-                return _data.First(data => data.AnimalType == AnimalType.Dairy);
-            }
+            if (animalType.IsDairyCattleType()) return _data.First(data => data.AnimalType == AnimalType.Dairy);
 
-            if (animalType.IsPoultryType())
-            {
-                return _data.First(data => data.AnimalType == AnimalType.Poultry);
-            }
+            if (animalType.IsPoultryType()) return _data.First(data => data.AnimalType == AnimalType.Poultry);
 
             var defaultData = _data.First(data => data.AnimalType == AnimalType.Swine);
 
-            Trace.TraceError($"{nameof(NitrogenConcentrationLiquidManureProvider)}.{nameof(GetData)}: unknow animal type '{animalType}'. Returning default of {defaultData}");
+            Trace.TraceError(
+                $"{nameof(NitrogenConcentrationLiquidManureProvider)}.{nameof(GetData)}: unknow animal type '{animalType}'. Returning default of {defaultData}");
 
             return defaultData;
         }

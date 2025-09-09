@@ -4,7 +4,7 @@ using System.Linq;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
-using H.Infrastructure;
+using H.Core.Properties;
 
 namespace H.Core.Services.LandManagement
 {
@@ -13,12 +13,9 @@ namespace H.Core.Services.LandManagement
         protected void AssignPerennialViewItemsDescription(IEnumerable<CropViewItem> viewItems)
         {
             foreach (var cropViewItem in viewItems)
-            {
                 if (cropViewItem.CropType.IsPerennial())
-                {
-                    cropViewItem.Description = string.Format(H.Core.Properties.Resources.LabelYearXInYYearPerennialStand, cropViewItem.YearInPerennialStand, cropViewItem.PerennialStandLength);
-                }
-            }
+                    cropViewItem.Description = string.Format(Resources.LabelYearXInYYearPerennialStand,
+                        cropViewItem.YearInPerennialStand, cropViewItem.PerennialStandLength);
         }
 
         public void AssignPerennialStandPositionalYears(
@@ -31,7 +28,7 @@ namespace H.Core.Services.LandManagement
                 var distinctYears = group.Select(x => x.Year).Distinct();
                 var totalLength = distinctYears.Count();
 
-                for (int i = 0; i < distinctYears.Count(); i++)
+                for (var i = 0; i < distinctYears.Count(); i++)
                 {
                     var position = i + 1;
                     var year = distinctYears.ElementAt(i);
@@ -54,8 +51,6 @@ namespace H.Core.Services.LandManagement
                         {
                             secondaryCropForYear.YearInPerennialStand = position;
                             secondaryCropForYear.PerennialStandLength = totalLength;
-
-                            continue;
                         }
                     }
                     else
@@ -71,13 +66,13 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// It is assumed that 30% of the root biomass is turned over (input) annually before harvest, and 100% on harvest for perennials
+        ///     It is assumed that 30% of the root biomass is turned over (input) annually before harvest, and 100% on harvest for
+        ///     perennials
         /// </summary>
         protected void AssignPerennialRootsReturned(IEnumerable<CropViewItem> list)
         {
             var perennialStands = list.Where(x => x.CropType.IsPerennial()).GroupBy(x => x.PerennialStandGroupId);
             foreach (var currentPerennialStand in perennialStands)
-            {
                 for (var index = 0; index < currentPerennialStand.OrderBy(x => x.Year).Count(); index++)
                 {
                     var cropViewItem = currentPerennialStand.ElementAt(index);
@@ -85,15 +80,11 @@ namespace H.Core.Services.LandManagement
                     if (cropViewItem.YearInPerennialStand == cropViewItem.PerennialStandLength)
                     {
                         if (cropViewItem.CropType == CropType.RangelandNative)
-                        {
                             // Range lands are never harvested and so we continue with 30% root turnover
                             cropViewItem.PercentageOfRootsReturnedToSoil = 30;
-                        }
                         else
-                        {
                             // Last year of stand is when 100% of roots are returned
                             cropViewItem.PercentageOfRootsReturnedToSoil = 100;
-                        }
                     }
                     else
                     {
@@ -101,11 +92,10 @@ namespace H.Core.Services.LandManagement
                         cropViewItem.PercentageOfRootsReturnedToSoil = 30;
                     }
                 }
-            }
         }
 
         public IEnumerable<IGrouping<Guid, CropViewItem>> AssignPerennialStandIds(
-            IEnumerable<CropViewItem> viewItems, 
+            IEnumerable<CropViewItem> viewItems,
             FieldSystemComponent fieldSystemComponent)
         {
             var distinctYears = viewItems.Select(y => y.Year).Distinct().OrderBy(x => x);
@@ -116,7 +106,7 @@ namespace H.Core.Services.LandManagement
             foreach (var year in distinctYears)
             {
                 var mainCrop = viewItems.Single(x => x.Year == year && x.IsSecondaryCrop == false);
-                var secondaryCrop = viewItems.SingleOrDefault(x => x.Year == year && x.IsSecondaryCrop == true);
+                var secondaryCrop = viewItems.SingleOrDefault(x => x.Year == year && x.IsSecondaryCrop);
 
                 if (secondaryCrop == null)
                 {
@@ -124,10 +114,7 @@ namespace H.Core.Services.LandManagement
 
                     if (mainCrop.CropType.IsPerennial())
                     {
-                        if (mainCrop.CropType != lastCropType)
-                        {
-                            currentPerennialId = Guid.NewGuid();
-                        }
+                        if (mainCrop.CropType != lastCropType) currentPerennialId = Guid.NewGuid();
 
                         mainCrop.PerennialStandGroupId = currentPerennialId;
                         lastCropType = mainCrop.CropType;
@@ -136,17 +123,12 @@ namespace H.Core.Services.LandManagement
                     {
                         currentPerennialId = Guid.NewGuid();
                     }
-
-                    continue;
                 }
                 else
                 {
                     if (mainCrop.CropType.IsPerennial())
                     {
-                        if (mainCrop.CropType != lastCropType)
-                        {
-                            currentPerennialId = Guid.NewGuid();
-                        }
+                        if (mainCrop.CropType != lastCropType) currentPerennialId = Guid.NewGuid();
 
                         mainCrop.PerennialStandGroupId = currentPerennialId;
                         lastCropType = mainCrop.CropType;
@@ -158,10 +140,7 @@ namespace H.Core.Services.LandManagement
 
                     if (secondaryCrop.CropType.IsPerennial())
                     {
-                        if (secondaryCrop.CropType != lastCropType)
-                        {
-                            currentPerennialId = Guid.NewGuid();
-                        }
+                        if (secondaryCrop.CropType != lastCropType) currentPerennialId = Guid.NewGuid();
 
                         secondaryCrop.PerennialStandGroupId = currentPerennialId;
                         lastCropType = secondaryCrop.CropType;
@@ -173,7 +152,8 @@ namespace H.Core.Services.LandManagement
                 }
             }
 
-            var groupsOfStands = viewItems.Where(x => x.PerennialStandGroupId != Guid.Empty).GroupBy(x => x.PerennialStandGroupId);
+            var groupsOfStands = viewItems.Where(x => x.PerennialStandGroupId != Guid.Empty)
+                .GroupBy(x => x.PerennialStandGroupId);
 
             return groupsOfStands;
         }
@@ -181,65 +161,55 @@ namespace H.Core.Services.LandManagement
         public void AssignTillageToFinalYearOfPerennialStands(IEnumerable<CropViewItem> viewItems)
         {
             foreach (var cropViewItem in viewItems)
-            {
                 if (cropViewItem.CropType.IsPerennial())
                 {
                     if (cropViewItem.YearInPerennialStand == cropViewItem.PerennialStandLength)
                     {
                         if (cropViewItem.CropType == CropType.RangelandNative)
-                        {
                             // Rangelands are never tilled
                             cropViewItem.TillageType = TillageType.NoTill;
-                        }
                         else
-                        {
                             cropViewItem.TillageType = TillageType.Reduced;
-                        }
                     }
                     else
                     {
                         cropViewItem.TillageType = TillageType.NoTill;
                     }
                 }
-            }
         }
 
         protected void ProcessPerennials(IEnumerable<CropViewItem> viewItems, FieldSystemComponent fieldSystemComponent)
         {
-            this.AssignPerennialStandIds(viewItems, fieldSystemComponent);
-            this.AssignPerennialStandPositionalYears(viewItems, fieldSystemComponent);
-            this.AssignPerennialViewItemsDescription(viewItems);
-            this.AssignPerennialRootsReturned(viewItems);
-            this.AssignTillageToFinalYearOfPerennialStands(viewItems);
+            AssignPerennialStandIds(viewItems, fieldSystemComponent);
+            AssignPerennialStandPositionalYears(viewItems, fieldSystemComponent);
+            AssignPerennialViewItemsDescription(viewItems);
+            AssignPerennialRootsReturned(viewItems);
+            AssignTillageToFinalYearOfPerennialStands(viewItems);
         }
 
         public void PostProcessPerennials(FieldSystemComponent fieldSystemComponent, Farm farm)
         {
             var stageState = farm.GetFieldSystemDetailsStageState();
-            if (stageState == null)
-            {
-                return;
-            }
+            if (stageState == null) return;
 
-            var viewItemsForField = stageState.DetailsScreenViewCropViewItems.Where(x => x.FieldSystemComponentGuid == fieldSystemComponent.Guid).OrderBy(x => x.Year).ToList();
+            var viewItemsForField = stageState.DetailsScreenViewCropViewItems
+                .Where(x => x.FieldSystemComponentGuid == fieldSystemComponent.Guid).OrderBy(x => x.Year).ToList();
 
             foreach (var cropViewItem in viewItemsForField)
             {
                 var nextYear = cropViewItem.Year + 1;
-                var hasCropInNextYear = viewItemsForField.SingleOrDefault(x => x.Year == nextYear && x.IsSecondaryCrop == false) != null;
+                var hasCropInNextYear =
+                    viewItemsForField.SingleOrDefault(x => x.Year == nextYear && x.IsSecondaryCrop == false) != null;
 
-                if (cropViewItem.CropType.IsPerennial() && cropViewItem.IsFinalYearInPerennialStand() && hasCropInNextYear == false)
-                {
-                    cropViewItem.PercentageOfRootsReturnedToSoil = 30;
-                }
-                else
-                {
-                    // Leave whatever was set for the last year (by default this will be 100% set at initialization)
-                }
+                if (cropViewItem.CropType.IsPerennial() && cropViewItem.IsFinalYearInPerennialStand() &&
+                    hasCropInNextYear == false) cropViewItem.PercentageOfRootsReturnedToSoil = 30;
 
+                // Leave whatever was set for the last year (by default this will be 100% set at initialization)
                 if (farm.IsNonSwathingGrazingScenario(cropViewItem))
                 {
-                    var moistureContent = cropViewItem.GrazingViewItems.Any() ? cropViewItem.GrazingViewItems.Average(x => x.MoistureContentAsPercentage) : 1;
+                    var moistureContent = cropViewItem.GrazingViewItems.Any()
+                        ? cropViewItem.GrazingViewItems.Average(x => x.MoistureContentAsPercentage)
+                        : 1;
                     cropViewItem.MoistureContentOfCropPercentage = moistureContent;
                 }
 
@@ -248,10 +218,7 @@ namespace H.Core.Services.LandManagement
                 if (harvestViewItems.Any())
                 {
                     var moistureContent = harvestViewItems.Average(x => x.MoistureContentAsPercentage);
-                    if (moistureContent == 0)
-                    {
-                        moistureContent = 1;
-                    }
+                    if (moistureContent == 0) moistureContent = 1;
 
                     cropViewItem.MoistureContentOfCropPercentage = moistureContent;
                 }

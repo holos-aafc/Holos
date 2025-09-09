@@ -1,8 +1,4 @@
-﻿#region Imports
-
-#endregion
-
-using H.Infrastructure;
+﻿using H.Infrastructure;
 
 namespace H.Core.Models.Animals.OtherAnimals
 {
@@ -14,30 +10,10 @@ namespace H.Core.Models.Animals.OtherAnimals
 
         public OtherLivestockComponent()
         {
-            this.ComponentNameDisplayString = ComponentType.OtherLivestock.GetDescription();
-            this.ComponentCategory = ComponentCategory.OtherLivestock;
-            this.ComponentType = ComponentType.OtherLivestock;
+            ComponentNameDisplayString = ComponentType.OtherLivestock.GetDescription();
+            ComponentCategory = ComponentCategory.OtherLivestock;
+            ComponentType = ComponentType.OtherLivestock;
         }
-
-        #endregion
-
-        #region Fields
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
-        #region Public Methods
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
-
-        #region Event Handlers
 
         #endregion
     }
