@@ -46,7 +46,7 @@ namespace H.Core.Services.Initialization.Crops
                 managementPeriod.Start.ToString("MM/dd/yyyy"),
                 managementPeriod.End.ToString("MM/dd/yyyy"),
                 managementPeriod.NumberOfDays,
-                managementPeriod.SelectedDiet.Name.ToLowerInvariant());
+                managementPeriod.SelectedDiet?.Name?.ToLowerInvariant());
         }
 
         public void InitializeGrazingViewItems(Farm farm, CropViewItem viewItem,
