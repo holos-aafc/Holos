@@ -147,7 +147,7 @@ namespace H.Core.Test.Calculators.Nitrogen
             var result = _sut.CalculateTopographyEmissions(
                 fractionOfLandOccupiedByLowerPortionsOfLandscape: 0.1,
                 growingSeasonPrecipitation: 0,
-                growingSeasonEvapotranspiration: 0);
+                growingSeasonEvapotranspiration: 0, amountOfIrrigation: 0);
 
             Assert.AreEqual(0, result);
         }

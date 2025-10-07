@@ -150,7 +150,7 @@ namespace H.Core.Calculators.Nitrogen
             var emissionsDueToLandscapeAndTopography = this.CalculateTopographyEmissions(
                 fractionOfLandOccupiedByLowerPortionsOfLandscape: fractionOfLandOccupiedByLowerPortionsOfLandscape,
                 growingSeasonPrecipitation: farm.GetGrowingSeasonPrecipitation(year),
-                growingSeasonEvapotranspiration: farm.GetGrowingSeasonEvapotranspiration(year));
+                growingSeasonEvapotranspiration: farm.GetGrowingSeasonEvapotranspiration(year), amountOfIrrigation: viewItem.AmountOfIrrigation);
 
             var baseEcodistrictFactor = this.CalculateBaseEcodistrictValue(
                 topographyEmission: emissionsDueToLandscapeAndTopography,
@@ -453,11 +453,11 @@ namespace H.Core.Calculators.Nitrogen
         /// <param name="fractionOfLandOccupiedByLowerPortionsOfLandscape">Fraction of land occupied by lower portions of landscape (from Rochette et al. 2008)</param>
         /// <param name="growingSeasonPrecipitation">Annual growing season precipitation (May – October)</param>
         /// <param name="growingSeasonEvapotranspiration">Growing season potential evapotranspiration, by ecodistrict (May – October)</param>
+        /// <param name="amountOfIrrigation"></param>
         /// <returns>N2O emission factor adjusted due to position in landscape and moisture regime (kg N2O-N)</returns>
-        public double CalculateTopographyEmissions(
-            double fractionOfLandOccupiedByLowerPortionsOfLandscape,
+        public double CalculateTopographyEmissions(double fractionOfLandOccupiedByLowerPortionsOfLandscape,
             double growingSeasonPrecipitation,
-            double growingSeasonEvapotranspiration)
+            double growingSeasonEvapotranspiration, double amountOfIrrigation)
         {
             if (Math.Abs(growingSeasonEvapotranspiration) < double.Epsilon)
             {
@@ -479,21 +479,21 @@ namespace H.Core.Calculators.Nitrogen
              */
 
             // For irrigated sites
-            if (Math.Abs(growingSeasonPrecipitation - growingSeasonEvapotranspiration) < double.Epsilon)
+            if (amountOfIrrigation > 0 || Math.Abs(growingSeasonPrecipitation - growingSeasonEvapotranspiration) < double.Epsilon)
             {
-                result = emissionFactorForIrrigatedSites;
+                return emissionFactorForIrrigatedSites;
             }
             
             // For humid environments
             if ((growingSeasonPrecipitation / growingSeasonEvapotranspiration) > 1)
             {
-                result = emissionFactorForHumidEnvironments;
+                return emissionFactorForHumidEnvironments;
             }
 
             // For dry environments
             if ((growingSeasonPrecipitation / growingSeasonEvapotranspiration) <= 1)
             {
-                result = emissionFactorForDryEnvironments;
+                return emissionFactorForDryEnvironments;
             }
 
             return result;
