@@ -104,6 +104,11 @@ namespace H.Core.Test.Providers.Climate
             // May 1 = 122nd day of year
             // October 31 = 305 day of year
 
+            var a = northData.Where(x => x.Year == 1985 && x.JulianDay >= 122 && x.JulianDay <= 305).Select(x => x.SolarRadiation);
+            var b = northData.Where(x => x.Year == 1984 && x.JulianDay >= 122 && x.JulianDay <= 305).Select(x => x.SolarRadiation);
+            var c = northData.Where(x => x.Year == 1983 && x.JulianDay >= 122 && x.JulianDay <= 305).Select(x => x.SolarRadiation); 
+            var d = northData.Where(x => x.Year == 1982 && x.JulianDay >= 122 && x.JulianDay <= 305).Select(x => x.SolarRadiation);
+
             // present data
             var northGrowingSeasonValues = northData.Where(x => x.Year == 2019 && x.JulianDay >= 122 && x.JulianDay <= 305).Select(x => x.MeanDailyPrecipitation);
             var eastGrowingSeasonValues = eastData.Where(x => x.Year == 2019 && x.JulianDay >= 122 && x.JulianDay <= 305).Select(x => x.MeanDailyPrecipitation);

@@ -5,7 +5,6 @@
         #region Public Methods
 
         /// <summary>
-        /// Equation 2.5.3-1
         /// Equation 2.7.5-1
         /// Equation 2.7.5-2
         /// </summary>

@@ -68,8 +68,8 @@ namespace H.Core.Services.Initialization.Animals
                 if (managementPeriod.ManureDetails.StateType.IsGrazingArea())
                 {
                     managementPeriod.ManureDetails.LeachingFraction = _nitrogenInputCalculator.CalculateFractionOfNitrogenLostByLeachingAndRunoff(
-                        growingSeasonPrecipitation: farm.ClimateData.PrecipitationData.CalculateGrowingSeasonPrecipitation(),
-                        growingSeasonEvapotranspiration: farm.ClimateData.EvapotranspirationData.CalculateGrowingSeasonEvapotranspiration());
+                        growingSeasonPrecipitation: farm.ClimateData.GetGrowingSeasonPrecipitation(managementPeriod.Start.Year),
+                        growingSeasonEvapotranspiration: farm.ClimateData.GetGrowingSeasonEvapotranspiration(managementPeriod.Start.Year));
                 }
                 else
                 {

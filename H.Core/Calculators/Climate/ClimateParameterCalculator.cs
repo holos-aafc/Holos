@@ -313,7 +313,7 @@ namespace H.Core.Calculators.Climate
         /// Eq. 1.6.2-4
         /// </summary>
         /// <param name="maxTemp">Maximum temperature of all temps considered</param>
-        /// <param name="minTemp">Minimum tempearture of all temps considered</param>
+        /// <param name="minTemp">Minimum temperature of all temps considered</param>
         /// <param name="cropType">The crop you wish to measure</param>
         /// <param name="meanDailyTemp">Mean daily temperature (C)</param>
         /// <param name="solarRadiaton">Solar radiation (MJ m^-2 day^-1)</param>
