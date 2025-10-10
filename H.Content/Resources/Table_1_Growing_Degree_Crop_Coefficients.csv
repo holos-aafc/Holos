@@ -1,5 +1,5 @@
 "Table 1. Values for the coefficients a; b; c; d; and e required to calculate growing degree day driven crop coefficients (Kc)(from Martel et al. 2021)"
-Crop type, factor a,factor b,factor c, factor d,factor e
+Crop type, a, b, c, d, e
 Alfalfa seed,1.05E-01,3.82E-03,-6.77E-06,4.83E-09,-1.25E-12
 Tame legume,1.05E-01,3.82E-03,-6.77E-06,4.83E-09,-1.25E-12
 Barley,4.22E-02,1.51E-03,4.89E-06,-8.69E-09,2.49E-12
