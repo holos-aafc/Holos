@@ -47,6 +47,26 @@ namespace H.Core.Test.Providers.Climate
         #endregion
 
         [TestMethod]
+        public void IsValidDailyDataReturnsFalseDuring2025()
+        {
+            var dailyData = new DailyClimateData();
+            dailyData.Year = 2025; // Year NASA API was shutdown in October due to US government funding issues
+            dailyData.SolarRadiation = -999;
+
+            Assert.IsFalse(_nasaClimateProvider.IsValidDailyData(dailyData));
+        }
+
+        [TestMethod]
+        public void IsValidDailyDataReturnsTrue()
+        {
+            var dailyData = new DailyClimateData();
+            dailyData.Year = 2024;
+            dailyData.SolarRadiation = 100;
+
+            Assert.IsTrue(_nasaClimateProvider.IsValidDailyData(dailyData));
+        }
+
+        [TestMethod]
         public void IsCachedReturnsTrue()
         {
             const double latitude = 49.6;
@@ -108,6 +128,8 @@ namespace H.Core.Test.Providers.Climate
             var b = northData.Where(x => x.Year == 1984 && x.JulianDay >= 122 && x.JulianDay <= 305).Select(x => x.SolarRadiation);
             var c = northData.Where(x => x.Year == 1983 && x.JulianDay >= 122 && x.JulianDay <= 305).Select(x => x.SolarRadiation); 
             var d = northData.Where(x => x.Year == 1982 && x.JulianDay >= 122 && x.JulianDay <= 305).Select(x => x.SolarRadiation);
+
+            var i = northData.Where(x => x.Year == 2025 && x.JulianDay >= 122 && x.JulianDay <= 364).Select(x => new { Date = x.Date, t = x.MeanDailyAirTemperature, precip = x.MeanDailyPrecipitation, pet = x.MeanDailyPET, solar = x.SolarRadiation});
 
             // present data
             var northGrowingSeasonValues = northData.Where(x => x.Year == 2019 && x.JulianDay >= 122 && x.JulianDay <= 305).Select(x => x.MeanDailyPrecipitation);

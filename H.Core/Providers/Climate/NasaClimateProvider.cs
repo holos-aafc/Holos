@@ -1,6 +1,7 @@
 ﻿using H.Core.Calculators.Climate;
 using H.Core.Tools;
 using Newtonsoft.Json.Linq;
+using SharpKml.Dom;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,6 +9,7 @@ using System.IO;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using TimeSpan = System.TimeSpan;
 
 namespace H.Core.Providers.Climate
 {
@@ -158,6 +160,12 @@ namespace H.Core.Providers.Climate
                 data.MeanDailyPrecipitation = (double)rainE.Current.Value;
                 data.RelativeHumidity = (double)relativeHumidityE.Current.Value;
                 data.SolarRadiation = (double)solarRadiationE.Current.Value; // Note: Nasa provides this value with units of measurement of MJ/m^2/day which is what the evapotranspiration calculator expects. No conversion is needed here
+
+                if (this.IsValidDailyData(data) == false)
+                {
+                    continue;
+                }
+
                 data.MeanDailyPET = _evapotranspirationCalculator.CalculateReferenceEvapotranspiration(data.MeanDailyAirTemperature, data.SolarRadiation, data.RelativeHumidity);
                 data.JulianDay = julian++;
 
@@ -178,11 +186,30 @@ namespace H.Core.Providers.Climate
                 }
 
                 data.Date = new DateTime(data.Year, 1, 1).AddDays(data.JulianDay - 1);
-
+                
                 customClimateData.Add(data);
             }
 
             return customClimateData;
+        }
+
+        /// <summary>
+        /// In 2025, US government was shutdown in October. Data after ~ October 5th is missing all values (we just check solar radiation here since that is sufficient to determine if the data set is missing).
+        ///
+        /// If solar radiation is undefined, skip this entry as it is needed for PET calculation. When this value is not returned, climate normals will need to be used
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public bool IsValidDailyData(DailyClimateData data)
+        {
+            if ((Math.Abs(data.SolarRadiation - (-999)) < double.Epsilon) && data.Year == 2025)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         /// <summary>
