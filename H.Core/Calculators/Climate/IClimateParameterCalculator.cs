@@ -8,75 +8,73 @@ namespace H.Core.Calculators.Climate
     public interface IClimateParameterCalculator
     {
         double CalculateClimateParameter(int emergenceDay,
-                                         int ripeningDay,
-                                         double yield,
-                                         double clay,
-                                         double sand,
-                                         double layerThicknessInMillimeters,
-                                         double percentageSoilOrganicCarbon,
-                                         double variance,
-                                         double alfa,
-                                         double decompositionMinimumTemperature,
-                                         double decompositionMaximumTemperature,
-                                         double moistureResponseFunctionAtWiltingPoint,
-                                         double moistureResponseFunctionAtSaturation,
-                                         List<double> evapotranspirations,
-                                         List<double> precipitations,
-                                         List<double> temperatures);
+            int ripeningDay,
+            double yield,
+            double clay,
+            double sand,
+            double layerThicknessInMillimeters,
+            double percentageSoilOrganicCarbon,
+            double variance,
+            double alfa,
+            double decompositionMinimumTemperature,
+            double decompositionMaximumTemperature,
+            double moistureResponseFunctionAtWiltingPoint,
+            double moistureResponseFunctionAtSaturation,
+            List<double> evapotranspirations,
+            List<double> precipitations,
+            List<double> temperatures, List<double> dailyMinimumTemperatures, List<double> dailyMaximumTemperatures,
+            CropType cropType);
 
         double CalculateClimateManagementFactor(double climateParameter, double tillageFactor);
 
-        List<ClimateParameterDailyResult> CalculateDailyClimateParameterResults(
-            int emergenceDay, 
-            int ripeningDay, 
-            double yield, 
-            double clay, 
-            double sand, 
-            double layerThicknessInMillimeters, 
-            double percentageSoilOrganicCarbon, 
-            double variance, 
-            double alfa, 
-            double decompositionMinimumTemperature, 
-            double decompositionMaximumTemperature, 
-            double moistureResponseFunctionAtWiltingPoint, 
-            double moistureResponseFunctionAtSaturation, 
-            List<double> evapotranspirations, 
-            List<double> precipitations, 
-            List<double> temperatures);
+        List<ClimateParameterDailyResult> CalculateDailyClimateParameterResults(int emergenceDay,
+            int ripeningDay,
+            double yield,
+            double clay,
+            double sand,
+            double layerThicknessInMillimeters,
+            double percentageSoilOrganicCarbon,
+            double variance,
+            double alfa,
+            double decompositionMinimumTemperature,
+            double decompositionMaximumTemperature,
+            double moistureResponseFunctionAtWiltingPoint,
+            double moistureResponseFunctionAtSaturation,
+            List<double> evapotranspirations,
+            List<double> precipitations,
+            List<double> temperatures, List<double> dailyMinimumTemperatures, List<double> dailyMaximumTemperatures,
+            CropType cropType);
 
         double CalculateManagementFactor(
             double climateParameter,
             double tillageFactor);
 
-        double CalculateClimateParameterForYear(
-            Farm farm,
+        double CalculateClimateParameterForYear(Farm farm,
             CropViewItem cropViewItem,
             List<double> evapotranspirations,
-            List<double> precipitations, 
-            List<double> temperatures);
+            List<double> precipitations,
+            List<double> temperatures, List<double> dailyMinimumTemperatures, List<double> dailyMaximumTemperatures);
 
-        List<ClimateParameterDailyResult> CalculateDailyClimateParameters(
-            Farm farm,
+        List<ClimateParameterDailyResult> CalculateDailyClimateParameters(Farm farm,
             CropViewItem cropViewItem,
             List<double> dailyEvapotranspiration,
             List<double> dailyPrecipitation,
-            List<double> dailyTemperature);
+            List<double> dailyTemperature, List<double> dailyMinimumTemperature, List<double> dailyMaximumTemperature);
 
         /// <summary>
-        /// Eq. 1.6.2-4
+        /// Equation 1.6.2-5
         /// </summary>
-        /// <param name="maxTemp">Maximum temperature of all temps considered</param>
-        /// <param name="minTemp">Minimum tempearture of all temps considered</param>
-        /// <param name="cropType">The crop you wish to measure</param>
-        /// <param name="meanDailyTemp">Mean daily temperature (C)</param>
-        /// <param name="solarRadiaton">Solar radiation (MJ m^-2 day^-1)</param>
-        /// <param name="relativeHumidity">Relative humidity(%)</param>
+        /// <param name="cropType"></param>
+        /// <param name="greenAreaIndex"></param>
+        /// <param name="maximumTemperatureForDay"></param>
+        /// <param name="minimumTemperatureForDay"></param>
+        /// <param name="meanTemperatureForDay"></param>
         /// <returns></returns>
-        double CalculateCropSpecificEvapotranspirationNoWaterAvailability(double maxTemp,
-                                                                                          double minTemp,
-                                                                                          CropType cropType,
-                                                                                          double meanDailyTemp,
-                                                                                          double solarRadiaton,
-                                                                                          double relativeHumidity);
+        double CalculateCropCoefficient(
+            CropType cropType,
+            double greenAreaIndex,
+            double maximumTemperatureForDay,
+            double minimumTemperatureForDay, 
+            double meanTemperatureForDay);
     }
 }

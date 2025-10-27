@@ -25,6 +25,9 @@ namespace H.Core.Providers.Climate
     ///
     /// Parameter definitions:
     /// https://power.larc.nasa.gov/#resources
+    ///
+    /// All parameters:
+    /// https://power.larc.nasa.gov/parameters/
     /// </summary>
     public class NasaClimateProvider
     {
@@ -140,13 +143,26 @@ namespace H.Core.Providers.Climate
             var solarRadiation = (JObject)featuresValueArray["parameter"]["ALLSKY_SFC_SW_DWN"];
             var solarRadiationE = solarRadiation.GetEnumerator();
 
+            // Minimum temperature and its enumerator to access the next data
+            var minimumTemperature = (JObject)featuresValueArray["parameter"]["T2M_MIN"];
+            var minimumTemperatureE = minimumTemperature.GetEnumerator();
+
+            // Maximum temperature and its enumerator to access the next data
+            var maximumTemperature = (JObject)featuresValueArray["parameter"]["T2M_MAX"];
+            var maximumTemperatureE = maximumTemperature.GetEnumerator();
+
             // Creating a temp file for the NASA data
 
             var customClimateData = new List<DailyClimateData>();
 
             // NOTE: NASA API does not provide evapotranspiration - this needs to be calculated by caller
             int julian = 1;
-            while (rainE.MoveNext() && temperatureE.MoveNext() && relativeHumidityE.MoveNext() && solarRadiationE.MoveNext())
+            while (rainE.MoveNext() && 
+                   temperatureE.MoveNext() && 
+                   relativeHumidityE.MoveNext() && 
+                   solarRadiationE.MoveNext() &&
+                   minimumTemperatureE.MoveNext() &&
+                   maximumTemperatureE.MoveNext())
             {
                 var data = new DailyClimateData();
                 if (rainE.Current.Key.Substring(4, 4) == "0101")
@@ -157,6 +173,8 @@ namespace H.Core.Providers.Climate
 
                 data.Year = int.Parse(rainE.Current.Key.Substring(0, 4));
                 data.MeanDailyAirTemperature = (double)temperatureE.Current.Value;
+                data.MinimumAirTemperature = (double)minimumTemperatureE.Current.Value;
+                data.MaximumAirTemperature = (double)maximumTemperatureE.Current.Value;
                 data.MeanDailyPrecipitation = (double)rainE.Current.Value;
                 data.RelativeHumidity = (double)relativeHumidityE.Current.Value;
                 data.SolarRadiation = (double)solarRadiationE.Current.Value; // Note: Nasa provides this value with units of measurement of MJ/m^2/day which is what the evapotranspiration calculator expects. No conversion is needed here
@@ -232,11 +250,19 @@ namespace H.Core.Providers.Climate
             // AG: Agroclimatology
             var userCommunity = "AG";
 
+            /*
+             * All parameters:
+             *
+             * https://power.larc.nasa.gov/parameters/
+             */
+
             // T2M: temperature at 2 meters (C)
+            // T2M_MIN: temperature at 2 meters (C) Minimum
+            // T2M_MAX: temperature at 2 meters (C) Maximum
             // PRECTOT: Precipitation Corrected (mm)
             // RH2M: relative humidity @ 2 m.
             // ALLSKY_SFC_SW_DWN: All Sky Insolation Incident on a Horizontal Surface (AKA solar radiation) (MJ/m^2/day *when AG community type is specified)
-            var parameters = "T2M,PRECTOTCORR,RH2M,ALLSKY_SFC_SW_DWN";
+            var parameters = "T2M,PRECTOTCORR,RH2M,ALLSKY_SFC_SW_DWN,T2M_MIN,T2M_MAX";
 
             var latitudeString = latitude.ToString(Infrastructure.InfrastructureConstants.EnglishCultureInfo.NumberFormat);
             var longitudeString = longitude.ToString(Infrastructure.InfrastructureConstants.EnglishCultureInfo.NumberFormat);

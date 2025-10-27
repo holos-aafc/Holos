@@ -129,7 +129,8 @@ namespace H.Core.Test.Providers.Climate
             var c = northData.Where(x => x.Year == 1983 && x.JulianDay >= 122 && x.JulianDay <= 305).Select(x => x.SolarRadiation); 
             var d = northData.Where(x => x.Year == 1982 && x.JulianDay >= 122 && x.JulianDay <= 305).Select(x => x.SolarRadiation);
 
-            var i = northData.Where(x => x.Year == 2025 && x.JulianDay >= 122 && x.JulianDay <= 364).Select(x => new { Date = x.Date, t = x.MeanDailyAirTemperature, precip = x.MeanDailyPrecipitation, pet = x.MeanDailyPET, solar = x.SolarRadiation});
+            var i = northData.Where(x => x.Year == 2025 && x.JulianDay >= 122 && x.JulianDay <= 364).Select(x => new { Date = x.Date, t = x.MeanDailyAirTemperature, precip = x.MeanDailyPrecipitation, pet = x.MeanDailyPET, solar = x.SolarRadiation, minTemp = x.MinimumAirTemperature, maxTemp = x.MaximumAirTemperature});
+            var j = northData.Where(x => x.Year == 2024 && x.JulianDay >= 122 && x.JulianDay <= 364).Select(x => new { Date = x.Date, t = x.MeanDailyAirTemperature, precip = x.MeanDailyPrecipitation, pet = x.MeanDailyPET, solar = x.SolarRadiation, minTemp = x.MinimumAirTemperature, maxTemp = x.MaximumAirTemperature });
 
             // present data
             var northGrowingSeasonValues = northData.Where(x => x.Year == 2019 && x.JulianDay >= 122 && x.JulianDay <= 305).Select(x => x.MeanDailyPrecipitation);

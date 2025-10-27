@@ -51,13 +51,17 @@ namespace H.Core.Calculators.Climate
 
                     var temperatureList = climateDataForYear.OrderBy(climateData => climateData.JulianDay).Select(climateData => climateData.MeanDailyAirTemperature).ToList();
                     var evapotranspirationList = climateDataForYear.OrderBy(climateData => climateData.JulianDay).Select(climateData => climateData.MeanDailyPET).ToList();
+                    var minimumTemperatureList = climateDataForYear.OrderBy(climateData => climateData.JulianDay).Select(climateData => climateData.MinimumAirTemperature).ToList();
+                    var maximumTemperatureList = climateDataForYear.OrderBy(climateData => climateData.JulianDay).Select(climateData => climateData.MaximumAirTemperature).ToList();
 
                     climateParameter = _climateParameterCalculator.CalculateClimateParameterForYear(
                         farm: farm,
                         cropViewItem: viewItem,
                         evapotranspirations: evapotranspirationList,
                         precipitations: totalPrecipitationList,
-                        temperatures: temperatureList);
+                        temperatures: temperatureList, 
+                        dailyMinimumTemperatures: minimumTemperatureList, 
+                        dailyMaximumTemperatures: maximumTemperatureList);
                 }
                 else
                 {
@@ -71,7 +75,9 @@ namespace H.Core.Calculators.Climate
                         cropViewItem: viewItem,
                         evapotranspirations: farm.ClimateData.EvapotranspirationData.GetAveragedYearlyValues(),
                         precipitations: totalPrecipitationList,
-                        temperatures: farm.ClimateData.TemperatureData.GetAveragedYearlyValues());
+                        temperatures: farm.ClimateData.TemperatureData.GetAveragedYearlyValues(), 
+                        dailyMinimumTemperatures: farm.ClimateData.TemperatureData.GetAveragedYearlyValues(), 
+                        dailyMaximumTemperatures: farm.ClimateData.TemperatureData.GetAveragedYearlyValues());
                 }
 
                 return Math.Round(climateParameter, CoreConstants.DefaultNumberOfDecimalPlaces);
@@ -89,7 +95,9 @@ namespace H.Core.Calculators.Climate
                     cropViewItem: viewItem,
                     evapotranspirations: farm.ClimateData.EvapotranspirationData.GetAveragedYearlyValues(),
                     precipitations: totalPrecipitationList,
-                    temperatures: farm.ClimateData.TemperatureData.GetAveragedYearlyValues());
+                    temperatures: farm.ClimateData.TemperatureData.GetAveragedYearlyValues(), 
+                    dailyMinimumTemperatures: farm.ClimateData.TemperatureData.GetAveragedYearlyValues(), 
+                    dailyMaximumTemperatures: farm.ClimateData.TemperatureData.GetAveragedYearlyValues());
 
                 return Math.Round(result, CoreConstants.DefaultNumberOfDecimalPlaces);
             }

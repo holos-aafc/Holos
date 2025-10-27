@@ -16,6 +16,16 @@ namespace H.Core.Providers.Climate
         public double MeanDailyAirTemperature { get; set; }
 
         /// <summary>
+        /// (degrees C)
+        /// </summary>
+        public double MaximumAirTemperature { get; set; }
+
+        /// <summary>
+        /// (degrees C)
+        /// </summary>
+        public double MinimumAirTemperature { get; set; }
+
+        /// <summary>
         /// (mm)
         /// </summary>
         public double MeanDailyPrecipitation { get; set; }

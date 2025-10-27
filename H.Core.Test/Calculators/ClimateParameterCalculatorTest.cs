@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using H.Content;
 using H.Core.Calculators.Climate;
+using H.Core.Enumerations;
 using H.Core.Providers.Temperature;
 using H.Infrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -40,11 +41,14 @@ namespace H.Core.Test.Calculators
             const double decompositionMaximumTemperature = 30;
             const double moistureResponseFunctionAtSaturation = 0.4;
             const double moistureResponseFunctionAtWiltingPoint = 0.18;
+            const CropType cropType = CropType.None;
 
             var kapuskasingTestFileLines = CsvResourceReader.GetFileLines(CsvResourceNames.Kapuskasing);
             var temperatures = new List<double>();
             var precipitations = new List<double>();
             var evapotranspirations = new List<double>();
+            var dailyMinimumTemperatures = new List<double>();
+            var dailyMaximumTemperatures = new List<double>();
 
             for (var yearIndex = 1970; yearIndex < 1971; yearIndex++)
             {
@@ -58,8 +62,9 @@ namespace H.Core.Test.Calculators
 
                     temperatures.Add(double.Parse(line.ElementAt(5), InfrastructureConstants.EnglishCultureInfo));
                     precipitations.Add(double.Parse(line.ElementAt(6), InfrastructureConstants.EnglishCultureInfo));
-                    evapotranspirations.Add(double.Parse(line.ElementAt(7),
-                                                         InfrastructureConstants.EnglishCultureInfo));
+                    evapotranspirations.Add(double.Parse(line.ElementAt(7), InfrastructureConstants.EnglishCultureInfo));
+                    dailyMinimumTemperatures.Add(double.Parse(line.ElementAt(5), InfrastructureConstants.EnglishCultureInfo));
+                    dailyMaximumTemperatures.Add(double.Parse(line.ElementAt(5), InfrastructureConstants.EnglishCultureInfo));
                 }
 
                 var result = _sut.CalculateClimateParameter(emergenceDay,
@@ -77,7 +82,10 @@ namespace H.Core.Test.Calculators
                                                             moistureResponseFunctionAtSaturation,
                                                             evapotranspirations,
                                                             precipitations,
-                                                            temperatures);
+                                                            temperatures, 
+                                                            dailyMinimumTemperatures, 
+                                                            dailyMaximumTemperatures, 
+                                                            cropType);
             }
         }
 
@@ -97,11 +105,14 @@ namespace H.Core.Test.Calculators
             const double decompositionMaximumTemperature = 30;
             const double moistureResponseFunctionAtSaturation = 0.4;
             const double moistureResponseFunctionAtWiltingPoint = 0.18;
+            const CropType cropType = CropType.None;
 
             var kapuskasingTestFileLines = CsvResourceReader.GetFileLines(CsvResourceNames.Kapuskasing);
             var temperatures = new List<double>();
             var precipitations = new List<double>();
             var evapotranspirations = new List<double>();
+            var dailyMinimumTemperatures = new List<double>();
+            var dailyMaximumTemperatures = new List<double>();
 
             var file = H.Core.Test.Resource1.climate_parameter_tool_input.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
             foreach (var line in file)
@@ -117,7 +128,8 @@ namespace H.Core.Test.Calculators
                 temperatures.Add(temp);
                 precipitations.Add(prec);
                 evapotranspirations.Add(evap);
-
+                dailyMinimumTemperatures.Add(temp);
+                dailyMaximumTemperatures.Add(temp);
             }
 
             var result = _sut.CalculateClimateParameter(emergenceDay,
@@ -135,7 +147,10 @@ namespace H.Core.Test.Calculators
                                                         moistureResponseFunctionAtSaturation,
                                                         evapotranspirations,
                                                         precipitations,
-                                                        temperatures);
+                                                        temperatures, 
+                                                        dailyMinimumTemperatures, 
+                                                        dailyMaximumTemperatures, 
+                                                        cropType);
         }
 
         [TestMethod]
@@ -154,11 +169,14 @@ namespace H.Core.Test.Calculators
             const double decompositionMaximumTemperature = 30;
             const double moistureResponseFunctionAtSaturation = 0.4;
             const double moistureResponseFunctionAtWiltingPoint = 0.18;
+            const CropType cropType = CropType.None;
 
             var kapuskasingTestFileLines = CsvResourceReader.GetFileLines(CsvResourceNames.Kapuskasing);
             var temperatures = new List<double>();
             var precipitations = new List<double>();
             var evapotranspirations = new List<double>();
+            var dailyMinimumTemperatures = new List<double>();
+            var dailyMaximumTemperatures = new List<double>();
 
             double result = 0;
             for (var yearIndex = 1970; yearIndex < 1971; yearIndex++)
@@ -172,6 +190,8 @@ namespace H.Core.Test.Calculators
                     }
 
                     temperatures.Add(double.Parse(line.ElementAt(5), InfrastructureConstants.EnglishCultureInfo));
+                    dailyMinimumTemperatures.Add(double.Parse(line.ElementAt(5), InfrastructureConstants.EnglishCultureInfo));
+                    dailyMaximumTemperatures.Add(double.Parse(line.ElementAt(5), InfrastructureConstants.EnglishCultureInfo));
                     precipitations.Add(double.Parse(line.ElementAt(6), InfrastructureConstants.EnglishCultureInfo));
                     evapotranspirations.Add(double.Parse(line.ElementAt(7), InfrastructureConstants.EnglishCultureInfo));
                 }
@@ -191,7 +211,10 @@ namespace H.Core.Test.Calculators
                                                         moistureResponseFunctionAtSaturation,
                                                         evapotranspirations,
                                                         precipitations,
-                                                        temperatures);
+                                                        temperatures, 
+                                                        dailyMinimumTemperatures, 
+                                                        dailyMaximumTemperatures, 
+                                                        cropType);
             }
         }
 
@@ -215,12 +238,15 @@ namespace H.Core.Test.Calculators
             const double decompositionMaximumTemperature = 30;
             const double moistureResponseFunctionAtSaturation = 0.4;
             const double moistureResponseFunctionAtWiltingPoint = 0.18;
+            const CropType cropType = CropType.None;
 
             var kapuskasingTestFileLines = CsvResourceReader.GetFileLines(CsvResourceNames.Kapuskasing);
             var results = new Dictionary<int, double>();
             var temperatures = new List<double>();
             var precipitations = new List<double>();
             var evapotranspirations = new List<double>();
+            var dailyMinimumTemperatures = new List<double>();
+            var dailyMaximumTemperatures = new List<double>();
 
             for (var yearIndex = 1970; yearIndex <= 1999; yearIndex++)
             {
@@ -233,9 +259,10 @@ namespace H.Core.Test.Calculators
                     }
 
                     temperatures.Add(double.Parse(line.ElementAt(5), InfrastructureConstants.EnglishCultureInfo));
+                    dailyMinimumTemperatures.Add(double.Parse(line.ElementAt(5), InfrastructureConstants.EnglishCultureInfo));
+                    dailyMaximumTemperatures.Add(double.Parse(line.ElementAt(5), InfrastructureConstants.EnglishCultureInfo));
                     precipitations.Add(double.Parse(line.ElementAt(6), InfrastructureConstants.EnglishCultureInfo));
-                    evapotranspirations.Add(double.Parse(line.ElementAt(7),
-                                                         InfrastructureConstants.EnglishCultureInfo));
+                    evapotranspirations.Add(double.Parse(line.ElementAt(7), InfrastructureConstants.EnglishCultureInfo));
                 }
 
                 var result = _sut.CalculateClimateParameter(emergenceDay,
@@ -253,7 +280,10 @@ namespace H.Core.Test.Calculators
                                                             moistureResponseFunctionAtSaturation,
                                                             evapotranspirations,
                                                             precipitations,
-                                                            temperatures);
+                                                            temperatures,
+                                                            dailyMinimumTemperatures,
+                                                            dailyMaximumTemperatures, 
+                                                            cropType);
 
                 results.Add(yearIndex, Math.Round(result, 2));
 
@@ -307,18 +337,93 @@ namespace H.Core.Test.Calculators
         [TestMethod]
         public void CalculateCropCoefficientCorrectValue()
         {
-            var cropCoefficient = _sut.CalculateCropCoefficient(30.3, 21.5, Enumerations.CropType.AlfalfaSeed);
+            const double maxTemperatureForDay = 30.3;
+            const double minTemperatureForDay = 21.5;
+            var meanTemperature = (maxTemperatureForDay + minTemperatureForDay) / 2.0;
+
+            var cropCoefficient = _sut.CalculateCropCoefficient(30.3, 21.5, Enumerations.CropType.AlfalfaSeed, meanTemperature);
 
             Assert.AreEqual(0.1027, Math.Round(cropCoefficient, 4));
         }
 
         [TestMethod]
-        public void CalculateCropSpecificEvapotranspirationNoWaterAvailabilityReturnCorrectValue()
+        public void CalculateCropCoefficient_ReturnsExpected_ForTypicalValues()
         {
-            var result = _sut.CalculateCropSpecificEvapotranspirationNoWaterAvailability(30.3, 21.5, Enumerations.CropType.AlfalfaSeed, 12, 1, 30);
+            // Arrange
+            double maxTemp = 25.0;
+            double minTemp = 15.0;
+            double meanTemp = (maxTemp + minTemp) / 2.0;
+            var cropType = CropType.Wheat;
 
-            Assert.AreEqual(0.0564, Math.Round(result, 4));
+            // Act
+            double result = _sut.CalculateCropCoefficient(maxTemp, minTemp, cropType, meanTemp);
+
+            // Assert
+            Assert.AreEqual(-0.0192, result);
         }
+
+        [TestMethod]
+        public void CalculateCropCoefficient_ReturnsExpected_ForZeroMinimumAndMaximumTemperatures()
+        {
+            // Arrange
+            double maxTemp = 0;
+            double minTemp = 0;
+            double meanTemp = 15;
+            var cropType = CropType.Wheat;
+
+            // Act
+            double result = _sut.CalculateCropCoefficient(maxTemp, minTemp, cropType, meanTemp);
+
+            // Assert
+            Assert.AreEqual(0.0072082735700000015, result);
+        }
+
+        [TestMethod]
+        public void CalculateCropCoefficient_ReturnsSame_ForEqualMinMaxTemp()
+        {
+            // Arrange
+            double temp = 20.0;
+            var cropType = CropType.Barley;
+
+            // Act
+            double result = _sut.CalculateCropCoefficient(temp, temp, cropType, temp);
+
+            // Assert
+            Assert.AreEqual(0.06592104730625, result);
+        }
+
+        [TestMethod]
+        public void CalculateCropCoefficient_HandlesNegativeTemperatures()
+        {
+            // Arrange
+            double maxTemp = -2.0;
+            double minTemp = -5.0;
+            double meanTemp = (maxTemp + minTemp) / 2.0;
+            var cropType = CropType.Rye;
+
+            // Act
+            double result = _sut.CalculateCropCoefficient(maxTemp, minTemp, cropType, meanTemp);
+
+            // Assert
+            Assert.AreEqual(-0.029574134741082746, result);
+        }
+
+        [TestMethod]
+        public void CalculateCropCoefficient_ForPerennialCropType()
+        {
+            // Arrange
+            double maxTemp = 30.0;
+            double minTemp = 10.0;
+            double meanTemp = 15.0;
+            var cropType = CropType.AlfalfaSeed;
+
+            // Act
+            double result = _sut.CalculateCropCoefficient(maxTemp, minTemp, cropType, meanTemp);
+
+            // Assert
+            Assert.AreEqual(0.0019864688327069263, result);
+        }
+
         #endregion
     }
 }
