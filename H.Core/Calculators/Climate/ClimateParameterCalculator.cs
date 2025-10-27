@@ -293,6 +293,7 @@ namespace H.Core.Calculators.Climate
 
         /// <summary>
         /// Equation 1.6.2-3
+        /// Equation 1.6.2-4
         /// </summary>
         /// <param name="maximumTemperatureForDay">Maximum temperature of all temperatures considered</param>
         /// <param name="minimumTemperatureForDay">Minimum temperature of all temperatures considered</param>
@@ -352,6 +353,9 @@ namespace H.Core.Calculators.Climate
             return kc;
         }
 
+        /// <summary>
+        /// Equation 1.6.2-4
+        /// </summary>
         private double CalculateKcForPerennial(double a, double b, double temperatureTerm, double Tbase)
         {
             var innerExponentTerm = temperatureTerm - Tbase;
@@ -362,6 +366,9 @@ namespace H.Core.Calculators.Climate
             return finalFactor;
         }
 
+        /// <summary>
+        /// Equation 1.6.2-3
+        /// </summary>
         private double CalculateKcForAnnual(double a, double b, double c, double d, double e, double temperatureTerm, double Tbase)
         {
             var innerTerm = temperatureTerm - Tbase;

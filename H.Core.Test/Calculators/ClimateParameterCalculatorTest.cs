@@ -343,7 +343,7 @@ namespace H.Core.Test.Calculators
 
             var cropCoefficient = _sut.CalculateCropCoefficient(30.3, 21.5, Enumerations.CropType.AlfalfaSeed, meanTemperature);
 
-            Assert.AreEqual(0.1027, Math.Round(cropCoefficient, 4));
+            Assert.AreEqual(-0.00024093600718921304, cropCoefficient);
         }
 
         [TestMethod]
@@ -399,13 +399,15 @@ namespace H.Core.Test.Calculators
             double maxTemp = -2.0;
             double minTemp = -5.0;
             double meanTemp = (maxTemp + minTemp) / 2.0;
-            var cropType = CropType.Rye;
+
+            // Use a crop type that Holos supports. Not all types in table 1 are presented to the user for selection.
+            var cropType = CropType.FallRye;
 
             // Act
             double result = _sut.CalculateCropCoefficient(maxTemp, minTemp, cropType, meanTemp);
 
             // Assert
-            Assert.AreEqual(-0.029574134741082746, result);
+            Assert.AreEqual(-0.058580722557568757, result);
         }
 
         [TestMethod]

@@ -62,6 +62,10 @@ namespace H.Core.Providers.Climate
 
         public Table_1_Growing_Degree_Crop_Coefficients_Data GetByCropType(CropType cropType)
         {
+            /*
+             * Some of the default Holos crop types don't have direct matches in the table. Closest equivalents are used instead.
+             */
+
             var result = _cache.FirstOrDefault(x => x.Crop == cropType);
             if (result != null)
             {
@@ -82,6 +86,10 @@ namespace H.Core.Providers.Climate
             else if (cropType.IsOtherFieldCrop())
             {
                 return _cache.SingleOrDefault(x => x.Crop == CropType.SorghumSudanGrass);
+            }
+            else if (cropType == CropType.GrassSilage)
+            {
+                return _cache.SingleOrDefault(x => x.Crop == CropType.GrassHay);
             }
             else
             {

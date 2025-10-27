@@ -26,11 +26,11 @@ namespace H.Core.Test.Providers.Climate
             var data = _provider.GetGrowingDegreeCoefficients();
 
             #region Asserts
-            Assert.AreEqual(Enumerations.CropType.AlfalfaSeed, data[0].Crop);
-            Assert.AreEqual(Enumerations.CropType.TameLegume, data[1].Crop);
-            Assert.AreEqual(Enumerations.CropType.Dill, data[15].Crop);
-            Assert.AreEqual(Enumerations.CropType.GreenFeed, data[33].Crop);
-            Assert.AreEqual(Enumerations.CropType.FallRye, data[74].Crop);
+            Assert.AreEqual(CropType.AlfalfaSeed, data[0].Crop);
+            Assert.AreEqual(CropType.TameLegume, data[1].Crop);
+            Assert.AreEqual(CropType.Dill, data[15].Crop);
+            Assert.AreEqual(CropType.GreenFeed, data[33].Crop);
+            Assert.AreEqual(CropType.FallRye, data[74].Crop);
             #endregion
         }
 
@@ -58,6 +58,27 @@ namespace H.Core.Test.Providers.Climate
             {
                 var data = _provider.GetByCropType(i);
                 Assert.IsNotNull(data);
+            }
+        }
+
+        [TestMethod]
+        public void GetByCropType_Returns_Entry_For_All_ValidCropTypes()
+        {
+            // Ensure every crop returned by GetValidCropTypes maps to an entry in the provider
+            var validCropTypes = CropTypeExtensions.GetValidCropTypes().ToList();
+
+            // Remove types that don't apply
+            validCropTypes.Remove(CropType.SummerFallow);
+
+            foreach (var crop in validCropTypes)
+            {
+                var data = _provider.GetByCropType(crop);
+                Assert.IsNotNull(data, $"Provider returned null for crop {crop}");
+
+                Assert.AreNotEqual(0, data.A);
+
+                // Provider returns a default object when no match found; ensure Crop is set (not NotSelected)
+                Assert.AreNotEqual(CropType.NotSelected, data.Crop, $"No table entry found for crop {crop}");
             }
         }
     }
