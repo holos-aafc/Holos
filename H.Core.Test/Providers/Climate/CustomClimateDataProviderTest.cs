@@ -49,7 +49,7 @@ namespace H.Core.Test.Providers.Climate
         [TestMethod]
         public void ReadUserClimateFileReturnsNonEmptyList()
         {
-            var lines = Resource1.custom_climate_data.Split(new []{Environment.NewLine}, StringSplitOptions.None).ToList();
+            var lines = Resource1.custom_climate_data.Split(new []{Environment.NewLine, "\n"}, StringSplitOptions.None).ToList();
 
             var result = _provider.ParseFileLines(lines);
 

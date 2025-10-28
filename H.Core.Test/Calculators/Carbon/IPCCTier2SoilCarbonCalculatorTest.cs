@@ -114,7 +114,7 @@ namespace H.Core.Test.Calculators.Carbon
 
             // Read in monthly test data
             var data = Resource1.Tier2TestData;
-            var lines = data.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            var lines = data.Split(new string[] { Environment.NewLine , "\n"}, StringSplitOptions.RemoveEmptyEntries);
             foreach (var line in lines.Skip(1))
             {
                 var dataRow = new TestClimateData();

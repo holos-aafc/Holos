@@ -134,6 +134,7 @@ namespace H.Core.Models
         private bool _useCustomNitrogenFertilizerConversionFactor;
         private bool _useCustomPhosphorusFertilizerConversionFactor;
         private bool _useCustomPotassiumConversionFactor;
+        private bool _useCustomElectricityConversionFactor;
 
         // IPCC Tier 2 Carbon
         private int _defaultRunInPeriod;
@@ -741,6 +742,15 @@ namespace H.Core.Models
         {
             get => _useCustomPotassiumConversionFactor;
             set => SetProperty(ref _useCustomPotassiumConversionFactor, value);
+        }
+
+        /// <summary>
+        /// User can indicate if a custom electricity conversion factor should be used.
+        /// </summary>
+        public bool UseCustomElectricityConversionFactor
+        {
+            get => _useCustomElectricityConversionFactor;
+            set => SetProperty(ref _useCustomElectricityConversionFactor, value);
         }
 
         /// <summary>

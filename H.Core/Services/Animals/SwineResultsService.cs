@@ -297,9 +297,15 @@ namespace H.Core.Services.Animals
                 return;
             }
 
-            var energyConversionFactor = _energyConversionDefaultsProvider.GetElectricityConversionValue(
-                year: groupEmissionsByMonth.MonthsAndDaysData.Year, 
-                province: farm.DefaultSoilData.Province);
+            var energyConversionFactor = 0d;
+            if (farm.Defaults.UseCustomElectricityConversionFactor)
+            {
+                energyConversionFactor = farm.Defaults.ConversionOfElectricityToCo2;
+            }
+            else
+            {
+                energyConversionFactor = _energyConversionDefaultsProvider.GetElectricityConversionValue(groupEmissionsByMonth.MonthsAndDaysData.Year, farm.DefaultSoilData.Province);
+            }
 
             groupEmissionsByMonth.MonthlyEnergyCarbonDioxide = this.CalculateTotalCarbonDioxideEmissionsFromSwineHousing(
                 numberOfAnimals: groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.NumberOfAnimals,

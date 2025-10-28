@@ -353,7 +353,16 @@ namespace H.Core.Services.Animals
                 return;
             }
 
-            var energyConversionFactor  = _energyConversionDefaultsProvider.GetElectricityConversionValue(groupEmissionsByMonth.MonthsAndDaysData.Year, farm.DefaultSoilData.Province);
+            var energyConversionFactor = 0d;
+            if (farm.Defaults.UseCustomElectricityConversionFactor)
+            {
+                energyConversionFactor = farm.Defaults.ConversionOfElectricityToCo2;
+            }
+            else
+            {
+                energyConversionFactor = _energyConversionDefaultsProvider.GetElectricityConversionValue(groupEmissionsByMonth.MonthsAndDaysData.Year, farm.DefaultSoilData.Province);
+            }
+
             groupEmissionsByMonth.MonthlyEnergyCarbonDioxide = this.CalculateTotalEnergyCarbonDioxideEmissionsFromPoultryOperations(
                 numberOfAnimals: groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.NumberOfAnimals,
                 numberOfDays: groupEmissionsByMonth.MonthsAndDaysData.DaysInMonth,
@@ -526,7 +535,16 @@ namespace H.Core.Services.Animals
                 totalDaysInProductionCycle = 1;
             }
 
-            var energyConversionFactor = _energyConversionDefaultsProvider.GetElectricityConversionValue(groupEmissionsByMonth.MonthsAndDaysData.Year, farm.DefaultSoilData.Province);
+            var energyConversionFactor = 0d;
+            if (farm.Defaults.UseCustomElectricityConversionFactor)
+            {
+                energyConversionFactor = farm.Defaults.ConversionOfElectricityToCo2;
+            }
+            else
+            {
+                energyConversionFactor = _energyConversionDefaultsProvider.GetElectricityConversionValue(groupEmissionsByMonth.MonthsAndDaysData.Year, farm.DefaultSoilData.Province);
+            }
+
             var barnCapacity = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.NumberOfAnimals;
             var daysInMonth = (double) groupEmissionsByMonth.MonthsAndDaysData.DaysInMonth;
 
