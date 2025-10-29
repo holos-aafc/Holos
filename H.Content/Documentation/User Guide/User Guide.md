@@ -193,19 +193,31 @@ Holos can handle multiple farms created by the user, each representing different
 
 ## Formatting the custom climate data file
 
-In order to import your own climate data into Holos, the file must be a Comma Separated Values (CSV) and have the “.csv” file extension. The file must also contain the following columns:
+In order to import your own climate data into Holos, the file must be a Comma Separated Values (CSV) and have the ".csv" file extension. The file must also contain the following columns (headers are not case-sensitive and spaces are ignored when parsing):
 
-* **Year** – The year the climate data is from.
-* **Julian day** – The day based on the Julian Calendar.
-* **Mean daily air temperature** – The mean temperature of that day.
-*	**Mean daily precipitation** – The mean precipitation of that day.
-* **Mean daily potential evapotranspiration (PET)** – The mean potential evapotranspiration of that day.
+* **Year** – The year the climate data is from. (format: YYYY, e.g. 2020)
+* **Julian day** – The day based on the Julian Calendar. (integer: 1–366)
+* **Mean daily air temperature** – The mean temperature of that day. (units: degrees Celsius, °C)
+* **Mean daily precipitation** – The mean precipitation of that day. (units: millimetres, mm)
+* **Mean daily potential evapotranspiration (PET)** – The mean potential evapotranspiration of that day. (units: millimetres, mm)
+
+Optional columns:
+
+* **Maximum air temperature** – The maximum temperature recorded for the day. (units: degrees Celsius, °C)
+* **Minimum air temperature** – The minimum temperature recorded for the day. (units: degrees Celsius, °C)
+
+Notes and examples:
+
+- The parser matches columns by header name (case-insensitive) and ignores spaces, so the following header text are all acceptable: `MaximumAirTemperature`, `maximum air temperature`, `Maximum Air Temperature`, etc. The same applies to `MinimumAirTemperature`, `MeanDailyAirTemperature`, `MeanDailyPrecipitation`, and `MeanDailyPET`.
+- Column order is flexible: the parser locates data by header names, so you may place the optional max/min columns anywhere in the header row.
+- If both `MeanDailyAirTemperature` and `Maximum/MinimumAirTemperature` are provided, Holos will use the explicit mean from the `MeanDailyAirTemperature` column. If the mean is missing but both max and min are present, Holos computes the mean using `(max + min) /2`.
+- All numeric values should use a period (`.`) as the decimal separator (for example `12.5`), and values should be provided in the units listed above. If your data is in different units, convert them before importing.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter2/figure2-10.PNG" alt="Figure 2-10" width=""/>
-    <br>
-    <em>Figure: 2.10 custom climate data file format.</em>
+ <img src="../../Images/UserGuide/en/chapter2/figure2-10.PNG" alt="Figure 2.10" width=""/>
+ <br>
+ <em>Figure: 2.10 custom climate data file format. The two maximum/minimum temperature columns are optional; include them if you have daily extremes available.</em>
 </p>
 
 <br>
