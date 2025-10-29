@@ -82,9 +82,9 @@ namespace H.Core.Test.Calculators
                                                             moistureResponseFunctionAtSaturation,
                                                             evapotranspirations,
                                                             precipitations,
-                                                            temperatures, 
-                                                            dailyMinimumTemperatures, 
-                                                            dailyMaximumTemperatures, 
+                                                            temperatures,
+                                                            dailyMinimumTemperatures,
+                                                            dailyMaximumTemperatures,
                                                             cropType);
             }
         }
@@ -147,9 +147,9 @@ namespace H.Core.Test.Calculators
                                                         moistureResponseFunctionAtSaturation,
                                                         evapotranspirations,
                                                         precipitations,
-                                                        temperatures, 
-                                                        dailyMinimumTemperatures, 
-                                                        dailyMaximumTemperatures, 
+                                                        temperatures,
+                                                        dailyMinimumTemperatures,
+                                                        dailyMaximumTemperatures,
                                                         cropType);
         }
 
@@ -211,9 +211,9 @@ namespace H.Core.Test.Calculators
                                                         moistureResponseFunctionAtSaturation,
                                                         evapotranspirations,
                                                         precipitations,
-                                                        temperatures, 
-                                                        dailyMinimumTemperatures, 
-                                                        dailyMaximumTemperatures, 
+                                                        temperatures,
+                                                        dailyMinimumTemperatures,
+                                                        dailyMaximumTemperatures,
                                                         cropType);
             }
         }
@@ -282,7 +282,7 @@ namespace H.Core.Test.Calculators
                                                             precipitations,
                                                             temperatures,
                                                             dailyMinimumTemperatures,
-                                                            dailyMaximumTemperatures, 
+                                                            dailyMaximumTemperatures,
                                                             cropType);
 
                 results.Add(yearIndex, Math.Round(result, 2));
@@ -424,6 +424,129 @@ namespace H.Core.Test.Calculators
 
             // Assert
             Assert.AreEqual(0.0019864688327069263, result);
+        }
+
+        [TestMethod]
+        public void CalculateKcForAnnualCrops_TypicalValues_ReturnsExpected()
+        {
+            // Arrange
+            double a = 1.0;
+            double b = 0.1;
+            double c = 0.01;
+            double d = 0.001;
+            double e = 0.0001;
+            double temperatureTerm = 10.0;
+            double Tbase = 5.0;
+
+            // innerTerm =5 -> expected = a + b*5 + c*25 + d*125 + e*625
+            double expected = 1.9375;
+
+            // Act
+            double actual = _sut.CalculateKcForAnnualCrops(a, b, c, d, e, temperatureTerm, Tbase);
+
+            // Assert
+            Assert.AreEqual(expected, actual, 1e-9);
+        }
+
+        [TestMethod]
+        public void CalculateKcForAnnualCrops_TemperatureEqualsTbase_ReturnsA()
+        {
+            // Arrange
+            double a = 2.5;
+            double b = 0.2;
+            double c = 0.05;
+            double d = 0.001;
+            double e = 0.0002;
+            double temperatureTerm = 5.0;
+            double Tbase = 5.0;
+
+            // innerTerm =0 -> expected == a
+            double expected = a;
+
+            // Act
+            double actual = _sut.CalculateKcForAnnualCrops(a, b, c, d, e, temperatureTerm, Tbase);
+
+            // Assert
+            Assert.AreEqual(expected, actual, 1e-9);
+        }
+
+        [TestMethod]
+        public void CalculateKcForAnnualCrops_NegativeInnerTerm_ReturnsCorrectPolynomial()
+        {
+            // Arrange
+            double a = 1.0;
+            double b = 0.1;
+            double c = 0.01;
+            double d = 0.001;
+            double e = 0.0001;
+            double temperatureTerm = 3.0;
+            double Tbase = 5.0;
+
+            // innerTerm = -2 -> expected = a + b*(-2) + c*(4) + d*(-8) + e*(16) =0.8336
+            double expected = 0.8336;
+
+            // Act
+            double actual = _sut.CalculateKcForAnnualCrops(a, b, c, d, e, temperatureTerm, Tbase);
+
+            // Assert
+            Assert.AreEqual(expected, actual, 1e-9);
+        }
+
+        // Added tests for CalculateKcForPerennialCrops
+        [TestMethod]
+        public void CalculateKcForPerennialCrops_TypicalValues_ReturnsExpected()
+        {
+            // Arrange
+            double a = 1.0;
+            double b = 0.1;
+            double temperatureTerm = 10.0;
+            double Tbase = 5.0;
+
+            // expected = a * (1 - Math.Exp(-b * (temperatureTerm - Tbase)))
+            double expected = a * (1.0 - Math.Exp((-1.0) * b * (temperatureTerm - Tbase)));
+
+            // Act
+            double actual = _sut.CalculateKcForPerennialCrops(a, b, temperatureTerm, Tbase);
+
+            // Assert
+            Assert.AreEqual(expected, actual, 1e-12);
+        }
+
+        [TestMethod]
+        public void CalculateKcForPerennialCrops_TemperatureEqualsTbase_ReturnsZero()
+        {
+            // Arrange
+            double a = 2.5;
+            double b = 0.2;
+            double temperatureTerm = 5.0;
+            double Tbase = 5.0;
+
+            double expected = 0.0;
+
+            // Act
+            double actual = _sut.CalculateKcForPerennialCrops(a, b, temperatureTerm, Tbase);
+
+            // Assert
+            Assert.AreEqual(expected, actual, 1e-12);
+        }
+
+        [TestMethod]
+        public void CalculateKcForPerennialCrops_NegativeInnerTerm_ReturnsNegative()
+        {
+            // Arrange
+            double a = 1.0;
+            double b = 0.1;
+            double temperatureTerm = 3.0;
+            double Tbase = 5.0;
+
+            // expected = a * (1 - Math.Exp(-b * (temperatureTerm - Tbase)))
+            double expected = a * (1.0 - Math.Exp((-1.0) * b * (temperatureTerm - Tbase)));
+
+            // Act
+            double actual = _sut.CalculateKcForPerennialCrops(a, b, temperatureTerm, Tbase);
+
+            // Assert
+            Assert.AreEqual(expected, actual, 1e-12);
         }
 
         #endregion

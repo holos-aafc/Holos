@@ -76,5 +76,15 @@ namespace H.Core.Calculators.Climate
             double maximumTemperatureForDay,
             double minimumTemperatureForDay, 
             double meanTemperatureForDay);
+
+        /// <summary>
+        /// Equation 1.6.2-3
+        /// </summary>
+        double CalculateKcForAnnualCrops(double a, double b, double c, double d, double e, double temperatureTerm, double Tbase);
+
+        /// <summary>
+        /// Equation 1.6.2-4
+        /// </summary>
+        double CalculateKcForPerennialCrops(double a, double b, double temperatureTerm, double Tbase);
     }
 }

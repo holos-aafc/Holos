@@ -343,20 +343,32 @@ namespace H.Core.Calculators.Climate
             var kc = 0d;
             if (cropType.IsAnnual())
             {
-                kc = this.CalculateKcForAnnual(a: a, b: b, c: c, d: d, e: e, temperatureTerm: userTemperatureTerm, Tbase: Tbase);
+                kc = this.CalculateKcForAnnualCrops(a: a, b: b, c: c, d: d, e: e, temperatureTerm: userTemperatureTerm, Tbase: Tbase);
             }
             else
             {
-                kc = this.CalculateKcForPerennial(a: a, b: b, temperatureTerm: userTemperatureTerm, Tbase: Tbase);
+                kc = this.CalculateKcForPerennialCrops(a: a, b: b, temperatureTerm: userTemperatureTerm, Tbase: Tbase);
             }
 
-            return kc;
+            return kc; 
         }
 
         /// <summary>
-        /// Equation 1.6.2-4
+        /// Equation 1.6.2-4 
+        ///  
+        /// Calculates the crop coefficient (Kc) for perennial crops using an exponential decay model.
+        /// The calculation uses the temperature difference from the base temperature (Tbase).
         /// </summary>
-        private double CalculateKcForPerennial(double a, double b, double temperatureTerm, double Tbase)
+        /// <param name="a">Coefficient 'a' from Table1 (see <see cref="Table_1_Growing_Degree_Crop_Coefficients_Provider"/> and <see cref="Table_1_Growing_Degree_Crop_Coefficients_Data"/>).</param>
+        /// <param name="b">Coefficient 'b' from Table1 (see <see cref="Table_1_Growing_Degree_Crop_Coefficients_Provider.GetByCropType(CropType)"/>).</param>
+        /// <param name="temperatureTerm">Temperature value used in the equation. This is either the half-difference between maximum and minimum daily temperatures, or the mean daily temperature when Tmax and Tmin are equal or unavailable.</param>
+        /// <param name="Tbase">Base temperature for crop growth.</param>
+        /// <returns>Crop coefficient (Kc) for perennial crops.</returns>
+        /// <remarks>
+        /// The coefficients <c>a</c> and <c>b</c> are crop-specific values stored in <see cref="Table_1_Growing_Degree_Crop_Coefficients_Data"/>
+        /// and retrieved via <see cref="Table_1_Growing_Degree_Crop_Coefficients_Provider.GetByCropType(CropType)"/>.        
+        /// </remarks>
+        public double CalculateKcForPerennialCrops(double a, double b, double temperatureTerm, double Tbase)
         {
             var innerExponentTerm = temperatureTerm - Tbase;
             var powerTerm = (-1.0) * b * innerExponentTerm;
@@ -368,14 +380,29 @@ namespace H.Core.Calculators.Climate
 
         /// <summary>
         /// Equation 1.6.2-3
+        /// Calculates the crop coefficient (Kc) for annual crops using a fourth-order polynomial
+        /// in the temperature difference from the base temperature.
         /// </summary>
-        private double CalculateKcForAnnual(double a, double b, double c, double d, double e, double temperatureTerm, double Tbase)
+        /// <remarks>
+        /// The coefficients (a, b, c, d, e) are crop-specific values stored in
+        /// <see cref="Table_1_Growing_Degree_Crop_Coefficients_Data"/>
+        /// and provided by <see cref="Table_1_Growing_Degree_Crop_Coefficients_Provider"/>.
+        /// </remarks>
+        /// <param name="a">Coefficient 'a' (from the table provider)</param>
+        /// <param name="b">Coefficient 'b' (from the table provider)</param>
+        /// <param name="c">Coefficient 'c' (from the table provider)</param>
+        /// <param name="d">Coefficient 'd' (from the table provider)</param>
+        /// <param name="e">Coefficient 'e' (from the table provider)</param>
+        /// <param name="temperatureTerm">Temperature term: half the difference between daily max and min temperatures, or the daily mean if Tmax==Tmin.</param>
+        /// <param name="Tbase">Base temperature for crop growth.</param>
+        /// <returns>The calculated crop coefficient (Kc) for annual crops.</returns>
+        public double CalculateKcForAnnualCrops(double a, double b, double c, double d, double e, double temperatureTerm, double Tbase)
         {
             var innerTerm = temperatureTerm - Tbase;
 
-            var term2 = b * (innerTerm);
+            var term2 = b * innerTerm;
             var term3 = c * Math.Pow(innerTerm, 2);
-            var term4 = d * Math.Pow(innerTerm, 3);
+            var term4 = d * Math.Pow(innerTerm, 3); 
             var term5 = e * Math.Pow(innerTerm, 4);
 
             return a + term2 + term3 + term4 + term5;

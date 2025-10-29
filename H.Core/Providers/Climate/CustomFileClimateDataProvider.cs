@@ -50,7 +50,13 @@ namespace H.Core.Providers.Climate
                 from word in lines.First()
                 select word.ToLower().Replace(" ", String.Empty);
 
-            if (fileHeaders.SequenceEqual(this.GetExpectedFileHeaderList()) == false)
+            var fileHeaderList = fileHeaders.ToList();
+
+            // Accept either the original 5-column format or the extended 7-column format (with max/min temperatures)
+            var expectedBase = this.GetExpectedFileHeaderList();
+            var expectedExtended = this.GetExtendedFileHeaderList();
+
+            if (fileHeaderList.SequenceEqual(expectedBase) == false && fileHeaderList.SequenceEqual(expectedExtended) == false)
             {
                 return false;
             }
@@ -63,9 +69,30 @@ namespace H.Core.Providers.Climate
             return new List<string> { "year", "julianday", "meandailyairtemperature", "meandailyprecipitation", "meandailypet" };
         }
 
+        public List<string> GetExtendedFileHeaderList()
+        {
+            return new List<string> { "year", "julianday", "meandailyairtemperature", "maximumairtemperature", "minimumairtemperature", "meandailyprecipitation", "meandailypet" };
+        }
+
         public List<DailyClimateData> ParseFileLines(List<string> lines)
         {
             var result = new List<DailyClimateData>();
+
+            if (lines == null || lines.Count == 0)
+            {
+                return result;
+            }
+
+            // Determine header indices from the first line so we can support both 5- and 7-column files
+            var headerTokens = lines[0].Split(',').Select(h => h.ToLower().Replace(" ", String.Empty)).ToList();
+
+            int idxYear = headerTokens.IndexOf("year");
+            int idxJulian = headerTokens.IndexOf("julianday");
+            int idxMeanTemp = headerTokens.IndexOf("meandailyairtemperature");
+            int idxMaxTemp = headerTokens.IndexOf("maximumairtemperature");
+            int idxMinTemp = headerTokens.IndexOf("minimumairtemperature");
+            int idxPrecip = headerTokens.IndexOf("meandailyprecipitation");
+            int idxPET = headerTokens.IndexOf("meandailypet");
 
             // Skip header row
             for (int i = 1; i < lines.Count; i++)
@@ -81,17 +108,62 @@ namespace H.Core.Providers.Climate
                     continue;
                 }
 
-                var year = int.Parse(tokens[0], InfrastructureConstants.EnglishCultureInfo);
-                var julianDay = int.Parse(tokens[1], InfrastructureConstants.EnglishCultureInfo);
-                var temperature = string.IsNullOrWhiteSpace(tokens[2]) ? 0 : double.Parse(tokens[2], InfrastructureConstants.EnglishCultureInfo);
-                var precipitation = string.IsNullOrWhiteSpace(tokens[3]) ? 0 : double.Parse(tokens[3], InfrastructureConstants.EnglishCultureInfo);
-                var evapotranspiration = string.IsNullOrWhiteSpace(tokens[4]) ? 0 : double.Parse(tokens[4], InfrastructureConstants.EnglishCultureInfo);
+                // helper to safely parse a token by index
+                double ParseDoubleAt(int idx)
+                {
+                    if (idx < 0 || idx >= tokens.Length)
+                    {
+                        return 0d;
+                    }
+
+                    var s = tokens[idx];
+                    return string.IsNullOrWhiteSpace(s) ? 0d : double.Parse(s, InfrastructureConstants.EnglishCultureInfo);
+                }
+
+                int ParseIntAt(int idx)
+                {
+                    if (idx < 0 || idx >= tokens.Length)
+                    {
+                        return 0;
+                    }
+
+                    var s = tokens[idx];
+                    return string.IsNullOrWhiteSpace(s) ? 0 : int.Parse(s, InfrastructureConstants.EnglishCultureInfo);
+                }
+
+                var year = ParseIntAt(idxYear);
+                var julianDay = ParseIntAt(idxJulian);
+
+                // Mean temperature: prefer explicit mean if present; otherwise compute from max/min when available
+                double temperature = 0d;
+                var meanPresent = idxMeanTemp >= 0 && idxMeanTemp < tokens.Length && !string.IsNullOrWhiteSpace(tokens[idxMeanTemp]);
+                var maxPresent = idxMaxTemp >= 0 && idxMaxTemp < tokens.Length && !string.IsNullOrWhiteSpace(tokens[idxMaxTemp]);
+                var minPresent = idxMinTemp >= 0 && idxMinTemp < tokens.Length && !string.IsNullOrWhiteSpace(tokens[idxMinTemp]);
+
+                if (meanPresent)
+                {
+                    temperature = ParseDoubleAt(idxMeanTemp);
+                }
+                else if (maxPresent && minPresent)
+                {
+                    var maxT = ParseDoubleAt(idxMaxTemp);
+                    var minT = ParseDoubleAt(idxMinTemp);
+                    temperature = (maxT + minT) / 2.0;
+                }
+
+                var maxTemperature = maxPresent ? ParseDoubleAt(idxMaxTemp) : 0d;
+                var minTemperature = minPresent ? ParseDoubleAt(idxMinTemp) : 0d;
+
+                var precipitation = idxPrecip >= 0 ? ParseDoubleAt(idxPrecip) : 0d;
+                var evapotranspiration = idxPET >= 0 ? ParseDoubleAt(idxPET) : 0d;
 
                 result.Add(new DailyClimateData()
                 {
                     Year = year,
                     JulianDay = julianDay,
                     MeanDailyAirTemperature = temperature,
+                    MaximumAirTemperature = maxTemperature,
+                    MinimumAirTemperature = minTemperature,
                     MeanDailyPrecipitation = precipitation,
                     MeanDailyPET = evapotranspiration,
                 });
@@ -102,7 +174,7 @@ namespace H.Core.Providers.Climate
 
         public List<DailyClimateData> ParseText(string text)
         {
-            var lines = text.Split(new[] {Environment.NewLine}, StringSplitOptions.None).ToList();
+            var lines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList();
 
             return this.ParseFileLines(lines);
         }

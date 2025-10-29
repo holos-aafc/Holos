@@ -22,7 +22,7 @@ namespace H.Core.Test {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resource1 {
+    public class Resource1 {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace H.Core.Test {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("H.Core.Test.Resource1", typeof(Resource1).Assembly);
@@ -51,7 +51,7 @@ namespace H.Core.Test {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -90,9 +90,11 @@ namespace H.Core.Test {
         ///1985,27,-5.3,0.3,0
         ///1985,28,-5,3.3,0
         ///1985,29,-21.3,0,0
-        ///1985,30,-23,0 [rest of string was truncated]&quot;;.
+        ///1985,30,-23,0,0
+        ///1985,31,-22.5,0,0
+        ///1985,32, [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string climate_parameter_tool_input {
+        public static string climate_parameter_tool_input {
             get {
                 return ResourceManager.GetString("climate_parameter_tool_input", resourceCulture);
             }
@@ -123,11 +125,45 @@ namespace H.Core.Test {
         ///1912,21,4.8,0,0
         ///1912,22,2.2,0,0
         ///1912,23,-3.3,0,0
-        ///1912,2 [rest of string was truncated]&quot;;.
+        ///1912,24,2.3,0,0
+        ///1912,25,3.4,0, [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string custom_climate_data {
+        public static string custom_climate_data {
             get {
                 return ResourceManager.GetString("custom_climate_data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year,Julian day,Mean Daily Air Temperature,Mean Daily Precipitation,Mean Daily PET
+        ///1912,1,-15.6,0,0
+        ///1912,2,-17.5,2,0
+        ///1912,3,-17.2,0,0
+        ///1912,4,-15.3,0,0
+        ///1912,5,-20.8,2.5,0
+        ///1912,6,-24.2,0,0
+        ///1912,7,-18.4,0.8,0
+        ///1912,8,-13.1,0,0
+        ///1912,9,-22.2,0.8,0
+        ///1912,10,-30.3,0.5,0
+        ///1912,11,-30,0,0
+        ///1912,12,-11.7,0,0
+        ///1912,13,-10,0,0
+        ///1912,14,-16.7,0,0
+        ///1912,15,-1.2,0,0
+        ///1912,16,0.6,8.6,0
+        ///1912,17,-9.4,0,0
+        ///1912,18,-19.7,0,0
+        ///1912,19,-12,0,0
+        ///1912,20,-2.5,0,0
+        ///1912,21,4.8,0,0
+        ///1912,22,2.2,0,0
+        ///1912,23,-3.3,0,0
+        ///1912,2 [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string lethbridge_daily_variable {
+            get {
+                return ResourceManager.GetString("lethbridge_daily_variable", resourceCulture);
             }
         }
         
@@ -135,9 +171,9 @@ namespace H.Core.Test {
         ///   Looks up a localized string similar to Counter,Year,tfac,wfac,CI,Sand,LC,NC,Beta,alpha,kA,ACTIVEy*,ACTIVEy,Active_diff,kS,SLOWy*,SLOWy,Slow_diff,kP,PASSIVEy*,PASSIVEy,Passive_diff,SOCy,SOC_diff
         ///1,1970,0.467,1.053,3.569,0.25,0.111,0.021,2.694,1.80,4.829,0.37,0.37,0.03,0.312,3.90,3.70,0.09,0.0034,63.61,58.82,0.02,62.89,0.14
         ///2,1971,0.489,1.322,3.718,0.25,0.111,0.021,2.807,1.88,6.351,0.30,0.30,-0.08,0.410,3.09,3.45,-0.25,0.0045,50.39,58.78,-0.04,62.52,-0.36
-        ///3,1972,0.492,0.913,3.096,0.25,0.111,0.021,2.337,1.56,4.417,0.35,0.35,0.06,0.285,3.70,3.52, [rest of string was truncated]&quot;;.
+        ///3,1972,0.492,0.913,3.096,0.25,0.111,0.021,2.337,1.56,4.417,0.35,0.35,0.06,0.285,3.70,3.52,0.0 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string outputs {
+        public static string outputs {
             get {
                 return ResourceManager.GetString("outputs", resourceCulture);
             }
@@ -149,9 +185,9 @@ namespace H.Core.Test {
         ///1950,2,1950.083,20.7,34.4,214.4,0.712,0.16,0.42,,1951,0.521,0.829,,,1951,0.521,1.244
         ///1950,3,1950.167,18.6,10.7,176.6,0.631,0.061,0.293,,1952,0.479,0.827,,,1952,0.479,1.241
         ///1950,4,1950.25,16.6,12.9,104.2,0.551,0.124,0.374,,1953,0.508,0.789,,,1953,0.508,1.183
-        ///1950,5,1950.333,13.8,130.1,62.8,0.443,1.25,1.5,,1954,0.504,0. [rest of string was truncated]&quot;;.
+        ///1950,5,1950.333,13.8,130.1,62.8,0.443,1.25,1.5,,1954,0.504,0.700,, [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Tier2TestData {
+        public static string Tier2TestData {
             get {
                 return ResourceManager.GetString("Tier2TestData", resourceCulture);
             }
