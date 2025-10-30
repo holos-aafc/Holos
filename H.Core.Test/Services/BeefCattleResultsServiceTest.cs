@@ -506,7 +506,7 @@ namespace H.Core.Test.Services
             var electricityConversion = 219.875;
             var numberOfDaysInMonth = 30;
             var result = _resultsService.CalculateTotalCarbonDioxideEmissionsFromHousedBeefOperations(numberOfCattle,
-                numberOfDaysInMonth, electricityConversion);
+                numberOfDaysInMonth, electricityConversion, housedBeefConversion);
             Assert.AreEqual(numberOfCattle * (housedBeefConversion / CoreConstants.DaysInYear) * numberOfDaysInMonth * electricityConversion, result);
         }
 

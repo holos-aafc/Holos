@@ -101,14 +101,13 @@ namespace H.Core.Test.Services
         public void CalculateTotalCarbonDioxideEmissionsFromPoultryOperationsReturnsCorrectValue()
         {
             var barnCapacityForPoultry = 70;
-
+            var housingFactor = 2.88;
             var numberOfDaysInMonth = 30;
             var energyConversion = 2;
             var result = _resultsService.CalculateTotalEnergyCarbonDioxideEmissionsFromPoultryOperations(barnCapacityForPoultry,
-                numberOfDaysInMonth, energyConversion);
-            Assert.AreEqual(barnCapacityForPoultry * (2.88/365) * energyConversion * numberOfDaysInMonth, result);
+                numberOfDaysInMonth, energyConversion, housingFactor);
+            Assert.AreEqual(barnCapacityForPoultry * (housingFactor/365) * energyConversion * numberOfDaysInMonth, result);
         }
-
 
         #endregion
     }

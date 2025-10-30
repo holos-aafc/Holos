@@ -559,7 +559,7 @@ namespace H.Core.Test.Services
             var electricityConversion = 160.875;
             var numberOfDaysInMonth = 30;
             var result = _dairyCattleResultsService.CalculateTotalCarbonDioxideEmissionsFromDairyHousing(numberOfLactatingDairyCows,
-                numberOfDaysInMonth, electricityConversion);
+                numberOfDaysInMonth, electricityConversion, dairyCowConversion);
             Assert.AreEqual(numberOfLactatingDairyCows * (dairyCowConversion / CoreConstants.DaysInYear) * numberOfDaysInMonth * electricityConversion, result);
         }
 

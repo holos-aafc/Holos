@@ -310,7 +310,8 @@ namespace H.Core.Services.Animals
             groupEmissionsByMonth.MonthlyEnergyCarbonDioxide = this.CalculateTotalCarbonDioxideEmissionsFromSwineHousing(
                 numberOfAnimals: groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.NumberOfAnimals,
                 numberOfDays: groupEmissionsByMonth.MonthsAndDaysData.DaysInMonth,
-                electricityConversion: energyConversionFactor);
+                electricityConversion: energyConversionFactor, 
+                housingFactor: farm.Defaults.ElectricitySwine);
         }
 
         #endregion
@@ -532,15 +533,13 @@ namespace H.Core.Services.Animals
         /// <param name="numberOfAnimals">Number of pigs</param>
         /// <param name="numberOfDays">Number of days in month</param>
         /// <param name="electricityConversion">Province specific value (kg CO2 kWh^-1)</param>
+        /// <param name="housingFactor"></param>
         /// <returns>Total CO2 emissions from swine operations (kg CO2 year^-1) – for each pig group</returns>
-        public double CalculateTotalCarbonDioxideEmissionsFromSwineHousing(
-            double numberOfAnimals, 
+        public double CalculateTotalCarbonDioxideEmissionsFromSwineHousing(double numberOfAnimals,
             double numberOfDays,
-            double electricityConversion)
+            double electricityConversion, double housingFactor)
         {
-            const double swineConversion = 1.06;
-
-            var result =  numberOfAnimals * (swineConversion / CoreConstants.DaysInYear) * electricityConversion * numberOfDays;
+            var result =  numberOfAnimals * (housingFactor / CoreConstants.DaysInYear) * electricityConversion * numberOfDays;
 
             return result;
         }

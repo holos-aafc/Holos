@@ -321,13 +321,12 @@ namespace H.Core.Test.Services
             var numberOfPigs = 60;
             var numberOfDaysInMonth = 29;
             var electricityConversion = 20;
+            var housingFactor = 1.06;
             var result = _resultsService.CalculateTotalCarbonDioxideEmissionsFromSwineHousing(numberOfPigs,
                 numberOfDaysInMonth,
-                electricityConversion);
-            Assert.AreEqual(numberOfPigs * numberOfDaysInMonth * (1.06 / 365) * electricityConversion, result, 2);
+                electricityConversion, housingFactor);
+            Assert.AreEqual(numberOfPigs * numberOfDaysInMonth * (housingFactor / 365) * electricityConversion, result, 2);
         }
-
-       
 
         #endregion
     }

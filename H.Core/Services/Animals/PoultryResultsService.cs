@@ -366,7 +366,7 @@ namespace H.Core.Services.Animals
             groupEmissionsByMonth.MonthlyEnergyCarbonDioxide = this.CalculateTotalEnergyCarbonDioxideEmissionsFromPoultryOperations(
                 numberOfAnimals: groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.NumberOfAnimals,
                 numberOfDays: groupEmissionsByMonth.MonthsAndDaysData.DaysInMonth,
-                energyConversion: energyConversionFactor);
+                energyConversion: energyConversionFactor, housingFactor: farm.Defaults.ElectricityPoultry);
         }
 
         #endregion
@@ -503,15 +503,13 @@ namespace H.Core.Services.Animals
         /// <param name="numberOfAnimals">Barn capacity for poultry</param>
         /// <param name="numberOfDays">Number of days in month</param>
         /// <param name="energyConversion">kWh per poultry placement per year for electricity (kWh poultry placement^-1 year^-1) </param>
+        /// <param name="housingFactor"></param>
         /// <returns>Total CO2 emissions from poultry operations (kg CO2)</returns>
-        public double CalculateTotalEnergyCarbonDioxideEmissionsFromPoultryOperations(
-            double numberOfAnimals, 
-            double numberOfDays, 
-            double energyConversion)
+        public double CalculateTotalEnergyCarbonDioxideEmissionsFromPoultryOperations(double numberOfAnimals,
+            double numberOfDays,
+            double energyConversion, double housingFactor)
         {
-            const double poultryConversion = 2.88;
-
-            return numberOfAnimals * (poultryConversion / CoreConstants.DaysInYear) * energyConversion * numberOfDays;
+            return numberOfAnimals * (housingFactor / CoreConstants.DaysInYear) * energyConversion * numberOfDays;
         }
 
         /// <summary>

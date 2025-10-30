@@ -134,7 +134,12 @@ namespace H.Core.Models
         private bool _useCustomNitrogenFertilizerConversionFactor;
         private bool _useCustomPhosphorusFertilizerConversionFactor;
         private bool _useCustomPotassiumConversionFactor;
+
         private bool _useCustomElectricityConversionFactor;
+        private bool _useCustomElectricityConversionFactorForBeef;
+        private bool _useCustomElectricityConversionFactorForDairy;
+        private bool _useCustomElectricityConversionFactorForPoultry;
+        private bool _useCustomElectricityConversionFactorForSwine;
 
         // IPCC Tier 2 Carbon
         private int _defaultRunInPeriod;
@@ -751,6 +756,30 @@ namespace H.Core.Models
         {
             get => _useCustomElectricityConversionFactor;
             set => SetProperty(ref _useCustomElectricityConversionFactor, value);
+        }
+
+        public bool UseCustomElectricityConversionFactorForBeef
+        {
+            get => _useCustomElectricityConversionFactorForBeef;
+            set => SetProperty(ref _useCustomElectricityConversionFactorForBeef, value);
+        }
+
+        public bool UseCustomElectricityConversionFactorForDairy
+        {
+            get => _useCustomElectricityConversionFactorForDairy;
+            set => SetProperty(ref _useCustomElectricityConversionFactorForDairy, value);
+        }
+
+        public bool UseCustomElectricityConversionFactorForPoultry
+        {
+            get => _useCustomElectricityConversionFactorForPoultry;
+            set => SetProperty(ref _useCustomElectricityConversionFactorForPoultry, value);
+        }
+
+        public bool UseCustomElectricityConversionFactorForSwine
+        {
+            get => _useCustomElectricityConversionFactorForSwine;
+            set => SetProperty(ref _useCustomElectricityConversionFactorForSwine, value);
         }
 
         /// <summary>

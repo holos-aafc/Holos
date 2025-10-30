@@ -583,7 +583,7 @@ namespace H.Core.Services.Animals
             }
 
             var energyConversionFactor = 0d;
-            if (farm.Defaults.UseCustomElectricityConversionFactor)
+            if (farm.Defaults.UseCustomElectricityConversionFactorForBeef)
             {
                 energyConversionFactor = farm.Defaults.ConversionOfElectricityToCo2;
             }
@@ -595,7 +595,8 @@ namespace H.Core.Services.Animals
             groupEmissionsByMonth.MonthlyEnergyCarbonDioxide = this.CalculateTotalCarbonDioxideEmissionsFromHousedBeefOperations(
                 numberOfCattle: groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.NumberOfAnimals,
                 numberOfDaysInMonth: groupEmissionsByMonth.MonthsAndDaysData.DaysInMonth,
-                energyConversionFactor: energyConversionFactor);
+                energyConversionFactor: energyConversionFactor, 
+                housedBeefConversionFactor: farm.Defaults.ElectricityHousedBeef);
         }
 
         protected override void CalculateEstimatesOfProduction(
@@ -902,11 +903,10 @@ namespace H.Core.Services.Animals
         public double CalculateTotalCarbonDioxideEmissionsFromHousedBeefOperations(
             double numberOfCattle,
             double numberOfDaysInMonth,
-            double energyConversionFactor)
+            double energyConversionFactor, 
+            double housedBeefConversionFactor)
         {
-            var housedBeefConversion = 65.7;
-
-            return numberOfCattle * (housedBeefConversion / CoreConstants.DaysInYear) * energyConversionFactor * numberOfDaysInMonth;
+            return numberOfCattle * (housedBeefConversionFactor / CoreConstants.DaysInYear) * energyConversionFactor * numberOfDaysInMonth;
         }
 
         #endregion

@@ -568,7 +568,8 @@ namespace H.Core.Services.Animals
             groupEmissionsByMonth.MonthlyEnergyCarbonDioxide = this.CalculateTotalCarbonDioxideEmissionsFromDairyHousing(
                 numberOfLactatingDairyCows: groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod.NumberOfAnimals,
                 numberOfDaysInMonth: groupEmissionsByMonth.MonthsAndDaysData.DaysInMonth, 
-                energyConversionFactor: energyConversionFactor);
+                energyConversionFactor: energyConversionFactor, 
+                housingFactor: farm.Defaults.ElectricityDairy);
         }
 
         protected override void CalculateEstimatesOfProduction(
@@ -765,23 +766,20 @@ namespace H.Core.Services.Animals
         }
 
 
-
-
         /// <summary>
         /// Equation 6.2.1-1
         /// </summary>
         /// <param name="numberOfLactatingDairyCows">Number of dairy cows</param>
         /// <param name="numberOfDaysInMonth">Number of days in month</param>
         /// <param name="energyConversionFactor">Electricity conversion factor (kg CO2 kWh^-1)</param>
+        /// <param name="housingFactor"></param>
         /// <returns>Total CO2 emissions from dairy operations (kg CO2 year^-1) - for each lactating group</returns>
-        public double CalculateTotalCarbonDioxideEmissionsFromDairyHousing(
-            double numberOfLactatingDairyCows, 
-            double numberOfDaysInMonth, 
-            double energyConversionFactor)
+        public double CalculateTotalCarbonDioxideEmissionsFromDairyHousing(double numberOfLactatingDairyCows,
+            double numberOfDaysInMonth,
+            double energyConversionFactor, 
+            double housingFactor)
         {
-            const double DairyCowConversion = 968;
-
-            return numberOfLactatingDairyCows * (DairyCowConversion /CoreConstants.DaysInYear) * energyConversionFactor * numberOfDaysInMonth;
+            return numberOfLactatingDairyCows * (housingFactor /CoreConstants.DaysInYear) * energyConversionFactor * numberOfDaysInMonth;
         }
 
         #endregion
