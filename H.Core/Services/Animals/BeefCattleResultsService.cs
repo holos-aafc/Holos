@@ -583,7 +583,7 @@ namespace H.Core.Services.Animals
             }
 
             var energyConversionFactor = 0d;
-            if (farm.Defaults.UseCustomElectricityConversionFactorForBeef)
+            if (farm.Defaults.UseCustomElectricityConversionFactor)
             {
                 energyConversionFactor = farm.Defaults.ConversionOfElectricityToCo2;
             }
