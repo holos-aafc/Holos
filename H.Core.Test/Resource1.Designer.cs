@@ -192,5 +192,16 @@ namespace H.Core.Test {
                 return ResourceManager.GetString("Tier2TestData", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year,JulianDay,MeanDailyAirTemperature,MaximumAirTemperature,MinimumAirTemperature,MeanDailyPrecipitation,MeanDailyPET
+        ///2020,1,6,10,2,0,1
+        ///2020,2,7,11,3,2,1.5
+        /// </summary>
+        public static string extended_climate_with_max_min {
+            get {
+                return ResourceManager.GetString("extended_climate_with_max_min", resourceCulture);
+            }
+        }
     }
 }

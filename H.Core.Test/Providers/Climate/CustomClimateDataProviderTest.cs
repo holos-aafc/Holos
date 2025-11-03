@@ -51,7 +51,7 @@ namespace H.Core.Test.Providers.Climate
         [TestMethod]
         public void ReadUserClimateFileReturnsNonEmptyList()
         {
-            var lines = Resource1.custom_climate_data.Split(new []{Environment.NewLine, "\n"}, StringSplitOptions.None).ToList();
+            var lines = Resource1.custom_climate_data.Split(new[] { Environment.NewLine, "\n" }, StringSplitOptions.None).ToList();
 
             var result = _provider.ParseFileLines(lines);
 
@@ -143,7 +143,7 @@ namespace H.Core.Test.Providers.Climate
             var firstDataLine = fileLines[1];
             var fields = firstDataLine.Split(',');
             int expectedYear;
-            int expectedJulianDay = 0;
+            int expectedJulianDay =0;
             if (!int.TryParse(fields[0], out expectedYear) || !int.TryParse(fields[1], out expectedJulianDay))
             {
                 Assert.Fail("Could not parse Year/JulianDay from first data line of the test CSV resource.");
@@ -152,6 +152,70 @@ namespace H.Core.Test.Providers.Climate
             var first = parsed.First();
             Assert.AreEqual(expectedYear, first.Year, "Year from parsed record does not match CSV resource.");
             Assert.AreEqual(expectedJulianDay, first.JulianDay, "JulianDay from parsed record does not match CSV resource.");
+        }
+
+        [TestMethod]
+        public void ParseExtendedResource_WithMaxMin_ParsesAllFields()
+        {
+            var csv = Resource1.extended_climate_with_max_min;
+            Assert.IsFalse(string.IsNullOrWhiteSpace(csv), "Extended climate resource is missing or empty.");
+
+            var lines = csv.Split(new[] { Environment.NewLine, "\n" }, StringSplitOptions.None)
+                .Where(l => !string.IsNullOrWhiteSpace(l))
+                .ToList();
+
+            var parsed = _provider.ParseFileLines(lines);
+            // Expect full year 2025 dataset
+            Assert.AreEqual(365, parsed.Count, "Expected 365 daily records for 2025.");
+            Assert.IsTrue(parsed.All(p => p.Year == 2025), "All records should be for year 2025.");
+            Assert.AreEqual(1, parsed.First().JulianDay, "First record should be day 1.");
+            Assert.AreEqual(365, parsed.Last().JulianDay, "Last record should be day 365.");
+
+            // Basic invariants on temperatures and non-negative water variables
+            Assert.IsTrue(parsed.All(p => p.MaximumAirTemperature >= p.MeanDailyAirTemperature && p.MeanDailyAirTemperature >= p.MinimumAirTemperature),
+                "Each record should satisfy Max >= Mean >= Min.");
+            Assert.IsTrue(parsed.All(p => p.MeanDailyPrecipitation >= 0 && p.MeanDailyPET >= 0),
+                "Precipitation and PET should be non-negative.");
+
+            // Ensure we have some precipitation and some PET >0 days
+            Assert.IsTrue(parsed.Any(p => p.MeanDailyPrecipitation > 0), "Expected some days with precipitation.");
+            Assert.IsTrue(parsed.Any(p => p.MeanDailyPET > 0), "Expected some days with PET > 0.");
+        }
+
+        [TestMethod]
+        public void ParseGeneratedSinusoidalDataset_ParsesAllFieldsAndSeasonality()
+        {
+            // Build sinusoidal dataset for 2025 in-memory
+            var lines = new List<string>();
+            lines.Add("Year,JulianDay,MeanDailyAirTemperature,MaximumAirTemperature,MinimumAirTemperature,MeanDailyPrecipitation,MeanDailyPET");
+
+            for (int d = 1; d <= 365; d++)
+            {
+                // Mean = 5 + 15*sin(2*pi*(d-80)/365)
+                var mean = Math.Round(5 + 15 * Math.Sin(2 * Math.PI * (d - 80) / 365.0), 1);
+                var max = Math.Round(mean + 5, 1);
+                var min = Math.Round(mean - 5, 1);
+                double precip = (d % 10 == 0) ? 5.0 : (d % 7 == 0 ? 2.0 : 0.0);
+                var pet = Math.Round(Math.Max(0.0, mean) * 0.12, 3);
+                lines.Add($"2025,{d},{mean},{max},{min},{precip},{pet}");
+            }
+
+            var parsed = _provider.ParseFileLines(lines);
+            Assert.AreEqual(365, parsed.Count);
+            Assert.IsTrue(parsed.All(p => p.Year == 2025));
+            Assert.AreEqual(1, parsed.First().JulianDay);
+            Assert.AreEqual(365, parsed.Last().JulianDay);
+            Assert.IsTrue(parsed.All(p => p.MaximumAirTemperature >= p.MeanDailyAirTemperature && p.MeanDailyAirTemperature >= p.MinimumAirTemperature));
+            Assert.IsTrue(parsed.All(p => p.MeanDailyPrecipitation >= 0 && p.MeanDailyPET >= 0));
+
+            // Seasonal extremes expected roughly mid-summer and mid-winter
+            var maxMean = parsed.Max(p => p.MeanDailyAirTemperature);
+            var minMean = parsed.Min(p => p.MeanDailyAirTemperature);
+            Assert.IsTrue(maxMean >= 19.0 && maxMean <= 20.1, $"Unexpected summer peak mean: {maxMean}");
+            Assert.IsTrue(minMean <= -9.0 && minMean >= -10.5, $"Unexpected winter trough mean: {minMean}");
+
+            // PET should correlate with positive mean temperatures
+            Assert.IsTrue(parsed.Any(p => p.MeanDailyPET > 2.0), "Expect some higher PET values in warm season.");
         }
 
         #endregion

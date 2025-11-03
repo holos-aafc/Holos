@@ -211,6 +211,7 @@
     <None Include="app.config" />
     <None Include="Resources\ALLLethbridgeClimateData_1912-2017_ForReCropCalc.csv" />
     <None Include="Resources\climate_parameter_tool_input.csv" />
+    <None Include="Resources\ExtendedClimateData_WithMaxMin.csv" />
     <None Include="Resources\Lethbridge_DailyVariableClimateData_1912-2019.csv" />
     <None Include="Resources\outputs.csv" />
     <None Include="Resources\Tier2TestData.csv" />

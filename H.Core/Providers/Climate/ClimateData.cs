@@ -38,7 +38,7 @@ namespace H.Core.Providers.Climate
         private readonly Dictionary<int, double> _precipitationByYear = new Dictionary<int, double>();
         private readonly Dictionary<int, double> _growingSeasonPrecipitationByYear = new Dictionary<int, double>();
         private readonly Dictionary<int, double> _growingSeasonEvapotranspirationByYear = new Dictionary<int, double>();
-        private Dictionary<Tuple<DateTime, DateTime>, List<double>> _temperaturesByDateRange = new Dictionary<Tuple<DateTime, DateTime>, List<double>>();
+        private readonly Dictionary<Tuple<DateTime, DateTime>, List<double>> _temperaturesByDateRange = new Dictionary<Tuple<DateTime, DateTime>, List<double>>();
 
         #endregion
 
