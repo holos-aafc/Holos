@@ -104,7 +104,8 @@ namespace H.Core.Test.Calculators.Carbon
             climateData = _climateProvider.Get(
                     latitude: latitude,
                     longitude: longitude,
-                    climateNormalTimeFrame: TimeFrame.NineteenNinetyToTwoThousand);
+                    climateNormalTimeFrame: TimeFrame.NineteenNinetyToTwoThousand,
+                    farm: new Farm());
 
             _monthlyTestData = new List<TestClimateData>();
             _annualTestData = new List<TestFactorData>();

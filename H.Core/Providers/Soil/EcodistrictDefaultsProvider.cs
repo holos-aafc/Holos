@@ -22,6 +22,9 @@ namespace H.Core.Providers.Soil
         private readonly SoilFunctionalCategoryStringConverter _soilFunctionalCategoryStringConverter;
         private readonly SoilTextureStringConverter _soilTextureStringConverter;
 
+        private readonly Dictionary<Tuple<int, Province>, EcodistrictDefaultsData> _cacheByEcodistrictAndProvince = new Dictionary<Tuple<int, Province>, EcodistrictDefaultsData>();
+        private readonly Dictionary<int, EcodistrictDefaultsData> _cacheByEcodistrict = new Dictionary<int, EcodistrictDefaultsData>();
+
         #endregion
 
         #region Constructors
@@ -35,14 +38,16 @@ namespace H.Core.Providers.Soil
             _soilFunctionalCategoryStringConverter = new SoilFunctionalCategoryStringConverter();
             _soilTextureStringConverter = new SoilTextureStringConverter();
 
-            this.Data = this.ReadFile();
+            foreach (var ecodistrictDefaultsData in this.ReadFile())
+            {
+                _cacheByEcodistrictAndProvince[Tuple.Create(ecodistrictDefaultsData.EcodistrictId, ecodistrictDefaultsData.Province)] = ecodistrictDefaultsData;
+                _cacheByEcodistrict[ecodistrictDefaultsData.EcodistrictId] = ecodistrictDefaultsData;
+            }
         }
 
         #endregion
 
         #region Properties
-
-        private List<EcodistrictDefaultsData> Data { get; set; }
 
         #endregion
 
@@ -53,15 +58,13 @@ namespace H.Core.Providers.Soil
         /// </summary>
         public Ecozone GetEcozone(int ecodistrictId)
         {
-            var result = this.Data.FirstOrDefault(x => x.EcodistrictId == ecodistrictId);
-            if (result != null)
+            if (_cacheByEcodistrict.ContainsKey(ecodistrictId))
             {
-                return result.Ecozone;
+                return _cacheByEcodistrict[ecodistrictId].Ecozone;
             }
-
             else
             {
-                Trace.TraceError( $"{nameof(EcodistrictDefaultsProvider)}.{nameof(EcodistrictDefaultsProvider.GetEcozone)} unable to get ecozone for ecodistrict: {ecodistrictId}. Returning default value of {Ecozone.AtlanticMaritimes.GetDescription()}.");
+                Trace.TraceError($"{nameof(EcodistrictDefaultsProvider)}.{nameof(EcodistrictDefaultsProvider.GetEcozone)} unable to get ecozone for ecodistrict: {ecodistrictId}. Returning default value of {Ecozone.AtlanticMaritimes.GetDescription()}.");
 
                 return Ecozone.AtlanticMaritimes;
             }
@@ -69,17 +72,15 @@ namespace H.Core.Providers.Soil
 
         public double GetFractionOfLandOccupiedByPortionsOfLandscape(int ecodistrictId, Province province)
         {
-            const double defaultValue = 0;
-
-            var result = this.Data.FirstOrDefault(x => x.EcodistrictId == ecodistrictId && 
-                                                       x.Province == province);
-            if (result != null)
+            if (_cacheByEcodistrictAndProvince.ContainsKey(new Tuple<int, Province>(ecodistrictId, province)))
             {
                 // Convert value to a fraction not a percentage (i.e. 0.20 not 20)
-                return result.FTopo / 100;
+                return _cacheByEcodistrictAndProvince[new Tuple<int, Province>(ecodistrictId, province)].FTopo / 100;
             }
             else
             {
+                const double defaultValue = 0;
+
                 Trace.TraceError($"{nameof(EcodistrictDefaultsProvider)}.{nameof(EcodistrictDefaultsProvider.GetEcozone)} unable to get FTopo value for ecodistrict: {ecodistrictId}. Returning default value of {defaultValue}.");
 
                 return defaultValue;

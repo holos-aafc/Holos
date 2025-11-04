@@ -93,10 +93,13 @@ namespace H.Core.Test.Services
                 },
                 Longitude = -112,
                 Latitude = 49,
-                ClimateData = _climateProvider.Get(49, -112, TimeFrame.NineteenNinetyToTwoThousand),
                 GeographicData = geographicDataProvider.GetGeographicalData(793011),
                 PolygonId = 793011,
             };
+
+            farmToReplicate.ClimateData =
+                _climateProvider.Get(49, -112, TimeFrame.NineteenNinetyToTwoThousand, farmToReplicate);
+
             farmToReplicate.GeographicData.CustomYieldData = new List<CustomUserYieldData> { new CustomUserYieldData() };
             farmToReplicate.Components.Add(new SheepComponent());
             farmToReplicate.Components.Add(new FieldSystemComponent()
@@ -138,7 +141,7 @@ namespace H.Core.Test.Services
 
             //climate data
             Assert.AreEqual(result.ClimateData.TemperatureData.GetMeanAnnualTemperature(), farmToReplicate.ClimateData.TemperatureData.GetMeanAnnualTemperature());
-            farmToReplicate.ClimateData = _climateProvider.Get(50, -105, TimeFrame.NineteenNinetyToTwoThousand); 
+            farmToReplicate.ClimateData = _climateProvider.Get(50, -105, TimeFrame.NineteenNinetyToTwoThousand, farmToReplicate);
 
             if (farmToReplicate.ClimateData == null)
             {

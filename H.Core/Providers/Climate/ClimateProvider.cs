@@ -70,7 +70,27 @@ namespace H.Core.Providers.Climate
             return climateData;
         }
 
-        public ClimateData Get(List<DailyClimateData> dailyClimateData, TimeFrame timeFrame)
+        public ClimateData Get(string filepath, TimeFrame normalCalculationTimeFrame, Farm farm)
+        {
+            var dailyClimateData = _customFileClimateDataProvider.GetDailyClimateData(filepath);
+
+            var temperatureNormals = _climateNormalCalculator.GetTemperatureDataByDailyValues(dailyClimateData, normalCalculationTimeFrame);
+            var precipitationNormals = _climateNormalCalculator.GetPrecipitationDataByDailyValues(dailyClimateData, normalCalculationTimeFrame);
+            var evapotranspirationNormals = _climateNormalCalculator.GetEvapotranspirationDataByDailyValues(dailyClimateData, normalCalculationTimeFrame);
+
+            var climateData = new ClimateData(dailyClimateData)
+            {
+                TemperatureData = temperatureNormals,
+                PrecipitationData = precipitationNormals,
+                EvapotranspirationData = evapotranspirationNormals,
+            };
+
+            climateData.BarnTemperatureData = _indoorTemperatureProvider.GetIndoorTemperature(farm.Province);
+
+            return climateData;
+        }
+
+        public ClimateData Get(List<DailyClimateData> dailyClimateData, TimeFrame timeFrame, Farm farm)
         {
             if (dailyClimateData.Any() == false)
             {
@@ -81,15 +101,19 @@ namespace H.Core.Providers.Climate
             var precipitationNormals = _climateNormalCalculator.GetPrecipitationDataByDailyValues(dailyClimateData, timeFrame);
             var evapotranspirationNormals = _climateNormalCalculator.GetEvapotranspirationDataByDailyValues(dailyClimateData, timeFrame);
 
-            return new ClimateData(dailyClimateData)
+            var climateData = new ClimateData(dailyClimateData)
             {
                 TemperatureData = temperatureNormals,
                 PrecipitationData = precipitationNormals,
                 EvapotranspirationData = evapotranspirationNormals,
             };
+
+            climateData.BarnTemperatureData = _indoorTemperatureProvider.GetIndoorTemperature(farm.Province);
+
+            return climateData;
         }
 
-        public ClimateData Get(double latitude, double longitude, TimeFrame climateNormalTimeFrame)
+        public ClimateData Get(double latitude, double longitude, TimeFrame climateNormalTimeFrame, Farm farm)
         {
             // Cache here since climate normal calculations are expensive
             var key = new Tuple<double, double, TimeFrame>(latitude, longitude, climateNormalTimeFrame);
@@ -100,27 +124,16 @@ namespace H.Core.Providers.Climate
 
             var dailyClimateData = _nasaClimateProvider.GetCustomClimateData(latitude, longitude);
             if (dailyClimateData.Any() == false)
-            {                
+            {
                 // This happens if exceptions are thrown when calling the nasa api (i.e. 502 Gateway Error)
                 // as well as if there are timeouts or empty responses
                 return null;
             }
 
-            var result = this.Get(dailyClimateData, climateNormalTimeFrame);
+            var result = this.Get(dailyClimateData, climateNormalTimeFrame, farm);
             _cacheByPosition.Add(key, result);
 
             return result;
-        }
-
-        public ClimateData Get(double latitude, double longitude, TimeFrame climateNormalTimeFrame, Farm farm)
-        {
-            var climateData = this.Get(latitude, longitude, climateNormalTimeFrame);
-            if (climateData != null)
-            {
-                climateData.BarnTemperatureData = _indoorTemperatureProvider.GetIndoorTemperature(farm.Province);
-            }
-
-            return climateData;
         }
 
         public double GetMeanTemperatureForDay(Farm farm, DateTime dateTime)
@@ -167,22 +180,6 @@ namespace H.Core.Providers.Climate
         public double GetAnnualEvapotranspiration(Farm farm, int year)
         {
             return farm.GetAnnualEvapotranspiration(year);
-        }
-
-        public ClimateData Get(string filepath, TimeFrame normalCalculationTimeFrame)
-        {
-            var dailyClimateData = _customFileClimateDataProvider.GetDailyClimateData(filepath);
-
-            var temperatureNormals = _climateNormalCalculator.GetTemperatureDataByDailyValues(dailyClimateData, normalCalculationTimeFrame);
-            var precipitationNormals = _climateNormalCalculator.GetPrecipitationDataByDailyValues(dailyClimateData, normalCalculationTimeFrame);
-            var evapotranspirationNormals = _climateNormalCalculator.GetEvapotranspirationDataByDailyValues(dailyClimateData, normalCalculationTimeFrame);
-
-            return new ClimateData(dailyClimateData)
-            {
-                TemperatureData = temperatureNormals,
-                PrecipitationData = precipitationNormals,
-                EvapotranspirationData = evapotranspirationNormals,
-            };
         }
 
         public ClimateData GetClimateData(int polygonId, TimeFrame timeFrame)

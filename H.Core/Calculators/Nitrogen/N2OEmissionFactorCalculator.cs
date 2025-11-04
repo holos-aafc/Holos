@@ -1,8 +1,8 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Transactions;
 using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Nitrogen.NitrogenService;
 using H.Core.Emissions.Results;
@@ -27,6 +27,11 @@ namespace H.Core.Calculators.Nitrogen
         private readonly IDigestateService _digestateService;
         private readonly INitrogenService _nitrogenCalculator;
         private readonly ICarbonService _carbonService;
+        private Dictionary<Tuple<double, SoilTexture, Region>, double> _baseEmissionFactorCalculationCache = new Dictionary<Tuple<double, SoilTexture, Region>, double>();
+
+        // Cache for CalculateBaseEcodistrictFactor lookups
+        private Dictionary<Tuple<int, Province, int, double, SoilTexture, Region>, double> _baseEcodistrictFactorCache =
+            new Dictionary<Tuple<int, Province, int, double, SoilTexture, Region>, double>();
 
         #endregion
 
@@ -137,11 +142,24 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateBaseEcodistrictFactor(
             Farm farm,
-            CropViewItem viewItem, 
+            CropViewItem viewItem,
             int year)
         {
             // Item may be null if there are no fields on the farm
             var soilData = viewItem == null ? farm.DefaultSoilData : farm.GetPreferredSoilData(viewItem);
+
+            var cacheKey = new Tuple<int, Province, int, double, SoilTexture, Region>(
+                soilData.EcodistrictId,
+                soilData.Province,
+                year,
+                viewItem == null ? 0.0 : viewItem.AmountOfIrrigation,
+                soilData.SoilTexture,
+                soilData.Province.GetRegion());
+
+            if (_baseEcodistrictFactorCache.ContainsKey(cacheKey))
+            {
+                return _baseEcodistrictFactorCache[cacheKey];
+            }
 
             var fractionOfLandOccupiedByLowerPortionsOfLandscape = _ecodistrictDefaultsProvider.GetFractionOfLandOccupiedByPortionsOfLandscape(
                 ecodistrictId: soilData.EcodistrictId,
@@ -150,7 +168,8 @@ namespace H.Core.Calculators.Nitrogen
             var emissionsDueToLandscapeAndTopography = this.CalculateTopographyEmissions(
                 fractionOfLandOccupiedByLowerPortionsOfLandscape: fractionOfLandOccupiedByLowerPortionsOfLandscape,
                 growingSeasonPrecipitation: farm.GetGrowingSeasonPrecipitation(year),
-                growingSeasonEvapotranspiration: farm.GetGrowingSeasonEvapotranspiration(year), amountOfIrrigation: viewItem.AmountOfIrrigation);
+                growingSeasonEvapotranspiration: farm.GetGrowingSeasonEvapotranspiration(year),
+                amountOfIrrigation: viewItem == null ? 0.0 : viewItem.AmountOfIrrigation);
 
             var baseEcodistrictFactor = this.CalculateBaseEcodistrictValue(
                 topographyEmission: emissionsDueToLandscapeAndTopography,
@@ -163,6 +182,8 @@ namespace H.Core.Calculators.Nitrogen
                 viewItem.FractionOfLandOccupiedByLowerPortionsOfLandscape = fractionOfLandOccupiedByLowerPortionsOfLandscape;
                 viewItem.WeightedModifierBasedOnTexture = this.CalculateModifierBasedOnTexture(soilData.SoilTexture, soilData.Province.GetRegion(), 1);
             }
+
+            _baseEcodistrictFactorCache.Add(cacheKey, baseEcodistrictFactor);
 
             return baseEcodistrictFactor;
         }
@@ -193,7 +214,7 @@ namespace H.Core.Calculators.Nitrogen
                 cropViewItem: viewItem);
 
             var nitrogenSourceModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: Table_13_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.SyntheticNitrogen, 
+                nitrogenSourceType: Table_13_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.SyntheticNitrogen,
                 cropViewItem: viewItem);
 
             var soilReductionFactor = _soilN2OEmissionFactorsProvider.GetReductionFactorBasedOnApplicationMethod(viewItem.SoilReductionFactor);
@@ -206,7 +227,7 @@ namespace H.Core.Calculators.Nitrogen
                 baseEcodistictEmissionFactor: baseEcodistrictFactor,
                 croppingSystemModifier: croppingSystemModifier,
                 tillageModifier: tillageModifier,
-                nitrogenSourceModifier: nitrogenSourceModifier, 
+                nitrogenSourceModifier: nitrogenSourceModifier,
                 applicationMethodReductionFactor: soilReductionFactor);
 
             return syntheticNitrogenEmissionFactor;
@@ -222,8 +243,8 @@ namespace H.Core.Calculators.Nitrogen
                 return farm.Defaults.CustomN2OEmissionFactor;
             }
 
-            var baseEcodistrictFactor = CalculateBaseEcodistrictFactor(farm, year); 
-            
+            var baseEcodistrictFactor = CalculateBaseEcodistrictFactor(farm, year);
+
             var nitrogenSourceModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
                 nitrogenSourceType: Table_13_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.OrganicNitrogen);
 
@@ -268,7 +289,7 @@ namespace H.Core.Calculators.Nitrogen
                 cropViewItem: viewItem);
 
             var nitrogenSourceModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: Table_13_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.OrganicNitrogen, 
+                nitrogenSourceType: Table_13_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.OrganicNitrogen,
                 cropViewItem: viewItem);
 
             var ecodistrictManureEmissionFactor = this.CalculateEmissionFactor(
@@ -281,7 +302,7 @@ namespace H.Core.Calculators.Nitrogen
         }
 
         public double GetEmissionFactorForCropResidues(
-            CropViewItem viewItem, 
+            CropViewItem viewItem,
             Farm farm)
         {
             if (viewItem == null)
@@ -306,7 +327,7 @@ namespace H.Core.Calculators.Nitrogen
                 cropViewItem: viewItem);
 
             var cropResidueModifier = _soilN2OEmissionFactorsProvider.GetFactorForNitrogenSource(
-                nitrogenSourceType: Table_13_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.CropResidueNitrogen, 
+                nitrogenSourceType: Table_13_Soil_N2O_Emission_Factors_Provider.NitrogenSourceTypes.CropResidueNitrogen,
                 cropViewItem: viewItem);
 
             var emissionFactorForCropResidues = this.CalculateEmissionFactor(
@@ -428,7 +449,7 @@ namespace H.Core.Calculators.Nitrogen
         /// <param name="potentialEvapotranspiration">Growing season potential evapotranspiration, by ecodistrict (May – October)</param>
         /// <returns>Ecodistrict emission factor [kg N2O-N (kg N)-1]</returns>
         public double CalculateEcodistrictEmissionFactor(
-            double precipitation, 
+            double precipitation,
             double potentialEvapotranspiration)
         {
             if (precipitation > potentialEvapotranspiration)
@@ -445,6 +466,8 @@ namespace H.Core.Calculators.Nitrogen
             }
         }
 
+        private Dictionary<Tuple<double, double, double, double>, double> _topographyCalculationCache = new Dictionary<Tuple<double, double, double, double>, double>();
+
         /// <summary>
         /// Equation 2.5.2-1
         /// Equation 2.5.2-2
@@ -455,13 +478,26 @@ namespace H.Core.Calculators.Nitrogen
         /// <param name="growingSeasonEvapotranspiration">Growing season potential evapotranspiration, by ecodistrict (May – October)</param>
         /// <param name="amountOfIrrigation"></param>
         /// <returns>N2O emission factor adjusted due to position in landscape and moisture regime (kg N2O-N)</returns>
-        public double CalculateTopographyEmissions(double fractionOfLandOccupiedByLowerPortionsOfLandscape,
+        public double CalculateTopographyEmissions(
+            double fractionOfLandOccupiedByLowerPortionsOfLandscape,
             double growingSeasonPrecipitation,
-            double growingSeasonEvapotranspiration, double amountOfIrrigation)
+            double growingSeasonEvapotranspiration,
+            double amountOfIrrigation)
         {
             if (Math.Abs(growingSeasonEvapotranspiration) < double.Epsilon)
             {
                 return 0;
+            }
+
+            var cacheKey = new Tuple<double, double, double, double>(
+                fractionOfLandOccupiedByLowerPortionsOfLandscape,
+                growingSeasonPrecipitation,
+                growingSeasonEvapotranspiration,
+                amountOfIrrigation);
+
+            if (_topographyCalculationCache.ContainsKey(cacheKey))
+            {
+                return _topographyCalculationCache[cacheKey];
             }
 
             var emissionFactorUsingPotentialEvapotranspiration = this.CalculateEmissionFactorUsingPotentialEvapotranspiration(growingSeasonEvapotranspiration);
@@ -481,20 +517,28 @@ namespace H.Core.Calculators.Nitrogen
             // For irrigated sites
             if (amountOfIrrigation > 0 || Math.Abs(growingSeasonPrecipitation - growingSeasonEvapotranspiration) < double.Epsilon)
             {
+                _topographyCalculationCache.Add(cacheKey, emissionFactorForIrrigatedSites);
+
                 return emissionFactorForIrrigatedSites;
             }
-            
+
             // For humid environments
             if ((growingSeasonPrecipitation / growingSeasonEvapotranspiration) > 1)
             {
+                _topographyCalculationCache.Add(cacheKey, emissionFactorForHumidEnvironments);
+
                 return emissionFactorForHumidEnvironments;
             }
 
             // For dry environments
             if ((growingSeasonPrecipitation / growingSeasonEvapotranspiration) <= 1)
             {
+                _topographyCalculationCache.Add(cacheKey, emissionFactorForDryEnvironments);
+
                 return emissionFactorForDryEnvironments;
             }
+
+            _topographyCalculationCache.Add(cacheKey, result);
 
             return result;
         }
@@ -507,8 +551,8 @@ namespace H.Core.Calculators.Nitrogen
         /// <param name="fractionOfThisTexture">The fraction of the ecodistrict that is comprised of this soil texture type (100% for now)</param>
         /// <returns>A weighted modifier which provides a correction of the EF_Topo in ecodistrict "i" based on the soil texture </returns>
         public double CalculateModifierBasedOnTexture(
-            SoilTexture soilTexture, 
-            Region region, 
+            SoilTexture soilTexture,
+            Region region,
             double fractionOfThisTexture)
         {
             var textureFactor = _soilN2OEmissionFactorsProvider.GetFactorForSoilTexture(
@@ -528,10 +572,21 @@ namespace H.Core.Calculators.Nitrogen
         /// <param name="region">The region of the ecodistrict</param>
         /// <returns>A function of the three factors that create a base ecodistrict specific value that accounts for the climatic, topographic and edaphic characteristics of the spatial unit for lands</returns>
         public double CalculateBaseEcodistrictValue(
-            double topographyEmission, 
-            SoilTexture soilTexture, 
+            double topographyEmission,
+            SoilTexture soilTexture,
             Region region)
         {
+
+            var cacheKey = new Tuple<double, SoilTexture, Region>(
+                topographyEmission,
+                soilTexture,
+                region);
+
+            if (_baseEmissionFactorCalculationCache.ContainsKey(cacheKey))
+            {
+                return _baseEmissionFactorCalculationCache[cacheKey];
+            }
+
             var textureModifier = this.CalculateModifierBasedOnTexture(
                     soilTexture: soilTexture,
                     region: region,
@@ -548,6 +603,8 @@ namespace H.Core.Calculators.Nitrogen
 
             var result = topographyEmission * textureModifier * winterCorrection;
 
+            _baseEmissionFactorCalculationCache[cacheKey] = result;
+
             return result;
         }
 
@@ -563,7 +620,7 @@ namespace H.Core.Calculators.Nitrogen
         public double CalculateEmissionFactor(double baseEcodistictEmissionFactor,
             double croppingSystemModifier,
             double tillageModifier,
-            double nitrogenSourceModifier, 
+            double nitrogenSourceModifier,
             double applicationMethodReductionFactor = 1.0)
         {
             var result = baseEcodistictEmissionFactor * croppingSystemModifier * tillageModifier * nitrogenSourceModifier * applicationMethodReductionFactor;

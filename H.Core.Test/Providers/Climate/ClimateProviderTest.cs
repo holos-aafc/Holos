@@ -160,7 +160,7 @@ namespace H.Core.Test.Providers.Climate
         [TestMethod]
         public void ChangeNormals()
         {
-            var climateData = _climateProvider.Get(50.99, -80.00, Enumerations.TimeFrame.NineteenEightyToNineteenNinety);
+            var climateData = _climateProvider.Get(50.99, -80.00, Enumerations.TimeFrame.NineteenEightyToNineteenNinety, new Farm());
 
             // If Nasa service is offline we will get null and a failing test. Return from test in this case since we need data to test normals
             if (climateData == null)

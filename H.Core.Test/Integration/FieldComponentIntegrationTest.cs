@@ -86,7 +86,7 @@ namespace H.Core.Test.Integration
             // We will now get climate data from the NASA API. Note that if the latitude and longitude are known, we can get precise climate data for our location. If precise location
             // is not know, we call use slightly less accurate 30 year climate normals.
 
-            farm.ClimateData = _climateProvider.Get(49.699498, -112.775813, TimeFrame.NineteenNinetyToTwoThousand); // Lethbridge research station coordinates
+            farm.ClimateData = _climateProvider.Get(49.699498, -112.775813, TimeFrame.NineteenNinetyToTwoThousand, farm); // Lethbridge research station coordinates
 
             // _climateProvider.Get(...) returns null if the NasaClimateProvider.GetCustomClimateData() call returned an empty list
             // This happens if there was an exception thrown (i.e. 502 Gateway Error) or etc. during the NASA Api Call 
@@ -151,11 +151,7 @@ namespace H.Core.Test.Integration
         {
             var farm = new Farm();
 
-
-
             // import data using Field API Client
-
-
 
             farm.Name = "test";
             farm.Province = Province.Saskatchewan;
@@ -166,7 +162,7 @@ namespace H.Core.Test.Integration
 
             _nasaClimateProvider.EndDate = new DateTime(2022, 8, 18);
             var nasaClimateForDate = _nasaClimateProvider.GetCustomClimateData(50.254, -103.867);
-            farm.ClimateData = _climateProvider.Get(nasaClimateForDate, TimeFrame.TwoThousandToCurrent);
+            farm.ClimateData = _climateProvider.Get(nasaClimateForDate, TimeFrame.TwoThousandToCurrent, farm);
 
             // _climateProvider.Get(...) returns null if nasaClimateForDate is an empty list
             // This happens if there was an exception thrown (i.e. 502 Gateway Error) or etc. during the NASA Api Call
@@ -177,7 +173,6 @@ namespace H.Core.Test.Integration
             }
 
             farm.ClimateAcquisition = Farm.ChosenClimateAcquisition.Custom;
-            
             
             farm.Defaults.DefaultRunInPeriod = 20;
 
@@ -190,13 +185,9 @@ namespace H.Core.Test.Integration
                 EndYear = 2022,
             };
 
-
-
             var cvi1 = new CropViewItem();
             cvi1.CropType = CropType.AlfalfaMedicagoSativaL;
             _initializationService.InitializeCrop(cvi1, farm, _applicationData.GlobalSettings);  // moisture content will be set here
-
-
 
             cvi1.Area = 54.78;
             cvi1.FieldName = "Tony - East of Lane";
@@ -207,8 +198,6 @@ namespace H.Core.Test.Integration
             cvi1.Yield = 5380;                           // get from agexpert
             cvi1.MoistureContentOfCropPercentage = 12;
             // Need cover crop, if applicable
-
-
 
             // Need manure application, if applicable
             // This record doesn't have any manure, but commented code below shows how to add some

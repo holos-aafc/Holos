@@ -157,9 +157,12 @@ namespace H.Core.Providers.Climate
                 var precipitation = idxPrecip >= 0 ? ParseDoubleAt(idxPrecip) : 0d;
                 var evapotranspiration = idxPET >= 0 ? ParseDoubleAt(idxPET) : 0d;
 
+                var date = FromJulianDay(julianDay, year);
+
                 result.Add(new DailyClimateData()
                 {
                     Year = year,
+                    Date = date,
                     JulianDay = julianDay,
                     MeanDailyAirTemperature = temperature,
                     MaximumAirTemperature = maxTemperature,
@@ -201,6 +204,13 @@ namespace H.Core.Providers.Climate
             var dailyClimateData = this.ParseFileLines(lines);
 
             return dailyClimateData;
+        }
+
+        public static DateTime FromJulianDay(double julianDay, int year)
+        {
+            var epoch = new DateTime(year, 1, 1);
+
+            return epoch.AddDays(julianDay - 1);
         }
 
         #endregion

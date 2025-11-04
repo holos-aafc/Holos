@@ -8,6 +8,9 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using H.Core.Providers.Evapotranspiration;
+using H.Core.Providers.Precipitation;
 using H.Core.Providers.Soil;
 using NitrogenFertilizerType = H.Core.Enumerations.NitrogenFertilizerType;
 
@@ -120,6 +123,174 @@ namespace H.Core.Test.Calculators.Nitrogen
         #endregion
 
         #region Tests
+
+        /// <summary>
+        /// Ensure cache key uses irrigation: changing AmountOfIrrigation yields a different value.
+        /// Also returns the same as original when reverted (cache hit for original key).
+        /// </summary>
+        [TestMethod]
+        public void CalculateBaseEcodistrictFactor_ReturnsDifferent_When_IrrigationChanges()
+        {
+            var year = _viewItem.Year;
+
+            var soilData = new SoilData();
+            soilData.EcodistrictId = 371;
+            soilData.Province = Province.Ontario;
+
+            _farm.GeographicData.DefaultSoilData = soilData;
+
+            // Simulate dry environment to ensure irrigation has an effect
+            _farm.ClimateData.PrecipitationData = new PrecipitationData() {GrowingSeasonPrecipitation = 100 };
+            _farm.ClimateData.EvapotranspirationData = new EvapotranspirationData() { GrowingSeasonEvapotranspiration = 200 };
+
+            _viewItem.AmountOfIrrigation =0.0;
+            var noIrr = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
+
+            _viewItem.AmountOfIrrigation =10.0;
+            var withIrr = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
+
+            Assert.AreNotEqual(noIrr, withIrr,1e-12, "Expected different EF when irrigation changes, verifying fresh calculation (new cache key).");
+
+            // Revert to original irrigation to ensure cached/original value is returned consistently
+            _viewItem.AmountOfIrrigation =0.0;
+            var noIrrAgain = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
+            Assert.AreEqual(noIrr, noIrrAgain,1e-12, "Reverting irrigation should yield the original value (cache hit).");
+        }
+
+        /// <summary>
+        /// Ensure cache key uses soil texture: changing texture yields a different value.
+        /// </summary>
+        [TestMethod]
+        public void CalculateBaseEcodistrictFactor_ReturnsDifferent_When_SoilTextureChanges()
+        {
+            var year = _viewItem.Year;
+
+            var soilData = new SoilData();
+            soilData.EcodistrictId = 371;
+            soilData.Province = Province.Ontario;
+
+            _farm.GeographicData.DefaultSoilData = soilData;
+
+            soilData.SoilTexture = SoilTexture.Coarse;
+
+            var coarseVal = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
+
+            soilData.SoilTexture = SoilTexture.Fine;
+
+            var fineVal = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
+
+            Assert.AreNotEqual(coarseVal, fineVal,1e-12, "Expected different EF when soil texture changes, verifying fresh calculation (new cache key).");
+        }
+
+        /// <summary>
+        /// Ensure cache key uses ecodistrict: changing ecodistrict yields a different value.
+        /// </summary>
+        [TestMethod]
+        public void CalculateBaseEcodistrictFactor_ReturnsDifferent_When_EcodistrictIdChanges()
+        {
+            var year = _viewItem.Year;
+
+            var soilData = new SoilData();
+            soilData.EcodistrictId = 371;
+            soilData.Province = Province.Ontario;
+
+            _farm.GeographicData.DefaultSoilData = soilData;
+
+            // Simulate dry environment to ensure the FTopo value (based on Ecodistrict) has an effect
+            _farm.ClimateData.PrecipitationData = new PrecipitationData() { GrowingSeasonPrecipitation = 100 };
+            _farm.ClimateData.EvapotranspirationData = new EvapotranspirationData() { GrowingSeasonEvapotranspiration = 200 };
+
+            var result1 = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
+
+            soilData.EcodistrictId = 377;
+
+            var results2 = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
+
+            Assert.AreNotEqual(result1, results2, 1e-12, "Expected different EF when ecodistrict changes, verifying fresh calculation (new cache key).");
+
+            // Revert to original ecodistrict to ensure cached/original value is returned consistently
+            
+            soilData.EcodistrictId = 371;
+            var result1Again = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
+            Assert.AreEqual(result1, result1Again, 1e-12, "Reverting ecodistrict should yield the original value (cache hit).");
+        }
+
+        /// <summary>
+        /// Ensure cache key uses province: changing province yields a different value.
+        /// </summary>
+        [TestMethod]
+        public void CalculateBaseEcodistrictFactor_ReturnsDifferent_When_ProvinceChanges()
+        {
+            var year = _viewItem.Year;
+
+            var soilData = new SoilData();
+            soilData.EcodistrictId = 371;
+            soilData.Province = Province.Ontario;
+
+            _farm.GeographicData.DefaultSoilData = soilData;
+
+            // Simulate dry environment to ensure the FTopo value (based on Ecodistrict) has an effect. FTopo is province dependent.
+            _farm.ClimateData.PrecipitationData = new PrecipitationData() { GrowingSeasonPrecipitation = 100 };
+            _farm.ClimateData.EvapotranspirationData = new EvapotranspirationData() { GrowingSeasonEvapotranspiration = 200 };
+
+            var result1 = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
+
+            soilData.Province = Province.Manitoba;
+            soilData.EcodistrictId = 380;
+
+            var results2 = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
+
+            Assert.AreNotEqual(result1, results2, 1e-12, "Expected different EF when province changes, verifying fresh calculation (new cache key).");
+
+            // Revert to original province and ecodistrict to ensure cached/original value is returned consistently
+
+            soilData.Province = Province.Ontario;
+            soilData.EcodistrictId = 371;
+
+            var result1Again = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
+            Assert.AreEqual(result1, result1Again, 1e-12, "Reverting province should yield the original value (cache hit).");
+        }
+
+        /// <summary>
+        /// Ensure cache key uses year: changing year yields a different value.
+        /// </summary>
+        [TestMethod]
+        public void CalculateBaseEcodistrictFactor_ReturnsDifferent_When_YearChanges()
+        {
+            var year = _viewItem.Year;
+
+            var soilData = new SoilData();
+            soilData.EcodistrictId = 371;
+            soilData.Province = Province.Ontario;
+
+            _farm.GeographicData.DefaultSoilData = soilData;
+
+            // Simulate dry environment to ensure the FTopo value (based on Ecodistrict) has an effect. FTopo is province dependent.
+            _farm.ClimateData.PrecipitationData = new PrecipitationData() { GrowingSeasonPrecipitation = 100 };
+            _farm.ClimateData.EvapotranspirationData = new EvapotranspirationData() { GrowingSeasonEvapotranspiration = 200 };
+
+            var result1 = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
+
+            // Change the year
+            year += 1;
+
+            // Simulate humid environment. Since we are in a different year. The year is only used to lookup climate data and so a change in year would result in different climate data
+            _farm.ClimateData.PrecipitationData = new PrecipitationData() { GrowingSeasonPrecipitation = 500 };
+            _farm.ClimateData.EvapotranspirationData = new EvapotranspirationData() { GrowingSeasonEvapotranspiration = 200 };
+
+            var results2 = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
+
+            Assert.AreNotEqual(result1, results2, 1e-12, "Expected different climate data when year changes, verifying fresh calculation (new cache key).");
+
+            // Revert to original province and year and climate data to ensure cached/original value is returned consistently
+
+            year -= 1;
+            _farm.ClimateData.PrecipitationData = new PrecipitationData() { GrowingSeasonPrecipitation = 100 };
+            _farm.ClimateData.EvapotranspirationData = new EvapotranspirationData() { GrowingSeasonEvapotranspiration = 200 };
+
+            var result1Again = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
+            Assert.AreEqual(result1, result1Again, 1e-12, "Reverting year and climate data should yield the original value (cache hit).");
+        }
 
         /// <summary>
         /// Equation 2.5.1-1
@@ -905,5 +1076,157 @@ namespace H.Core.Test.Calculators.Nitrogen
         }
 
         #endregion
+
+        [TestMethod]
+        public void CalculateTopographyEmissions_Cache_Used_For_Irrigated_Branch()
+        {
+            // Arrange
+            var fTopo =0.25; // fraction of land in lower landscape
+            var precip =50.0;
+            var evap =50.0; // equal would also trigger irrigated branch due to equality, but we set irrigation >0 to be explicit
+            var irrigation =10.0; // >0 ensures irrigated branch
+
+            var cacheField = typeof(N2OEmissionFactorCalculator).GetField("_topographyCalculationCache", BindingFlags.Instance | BindingFlags.NonPublic);
+            var cache = (System.Collections.IDictionary)cacheField.GetValue(_sut);
+            var before = cache.Count;
+
+            // Act
+            var v1 = _sut.CalculateTopographyEmissions(fTopo, precip, evap, irrigation);
+            var afterFirst = cache.Count;
+            var v2 = _sut.CalculateTopographyEmissions(fTopo, precip, evap, irrigation);
+            var afterSecond = cache.Count;
+
+            // Assert
+            Assert.AreEqual(v1, v2,0.0, "Cached value should be stable for identical inputs (irrigated branch).");
+            Assert.IsTrue(afterFirst >= before +1, "Expected cache to add an entry on first call.");
+            Assert.AreEqual(afterFirst, afterSecond, "Second identical call should not grow the cache.");
+        }
+
+        [TestMethod]
+        public void CalculateTopographyEmissions_Cache_Used_For_Humid_Branch()
+        {
+            var fTopo =0.30;
+            var precip =200.0;
+            var evap =100.0; // precip/evap >1 => humid
+            var irrigation =0.0;
+
+            var cacheField = typeof(N2OEmissionFactorCalculator).GetField("_topographyCalculationCache", BindingFlags.Instance | BindingFlags.NonPublic);
+            var cache = (System.Collections.IDictionary)cacheField.GetValue(_sut);
+            var before = cache.Count;
+
+            var v1 = _sut.CalculateTopographyEmissions(fTopo, precip, evap, irrigation);
+            var afterFirst = cache.Count;
+            var v2 = _sut.CalculateTopographyEmissions(fTopo, precip, evap, irrigation);
+            var afterSecond = cache.Count;
+
+            Assert.AreEqual(v1, v2,0.0, "Cached value should be stable for identical inputs (humid branch).");
+            Assert.IsTrue(afterFirst >= before +1, "Expected cache to add an entry on first call (humid).");
+            Assert.AreEqual(afterFirst, afterSecond, "Second identical call should not grow the cache (humid).");
+        }
+
+        [TestMethod]
+        public void CalculateTopographyEmissions_Cache_Used_For_Dry_Branch()
+        {
+            var fTopo =0.40;
+            var precip =40.0;
+            var evap =100.0; // precip/evap <=1 => dry
+            var irrigation =0.0;
+
+            var cacheField = typeof(N2OEmissionFactorCalculator).GetField("_topographyCalculationCache", BindingFlags.Instance | BindingFlags.NonPublic);
+            var cache = (System.Collections.IDictionary)cacheField.GetValue(_sut);
+            var before = cache.Count;
+
+            var v1 = _sut.CalculateTopographyEmissions(fTopo, precip, evap, irrigation);
+            var afterFirst = cache.Count;
+            var v2 = _sut.CalculateTopographyEmissions(fTopo, precip, evap, irrigation);
+            var afterSecond = cache.Count;
+
+            Assert.AreEqual(v1, v2,0.0, "Cached value should be stable for identical inputs (dry branch).");
+            Assert.IsTrue(afterFirst >= before +1, "Expected cache to add an entry on first call (dry).");
+            Assert.AreEqual(afterFirst, afterSecond, "Second identical call should not grow the cache (dry).");
+        }
+
+        [TestMethod]
+        public void CalculateTopographyEmissions_NewKey_When_InputsChange()
+        {
+            var cacheField = typeof(N2OEmissionFactorCalculator).GetField("_topographyCalculationCache", BindingFlags.Instance | BindingFlags.NonPublic);
+            var cache = (System.Collections.IDictionary)cacheField.GetValue(_sut);
+            var before = cache.Count;
+
+            var fTopo =0.20;
+            var precip =60.0;
+            var evap =120.0;
+            var irrigation =0.0;
+
+            var v1 = _sut.CalculateTopographyEmissions(fTopo, precip, evap, irrigation);
+            var afterFirst = cache.Count;
+
+            // Change one component of the cache key (precipitation) to force a new entry
+            var precip2 =61.0;
+            var v2 = _sut.CalculateTopographyEmissions(fTopo, precip2, evap, irrigation);
+            var afterSecond = cache.Count;
+
+            Assert.IsTrue(afterFirst >= before +1, "Expected cache to add an entry on first call.");
+            Assert.IsTrue(afterSecond >= afterFirst +1, "Changing an input should create a new cache entry.");
+
+            // Values should typically differ for different precipitation; if equal due to function behavior, cache size assertions still validate new key
+            if (Math.Abs(v1 - v2) <1e-12)
+            {
+                Assert.Inconclusive("Topography emission values are equal for very similar inputs, but a distinct cache key was created as expected.");
+            }
+        }
+
+        [TestMethod]
+        public void CalculateBaseEcodistrictValue_Cache_Stable_Across_Identical_Calls()
+        {
+            // Arrange
+            double topo =0.0123;
+            var texture = SoilTexture.Coarse;
+            var region = Region.WesternCanada;
+
+            var cacheField = typeof(N2OEmissionFactorCalculator).GetField("_baseEmissionFactorCalculationCache", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            var cache = (System.Collections.IDictionary)cacheField.GetValue(_sut);
+            var before = cache.Count;
+
+            // Act
+            var v1 = _sut.CalculateBaseEcodistrictValue(topo, texture, region);
+            var afterFirst = cache.Count;
+            var v2 = _sut.CalculateBaseEcodistrictValue(topo, texture, region);
+            var afterSecond = cache.Count;
+
+            // Assert
+            Assert.AreEqual(v1, v2,0.0, "Cached base ecodistrict value should be stable across identical calls.");
+            Assert.IsTrue(afterFirst >= before +1, "First call should add a cache entry.");
+            Assert.AreEqual(afterFirst, afterSecond, "Second identical call should not grow the cache.");
+        }
+
+        [TestMethod]
+        public void CalculateBaseEcodistrictValue_NewEntry_When_InputsChange()
+        {
+            // Arrange
+            double topo1 =0.02;
+            double topo2 =0.03; // different topography emission
+            var texture = SoilTexture.Fine;
+            var region = Region.EasternCanada;
+
+            var cacheField = typeof(N2OEmissionFactorCalculator).GetField("_baseEmissionFactorCalculationCache", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            var cache = (System.Collections.IDictionary)cacheField.GetValue(_sut);
+            var before = cache.Count;
+
+            // Act
+            var v1 = _sut.CalculateBaseEcodistrictValue(topo1, texture, region);
+            var afterFirst = cache.Count;
+            var v2 = _sut.CalculateBaseEcodistrictValue(topo2, texture, region);
+            var afterSecond = cache.Count;
+
+            // Assert
+            Assert.IsTrue(afterFirst >= before +1, "First call should add a cache entry.");
+            Assert.IsTrue(afterSecond >= afterFirst +1, "Changing an input should create a new cache entry.");
+
+            if (Math.Abs(v1 - v2) <1e-12)
+            {
+                Assert.Inconclusive("Values equal for these inputs, but cache recorded a distinct key as expected.");
+            }
+        }
     }
 }

@@ -734,9 +734,7 @@ namespace H.Core.Calculators.Climate
             double maximumTemperatureForDay,
             double minimumTemperatureForDay,
             double meanTemperatureForDay)
-        {
-            return this.CalculateCropCoefficient(greenAreaIndex);
-
+        { 
             var result = 0.0;
 
             if (cropType != CropType.None)
