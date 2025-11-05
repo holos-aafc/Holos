@@ -136,7 +136,7 @@ Source (source code file, table, algorithm document, etc.): https://github.com/h
 ***
 ## YearInPerennialStand
 
-Example value: 2018
+Example value: 1
 
 Type value: Int (Integer/Numeric)
 
