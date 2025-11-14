@@ -479,13 +479,13 @@ namespace H.Core.Providers.Feed
         public double NEma
         {
             get { return _nEma; }
-            set { this.SetProperty(ref _nEma, value, () => base.RaisePropertyChanged(nameof(this.Nemf))); }
+            set { this.SetProperty(ref _nEma, value, this.UpdateNemf); }
         }
 
         public double NEga
         {
             get { return _nEga; }
-            set { this.SetProperty(ref _nEga, value, () => base.RaisePropertyChanged(nameof(this.Nemf))); }
+            set { this.SetProperty(ref _nEga, value, this.UpdateNemf); }
         }
 
         public double RUP
@@ -1316,13 +1316,11 @@ namespace H.Core.Providers.Feed
 
         #region Calculated Properties
 
+        private double _nemf;
         public double Nemf
         {
-            get
-            {
-                // NEmf (MJ/kg DM) = [NEma (Mcal/kg DM) + NEga (Mcal/kg DM)] * 4.184 (conversion factor for Mcal to MJ)
-                return (this.NEga + this.NEma) * 4.184;
-            }
+            get { return _nemf; }
+            set { this.SetProperty(ref _nemf, value); }
         }
 
         #endregion
@@ -1375,6 +1373,11 @@ namespace H.Core.Providers.Feed
         #endregion
 
         #region Private Methods
+
+        private void UpdateNemf()
+        {
+            this.Nemf = (this.NEga + this.NEma) * 4.184;
+        }
 
         #endregion
 

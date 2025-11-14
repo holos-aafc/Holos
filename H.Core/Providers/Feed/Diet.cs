@@ -463,6 +463,7 @@ namespace H.Core.Providers.Feed
             this.Ash = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.Ash);
             this.CrudeFiber = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.CrudeFiber);
             this.P = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.P);
+            this.DietaryNetEnergyConcentration = this.CalculateNemf();
 
             this.CalculateMCF();
         }
@@ -596,7 +597,17 @@ namespace H.Core.Providers.Feed
 
         public double CalculateNemf()
         {
-            return this.Ingredients.WeightedAverage(x => x.Nemf, x => x.PercentageInDiet);
+            var list = new List<Tuple<double, double>>();
+
+            foreach (var ingredient in this.Ingredients)
+            {
+                var nemf = (ingredient.NEga + ingredient.NEma) * 4.184;
+                var percentageInDiet = ingredient.PercentageInDiet;
+
+                list.Add(new Tuple<double, double>(nemf, percentageInDiet));
+            }
+
+            return list.WeightedAverage(x => x.Item1, x => x.Item2);
         }
 
         public double CalculateMCF(AnimalType animalType, double totalDigestibleNutrient)

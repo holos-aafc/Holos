@@ -73,20 +73,31 @@ namespace H.Core.Services.Animals
                 startDate: managementPeriod.Start,
                 currentDate: dailyEmissions.DateTime);
 
-            var nemf = 0d;
-            if (managementPeriod.SelectedDiet.DietaryNetEnergyConcentration == 0)
+            var dietDietaryNetEnergyConcentration = 0d;
+            var selectedDiet = managementPeriod.SelectedDiet;
+            if (managementPeriod.AnimalsAreMilkFedOnly == false)
             {
-                // Default/system diets will have a predefined (lookup table) NEmf value
-                nemf = managementPeriod.SelectedDiet.CalculateNemf();
-            }
-            else
-            {
-                // Custom diets will not have a predefined value and must therefore be calculated
-                nemf = managementPeriod.SelectedDiet.DietaryNetEnergyConcentration;
+                // Animals are consuming solid food, and so we need to determine the NEmf based on the diet
+                if (selectedDiet.DietaryNetEnergyConcentration == 0)
+                {
+                    // User didn't specify a NEmf value (or the component NEga and NEma values), so we calculate the NEmf based on TDN
+                    // GitHub #389
+
+                    var tdn = selectedDiet.TotalDigestibleNutrient;
+                    var rem = this.CalculateRatioOfNetEnergyAvailableInDietForMaintenanceToDigestibleEnergy(tdn);
+                    var nemfAlternate = rem * 18.45 * (tdn / 100.0);
+
+                    dietDietaryNetEnergyConcentration = nemfAlternate;
+                }
+                else
+                {
+                    // Use the NEmf value provided by the user (either directly, or via the NEga and NEma values)
+                    dietDietaryNetEnergyConcentration = managementPeriod.SelectedDiet.DietaryNetEnergyConcentration;
+                }
             }
 
             dailyEmissions.DryMatterIntake = base.CalculateDryMatterIntakeForCalves(
-                dietaryNetEnergyConcentration: nemf,
+                dietaryNetEnergyConcentration: dietDietaryNetEnergyConcentration,
                 weight: dailyEmissions.AnimalWeight, areMilkFedOnly: 
                 managementPeriod.AnimalsAreMilkFedOnly);
 

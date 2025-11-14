@@ -525,7 +525,8 @@ namespace H.Core.Calculators.Carbon
             this.N2O_NFromOrganicNitrogenLeachingExported = leachingEmissionsFromExportedManure / farm.GetTotalAreaOfFarm(includeNativeGrasslands: false, this.Year);
         }
 
-        protected void CalculateActualAmountsLeached(double fractionLeach,
+        protected void CalculateActualAmountsLeached(
+            double fractionLeach,
             double emissionFactorLeaching,
             Farm farm)
         {
