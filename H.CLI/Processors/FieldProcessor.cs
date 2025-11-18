@@ -58,7 +58,7 @@ namespace H.CLI.Processors
 
             var farmName = farm.Name + Properties.Resources.Results;
 
-            string filePath = InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.Outputs + @"\" + farmName + @"\" + Properties.Resources.DefaultFieldsInputFolder + @"\";
+            string filePath = InfrastructureConstants.BaseOutputDirectoryPath + @"\" + farmName + @"\" + Properties.Resources.DefaultFieldsInputFolder + @"\";
 
             // Write field system data to file
             _fieldResultsService.ExportResultsToFile(

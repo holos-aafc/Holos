@@ -17,6 +17,7 @@ using H.Core;
 using H.Core.Models;
 using H.Core.Services;
 using System.Collections.Generic;
+using H.CLI.TemporaryComponentStorage;
 using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Nitrogen;
 using H.Core.Providers.Climate;
@@ -41,6 +42,8 @@ namespace H.CLI
         private static SettingsHandler _globalSettingsHandler;
         private static ProcessorHandler _processorHandler;
         private static DataInputHandler _dataInputHandler;
+        private static InputHelper _inputHelper;
+        private static GeographicDataProvider _geographicDataProvider;
 
         #endregion
 
@@ -54,7 +57,7 @@ namespace H.CLI
             _slcClimateDataProvider = new SlcClimateDataProvider();
             _climateProvider = new ClimateProvider(_slcClimateDataProvider);
             _n2OEmissionFactorCalculator = new N2OEmissionFactorCalculator(_climateProvider);
-            _iCbmSoilCarbonCalculator = new ICBMSoilCarbonCalculator(_climateProvider, _n2OEmissionFactorCalculator); 
+            _iCbmSoilCarbonCalculator = new ICBMSoilCarbonCalculator(_climateProvider, _n2OEmissionFactorCalculator);
             _ipccSoilCarbonCalculator = new IPCCTier2SoilCarbonCalculator(_climateProvider, _n2OEmissionFactorCalculator);
             _initializationService = new InitializationService();
             _fieldResultsService = new FieldResultsService(_iCbmSoilCarbonCalculator, _ipccSoilCarbonCalculator, _n2OEmissionFactorCalculator, _initializationService);
@@ -62,25 +65,22 @@ namespace H.CLI
             _globalSettingsHandler = new SettingsHandler(_climateProvider);
             _processorHandler = new ProcessorHandler(_fieldResultsService);
             _dataInputHandler = new DataInputHandler();
+            _inputHelper = new InputHelper();
+
+            _geographicDataProvider = new GeographicDataProvider();
+            _geographicDataProvider.Initialize();
         }
 
         #endregion
 
         #region Methods
 
-        public static string GetVersionString()
+        private static void Reset()
         {
-            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
-            {
-                return System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
-            }
-            else
-            {
-                return "1.0";
-            }
+            _storage = new Storage();
         }
 
-        static void Main(string[] args)
+        private static void Run(string[] args)
         {
             // CLI arguments access 
             CLIArguments argValues = new CLIArguments();
@@ -115,21 +115,21 @@ namespace H.CLI
                 DriveInfo givenPathDriveInfo = new DriveInfo(argValues.OutputPath);
                 givenPathDriveInfoWrapper = new DriveInfoWrapper(givenPathDriveInfo);
             }
+
             InfrastructureConstants.CheckOutputDirectoryPath(argValues.OutputPath, givenPathDriveInfoWrapper, farmsFolderPath);
 
             // Units of measurement access
             CLIUnitsOfMeasurementConstants.PromptUserForUnitsOfMeasurement(argValues.Units);
 
             var applicationData = new ApplicationData();
-            
+
             var templateFarmHandler = new TemplateFarmHandler();
 
             // Get The Directories in the "Farms" folder
             var listOfFarmPaths = directoryHandler.GetListOfFarms(farmsFolderPath, argValues, _exportedFarmsHandler.pathToExportedFarm, generatedFarmFolders);
 
             // Set up the geographic data provider only once to speed up processing.
-            var geographicDataProvider = new GeographicDataProvider();
-            geographicDataProvider.Initialize();
+
 
             // If the directory exists and there are directories in the Farms folder - meaning there should be at least one farm folder.
             if (Directory.Exists(farmsFolderPath) && listOfFarmPaths.Any())
@@ -137,7 +137,7 @@ namespace H.CLI
                 //if there is no template farm folder, create one
                 //templateFarmHandler.CreateTemplateFarmIfNotExists(farmsFolderPath, geographicDataProvider);
 
-                _globalSettingsHandler.InitializePolygonIDList(geographicDataProvider);
+                _globalSettingsHandler.InitializePolygonIDList(_geographicDataProvider);
 
                 foreach (var farmDirectoryPath in listOfFarmPaths)
                 {
@@ -146,7 +146,7 @@ namespace H.CLI
 
                     if (!settingsFilePathsInFarmDirectory.Any())
                     {
-                        _globalSettingsHandler.GetUserSettingsMenuChoice(farmDirectoryPath, geographicDataProvider);
+                        _globalSettingsHandler.GetUserSettingsMenuChoice(farmDirectoryPath, _geographicDataProvider);
 
                         // This will be the default name for the farm settings file. The user can change the name of the settings file in the Farm folder if they want to.
                         var defaultFarmSettingsFilePath = farmDirectoryPath + @"\" + Properties.Resources.NameOfSettingsFile + ".settings";
@@ -218,7 +218,7 @@ namespace H.CLI
                     var componentResults = new ComponentResultsProcessor(_storage, new TimePeriodHelper(), _fieldResultsService, _n2OEmissionFactorCalculator);
 
                     // Get base directory of user entered path to create Total Results For All Farms folder
-                    Directory.CreateDirectory(InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.Outputs + @"\" + Properties.Resources.TotalResultsForAllFarms);
+                    Directory.CreateDirectory(InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.TotalResultsForAllFarms);
 
                     // Output Individual Results For Each Farm's Land Management Components (list of components is filtered inside method)
                     // Slowest section because we initialize view models for every component
@@ -232,17 +232,13 @@ namespace H.CLI
 
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine(Properties.Resources.LabelProcessingComplete);
-                    Console.ReadLine();
                     Console.ForegroundColor = ConsoleColor.White;
-                    Environment.Exit(1);
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(Properties.Resources.NoFarmsToProcess);
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.ReadLine();
-                    Environment.Exit(1);
                 }
             }
             else
@@ -251,12 +247,46 @@ namespace H.CLI
                  * There is nothing in the Farms Folder, create a Template Farm and instruct user to populate their folders with data files
                  */
 
-                templateFarmHandler.CreateTemplateFarmIfNotExists(farmsFolderPath, geographicDataProvider);
+                templateFarmHandler.CreateTemplateFarmIfNotExists(farmsFolderPath, _geographicDataProvider);
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine(String.Format(Properties.Resources.InitialMessageAfterInstallation, farmsFolderPath));
                 _ = Console.ReadKey();
-                Environment.Exit(1);
             }
+        }
+
+        public static string GetVersionString()
+        {
+            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            {
+                return System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+            }
+            else
+            {
+                return "1.0";
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            var continueWithAnotherRun = string.Empty;
+            do
+            {
+                Run(args);
+
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("Would you like to run another scenario? (Y/N)");
+                continueWithAnotherRun = Console.ReadLine();
+
+                if (_inputHelper.IsYesResponse(continueWithAnotherRun))
+                {
+                    Console.Clear();
+                    Reset();
+                }
+
+            } while (_inputHelper.IsYesResponse(continueWithAnotherRun));
+
+            Environment.Exit(1);
         }
 
         static void ShowBanner()

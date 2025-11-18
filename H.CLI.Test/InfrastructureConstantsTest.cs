@@ -16,7 +16,7 @@ namespace H.CLI.Test
             string farmsFoldersPath = @"C:\User";
             bool check = InfrastructureConstants.CheckOutputDirectoryPath(givenPath, null, farmsFoldersPath);
 
-            Assert.AreEqual(InfrastructureConstants.BaseOutputDirectoryPath, farmsFoldersPath);
+            Assert.AreEqual(InfrastructureConstants.BaseOutputDirectoryPath, Path.Combine(farmsFoldersPath, Properties.Resources.Outputs));
             Assert.IsFalse(check);
         }
 
