@@ -17,7 +17,6 @@ namespace H.Core.Services.LandManagement
 {
     public partial class FieldResultsService
     {
-
         #region Public Methods
 
         /// <summary>
@@ -148,8 +147,8 @@ namespace H.Core.Services.LandManagement
                 {
                     this.CreateDetailViewItems(projectedComponent as FieldSystemComponent, farm);
                 }
-
-               this.PostProcessPerennials(component, farm);
+                
+                this.PostProcessPerennials(component, farm);
             }
         }
 

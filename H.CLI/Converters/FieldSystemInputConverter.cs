@@ -162,6 +162,7 @@ namespace H.CLI.Converters
                     {
                         var blendData = _blendsProvider.GetData(rowInput.FertilizerBlend);
                         var amountOfProduct = (rowInput.NitrogenFertilizerRate / (blendData.PercentageNitrogen / 100.0));
+                        var applicationMethod = rowInput.FertilizerApplicationMethod;
 
                         viewItem.FertilizerApplicationViewItems = new ObservableCollection<FertilizerApplicationViewItem>()
                         {
@@ -170,6 +171,7 @@ namespace H.CLI.Converters
                                 FertilizerBlendData = blendData,
                                 AmountOfNitrogenApplied = rowInput.NitrogenFertilizerRate,
                                 AmountOfBlendedProductApplied = amountOfProduct,
+                                FertilizerApplicationMethodology = applicationMethod,
                             }
                         };
 

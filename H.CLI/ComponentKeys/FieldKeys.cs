@@ -106,6 +106,7 @@ namespace H.CLI.ComponentKeys
             {Properties.Resources.Key_FuelEnergy, null },
             {Properties.Resources.Key_HerbicideEnergy, null },
             {Properties.Resources.Key_FertilizerBlend, null },
+            {Properties.Resources.Key_FertilizerApplicationMethod, null },
         };
 
         //  Currently only 2 optional headers in the field keys
@@ -114,6 +115,7 @@ namespace H.CLI.ComponentKeys
             if (s == Properties.Resources.Key_NitrogenFixation) return true;
             else if (s == Properties.Resources.Key_FertilizerBlend) return true;
             else if (s == Properties.Resources.Key_NitrogenDeposit) return true;
+            else if (s == Properties.Resources.Key_FertilizerApplicationMethod) return true;
             else return false;
         }
         // Populate with all the keys that exist currently and tell if it is missing or not

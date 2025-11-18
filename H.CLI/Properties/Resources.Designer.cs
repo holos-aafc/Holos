@@ -1519,6 +1519,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fertilizer Application Method.
+        /// </summary>
+        public static string Key_FertilizerApplicationMethod {
+            get {
+                return ResourceManager.GetString("Key_FertilizerApplicationMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fertilizer Blend.
         /// </summary>
         public static string Key_FertilizerBlend {

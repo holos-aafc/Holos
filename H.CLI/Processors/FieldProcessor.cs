@@ -223,6 +223,15 @@ namespace H.CLI.Processors
                     stringBuilder.Append(FertilizerBlends.Custom + columnSeparator);
                 }
 
+                if (fertilizerApplication != null)
+                {
+                    stringBuilder.Append(fertilizerApplication.FertilizerApplicationMethodology + columnSeparator);
+                }
+                else
+                {
+                    stringBuilder.Append(FertilizerApplicationMethodologies.Broadcast + columnSeparator);
+                }
+
                 stringBuilder.Append(Environment.NewLine);
             }
 

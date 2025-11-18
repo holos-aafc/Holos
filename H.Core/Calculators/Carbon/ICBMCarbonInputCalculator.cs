@@ -401,13 +401,14 @@ namespace H.Core.Calculators.Carbon
                 return 0;
             }
 
-            // Equation 2.1.2-28
-            var carbonInputFromRoots = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.BiomassCoefficientRoots / currentYearViewItem.BiomassCoefficientProduct) * (currentYearViewItem.PercentageOfRootsReturnedToSoil / 100.0);
-            if (carbonInputFromRoots < 450)
+            var carbonInput = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.BiomassCoefficientRoots / currentYearViewItem.BiomassCoefficientProduct);
+            if (carbonInput < 450)
             {
-                carbonInputFromRoots = 450;
+                carbonInput = 450;
             }
 
+            // Equation 2.1.2-28
+            var carbonInputFromRoots = carbonInput * (currentYearViewItem.PercentageOfRootsReturnedToSoil / 100.0);
             if (currentYearViewItem.YearInPerennialStand == 1)
             {
                 return carbonInputFromRoots;

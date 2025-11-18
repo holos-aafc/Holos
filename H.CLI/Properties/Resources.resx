@@ -1499,4 +1499,7 @@ Would you like to continue using this directory?</value>
   <data name="Settings_PathToCustomYieldFile" xml:space="preserve">
     <value>Path To Custom Yield Input File</value>
   </data>
+  <data name="Key_FertilizerApplicationMethod" xml:space="preserve">
+	  <value>Fertilizer Application Method</value>
+  </data>
 </root>
