@@ -14,7 +14,7 @@ Please note that Holos 4 can be installed on a Microsoft Windows PC only. Mac OS
 
 Launch Holos by double-clicking on the Holos desktop icon. Holos will ask the user to open an existing farm, create a new farm, or import a saved farm file (Figure 1). If there is already a saved farm in the system, the user can click **Open**. If there are no saved farms in the system, Holos will ask the user if they want to create a **New** farm or **Import** a saved farm file (i.e., a .json file). If the user creates a new farm, they are asked for the farm name and an optional comment (Figure 2).  
 
-Enter **"Holos 2024"** as the Name and **"Training Version"** in the Comments.  Click **OK** to proceed to the next screen.
+Enter **"Holos 2025"** as the Name and **"Training Version"** in the Comments.  Click **OK** to proceed to the next screen.
 
 Ensure **"Metric"** is selected as the unit of measurement type and then click the **Next** button at the bottom of the screen (Figure 3). 
 
@@ -156,7 +156,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 1. Rename the field to “**Wheat & Hairy Vetch**” in the **Step 1** section of the screen. Change the area of the field to **"18 ha"**.
 
-2. Leave the start and end years as **"1985"** and **"2024"**, respectively.
+2. Leave the start and end years as **"1985"** and **"2025"**, respectively.
 
 3. Select "**Wheat**" as the main crop and "**Hairy Vetch**" as the cover crop in **Step 2**.
 
@@ -184,7 +184,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 <p align="center">
     <img src="../../Images/PoultryGuide/en/Figure11.gif" alt="Figure 11" width="950"/>
     <br>
-    <em>Figure 11: Adding fertilizer to a field (Updated for 2025).</em>
+    <em>Figure 11: Adding fertilizer to a field.</em>
 </p> 
 
 <br>
@@ -216,7 +216,7 @@ Adding animal components follows the same approach that was used for the land ma
 <p align="center">
     <img src="../../Images/PoultryGuide/en/Figure12.gif" alt="Figure 12" width="950"/>
     <br>
-    <em>Figure 12: The Poultry Components (Updated for 2025).</em>
+    <em>Figure 12: The Poultry Components.</em>
 </p>
 
 <br>
@@ -234,7 +234,7 @@ The poultry meat production farm is **divided into three management (production)
 
 2. Click the management period “**Brooding stage**” in **Step 2** to activate that management period.
 
-3. Ensure “**January 1, 2024**” appears as the start date and “**January 15, 2024**” as the end date. These dates are set as the defaults.
+3. Ensure “**January 1, 2025**” appears as the start date and “**January 15, 2025**” as the end date. These dates are set as the defaults.
    
 4. Keep the default start and end dates for the two "**Rearing stage**" management periods. Thus, all three management periods will be 14 days in length. 
 
@@ -252,7 +252,7 @@ The poultry meat production farm is **divided into three management (production)
 
 ## Entering 'Chicken Egg Production' Information
 
-Click on the "**Hens**" row in the animal group section in **Step 1**. As egg-laying occurs year round, there is only a single 358-day management period for hens that starts on **"January 1, 2024"** and ends on **"December 23, 2024"**.
+Click on the "**Hens**" row in the animal group section in **Step 1**. As egg-laying occurs year round, there is only a single 358-day management period for hens that starts on **"January 1, 2025"** and ends on **"December 25, 2025"**.
 
 * **General tab:**
 
@@ -274,7 +274,7 @@ We can enter data related to the number of animals, manure system, and housing t
 
 2. Click the management period **"Brooding stage"** in **Step 2** to activate that management period.
 
-3. Ensure **"January 1, 2024"** appears as the start date and **"January 15, 2024"** as the end date. These dates are set as the defaults.
+3. Ensure **"January 1, 2025"** appears as the start date and **"January 15, 2025"** as the end date. These dates are set as the defaults.
 
 * **General tab:**:
     * Enter **"150,000"** as the number of animals. 
@@ -285,7 +285,7 @@ We can enter data related to the number of animals, manure system, and housing t
 * **Manure tab**:
     * Leave **"Solid storage (with or without litter)"** as the default manure handling system.
 
-Highlight the **"Rearing stage"** management period and set the start date to **"January 16, 2024"** and the end date to **"May 14, 2024"**; enter the same animal number, housing and manure management information as for the **"Brooding stage"**.
+Highlight the **"Rearing stage"** management period and set the start date to **"January 16, 2025"** and the end date to **"May 15, 2025"**; enter the same animal number, housing and manure management information as for the **"Brooding stage"**.
 
 
 ### Adding a Manure Application to the Wheat Field
@@ -295,7 +295,7 @@ In Holos, the user can apply livestock manure to a field using either manure pro
 1. Select the **Wheat & Hairy Vetch** field from the list of components added to our farm.
 
 2. Click on the **Manure** tab and then click the **Add Manure Application** button.
-    * Select **"April 30, 2024"** as the date.
+    * Select **"April 30, 2025"** as the date.
     * Select **"Livestock"** as the origin of manure.
     * Select **"Poultry"** as the manure type.
     * Select **"Solid storage (with or without litter)"** as the manure handling system.
