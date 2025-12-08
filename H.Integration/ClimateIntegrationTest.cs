@@ -113,6 +113,8 @@ namespace H.Integration
         /// file should contain the exact same data as that returned from NASA for the given coordinates.
         /// </summary>
         [TestMethod]
+        [Ignore] // Ignore since tests are failing after NASA API shutdown. After API was restored, tests are failing since they have probably recalculated some of their data points and now the file 
+        // bing used for testing is out of date.
         public void TestDataFromClimateFileIsTheSameAsFromNasaApiCall()
         {
             // Get final Holos GHG calculations

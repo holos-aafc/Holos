@@ -17,7 +17,7 @@ Holos has a default value: No
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (source code file, table, algorithm document, etc.): 
+Source (source code file, table, algorithm document, etc.):
 
 ***
 ## Name

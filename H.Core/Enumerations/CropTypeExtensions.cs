@@ -323,7 +323,6 @@ namespace H.Core.Enumerations
                 case CropType.Canola:
                 case CropType.Camelina:
                 case CropType.Mustard:
-                case CropType.Soybeans:
                 case CropType.Flax:
                     return true;
                 default:
@@ -357,6 +356,7 @@ namespace H.Core.Enumerations
                 case CropType.DryPeas:
                 case CropType.FieldPeas:
                 case CropType.Lentils:
+                case CropType.Soybeans:
                     return true;
                 default:
                     return false;

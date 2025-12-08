@@ -666,6 +666,32 @@ namespace H.Core.Test.Calculators.Carbon
         }
 
         [TestMethod]
+        public void CalculateCarbonInputFromRootsForPerennialsWhenCurrentYearInput()
+        {
+            var previousYearViewItem = new CropViewItem()
+            {
+                CarbonInputFromRoots = 5000,
+            };
+
+            var currentYearViewItem = new CropViewItem()
+            {
+                PlantCarbonInAgriculturalProduct = 100,
+                BiomassCoefficientProduct = 0.15,
+                BiomassCoefficientRoots = 0.04,
+                PercentageOfRootsReturnedToSoil = 100,
+            };
+
+            var farm = new Farm();
+
+            var result = _sut.CalculateCarbonInputFromRootsForPerennials(
+                previousYearViewItem: previousYearViewItem,
+                currentYearViewItem: currentYearViewItem,
+                farm);
+
+            Assert.AreEqual(5967.5, result, 1);
+        }
+
+        [TestMethod]
         public void CalculateCarbonInputFromRootsForPerennialsWhenCurrentYearInputsIsGreaterThanPreviousYearInputs()
         {
             var previousYearViewItem = new CropViewItem()
