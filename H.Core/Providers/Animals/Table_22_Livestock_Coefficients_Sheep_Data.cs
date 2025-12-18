@@ -5,16 +5,6 @@ namespace H.Core.Providers.Animals
 {
     public class Table_22_Livestock_Coefficients_Sheep_Data : AnimalCoefficientData
     {
-        #region Methods
-
-        public override string ToString()
-        {
-            return
-                $"{base.ToString()}, {nameof(CoefficientA)}: {CoefficientA}, {nameof(CoefficientB)}: {CoefficientB}, {nameof(WoolProduction)}: {WoolProduction}";
-        }
-
-        #endregion
-
         #region Properties
 
         [Units(MetricUnitsOfMeasurement.MegaJoulesPerKilogram)]
@@ -25,6 +15,15 @@ namespace H.Core.Providers.Animals
 
         [Units(MetricUnitsOfMeasurement.KilogramsPerYear)]
         public double WoolProduction { get; set; }
+
+        #endregion
+
+        #region Methods
+
+        public override string ToString()
+        {
+            return $"{base.ToString()}, {nameof(CoefficientA)}: {CoefficientA}, {nameof(CoefficientB)}: {CoefficientB}, {nameof(WoolProduction)}: {WoolProduction}";
+        }
 
         #endregion
     }

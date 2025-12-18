@@ -12,9 +12,8 @@
         #region Properties
 
         /// <summary>
-        ///     Enables the showing/hiding of the list of available components on the component selection view. This allows users
-        ///     with smaller screen sizes to hide this
-        ///     additional information.
+        /// Enables the showing/hiding of the list of available components on the component selection view. This allows users with smaller screen sizes to hide this
+        /// additional information.
         /// </summary>
         public bool ShowAvailableComponentsList
         {
@@ -23,8 +22,7 @@
         }
 
         /// <summary>
-        ///     Includes/excludes the report of emissions related to exports from the farm (e.g. manure and/or crop residue
-        ///     exports_
+        /// Includes/excludes the report of emissions related to exports from the farm (e.g. manure and/or crop residue exports_
         /// </summary>
         public bool ShowExportEmissionsInFinalReport
         {

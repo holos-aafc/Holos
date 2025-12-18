@@ -1,6 +1,5 @@
 ﻿#region Imports
 
-using System.Diagnostics;
 using H.Core.Enumerations;
 using H.Core.Tools;
 
@@ -9,7 +8,7 @@ using H.Core.Tools;
 namespace H.Core.Providers.Animals
 {
     /// <summary>
-    ///     Table 16. Livestock coefficients for beef cattle and dairy cattle.
+    ///  Table 16. Livestock coefficients for beef cattle and dairy cattle.
     /// </summary>
     public class Table_16_Livestock_Coefficients_BeefAndDairy_Cattle_Provider : IAnimalCoefficientDataProvider
     {
@@ -33,7 +32,7 @@ namespace H.Core.Providers.Animals
 
                 case AnimalType.BeefCalf:
                 {
-                    return new AnimalCoefficientData
+                    return new AnimalCoefficientData()
                     {
                         AnimalType = AnimalType.BeefCalf,
                         BaselineMaintenanceCoefficient = CoreConstants.NotApplicable,
@@ -45,7 +44,7 @@ namespace H.Core.Providers.Animals
 
                 case AnimalType.BeefCowLactating:
                 {
-                    return new AnimalCoefficientData
+                    return new AnimalCoefficientData()
                     {
                         AnimalType = AnimalType.BeefCowLactating,
                         BaselineMaintenanceCoefficient = 0.386,
@@ -57,7 +56,7 @@ namespace H.Core.Providers.Animals
 
                 case AnimalType.BeefCowDry:
                 {
-                    return new AnimalCoefficientData
+                    return new AnimalCoefficientData()
                     {
                         AnimalType = AnimalType.BeefCowDry,
                         BaselineMaintenanceCoefficient = 0.322,
@@ -69,7 +68,7 @@ namespace H.Core.Providers.Animals
 
                 case AnimalType.BeefBulls:
                 {
-                    return new AnimalCoefficientData
+                    return new AnimalCoefficientData()
                     {
                         AnimalType = AnimalType.BeefBulls,
                         BaselineMaintenanceCoefficient = 0.370,
@@ -81,7 +80,7 @@ namespace H.Core.Providers.Animals
 
                 case AnimalType.BeefBackgrounderSteer:
                 {
-                    return new AnimalCoefficientData
+                    return new AnimalCoefficientData()
                     {
                         AnimalType = AnimalType.BeefBackgrounderSteer,
                         BaselineMaintenanceCoefficient = 0.322,
@@ -95,7 +94,7 @@ namespace H.Core.Providers.Animals
                 case AnimalType.BeefBackgrounderHeifer:
                 case AnimalType.BeefReplacementHeifers:
                 {
-                    return new AnimalCoefficientData
+                    return new AnimalCoefficientData()
                     {
                         AnimalType = AnimalType.BeefBackgrounderHeifer,
                         BaselineMaintenanceCoefficient = 0.322,
@@ -107,7 +106,7 @@ namespace H.Core.Providers.Animals
 
                 case AnimalType.BeefFinishingSteer:
                 {
-                    return new AnimalCoefficientData
+                    return new AnimalCoefficientData()
                     {
                         AnimalType = AnimalType.BeefFinishingSteer,
                         BaselineMaintenanceCoefficient = 0.322,
@@ -119,7 +118,7 @@ namespace H.Core.Providers.Animals
 
                 case AnimalType.BeefFinishingHeifer:
                 {
-                    return new AnimalCoefficientData
+                    return new AnimalCoefficientData()
                     {
                         AnimalType = AnimalType.BeefFinishingHeifer,
                         BaselineMaintenanceCoefficient = 0.322,
@@ -141,75 +140,74 @@ namespace H.Core.Providers.Animals
 
                 case AnimalType.DairyLactatingCow:
                 {
-                    return new AnimalCoefficientData
+                    return new AnimalCoefficientData()
                     {
                         AnimalType = AnimalType.DairyLactatingCow,
                         BaselineMaintenanceCoefficient = 0.386,
                         GainCoefficient = 0.8,
                         DefaultInitialWeight = 687,
-                        DefaultFinalWeight = 687
+                        DefaultFinalWeight = 687,
                     };
                 }
 
                 case AnimalType.DairyDryCow:
                 {
-                    return new AnimalCoefficientData
+                    return new AnimalCoefficientData()
                     {
                         AnimalType = AnimalType.DairyDryCow,
                         BaselineMaintenanceCoefficient = 0.322,
                         GainCoefficient = 0.8,
                         DefaultInitialWeight = 687,
-                        DefaultFinalWeight = 687
+                        DefaultFinalWeight = 687,
                     };
                 }
 
                 case AnimalType.DairyHeifers:
                 {
-                    return new AnimalCoefficientData
+                    return new AnimalCoefficientData()
                     {
                         AnimalType = AnimalType.DairyHeifers,
                         BaselineMaintenanceCoefficient = 0.322,
                         GainCoefficient = 0.8,
                         DefaultInitialWeight = 637,
-                        DefaultFinalWeight = 687
+                        DefaultFinalWeight = 687,
                     };
                 }
 
                 case AnimalType.DairyBulls:
                 {
-                    return new AnimalCoefficientData
+                    return new AnimalCoefficientData()
                     {
                         AnimalType = AnimalType.DairyBulls,
                         BaselineMaintenanceCoefficient = 0.37,
                         GainCoefficient = 1.2,
                         DefaultInitialWeight = 1200,
-                        DefaultFinalWeight = 1200
+                        DefaultFinalWeight = 1200,
                     };
                 }
-
+                
                 case AnimalType.DairyCalves:
                 {
-                    return new AnimalCoefficientData
+                    return new AnimalCoefficientData()
                     {
                         AnimalType = AnimalType.DairyCalves,
                         BaselineMaintenanceCoefficient = 0,
                         GainCoefficient = 0,
                         DefaultInitialWeight = 45,
-                        DefaultFinalWeight = 127
+                        DefaultFinalWeight = 127,
                     };
                 }
 
                 default:
                 {
-                    var defaultValue = new AnimalCoefficientData
+                    var defaultValue = new AnimalCoefficientData()
                     {
                         BaselineMaintenanceCoefficient = 0,
                         GainCoefficient = 0,
                         DefaultInitialWeight = 0,
-                        DefaultFinalWeight = 0
+                        DefaultFinalWeight = 0,
                     };
-                    Trace.TraceError(
-                        $"{nameof(Table_16_Livestock_Coefficients_BeefAndDairy_Cattle_Provider)}.{nameof(GetCoefficientsByAnimalType)}" +
+                    System.Diagnostics.Trace.TraceError($"{nameof(Table_16_Livestock_Coefficients_BeefAndDairy_Cattle_Provider)}.{nameof(Table_16_Livestock_Coefficients_BeefAndDairy_Cattle_Provider.GetCoefficientsByAnimalType)}" +
                         $" unable to get data for animal type: {animalType}." +
                         $" Returning default value of {defaultValue}.");
                     return defaultValue;

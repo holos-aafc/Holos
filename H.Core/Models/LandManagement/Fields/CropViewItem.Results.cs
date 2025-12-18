@@ -22,44 +22,49 @@ namespace H.Core.Models.LandManagement.Fields
         public double NO3NFromManureAndDigestateLeaching;
         public double TotalN2ONFromManureAndDigestateLeaching;
         public double TotalN2ONFromManureAndDigestateLeachingExcludingRemainingAmounts;
-
+        
         /// <summary>
-        ///     Equation 2.5.4-1
-        ///     k = SN = Synthetic Nitrogen
+        /// Equation 2.5.4-1
+        ///
+        /// k = SN = Synthetic Nitrogen
         /// </summary>
         public double EF_SN;
 
         /// <summary>
-        ///     Equation 2.5.4-1
-        ///     k = CRN = Crop Residue Nitrogen
+        /// Equation 2.5.4-1
+        ///
+        /// k = CRN = Crop Residue Nitrogen
         /// </summary>
         public double EF_CRN;
 
         /// <summary>
-        ///     Equation 2.5.4-1
-        ///     k = ON = Organic Nitrogen
+        /// Equation 2.5.4-1
+        ///
+        /// k = ON = Organic Nitrogen
         /// </summary>
         public double EF_ON;
 
         /// <summary>
-        ///     (kg C ha^-1)
+        /// (kg C ha^-1)
         /// </summary>
         public double ChangeInCarbon { get; set; }
 
         /// <summary>
-        ///     (kg N ha^-1)
+        /// (kg N ha^-1)
         /// </summary>
         public double ChangeInNitrogenStock { get; set; }
 
         /// <summary>
-        ///     Soil C at beginning of year
-        ///     (kg C ha^-1)
+        /// Soil C at beginning of year
+        /// 
+        /// (kg C ha^-1)
         /// </summary>
         public double SoilCarbon { get; set; }
 
         /// <summary>
-        ///     Soil C at end of year
-        ///     (kg C ha^-1)
+        /// Soil C at end of year
+        /// 
+        /// (kg C ha^-1)
         /// </summary>
         public double SoilCarbonEndOfYear { get; set; }
 
@@ -70,38 +75,44 @@ namespace H.Core.Models.LandManagement.Fields
         public double OldPoolSoilCarbon { get; set; }
 
         /// <summary>
-        ///     Young pool aboveground at start of year
-        ///     (kg C ha^-1)
+        /// Young pool aboveground at start of year
+        /// 
+        /// (kg C ha^-1)
         /// </summary>
         public double YoungPoolSoilCarbonAboveGround { get; set; }
 
         /// <summary>
-        ///     Young pool aboveground at end of year
-        ///     (kg C ha^-1)
+        /// Young pool aboveground at end of year
+        /// 
+        /// (kg C ha^-1)
         /// </summary>
         public double YoungPoolSoilCarbonAboveGroundEndOfYear { get; set; }
 
         /// <summary>
-        ///     Young pool belowground at start of year
-        ///     (kg C ha^-1)
+        /// Young pool belowground at start of year
+        /// 
+        /// (kg C ha^-1)
         /// </summary>
         public double YoungPoolSoilCarbonBelowGround { get; set; }
 
         /// <summary>
-        ///     Young pool belowground at end of year
-        ///     (kg C ha^-1)
+        /// Young pool belowground at end of year
+        /// 
+        /// (kg C ha^-1)
         /// </summary>
         public double YoungPoolSoilCarbonBelowGroundEndOfYear { get; set; }
 
         /// <summary>
-        ///     Young pool manure at start of year
-        ///     (kg C ha^-1)
+        /// Young pool manure at start of year
+        /// 
+        /// (kg C ha^-1)
         /// </summary>
         public double YoungPoolManureCarbon { get; set; }
 
         /// <summary>
-        ///     Young pool manure at end of year
-        ///     (kg C ha^-1)
+        /// Young pool manure at end of year
+        /// 
+        /// (kg C ha^-1)
         /// </summary>
         public double YoungPoolManureCarbonEndOfYear { get; set; }
 
@@ -125,7 +136,7 @@ namespace H.Core.Models.LandManagement.Fields
         public double SyntheticNitrogenPool_N_SN { get; set; }
 
         /// <summary>
-        ///     kg N ha^-1
+        /// kg N ha^-1
         /// </summary>
         public double MineralNitrogenPool_N_mineralN { get; set; }
 
@@ -136,337 +147,319 @@ namespace H.Core.Models.LandManagement.Fields
         public double OrganicNitrogenPool_N_ON { get; set; }
 
         /// <summary>
-        ///     kg N ha^-1
+        /// kg N ha^-1
         /// </summary>
         public double MicrobeNitrogenPool_N_microbeN { get; set; }
-
         /// <summary>
-        ///     kg N
+        /// kg N
         /// </summary>
         public double N_min_FromDecompositionOfOldCarbon { get; set; }
-
         public double MineralizedNitrogenPool_N_min { get; set; }
 
         /// <summary>
-        ///     kg N ha^-1
+        /// kg N ha^-1
         /// </summary>
         public double AboveGroundResiduePool_AGresidueN { get; set; }
 
         /// <summary>
-        ///     kg N ha^-1
+        /// kg N ha^-1
         /// </summary>
         public double BelowGroundResiduePool_BGresidueN { get; set; }
 
         /// <summary>
-        ///     Manure N inputs from field applied manure
-        ///     (kg N ha^-1)
+        /// Manure N inputs from field applied manure
+        /// 
+        /// (kg N ha^-1)
         /// </summary>
         public double ManureResidueN { get; set; }
 
         /// <summary>
-        ///     (kg N2O-N field^-1)
+        /// (kg N2O-N field^-1)
         /// </summary>
         public double DirectNitrousOxideEmissionsFromSyntheticNitrogenForArea { get; set; }
 
         /// <summary>
-        ///     (kg N2O-N field^-1)
+        /// (kg N2O-N field^-1)
         /// </summary>
         public double DirectNitrousOxideEmissionsFromCropResiduesForArea { get; set; }
 
         /// <summary>
-        ///     (kg N2O-N field^-1)
+        /// (kg N2O-N field^-1)
         /// </summary>
         public double DirectNitrousOxideEmissionsFromMineralizedNitrogenForArea { get; set; }
 
         /// <summary>
-        ///     (kg N2O-N field^-1)
+        /// (kg N2O-N field^-1)
         /// </summary>
         public double DirectNitrousOxideEmissionsFromOrganicNitrogenForArea { get; set; }
 
         /// <summary>
-        ///     (kg N2O-N field^-1)
+        /// (kg N2O-N field^-1)
         /// </summary>
         public double DirectNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemainingAmounts { get; set; }
 
         /// <summary>
-        ///     (kg N2O-N field^-1)
+        /// (kg N2O-N field^-1)
         /// </summary>
         public double TotalDirectNitrousOxideForArea { get; set; }
 
         /// <summary>
-        ///     (kg N2O-N ha^-1)
+        /// (kg N2O-N ha^-1)
         /// </summary>
         public double TotalDirectN2ONFromCropExports { get; set; }
 
         /// <summary>
-        ///     (kg N2O-N ha^-1)
+        /// (kg N2O-N ha^-1)
         /// </summary>
         public double TotalIndirectN2ONFromExportedManure { get; set; }
 
         /// <summary>
-        ///     (kg NO3-N ha^-1)
+        /// (kg NO3-N ha^-1)
         /// </summary>
         public double TotalNO3NFromExportedManure { get; set; }
 
         /// <summary>
-        ///     (kg NH3-N ha^-1)
+        /// (kg NH3-N ha^-1)
         /// </summary>
         public double TotalNH3NFromExportedManure { get; set; }
 
         /// <summary>
-        ///     (kg NO-N ha^-1)
+        /// (kg NO-N ha^-1)
         /// </summary>
         public double TotalNONFromExportedCropResidues { get; set; }
 
         /// <summary>
-        ///     (kg N2O-N field^-1)
+        /// (kg N2O-N field^-1)
         /// </summary>
         public double TotalNitrousOxideForArea { get; set; }
 
         /// <summary>
-        ///     (kg N2O-N field^-1)
+        /// (kg N2O-N field^-1)
         /// </summary>
         public double IndirectNitrousOxideEmissionsFromSyntheticNitrogenForArea { get; set; }
 
         /// <summary>
-        ///     (kg N2O-N field^-1)
+        /// (kg N2O-N field^-1)
         /// </summary>
         public double IndirectNitrousOxideEmissionsFromCropResiduesForArea { get; set; }
 
         /// <summary>
-        ///     (kg N2O-N field^-1)
+        /// (kg N2O-N field^-1)
         /// </summary>
         public double IndirectNitrousOxideEmissionsFromMineralizedNitrogenForArea { get; set; }
 
         /// <summary>
-        ///     Leaching
-        ///     (kg N2O-N field^-1)
+        /// Leaching
+        /// 
+        /// (kg N2O-N field^-1)
         /// </summary>
         public double IndirectNitrousOxideEmissionsFromOrganicNitrogenForArea { get; set; }
 
         /// <summary>
-        ///     Leaching
-        ///     (kg N2O-N field^-1)
+        /// Leaching
+        /// 
+        /// (kg N2O-N field^-1)
         /// </summary>
-        public double IndirectNitrousOxideLeachingEmissionsFromOrganicNitrogenForAreaExcludingRemainingManure
-        {
-            get;
-            set;
-        }
+        public double IndirectNitrousOxideLeachingEmissionsFromOrganicNitrogenForAreaExcludingRemainingManure { get; set; }
 
         /// <summary>
-        ///     (kg N2O-N field^-1)
+        /// (kg N2O-N field^-1)
         /// </summary>
         public double IndirectNitrousOxideEmissionsFromVolatilizationOfSyntheticNitrogenForArea { get; set; }
 
         /// <summary>
-        ///     (kg N2O-N field^-1)
+        /// (kg N2O-N field^-1)
         /// </summary>
         public double IndirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForArea { get; set; }
-
+        
         /// <summary>
-        ///     (kg N2O-N field^-1)
+        /// (kg N2O-N field^-1)
         /// </summary>
-        public double IndirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForAreaExcludingRemainingAmounts
-        {
-            get;
-            set;
-        }
+        public double IndirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForAreaExcludingRemainingAmounts { get; set; }
 
         /// <summary>
-        ///     (kg N2O-N field^-1)
+        /// (kg N2O-N field^-1)
         /// </summary>
         public double TotalIndirectNitrousOxideForArea { get; set; }
 
         /// <summary>
-        ///     (kg N2O-N field^-1)
+        /// (kg N2O-N field^-1)
         /// </summary>
         public double TotalIndirectNitrousOxideForAreaExcludingRemainingAmounts { get; set; }
 
         /// <summary>
-        ///     (kg NO-N field^-1)
+        /// (kg NO-N field^-1)
         /// </summary>
         public double TotalNitricOxideForArea { get; set; }
 
         /// <summary>
-        ///     (kg NO-N field^-1)
+        /// (kg NO-N field^-1)
         /// </summary>
         public double DirectNitricOxideEmissionsFromSyntheticNitrogenForArea { get; set; }
 
         /// <summary>
-        ///     (kg NO-N field^-1)
+        /// (kg NO-N field^-1)
         /// </summary>
         public double DirectNitricOxideEmissionsFromCropResiduesForArea { get; set; }
 
         /// <summary>
-        ///     (kg NO-N field^-1)
+        /// (kg NO-N field^-1)
         /// </summary>
         public double DirectNitricOxideEmissionsFromMineralizedNitrogenForArea { get; set; }
 
         /// <summary>
-        ///     (kg NO-N field^-1)
+        /// (kg NO-N field^-1)
         /// </summary>
         public double DirectNitricOxideEmissionsFromOrganicNitrogenForArea { get; set; }
 
         /// <summary>
-        ///     (kg NO3-N field^-1)
+        /// (kg NO3-N field^-1)
         /// </summary>
         public double TotalNitrateLeachingForArea { get; set; }
 
         /// <summary>
-        ///     (kg NO3-N field^-1)
+        /// (kg NO3-N field^-1)
         /// </summary>
         public double IndirectNitrateFromSyntheticNitrogenForArea { get; set; }
 
         /// <summary>
-        ///     (kg NO3-N field^-1)
+        /// (kg NO3-N field^-1)
         /// </summary>
         public double IndirectNitrateFromCropResiduesForArea { get; set; }
 
         /// <summary>
-        ///     (kg NO3-N field^-1)
+        /// (kg NO3-N field^-1)
         /// </summary>
         public double IndirectNitrateFromMineralizedNitrogenForArea { get; set; }
 
         /// <summary>
-        ///     (kg NO3-N field^-1)
+        /// (kg NO3-N field^-1)
         /// </summary>
         public double IndirectNitrateFromOrganicNitrogenForArea { get; set; }
 
         /// <summary>
-        ///     (kg NH4-N field^-1)
+        /// (kg NH4-N field^-1)
         /// </summary>
         public double TotalAmmoniaForArea { get; set; }
 
         /// <summary>
-        ///     (kg NH4-N field^-1)
+        /// (kg NH4-N field^-1)
         /// </summary>
         public double IndirectAmmoniumEmissionsFromVolatilizationOfOrganicNitrogenForArea { get; set; }
 
         /// <summary>
-        ///     (kg NH4-N field^-1)
+        /// (kg NH4-N field^-1)
         /// </summary>
         public double IndirectAmmoniumEmissionsFromVolatilizationOfSyntheticNitrogenForArea { get; set; }
 
         /// <summary>
-        ///     (kg N2-N field^-1)
+        /// (kg N2-N field^-1)
         /// </summary>
         public double DenitrificationForArea { get; set; }
 
         /// <summary>
-        ///     kg N ha^-1
+        /// kg N ha^-1
         /// </summary>
         public double AboveGroundNitrogenResidueForCrop { get; set; }
 
         /// <summary>
-        ///     (kg N ha^-1)
+        /// (kg N ha^-1)
         /// </summary>
         public double ExportedNitrogenResidueForCrop { get; set; }
 
         /// <summary>
-        ///     kg N ha^-1
+        /// kg N ha^-1
         /// </summary>
         public double BelowGroundResidueNitrogenForCrop { get; set; }
 
         /// <summary>
-        ///     kg N
+        /// kg N
         /// </summary>
         public double OldPoolNitrogenRequirement { get; set; }
 
         /// <summary>
-        ///     kg ha^-1
+        /// kg ha^-1
         /// </summary>
         public double CropNitrogenDemand { get; set; }
 
         /// <summary>
-        ///     (kg N ha^-1)
+        /// (kg N ha^-1)
         /// </summary>
         public double TotalNitrogenInputs { get; set; }
 
         /// <summary>
-        ///     Total organic nitrogen (residue) inputs for IPCC Tier 2 pool calculation. Includes above ground residue, below
-        ///     ground residue, and manure residues.
-        ///     (kg N ha^-1)
+        /// Total organic nitrogen (residue) inputs for IPCC Tier 2 pool calculation. Includes above ground residue, below ground residue, and manure residues.
+        ///
+        /// (kg N ha^-1)
         /// </summary>
         public double TotalNitrogenInputsForIpccTier2 { get; set; }
 
         /// <summary>
-        ///     Sum total of all emission types for the field (N2O-N, NO-N, NO3-N, and NH4-N)
+        /// Sum total of all emission types for the field (N2O-N, NO-N, NO3-N, and NH4-N)
         /// </summary>
         public double TotalNitrogenEmissions { get; set; }
 
         /// <summary>
-        ///     kg N ha^-1
+        /// kg N ha^-1
         /// </summary>
         public double TotalNitrogenOutputs { get; set; }
-
         /// <summary>
-        ///     kg N ha^-1
+        /// kg N ha^-1
         /// </summary>
         public double DifferenceBetweenInputsAndOutputs { get; set; }
-
         /// <summary>
-        ///     kg N ha^-1
+        /// kg N ha^-1
         /// </summary>
         public double SumOfMineralAndMicrobialPools { get; set; }
 
         /// <summary>
-        ///     kg N ha^-1
+        /// kg N ha^-1
         /// </summary>
         public double MineralNitrogenBalance { get; set; }
-
         /// <summary>
-        ///     kg N ha^-1
+        /// kg N ha^-1
         /// </summary>
         public double MicrobialNitrogenBalance { get; set; }
-
         /// <summary>
-        ///     kg N ha^-1
+        /// kg N ha^-1
         /// </summary>
         public double SyntheticInputsBeforeAdjustment { get; set; }
 
         /// <summary>
-        ///     kg N ha^-1
+        /// kg N ha^-1
         /// </summary>
         public double CropResiduesBeforeAdjustment { get; set; }
 
         /// <summary>
-        ///     kg N ha^-1
+        /// kg N ha^-1
         /// </summary>
         public double OrganicNitrogenResiduesBeforeAdjustment { get; set; }
-
         /// <summary>
-        ///     kg N
+        /// kg N
         /// </summary>
         public double TotalUptake { get; set; }
-
         public double Overflow { get; set; }
 
         /// <summary>
-        ///     unitless
+        /// unitless
         /// </summary>
         public double Ratio { get; set; }
-
         /// <summary>
-        ///     kg N ha^-1
+        /// kg N ha^-1
         /// </summary>
         public double MicrobeDeath { get; set; }
-
         /// <summary>
-        ///     kg N ha^-1
+        /// kg N ha^-1
         /// </summary>
         public double MicrobialPoolAfterCloseOfBudget { get; set; }
-
         /// <summary>
-        ///     kg N ha^-1
+        /// kg N ha^-1
         /// </summary>
         public double MicrobialPoolAfterOldPoolDemandAdjustment { get; set; }
-
         /// <summary>
-        ///     kg N ha^-1
+        /// kg N ha^-1
         /// </summary>
         public double MicrobialPoolAfterCropDemandAdjustment { get; set; }
-
         public double SoilCarbonRootMeanSquareError { get; set; }
         public double MeanAbsoluteError { get; set; }
 
@@ -488,14 +481,26 @@ namespace H.Core.Models.LandManagement.Fields
 
         public IPCCTier2Results IpccTier2CarbonResults
         {
-            get => _carbonResults;
-            set => SetProperty(ref _carbonResults, value);
+            get
+            {
+                return _carbonResults;
+            }
+            set
+            {
+                SetProperty(ref _carbonResults, value);
+            }
         }
 
         public IPCCTier2Results IpccTier2NitrogenResults
         {
-            get => _nitrogenResults;
-            set => SetProperty(ref _nitrogenResults, value);
+            get
+            {
+                return _nitrogenResults;
+            }
+            set
+            {
+                SetProperty(ref _nitrogenResults, value);
+            }
         }
 
         public double ActivePoolCarbon { get; set; }
@@ -503,86 +508,93 @@ namespace H.Core.Models.LandManagement.Fields
         public double PassivePoolCarbon { get; set; }
 
         /// <summary>
-        ///     Annual average air temperature effect on decomposition
-        ///     (unitless)
+        /// Annual average air temperature effect on decomposition
+        /// 
+        /// (unitless)
         /// </summary>
         public double TFac { get; set; }
 
         /// <summary>
-        ///     Annual water effect on decomposition
-        ///     (unitless)
+        /// Annual water effect on decomposition 
+        /// 
+        /// (unitless)
         /// </summary>
-        public double WFac { get; set; }
+        public double WFac { get; set; }       
 
         /// <summary>
-        ///     Fraction of 0-30 cm soil mass that is sand (0.050 – 2mm particles)
-        ///     (unitless)
+        /// Fraction of 0-30 cm soil mass that is sand (0.050 – 2mm particles)
+        /// 
+        /// (unitless)
         /// </summary>
         public double Sand { get; set; }
 
         /// <summary>
-        ///     Nitrogen fraction of the carbon input (from IPCC Tier 2).
-        ///     (unitless)
+        /// Nitrogen fraction of the carbon input (from IPCC Tier 2).
+        /// 
+        /// (unitless)
         /// </summary>
         public double NitrogenContent { get; set; }
 
         /// <summary>
-        ///     SOC stock at the end of the current year y for grid cell or region
-        ///     (kg C ha^-1)
+        /// SOC stock at the end of the current year y for grid cell or region
+        /// 
+        /// (kg C ha^-1)
         /// </summary>
         public double Soc { get; set; }
 
         /// <summary>
-        ///     SOC-N stock at the end of the current year y for grid cell or region
-        ///     (kg N ha^-1)
+        /// SOC-N stock at the end of the current year y for grid cell or region
+        /// 
+        /// (kg N ha^-1)
         /// </summary>
         public double SoilNitrogenStock { get; set; }
 
         /// <summary>
-        ///     Annual stock change factor for mineral soils in grid cell or region
-        ///     (tonnes C ha^-1)
+        /// Annual stock change factor for mineral soils in grid cell or region
+        /// 
+        /// (tonnes C ha^-1)
         /// </summary>
         public double SocDiff { get; set; }
 
         /// <summary>
-        ///     (kg ha^-1)
+        /// (kg ha^-1)
         /// </summary>
         public double AboveGroundResidueDryMatter { get; set; }
 
         /// <summary>
-        ///     (kg ha^-1)
+        /// (kg ha^-1)
         /// </summary>
         public double AboveGroundResidueDryMatterExported { get; set; }
 
         /// <summary>
-        ///     (kg ha^-1)
+        /// (kg ha^-1)
         /// </summary>
         public double BelowGroundResidueDryMatter { get; set; }
 
         /// <summary>
-        ///     (kg N2O ha^-1)
+        /// (kg N2O ha^-1)
         /// </summary>
         public double TotalDirectNitrousOxidePerHectare { get; set; }
 
         /// <summary>
-        ///     (kg N2O ha^-1)
+        /// (kg N2O ha^-1)
         /// </summary>
         public double TotalDirectNitrousOxidePerHectareExcludingRemainingAmounts { get; set; }
 
         /// <summary>
-        ///     (kg N2O ha^-1)
+        /// (kg N2O ha^-1)
         /// </summary>
         public double TotalIndirectNitrousOxidePerHectare { get; set; }
 
         /// <summary>
-        ///     (kg N2O ha^-1)
+        /// (kg N2O ha^-1)
         /// </summary>
         public double TotalIndirectNitrousOxidePerHectareExcludingRemainingAmounts { get; set; }
 
         public CropEnergyResults CropEnergyResults { get; set; }
 
         /// <summary>
-        ///     (kg NH3-N ha^-1)
+        /// (kg NH3-N ha^-1)
         /// </summary>
         public double AdjustedAmmoniacalLossFromLandAppliedManurePerHectare { get; set; }
 

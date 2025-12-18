@@ -8,7 +8,7 @@ namespace H.Core.Converters
     {
         public FertilizerBlends Convert(string input)
         {
-            var cleaned = GetLettersAsLowerCase(input);
+            var cleaned = base.GetLettersAsLowerCase(input);
             switch (cleaned)
             {
                 case "urea":
@@ -70,8 +70,7 @@ namespace H.Core.Converters
 
                 default:
                 {
-                    Trace.TraceError(
-                        $"{nameof(FertilizerBlendConverter)}.{nameof(Convert)}: unknown input '{cleaned}'. Returning default value of {FertilizerBlends.Urea.GetDescription()}");
+                    Trace.TraceError($"{nameof(FertilizerBlendConverter)}.{nameof(FertilizerBlendConverter.Convert)}: unknown input '{cleaned}'. Returning default value of {FertilizerBlends.Urea.GetDescription()}");
 
                     return FertilizerBlends.Urea;
                 }

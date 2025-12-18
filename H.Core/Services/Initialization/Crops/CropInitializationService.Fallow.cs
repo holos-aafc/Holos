@@ -1,6 +1,6 @@
 ﻿using H.Core.Enumerations;
-using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Models;
 
 namespace H.Core.Services.Initialization.Crops
 {
@@ -10,7 +10,10 @@ namespace H.Core.Services.Initialization.Crops
 
         public void InitializeFallow(Farm farm)
         {
-            foreach (var viewItem in farm.GetAllCropViewItems()) InitializeFallow(viewItem, farm);
+            foreach (var viewItem in farm.GetAllCropViewItems())
+            {
+                this.InitializeFallow(viewItem, farm);
+            }
         }
 
         public void InitializeFallow(CropViewItem viewItem, Farm farm)

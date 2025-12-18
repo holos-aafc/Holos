@@ -18,12 +18,12 @@ namespace H.Core.Enumerations
         CashCrop,
 
         /// <summary>
-        ///     Used for fallow, etc.
+        /// Used for fallow, etc.
         /// </summary>
         [LocalizedDescription("EnumNone", typeof(Resources))]
         None,
 
         [LocalizedDescription("EnumStubbleGrazing", typeof(Resources))]
-        StubbleGrazing
+        StubbleGrazing,
     }
 }

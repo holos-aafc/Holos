@@ -9,7 +9,7 @@
         SeededAndBrokenGrassland,
         BrokenGrassland,
         SeededGrassland,
-        PastPerennials, // Includes broken grassland
-        CurrentPerennials // Includes seeded grasslands
+        PastPerennials,     // Includes broken grassland
+        CurrentPerennials,  // Includes seeded grasslands
     }
 }

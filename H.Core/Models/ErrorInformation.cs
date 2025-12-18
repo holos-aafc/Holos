@@ -1,4 +1,5 @@
-﻿using H.Infrastructure;
+﻿using System.Windows;
+using H.Infrastructure;
 
 namespace H.Core.Models
 {
@@ -12,9 +13,12 @@ namespace H.Core.Models
 
         public ErrorInformation(string msg) : this()
         {
-            Message = msg;
+            base.Message = msg;
         }
 
         #endregion
+
+        #region Properties
+        #endregion 
     }
 }

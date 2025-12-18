@@ -1,4 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Documents;
 using H.Core.Enumerations;
 
 namespace H.Core.Converters
@@ -25,6 +31,7 @@ namespace H.Core.Converters
                     Trace.TraceError($"{lower} is not a unit of measurement. Returning default 'none'");
                     return EconomicMeasurementUnits.None;
             }
+
         }
     }
 }

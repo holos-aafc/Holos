@@ -5,14 +5,14 @@ namespace H.Core.Calculators.Nitrogen
     public interface IICBMNitrogenInputCalculator : INitrogenInputCalculator
     {
         /// <summary>
-        ///     Equation 2.5.6-1
+        /// Equation 2.5.6-1
         /// </summary>
         double CalculateGrainNitrogenTotal(
             double carbonInputFromAgriculturalProduct,
             double nitrogenConcentrationInProduct);
 
         /// <summary>
-        ///     Equation 2.5.6-2
+        /// Equation 2.5.6-2
         /// </summary>
         /// <param name="carbonInputFromProduct">Carbon input from product (kg ha^-1) </param>
         /// <param name="nitrogenConcentrationInProduct">N concentration in the product (kg kg-1) </param>
@@ -21,7 +21,7 @@ namespace H.Core.Calculators.Nitrogen
             double nitrogenConcentrationInProduct);
 
         /// <summary>
-        ///     Equation 2.5.6-3
+        /// Equation 2.5.6-3
         /// </summary>
         /// <param name="carbonInputFromStraw">Carbon input from straw (kg ha^-1)</param>
         /// <param name="nitrogenConcentrationInStraw"></param>
@@ -30,7 +30,7 @@ namespace H.Core.Calculators.Nitrogen
             double nitrogenConcentrationInStraw);
 
         /// <summary>
-        ///     Equation 2.5.6-4
+        /// Equation 2.5.6-4
         /// </summary>
         /// <param name="carbonInputFromRoots">Carbon input from roots (kg ha^-1)</param>
         /// <param name="nitrogenConcentrationInRoots">N concentration in the roots (kg kg-1) </param>
@@ -39,20 +39,17 @@ namespace H.Core.Calculators.Nitrogen
             double nitrogenConcentrationInRoots);
 
         /// <summary>
-        ///     Equation 2.5.6-5
+        /// Equation 2.5.6-5
         /// </summary>
         /// <param name="carbonInputFromExtraroots">Carbon input from extra-root material (kg ha^-1)</param>
-        /// <param name="nitrogenConcentrationInExtraroots">
-        ///     N concentration in the extra root (kg kg-1) (until known from
-        ///     literature, the same N concentration used for roots will be utilized)
-        /// </param>
+        /// <param name="nitrogenConcentrationInExtraroots">N concentration in the extra root (kg kg-1) (until known from literature, the same N concentration used for roots will be utilized)</param>
         double CalculateNitrogenContentExaduatesReturnedToSoil(
             double carbonInputFromExtraroots,
             double nitrogenConcentrationInExtraroots);
 
         /// <summary>
-        ///     Equation 2.5.5-5
-        ///     Equation 2.5.5-6
+        /// Equation 2.5.5-5
+        /// Equation 2.5.5-6
         /// </summary>
         /// <param name="nitrogenContentOfGrainReturnedToSoil">Nitrogen content of the grain returned to the soil (kg N ha^-1)</param>
         /// <param name="fertilizerEfficiencyFraction">Fertilizer use efficiency (fraction)</param>
@@ -70,7 +67,6 @@ namespace H.Core.Calculators.Nitrogen
 
         double CalculateTotalAboveGroundResidueNitrogenUsingIcbm(CropViewItem previousYearViewItem,
             CropViewItem currentYearViewItem);
-
         double CalculateTotalBelowGroundResidueNitrogenUsingIcbm(CropViewItem currentYearViewItem,
             CropViewItem previousYearViewItem);
     }

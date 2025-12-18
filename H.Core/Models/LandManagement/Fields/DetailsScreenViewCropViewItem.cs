@@ -1,6 +1,8 @@
 ﻿#region Imports
 
 using System;
+using H.Core.Enumerations;
+using H.Infrastructure;
 
 #endregion
 

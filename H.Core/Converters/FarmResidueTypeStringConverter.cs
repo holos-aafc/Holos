@@ -1,13 +1,18 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using H.Core.Enumerations;
+using System.Diagnostics;
 
 namespace H.Core.Converters
 {
-    internal class FarmResidueTypeStringConverter : ConverterBase
+    class FarmResidueTypeStringConverter : ConverterBase
     {
         public FarmResidueType Convert(string input)
         {
-            switch (GetLettersAsLowerCase(input))
+            switch (this.GetLettersAsLowerCase(input))
             {
                 case "barleystraw":
                     return FarmResidueType.BarleyStraw;
@@ -53,9 +58,8 @@ namespace H.Core.Converters
 
                 default:
                 {
-                    Trace.TraceError(
-                        $"{nameof(FarmResidueTypeStringConverter)}.{nameof(Convert)} unknown residue type {input}. Returning {FarmResidueType.BarleyStraw}");
-                    return FarmResidueType.BarleyStraw;
+                        Trace.TraceError($"{nameof(FarmResidueTypeStringConverter)}.{nameof(FarmResidueTypeStringConverter.Convert)} unknown residue type {input}. Returning {FarmResidueType.BarleyStraw}");
+                        return FarmResidueType.BarleyStraw;
                 }
             }
         }

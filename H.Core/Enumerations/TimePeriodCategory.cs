@@ -4,6 +4,6 @@
     {
         Past,
         Current,
-        Future
+        Future,
     }
 }

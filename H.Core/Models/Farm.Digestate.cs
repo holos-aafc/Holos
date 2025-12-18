@@ -1,5 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.ObjectModel;
+using H.Core.Enumerations;
+using System.Diagnostics;
+using System.Linq;
 using H.Core.Models.Infrastructure;
+using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers.Animals;
 
 namespace H.Core.Models
 {
@@ -9,9 +14,14 @@ namespace H.Core.Models
 
         public AnaerobicDigestionComponent GetAnaerobicDigestionComponent()
         {
-            if (AnaerobicDigestionComponents.Any()) return AnaerobicDigestionComponents.First();
-
-            return new AnaerobicDigestionComponent();
+            if (this.AnaerobicDigestionComponents.Any())
+            {
+                return this.AnaerobicDigestionComponents.First();
+            }
+            else
+            {
+                return new AnaerobicDigestionComponent();
+            }
         }
 
         #endregion

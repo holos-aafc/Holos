@@ -4,40 +4,24 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Windows.Shapes;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
 using H.Core.Tools;
 using H.Infrastructure;
+using Newtonsoft.Json.Linq;
 
 #endregion
 
 namespace H.Core.Providers.Soil
 {
     /// <summary>
-    ///     http://sis.agr.gc.ca/cansis/nsdb/index.html
+    /// http://sis.agr.gc.ca/cansis/nsdb/index.html
     /// </summary>
     public class NationalSoilDataBaseProvider : GeographicDataProviderBase, ISoilDataProvider
     {
-        #region Constructors
-
-        public NationalSoilDataBaseProvider()
-        {
-            HTraceListener.AddTraceListener();
-            _provinceStringConverter = new ProvinceStringConverter();
-            _firstNonLitterLayerCache = new Dictionary<string, SoilLayerTableData>();
-            _soilLayerTableBySoilIdentifierDictionary = new Dictionary<string, List<SoilLayerTableData>>();
-            _componentTableDataList = new List<ComponentTableData>();
-            _soilLayerTableDataList = new List<SoilLayerTableData>();
-            _soilNameTableDataList = new List<SoilNameTableData>();
-            _soilGreatGroupDataList = new List<SoilGreatGroupData>();
-            _polygonAttributeTableDataList = new Dictionary<int, PolygonAttributeTableData>();
-            _ecodistrictNamesTableDataList = new Dictionary<int, EcodistrictNamesTableData>();
-        }
-
-        #endregion
-
-        #region Fields
+        #region Fields       
 
         private const string AgriculturalTypeSoilProfile = "A";
         private const string NativeTypeSoilProfile = "N";
@@ -56,20 +40,45 @@ namespace H.Core.Providers.Soil
 
         #endregion
 
+        #region Constructors
+
+        public NationalSoilDataBaseProvider()
+        {
+            HTraceListener.AddTraceListener();
+            _provinceStringConverter = new ProvinceStringConverter();
+            _firstNonLitterLayerCache = new Dictionary<string, SoilLayerTableData>();
+            _soilLayerTableBySoilIdentifierDictionary = new Dictionary<string, List<SoilLayerTableData>>();
+            _componentTableDataList = new List<ComponentTableData>();
+            _soilLayerTableDataList = new List<SoilLayerTableData>();
+            _soilNameTableDataList = new List<SoilNameTableData>();
+            _soilGreatGroupDataList = new List<SoilGreatGroupData>();
+            _polygonAttributeTableDataList = new Dictionary<int, PolygonAttributeTableData>();
+            _ecodistrictNamesTableDataList = new Dictionary<int, EcodistrictNamesTableData>();
+        }
+
+        #endregion
+
+        #region Properties
+
+        #endregion
+
         #region Public Methods
 
         public void Initialize()
         {
-            if (IsInitialized) return;
+            if (this.IsInitialized)
+            {
+                return;
+            }
 
-            _componentTableDataList = GetComponentDataTable();
-            _soilLayerTableDataList = GetSoilLayerTable();
-            _soilNameTableDataList = GetSoilNameTable();
-            _soilGreatGroupDataList = GetSoilGreatGroupTable();
-            _polygonAttributeTableDataList = GetPolygonAttributeTable();
-            _ecodistrictNamesTableDataList = GetEcodistrictNamesTable();
+            _componentTableDataList = this.GetComponentDataTable();
+            _soilLayerTableDataList = this.GetSoilLayerTable();
+            _soilNameTableDataList = this.GetSoilNameTable();
+            _soilGreatGroupDataList = this.GetSoilGreatGroupTable();
+            _polygonAttributeTableDataList = this.GetPolygonAttributeTable();
+            _ecodistrictNamesTableDataList = this.GetEcodistrictNamesTable();
 
-            IsInitialized = true;
+            this.IsInitialized = true;
 
             Trace.TraceInformation($"{nameof(NationalSoilDataBaseProvider)} has been initialized.");
         }
@@ -78,10 +87,9 @@ namespace H.Core.Providers.Soil
         public bool DataExistsForPolygon(int polygonId)
         {
             // Check if polygon exists.
-            if (GetPolygonIdList().Contains(polygonId) == false)
+            if (this.GetPolygonIdList().Contains(polygonId) == false)
             {
-                Trace.TraceError(
-                    $"{nameof(NationalSoilDataBaseProvider)}.{nameof(DataExistsForPolygon)} polygon '{polygonId}' not found in polygon attribute table.");
+                Trace.TraceError($"{nameof(NationalSoilDataBaseProvider)}.{nameof(DataExistsForPolygon)} polygon '{polygonId}' not found in polygon attribute table.");
 
                 return false;
             }
@@ -90,27 +98,30 @@ namespace H.Core.Providers.Soil
             var componentExists = _componentTableDataList.Any(x => x.PolygonId == polygonId);
             if (componentExists == false)
             {
-                Trace.TraceError(
-                    $"{nameof(NationalSoilDataBaseProvider)}.{nameof(DataExistsForPolygon)} no soil component entry found for polygon '{polygonId}'.");
+                Trace.TraceError($"{nameof(NationalSoilDataBaseProvider)}.{nameof(DataExistsForPolygon)} no soil component entry found for polygon '{polygonId}'.");
 
                 return false;
             }
 
             // Check if we have soil data
-            var soilData = GetAllSoilDataForAllComponentsWithinPolygon(polygonId);
-            if (soilData.Any() == false) return false;
+            var soilData = this.GetAllSoilDataForAllComponentsWithinPolygon(polygonId);
+            if (soilData.Any() == false)
+            {
+                return false;
+            }
 
             // Don't add organic types or any other type for which we have no methodology
-            var knownMethodologyType = soilData.Where(x =>
-                x.SoilGreatGroup != SoilGreatGroupType.NotApplicable &&
-                x.SoilFunctionalCategory != SoilFunctionalCategory.Organic);
-            if (knownMethodologyType.Any() == false) return false;
+            var knownMethodologyType = soilData.Where(x => x.SoilGreatGroup != SoilGreatGroupType.NotApplicable && x.SoilFunctionalCategory != SoilFunctionalCategory.Organic);
+            if (knownMethodologyType.Any() == false)
+            {
+                return false;
+            }
 
             return true;
         }
 
         /// <summary>
-        ///     Reads the polygon component table (cmp.csv) to see if table has an entry for the polygon id.
+        /// Reads the polygon component table (cmp.csv) to see if table has an entry for the polygon id.
         /// </summary>
         public List<int> GetPolygonIdList()
         {
@@ -119,29 +130,32 @@ namespace H.Core.Providers.Soil
 
         public SoilData GetPredominantSoilDataByPolygonId(int polygonId)
         {
-            if (GetFirstNonLitterLayer(polygonId) == null) return null;
+            if (this.GetFirstNonLitterLayer(polygonId) == null)
+            {
+                return null;
+            }
 
             var soilData = new SoilData
             {
                 PolygonId = polygonId,
-                BulkDensity = GetBulkDensity(polygonId),
-                ProportionOfClayInSoil = GetProportionOfClayInSoil(polygonId),
-                ProportionOfSandInSoil = GetProportionOfSandInSoil(polygonId),
-                ProportionOfSoilOrganicCarbon = GetPercentageSoilOrganicCarbon(polygonId),
-                SoilGreatGroup = GetSoilGreatGroup(polygonId),
-                SoilSubGroup = GetSubGroup(polygonId),
-                TopLayerThickness = GetTopLayerThickness(polygonId),
-                SoilPh = GetSoilPh(polygonId),
-                SoilCec = GetSoilCec(polygonId),
-                SoilFunctionalCategory = GetSoilFunctionalCategory(polygonId),
-                Province = GetProvince(polygonId),
-                ParentMaterialTextureString = GetParentMaterialTextureType(polygonId),
-                SoilTexture = GetSoilTexture(polygonId),
-                EcodistrictName = GetEcodistrictName(polygonId),
-                SoilName = GetSoilName(polygonId),
-                EcodistrictId = GetEcodistrictId(polygonId),
-                Ecozone = GetEcozone(polygonId),
-                DrainageClass = GetDrainage(polygonId)
+                BulkDensity = this.GetBulkDensity(polygonId),
+                ProportionOfClayInSoil = this.GetProportionOfClayInSoil(polygonId),
+                ProportionOfSandInSoil = this.GetProportionOfSandInSoil(polygonId),
+                ProportionOfSoilOrganicCarbon = this.GetPercentageSoilOrganicCarbon(polygonId),
+                SoilGreatGroup = this.GetSoilGreatGroup(polygonId),
+                SoilSubGroup = this.GetSubGroup(polygonId),
+                TopLayerThickness = this.GetTopLayerThickness(polygonId),
+                SoilPh = this.GetSoilPh(polygonId),
+                SoilCec = this.GetSoilCec(polygonId),
+                SoilFunctionalCategory = this.GetSoilFunctionalCategory(polygonId),
+                Province = this.GetProvince(polygonId),
+                ParentMaterialTextureString = this.GetParentMaterialTextureType(polygonId),
+                SoilTexture = this.GetSoilTexture(polygonId),
+                EcodistrictName = this.GetEcodistrictName(polygonId),
+                SoilName = this.GetSoilName(polygonId),
+                EcodistrictId = this.GetEcodistrictId(polygonId),
+                Ecozone = this.GetEcozone(polygonId),
+                DrainageClass = this.GetDrainage(polygonId),
             };
 
             return soilData;
@@ -149,13 +163,13 @@ namespace H.Core.Providers.Soil
 
         private Ecozone GetEcozone(int polygonId)
         {
-            var ecodistrictId = GetEcodistrictId(polygonId);
+            var ecodistrictId = this.GetEcodistrictId(polygonId);
 
-            return ecodistrictDefaultsProvider.GetEcozone(ecodistrictId);
+            return base.ecodistrictDefaultsProvider.GetEcozone(ecodistrictId);
         }
 
         /// <summary>
-        ///     A polygon contains many components. Get a list of all components within the polygon.
+        /// A polygon contains many components. Get a list of all components within the polygon.
         /// </summary>
         /// <param name="polygonId"></param>
         /// <returns></returns>
@@ -163,8 +177,7 @@ namespace H.Core.Providers.Soil
         {
             var componentsWithinPolygon = _componentTableDataList.Where(x => x.PolygonId == polygonId).ToList();
 
-            Trace.TraceInformation(
-                $"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetAllSoilDataForAllComponentsWithinPolygon)} found {componentsWithinPolygon.Count} total components in polygon '{polygonId}. Getting first non-litter layers for these components.");
+            Trace.TraceInformation($"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetAllSoilDataForAllComponentsWithinPolygon)} found {componentsWithinPolygon.Count} total components in polygon '{polygonId}. Getting first non-litter layers for these components.");
 
             var result = new List<SoilData>();
 
@@ -173,11 +186,13 @@ namespace H.Core.Providers.Soil
             {
                 var componentTableData = componentsWithinPolygon[index];
 
-                Trace.TraceInformation(
-                    $"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetAllSoilDataForAllComponentsWithinPolygon)} getting soil data for component #{index + 1}.");
+                Trace.TraceInformation($"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetAllSoilDataForAllComponentsWithinPolygon)} getting soil data for component #{index + 1}.");
 
                 // If there is no soil dat for this component, move on to next.
-                if (GetFirstNonLitterLayer(componentTableData) == null) continue;
+                if (this.GetFirstNonLitterLayer(componentTableData) == null)
+                {
+                    continue;
+                }
 
                 var bulkDensity = GetBulkDensityByComponent(componentTableData);
                 var proportionOfClayInSoil = GetProportionOfClayInSoilByComponent(componentTableData);
@@ -191,31 +206,30 @@ namespace H.Core.Providers.Soil
                 var soilData = new SoilData
                 {
                     PolygonId = polygonId,
-                    SoilName = GetSoilName(polygonId),
+                    SoilName = this.GetSoilName(polygonId),
                     ComponentId = componentTableData.PolygonComponentId,
                     BulkDensity = bulkDensity > 0 ? bulkDensity : 0,
                     ProportionOfClayInSoil = proportionOfClayInSoil > 0 ? proportionOfClayInSoil : 0,
                     ProportionOfSandInSoil = proportionOfSandInSoil > 0 ? proportionOfSandInSoil : 0,
                     ProportionOfSoilOrganicCarbon = percentageSoilOrganicCarbon > 0 ? percentageSoilOrganicCarbon : 0,
-                    SoilGreatGroup = GetSoilGreatGroupByComponent(componentTableData),
-                    SoilSubGroup = GetSoilSubGroup(componentTableData),
+                    SoilGreatGroup = this.GetSoilGreatGroupByComponent(componentTableData),
+                    SoilSubGroup = this.GetSoilSubGroup(componentTableData),
                     TopLayerThickness = topLayerThickness > 0 ? topLayerThickness : 0,
                     SoilPh = soilPh > 0 ? soilPh : 0,
                     SoilCec = soilCec > 0 ? soilCec : 0,
-                    SoilFunctionalCategory = GetSoilFunctionalCategoryByComponent(componentTableData),
-                    Province = GetProvinceByComponent(componentTableData),
-                    ParentMaterialTextureString = GetParentMaterialTextureTypeByComponent(componentTableData),
-                    SoilTexture = GetSoilTextureByComponent(componentTableData),
-                    EcodistrictName = GetEcodistrictName(polygonId),
-                    EcodistrictId = GetEcodistrictId(polygonId),
-                    Ecozone = GetEcozone(polygonId),
-                    DrainageClass = GetDrainage(polygonId)
+                    SoilFunctionalCategory = this.GetSoilFunctionalCategoryByComponent(componentTableData),
+                    Province = this.GetProvinceByComponent(componentTableData),
+                    ParentMaterialTextureString = this.GetParentMaterialTextureTypeByComponent(componentTableData),
+                    SoilTexture = this.GetSoilTextureByComponent(componentTableData),
+                    EcodistrictName = this.GetEcodistrictName(polygonId),
+                    EcodistrictId = this.GetEcodistrictId(polygonId),
+                    Ecozone = this.GetEcozone(polygonId),
+                    DrainageClass = this.GetDrainage(polygonId),
                 };
 
                 result.Add(soilData);
 
-                Trace.TraceInformation(
-                    $"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetAllSoilDataForAllComponentsWithinPolygon)} found soil data for component #{index + 1}.");
+                Trace.TraceInformation($"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetAllSoilDataForAllComponentsWithinPolygon)} found soil data for component #{index + 1}.");
             }
 
             return result;
@@ -229,8 +243,7 @@ namespace H.Core.Providers.Soil
         {
             if (!_polygonAttributeTableDataList.ContainsKey(polygonId))
             {
-                Trace.TraceError(
-                    $"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetEcodistrictName)}: unable to find ecodistrict name for polygon id of {polygonId}. Returning empty string.");
+                Trace.TraceError($"{nameof(NationalSoilDataBaseProvider)}.{nameof(NationalSoilDataBaseProvider.GetEcodistrictName)}: unable to find ecodistrict name for polygon id of {polygonId}. Returning empty string.");
 
                 return string.Empty;
             }
@@ -238,8 +251,7 @@ namespace H.Core.Providers.Soil
             var polygonAttributeTableData = _polygonAttributeTableDataList[polygonId];
             if (_ecodistrictNamesTableDataList.ContainsKey(polygonAttributeTableData.EcodistrictId) == false)
             {
-                Trace.TraceError(
-                    $"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetEcodistrictName)}: unable to find ecodistrict name for polygon id of {polygonId}. Returning empty string.");
+                Trace.TraceError($"{nameof(NationalSoilDataBaseProvider)}.{nameof(NationalSoilDataBaseProvider.GetEcodistrictName)}: unable to find ecodistrict name for polygon id of {polygonId}. Returning empty string.");
 
                 return string.Empty;
             }
@@ -253,8 +265,7 @@ namespace H.Core.Providers.Soil
         {
             if (!_polygonAttributeTableDataList.ContainsKey(polygonId))
             {
-                Trace.TraceError(
-                    $"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetEcodistrictId)}: unable to find ecodistrict id for polygon id of {polygonId}. Returning default value of 0.");
+                Trace.TraceError($"{nameof(NationalSoilDataBaseProvider)}.{nameof(NationalSoilDataBaseProvider.GetEcodistrictId)}: unable to find ecodistrict id for polygon id of {polygonId}. Returning default value of 0.");
 
                 return 0;
             }
@@ -264,32 +275,32 @@ namespace H.Core.Providers.Soil
 
         private ParentMaterialTextureType GetParentMaterialTextureType(int polygonId)
         {
-            var parentMaterialTextureCode = GetParentMaterialTexture(polygonId);
-            var parentMaterialTexture = ConvertParentMaterialTexture(parentMaterialTextureCode);
+            var parentMaterialTextureCode = this.GetParentMaterialTexture(polygonId);
+            var parentMaterialTexture = this.ConvertParentMaterialTexture(parentMaterialTextureCode);
 
             return parentMaterialTexture;
         }
 
         private ParentMaterialTextureType GetParentMaterialTextureTypeByComponent(ComponentTableData componentTableData)
         {
-            var parentMaterialTextureCode = GetParentMaterialTextureByComponent(componentTableData);
-            var parentMaterialTexture = ConvertParentMaterialTexture(parentMaterialTextureCode);
+            var parentMaterialTextureCode = this.GetParentMaterialTextureByComponent(componentTableData);
+            var parentMaterialTexture = this.ConvertParentMaterialTexture(parentMaterialTextureCode);
 
             return parentMaterialTexture;
         }
 
         private SoilTexture GetSoilTexture(int polygonId)
         {
-            var parentMaterialTexture = GetParentMaterialTextureType(polygonId);
-            var soilTexture = ConvertParentMaterialTextureToSoilTexture(parentMaterialTexture);
+            var parentMaterialTexture = this.GetParentMaterialTextureType(polygonId);
+            var soilTexture = this.ConvertParentMaterialTextureToSoilTexture(parentMaterialTexture);
 
             return soilTexture;
         }
 
         private SoilTexture GetSoilTextureByComponent(ComponentTableData componentTableData)
         {
-            var parentMaterialTexture = GetParentMaterialTextureTypeByComponent(componentTableData);
-            var soilTexture = ConvertParentMaterialTextureToSoilTexture(parentMaterialTexture);
+            var parentMaterialTexture = this.GetParentMaterialTextureTypeByComponent(componentTableData);
+            var soilTexture = this.ConvertParentMaterialTextureToSoilTexture(parentMaterialTexture);
 
             return soilTexture;
         }
@@ -388,96 +399,103 @@ namespace H.Core.Providers.Soil
                     return ParentMaterialTextureType.Unknown;
 
                 default:
-                    throw new Exception(
-                        $"{nameof(NationalSoilDataBaseProvider)}.{nameof(ConvertParentMaterialTexture)} value not found for parent material texture code '{parentMaterialTextureCode.ToLowerInvariant()}'.");
+                    throw new Exception($"{nameof(NationalSoilDataBaseProvider)}.{nameof(this.ConvertParentMaterialTexture)} value not found for parent material texture code '{parentMaterialTextureCode.ToLowerInvariant()}'.");
             }
         }
 
         private SoilFunctionalCategory GetSoilFunctionalCategory(int polygonId)
         {
-            var soilGreatGroup = GetSoilGreatGroup(polygonId);
-            var province = GetProvince(polygonId);
+            var soilGreatGroup = this.GetSoilGreatGroup(polygonId);
+            var province = this.GetProvince(polygonId);
             var region = province.GetRegion();
 
             if (soilGreatGroup == SoilGreatGroupType.Unknown && region == Region.EasternCanada)
+            {
                 return SoilFunctionalCategory.EasternCanada;
+            }
 
-            var result =
-                _soilGreatGroupDataList.SingleOrDefault(x => x.SoilGreatGroup == soilGreatGroup && x.Region == region);
-            if (result != null) return result.SoilFunctionalCategory;
+            var result = _soilGreatGroupDataList.SingleOrDefault(x => x.SoilGreatGroup == soilGreatGroup && x.Region == region);
+            if (result != null)
+            {
+                return result.SoilFunctionalCategory;
+            }
 
             return SoilFunctionalCategory.Black;
         }
 
         private SoilFunctionalCategory GetSoilFunctionalCategoryByComponent(ComponentTableData componentTableData)
         {
-            var soilGreatGroup = GetSoilGreatGroupByComponent(componentTableData);
-            var province = GetProvinceByComponent(componentTableData);
+            var soilGreatGroup = this.GetSoilGreatGroupByComponent(componentTableData);
+            var province = this.GetProvinceByComponent(componentTableData);
             var region = province.GetRegion();
 
             if (soilGreatGroup == SoilGreatGroupType.Unknown && region == Region.EasternCanada)
+            {
                 return SoilFunctionalCategory.EasternCanada;
+            }
 
-            var result =
-                _soilGreatGroupDataList.SingleOrDefault(x => x.SoilGreatGroup == soilGreatGroup && x.Region == region);
-            if (result != null) return result.SoilFunctionalCategory;
+            var result = _soilGreatGroupDataList.SingleOrDefault(x => x.SoilGreatGroup == soilGreatGroup && x.Region == region);
+            if (result != null)
+            {
+                return result.SoilFunctionalCategory;
+            }
 
             return SoilFunctionalCategory.Black;
         }
 
         private Province GetProvince(int polygonId)
         {
-            var provinceCode = GetProvinceCode(polygonId);
+            var provinceCode = this.GetProvinceCode(polygonId);
 
-            var result = GetProvinceFromProvinceCode(provinceCode);
+            var result = this.GetProvinceFromProvinceCode(provinceCode);
 
             return result;
         }
 
         private Province GetProvinceByComponent(ComponentTableData componentTableData)
         {
-            var layer = GetFirstNonLitterLayer(componentTableData);
-            var provinceCode = GetProvinceCodeByComponent(componentTableData);
+            var layer = this.GetFirstNonLitterLayer(componentTableData);
+            var provinceCode = this.GetProvinceCodeByComponent(componentTableData);
 
-            var result = GetProvinceFromProvinceCode(provinceCode);
+            var result = this.GetProvinceFromProvinceCode(provinceCode);
 
             return result;
         }
 
         private string GetProvinceCode(int polygonId)
         {
-            var layer = GetFirstNonLitterLayer(polygonId);
+            var layer = this.GetFirstNonLitterLayer(polygonId);
 
             return layer.ProvinceCode;
         }
 
         private string GetProvinceCodeByComponent(ComponentTableData componentTableData)
         {
-            var layer = GetFirstNonLitterLayer(componentTableData);
+            var layer = this.GetFirstNonLitterLayer(componentTableData);
 
             return layer.ProvinceCode;
         }
 
         private double GetProportionOfClayInSoil(int polygonId)
         {
-            var layer = GetFirstNonLitterLayer(polygonId);
+            var layer = this.GetFirstNonLitterLayer(polygonId);
 
             return layer.TotalClay / 100.0;
         }
 
         private double GetProportionOfClayInSoilByComponent(ComponentTableData componentTableData)
         {
-            var layer = GetFirstNonLitterLayer(componentTableData);
+            var layer = this.GetFirstNonLitterLayer(componentTableData);
 
             return layer.TotalClay / 100.0;
         }
 
         /// <summary>
-        ///     Returns the top layer thickenss in mm.
+        /// Returns the top layer thickenss in mm.
         /// </summary>
         private int GetTopLayerThickness(int polygonId)
         {
-            var layer = GetFirstNonLitterLayer(polygonId);
+            var layer = this.GetFirstNonLitterLayer(polygonId);
 
             // Values from table are in cm - convert to mm since climate parameter calculations need input to be in mm.
             var result = (layer.LowerDepth - layer.UpperDepth) * 10;
@@ -486,11 +504,11 @@ namespace H.Core.Providers.Soil
         }
 
         /// <summary>
-        ///     Returns the top layer thickenss in mm.
+        /// Returns the top layer thickenss in mm.
         /// </summary>
         private double GetTopLayerThicknessByComponent(ComponentTableData componentTableData)
         {
-            var layer = GetFirstNonLitterLayer(componentTableData);
+            var layer = this.GetFirstNonLitterLayer(componentTableData);
 
             // Values from table are in cm - convert to mm since climate parameter calculations need input to be in mm.
             var result = (layer.LowerDepth - layer.UpperDepth) * 10;
@@ -500,79 +518,104 @@ namespace H.Core.Providers.Soil
 
         private double GetPercentageSoilOrganicCarbon(int polygonId)
         {
-            var layer = GetFirstNonLitterLayer(polygonId);
+            var layer = this.GetFirstNonLitterLayer(polygonId);
 
             return layer.OrganicCarbon;
         }
 
         private double GetPercentageSoilOrganicCarbonByComponent(ComponentTableData componentTableData)
         {
-            var layer = GetFirstNonLitterLayer(componentTableData);
+            var layer = this.GetFirstNonLitterLayer(componentTableData);
 
             return layer.OrganicCarbon;
         }
 
         private double GetBulkDensity(int polygonId)
         {
-            var layer = GetFirstNonLitterLayer(polygonId);
+            var layer = this.GetFirstNonLitterLayer(polygonId);
 
             return layer.BulkDensity;
         }
 
         private double GetBulkDensityByComponent(ComponentTableData componentTableData)
         {
-            var layer = GetFirstNonLitterLayer(componentTableData);
+            var layer = this.GetFirstNonLitterLayer(componentTableData);
 
             return layer.BulkDensity;
         }
 
         private string GetParentMaterialTexture(int polygonId)
         {
-            var soilNameTableData = GetSoilNameTableData(polygonId);
-            if (soilNameTableData == null) return string.Empty;
+            var soilNameTableData = this.GetSoilNameTableData(polygonId);
+            if (soilNameTableData == null)
+            {
+                return string.Empty;
+            }
 
             return soilNameTableData.FirstParentMaterialTexture;
         }
 
         private string GetParentMaterialTextureByComponent(ComponentTableData componentTableData)
         {
-            var soilNameTableData = GetSoilNameTableData(componentTableData);
-            if (soilNameTableData == null) return string.Empty;
+            var soilNameTableData = this.GetSoilNameTableData(componentTableData);
+            if (soilNameTableData == null)
+            {
+                return string.Empty;
+            }
             return soilNameTableData.FirstParentMaterialTexture;
         }
 
         private SoilDrainageClasses GetDrainage(int polygonId)
         {
-            var soilNameTableData = GetSoilNameTableData(polygonId);
-            if (soilNameTableData == null) return SoilDrainageClasses.NotApplicable;
+            var soilNameTableData = this.GetSoilNameTableData(polygonId);
+            if (soilNameTableData == null)
+            {
+                return SoilDrainageClasses.NotApplicable;
+            }
 
             var drainageString = soilNameTableData.SoilDrainageClass;
 
             if (string.IsNullOrWhiteSpace(drainageString) == false)
             {
                 if (drainageString.Equals("VR", StringComparison.InvariantCultureIgnoreCase))
+                {
                     return SoilDrainageClasses.VeryRapidlyDrained;
+                }
 
                 if (drainageString.Equals("R", StringComparison.InvariantCultureIgnoreCase))
+                {
                     return SoilDrainageClasses.RapidlyDrained;
+                }
 
                 if (drainageString.Equals("W", StringComparison.InvariantCultureIgnoreCase))
+                {
                     return SoilDrainageClasses.WellDrained;
+                }
 
                 if (drainageString.Equals("MW", StringComparison.InvariantCultureIgnoreCase))
+                {
                     return SoilDrainageClasses.ModeratelyWellDrained;
+                }
 
                 if (drainageString.Equals("I", StringComparison.InvariantCultureIgnoreCase))
+                {
                     return SoilDrainageClasses.ImperfectlyDrained;
+                }
 
                 if (drainageString.Equals("P", StringComparison.InvariantCultureIgnoreCase))
+                {
                     return SoilDrainageClasses.PoorlyDrained;
+                }
 
                 if (drainageString.Equals("VP", StringComparison.InvariantCultureIgnoreCase))
+                {
                     return SoilDrainageClasses.VeryPoorlyDrained;
+                }
 
                 if (drainageString.Equals("-", StringComparison.InvariantCultureIgnoreCase))
+                {
                     return SoilDrainageClasses.NotApplicable;
+                }
             }
 
             return SoilDrainageClasses.NotApplicable;
@@ -580,47 +623,53 @@ namespace H.Core.Providers.Soil
 
         private double GetSoilPh(int polygonId)
         {
-            var layer = GetFirstNonLitterLayer(polygonId);
+            var layer = this.GetFirstNonLitterLayer(polygonId);
 
             return layer.PHAsPerProjectReport;
         }
 
         private double GetSoilCec(int polygonId)
         {
-            var layer = GetFirstNonLitterLayer(polygonId);
+            var layer = this.GetFirstNonLitterLayer(polygonId);
 
             return layer.CationExchangeCapacity;
         }
 
         private double GetSoilPhByComponent(ComponentTableData componentTableData)
         {
-            var layer = GetFirstNonLitterLayer(componentTableData);
+            var layer = this.GetFirstNonLitterLayer(componentTableData);
 
             return layer.PHAsPerProjectReport;
         }
 
         private double GetSoilCecByComponent(ComponentTableData componentTableData)
         {
-            var layer = GetFirstNonLitterLayer(componentTableData);
+            var layer = this.GetFirstNonLitterLayer(componentTableData);
 
             return layer.CationExchangeCapacity;
         }
 
         private SoilGreatGroupType GetSoilGreatGroup(int polygonId)
         {
-            var soilNameTableData = GetSoilNameTableData(polygonId);
-            if (soilNameTableData == null) return SoilGreatGroupType.Unknown;
+            var soilNameTableData = this.GetSoilNameTableData(polygonId);
+            if (soilNameTableData == null)
+            {
+                return SoilGreatGroupType.Unknown;
+            }
 
             var soilGreatGroupCode = soilNameTableData.SoilGreatGroupThirdEdition;
-            var result = ConvertSoilGreatGroupCode(soilGreatGroupCode);
+            var result = this.ConvertSoilGreatGroupCode(soilGreatGroupCode);
 
             return result;
         }
 
         private string GetSubGroup(int polygonId)
         {
-            var soilNameTableData = GetSoilNameTableData(polygonId);
-            if (soilNameTableData == null) return string.Empty;
+            var soilNameTableData = this.GetSoilNameTableData(polygonId);
+            if (soilNameTableData == null)
+            {
+                return string.Empty;
+            }
 
             var result = soilNameTableData.SoilSubgroupThirdEdition;
 
@@ -629,19 +678,25 @@ namespace H.Core.Providers.Soil
 
         private SoilGreatGroupType GetSoilGreatGroupByComponent(ComponentTableData componentTableData)
         {
-            var soilNameTableData = GetSoilNameTableData(componentTableData);
-            if (soilNameTableData == null) return SoilGreatGroupType.Unknown;
+            var soilNameTableData = this.GetSoilNameTableData(componentTableData);
+            if (soilNameTableData == null)
+            {
+                return SoilGreatGroupType.Unknown;
+            }
 
             var soilGreatGroupCode = soilNameTableData.SoilGreatGroupThirdEdition;
-            var result = ConvertSoilGreatGroupCode(soilGreatGroupCode);
+            var result = this.ConvertSoilGreatGroupCode(soilGreatGroupCode);
 
             return result;
         }
 
         private string GetSoilSubGroup(ComponentTableData componentTableData)
         {
-            var soilNameTableData = GetSoilNameTableData(componentTableData);
-            if (soilNameTableData == null) return string.Empty;
+            var soilNameTableData = this.GetSoilNameTableData(componentTableData);
+            if (soilNameTableData == null)
+            {
+                return string.Empty;
+            }
 
             var result = soilNameTableData.SoilSubgroupThirdEdition;
 
@@ -650,8 +705,11 @@ namespace H.Core.Providers.Soil
 
         private string GetSoilName(int polygonId)
         {
-            var soilNameTableData = GetSoilNameTableData(polygonId);
-            if (soilNameTableData == null) return string.Empty;
+            var soilNameTableData = this.GetSoilNameTableData(polygonId);
+            if (soilNameTableData == null)
+            {
+                return string.Empty;
+            }
 
             var soilName = soilNameTableData.SoilName;
 
@@ -660,14 +718,14 @@ namespace H.Core.Providers.Soil
 
         private double GetProportionOfSandInSoil(int polygonId)
         {
-            var layer = GetFirstNonLitterLayer(polygonId);
+            var layer = this.GetFirstNonLitterLayer(polygonId);
 
             return layer.TotalSand / 100.0;
         }
 
         private double GetProportionOfSandInSoilByComponent(ComponentTableData componentTableData)
         {
-            var layer = GetFirstNonLitterLayer(componentTableData);
+            var layer = this.GetFirstNonLitterLayer(componentTableData);
 
             return layer.TotalSand / 100.0;
         }
@@ -1021,16 +1079,19 @@ namespace H.Core.Providers.Soil
             var results = new Dictionary<int, EcodistrictNamesTableData>();
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
             var fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.CanSisEcodistrictNamesTable)
-                .Skip(1)
-                .ToList();
+                                             .Skip(1)
+                                             .ToList();
             var result = from line in fileLines
-                select new EcodistrictNamesTableData
-                {
-                    EcodistrictId = int.Parse(line.ElementAt(0), cultureInfo),
-                    EcodistrictName = line.ElementAt(1)
-                };
+                         select new EcodistrictNamesTableData
+                         {
+                             EcodistrictId = int.Parse(line.ElementAt(0), cultureInfo),
+                             EcodistrictName = line.ElementAt(1)
+                         };
 
-            foreach (var data in result) results.Add(data.EcodistrictId, data);
+            foreach (var data in result)
+            {
+                results.Add(data.EcodistrictId, data);
+            }
 
 
             return results;
@@ -1041,16 +1102,19 @@ namespace H.Core.Providers.Soil
             var results = new Dictionary<int, PolygonAttributeTableData>();
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
             var fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.CanSisPolygonAttributeTable)
-                .Skip(1)
-                .ToList();
+                                             .Skip(1)
+                                             .ToList();
             var result = from line in fileLines
-                select new PolygonAttributeTableData
-                {
-                    PolygonId = int.Parse(line.ElementAt(2), cultureInfo),
-                    EcodistrictId = int.Parse(line.ElementAt(3), cultureInfo)
-                };
+                         select new PolygonAttributeTableData
+                         {
+                             PolygonId = int.Parse(line.ElementAt(2), cultureInfo),
+                             EcodistrictId = int.Parse(line.ElementAt(3), cultureInfo)
+                         };
 
-            foreach (var data in result) results.Add(data.PolygonId, data);
+            foreach (var data in result)
+            {
+                results.Add(data.PolygonId, data);
+            }
 
             return results;
         }
@@ -1076,12 +1140,12 @@ namespace H.Core.Providers.Soil
             foreach (var csvResourceName in csvResourceNames)
             {
                 var fileLines = CsvResourceReader.GetFileLines(csvResourceName)
-                    .Skip(1)
-                    .ToList();
+                                                 .Skip(1)
+                                                 .ToList();
 
                 foreach (var line in fileLines)
                 {
-                    var entry = new SoilNameTableData
+                    var entry = new SoilNameTableData()
                     {
                         SoilNameIdentifier = line.ElementAt(0),
                         ProvinceCode = line.ElementAt(1),
@@ -1124,24 +1188,24 @@ namespace H.Core.Providers.Soil
         {
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
             var fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.CanSisComponentTable)
-                .Skip(1)
-                .ToList();
+                                             .Skip(1)
+                                             .ToList();
             var result = from line in fileLines
-                select new ComponentTableData
-                {
-                    PolygonId = int.Parse(line.ElementAt(0), cultureInfo),
-                    ComponentNumber = int.Parse(line.ElementAt(1), cultureInfo),
-                    PercentageOfPolygonOccupiedByComponent = int.Parse(line.ElementAt(2), cultureInfo),
-                    SlopeGradient = line.ElementAt(3),
-                    Stone = line.ElementAt(4),
-                    LocalSurfaceForm = line.ElementAt(5),
-                    ProvinceCode = line.ElementAt(6),
-                    SoilCode = line.ElementAt(7),
-                    SoilCodeModifier = line.ElementAt(8),
-                    TypeOfSoilProfile = line.ElementAt(9),
-                    SoilNameIdentifier = line.ElementAt(10),
-                    PolygonComponentId = int.Parse(line.ElementAt(11), cultureInfo)
-                };
+                         select new ComponentTableData
+                         {
+                             PolygonId = int.Parse(line.ElementAt(0), cultureInfo),
+                             ComponentNumber = int.Parse(line.ElementAt(1), cultureInfo),
+                             PercentageOfPolygonOccupiedByComponent = int.Parse(line.ElementAt(2), cultureInfo),
+                             SlopeGradient = line.ElementAt(3),
+                             Stone = line.ElementAt(4),
+                             LocalSurfaceForm = line.ElementAt(5),
+                             ProvinceCode = line.ElementAt(6),
+                             SoilCode = line.ElementAt(7),
+                             SoilCodeModifier = line.ElementAt(8),
+                             TypeOfSoilProfile = line.ElementAt(9),
+                             SoilNameIdentifier = line.ElementAt(10),
+                             PolygonComponentId = int.Parse(line.ElementAt(11), cultureInfo)
+                         };
 
             return result.ToList();
         }
@@ -1167,12 +1231,12 @@ namespace H.Core.Providers.Soil
             foreach (var csvResourceName in csvResourceNames)
             {
                 var fileLines = CsvResourceReader.GetFileLines(csvResourceName)
-                    .Skip(1)
-                    .ToList();
+                                                 .Skip(1)
+                                                 .ToList();
 
                 foreach (var line in fileLines)
                 {
-                    var entry = new SoilLayerTableData
+                    var entry = new SoilLayerTableData()
                     {
                         SoilNameIdentifier = line.ElementAt(0),
                         ProvinceCode = line.ElementAt(1),
@@ -1209,72 +1273,78 @@ namespace H.Core.Providers.Soil
                         WoodyMaterial = int.Parse(line.ElementAt(32), cultureInfo)
                     };
 
-                    if (string.IsNullOrWhiteSpace(entry.ProvinceCode) ||
-                        entry.ProvinceCode.Equals("PR", StringComparison.InvariantCultureIgnoreCase))
+                    if (string.IsNullOrWhiteSpace(entry.ProvinceCode) || entry.ProvinceCode.Equals("PR", StringComparison.InvariantCultureIgnoreCase))
+                    {
                         // Some rows have an empty province code, in these cases get the province from the filename. The string "PR" is found in some rows and is probable an error when creating the CanSIS database
                         switch (csvResourceName)
                         {
                             case CsvResourceNames.CanSisSoilLayerTableAlberta:
-                            {
-                                entry.Province = Province.Alberta;
-                                break;
-                            }
+                                {
+                                    entry.Province = Province.Alberta;
+                                    break;
+                                }
                             case CsvResourceNames.CanSisSoilLayerTableBritishColumbia:
-                            {
-                                entry.Province = Province.BritishColumbia;
-                                break;
-                            }
+                                {
+                                    entry.Province = Province.BritishColumbia;
+                                    break;
+                                }
                             case CsvResourceNames.CanSisSoilLayerTableManitoba:
-                            {
-                                entry.Province = Province.Manitoba;
-                                break;
-                            }
+                                {
+                                    entry.Province = Province.Manitoba;
+                                    break;
+                                }
                             case CsvResourceNames.CanSisSoilLayerTableNewBrunswick:
-                            {
-                                entry.Province = Province.NewBrunswick;
-                                break;
-                            }
+                                {
+                                    entry.Province = Province.NewBrunswick;
+                                    break;
+                                }
                             case CsvResourceNames.CanSisSoilLayerTableNewfoundland:
-                            {
-                                entry.Province = Province.Newfoundland;
-                                break;
-                            }
+                                {
+                                    entry.Province = Province.Newfoundland;
+                                    break;
+                                }
                             case CsvResourceNames.CanSisSoilLayerTableNovaScotia:
-                            {
-                                entry.Province = Province.NovaScotia;
-                                break;
-                            }
+                                {
+                                    entry.Province = Province.NovaScotia;
+                                    break;
+                                }
                             case CsvResourceNames.CanSisSoilLayerTableOntario:
-                            {
-                                entry.Province = Province.Ontario;
-                                break;
-                            }
+                                {
+                                    entry.Province = Province.Ontario;
+                                    break;
+                                }
                             case CsvResourceNames.CanSisSoilLayerTablePrinceEdwardIsland:
-                            {
-                                entry.Province = Province.PrinceEdwardIsland;
-                                break;
-                            }
+                                {
+                                    entry.Province = Province.PrinceEdwardIsland;
+                                    break;
+                                }
                             case CsvResourceNames.CanSisSoilLayerTableQuebec:
-                            {
-                                entry.Province = Province.Quebec;
-                                break;
-                            }
+                                {
+                                    entry.Province = Province.Quebec;
+                                    break;
+                                }
                             case CsvResourceNames.CanSisSoilLayerTableSaskatchewan:
-                            {
-                                entry.Province = Province.Saskatchewan;
-                                break;
-                            }
+                                {
+                                    entry.Province = Province.Saskatchewan;
+                                    break;
+                                }
                         }
+                    }
                     else
+                    {
                         entry.Province = _provinceStringConverter.Convert(entry.ProvinceCode);
+                    }
 
                     results.Add(entry);
 
                     if (_soilLayerTableBySoilIdentifierDictionary.ContainsKey(entry.SoilNameIdentifier))
+                    {
                         _soilLayerTableBySoilIdentifierDictionary[entry.SoilNameIdentifier].Add(entry);
+                    }
                     else
-                        _soilLayerTableBySoilIdentifierDictionary.Add(entry.SoilNameIdentifier,
-                            new List<SoilLayerTableData> { entry });
+                    {
+                        _soilLayerTableBySoilIdentifierDictionary.Add(entry.SoilNameIdentifier, new List<SoilLayerTableData>() { entry });
+                    }
                 }
             }
 
@@ -1282,37 +1352,41 @@ namespace H.Core.Providers.Soil
         }
 
         /// <summary>
-        ///     Get first non-litter layer using the soil name identifier from the soil component.
+        /// Get first non-litter layer using the soil name identifier from the soil component.
         /// </summary>
         private SoilLayerTableData GetFirstNonLitterLayer(ComponentTableData componentTableData)
         {
             var soilNameIdentifier = componentTableData.SoilNameIdentifier;
 
-            var firstNonLitterLayer = GetFirstNonLitterLayerBySoilNameIdentifier(soilNameIdentifier);
-            if (firstNonLitterLayer != null) return firstNonLitterLayer;
+            var firstNonLitterLayer = this.GetFirstNonLitterLayerBySoilNameIdentifier(soilNameIdentifier);
+            if (firstNonLitterLayer != null)
+            {
+                return firstNonLitterLayer;
+            }
 
-            Trace.TraceError(
-                $"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetFirstNonLitterLayer)} first non-litter layer not found component id '{componentTableData.PolygonComponentId}'. Returning null.");
+            Trace.TraceError($"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetFirstNonLitterLayer)} first non-litter layer not found component id '{componentTableData.PolygonComponentId}'. Returning null.");
 
             return null;
         }
 
         /// <summary>
-        ///     Get first non-litter layer using a polygon as a lookup key.
+        /// Get first non-litter layer using a polygon as a lookup key.
         /// </summary>
         private SoilLayerTableData GetFirstNonLitterLayer(int polygonId)
         {
-            var components = GetAllSoilComponents(polygonId);
+            var components = this.GetAllSoilComponents(polygonId);
             foreach (var component in components)
             {
                 var soilNameIdentifier = component.SoilNameIdentifier;
 
-                var firstNonLitterLayer = GetFirstNonLitterLayerBySoilNameIdentifier(soilNameIdentifier);
-                if (firstNonLitterLayer != null) return firstNonLitterLayer;
+                var firstNonLitterLayer = this.GetFirstNonLitterLayerBySoilNameIdentifier(soilNameIdentifier);
+                if (firstNonLitterLayer != null)
+                {
+                    return firstNonLitterLayer;
+                }
             }
 
-            Trace.TraceError(
-                $"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetFirstNonLitterLayer)} first non-litter layer not found for polygon '{polygonId}'. Returning null.");
+            Trace.TraceError($"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetFirstNonLitterLayer)} first non-litter layer not found for polygon '{polygonId}'. Returning null.");
 
             return null;
         }
@@ -1321,71 +1395,82 @@ namespace H.Core.Providers.Soil
         {
             // Select first item since there may be more than one match.
             var levelOneSoilData = entries.FirstOrDefault(x => x.LayerNumber.Equals("1") && x.UpperDepth >= 0);
-            if (levelOneSoilData != null) return levelOneSoilData;
+            if (levelOneSoilData != null)
+            {
+                return levelOneSoilData;
+            }
 
             // The first layer item has a negative upper depth value indicating that it is a litter layer. Return the second layer in this case.
             var levelTwoSoilData = entries.FirstOrDefault(x => x.LayerNumber.Equals("2"));
-            if (levelTwoSoilData != null) return levelTwoSoilData;
+            if (levelTwoSoilData != null)
+            {
+                return levelTwoSoilData;
+            }
+            else
+            {
+                Trace.TraceError($"{nameof(NationalSoilDataBaseProvider)}.{nameof(this.GetAppropriateLayer)} no layers found with layer numbers equal to 1 or 2.");
 
-            Trace.TraceError(
-                $"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetAppropriateLayer)} no layers found with layer numbers equal to 1 or 2.");
-
-            return null;
+                return null;
+            }
         }
 
         /// <summary>
-        ///     Gets the first non-litter layer by using the soil name identifier as a lookup key into the soil layer table.
+        /// Gets the first non-litter layer by using the soil name identifier as a lookup key into the soil layer table.
         /// </summary>
         private SoilLayerTableData GetFirstNonLitterLayerBySoilNameIdentifier(string soilNameIdentifier)
         {
             if (_firstNonLitterLayerCache.ContainsKey(soilNameIdentifier))
+            {
                 return _firstNonLitterLayerCache[soilNameIdentifier];
+            }
 
             if (_soilLayerTableBySoilIdentifierDictionary.ContainsKey(soilNameIdentifier))
             {
                 var entriesBySoilNameIdentifier = _soilLayerTableBySoilIdentifierDictionary[soilNameIdentifier];
-                var agriculturalProfileEntries =
-                    entriesBySoilNameIdentifier.Where(x => x.TypeOfSoilProfile.Equals(AgriculturalTypeSoilProfile));
+                var agriculturalProfileEntries = entriesBySoilNameIdentifier.Where(x => x.TypeOfSoilProfile.Equals(AgriculturalTypeSoilProfile));
                 if (agriculturalProfileEntries.Any())
                 {
-                    var layer = GetAppropriateLayer(agriculturalProfileEntries);
+                    var layer = this.GetAppropriateLayer(agriculturalProfileEntries);
 
                     if (_firstNonLitterLayerCache.ContainsKey(soilNameIdentifier) == false)
+                    {
                         _firstNonLitterLayerCache.Add(soilNameIdentifier, layer);
+                    }
 
                     return layer;
                 }
+                else
+                {
+                    Trace.TraceWarning($"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetFirstNonLitterLayer)} no soil layer table entries found for soil name id '{soilNameIdentifier}' with agricultural soil profile. Searching for native soil profiles.");
+                }
 
-                Trace.TraceWarning(
-                    $"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetFirstNonLitterLayer)} no soil layer table entries found for soil name id '{soilNameIdentifier}' with agricultural soil profile. Searching for native soil profiles.");
-
-                var nativeProfileEntries =
-                    entriesBySoilNameIdentifier.Where(x => x.TypeOfSoilProfile.Equals(NativeTypeSoilProfile));
-
+                var nativeProfileEntries = entriesBySoilNameIdentifier.Where(x => x.TypeOfSoilProfile.Equals(NativeTypeSoilProfile));
+                
                 if (nativeProfileEntries.Any())
                 {
-                    var layer = GetAppropriateLayer(nativeProfileEntries);
-                    Trace.TraceWarning(
-                        $"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetFirstNonLitterLayer)} native soil profile was found.");
+                    var layer = this.GetAppropriateLayer(nativeProfileEntries);
+                    Trace.TraceWarning($"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetFirstNonLitterLayer)} native soil profile was found.");
 
                     if (_firstNonLitterLayerCache.ContainsKey(soilNameIdentifier) == false)
+                    {
                         _firstNonLitterLayerCache.Add(soilNameIdentifier, layer);
+                    }
 
                     return layer;
                 }
-
-                Trace.TraceWarning(
-                    $"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetFirstNonLitterLayer)} no soil layer table entries found for soil name id '{soilNameIdentifier}' with native soil profile.");
+                else
+                {
+                    Trace.TraceWarning($"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetFirstNonLitterLayer)} no soil layer table entries found for soil name id '{soilNameIdentifier}' with native soil profile.");
+                }
             }
 
-            Trace.TraceError(
-                $"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetFirstNonLitterLayer)} no soil layer table entry found for soil name id '{soilNameIdentifier}'. Returning null.");
+            Trace.TraceError($"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetFirstNonLitterLayer)} no soil layer table entry found for soil name id '{soilNameIdentifier}'. Returning null.");
 
             return null;
         }
 
         /// <summary>
-        ///     Get all components. There will not always be a soil name table entry for the first/largest component in the polygon
+        /// Get all components. There will not always be a soil name table entry for the first/largest component in the polygon
         /// </summary>
         /// <param name="polygonId"></param>
         /// <returns></returns>
@@ -1393,8 +1478,7 @@ namespace H.Core.Providers.Soil
         {
             var result = new List<ComponentTableData>();
 
-            var componentTableDataWithCommonPolygonId =
-                _componentTableDataList.Where(x => x.PolygonId == polygonId).ToList();
+            var componentTableDataWithCommonPolygonId = _componentTableDataList.Where(x => x.PolygonId == polygonId).ToList();
             if (componentTableDataWithCommonPolygonId.Any())
             {
                 var agriculturalComponents = componentTableDataWithCommonPolygonId
@@ -1403,9 +1487,7 @@ namespace H.Core.Providers.Soil
 
                 result.AddRange(agriculturalComponents);
 
-                var nativeSoilProfiles = componentTableDataWithCommonPolygonId
-                    .Where(x => x.TypeOfSoilProfile.Equals("N"))
-                    .OrderByDescending(x => x.PercentageOfPolygonOccupiedByComponent);
+                var nativeSoilProfiles = componentTableDataWithCommonPolygonId.Where(x => x.TypeOfSoilProfile.Equals("N")).OrderByDescending(x => x.PercentageOfPolygonOccupiedByComponent);
 
                 result.AddRange(nativeSoilProfiles);
             }
@@ -1415,45 +1497,47 @@ namespace H.Core.Providers.Soil
 
         private ComponentTableData GetLargestComponentWithinPolygon(int polygonId)
         {
-            var componentTableDataWithCommonPolygonId =
-                _componentTableDataList.Where(x => x.PolygonId == polygonId).ToList();
+            var componentTableDataWithCommonPolygonId = _componentTableDataList.Where(x => x.PolygonId == polygonId).ToList();
             if (componentTableDataWithCommonPolygonId.Any())
             {
-                var largestAgriculturalComponent = componentTableDataWithCommonPolygonId
-                    .Where(x => x.TypeOfSoilProfile.Equals("A"))
-                    .OrderByDescending(x => x.PercentageOfPolygonOccupiedByComponent).FirstOrDefault();
-                if (largestAgriculturalComponent != null) return largestAgriculturalComponent;
+                var largestAgriculturalComponent = componentTableDataWithCommonPolygonId.Where(x => x.TypeOfSoilProfile.Equals("A")).OrderByDescending(x => x.PercentageOfPolygonOccupiedByComponent).FirstOrDefault();
+                if (largestAgriculturalComponent != null)
+                {
+                    return largestAgriculturalComponent;
+                }
 
-                var nativeSoilProfiles =
-                    componentTableDataWithCommonPolygonId.Where(x => x.TypeOfSoilProfile.Equals("N"));
-                var largestNativeSoilComponent = nativeSoilProfiles
-                    .OrderByDescending(x => x.PercentageOfPolygonOccupiedByComponent).FirstOrDefault();
+                var nativeSoilProfiles = componentTableDataWithCommonPolygonId.Where(x => x.TypeOfSoilProfile.Equals("N"));
+                var largestNativeSoilComponent = nativeSoilProfiles.OrderByDescending(x => x.PercentageOfPolygonOccupiedByComponent).FirstOrDefault();
 
                 return largestNativeSoilComponent;
             }
+            else
+            {
+                Trace.TraceError($"{nameof(NationalSoilDataBaseProvider)}.{nameof(this.GetLargestComponentWithinPolygon)} value not found for polygon '{polygonId}'. Returning null.");
 
-            Trace.TraceError(
-                $"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetLargestComponentWithinPolygon)} value not found for polygon '{polygonId}'. Returning null.");
-
-            return null;
+                return null;
+            }
         }
 
         private SoilNameTableData GetSoilNameTableData(ComponentTableData componentTableData)
         {
             var soilNameIdentifier = componentTableData.SoilNameIdentifier;
 
-            return GetSoilNameTableDataBySoilNameIdentifier(soilNameIdentifier);
+            return this.GetSoilNameTableDataBySoilNameIdentifier(soilNameIdentifier);
         }
 
         private SoilNameTableData GetSoilNameTableData(int polygonId)
         {
-            var largestComponentWithinPolygon = GetAllSoilComponents(polygonId);
+            var largestComponentWithinPolygon = this.GetAllSoilComponents(polygonId);
             foreach (var data in largestComponentWithinPolygon)
             {
                 var soilNameIdentifier = data.SoilNameIdentifier;
 
-                var result = GetSoilNameTableDataBySoilNameIdentifier(soilNameIdentifier);
-                if (result != null) return result;
+                var result = this.GetSoilNameTableDataBySoilNameIdentifier(soilNameIdentifier);
+                if (result != null)
+                {
+                    return result;
+                }
             }
 
 
@@ -1480,37 +1564,49 @@ namespace H.Core.Providers.Soil
                     var tableDataNoTilde = tableData.SoilNameIdentifier.Replace("~", "");
                     var inputSoilNameIdentifierNoTilde = soilNameIdentifier.Replace("~", "");
 
-                    if (tableDataNoTilde.Equals(inputSoilNameIdentifierNoTilde)) matches.Add(tableData);
+                    if (tableDataNoTilde.Equals(inputSoilNameIdentifierNoTilde))
+                    {
+                        matches.Add(tableData);
+                    }
                 }
 
                 // Get ag. profile first
                 var agProfile = matches.FirstOrDefault(x => x.SoilNameIdentifier.EndsWith(AgriculturalTypeSoilProfile));
-                if (agProfile != null) return agProfile;
+                if (agProfile != null)
+                {
+                    return agProfile;
+                }
 
                 // Get native profile next
                 var nativeProfile = matches.FirstOrDefault(x => soilNameIdentifier.EndsWith(NativeTypeSoilProfile));
-                if (nativeProfile != null) return nativeProfile;
+                if (nativeProfile != null)
+                {
+                    return nativeProfile;
+                }
 
-                Trace.TraceError(
-                    $"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetSoilNameTableData)} value not found for soil name identifier '{soilNameIdentifier}'. Returning null.");
+                Trace.TraceError($"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetSoilNameTableData)} value not found for soil name identifier '{soilNameIdentifier}'. Returning null.");
 
                 return null;
             }
 
             // Select first item since there may be more than one match.
-            var soilNameTableData = filterByProvince.FirstOrDefault(x =>
-                x.SoilNameIdentifier.Equals(soilNameIdentifier) &&
-                x.TypeOfSoilProfile.Equals(AgriculturalTypeSoilProfile));
-            if (soilNameTableData != null) return soilNameTableData;
+            var soilNameTableData = filterByProvince.FirstOrDefault(x => x.SoilNameIdentifier.Equals(soilNameIdentifier) && x.TypeOfSoilProfile.Equals(AgriculturalTypeSoilProfile));
+            if (soilNameTableData != null)
+            {
+                return soilNameTableData;
+            }
 
-            soilNameTableData = filterByProvince.FirstOrDefault(x =>
-                x.SoilNameIdentifier.Equals(soilNameIdentifier) && x.TypeOfSoilProfile.Equals(NativeTypeSoilProfile));
-            if (soilNameTableData != null) return soilNameTableData;
+            soilNameTableData = filterByProvince.FirstOrDefault(x => x.SoilNameIdentifier.Equals(soilNameIdentifier) && x.TypeOfSoilProfile.Equals(NativeTypeSoilProfile));
+            if (soilNameTableData != null)
+            {
+                return soilNameTableData;
+            }
+            else
+            {
+                Trace.TraceError($"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetSoilNameTableData)} value not found for soil name identifier '{soilNameIdentifier}'. Returning null.");
 
-            Trace.TraceError(
-                $"{nameof(NationalSoilDataBaseProvider)}.{nameof(GetSoilNameTableData)} value not found for soil name identifier '{soilNameIdentifier}'. Returning null.");
-
-            return null;
+                return null;
+            }
         }
 
         private Province GetProvinceFromProvinceCode(string province)
@@ -1619,12 +1715,11 @@ namespace H.Core.Providers.Soil
                     return SoilGreatGroupType.HumicVertisol;
 
                 default:
-                {
-                    Trace.TraceError(
-                        $"{nameof(NationalSoilDataBaseProvider)}.{nameof(ConvertSoilGreatGroupCode)} value not found for soil great group code '{soilGreatGroup.ToLowerInvariant()}'.");
+                    {
+                        Trace.TraceError($"{nameof(NationalSoilDataBaseProvider)}.{nameof(this.ConvertSoilGreatGroupCode)} value not found for soil great group code '{soilGreatGroup.ToLowerInvariant()}'.");
 
-                    return SoilGreatGroupType.Unknown;
-                }
+                        return SoilGreatGroupType.Unknown;
+                    }
             }
         }
 
@@ -1633,6 +1728,10 @@ namespace H.Core.Providers.Soil
         {
             throw new NotImplementedException();
         }
+
+        #endregion
+
+        #region Event Handlers
 
         #endregion
     }

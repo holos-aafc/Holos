@@ -1,11 +1,12 @@
 ﻿using H.Core.Enumerations;
+using H.Core.Providers.Shelterbelt;
 
 namespace H.Core.Converters
 {
     public class ShelterbeltEnabledFromHardinessZoneConverter
     {
         /// <summary>
-        ///     Converts a hardiness zone to a bool, indicating whether the Shelterbelt Component should be enabled.
+        /// Converts a hardiness zone to a bool, indicating whether the Shelterbelt Component should be enabled.
         /// </summary>
         public bool Convert(HardinessZone plantHardinessZone)
         {

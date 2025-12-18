@@ -45,10 +45,10 @@
 </head>
 
 <body>
-<div id="map"></div>
+    <div id="map"></div>
+ 
 
-
-<script>
+    <script>
         let map;
         const fuelColorMapping = {
             'Gas': [202, 178, 214, 194],
@@ -182,16 +182,16 @@
         }
     </script>
 
-<!--
-To use this in your own project you need to have your own Google Maps Api key.
-https://developers.google.com/maps/documentation/javascript/get-api-key
--->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoCnZgZw85uWPCZWZ_kKcC89SywSg--w4&callback=initMap">
+    <!--
+      To use this in your own project you need to have your own Google Maps Api key.
+      https://developers.google.com/maps/documentation/javascript/get-api-key
+    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoCnZgZw85uWPCZWZ_kKcC89SywSg--w4&callback=initMap">
     </script>
-<!--
-deck.gl is needed to render the data onto the Google Map
--->
-<script src="https://unpkg.com/deck.gl@7.0.9/dist.min.js"></script>
+    <!--
+      deck.gl is needed to render the data onto the Google Map
+    -->
+    <script src="https://unpkg.com/deck.gl@7.0.9/dist.min.js"></script>
 
 <!--
 This is the spreadsheet that was used for this example:
@@ -203,7 +203,7 @@ The only thing you need to swap out in the script tag below is
 the spreadsheet id .../list/YOUR_SPREADSHEET_ID/1/...
     
 -->
-<script src="https://spreadsheets.google.com/feeds/list/19YOWhoDZzoNP9swdZ-5zOHm6laKFilnudiL2XCH1uyQ/1/public/values?alt=json-in-script&callback=createOverlay">
+    <script src="https://spreadsheets.google.com/feeds/list/19YOWhoDZzoNP9swdZ-5zOHm6laKFilnudiL2XCH1uyQ/1/public/values?alt=json-in-script&callback=createOverlay">
     </script>
 </body>
 

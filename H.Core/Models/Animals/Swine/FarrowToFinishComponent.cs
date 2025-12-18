@@ -1,5 +1,4 @@
-﻿using H.Core.Properties;
-using H.Infrastructure;
+﻿using H.Infrastructure;
 
 namespace H.Core.Models.Animals.Swine
 {
@@ -9,11 +8,11 @@ namespace H.Core.Models.Animals.Swine
 
         public FarrowToFinishComponent()
         {
-            ComponentNameDisplayString = ComponentType.FarrowToFinish.GetDescription();
-            ComponentCategory = ComponentCategory.Swine;
-            ComponentType = ComponentType.FarrowToFinish;
+            this.ComponentNameDisplayString = ComponentType.FarrowToFinish.GetDescription();
+            this.ComponentCategory = ComponentCategory.Swine;
+            this.ComponentType = ComponentType.FarrowToFinish;
 
-            ComponentDescriptionString = Resources.ToolTipFarrowToFinishProductionSystem;
+            this.ComponentDescriptionString = H.Core.Properties.Resources.ToolTipFarrowToFinishProductionSystem;
         }
 
         #endregion

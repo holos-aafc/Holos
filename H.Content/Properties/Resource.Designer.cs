@@ -616,6 +616,16 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icons8_settings_50 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_settings_50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 96,1970,01,01,1,-18.9,0,0
         ///96,1970,01,02,2,-17.2,0,0
         ///96,1970,01,03,3,-20.3,0,0
@@ -938,6 +948,16 @@ namespace H.Content.Properties {
         public static string scots_pine__31_allclusters_future {
             get {
                 return ResourceManager.GetString("scots_pine__31_allclusters_future", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Settings_50_px {
+            get {
+                object obj = ResourceManager.GetObject("Settings_50_px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

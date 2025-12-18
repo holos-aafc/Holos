@@ -5,17 +5,32 @@ using AutoMapper;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
-using H.Core.Properties;
 using H.Core.Providers.Economics;
 using H.Core.Providers.Fertilizer;
 using H.Core.Providers.Soil;
 using H.Core.Services.Initialization.Crops;
-using Microsoft.Extensions.Logging.Abstractions;
+using static H.Core.Services.LandManagement.FieldResultsService;
 
 namespace H.Core.Services
 {
     public class FieldComponentHelper : IFieldComponentHelper
     {
+        #region Fields
+
+        private readonly IMapper _cropViewItemMapper;
+        private readonly IMapper _cropEconomicDataMapper;
+        private readonly IMapper _grazingPeriodMapper;
+        private readonly IMapper _harvestPeriodMapper;
+        private readonly IMapper _manureApplicationViewItemMapper;
+        private readonly IMapper _fertilizerApplicationViewItemMapper;
+        private readonly IMapper _hayImportViewItemMapper;
+        private readonly IMapper _digestateViewItemMapper;
+        private readonly IMapper _soilDataMapper;
+
+        ICropInitializationService _cropInitializationService;
+
+        #endregion
+
         #region Constructors
 
         public FieldComponentHelper()
@@ -31,13 +46,12 @@ namespace H.Core.Services
                     .ForMember(y => y.ManureApplicationViewItems, z => z.Ignore())
                     .ForMember(y => y.CropEconomicData, z => z.Ignore())
                     .ForMember(y => y.FertilizerApplicationViewItems, z => z.Ignore());
-            }, new NullLoggerFactory());
+            });
 
             _cropViewItemMapper = cropViewItemMapperConfiguration.CreateMapper();
 
             var cropEconomicDataMapperConfiguration =
-                new MapperConfiguration(x => x.CreateMap<CropEconomicData, CropEconomicData>(),
-                    new NullLoggerFactory());
+                new MapperConfiguration(x => x.CreateMap<CropEconomicData, CropEconomicData>());
 
             _cropEconomicDataMapper = cropEconomicDataMapperConfiguration.CreateMapper();
 
@@ -45,7 +59,7 @@ namespace H.Core.Services
             {
                 x.CreateMap<HarvestViewItem, HarvestViewItem>()
                     .ForMember(y => y.Guid, z => z.Ignore());
-            }, new NullLoggerFactory());
+            });
 
             _harvestPeriodMapper = harvestPeriodMapperConfiguration.CreateMapper();
 
@@ -53,58 +67,47 @@ namespace H.Core.Services
             {
                 x.CreateMap<GrazingViewItem, GrazingViewItem>()
                     .ForMember(y => y.Guid, z => z.Ignore());
-            }, new NullLoggerFactory());
+            });
 
             _grazingPeriodMapper = grazingPeriodMapperConfiguration.CreateMapper();
 
-            var manureApplicationViewItemMapper = new MapperConfiguration(
-                x => { x.CreateMap<ManureApplicationViewItem, ManureApplicationViewItem>(); }, new NullLoggerFactory());
+            var manureApplicationViewItemMapper = new MapperConfiguration(x =>
+            {
+                x.CreateMap<ManureApplicationViewItem, ManureApplicationViewItem>();
+            });
 
             _manureApplicationViewItemMapper = manureApplicationViewItemMapper.CreateMapper();
 
-            var hayImportViewItemMapper =
-                new MapperConfiguration(x => { x.CreateMap<HayImportViewItem, HayImportViewItem>(); },
-                    new NullLoggerFactory());
+            var hayImportViewItemMapper = new MapperConfiguration(x =>
+            {
+                x.CreateMap<HayImportViewItem, HayImportViewItem>();
+            });
 
             _hayImportViewItemMapper = hayImportViewItemMapper.CreateMapper();
 
-            var digestateViewItemMapper = new MapperConfiguration(
-                x => { x.CreateMap<DigestateApplicationViewItem, DigestateApplicationViewItem>(); },
-                new NullLoggerFactory());
+            var digestateViewItemMapper = new MapperConfiguration(x =>
+            {
+                x.CreateMap<DigestateApplicationViewItem, DigestateApplicationViewItem>();
+            });
 
             _digestateViewItemMapper = digestateViewItemMapper.CreateMapper();
 
 
             var fertilizerApplicationViewItemMapper = new MapperConfiguration(x =>
             {
-                x.CreateMap<Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data,
-                    Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data>();
+                x.CreateMap<Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data, Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data>();
                 x.CreateMap<FertilizerApplicationViewItem, FertilizerApplicationViewItem>();
-            }, new NullLoggerFactory());
-
+            });
+            
             _fertilizerApplicationViewItemMapper = fertilizerApplicationViewItemMapper.CreateMapper();
 
-            var soilDataMapper =
-                new MapperConfiguration(x => { x.CreateMap<SoilData, SoilData>(); }, new NullLoggerFactory());
+            var soilDataMapper = new MapperConfiguration(x =>
+            {
+                x.CreateMap<SoilData, SoilData>();
+            });
 
             _soilDataMapper = soilDataMapper.CreateMapper();
         }
-
-        #endregion
-
-        #region Fields
-
-        private readonly IMapper _cropViewItemMapper;
-        private readonly IMapper _cropEconomicDataMapper;
-        private readonly IMapper _grazingPeriodMapper;
-        private readonly IMapper _harvestPeriodMapper;
-        private readonly IMapper _manureApplicationViewItemMapper;
-        private readonly IMapper _fertilizerApplicationViewItemMapper;
-        private readonly IMapper _hayImportViewItemMapper;
-        private readonly IMapper _digestateViewItemMapper;
-        private readonly IMapper _soilDataMapper;
-
-        private readonly ICropInitializationService _cropInitializationService;
 
         #endregion
 
@@ -116,7 +119,7 @@ namespace H.Core.Services
             component.EndYear = DateTime.Now.Year;
             component.YearOfObservation = DateTime.Now.Year;
 
-            var fieldName = GetUniqueFieldName(farm.FieldSystemComponents);
+            var fieldName = this.GetUniqueFieldName(farm.FieldSystemComponents);
             component.Name = fieldName;
             component.ComponentDescriptionString = fieldName;
             component.GroupPath = fieldName;
@@ -133,11 +136,13 @@ namespace H.Core.Services
             var fieldSystemComponents = components;
 
             var totalCount = fieldSystemComponents.Count();
-            var proposedName = string.Format(Resources.InterpolatedFieldNumber, i);
+            var proposedName = string.Format(Properties.Resources.InterpolatedFieldNumber, i);
 
             //while proposedName isn't unique create a uniqe name for this component so we don't have duplicate named components
             while (fieldSystemComponents.Any(x => x.Name == proposedName))
-                proposedName = string.Format(Resources.InterpolatedFieldNumber, ++i);
+            {
+                proposedName = string.Format(Properties.Resources.InterpolatedFieldNumber, ++i);
+            }
 
             return proposedName;
         }
@@ -146,12 +151,12 @@ namespace H.Core.Services
         {
             var fieldSystemComponent = (FieldSystemComponent)Activator.CreateInstance(typeof(FieldSystemComponent));
 
-            Replicate(component, fieldSystemComponent);
+            this.Replicate(component, fieldSystemComponent);
 
             fieldSystemComponent.Name = component.Name;
 
             /*
-             * Must be true else Holos will reinitialize the component
+             * Must be true else Holos will reinitialize the component 
              * causing field components in the components view to behave oddly
              * when clicked upon.
              */
@@ -212,33 +217,41 @@ namespace H.Core.Services
                 {
                     var copiedFertilizerApplicationViewItem = new FertilizerApplicationViewItem();
 
-                    _fertilizerApplicationViewItemMapper.Map(fertilizerApplicationViewItem,
-                        copiedFertilizerApplicationViewItem);
+                    _fertilizerApplicationViewItemMapper.Map(fertilizerApplicationViewItem, copiedFertilizerApplicationViewItem);
                     copiedViewItem.FertilizerApplicationViewItems.Add(copiedFertilizerApplicationViewItem);
                 }
             }
         }
 
         /// <summary>
-        ///     Determines which view item is the main crop for a particular year. Will use the boolean
-        ///     <see cref="H.Core.Models.LandManagement.Fields.CropViewItem.IsSecondaryCrop" /> to determine which view item
-        ///     is the main crop for the particular year.
+        /// Determines which view item is the main crop for a particular year. Will use the boolean <see cref="H.Core.Models.LandManagement.Fields.CropViewItem.IsSecondaryCrop"/> to determine which view item
+        /// is the main crop for the particular year.
         /// </summary>
         public CropViewItem GetMainCropForYear(IEnumerable<CropViewItem> viewItems,
             int year)
         {
             var viewItemsForYear = viewItems.GetByYear(year);
-            if (viewItemsForYear.Any() == false) return null;
+            if (viewItemsForYear.Any() == false)
+            {
+                return null;
+            }
 
             if (viewItemsForYear.Count() == 1)
+            {
                 // There is only one crop grown, return it as the main crop
                 return viewItemsForYear.Single();
+            }
 
             var mainCrop = viewItemsForYear.FirstOrDefault(x => x.IsSecondaryCrop == false);
-            if (mainCrop != null) return mainCrop;
-
-            // Old farms won't have this boolean set, so return first item or have user rebuild stage state
-            return viewItemsForYear.First();
+            if (mainCrop != null)
+            {
+                return mainCrop;
+            }
+            else
+            {
+                // Old farms won't have this boolean set, so return first item or have user rebuild stage state
+                return viewItemsForYear.First();
+            }
         }
 
         public CropViewItem GetCoverCropForYear(
@@ -246,17 +259,27 @@ namespace H.Core.Services
             int year)
         {
             var viewItemsForYear = viewItems.GetByYear(year);
-            if (viewItemsForYear.Any() == false) return null;
+            if (viewItemsForYear.Any() == false)
+            {
+                return null;
+            }
 
             if (viewItemsForYear.Count() == 1 && viewItemsForYear.Single().IsSecondaryCrop == false)
+            {
                 // There is only one crop grown and it is not a cover crop
                 return null;
+            }
 
-            var coverCrop = viewItemsForYear.FirstOrDefault(x => x.IsSecondaryCrop);
-            if (coverCrop != null) return coverCrop;
-
-            // Old farms won't have this boolean set, so return first item or have user rebuild stage state
-            return null;
+            var coverCrop = viewItemsForYear.FirstOrDefault(x => x.IsSecondaryCrop == true);
+            if (coverCrop != null)
+            {
+                return coverCrop;
+            }
+            else
+            {
+                // Old farms won't have this boolean set, so return first item or have user rebuild stage state
+                return null;
+            }
         }
 
         public AdjoiningYears GetAdjoiningYears(
@@ -269,7 +292,7 @@ namespace H.Core.Services
             // Get all items from the same year
             var viewItemsForYear = viewItems.GetItemsByYear(year);
 
-            var mainCropForCurrentYear = GetMainCropForYear(viewItemsForYear, year);
+            var mainCropForCurrentYear = this.GetMainCropForYear(viewItemsForYear, year);
             if (mainCropForCurrentYear.CropType.IsPerennial())
             {
                 // Items with same stand id
@@ -279,23 +302,25 @@ namespace H.Core.Services
                 var previousItemInStand = perennialItemsInStand.SingleOrDefault(x => x.Year == previousYear);
                 var nextItemInStand = perennialItemsInStand.SingleOrDefault(x => x.Year == nextYear);
 
-                return new AdjoiningYears
+                return new AdjoiningYears()
                 {
                     PreviousYearViewItem = previousItemInStand,
                     CurrentYearViewItem = mainCropForCurrentYear,
                     NextYearViewItem = nextItemInStand
                 };
             }
-
-            var previousYearViewItem = viewItems.SingleOrDefault(x => x.Year == previousYear);
-            var nextYearViewItem = viewItems.SingleOrDefault(x => x.Year == nextYear);
-
-            return new AdjoiningYears
+            else
             {
-                PreviousYearViewItem = previousYearViewItem,
-                CurrentYearViewItem = mainCropForCurrentYear,
-                NextYearViewItem = nextYearViewItem
-            };
+                var previousYearViewItem = viewItems.SingleOrDefault(x => x.Year == previousYear);
+                var nextYearViewItem = viewItems.SingleOrDefault(x => x.Year == nextYear);
+
+                return new AdjoiningYears()
+                {
+                    PreviousYearViewItem = previousYearViewItem,
+                    CurrentYearViewItem = mainCropForCurrentYear,
+                    NextYearViewItem = nextYearViewItem,
+                };
+            }
         }
 
         #endregion

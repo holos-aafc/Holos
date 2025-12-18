@@ -39,9 +39,8 @@
         LumCMaxAndKValuesForPerennialCroppingChange,
         ActivityCoefficientsForDairyBeefSheep,
         DietCoefficientsForDairyBeefSheep,
-
         /// <summary>
-        ///     Not used. Resource file has been deleted
+        /// Not used. Resource file has been deleted
         /// </summary>
         AdditiveReductionFactorsForAllCattle,
         MethaneConversionFactorsAndNitrogenOxideEmissionsForBeefDairySwine,
@@ -53,14 +52,12 @@
         EnergyRequirementsForCrops,
         FertilizerApplicationRates,
         CropFactors,
-
         /// <summary>
-        ///     Not used. Resource file has been deleted
+        /// Not used. Resource file has been deleted
         /// </summary>
         SoilN2OEmissionFactorsInfluencedByTillPractice,
-
         /// <summary>
-        ///     Not used. Resource file has been deleted
+        /// Not used. Resource file has been deleted
         /// </summary>
         SoilN2OEmissionFactorsInfluencedBySoilTexture,
         NitrogenApplicationRatesForSpringWheatStubbleAndFallowCrops,
@@ -96,7 +93,7 @@
         ON_Default_Yields,
 
         /// <summary>
-        ///     Not used. Resource file has been deleted
+        /// Not used. Resource file has been deleted
         /// </summary>
         DailyClimateDataInputForClimateParameterTest,
         IrrigationByMonth,
@@ -108,7 +105,7 @@
         ClimateNormalsByPolygon1970_2000,
         ClimateNormalsByPolygon1980_2010,
         ClimateNormalsByPolygon1990_2017,
-
+        
         CropEconomics,
 
         FertilizerBlends,
@@ -163,6 +160,6 @@
         AnimalSystemProductionDays,
 
         UpdatedSmallAreaYields,
-        IndoorBarnTemperatures
+        IndoorBarnTemperatures,
     }
 }

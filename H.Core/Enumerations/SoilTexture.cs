@@ -15,6 +15,6 @@ namespace H.Core.Enumerations
         Coarse,
 
         [LocalizedDescription("Unknown", typeof(Resources))]
-        Unknown
+        Unknown,
     }
 }

@@ -42,6 +42,6 @@ namespace H.Core.Enumerations
         Saskatchewan,
 
         [LocalizedDescription("Yukon", typeof(Resources))]
-        Yukon
+        Yukon,
     }
 }

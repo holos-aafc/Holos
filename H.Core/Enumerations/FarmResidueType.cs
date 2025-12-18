@@ -1,4 +1,9 @@
-﻿using H.Core.Properties;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using H.Core.Properties;
 using H.Infrastructure;
 
 namespace H.Core.Enumerations
@@ -63,6 +68,6 @@ namespace H.Core.Enumerations
         FoodWaste,
 
         [LocalizedDescription("EnumVegetableOil", typeof(Resources))]
-        VegetableOil
+        VegetableOil,
     }
 }

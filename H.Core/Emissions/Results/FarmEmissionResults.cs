@@ -5,36 +5,23 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using H.Core.Calculators.Infrastructure;
 using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.Converters;
 using H.Core.Enumerations;
 using H.Core.Models;
+using H.Core.Models.Animals;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models.Results;
-using H.Core.Properties;
+using H.Core.Providers.Climate;
 using H.Core.Services.LandManagement;
-using H.Infrastructure;
 
 namespace H.Core.Emissions.Results
 {
     public class FarmEmissionResults : ResultsViewItemBase
     {
-        #region Constructors
-
-        public FarmEmissionResults()
-        {
-            AnimalComponentEmissionsResults = new ObservableCollection<AnimalComponentEmissionsResults>();
-            EconomicResultsViewItems = new ObservableCollection<EconomicsResultsViewItem>();
-            FinalFieldResultViewItems = new ObservableCollection<CropViewItem>();
-            AnaerobicDigestorResults = new ObservableCollection<DigestorDailyOutput>();
-            ManureExportResultsViewItems = new ObservableCollection<ManureExportResultViewItem>();
-            CropResidueExportResultsViewItems = new ObservableCollection<CropResidueExportResultViewItem>();
-        }
-
-        #endregion
-
         public class DailyPrint
         {
             public string Component { get; set; }
@@ -131,6 +118,20 @@ namespace H.Core.Emissions.Results
 
         #endregion
 
+        #region Constructors
+
+        public FarmEmissionResults()
+        {
+            this.AnimalComponentEmissionsResults = new ObservableCollection<AnimalComponentEmissionsResults>();
+            this.EconomicResultsViewItems = new ObservableCollection<EconomicsResultsViewItem>();
+            this.FinalFieldResultViewItems = new ObservableCollection<CropViewItem>();
+            this.AnaerobicDigestorResults = new ObservableCollection<DigestorDailyOutput>();
+            this.ManureExportResultsViewItems = new ObservableCollection<ManureExportResultViewItem>();
+            this.CropResidueExportResultsViewItems = new ObservableCollection<CropResidueExportResultViewItem>();
+        }
+
+        #endregion
+
         #region Properties
 
         public int Year { get; set; }
@@ -154,7 +155,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Emission results from all animal components on the farm
+        /// Emission results from all animal components on the farm
         /// </summary>
         public ObservableCollection<AnimalComponentEmissionsResults> AnimalComponentEmissionsResults
         {
@@ -169,17 +170,33 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     The total emissions for the entire farm !!!
-        ///     (kg CO2e)
+        /// The total emissions for the entire farm !!!
+        ///
+        /// (kg CO2e)
         /// </summary>
-        public double TotalCarbonDioxideEquivalentsFromFarm => TotalCarbonDioxideEquivalentsFromLandManagementForFarm +
-                                                               TotalCarbonDioxideEquivalentsFromAnimalsForFarm;
+        public double TotalCarbonDioxideEquivalentsFromFarm
+        {
+            get
+            {
+                return this.TotalCarbonDioxideEquivalentsFromLandManagementForFarm + this.TotalCarbonDioxideEquivalentsFromAnimalsForFarm;
+            }
+        }
 
-        public double TotalN2OAsCarbonDioxideEquivalentsFromAnimals =>
-            AnimalComponentEmissionsResults.TotalNitrousOxideAsCarbonDioxideEquivalents();
+        public double TotalN2OAsCarbonDioxideEquivalentsFromAnimals
+        {
+            get
+            {
+                return this.AnimalComponentEmissionsResults.TotalNitrousOxideAsCarbonDioxideEquivalents();
+            }
+        }
 
-        public double TotalOrganicNitrogenAvailableForLandApplication =>
-            AnimalComponentEmissionsResults.TotalOrganicNitrogenAvailableForLandApplication();
+        public double TotalOrganicNitrogenAvailableForLandApplication
+        {
+            get
+            {
+                return this.AnimalComponentEmissionsResults.TotalOrganicNitrogenAvailableForLandApplication();
+            }
+        }
 
         /// Equation 4.5.2-5
         ///
@@ -187,77 +204,94 @@ namespace H.Core.Emissions.Results
         /// 
         /// (kg N)
         /// </summary>
-        public double TotalAvailableManureNitrogenInStoredManureAvailableForLandApplication =>
-            AnimalComponentEmissionsResults.TotalAvailableManureNitrogenInStoredManureAvailableForLandApplication();
+        public double TotalAvailableManureNitrogenInStoredManureAvailableForLandApplication
+        {
+            get
+            {
+                return this.AnimalComponentEmissionsResults.TotalAvailableManureNitrogenInStoredManureAvailableForLandApplication();
+            }
+        }
 
         /// <summary>
-        ///     Returns the total enteric methane produced from all animals on the farm
-        ///     (kg CH4)
+        /// Returns the total enteric methane produced from all animals on the farm
+        ///
+        /// (kg CH4)
         /// </summary>
         public double TotalEntericMethaneFromFarm
         {
             get
             {
-                var result = AnimalComponentEmissionsResults.TotalEntericMethane();
+                var result = this.AnimalComponentEmissionsResults.TotalEntericMethane();
 
                 return result;
             }
         }
 
         /// <summary>
-        ///     Returns the total manure methane produced from all animals on the farm
-        ///     (kg CH4)
+        /// Returns the total manure methane produced from all animals on the farm
+        ///
+        /// (kg CH4)
         /// </summary>
         public double TotalManureMethaneFromFarm
         {
             get
             {
-                var results = AnimalComponentEmissionsResults.TotalManureMethane();
+                var results = this.AnimalComponentEmissionsResults.TotalManureMethane();
 
                 return results;
             }
         }
 
-        public double TotalCombinedCO2FromFarm =>
-            TotalCarbonDioxideFromAnimals +
-            TotalCO2FromFarm +
-            TotalEnergyCarbonDioxideFromManureSpreading;
-
+        public double TotalCombinedCO2FromFarm
+        {
+            get
+            {
+                return this.TotalCarbonDioxideFromAnimals +
+                       this.TotalCO2FromFarm +
+                       this.TotalEnergyCarbonDioxideFromManureSpreading;
+            }
+        }
         /// <summary>
-        ///     Returns the sum of all CO2e from land management of the farm.
-        ///     <remarks>Does not include upstream emissions from herbicide and fertilizer production.</remarks>
-        ///     (kg CO2e)
+        /// Returns the sum of all CO2e from land management of the farm.
+        ///
+        /// <remarks>Does not include upstream emissions from herbicide and fertilizer production.</remarks>
+        ///
+        /// (kg CO2e)
         /// </summary>
         public double TotalCarbonDioxideEquivalentsFromLandManagementForFarm
         {
             get
             {
-                var result = TotalOnFarmCO2FromLandManagement * CoreConstants.CO2ToCO2eConversionFactor +
-                             TotalN2OEmissionsFromLandManagement * CoreConstants.N2OToCO2eConversionFactor;
+                var result = this.TotalOnFarmCO2FromLandManagement * CoreConstants.CO2ToCO2eConversionFactor +
+                             this.TotalN2OEmissionsFromLandManagement * CoreConstants.N2OToCO2eConversionFactor;
 
                 return result;
             }
         }
 
         /// <summary>
-        ///     Returns the sum of all CO2e from animals on the farm.
-        ///     (kg CO2e)
+        /// Returns the sum of all CO2e from animals on the farm.
+        ///
+        /// (kg CO2e)
         /// </summary>
-        public double TotalCarbonDioxideEquivalentsFromAnimalsForFarm =>
-            _emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsCH4, EmissionDisplayUnits.KilogramsC02e,
-                TotalEntericMethaneFromFarm) +
-            _emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsCH4, EmissionDisplayUnits.KilogramsC02e,
-                TotalManureMethaneFromFarm) +
-            _emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsN2O, EmissionDisplayUnits.KilogramsC02e,
-                TotalDirectNitrousOxideFromAnimals) +
-            _emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsN2O, EmissionDisplayUnits.KilogramsC02e,
-                TotalIndirectNitrousOxideFromAnimals) +
-            _emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02, EmissionDisplayUnits.KilogramsC02e,
-                TotalCarbonDioxideFromAnimals);
+        public double TotalCarbonDioxideEquivalentsFromAnimalsForFarm
+        {
+            get
+            {
+                return _emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsCH4, EmissionDisplayUnits.KilogramsC02e, this.TotalEntericMethaneFromFarm) +
+                       _emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsCH4, EmissionDisplayUnits.KilogramsC02e, this.TotalManureMethaneFromFarm) +
+                       _emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsN2O, EmissionDisplayUnits.KilogramsC02e, this.TotalDirectNitrousOxideFromAnimals) +
+                       _emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsN2O, EmissionDisplayUnits.KilogramsC02e, this.TotalIndirectNitrousOxideFromAnimals) +
+                       _emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02, EmissionDisplayUnits.KilogramsC02e, this.TotalCarbonDioxideFromAnimals);
+            }
+        }
 
         public double TotalLandArea
         {
-            get { return GetAllCropResultsByYear(Year).Sum(x => x.Area); }
+            get
+            {
+                return this.GetAllCropResultsByYear(this.Year).Sum(x => x.Area);
+            }
         }
 
         public double TotalHarvest
@@ -266,102 +300,159 @@ namespace H.Core.Emissions.Results
             {
                 var result = 0.0;
 
-                foreach (var cropViewItem in GetAllCropResultsByYear(Year))
+                foreach (var cropViewItem in this.GetAllCropResultsByYear(this.Year))
+                {
                     result += cropViewItem.EstimatesOfProductionResultsViewItem.Harvest;
+                }
 
                 return result;
             }
         }
 
         /// <summary>
-        ///     Returns the sum of direct and indirect N2O emissions for the farm.
-        ///     (kg N2O)
+        /// Returns the sum of direct and indirect N2O emissions for the farm.
+        ///
+        /// (kg N2O)
         /// </summary>
-        public double TotalN2OEmissionsFromLandManagement => TotalDirectN2OEmissionsFromLandManagement +
-                                                             TotalIndirectN2OEmissionsFromLandManagement;
+        public double TotalN2OEmissionsFromLandManagement
+        {
+            get
+            {
+                return this.TotalDirectN2OEmissionsFromLandManagement + this.TotalIndirectN2OEmissionsFromLandManagement;
+            }
+        }
 
-        public double TotalNitrousOxideEmissionFromLandManagementAsCarbonDioxideEquivalents =>
-            TotalN2OEmissionsFromLandManagement * CoreConstants.N2OToCO2eConversionFactor;
+        public double TotalNitrousOxideEmissionFromLandManagementAsCarbonDioxideEquivalents
+        {
+            get
+            {
+                return this.TotalN2OEmissionsFromLandManagement * CoreConstants.N2OToCO2eConversionFactor;
+            }
+        }
 
         /// <summary>
-        ///     (kg N2O)
+        /// (kg N2O)
         /// </summary>
-        public double TotalDirectNitrousOxideFromFarm =>
-            TotalDirectN2OEmissionsFromLandManagement + TotalDirectNitrousOxideFromAnimals;
+        public double TotalDirectNitrousOxideFromFarm
+        {
+            get
+            {
+                return this.TotalDirectN2OEmissionsFromLandManagement + this.TotalDirectNitrousOxideFromAnimals;
+            }
+        }
 
         /// <summary>
-        ///     (kg N2O)
+        /// (kg N2O)
         /// </summary>
-        public double TotalIndirectNitrousOxideFromFarm =>
-            TotalIndirectN2OEmissionsFromLandManagement + TotalIndirectNitrousOxideFromAnimals;
+        public double TotalIndirectNitrousOxideFromFarm
+        {
+            get
+            {
+                return this.TotalIndirectN2OEmissionsFromLandManagement + this.TotalIndirectNitrousOxideFromAnimals;
+            }
+        }
+        /// <summary>
+        /// (kg CO2)
+        /// </summary>
+        public double TotalCO2FromFarm
+        {
+            get
+            {
+                return this.TotalOnFarmCO2FromLandManagement;
+                // Animal CO2 total is output under the Energy CO2 column (in the GUI and CLI reports) so don't include it here)
+                //this.TotalCarbonDioxideFromAnimals;
+            }
+        }
 
         /// <summary>
-        ///     (kg CO2)
+        /// (kg CO2)
         /// </summary>
-        public double TotalCO2FromFarm => TotalOnFarmCO2FromLandManagement;
-
-        // Animal CO2 total is output under the Energy CO2 column (in the GUI and CLI reports) so don't include it here)
-        //this.TotalCarbonDioxideFromAnimals;
-        /// <summary>
-        ///     (kg CO2)
-        /// </summary>
-        public double TotalEnergyCarbonDioxideFromFarm =>
-            TotalOnFarmCO2FromLandManagement +
-            TotalCarbonDioxideFromAnimals;
+        public double TotalEnergyCarbonDioxideFromFarm
+        {
+            get
+            {
+                return this.TotalOnFarmCO2FromLandManagement +
+                       this.TotalCarbonDioxideFromAnimals;
+            }
+        }
 
         /// <summary>
-        ///     Note: for animals, the total CO2 is equal to the total energy CO2
-        ///     (kg CO2)
+        /// Note: for animals, the total CO2 is equal to the total energy CO2
+        /// 
+        /// (kg CO2)
         /// </summary>
-        public double TotalCarbonDioxideFromAnimals => AnimalComponentEmissionsResults.TotalCarbonDioxide();
+        public double TotalCarbonDioxideFromAnimals
+        {
+            get
+            {
+                return this.AnimalComponentEmissionsResults.TotalCarbonDioxide();
+            }
+        }
 
         /// <summary>
-        ///     (kg N2O)
+        /// (kg N2O)
         /// </summary>
-        public double TotalDirectNitrousOxideFromAnimals => AnimalComponentEmissionsResults.TotalDirectNitrousOxide();
+        public double TotalDirectNitrousOxideFromAnimals
+        {
+            get
+            {
+                return this.AnimalComponentEmissionsResults.TotalDirectNitrousOxide();
+            }
+        }
 
         /// <summary>
-        ///     (kg N2O)
+        /// (kg N2O)
         /// </summary>
-        public double TotalIndirectNitrousOxideFromAnimals =>
-            AnimalComponentEmissionsResults.TotalIndirectNitrousOxide();
+        public double TotalIndirectNitrousOxideFromAnimals
+        {
+            get
+            {
+                return this.AnimalComponentEmissionsResults.TotalIndirectNitrousOxide();
+
+            }
+        }
 
         /// <summary>
-        ///     (kg CO2)
+        /// (kg CO2)
         /// </summary>
         public double TotalOnFarmCO2FromLandManagement
         {
             get
             {
-                return GetAllCropResultsByYear(Year).Sum(x => x.CropEnergyResults.TotalOnFarmCroppingEnergyEmissions);
+                return this.GetAllCropResultsByYear(this.Year).Sum(x => x.CropEnergyResults.TotalOnFarmCroppingEnergyEmissions);
             }
         }
 
         /// <summary>
-        ///     (kg N2O)
+        /// (kg N2O)
         /// </summary>
         public double TotalDirectN2OEmissionsFromLandManagement
         {
-            get { return GetAllCropResultsByYear(Year).Sum(x => x.TotalDirectNitrousOxidePerHectare * x.Area); }
+            get
+            {
+                return this.GetAllCropResultsByYear(this.Year).Sum(x => x.TotalDirectNitrousOxidePerHectare * x.Area);
+            }
         }
 
         /// <summary>
-        ///     (kg N2O)
+        /// (kg N2O)
         /// </summary>
         public double TotalIndirectN2OEmissionsFromLandManagement
         {
-            get { return GetAllCropResultsByYear(Year).Sum(x => x.TotalIndirectNitrousOxidePerHectare * x.Area); }
+            get
+            {
+                return this.GetAllCropResultsByYear(this.Year).Sum(x => x.TotalIndirectNitrousOxidePerHectare * x.Area);
+            }
         }
 
         /// <summary>
-        ///     (kg CO2)
+        /// (kg CO2)
         /// </summary>
         public double TotalEnergyCarbonDioxideFromManureSpreading
         {
             get
             {
-                return GetAllCropResultsByYear(Year)
-                    .Sum(x => x.CropEnergyResults.EnergyCarbonDioxideFromManureSpreading);
+                return this.GetAllCropResultsByYear(this.Year).Sum(x => x.CropEnergyResults.EnergyCarbonDioxideFromManureSpreading);
             }
         }
 
@@ -476,7 +567,10 @@ namespace H.Core.Emissions.Results
                                 AccumulatedVolume = groupEmissionsByDay.AccumulatedVolume,
                             }; 
 
-                result.Add(a);
+                            result.Add(a);
+                        }
+                    }
+                }
             }
 
             return result;
@@ -489,50 +583,53 @@ namespace H.Core.Emissions.Results
             string languageAddOn,
             bool exportedFromGui)
         {
-            var stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new StringBuilder();
 
             BuildResultsFileOutputHeader(stringBuilder, Farm.MeasurementSystemType);
             string filePath;
 
             if (exportedFromGui)
             {
-                filePath = $"{path}";
+                filePath = $"{path.ToString()}";
                 filePath = filePath.Replace(".xlsx", "");
                 filePath += "_debug.csv";
             }
             else
             {
-                filePath = $"{path}{Farm.Name}_{Resources.Output}{languageAddOn}_debug.csv";
+                filePath = $"{path}{Farm.Name}_{Properties.Resources.Output}{languageAddOn}_debug.csv";
             }
 
             foreach (var dailyPrintItem in results)
-                BuildResultsFileOutputRow(stringBuilder, dailyPrintItem, cultureInfo, Farm.MeasurementSystemType, Farm,
-                    exportedFromGui);
+            {
+                BuildResultsFileOutputRow(stringBuilder, dailyPrintItem, cultureInfo, Farm.MeasurementSystemType, Farm, exportedFromGui);
+            }
 
             try
             {
-                if (cultureInfo.Name == InfrastructureConstants.FrenchCultureInfo.Name)
+                if (cultureInfo.Name == Infrastructure.InfrastructureConstants.FrenchCultureInfo.Name)
+                {
                     //display the accented chars correctly
                     File.WriteAllText(filePath, stringBuilder.ToString(), Encoding.GetEncoding("iso-8859-1"));
+                }
                 else
+                {
                     File.WriteAllText(filePath, stringBuilder.ToString(), Encoding.GetEncoding("iso-8859-1"));
+                }
             }
             catch (IOException exception)
             {
-                Trace.TraceInformation(
-                    $"{nameof(FieldResultsService)}.{nameof(ExportResultsToFile)}: error writing data to csv file: '{exception.Message}'.");
+                Trace.TraceInformation($"{nameof(FieldResultsService)}.{nameof(this.ExportResultsToFile)}: error writing data to csv file: '{exception.Message}'.");
 
                 return false;
             }
 
-            Trace.TraceInformation(
-                $"{nameof(FieldResultsService)}.{nameof(ExportResultsToFile)}: successfully exported data to csv file: '{filePath}'.");
+            Trace.TraceInformation($"{nameof(FieldResultsService)}.{nameof(this.ExportResultsToFile)}: successfully exported data to csv file: '{filePath}'.");
             return true;
         }
 
         public List<GroupEmissionsByDay> GetAllDailyResultsByYear(int year)
         {
-            var result = GetAllDailyResults();
+            var result = this.GetAllDailyResults();
 
             var byYear = result.Where(x => x.DateTime.Year == year).ToList();
 
@@ -543,7 +640,7 @@ namespace H.Core.Emissions.Results
         {
             var result = new List<GroupEmissionsByDay>();
 
-            foreach (var animalComponentEmissionsResult in AnimalComponentEmissionsResults)
+            foreach (var animalComponentEmissionsResult in this.AnimalComponentEmissionsResults)
             {
                 var results = animalComponentEmissionsResult.GetDailyEmissions();
                 results.AddRange(results);
@@ -554,8 +651,7 @@ namespace H.Core.Emissions.Results
 
         public List<CropViewItem> GetCropResultsByField(FieldSystemComponent fieldSystemComponent)
         {
-            return FinalFieldResultViewItems.Where(x => x.FieldSystemComponentGuid.Equals(fieldSystemComponent.Guid))
-                .ToList();
+            return this.FinalFieldResultViewItems.Where(x => x.FieldSystemComponentGuid.Equals(fieldSystemComponent.Guid)).ToList();
         }
 
         #endregion
@@ -564,82 +660,42 @@ namespace H.Core.Emissions.Results
 
         private List<CropViewItem> GetAllCropResultsByYear(int year)
         {
-            return FinalFieldResultViewItems.Where(x => x.Year == year).ToList();
+            return this.FinalFieldResultViewItems.Where(x => x.Year == year).ToList();
         }
-
         private void BuildResultsFileOutputHeader(StringBuilder stringBuilder, MeasurementSystemType measurementSystem)
         {
-            var dailyPrint = new DailyPrint();
+            DailyPrint dailyPrint = new DailyPrint();
             stringBuilder.AppendLine("sep =,");
 
             stringBuilder.AppendLine(
                 nameof(dailyPrint.Component) + "," +
                 nameof(dailyPrint.AnimalGroup) + "," +
                 nameof(dailyPrint.Date) + "," +
-                nameof(dailyPrint.Temp) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.DegreesCelsius) +
-                "," +
+                nameof(dailyPrint.Temp) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.DegreesCelsius) + "," +
                 nameof(dailyPrint.AverageTemparatureLast30DaysKelvin) + "," +
                 nameof(dailyPrint.ClimateFactor) + "," +
-                nameof(dailyPrint.StartWeight) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem,
-                    MetricUnitsOfMeasurement.KilogramPerHeadPerDay) + "," +
-                nameof(dailyPrint.EndWeight) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem,
-                    MetricUnitsOfMeasurement.KilogramPerHeadPerDay) + "," +
-                nameof(dailyPrint.NEMaintenance) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem,
-                    MetricUnitsOfMeasurement.MegaJoulesPerHeadPerDay) + "," +
-                nameof(dailyPrint.NEactivity) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem,
-                    MetricUnitsOfMeasurement.MegaJoulesPerHeadPerDay) + "," +
-                nameof(dailyPrint.NetEnergyForLactation) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem,
-                    MetricUnitsOfMeasurement.MegaJoulesPerHeadPerDay) + "," +
-                nameof(dailyPrint.NetEnergyForPregnancy) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem,
-                    MetricUnitsOfMeasurement.MegaJoulesPerHeadPerDay) + "," +
-                nameof(dailyPrint.ADG) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem,
-                    MetricUnitsOfMeasurement.KilogramPerHeadPerDay) + "," +
-                nameof(dailyPrint.NEgain) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem,
-                    MetricUnitsOfMeasurement.MegaJoulesPerHeadPerDay) + "," +
+                nameof(dailyPrint.StartWeight) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramPerHeadPerDay) + "," +
+                nameof(dailyPrint.EndWeight) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramPerHeadPerDay) + "," +
+                nameof(dailyPrint.NEMaintenance) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.MegaJoulesPerHeadPerDay) + "," +
+                nameof(dailyPrint.NEactivity) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.MegaJoulesPerHeadPerDay) + "," +
+                nameof(dailyPrint.NetEnergyForLactation) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.MegaJoulesPerHeadPerDay) + "," +
+                nameof(dailyPrint.NetEnergyForPregnancy) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.MegaJoulesPerHeadPerDay) + "," +
+                nameof(dailyPrint.ADG) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramPerHeadPerDay) + "," +
+                nameof(dailyPrint.NEgain) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.MegaJoulesPerHeadPerDay) + "," +
                 nameof(dailyPrint.REM) + "," +
                 nameof(dailyPrint.REG) + "," +
-                nameof(dailyPrint.GEI) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem,
-                    MetricUnitsOfMeasurement.MegaJoulesPerHeadPerDay) + "," +
-                nameof(dailyPrint.EntericRate) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramsMethane) +
-                "," +
-                nameof(dailyPrint.EntericEmissions) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramsMethane) +
-                "," +
-                nameof(dailyPrint.ProteinIntake) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem,
-                    MetricUnitsOfMeasurement.KilogramPerHeadPerDay) + "," +
-                nameof(dailyPrint.ProteinRetainedForPregnancy) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem,
-                    MetricUnitsOfMeasurement.KilogramPerHeadPerDay) + "," +
-                nameof(dailyPrint.ProteinRetainedForLactation) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem,
-                    MetricUnitsOfMeasurement.KilogramPerHeadPerDay) + "," +
-                nameof(dailyPrint.EmptyBodyWeight) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem,
-                    MetricUnitsOfMeasurement.KilogramPerHeadPerDay) + "," +
-                nameof(dailyPrint.EmptyBodyGain) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem,
-                    MetricUnitsOfMeasurement.KilogramPerHeadPerDay) + "," +
-                nameof(dailyPrint.RetainedEnergy) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.MegaCalorie) + "," +
-                nameof(dailyPrint.ProteinRetainedForGain) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem,
-                    MetricUnitsOfMeasurement.KilogramPerHeadPerDay) + "," +
-                nameof(dailyPrint.FractionOfNitrogenExcretedInUrine) +
-                "," + // could not find (kg TAN (kg manure-N)^-1) MetricUnitsOfMeasurement Enum
-                nameof(dailyPrint.TanExcretionRate) +
-                "," + // could not find (kg TAN head^-1 day^-1) MetricUnitsOfMeasurement Enum
+                nameof(dailyPrint.GEI) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.MegaJoulesPerHeadPerDay) + "," +
+                nameof(dailyPrint.EntericRate) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramsMethane) + "," +
+                nameof(dailyPrint.EntericEmissions) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramsMethane) + "," +
+                nameof(dailyPrint.ProteinIntake) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramPerHeadPerDay) + "," +
+                nameof(dailyPrint.ProteinRetainedForPregnancy) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramPerHeadPerDay) + "," +
+                nameof(dailyPrint.ProteinRetainedForLactation) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramPerHeadPerDay) + "," +
+                nameof(dailyPrint.EmptyBodyWeight) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramPerHeadPerDay) + "," +
+                nameof(dailyPrint.EmptyBodyGain) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramPerHeadPerDay) + "," +
+                nameof(dailyPrint.RetainedEnergy) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.MegaCalorie) + "," +
+                nameof(dailyPrint.ProteinRetainedForGain) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramPerHeadPerDay) + "," +
+                nameof(dailyPrint.FractionOfNitrogenExcretedInUrine) + "," + // could not find (kg TAN (kg manure-N)^-1) MetricUnitsOfMeasurement Enum
+                nameof(dailyPrint.TanExcretionRate) + "," + // could not find (kg TAN head^-1 day^-1) MetricUnitsOfMeasurement Enum
                 nameof(dailyPrint.TanExcretion) + "," + // could not find (kg TAN) MetricUnitsOfMeasurement Enum
                 nameof(dailyPrint.NitrogenExcretionRate) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramPerHeadPerDay) + "," +
                 nameof(dailyPrint.FecalNitrogenExcretionRate) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramPerHeadPerDay) + "," +
@@ -665,49 +721,26 @@ namespace H.Core.Emissions.Results
                 nameof(dailyPrint.AdjustedNH3NFromHousing) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.Kilograms) + "," + //KG NH3-N
                 nameof(dailyPrint.TanEnteringStorageSystem) + "," + // could not find (kg TAN) MetricUnitsOfMeasurement Enum
                 nameof(dailyPrint.AdjustedAmountOfTanFlowingIntoStorageEachDay) + "," + // No units given
-                nameof(dailyPrint.AmbientAirTemperatureAdjustmentForStorage) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.DegreesCelsius) +
-                "," +
-                nameof(dailyPrint.AdjustedAmmoniaEmissionFactorForStorage) +
-                "," + // could not find kg NH3-N (kg TAN)^-1 MetricUnitsOfMeasurement Enum
-                nameof(dailyPrint.AmmoniaEmissionsFromStorageSystem) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.Kilograms) +
-                "," + //KG NH3
-                nameof(dailyPrint.AccumulatedTanInStorageOnDay) +
-                "," + // could not find (kg TAN) MetricUnitsOfMeasurement Enum
+                nameof(dailyPrint.AmbientAirTemperatureAdjustmentForStorage) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.DegreesCelsius) + "," +
+                nameof(dailyPrint.AdjustedAmmoniaEmissionFactorForStorage) + "," + // could not find kg NH3-N (kg TAN)^-1 MetricUnitsOfMeasurement Enum
+                nameof(dailyPrint.AmmoniaEmissionsFromStorageSystem) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.Kilograms) + "," + //KG NH3
+                nameof(dailyPrint.AccumulatedTanInStorageOnDay) + "," + // could not find (kg TAN) MetricUnitsOfMeasurement Enum
                 nameof(dailyPrint.VolatilizationForStorage) + "," + // No units given
                 nameof(dailyPrint.AmmoniaLossFromStorage) + "," + // No units given
-                nameof(dailyPrint.AdjustedAmmoniaFromStorage) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.Kilograms) +
-                "," + // (kg NH3-N)
-                nameof(dailyPrint.ManureIndirectN2ONEmission) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON) +
-                "," +
-                nameof(dailyPrint.AmountOfCarbonLostAsMethaneDuringManagement) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.Kilograms) +
-                "," + // (kg C)
-                nameof(dailyPrint.FecalCarbonExcretion) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.Kilograms) +
-                "," + // (kg C)
-                nameof(dailyPrint.CarbonAddedFromBeddingMaterial) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.Kilograms) +
-                "," + // (kg C)
+                nameof(dailyPrint.AdjustedAmmoniaFromStorage) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.Kilograms) + "," + // (kg NH3-N)
+                nameof(dailyPrint.ManureIndirectN2ONEmission) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramsN2ON) + "," +
+                nameof(dailyPrint.AmountOfCarbonLostAsMethaneDuringManagement) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.Kilograms) + "," + // (kg C)
+                nameof(dailyPrint.FecalCarbonExcretion) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.Kilograms) + "," + // (kg C)
+                nameof(dailyPrint.CarbonAddedFromBeddingMaterial) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.Kilograms) + "," + // (kg C)
                 nameof(dailyPrint.NonAccumulatedCarbonCreatedOnDay) + "," + // No units given
-                nameof(dailyPrint.AccumulatedAmountOfCarbonInStoredManureOnDay) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.Kilograms) +
-                "," + // (kg C)
-                nameof(dailyPrint.AccumulatedTANAvailableForLandApplicationOnDay) +
-                "," + // could not find (kg TAN day^-1) MetricUnitsOfMeasurement Enum
-                nameof(dailyPrint.AccumulatedNitrogenAvailableForLandApplicationOnDay) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramsPerDay) +
-                "," + // (kg N day^-1)
+                nameof(dailyPrint.AccumulatedAmountOfCarbonInStoredManureOnDay) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.Kilograms) + "," + // (kg C)
+                nameof(dailyPrint.AccumulatedTANAvailableForLandApplicationOnDay) + "," + // could not find (kg TAN day^-1) MetricUnitsOfMeasurement Enum
+                nameof(dailyPrint.AccumulatedNitrogenAvailableForLandApplicationOnDay) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramsPerDay) + "," + // (kg N day^-1)
                 nameof(dailyPrint.ManureCarbonNitrogenRatio) + "," + // Unitless
-                nameof(dailyPrint.TotalAmountOfNitrogenInStoredManureAvailableForDay) +
-                _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogen) +
-                "," +
-                nameof(dailyPrint.TotalVolumeOfManureAvailableForLandApplication) + "," + // unclear units
+                nameof(dailyPrint.TotalAmountOfNitrogenInStoredManureAvailableForDay) + _unitsCalculator.GetPrintFriendlyString(measurementSystem, MetricUnitsOfMeasurement.KilogramsNitrogen) + "," +
+                nameof(dailyPrint.TotalVolumeOfManureAvailableForLandApplication) + "," +  // unclear units
                 nameof(dailyPrint.AccumulatedVolume)
-            );
+                );
         }
 
         private void BuildResultsFileOutputRow(StringBuilder stringBuilder,

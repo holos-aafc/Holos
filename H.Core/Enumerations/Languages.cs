@@ -9,6 +9,6 @@ namespace H.Core.Enumerations
         English,
 
         [LocalizedDescription("EnumFrench", typeof(Resources))]
-        French
+        French,
     }
 }

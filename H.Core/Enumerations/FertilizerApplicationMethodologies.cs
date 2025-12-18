@@ -4,7 +4,7 @@ using H.Infrastructure;
 namespace H.Core.Enumerations
 {
     /// <summary>
-    ///     Methods for applying fertilizer to a crop/field
+    /// Methods for applying fertilizer to a crop/field
     /// </summary>
     public enum FertilizerApplicationMethodologies
     {
@@ -15,6 +15,6 @@ namespace H.Core.Enumerations
         IncorporatedOrPartiallyInjected,
 
         [LocalizedDescription("EnumFullyInjected", typeof(Resources))]
-        FullyInjected
+        FullyInjected,
     }
 }

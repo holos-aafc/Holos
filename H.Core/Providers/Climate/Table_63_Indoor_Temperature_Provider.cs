@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing.Text;
 using System.Linq;
+using System.Windows.Documents;
+using System.Xaml;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
@@ -11,15 +14,6 @@ namespace H.Core.Providers.Climate
 {
     public class Table_63_Indoor_Temperature_Provider : ProviderBase, IIndoorTemperatureProvider
     {
-        #region Constructors
-
-        public Table_63_Indoor_Temperature_Provider()
-        {
-            _data = ReadFile();
-        }
-
-        #endregion
-
         #region Fields
 
         private readonly ProvinceStringConverter _provincesConverter = new ProvinceStringConverter();
@@ -27,11 +21,20 @@ namespace H.Core.Providers.Climate
 
         #endregion
 
+        #region Constructors
+
+        public Table_63_Indoor_Temperature_Provider()
+        {
+            _data = this.ReadFile();
+        }
+
+        #endregion
+
         #region Public Methods
 
         public double GetIndoorTemperatureForMonth(Province province, Months months)
         {
-            var temperatureForProvince = GetIndoorTemperature(province);
+            var temperatureForProvince = this.GetIndoorTemperature(province);
 
             return temperatureForProvince.GetValueByMonth(months);
         }
@@ -39,12 +42,17 @@ namespace H.Core.Providers.Climate
         public IndoorTemperatureData GetIndoorTemperature(Province province)
         {
             var result = _data.SingleOrDefault(x => x.Province == province);
-            if (result != null) return result;
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                Trace.TraceError($"{nameof(Table_63_Indoor_Temperature_Provider)}.{nameof(Table_63_Indoor_Temperature_Provider.GetIndoorTemperature)}" +
+                                 $" unknown province: '{province.GetDescription()}', returning 0");
 
-            Trace.TraceError($"{nameof(Table_63_Indoor_Temperature_Provider)}.{nameof(GetIndoorTemperature)}" +
-                             $" unknown province: '{province.GetDescription()}', returning 0");
-
-            return new IndoorTemperatureData();
+                return new IndoorTemperatureData();
+            }
         }
 
         public List<IndoorTemperatureData> ReadFile()
@@ -59,9 +67,9 @@ namespace H.Core.Providers.Climate
             {
                 var province = _provincesConverter.Convert(line[0]);
                 var monthlyValues = new List<double>();
-                for (var i = 2; i < line.Length; i++)
+                for (int i = 2; i < line.Length; i++)
                 {
-                    var valueForMonth = ParseDouble(line[i]);
+                    var valueForMonth = base.ParseDouble(line[i]);
                     monthlyValues.Add(valueForMonth);
                 }
 
@@ -82,71 +90,71 @@ namespace H.Core.Providers.Climate
             switch (month)
             {
                 case Months.January:
-                {
-                    return 15;
-                }
+                    {
+                        return 15;
+                    }
 
                 case Months.February:
-                {
-                    return 17;
-                }
+                    {
+                        return 17;
+                    }
 
                 case Months.March:
-                {
-                    return 19;
-                }
+                    {
+                        return 19;
+                    }
 
                 case Months.April:
-                {
-                    return 21;
-                }
+                    {
+                        return 21;
+                    }
 
                 case Months.May:
-                {
-                    return 23;
-                }
+                    {
+                        return 23;
+                    }
 
                 case Months.June:
-                {
-                    return 25;
-                }
+                    {
+                        return 25;
+                    }
 
                 case Months.July:
-                {
-                    return 25;
-                }
+                    {
+                        return 25;
+                    }
 
                 case Months.August:
-                {
-                    return 23;
-                }
+                    {
+                        return 23;
+                    }
 
                 case Months.September:
-                {
-                    return 21;
-                }
+                    {
+                        return 21;
+                    }
 
                 case Months.October:
-                {
-                    return 19;
-                }
+                    {
+                        return 19;
+                    }
 
                 case Months.November:
-                {
-                    return 17;
-                }
+                    {
+                        return 17;
+                    }
 
                 case Months.December:
-                {
-                    return 15;
-                }
+                    {
+                        return 15;
+                    }
 
                 default:
-                {
-                    return 15;
-                }
+                    {
+                        return 15;
+                    }
             }
-        }
+        } 
 
         #endregion
     }

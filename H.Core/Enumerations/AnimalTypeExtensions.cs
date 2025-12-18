@@ -1,4 +1,6 @@
-﻿using H.Core.Models;
+﻿using System.Runtime.CompilerServices;
+using System.Windows.Markup;
+using H.Core.Models;
 
 namespace H.Core.Enumerations
 {
@@ -43,7 +45,7 @@ namespace H.Core.Enumerations
                     return true;
 
                 default:
-                    return false;
+                        return false;
             }
         }
 
@@ -168,7 +170,7 @@ namespace H.Core.Enumerations
                 case AnimalType.ChickenEggs:
                 case AnimalType.Chicks:
                     return true;
-
+                
                 default:
                     return false;
             }
@@ -248,49 +250,93 @@ namespace H.Core.Enumerations
 
         public static AnimalType GetCategory(this AnimalType animalType)
         {
-            if (animalType.IsOtherAnimalType()) return AnimalType.OtherLivestock;
+            if (animalType.IsOtherAnimalType())
+            {
+                return AnimalType.OtherLivestock;
+            }
 
-            if (animalType.IsPoultryType()) return AnimalType.Poultry;
+            if (animalType.IsPoultryType())
+            {
+                return AnimalType.Poultry;
+            }
 
-            if (animalType.IsSheepType()) return AnimalType.Sheep;
+            if (animalType.IsSheepType())
+            {
+                return AnimalType.Sheep;
+            }
 
-            if (animalType.IsSwineType()) return AnimalType.Swine;
+            if (animalType.IsSwineType())
+            {
+                return AnimalType.Swine;
+            }
 
-            if (animalType.IsDairyCattleType()) return AnimalType.Dairy;
+            if (animalType.IsDairyCattleType())
+            {
+                return AnimalType.Dairy;
+            }
 
-            if (animalType.IsBeefCattleType()) return AnimalType.Beef;
+            if (animalType.IsBeefCattleType())
+            {
+                return AnimalType.Beef;
+            }
 
             return AnimalType.NotSelected;
         }
 
         public static ComponentCategory GetComponentCategoryFromAnimalType(this AnimalType animalType)
         {
-            if (animalType.IsBeefCattleType()) return ComponentCategory.BeefProduction;
-
-            if (animalType.IsDairyCattleType()) return ComponentCategory.Dairy;
-
-            if (animalType.IsSwineType()) return ComponentCategory.Swine;
-
-            if (animalType.IsPoultryType()) return ComponentCategory.Poultry;
-
-            if (animalType.IsSheepType()) return ComponentCategory.Sheep;
-
-            return ComponentCategory.OtherLivestock;
+            if (animalType.IsBeefCattleType())
+            {
+                return ComponentCategory.BeefProduction;
+            }
+            else if (animalType.IsDairyCattleType())
+            {
+                return ComponentCategory.Dairy;
+            } 
+            else if (animalType.IsSwineType())
+            {
+                return ComponentCategory.Swine;
+            }
+            else if (animalType.IsPoultryType())
+            {
+                return ComponentCategory.Poultry;
+            }
+            else if (animalType.IsSheepType())
+            {
+                return ComponentCategory.Sheep;
+            }
+            else
+            {
+                return ComponentCategory.OtherLivestock;
+            }
         }
 
         public static ManureAnimalSourceTypes GetManureAnimalSource(this AnimalType animalType)
         {
-            if (animalType.IsBeefCattleType()) return ManureAnimalSourceTypes.BeefManure;
-
-            if (animalType.IsDairyCattleType()) return ManureAnimalSourceTypes.DairyManure;
-
-            if (animalType.IsSwineType()) return ManureAnimalSourceTypes.SwineManure;
-
-            if (animalType.IsPoultryType()) return ManureAnimalSourceTypes.PoultryManure;
-
-            if (animalType.IsSheepType()) return ManureAnimalSourceTypes.SheepManure;
-
-            return ManureAnimalSourceTypes.OtherLivestockManure;
+            if (animalType.IsBeefCattleType())
+            {
+                return ManureAnimalSourceTypes.BeefManure;
+            }
+            else if (animalType.IsDairyCattleType())
+            {
+                return ManureAnimalSourceTypes.DairyManure;
+            }
+            else if (animalType.IsSwineType())
+            {
+                return ManureAnimalSourceTypes.SwineManure;
+            }
+            else if (animalType.IsPoultryType())
+            {
+                return ManureAnimalSourceTypes.PoultryManure;
+            }
+            else if (animalType.IsSheepType())
+            {
+                return ManureAnimalSourceTypes.SheepManure;
+            }
+            else
+            {
+                return ManureAnimalSourceTypes.OtherLivestockManure;
+            }
         }
     }
 }

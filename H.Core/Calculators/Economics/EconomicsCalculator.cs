@@ -9,9 +9,11 @@ using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Models.Results;
-using H.Core.Properties;
+using H.Core.Providers.Animals;
 using H.Core.Providers.Economics;
+using H.Core.Services;
 using H.Core.Services.LandManagement;
 using H.Infrastructure;
 
@@ -40,9 +42,13 @@ namespace H.Core.Calculators.Economics
         public EconomicsCalculator(IFieldResultsService fieldResultsService)
         {
             if (fieldResultsService != null)
+            {
                 _fieldResultsService = fieldResultsService;
+            }
             else
+            {
                 throw new ArgumentNullException(nameof(fieldResultsService));
+            }
         }
 
         #endregion
@@ -57,7 +63,7 @@ namespace H.Core.Calculators.Economics
         #region Public Methods
 
         /// <summary>
-        ///     Write economic data to a file
+        /// Write economic data to a file
         /// </summary>
         /// <param name="farm">the farm with the economics data</param>
         /// <param name="path">path of the file to write to</param>
@@ -70,35 +76,32 @@ namespace H.Core.Calculators.Economics
             FarmEmissionResults farmEmissionResults,
             string languageAddon = null)
         {
-            MeasurementSystem = farm.MeasurementSystemType;
+            this.MeasurementSystem = farm.MeasurementSystemType;
 
             var strBuilder = new StringBuilder();
-            BuildFileContents(farm, strBuilder, applicationData, farmEmissionResults);
+            this.BuildFileContents(farm, strBuilder, applicationData, farmEmissionResults);
 
             if (!exportFromGui)
+            {
                 //need  a special path for the CLI outputs
-                path = $"{path}{farm.Name}_{Resources.Economics}_{Resources.Output}{languageAddon}.csv";
+                path = $"{path}{farm.Name}_{Properties.Resources.Economics}_{Properties.Resources.Output}{languageAddon}.csv";
+            }
             try
             {
                 File.WriteAllText(path, strBuilder.ToString(), Encoding.UTF8);
             }
             catch (IOException e)
             {
-                Trace.TraceError(
-                    $"{nameof(EconomicsCalculator)}.{nameof(ExportEconomicsDataToFile)}: error occurred {e.Message}");
+                Trace.TraceError($"{nameof(EconomicsCalculator)}.{nameof(ExportEconomicsDataToFile)}: error occurred {e.Message}");
                 return false;
             }
-
             return true;
         }
 
         /// <summary>
-        ///     Get the  total profit of all the profits in the list of <see cref="EconomicsResultsViewItem" />.
+        /// Get the  total profit of all the profits in the list of <see cref="EconomicsResultsViewItem"/>.
         /// </summary>
-        /// <param name="economicsResultsViewItems">
-        ///     List of  all the <see cref="EconomicsResultsViewItem" /> to be displayed in the
-        ///     results.
-        /// </param>
+        /// <param name="economicsResultsViewItems">List of  all the <see cref="EconomicsResultsViewItem"/> to be displayed in the results.</param>
         /// <returns>total profit for all items</returns>
         public double GetTotalProfit(IEnumerable<EconomicsResultsViewItem> economicsResultsViewItems)
         {
@@ -106,7 +109,7 @@ namespace H.Core.Calculators.Economics
         }
 
         /// <summary>
-        ///     Get the sum total of all the revenues in the list of <see cref="EconomicsResultsViewItem" />
+        /// Get the sum total of all the revenues in the list of <see cref="EconomicsResultsViewItem"/>
         /// </summary>
         /// <param name="economicsResultsViewItems">the list of view items to display in the results</param>
         /// <returns>total sum of all the revenues in the list of view items</returns>
@@ -116,7 +119,7 @@ namespace H.Core.Calculators.Economics
         }
 
         /// <summary>
-        ///     Calculate the profit for a single <see cref="EconomicsResultsViewItem" />
+        /// Calculate the profit for a single <see cref="EconomicsResultsViewItem"/>
         /// </summary>
         /// <param name="economicResultsViewItem">the EconomicsResultsViewItem in question</param>
         /// <param name="measurementType">the farm's units of measurement</param>
@@ -124,23 +127,20 @@ namespace H.Core.Calculators.Economics
         public void CalculateFieldComponentsProfit(EconomicsResultsViewItem economicResultsViewItem,
             MeasurementSystemType measurementType)
         {
-            economicResultsViewItem.TotalFixedCost = CalculateTotalFixedCost(
-                economicResultsViewItem.CropEconomicData.TotalFixedCostPerUnit, economicResultsViewItem.Area);
-            economicResultsViewItem.TotalVariableCost = CalculateTotalVariableCost(
-                economicResultsViewItem.CropEconomicData.TotalVariableCostPerUnit, economicResultsViewItem.Area);
+            economicResultsViewItem.TotalFixedCost = this.CalculateTotalFixedCost(economicResultsViewItem.CropEconomicData.TotalFixedCostPerUnit, economicResultsViewItem.Area);
+            economicResultsViewItem.TotalVariableCost = this.CalculateTotalVariableCost(economicResultsViewItem.CropEconomicData.TotalVariableCostPerUnit, economicResultsViewItem.Area);
 
             //units have been converted in the previous calcs so no need to convert here
-            economicResultsViewItem.TotalCost =
-                economicResultsViewItem.TotalFixedCost + economicResultsViewItem.TotalVariableCost;
+            economicResultsViewItem.TotalCost = economicResultsViewItem.TotalFixedCost + economicResultsViewItem.TotalVariableCost;
 
             economicResultsViewItem.Profit = economicResultsViewItem.Revenues - economicResultsViewItem.TotalCost;
         }
 
         /// <summary>
-        ///     Calculate the results to display in the economics view
+        /// Calculate the results to display in the economics view
         /// </summary>
         /// <param name="farmEmissionResults"></param>
-        /// <returns>list of <see cref="EconomicsResultsViewItem" /></returns>
+        /// <returns>list of <see cref="EconomicsResultsViewItem"/></returns>
         public List<EconomicsResultsViewItem> CalculateCropResults(FarmEmissionResults farmEmissionResults)
         {
             var result = new List<EconomicsResultsViewItem>();
@@ -148,17 +148,18 @@ namespace H.Core.Calculators.Economics
 
             foreach (var fieldSystemComponent in farm.FieldSystemComponents)
             {
-                var resultsForField = farmEmissionResults.FinalFieldResultViewItems
-                    .Where(x => x.FieldSystemComponentGuid.Equals(fieldSystemComponent.Guid)).ToList();
+                var resultsForField = farmEmissionResults.FinalFieldResultViewItems.Where(x => x.FieldSystemComponentGuid.Equals(fieldSystemComponent.Guid)).ToList();
                 var orderedByYear = resultsForField.OrderBy(x => x.Year).ToList();
-                if (orderedByYear.Any() == false) continue;
+                if (orderedByYear.Any() == false)
+                {
+                    continue;
+                }
 
                 var viewItem = orderedByYear.Last();
 
                 if (viewItem.CropEconomicData == null)
                 {
-                    Trace.TraceError(
-                        $"{nameof(EconomicsCalculator)}.{nameof(CalculateCropResults)}: {nameof(CropEconomicData)} is null for {viewItem.CropType.GetDescription()}");
+                    Trace.TraceError($"{nameof(EconomicsCalculator)}.{nameof(CalculateCropResults)}: {nameof(CropEconomicData)} is null for {viewItem.CropType.GetDescription()}");
                     continue;
                 }
 
@@ -171,8 +172,7 @@ namespace H.Core.Calculators.Economics
                     {
                         var soilData = farm.GetPreferredSoilData(viewItem);
 
-                        viewItem.CropEconomicData.SoilFunctionalCategory =
-                            soilData.SoilFunctionalCategory.GetBaseSoilFunctionalCategory();
+                        viewItem.CropEconomicData.SoilFunctionalCategory = soilData.SoilFunctionalCategory.GetBaseSoilFunctionalCategory();
                         viewItem.CropEconomicData.SetUserDefinedFixedCostPerUnit(farm.MeasurementSystemType);
                         viewItem.CropEconomicData.FixedCostHandled = true;
                     }
@@ -184,14 +184,12 @@ namespace H.Core.Calculators.Economics
                 resultsViewItem.CropViewItem = viewItem;
                 resultsViewItem.Name = fieldSystemComponent.Name + " (" + viewItem.CropTypeString + ")";
                 resultsViewItem.Component = fieldSystemComponent;
-                resultsViewItem.GroupingString = Resources.TitleCrops;
-                resultsViewItem.Harvest = viewItem.HasHarvestViewItems
-                    ? viewItem.HarvestViewItems.Sum(x => x.AboveGroundBiomass)
-                    : viewItem.Yield;
+                resultsViewItem.GroupingString = Properties.Resources.TitleCrops;
+                resultsViewItem.Harvest = viewItem.HasHarvestViewItems ? viewItem.HarvestViewItems.Sum(x => x.AboveGroundBiomass) : viewItem.Yield;
                 resultsViewItem.Area = fieldSystemComponent.FieldArea;
 
-                CalculateRevenues(resultsViewItem);
-                CalculateFieldComponentsProfit(resultsViewItem, farm.MeasurementSystemType);
+                this.CalculateRevenues(resultsViewItem);
+                this.CalculateFieldComponentsProfit(resultsViewItem, farm.MeasurementSystemType);
 
                 result.Add(resultsViewItem);
 
@@ -199,13 +197,13 @@ namespace H.Core.Calculators.Economics
                 resultsViewItem.PropertyChanged += ResultsViewItemOnPropertyChanged;
             }
 
-            EconomicViewItems = result;
+            this.EconomicViewItems = result;
 
             return result;
         }
 
         /// <summary>
-        ///     Check the CropEconomicProvider cache for data on a province.
+        /// Check the CropEconomicProvider cache for data on a province.
         /// </summary>
         /// <param name="province">the province in question</param>
         /// <returns>true if the province exists, false otherwise.</returns>
@@ -215,7 +213,7 @@ namespace H.Core.Calculators.Economics
         }
 
         /// <summary>
-        ///     Check the CropEconomicProvider's cache a specific crop.
+        /// Check the CropEconomicProvider's cache a specific crop.
         /// </summary>
         /// <param name="cropType">the crop in question</param>
         /// <returns>true if crop exists in the cache, false otherwise.</returns>
@@ -229,7 +227,7 @@ namespace H.Core.Calculators.Economics
         #region Equations
 
         /// <summary>
-        ///     Equation 1.0
+        /// Equation 1.0 
         /// </summary>
         /// <param name="expectedMarketPrice">price in $/kg or $/bu</param>
         /// <param name="harvest">harvest of the crop in kg or bu</param>
@@ -241,7 +239,7 @@ namespace H.Core.Calculators.Economics
         }
 
         /// <summary>
-        ///     Equation 1.1
+        /// Equation 1.1
         /// </summary>
         /// <param name="fixedCostsPerUnitArea">fixed costs assumed to be in $/acre coming from the 'crop_economics.csv'</param>
         /// <param name="area">area of the field in ac or ha</param>
@@ -252,7 +250,7 @@ namespace H.Core.Calculators.Economics
         }
 
         /// <summary>
-        ///     Equation. 1.2
+        /// Equation. 1.2
         /// </summary>
         /// <param name="irrigatedFixedCostsPerUnitArea">fixed costs assumed to be in $/acre coming from the 'crop_economics.csv'</param>
         /// <param name="area">area of the field in matching units</param>
@@ -263,7 +261,7 @@ namespace H.Core.Calculators.Economics
         }
 
         /// <summary>
-        ///     Equation 1.3
+        /// Equation 1.3
         /// </summary>
         /// <param name="variabelCostsPerUnitArea">variable costs assumed to be in $/acre coming from the 'crop_economics.csv'</param>
         /// <param name="area">area of field in ac or ha</param>
@@ -274,12 +272,9 @@ namespace H.Core.Calculators.Economics
         }
 
         /// <summary>
-        ///     Equation 1.4
+        /// Equation 1.4
         /// </summary>
-        /// <param name="variableIrragatedCostsPerUnitArea">
-        ///     variable costs assumed to be in $/acre coming from the
-        ///     'crop_economics.csv'
-        /// </param>
+        /// <param name="variableIrragatedCostsPerUnitArea">variable costs assumed to be in $/acre coming from the 'crop_economics.csv'</param>
         /// <param name="area">area in matching units</param>
         /// <returns>variable cost for irrigation</returns>
         public double CalculateIrrigatedVariableCost(double variableIrragatedCostsPerUnitArea, double area)
@@ -288,7 +283,7 @@ namespace H.Core.Calculators.Economics
         }
 
         /// <summary>
-        ///     Equation 1.5
+        /// Equation 1.5
         /// </summary>
         /// <param name="variableCostsNitrogenPerTonne">variable costs for nitrogen in $/tonne found in 'crop_economics.csv'</param>
         /// <param name="nitrogenFertilizerRate">fertilizer rate in kg/ha or lb/ac</param>
@@ -299,12 +294,14 @@ namespace H.Core.Calculators.Economics
             double nitrogenFertilizerRate, double area, MeasurementSystemType measurementType)
         {
             if (measurementType == MeasurementSystemType.Metric)
-                return variableCostsNitrogenPerTonne / 1000 * nitrogenFertilizerRate * area;
+            {
+                return (variableCostsNitrogenPerTonne / 1000) * nitrogenFertilizerRate * area;
+            }
 
             // working with imperial units we need to convert them to metric and use the same equation above
             var convertedMetricRate =
-                _unitsCalculator.ConvertValueToMetricFromImperial(ImperialUnitsOfMeasurement.PoundsPerAcre,
-                    nitrogenFertilizerRate);
+                 _unitsCalculator.ConvertValueToMetricFromImperial(ImperialUnitsOfMeasurement.PoundsPerAcre,
+                     nitrogenFertilizerRate);
             var convertedMetricArea =
                 _unitsCalculator.ConvertValueToMetricFromImperial(ImperialUnitsOfMeasurement.Acres, area);
 
@@ -312,7 +309,7 @@ namespace H.Core.Calculators.Economics
         }
 
         /// <summary>
-        ///     Equation 1.6
+        /// Equation 1.6
         /// </summary>
         /// <param name="variableCostsPhophorusPerTonne">variable costs for phosphorus in $/tonne found in 'crop_economics.csv'</param>
         /// <param name="phosphorusFertilizerRate">fertilizer rate in kg/ha or lb/ac</param>
@@ -323,12 +320,14 @@ namespace H.Core.Calculators.Economics
             double phosphorusFertilizerRate, double area, MeasurementSystemType measurementType)
         {
             if (measurementType == MeasurementSystemType.Metric)
+            {
                 return variableCostsPhophorusPerTonne / 1000 * phosphorusFertilizerRate * area;
+            }
 
             // working with imperial units we need to convert them to metric and use the same equation above
             var convertedMetricRate =
-                _unitsCalculator.ConvertValueToMetricFromImperial(ImperialUnitsOfMeasurement.PoundsPerAcre,
-                    phosphorusFertilizerRate);
+                 _unitsCalculator.ConvertValueToMetricFromImperial(ImperialUnitsOfMeasurement.PoundsPerAcre,
+                     phosphorusFertilizerRate);
             var convertedMetricArea =
                 _unitsCalculator.ConvertValueToMetricFromImperial(ImperialUnitsOfMeasurement.Acres, area);
 
@@ -336,7 +335,7 @@ namespace H.Core.Calculators.Economics
         }
 
         /// <summary>
-        ///     Equation 1.7
+        /// Equation 1.7
         /// </summary>
         /// <param name="variableHerbicideCostPerUnitArea">variable cost for herbicide in $/acre of $/ha</param>
         /// <param name="area">area in matching units</param>
@@ -347,7 +346,7 @@ namespace H.Core.Calculators.Economics
         }
 
         /// <summary>
-        ///     Equation 1.8
+        /// Equation 1.8
         /// </summary>
         /// <param name="labourCostsPerUnitArea">labour costs in $/acre or $/ha</param>
         /// <param name="area">area in matching units</param>
@@ -358,7 +357,7 @@ namespace H.Core.Calculators.Economics
         }
 
         /// <summary>
-        ///     Equation 1.9
+        /// Equation 1.9
         /// </summary>
         /// <param name="labourCostsIrrigationPerUnitArea">labour cost for irrigation in $/unit found in 'crop_economics.csv'</param>
         /// <param name="area">area in matching units</param>
@@ -369,20 +368,21 @@ namespace H.Core.Calculators.Economics
         }
 
         /// <summary>
-        ///     Equation 1.10
+        /// Equation 1.10
         /// </summary>
         /// <param name="numberOfPasses">Number of passes over field</param>
         /// <param name="fixedCostPerUnitArea">fixed cost in $/acre or $/ha</param>
         /// <param name="area">area of field in matching units</param>
         /// <param name="measurementType">units of measurement matching the area</param>
         /// <returns>Fixed cost of NO herbicide</returns>
-        public double CalculateNOHerbicideFixedCost(int numberOfPasses, double fixedCostPerUnitArea, double area,
-            MeasurementSystemType measurementType)
+        public double CalculateNOHerbicideFixedCost(int numberOfPasses, double fixedCostPerUnitArea, double area, MeasurementSystemType measurementType)
         {
-            var fixedCost = CalculateTotalFixedCost(fixedCostPerUnitArea, area);
+            var fixedCost = this.CalculateTotalFixedCost(fixedCostPerUnitArea, area);
 
             if (measurementType == MeasurementSystemType.Metric)
+            {
                 return fixedCost - MetricFixedHerbicideCost * numberOfPasses * area;
+            }
 
             //working in imperial
             var imperialFixedHerbicedCost = MetricFixedHerbicideCost / AcresPerHectare;
@@ -392,20 +392,21 @@ namespace H.Core.Calculators.Economics
 
 
         /// <summary>
-        ///     Equation 1.11
+        /// Equation 1.11
         /// </summary>
         /// <param name="variableCostPerUnitArea">variable cost in $/acre should be part of 'crop_economics.csv'</param>
         /// <param name="numberOfPasses">number of passes over field</param>
         /// <param name="area">area of field in matching units</param>
         /// <param name="measurementType">units of measurement matching the area</param>
         /// <returns>variable cost of NO Herbicide</returns>
-        public double CalculateNOHerbicideVariableCost(double variableCostPerUnitArea, int numberOfPasses, double area,
-            MeasurementSystemType measurementType)
+        public double CalculateNOHerbicideVariableCost(double variableCostPerUnitArea, int numberOfPasses, double area, MeasurementSystemType measurementType)
         {
-            var variableCost = CalculateTotalVariableCost(variableCostPerUnitArea, area);
+            var variableCost = this.CalculateTotalVariableCost(variableCostPerUnitArea, area);
             //area is supposed to be in hectares for this.
             if (measurementType == MeasurementSystemType.Metric)
-                return variableCost - MetricVariableHerbicideCost * numberOfPasses * area;
+            {
+                return variableCost - (MetricVariableHerbicideCost * numberOfPasses * area);
+            }
 
             //working in imperial
             var imperialVariableHerbicideCost = MetricVariableHerbicideCost / AcresPerHectare;
@@ -414,7 +415,7 @@ namespace H.Core.Calculators.Economics
         }
 
         /// <summary>
-        ///     Equation 1.12
+        /// Equation 1.12
         /// </summary>
         /// <param name="labourCostsPerUnitArea">labour costs in $/acre should be part of 'crop_economics.csv'</param>
         /// <param name="numberOfPasses">number of passes over field</param>
@@ -424,17 +425,18 @@ namespace H.Core.Calculators.Economics
         public double CalculateNOHerbicideLabourCost(double labourCostsPerUnitArea, int numberOfPasses, double area,
             MeasurementSystemType measurementType)
         {
-            var labourCost = CalculateFixedLabourCost(labourCostsPerUnitArea, area);
+            var labourCost = this.CalculateFixedLabourCost(labourCostsPerUnitArea, area);
 
             if (measurementType == MeasurementSystemType.Metric)
+            {
                 return labourCost - MetricLabourCostOfHerbicide * numberOfPasses * area;
+            }
 
             // working in imperial
             var imperialLabourCostOfHerbicide = MetricLabourCostOfHerbicide / AcresPerHectare;
 
             return labourCost - imperialLabourCostOfHerbicide * numberOfPasses * area;
         }
-
         #endregion
 
 
@@ -442,62 +444,75 @@ namespace H.Core.Calculators.Economics
 
         private void BuildFileContents(Farm farm,
             StringBuilder strBuilder,
-            ApplicationData applicationData,
+            ApplicationData applicationData, 
             FarmEmissionResults farmEmissionResults)
         {
-            BuildHeaderRow(strBuilder, farm.MeasurementSystemType, applicationData);
-            if (!EconomicDataExistsForProvinceOrCrop(farm)) return;
+            this.BuildHeaderRow(strBuilder, farm.MeasurementSystemType, applicationData);
+            if (!this.EconomicDataExistsForProvinceOrCrop(farm))
+            {
+                return;
+            }
 
-            var resultViewItems = CalculateCropResults(farmEmissionResults);
+            var resultViewItems = this.CalculateCropResults(farmEmissionResults);
             foreach (var resultViewItem in resultViewItems)
+            {
                 strBuilder.AppendLine($"{farm.Name}, " +
-                                      $"{resultViewItem.Name}, " +
-                                      $"{resultViewItem.CropViewItem.CropTypeString}, " +
-                                      $"{resultViewItem.Harvest}, " +
-                                      $"{resultViewItem.CropEconomicData.ExpectedMarketPrice}, " +
-                                      $"{resultViewItem.Revenues}");
+                    $"{resultViewItem.Name}, " +
+                    $"{resultViewItem.CropViewItem.CropTypeString}, " +
+                    $"{resultViewItem.Harvest}, " +
+                    $"{resultViewItem.CropEconomicData.ExpectedMarketPrice}, " +
+                    $"{resultViewItem.Revenues}");
+            }
             strBuilder.AppendLine();
-            strBuilder.AppendLine($"{Resources.TotalRevenue}, {GetTotalRevenues(resultViewItems)}");
+            strBuilder.AppendLine($"{Properties.Resources.TotalRevenue}, {GetTotalRevenues(resultViewItems)}");
         }
 
         private bool EconomicDataExistsForProvinceOrCrop(Farm farm)
         {
-            if (!HasEconDataForProvince(farm.DefaultSoilData.Province)) return false;
+            if (!HasEconDataForProvince(farm.DefaultSoilData.Province))
+            {
+                return false;
+            }
             foreach (var component in farm.FieldSystemComponents)
-            foreach (var item in component.CropViewItems)
-                if (!HasEconDataForCropType(item.CropType))
-                    return false;
-
+            {
+                foreach (var item in component.CropViewItems)
+                {
+                    if (!HasEconDataForCropType(item.CropType))
+                    {
+                        return false;
+                    }
+                }
+            }
             return true;
         }
 
         private void CalculateRevenues(EconomicsResultsViewItem resultsViewItem)
         {
-            resultsViewItem.Revenues = CalculateRevenue(resultsViewItem.CropEconomicData.ExpectedMarketPrice,
-                resultsViewItem.Harvest);
+            resultsViewItem.Revenues = this.CalculateRevenue(resultsViewItem.CropEconomicData.ExpectedMarketPrice, resultsViewItem.Harvest);
         }
 
         private void ResultsViewItemOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (sender is EconomicsResultsViewItem resultsViewItem)
+            {
                 if (e.PropertyName.Equals(nameof(CropEconomicData.ExpectedMarketPrice)))
                 {
-                    CalculateRevenues(resultsViewItem);
-                    CalculateFieldComponentsProfit(resultsViewItem, resultsViewItem.Farm.MeasurementSystemType);
+                    this.CalculateRevenues(resultsViewItem);
+                    this.CalculateFieldComponentsProfit(resultsViewItem, resultsViewItem.Farm.MeasurementSystemType);
                 }
+            }
         }
 
-        private void BuildHeaderRow(StringBuilder stringbuilder, MeasurementSystemType measurementSystemType,
-            ApplicationData applicationData)
+        private void BuildHeaderRow(StringBuilder stringbuilder, MeasurementSystemType measurementSystemType, ApplicationData applicationData)
         {
             stringbuilder.AppendLine(
-                $"{Resources.LabelFarm}, " +
-                $"{Resources.LabelField}, " +
-                $"{Resources.LabelCrop}, " +
-                $"{Resources.TitleHarvest} {_unitsCalculator.GetUnitsOfMeasurementString(measurementSystemType, MetricUnitsOfMeasurement.Kilograms)}, " +
-                $"{Resources.TitleExpectedMarketPrice} {applicationData.DisplayUnitStrings.DollarsPerKilogramString}, " +
-                $"{Resources.TitleRevenue} {applicationData.DisplayUnitStrings.DollarsPerHectare}"
-            );
+                $"{Properties.Resources.LabelFarm}, " +
+                $"{Properties.Resources.LabelField}, " +
+                $"{Properties.Resources.LabelCrop }, " +
+                $"{Properties.Resources.TitleHarvest} {_unitsCalculator.GetUnitsOfMeasurementString(measurementSystemType, MetricUnitsOfMeasurement.Kilograms)}, " +
+                $"{Properties.Resources.TitleExpectedMarketPrice} {applicationData.DisplayUnitStrings.DollarsPerKilogramString}, " +
+                $"{Properties.Resources.TitleRevenue} {applicationData.DisplayUnitStrings.DollarsPerHectare}"
+                );
         }
 
         private double MultiplyCostPerUnitAreaByArea(double costPerUnitArea, double area)
@@ -505,7 +520,6 @@ namespace H.Core.Calculators.Economics
             //costPerUnitArea should be converted to the appropriate units by this point
             return costPerUnitArea * area;
         }
-
         #endregion
     }
 }

@@ -1,4 +1,9 @@
-﻿using H.Core.Enumerations;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using H.Core.Enumerations;
 
 namespace H.Core.Models
 {
@@ -6,7 +11,7 @@ namespace H.Core.Models
     {
         public static AnimalType GetAnimalTypeFromAnimalComponentType(this ComponentType componentType)
         {
-            switch (componentType)
+            switch(componentType)
             {
                 case ComponentType.Backgrounding:
                 case ComponentType.Finishing:
@@ -58,7 +63,9 @@ namespace H.Core.Models
 
                 default:
                     return AnimalType.NotSelected;
+
             }
+
         }
     }
 }

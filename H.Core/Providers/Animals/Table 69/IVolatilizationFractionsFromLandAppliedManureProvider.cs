@@ -1,4 +1,5 @@
-﻿using H.Core.Enumerations;
+﻿using System.Collections.Generic;
+using H.Core.Enumerations;
 
 namespace H.Core.Providers.Animals.Table_69
 {

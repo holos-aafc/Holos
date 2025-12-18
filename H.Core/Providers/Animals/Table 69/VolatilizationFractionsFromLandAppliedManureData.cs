@@ -10,7 +10,7 @@ namespace H.Core.Providers.Animals.Table_69
         public int Year { get; set; }
 
         /// <summary>
-        ///     (kg NH3-N volatilized kg^-1 manure N applied)
+        /// (kg NH3-N volatilized kg^-1 manure N applied)
         /// </summary>
         public double ImpliedEmissionFactor { get; set; }
 

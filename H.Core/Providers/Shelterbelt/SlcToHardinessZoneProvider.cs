@@ -1,24 +1,23 @@
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using H.Content;
-using H.Infrastructure;
 
 namespace H.Core.Providers.Shelterbelt
 {
     /// <summary>
-    ///     If speed is needed, try using the same provider object everywhere.
-    ///     It will cache the table and load it only once, after which things can be accessed in constant time
-    ///     instead of O(n) time where n may be large enough to take a second.
+    /// If speed is needed, try using the same provider object everywhere.
+    /// It will cache the table and load it only once, after which things can be accessed in constant time
+    /// instead of O(n) time where n may be large enough to take a second.
     /// </summary>
-    public class SlcToHardinessZoneProvider
+	public class SlcToHardinessZoneProvider
     {
-        private readonly List<SlcToHardinessZoneData> _table;
+        private List<SlcToHardinessZoneData> _table;
 
         public SlcToHardinessZoneProvider()
         {
             _table = CacheTable();
         }
-
         public List<SlcToHardinessZoneData> GetSlcToHardinessZone()
         {
             return _table;
@@ -26,7 +25,7 @@ namespace H.Core.Providers.Shelterbelt
 
         private List<SlcToHardinessZoneData> CacheTable()
         {
-            var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
+            var cultureInfo = H.Infrastructure.InfrastructureConstants.EnglishCultureInfo;
             var filename = CsvResourceNames.SlcToHardinessZone;
             var filelines = CsvResourceReader.GetFileLines(filename);
             var result = new List<SlcToHardinessZoneData>();
@@ -75,8 +74,8 @@ namespace H.Core.Providers.Shelterbelt
                 entry.HTotalProportion = hTotalProportion;
                 result.Add(entry);
             }
-
             return result;
         }
+
     }
 }

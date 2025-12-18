@@ -4,14 +4,33 @@ namespace H.Core.Models.Animals.Dairy
 {
     public class DairyBullComponent : AnimalComponentBase
     {
+        #region Fields        
+
+        #endregion
+
         #region Constructors
 
         public DairyBullComponent()
         {
-            ComponentNameDisplayString = ComponentType.DairyBulls.GetDescription();
-            ComponentCategory = ComponentCategory.Dairy;
-            ComponentType = ComponentType.DairyBulls;
+            this.ComponentNameDisplayString = ComponentType.DairyBulls.GetDescription();
+            this.ComponentCategory = ComponentCategory.Dairy;
+            this.ComponentType = ComponentType.DairyBulls;
         }
+
+        #endregion
+
+        #region Properties       
+
+        #endregion
+
+        #region Public Methods
+
+        #endregion
+
+        #region Private Methods
+        #endregion
+
+        #region Event Handlers
 
         #endregion
     }

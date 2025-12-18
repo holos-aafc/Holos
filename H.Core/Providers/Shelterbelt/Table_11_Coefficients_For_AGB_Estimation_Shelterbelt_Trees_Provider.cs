@@ -1,20 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using H.Content;
+using H.Core.Converters;
+using H.Core.Providers.Plants;
+using H.Infrastructure;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using H.Content;
-using H.Core.Converters;
-using H.Infrastructure;
 
 namespace H.Core.Providers.Shelterbelt
 {
     /// <summary>
-    ///     Table 11
-    ///     Coefficients for above-ground biomass estimation for shelterbelt tree species
+    /// Table 11
+    /// Coefficients for above-ground biomass estimation for shelterbelt tree species
     /// </summary>
     public class Table_11_Coefficients_For_AGB_Estimation_Shelterbelt_Trees_Provider
     {
-        private readonly List<Table_11_Coefficients_For_AGB_Estimation_Shelterbelt_Trees_Data> _cache;
         private readonly TreeSpeciesStringConverter _treeSpeciesStringConverter = new TreeSpeciesStringConverter();
+        private readonly List<Table_11_Coefficients_For_AGB_Estimation_Shelterbelt_Trees_Data> _cache;
 
         public Table_11_Coefficients_For_AGB_Estimation_Shelterbelt_Trees_Provider()
         {
@@ -37,9 +38,8 @@ namespace H.Core.Providers.Shelterbelt
             {
                 if (string.IsNullOrWhiteSpace(line[0]))
                 {
-                    Trace.Write(
-                        $"{nameof(Table_11_Coefficients_For_AGB_Estimation_Shelterbelt_Trees_Provider)}.{nameof(BuildCache)}" +
-                        $" - File: {nameof(CsvResourceNames.CoefficientsForAboveGroundBiomassEstimationForShelterbeltTreeSpecies)} : first cell of the line is empty. Exiting loop to stop reading more lines inside .csv file.");
+                    Trace.Write($"{nameof(Table_11_Coefficients_For_AGB_Estimation_Shelterbelt_Trees_Provider)}.{nameof(BuildCache)}" +
+                                $" - File: {nameof(CsvResourceNames.CoefficientsForAboveGroundBiomassEstimationForShelterbeltTreeSpecies)} : first cell of the line is empty. Exiting loop to stop reading more lines inside .csv file.");
                     break;
                 }
 

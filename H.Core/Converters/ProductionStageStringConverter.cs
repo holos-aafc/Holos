@@ -9,8 +9,7 @@ namespace H.Core.Converters
     {
         #region Properties
 
-        public static Dictionary<string, ProductionStages> Cache { get; set; } =
-            new Dictionary<string, ProductionStages>();
+        public static Dictionary<string, ProductionStages> Cache { get; set; } = new Dictionary<string, ProductionStages>();
 
         #endregion
 
@@ -18,50 +17,52 @@ namespace H.Core.Converters
         {
             ProductionStages result;
 
-            if (Cache.ContainsKey(input)) return Cache[input];
+            if (Cache.ContainsKey(input))
+            {
+                return Cache[input];
+            }
 
-            var cleanedInput = GetLettersAsLowerCase(input);
+            var cleanedInput = base.GetLettersAsLowerCase(input);
             switch (cleanedInput)
             {
                 case "gestating":
-                    result = ProductionStages.Gestating;
+                    result =  ProductionStages.Gestating;
                     break;
 
                 case "lactating":
-                    result = ProductionStages.Lactating;
+                    result =  ProductionStages.Lactating;
                     break;
 
                 case "open":
-                    result = ProductionStages.Open;
+                    result =  ProductionStages.Open;
                     break;
 
                 case "weaning":
-                    result = ProductionStages.Weaning;
+                    result =  ProductionStages.Weaning;
                     break;
 
                 case "growingandfinishing":
-                    result = ProductionStages.GrowingAndFinishing;
+                    result =  ProductionStages.GrowingAndFinishing;
                     break;
 
                 case "breedingstock":
-                    result = ProductionStages.BreedingStock;
+                    result =  ProductionStages.BreedingStock;
                     break;
 
                 case "weaned":
-                    result = ProductionStages.Weaned;
+                    result =  ProductionStages.Weaned;
                     break;
 
                 default:
                 {
-                    var notFound = ProductionStages.Gestating;
+                        ProductionStages notFound = ProductionStages.Gestating;
 
-                    Trace.TraceError(
-                        $"{nameof(ProductionStageStringConverter)}.{nameof(Convert)}: unknown production stage '{input}'. result = ing {notFound.GetDescription()}");
+                    Trace.TraceError($"{nameof(ProductionStageStringConverter)}.{nameof(ProductionStageStringConverter.Convert)}: unknown production stage '{input}'. result = ing {notFound.GetDescription()}");
 
-                    result = notFound;
+                    result =  notFound;
 
                     break;
-                }
+                    }
             }
 
             Cache.Add(input, result);

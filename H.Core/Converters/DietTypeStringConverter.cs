@@ -1,6 +1,7 @@
 ﻿using System;
 using H.Core.Enumerations;
 using H.Core.Properties;
+using H.Core.Providers.Feed;
 
 namespace H.Core.Converters
 {
@@ -8,7 +9,7 @@ namespace H.Core.Converters
     {
         public DietType Convert(string input)
         {
-            switch (GetLettersAsLowerCase(input))
+            switch (this.GetLettersAsLowerCase(input))
             {
                 case "barley":
                 case "barleybased":

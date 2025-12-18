@@ -3,12 +3,12 @@
     public abstract class MessageBase : IMessage
     {
         /// <summary>
-        ///     The string that should be displayed to the user.
+        /// The string that should be displayed to the user.
         /// </summary>
         public string Message { get; set; }
 
         /// <summary>
-        ///     A scope to categorize messages that belong together (but don't necessarily have to be shown at the same time).
+        /// A scope to categorize messages that belong together (but don't necessarily have to be shown at the same time).
         /// </summary>
         public string Scope { get; set; }
 

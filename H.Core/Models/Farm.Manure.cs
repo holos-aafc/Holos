@@ -1,23 +1,22 @@
 ﻿using System.Collections.ObjectModel;
+using H.Core.Enumerations;
 using System.Diagnostics;
 using System.Linq;
-using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
 
 namespace H.Core.Models
 {
-    public partial class Farm
+    public partial class Farm 
     {
         #region Fields
 
-        private ObservableCollection<ManureExportViewItem> _manureExportViewItems =
-            new ObservableCollection<ManureExportViewItem>();
+        private ObservableCollection<ManureExportViewItem> _manureExportViewItems = new ObservableCollection<ManureExportViewItem>();
 
         #endregion
 
         #region Properties
-
+        
         public ObservableCollection<ManureExportViewItem> ManureExportViewItems
         {
             get => _manureExportViewItems;
@@ -29,10 +28,8 @@ namespace H.Core.Models
         #region Public Methods
 
         /// <summary>
-        ///     When a farm is initialized, defaults are assigned to the farm. The user can then change these values if they wish.
-        ///     This data is therefore held here in the farm object since it is specific
-        ///     to this farm instance and lookups should be made here and not from the provider class since this method will
-        ///     persist changes. Returns data associated with table 9.
+        /// When a farm is initialized, defaults are assigned to the farm. The user can then change these values if they wish. This data is therefore held here in the farm object since it is specific
+        /// to this farm instance and lookups should be made here and not from the provider class since this method will persist changes. Returns data associated with table 9.
         /// </summary>
         public DefaultManureCompositionData GetManureCompositionData(
             ManureStateType manureStateType,
@@ -42,20 +39,32 @@ namespace H.Core.Models
 
             AnimalType animalLookupType;
             if (animalType.IsBeefCattleType())
+            {
                 animalLookupType = AnimalType.Beef;
+            }
             else if (animalType.IsDairyCattleType())
+            {
                 animalLookupType = AnimalType.Dairy;
+            }
             else if (animalType.IsSheepType())
+            {
                 animalLookupType = AnimalType.Sheep;
+            }
             else if (animalType.IsSwineType())
+            {
                 animalLookupType = AnimalType.Swine;
+            }
             else if (animalType.IsPoultryType())
+            {
                 animalLookupType = AnimalType.Poultry;
+            }
             else
+            {
                 // Other animals have a value for animal group (Horses, Goats, etc.)
                 animalLookupType = animalType;
+            }
 
-            var manureCompositionData = DefaultManureCompositionData.SingleOrDefault(x =>
+            var manureCompositionData = this.DefaultManureCompositionData.SingleOrDefault(x =>
                 x.ManureStateType == manureStateType &&
                 x.AnimalType == animalLookupType);
 

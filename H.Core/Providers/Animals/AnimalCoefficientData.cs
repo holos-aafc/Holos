@@ -9,16 +9,6 @@ namespace H.Core.Providers.Animals
 {
     public class AnimalCoefficientData : IAnimalCoefficientData
     {
-        #region Methods
-
-        public override string ToString()
-        {
-            return
-                $"{nameof(AnimalType)}: {AnimalType}, {nameof(BaselineMaintenanceCoefficient)}: {BaselineMaintenanceCoefficient}, {nameof(GainCoefficient)}: {GainCoefficient}, {nameof(DefaultInitialWeight)}: {DefaultInitialWeight}, {nameof(DefaultFinalWeight)}: {DefaultFinalWeight}";
-        }
-
-        #endregion
-
         #region Properties
 
         public AnimalType AnimalType { get; set; }
@@ -36,6 +26,15 @@ namespace H.Core.Providers.Animals
 
         [Units(MetricUnitsOfMeasurement.Kilograms)]
         public double DefaultDailyGain { get; set; }
+
+        #endregion
+
+        #region Methods
+
+        public override string ToString()
+        {
+            return $"{nameof(AnimalType)}: {AnimalType}, {nameof(BaselineMaintenanceCoefficient)}: {BaselineMaintenanceCoefficient}, {nameof(GainCoefficient)}: {GainCoefficient}, {nameof(DefaultInitialWeight)}: {DefaultInitialWeight}, {nameof(DefaultFinalWeight)}: {DefaultFinalWeight}";
+        }
 
         #endregion
     }

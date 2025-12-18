@@ -30,6 +30,6 @@ namespace H.Core.Enumerations
         NineteenEightyToTwoThousandTen,
 
         [LocalizedDescription("EnumNineteenNinetyToTwoThousandSeventeen", typeof(Resources))]
-        NineteenNinetyToTwoThousandSeventeen
+        NineteenNinetyToTwoThousandSeventeen,
     }
 }

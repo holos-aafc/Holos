@@ -1,12 +1,12 @@
-﻿using H.Core.Properties;
+﻿using System.Windows.Media.TextFormatting;
+using H.Core.Properties;
 using H.Infrastructure;
 
 namespace H.Core.Enumerations
 {
     /// <summary>
-    ///     When adding new crops to this enumeration, add the new crops to the end of the list. Do not alphabetize the crops
-    ///     in this list since farm files store a numerical
-    ///     value for crop view items which is the expected numerical position within this list.
+    /// When adding new crops to this enumeration, add the new crops to the end of the list. Do not alphabetize the crops in this list since farm files store a numerical
+    /// value for crop view items which is the expected numerical position within this list.
     /// </summary>
     public enum CropType
     {
@@ -554,17 +554,13 @@ namespace H.Core.Enumerations
 
         [LocalizedDescription("EnumWinterCanolaHybrid", typeof(Resources))]
         WinterCanolaHybrid,
-
         #endregion
 
 
         /// <summary>
-        ///     The new crops below are from the "Default values for nitrogen and lignin contents in crops for steady state
-        ///     methods.
+        /// The new crops below are from the "Default values for nitrogen and lignin contents in crops for steady state methods.
         /// </summary>
-
         #region Nitrogen and lignin contents table
-
         [LocalizedDescription("EnumGrains", typeof(Resources))]
         Grains,
 
@@ -619,6 +615,6 @@ namespace H.Core.Enumerations
         #endregion
 
         [LocalizedDescription("EnumGrassSilage", typeof(Resources))]
-        GrassSilage
+        GrassSilage,
     }
 }

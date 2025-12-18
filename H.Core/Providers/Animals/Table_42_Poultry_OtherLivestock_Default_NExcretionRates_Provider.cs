@@ -1,131 +1,163 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using H.Core.Converters;
 using H.Core.Enumerations;
 
 namespace H.Core.Providers.Animals
 {
     /// <summary>
-    ///     Table 42. Default nitrogen excretion rates for poultry and other livestock.
+    /// Table 42. Default nitrogen excretion rates for poultry and other livestock.
     /// </summary>
     public class Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Provider
     {
         #region Public Methods
-
         public double GetNitrogenExcretionRateValue(AnimalType animalType)
         {
-            var result = GetNExcretionRateByAnimalType(animalType);
-            if (result != null) return result.NitrogenExcretionRatePerHead;
-
-            return 0;
+            var result = this.GetNExcretionRateByAnimalType(animalType);
+            if (result != null)
+            {
+                return result.NitrogenExcretionRatePerHead;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
-        public Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data GetNExcretionRateByAnimalType(
-            AnimalType animalType)
+        public Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data GetNExcretionRateByAnimalType(AnimalType animalType)
         {
             if (animalType == AnimalType.ChickenPullets || animalType == AnimalType.ChickenCockerels)
-                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data
+            {
+                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data()
                 {
                     AverageLiveAnimalWeight = 0.725,
                     NitrogenExcretionPerThousandKG = 0,
-                    NitrogenExcretionRatePerHead = 0.0009
+                    NitrogenExcretionRatePerHead = 0.0009,
                 };
+            }
 
             if (animalType == AnimalType.ChickenHens)
-                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data
+            {
+                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data()
                 {
                     AverageLiveAnimalWeight = 1.8,
                     NitrogenExcretionPerThousandKG = 0,
-                    NitrogenExcretionRatePerHead = 0.0017
+                    NitrogenExcretionRatePerHead = 0.0017,
                 };
+            }
 
             if (animalType == AnimalType.ChickenRoosters)
-                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data
+            {
+                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data()
                 {
                     AverageLiveAnimalWeight = 0.9,
                     NitrogenExcretionPerThousandKG = 0,
-                    NitrogenExcretionRatePerHead = 0.0022
+                    NitrogenExcretionRatePerHead = 0.0022,
                 };
+            }
 
             if (animalType.IsTurkeyType())
-                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data
+            {
+                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data()
                 {
                     AverageLiveAnimalWeight = 6.8,
                     NitrogenExcretionPerThousandKG = 0.74,
-                    NitrogenExcretionRatePerHead = 0.005
+                    NitrogenExcretionRatePerHead = 0.005,
                 };
+            }
 
             if (animalType == AnimalType.Ducks)
-                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data
+            {
+                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data()
                 {
                     AverageLiveAnimalWeight = 2.7,
                     NitrogenExcretionPerThousandKG = 0.83,
-                    NitrogenExcretionRatePerHead = 0.0022
+                    NitrogenExcretionRatePerHead = 0.0022,
                 };
+            }
 
             // Footnote 1
             if (animalType == AnimalType.Geese)
-                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data
+            {
+                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data()
                 {
                     AverageLiveAnimalWeight = 4,
                     NitrogenExcretionPerThousandKG = 0.83,
-                    NitrogenExcretionRatePerHead = 0.0033
+                    NitrogenExcretionRatePerHead = 0.0033,
                 };
+            }
 
             if (animalType == AnimalType.Goats)
-                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data
+            {
+                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data()
                 {
                     AverageLiveAnimalWeight = 64,
                     NitrogenExcretionPerThousandKG = 0.46,
-                    NitrogenExcretionRatePerHead = 0.0294
+                    NitrogenExcretionRatePerHead = 0.0294,
                 };
+            }
 
             // Footnote 2
             if (animalType == AnimalType.Llamas || animalType == AnimalType.Alpacas)
-                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data
+            {
+                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data()
                 {
                     AverageLiveAnimalWeight = 112,
                     NitrogenExcretionPerThousandKG = 0.35,
-                    NitrogenExcretionRatePerHead = 0.0392
+                    NitrogenExcretionRatePerHead = 0.0392,
                 };
+            }
 
 
             // Footnote 3
             if (animalType == AnimalType.Deer || animalType == AnimalType.Elk)
-                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data
+            {
+                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data()
                 {
                     AverageLiveAnimalWeight = 120,
                     NitrogenExcretionPerThousandKG = 0.67,
-                    NitrogenExcretionRatePerHead = 0.0804
+                    NitrogenExcretionRatePerHead = 0.0804,
                 };
+            }
 
             if (animalType == AnimalType.Horses)
-                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data
+            {
+                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data()
                 {
                     AverageLiveAnimalWeight = 450,
                     NitrogenExcretionPerThousandKG = 0.3,
-                    NitrogenExcretionRatePerHead = 0.1350
+                    NitrogenExcretionRatePerHead = 0.1350,
                 };
+            }
 
             if (animalType == AnimalType.Mules)
-                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data
+            {
+                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data()
                 {
                     AverageLiveAnimalWeight = 245,
                     NitrogenExcretionPerThousandKG = 0.3,
-                    NitrogenExcretionRatePerHead = 0.0735
+                    NitrogenExcretionRatePerHead = 0.0735,
                 };
+            }
 
             // Footnote 4
             if (animalType == AnimalType.Bison)
-                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data
+            {
+                return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data()
                 {
                     AverageLiveAnimalWeight = 580,
                     NitrogenExcretionPerThousandKG = 0.4,
-                    NitrogenExcretionRatePerHead = 0.2320
+                    NitrogenExcretionRatePerHead = 0.2320,
                 };
+            }
 
-            Trace.TraceError(
-                $"{nameof(Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Provider)}.{nameof(GetNExcretionRateByAnimalType)}" +
-                $" unable to get data for animal type: {animalType}." +
-                " Returning default value of 0.");
+            Trace.TraceError($"{nameof(Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Provider)}.{nameof(this.GetNExcretionRateByAnimalType)}" +
+                             $" unable to get data for animal type: {animalType}." +
+                             $" Returning default value of 0.");
 
             return new Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Data();
         }
@@ -142,7 +174,6 @@ namespace H.Core.Providers.Animals
             Footnote 4: N excretion rate value for ‘other cattle’ was used.
 
          */
-
         #endregion
     }
 }

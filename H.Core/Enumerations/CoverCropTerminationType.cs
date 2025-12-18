@@ -4,7 +4,7 @@ using H.Infrastructure;
 namespace H.Core.Enumerations
 {
     /// <summary>
-    ///     Cover crop termination type depends on the type of tillage (reduced/no-till = chemical, intensive = mechanical)
+    /// Cover crop termination type depends on the type of tillage (reduced/no-till = chemical, intensive = mechanical)
     /// </summary>
     public enum CoverCropTerminationType
     {
@@ -24,6 +24,6 @@ namespace H.Core.Enumerations
         Chemical,
 
         [LocalizedDescription("EnumMechanicalTerminationType", typeof(Resources))]
-        Mechanical
+        Mechanical,
     }
 }

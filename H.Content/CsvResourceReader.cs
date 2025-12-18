@@ -16,7 +16,7 @@ namespace H.Content
     /// </summary>
     public static class CsvResourceReader
     {
-        #region Public Methods
+        #region Public Methods        
 
         public static IEnumerable<string[]> GetFileLines(CsvResourceNames csvResourceName)
         {
@@ -108,7 +108,7 @@ namespace H.Content
 
                 case CsvResourceNames.CropFactors:
                     return SplitFileIntoLines(Resource.CropFactors);
-
+                
                 case CsvResourceNames.NitrogenApplicationRatesForSpringWheatStubbleAndFallowCrops:
                     return SplitFileIntoLines(Resource.NitrogenApplicationRatesForSpringWheatStubbleAndFallowCrops);
 
@@ -137,7 +137,7 @@ namespace H.Content
 
                 case CsvResourceNames.SwineVolatileExcretion:
                     return SplitFileIntoLines(Resource.SwineVolatileExcretion_34);
-
+                
                 // Provider not being used. Duplicate
                 case CsvResourceNames.SwineVolatileAndSoilNitrogenExcretionAdjustmentFactors:
                     return SplitFileIntoLines(Resource.VS_Excretion_For_Performance_Standard_Diets_For_Swine_Group);
@@ -161,8 +161,7 @@ namespace H.Content
                     return SplitFileIntoLines(Resource.shelterbelt_ecodistrict_lookup_table);
 
                 case CsvResourceNames.ShelterbeltHardinessZoneLookup:
-                    return SplitFileIntoLines(
-                        Resource.Table_12_Shelterbelt_Carbon_Accumulation_Lookup_By_Hardiness_Zone);
+                    return SplitFileIntoLines(Resource.Table_12_Shelterbelt_Carbon_Accumulation_Lookup_By_Hardiness_Zone);
 
                 case CsvResourceNames.SlcToHardinessZone:
                     return SplitFileIntoLines(Resource.slc_to_hardiness_zone);
@@ -226,7 +225,7 @@ namespace H.Content
 
                 case CsvResourceNames.ON_Default_Yields:
                     return SplitFileIntoLinesUsingRegex(Resource.on_default_yields);
-
+                
                 case CsvResourceNames.SwineFeedIngredientList:
                     return SplitFileIntoLinesUsingRegex(Resource.Swine_Feed_Ingredient_List);
 
@@ -258,8 +257,7 @@ namespace H.Content
                     return SplitFileIntoLinesUsingRegex(Resource.crop_economics);
 
                 case CsvResourceNames.FertilizerBlends:
-                    return SplitFileIntoLinesUsingRegex(Resource
-                        .Table_48_Carbon_Footprint_At_Plant_Gate_For_Direct_Fertilizer_Blends);
+                    return SplitFileIntoLinesUsingRegex(Resource.Table_48_Carbon_Footprint_At_Plant_Gate_For_Direct_Fertilizer_Blends);
 
                 case CsvResourceNames.SmallAreaYields:
                     return SplitFileIntoLines(Resource.small_area_yields);
@@ -280,8 +278,7 @@ namespace H.Content
                     return SplitFileIntoLines(Resource.Table_54_Global_Warming_Potential_Of_Emissions);
 
                 case CsvResourceNames.CalibratedModelParameters:
-                    return SplitFileIntoLines(Resource
-                        .Table_8_Globally_Calibrated_Model_Paramters_To_Estimate_SOC_Changes);
+                    return SplitFileIntoLines(Resource.Table_8_Globally_Calibrated_Model_Paramters_To_Estimate_SOC_Changes);
 
                 case CsvResourceNames.NitrogenLinginContentsInSteadyStateMethods:
                     return SplitFileIntoLines(Resource.Table_9_Default_Values_For_Nitrogen_Lignin_In_Crops);
@@ -290,8 +287,7 @@ namespace H.Content
                     return SplitFileIntoLines(Resource.silage_yields);
 
                 case CsvResourceNames.ParametersBiogasMethaneProduction:
-                    return SplitFileIntoLines(Resource
-                        .Table_46_Parameters_For_Calculating_Biogas_Methane_Production_In_AD_System);
+                    return SplitFileIntoLines(Resource.Table_46_Parameters_For_Calculating_Biogas_Methane_Production_In_AD_System);
 
                 case CsvResourceNames.EmissionFactorsForDigestateStorage:
                     return SplitFileIntoLines(Resource.emission_factor_digestate_storage);
@@ -377,10 +373,22 @@ namespace H.Content
 
         #endregion
 
+        #region Constructors
+
+        #endregion
+
+        #region Fields
+
+        #endregion
+
+        #region Properties
+
+        #endregion
+
         #region Private Methods
 
         /// <summary>
-        ///     Use this method when CSV has no nested ',' characters. This method is faster than regex method.
+        /// Use this method when CSV has no nested ',' characters. This method is faster than regex method.
         /// </summary>
         public static IEnumerable<string[]> SplitFileIntoLines(string fileContents)
         {
@@ -399,17 +407,20 @@ namespace H.Content
         }
 
         /// <summary>
-        ///     Use this method when CSV has nested ',' characters. This method is slower than non-regex method.
+        /// Use this method when CSV has nested ',' characters. This method is slower than non-regex method.
         /// </summary>
         public static IEnumerable<string[]> SplitFileIntoLinesUsingRegex(string fileContents)
         {
             // CsvReader uses a regex internally.
             var reader = new CsvReader(new MemoryStream(Encoding.UTF8.GetBytes(fileContents)));
-            foreach (var row in reader.RowEnumerator) yield return (string[])row;
+            foreach (var row in reader.RowEnumerator)
+            {
+                yield return (string[]) row;
+            }
         }
 
         /// <summary>
-        ///     Use this method when CSV has nested ',' characters. This method is slower than non-regex method.
+        /// Use this method when CSV has nested ',' characters. This method is slower than non-regex method.
         /// </summary>
         public static IEnumerable<string[]> SplitFileIntoLinesUsingRegex(Stream fileContents)
         {
@@ -417,12 +428,19 @@ namespace H.Content
 
             // CsvReader uses a regex internally.
             var reader = new CsvReader(fileContents);
-            foreach (var row in reader.RowEnumerator) result.Add((string[])row);
+            foreach (var row in reader.RowEnumerator)
+            {
+                result.Add((string[])row);
+            }
 
             reader.Dispose();
 
             return result;
         }
+
+        #endregion
+
+        #region Event Handlers
 
         #endregion
     }

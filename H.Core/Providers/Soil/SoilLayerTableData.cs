@@ -3,7 +3,7 @@
 namespace H.Core.Providers.Soil
 {
     /// <summary>
-    ///     http://sis.agr.gc.ca/cansis/nsdb/soil/v2/slt/index.html
+    /// http://sis.agr.gc.ca/cansis/nsdb/soil/v2/slt/index.html
     /// </summary>
     internal class SoilLayerTableData
     {
@@ -53,7 +53,9 @@ namespace H.Core.Providers.Soil
                     OrganicCarbon >= 0 &&
                     PHInCalciumChloride > 0 &&
                     PHAsPerProjectReport > 0)
+                {
                     return true;
+                }
 
                 return false;
             }

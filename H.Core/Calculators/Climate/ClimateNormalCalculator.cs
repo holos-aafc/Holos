@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using H.Core.Enumerations;
+using H.Core.Providers;
 using H.Core.Providers.Climate;
 using H.Core.Providers.Evapotranspiration;
 using H.Core.Providers.Precipitation;
@@ -10,7 +11,7 @@ using H.Core.Providers.Temperature;
 namespace H.Core.Calculators.Climate
 {
     /// <summary>
-    ///     Calculates monthly climate normals based on daily climate values
+    /// Calculates monthly climate normals based on daily climate values
     /// </summary>
     public class ClimateNormalCalculator
     {
@@ -21,9 +22,8 @@ namespace H.Core.Calculators.Climate
         {
             Temperature,
             Precipitation,
-            Evapotranspiration
+            Evapotranspiration,
         }
-
         public class SpecificClimateValueType
         {
             public ClimateType ClimateNormalType { get; set; }
@@ -37,18 +37,17 @@ namespace H.Core.Calculators.Climate
         #region Public Methods
 
         /// <summary>
-        ///     Get evapotranspiration for custom timeframe
+        /// Get evapotranspiration for custom timeframe
         /// </summary>
         /// <param name="customClimateData">the daily climate data needed to calc the Evapotranspiration data</param>
         /// <param name="customTimeFrameStart">beginning of custom time frame</param>
         /// <param name="customTimeFrameEnd">end of custom time frame</param>
         /// <returns>EvapotranspirationData</returns>
-        public EvapotranspirationData GetEvapotranspirationDataByDailyValues(List<DailyClimateData> customClimateData,
-            int customTimeFrameStart, int customTimeFrameEnd)
+        public EvapotranspirationData GetEvapotranspirationDataByDailyValues(List<DailyClimateData> customClimateData, int customTimeFrameStart, int customTimeFrameEnd)
         {
-            var dictionary = GetNormalsForAllTwelveMonths(customClimateData, customTimeFrameStart, customTimeFrameEnd);
+            var dictionary = this.GetNormalsForAllTwelveMonths(customClimateData, customTimeFrameStart, customTimeFrameEnd);
             var evapotranspirationNormals = dictionary[MonthlyNormalTypes.evapotranspiration];
-            var evapotranspiration = new EvapotranspirationData
+            var evapotranspiration = new EvapotranspirationData()
             {
                 January = evapotranspirationNormals[Months.January],
                 February = evapotranspirationNormals[Months.February],
@@ -61,24 +60,24 @@ namespace H.Core.Calculators.Climate
                 September = evapotranspirationNormals[Months.September],
                 October = evapotranspirationNormals[Months.October],
                 November = evapotranspirationNormals[Months.November],
-                December = evapotranspirationNormals[Months.December]
+                December = evapotranspirationNormals[Months.December],
             };
 
             return evapotranspiration;
         }
 
         /// <summary>
-        ///     Get evapotranspirationdata for a timeframe
+        /// Get evapotranspirationdata for a timeframe
         /// </summary>
         /// <param name="customClimateData">the daily climate data needed to calc the Evapotranspiration data</param>
         /// <param name="timeFrame">the time frame to calculate for</param>
         /// <returns>EvapotranspirationData</returns>
-        public EvapotranspirationData GetEvapotranspirationDataByDailyValues(List<DailyClimateData> customClimateData,
-            TimeFrame timeFrame)
+        public EvapotranspirationData GetEvapotranspirationDataByDailyValues(List<DailyClimateData> customClimateData, TimeFrame timeFrame)
         {
-            var dictionary = GetNormalsForAllTwelveMonths(customClimateData, timeFrame);
+
+            var dictionary = this.GetNormalsForAllTwelveMonths(customClimateData, timeFrame);
             var evapotranspirationNormals = dictionary[MonthlyNormalTypes.evapotranspiration];
-            var evapotranspiration = new EvapotranspirationData
+            var evapotranspiration = new EvapotranspirationData()
             {
                 January = evapotranspirationNormals[Months.January],
                 February = evapotranspirationNormals[Months.February],
@@ -91,25 +90,24 @@ namespace H.Core.Calculators.Climate
                 September = evapotranspirationNormals[Months.September],
                 October = evapotranspirationNormals[Months.October],
                 November = evapotranspirationNormals[Months.November],
-                December = evapotranspirationNormals[Months.December]
+                December = evapotranspirationNormals[Months.December],
             };
 
             return evapotranspiration;
         }
 
         /// <summary>
-        ///     get precipitation for custom timeframe
+        /// get precipitation for custom timeframe
         /// </summary>
         /// <param name="customClimateData">the daily climate data needed to calc the Evapotranspiration data</param>
         /// <param name="customTimeFrameStart">beginning of custom time frame</param>
         /// <param name="customTimeFrameEnd">end of custom time frame</param>
         /// <returns>PrecipitationData</returns>
-        public PrecipitationData GetPrecipitationDataByDailyValues(List<DailyClimateData> customClimateData,
-            int customTimeFrameStart, int customTimeFrameEnd)
+        public PrecipitationData GetPrecipitationDataByDailyValues(List<DailyClimateData> customClimateData, int customTimeFrameStart, int customTimeFrameEnd)
         {
-            var dictionary = GetNormalsForAllTwelveMonths(customClimateData, customTimeFrameStart, customTimeFrameEnd);
+            var dictionary = this.GetNormalsForAllTwelveMonths(customClimateData, customTimeFrameStart, customTimeFrameEnd);
             var precipitationNormals = dictionary[MonthlyNormalTypes.precipitation];
-            var precipitationData = new PrecipitationData
+            var precipitationData = new PrecipitationData()
             {
                 January = precipitationNormals[Months.January],
                 February = precipitationNormals[Months.February],
@@ -122,24 +120,23 @@ namespace H.Core.Calculators.Climate
                 September = precipitationNormals[Months.September],
                 October = precipitationNormals[Months.October],
                 November = precipitationNormals[Months.November],
-                December = precipitationNormals[Months.December]
+                December = precipitationNormals[Months.December],
             };
 
             return precipitationData;
         }
 
         /// <summary>
-        ///     get precipitation for a specified timeframe
+        /// get precipitation for a specified timeframe
         /// </summary>
         /// <param name="customClimateData">the daily climate data needed to calc the Evapotranspiration data</param>
         /// <param name="timeFrame">the time frame to calculate for</param>
         /// <returns>PrecipitationData</returns>
-        public PrecipitationData GetPrecipitationDataByDailyValues(List<DailyClimateData> customClimateData,
-            TimeFrame timeFrame)
+        public PrecipitationData GetPrecipitationDataByDailyValues(List<DailyClimateData> customClimateData, TimeFrame timeFrame)
         {
-            var dictionary = GetNormalsForAllTwelveMonths(customClimateData, timeFrame);
+            var dictionary = this.GetNormalsForAllTwelveMonths(customClimateData, timeFrame);
             var precipitationNormals = dictionary[MonthlyNormalTypes.precipitation];
-            var precipitationData = new PrecipitationData
+            var precipitationData = new PrecipitationData()
             {
                 January = precipitationNormals[Months.January],
                 February = precipitationNormals[Months.February],
@@ -152,25 +149,24 @@ namespace H.Core.Calculators.Climate
                 September = precipitationNormals[Months.September],
                 October = precipitationNormals[Months.October],
                 November = precipitationNormals[Months.November],
-                December = precipitationNormals[Months.December]
+                December = precipitationNormals[Months.December],
             };
 
             return precipitationData;
         }
 
         /// <summary>
-        ///     get temperature data for custom timeframe
+        /// get temperature data for custom timeframe
         /// </summary>
         /// <param name="customClimateData">the daily climate data needed to calc the Evapotranspiration data</param>
         /// <param name="customTimeFrameStart">beginning of custom time frame</param>
         /// <param name="customTimeFrameEnd">end of custom time frame</param>
         /// <returns>TemperatureData</returns>
-        public TemperatureData GetTemperatureDataByDailyValues(List<DailyClimateData> customClimateData,
-            int customTimeFrameStart, int customTimeFrameEnd)
+        public TemperatureData GetTemperatureDataByDailyValues(List<DailyClimateData> customClimateData, int customTimeFrameStart, int customTimeFrameEnd)
         {
-            var dictionary = GetNormalsForAllTwelveMonths(customClimateData, customTimeFrameStart, customTimeFrameEnd);
+            var dictionary = this.GetNormalsForAllTwelveMonths(customClimateData, customTimeFrameStart, customTimeFrameEnd);
             var temperatureNormals = dictionary[MonthlyNormalTypes.temperature];
-            var temperatureData = new TemperatureData
+            var temperatureData = new TemperatureData()
             {
                 January = temperatureNormals[Months.January],
                 February = temperatureNormals[Months.February],
@@ -183,24 +179,23 @@ namespace H.Core.Calculators.Climate
                 September = temperatureNormals[Months.September],
                 October = temperatureNormals[Months.October],
                 November = temperatureNormals[Months.November],
-                December = temperatureNormals[Months.December]
+                December = temperatureNormals[Months.December],
             };
 
             return temperatureData;
         }
 
         /// <summary>
-        ///     get temperature data for a timeframe
+        /// get temperature data for a timeframe
         /// </summary>
         /// <param name="customClimateData">the daily climate data needed to calc the Evapotranspiration data</param>
         /// <param name="timeFrame">the time frame to calculate for</param>
         /// <returns>TemperatureData</returns>
-        public TemperatureData GetTemperatureDataByDailyValues(List<DailyClimateData> customClimateData,
-            TimeFrame timeFrame)
+        public TemperatureData GetTemperatureDataByDailyValues(List<DailyClimateData> customClimateData, TimeFrame timeFrame)
         {
-            var dictionary = GetNormalsForAllTwelveMonths(customClimateData, timeFrame);
+            var dictionary = this.GetNormalsForAllTwelveMonths(customClimateData, timeFrame);
             var temperatureNormals = dictionary[MonthlyNormalTypes.temperature];
-            var temperatureData = new TemperatureData
+            var temperatureData = new TemperatureData()
             {
                 January = temperatureNormals[Months.January],
                 February = temperatureNormals[Months.February],
@@ -213,27 +208,23 @@ namespace H.Core.Calculators.Climate
                 September = temperatureNormals[Months.September],
                 October = temperatureNormals[Months.October],
                 November = temperatureNormals[Months.November],
-                December = temperatureNormals[Months.December]
+                December = temperatureNormals[Months.December],
             };
 
             return temperatureData;
         }
 
         /// <summary>
-        ///     get normals for all twelve months for a custom time frame
+        /// get normals for all twelve months for a custom time frame
         /// </summary>
         /// <param name="customClimateDatas">the daily climate data from which to calculate the normals</param>
         /// <param name="customTimeFrameStart">beginning of the timeframe</param>
         /// <param name="customTimeFrameEnd">end of the time frame</param>
-        /// <returns>
-        ///     A dictionary keyed with the data type (precipitation, temperature) to a dictionary mapping month to normal
-        ///     values
-        /// </returns>
-        public Dictionary<MonthlyNormalTypes, Dictionary<Months, double>> GetNormalsForAllTwelveMonths(
-            List<DailyClimateData> customClimateDatas, int customTimeFrameStart, int customTimeFrameEnd)
+        /// <returns>A dictionary keyed with the data type (precipitation, temperature) to a dictionary mapping month to normal values</returns>
+        public Dictionary<MonthlyNormalTypes, Dictionary<Months, double>> GetNormalsForAllTwelveMonths(List<DailyClimateData> customClimateDatas, int customTimeFrameStart, int customTimeFrameEnd)
         {
-            var startYear = customTimeFrameStart;
-            var endYear = customTimeFrameEnd;
+            int startYear = customTimeFrameStart;
+            int endYear = customTimeFrameEnd;
 
             // Precipitation
             var precipNormal = new Dictionary<Months, double>();
@@ -250,32 +241,32 @@ namespace H.Core.Calculators.Climate
             foreach (var item in customClimateDatas)
             {
                 // Precipitation values
-                var precip = new SpecificClimateValueType
+                var precip = new SpecificClimateValueType()
                 {
                     ClimateNormalType = ClimateType.Precipitation,
                     JulianDay = item.JulianDay,
                     ClimateValue = item.MeanDailyPrecipitation,
-                    Year = item.Year
+                    Year = item.Year,
                 };
                 listOfPrecips.Add(precip);
 
                 // Temperature values
-                var temperature = new SpecificClimateValueType
+                var temperature = new SpecificClimateValueType()
                 {
                     ClimateNormalType = ClimateType.Temperature,
                     JulianDay = item.JulianDay,
                     ClimateValue = item.MeanDailyAirTemperature,
-                    Year = item.Year
+                    Year = item.Year,
                 };
                 listOfTemperatures.Add(temperature);
 
                 // Evapotranspiration values
-                var evapotrans = new SpecificClimateValueType
+                var evapotrans = new SpecificClimateValueType()
                 {
                     ClimateNormalType = ClimateType.Evapotranspiration,
                     JulianDay = item.JulianDay,
                     ClimateValue = item.MeanDailyPET,
-                    Year = item.Year
+                    Year = item.Year,
                 };
                 listOfEvapotrans.Add(evapotrans);
             }
@@ -306,19 +297,15 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        ///     Determine each month's normal data based on NASA information (or other custom climate data)
+        /// Determine each month's normal data based on NASA information (or other custom climate data)
         /// </summary>
         /// <param name="customClimateDatas">Climate information, likely from NASA</param>
-        /// <returns>
-        ///     A dicitionary keyed with the data type (precipitation, temperature) to a dictionary mapping month to normal
-        ///     values
-        /// </returns>
-        public Dictionary<MonthlyNormalTypes, Dictionary<Months, double>> GetNormalsForAllTwelveMonths(
-            List<DailyClimateData> customClimateDatas, TimeFrame timeFrame)
+        /// <returns>A dicitionary keyed with the data type (precipitation, temperature) to a dictionary mapping month to normal values</returns>
+        public Dictionary<MonthlyNormalTypes, Dictionary<Months, double>> GetNormalsForAllTwelveMonths(List<DailyClimateData> customClimateDatas, TimeFrame timeFrame)
         {
-            var period = GetTimeFrame(timeFrame);
-            var startYear = period.Item1;
-            var endYear = period.Item2;
+            Tuple<int, int> period = this.GetTimeFrame(timeFrame);
+            int startYear = period.Item1;
+            int endYear = period.Item2;
 
             //Precipitation 
             var precipNormal = new Dictionary<Months, double>();
@@ -335,32 +322,32 @@ namespace H.Core.Calculators.Climate
             foreach (var item in customClimateDatas)
             {
                 //precip values
-                var precip = new SpecificClimateValueType
+                var precip = new SpecificClimateValueType()
                 {
                     ClimateNormalType = ClimateType.Precipitation,
                     JulianDay = item.JulianDay,
                     ClimateValue = item.MeanDailyPrecipitation,
-                    Year = item.Year
+                    Year = item.Year,
                 };
                 listOfPrecips.Add(precip);
 
                 //temperature values
-                var temperature = new SpecificClimateValueType
+                var temperature = new SpecificClimateValueType()
                 {
                     ClimateNormalType = ClimateType.Temperature,
                     JulianDay = item.JulianDay,
                     ClimateValue = item.MeanDailyAirTemperature,
-                    Year = item.Year
+                    Year = item.Year,
                 };
                 listOfTemperatures.Add(temperature);
 
                 //evapotrans value
-                var evapotrans = new SpecificClimateValueType
+                var evapotrans = new SpecificClimateValueType()
                 {
                     ClimateNormalType = ClimateType.Evapotranspiration,
                     JulianDay = item.JulianDay,
                     ClimateValue = item.MeanDailyPET,
-                    Year = item.Year
+                    Year = item.Year,
                 };
                 listOfEvapotrans.Add(evapotrans);
             }
@@ -391,48 +378,41 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        ///     Equation 1.6.2-6
-        ///     For a given period of years (for our uses its 30 years) and a specified day range (i.e. a month) you receive a 30
-        ///     year average of a certain type for that month
+        /// Equation 1.6.2-6
+        /// For a given period of years (for our uses its 30 years) and a specified day range (i.e. a month) you receive a 30 year average of a certain type for that month
         /// </summary>
         /// <param name="startYear">Beginning year of period to measure</param>
         /// <param name="endYear">End year of period to measure</param>
         /// <param name="startMonth">Beginning of the month (Julian Day)</param>
         /// <param name="endMonth">End of the month (Julian Day)</param>
-        /// <param name="climateValue">
-        ///     List of values containing the climate normal type you wish to calculate (precipitation,
-        ///     temperature, evapotranspiration) NOTE: ensure the list is entirely comprised of one climate normal type"
-        /// </param>
+        /// <param name="climateValue">List of values containing the climate normal type you wish to calculate (precipitation, temperature, evapotranspiration) NOTE: ensure the list is entirely comprised of one climate normal type"</param>
         /// <returns>30 year average of daily climate values over a given period, month, and type</returns>
-        public double GetClimateNormalValues(int startYear, int endYear, int startMonth, int endMonth,
-            List<SpecificClimateValueType> climateValue)
+        public double GetClimateNormalValues(int startYear, int endYear, int startMonth, int endMonth, List<SpecificClimateValueType> climateValue)
         {
             //it seems in the base form 1.6.2-6 gives the correct data for temperature since that needs an average daily temperature
             //Precipitation and PET however require a monthly total averaged over the 30 year period
             var outerSum = new List<double>();
             var climateType = climateValue[0].ClimateNormalType;
-            for (var i = startYear; i <= endYear; i++)
+            for (int i = startYear; i <= endYear; i++)
             {
                 //by year
                 var climateDataForCurrentYear = climateValue.Where(x => x.Year == i);
                 //by month
-                var climateDataForCurrentDayRange =
-                    climateDataForCurrentYear.Where(y => y.JulianDay >= startMonth && y.JulianDay <= endMonth);
+                var climateDataForCurrentDayRange = climateDataForCurrentYear.Where(y => y.JulianDay >= startMonth && y.JulianDay <= endMonth);
                 //sum all climatevalues
                 var innerSum = climateDataForCurrentDayRange.Select(z => z.ClimateValue).Sum();
                 outerSum.Add(innerSum);
             }
-
             if (climateType == ClimateType.Temperature)
             {
                 var numerator = outerSum.Sum();
-                var denominator = (endMonth - startMonth) * 30;
+                var denominator = ((endMonth - startMonth) * 30);
 
                 var result = numerator / denominator;
 
                 return result;
             }
-            else
+            else 
             {
                 var result = outerSum.Average();
 
@@ -494,7 +474,6 @@ namespace H.Core.Calculators.Climate
                     throw new Exception($"{timeFrame} not a valid period");
             }
         }
-
         #endregion
     }
 }

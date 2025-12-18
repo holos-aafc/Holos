@@ -1,7 +1,21 @@
-﻿using System.Collections.Generic;
-using H.Core.Emissions.Results;
+﻿using H.Core.Emissions.Results;
+using H.Core.Enumerations;
 using H.Core.Models;
+using H.Core.Services.Animals;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+using System.Transactions;
+using System.Windows.Media.Animation;
+using AutoMapper.Configuration.Annotations;
+using H.Core.Events;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers.Animals;
+using H.Infrastructure;
 
 namespace H.Core.Calculators.Nitrogen
 {
@@ -14,15 +28,19 @@ namespace H.Core.Calculators.Nitrogen
             var field = farm.GetFieldSystemComponent(currentYearResults.FieldSystemComponentGuid);
 
             foreach (var emissionsResults in animalComponentEmissionsResultsList)
-            foreach (var animalGroupEmissionResults in emissionsResults.EmissionResultsForAllAnimalGroupsInComponent)
-            foreach (var groupEmissionsByMonth in animalGroupEmissionResults.GroupEmissionsByMonths)
             {
-                var managementPeriod = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod;
-                if (field.IsGrazingManagementPeriodFromPasture(managementPeriod) &&
-                    managementPeriod.Start.Year == currentYearResults.Year)
+                foreach (var animalGroupEmissionResults in emissionsResults.EmissionResultsForAllAnimalGroupsInComponent)
                 {
-                    var emissions = groupEmissionsByMonth.MonthlyManureDirectN2ONEmission;
-                    result += emissions;
+                    foreach (var groupEmissionsByMonth in animalGroupEmissionResults.GroupEmissionsByMonths)
+                    {
+                        var managementPeriod = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod;
+                        if (field.IsGrazingManagementPeriodFromPasture(managementPeriod) && managementPeriod.Start.Year == currentYearResults.Year)
+                        {
+                            var emissions = groupEmissionsByMonth.MonthlyManureDirectN2ONEmission;
+                            result += emissions;
+                        }
+
+                    }
                 }
             }
 
@@ -36,15 +54,19 @@ namespace H.Core.Calculators.Nitrogen
             var field = farm.GetFieldSystemComponent(currentYearResults.FieldSystemComponentGuid);
 
             foreach (var emissionsResults in animalComponentEmissionsResultsList)
-            foreach (var animalGroupEmissionResults in emissionsResults.EmissionResultsForAllAnimalGroupsInComponent)
-            foreach (var groupEmissionsByMonth in animalGroupEmissionResults.GroupEmissionsByMonths)
             {
-                var managementPeriod = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod;
-                if (field.IsGrazingManagementPeriodFromPasture(managementPeriod) &&
-                    managementPeriod.Start.Year == currentYearResults.Year)
+                foreach (var animalGroupEmissionResults in emissionsResults.EmissionResultsForAllAnimalGroupsInComponent)
                 {
-                    var emissions = groupEmissionsByMonth.MonthlyManureLeachingN2ONEmission;
-                    result += emissions;
+                    foreach (var groupEmissionsByMonth in animalGroupEmissionResults.GroupEmissionsByMonths)
+                    {
+                        var managementPeriod = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod;
+                        if (field.IsGrazingManagementPeriodFromPasture(managementPeriod) && managementPeriod.Start.Year == currentYearResults.Year)
+                        {
+                            var emissions = groupEmissionsByMonth.MonthlyManureLeachingN2ONEmission;
+                            result += emissions;
+                        }
+
+                    }
                 }
             }
 
@@ -58,15 +80,19 @@ namespace H.Core.Calculators.Nitrogen
             var field = farm.GetFieldSystemComponent(currentYearResults.FieldSystemComponentGuid);
 
             foreach (var emissionsResults in animalComponentEmissionsResultsList)
-            foreach (var animalGroupEmissionResults in emissionsResults.EmissionResultsForAllAnimalGroupsInComponent)
-            foreach (var groupEmissionsByMonth in animalGroupEmissionResults.GroupEmissionsByMonths)
             {
-                var managementPeriod = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod;
-                if (field.IsGrazingManagementPeriodFromPasture(managementPeriod) &&
-                    managementPeriod.Start.Year == currentYearResults.Year)
+                foreach (var animalGroupEmissionResults in emissionsResults.EmissionResultsForAllAnimalGroupsInComponent)
                 {
-                    var emissions = groupEmissionsByMonth.MonthlyManureNitrateLeachingN2ONEmission;
-                    result += emissions;
+                    foreach (var groupEmissionsByMonth in animalGroupEmissionResults.GroupEmissionsByMonths)
+                    {
+                        var managementPeriod = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod;
+                        if (field.IsGrazingManagementPeriodFromPasture(managementPeriod) && managementPeriod.Start.Year == currentYearResults.Year)
+                        {
+                            var emissions = groupEmissionsByMonth.MonthlyManureNitrateLeachingN2ONEmission;
+                            result += emissions;
+                        }
+
+                    }
                 }
             }
 
@@ -80,15 +106,19 @@ namespace H.Core.Calculators.Nitrogen
             var field = farm.GetFieldSystemComponent(currentYearResults.FieldSystemComponentGuid);
 
             foreach (var emissionsResults in animalComponentEmissionsResultsList)
-            foreach (var animalGroupEmissionResults in emissionsResults.EmissionResultsForAllAnimalGroupsInComponent)
-            foreach (var groupEmissionsByMonth in animalGroupEmissionResults.GroupEmissionsByMonths)
             {
-                var managementPeriod = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod;
-                if (field.IsGrazingManagementPeriodFromPasture(managementPeriod) &&
-                    managementPeriod.Start.Year == currentYearResults.Year)
+                foreach (var animalGroupEmissionResults in emissionsResults.EmissionResultsForAllAnimalGroupsInComponent)
                 {
-                    var emissions = groupEmissionsByMonth.MonthlyManureVolatilizationN2ONEmission;
-                    result += emissions;
+                    foreach (var groupEmissionsByMonth in animalGroupEmissionResults.GroupEmissionsByMonths)
+                    {
+                        var managementPeriod = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod;
+                        if (field.IsGrazingManagementPeriodFromPasture(managementPeriod) && managementPeriod.Start.Year == currentYearResults.Year)
+                        {
+                            var emissions = groupEmissionsByMonth.MonthlyManureVolatilizationN2ONEmission;
+                            result += emissions;
+                        }
+
+                    }
                 }
             }
 
@@ -102,15 +132,19 @@ namespace H.Core.Calculators.Nitrogen
             var field = farm.GetFieldSystemComponent(currentYearResults.FieldSystemComponentGuid);
 
             foreach (var emissionsResults in animalComponentEmissionsResultsList)
-            foreach (var animalGroupEmissionResults in emissionsResults.EmissionResultsForAllAnimalGroupsInComponent)
-            foreach (var groupEmissionsByMonth in animalGroupEmissionResults.GroupEmissionsByMonths)
             {
-                var managementPeriod = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod;
-                if (field.IsGrazingManagementPeriodFromPasture(managementPeriod) &&
-                    managementPeriod.Start.Year == currentYearResults.Year)
+                foreach (var animalGroupEmissionResults in emissionsResults.EmissionResultsForAllAnimalGroupsInComponent)
                 {
-                    var emissions = groupEmissionsByMonth.MonthlyNH3FromGrazingAnimals;
-                    result += emissions;
+                    foreach (var groupEmissionsByMonth in animalGroupEmissionResults.GroupEmissionsByMonths)
+                    {
+                        var managementPeriod = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod;
+                        if (field.IsGrazingManagementPeriodFromPasture(managementPeriod) && managementPeriod.Start.Year == currentYearResults.Year)
+                        {
+                            var emissions = groupEmissionsByMonth.MonthlyNH3FromGrazingAnimals;
+                            result += emissions;
+                        }
+
+                    }
                 }
             }
 

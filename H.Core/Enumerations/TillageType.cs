@@ -12,15 +12,15 @@ namespace H.Core.Enumerations
         Reduced,
 
         /// <summary>
-        ///     This was called 'None' in version 3.
+        /// This was called 'None' in version 3.
         /// </summary>
         [LocalizedDescription("NoTillTillage", typeof(Resources))]
         NoTill,
 
         /// <summary>
-        ///     This was called 'Intense' in version 3.
+        /// This was called 'Intense' in version 3.
         /// </summary>
         [LocalizedDescription("IntensiveTillage", typeof(Resources))]
-        Intensive
+        Intensive,
     }
 }

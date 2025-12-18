@@ -12,6 +12,6 @@ namespace H.Core.Enumerations
         Loam,
 
         [LocalizedDescription("EnumSand", typeof(Resources))]
-        Sand
+        Sand,
     }
 }

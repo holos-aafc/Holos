@@ -1,4 +1,6 @@
-﻿namespace H.Core.Models.Results
+﻿using H.Infrastructure;
+
+namespace H.Core.Models.Results
 {
     public class EstimatesOfProductionResultsViewItem : ResultsViewItemBase
     {
@@ -24,83 +26,161 @@
 
         public int Year
         {
-            get => _year;
-            set => SetProperty(ref _year, value);
+            get
+            {
+                return _year;
+            }
+            set
+            {
+                SetProperty(ref _year, value);
+            }
         }
 
         public ComponentCategory Category
         {
-            get => _category;
-            set => SetProperty(ref _category, value);
+            get
+            {
+                return _category;
+            }
+            set
+            {
+                SetProperty(ref _category, value);
+            }
         }
 
         public string ComponentTypeString
         {
-            get => _componentTypeString;
-            set => SetProperty(ref _componentTypeString, value);
+            get
+            {
+                return _componentTypeString;
+            }
+            set
+            {
+                SetProperty(ref _componentTypeString, value);
+            }
         }
 
         public double Harvest
         {
-            get => _harvest;
-            set => SetProperty(ref _harvest, value);
+            get
+            {
+                return _harvest;
+            }
+            set
+            {
+                SetProperty(ref _harvest, value);
+            }
         }
 
         public double Area
         {
-            get => _area;
-            set => SetProperty(ref _area, value);
+            get
+            {
+                return _area;
+            }
+            set
+            {
+                SetProperty(ref _area, value);
+            }
         }
 
         public double LandAppliedManure
         {
-            get => _landAppliedManure;
-            set => SetProperty(ref _landAppliedManure, value);
+            get
+            {
+                return _landAppliedManure;
+            }
+            set
+            {
+                SetProperty(ref _landAppliedManure, value);
+            }
         }
 
         public double Beef
         {
-            get => _beef;
-            set => SetProperty(ref _beef, value);
+            get
+            {
+                return _beef;
+            }
+            set
+            {
+                SetProperty(ref _beef, value);
+            }
         }
 
         public double Milk
         {
-            get => _milk;
-            set => SetProperty(ref _milk, value);
+            get
+            {
+                return _milk;
+            }
+            set
+            {
+                SetProperty(ref _milk, value);
+            }
         }
 
         /// <summary>
-        ///     FPCM
+        /// FPCM
         /// </summary>
-        public double FatAndProteinCorrectedMilk
+        public double FatAndProteinCorrectedMilk 
         {
-            get => _fpcm;
-            set => SetProperty(ref _fpcm, value);
+            get
+            {
+                return _fpcm;
+            }
+            set
+            {
+                SetProperty(ref _fpcm, value);
+            }
         }
 
         public double Lamb
         {
-            get => _lamb;
-            set => SetProperty(ref _lamb, value);
+            get
+            {
+                return _lamb;
+            }
+            set
+            {
+                SetProperty(ref _lamb, value);
+            }
         }
 
         public string ComponentName
         {
-            get => _componentName;
-            set => SetProperty(ref _componentName, value);
+            get
+            {
+                return _componentName;
+            }
+            set
+            {
+                SetProperty(ref _componentName, value);
+            }
         }
 
         public string MonthString
         {
-            get => _monthString;
-            set => SetProperty(ref _monthString, value);
+            get
+            {
+                return _monthString;
+            }
+            set
+            {
+                SetProperty(ref _monthString, value);
+            }
         }
 
         public string ManagementPeriodName
         {
-            get => _managementPeriodName;
-            set => SetProperty(ref _managementPeriodName, value);
+            get
+            {
+                return _managementPeriodName;
+            }
+            set
+            {
+                SetProperty(ref _managementPeriodName, value);
+            }
         }
 
         #endregion

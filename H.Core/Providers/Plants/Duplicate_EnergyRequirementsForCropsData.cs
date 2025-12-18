@@ -17,8 +17,7 @@ namespace H.Core.Providers.Plants
 
         public override string ToString()
         {
-            return
-                $"{nameof(IsForFallow)}: {IsForFallow}, {nameof(IsAnyCrop)}: {IsAnyCrop}, {nameof(TillageType)}: {TillageType}, {nameof(Province)}: {Province}, {nameof(SoilFunctionalCategory)}: {SoilFunctionalCategory}, {nameof(EnergyForFuel)}: {EnergyForFuel}, {nameof(EnergyForHerbicide)}: {EnergyForHerbicide}, {nameof(CropType)}: {CropType}";
+            return $"{nameof(IsForFallow)}: {IsForFallow}, {nameof(IsAnyCrop)}: {IsAnyCrop}, {nameof(TillageType)}: {TillageType}, {nameof(Province)}: {Province}, {nameof(SoilFunctionalCategory)}: {SoilFunctionalCategory}, {nameof(EnergyForFuel)}: {EnergyForFuel}, {nameof(EnergyForHerbicide)}: {EnergyForHerbicide}, {nameof(CropType)}: {CropType}";
         }
     }
 }

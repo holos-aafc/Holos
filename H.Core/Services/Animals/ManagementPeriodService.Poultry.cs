@@ -1,39 +1,20 @@
-﻿using System;
-using System.ComponentModel;
-using H.Core.Models;
+﻿using H.Core.Models;
 using H.Core.Models.Animals;
-using H.Core.Properties;
+using H.Core.Services.Initialization;
+using System;
+using System.ComponentModel;
 
 namespace H.Core.Services.Animals
 {
     public partial class ManagementPeriodService
     {
-        #region Private Methods
-
-        private ManagementPeriod AddPoultryManagementPeriodToAnimalGroup(Farm farm, AnimalGroup animalGroup,
-            ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
-        {
-            var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
-                animalGroupOnPropertyChanged);
-
-            _initializationService.InitializeDailyTanExcretion(managementPeriod);
-            _initializationService.InitializeAmmoniaEmissionFactorForManureStorage(managementPeriod);
-            _initializationService.InitializeAmmoniaEmissionFactorForLandApplication(managementPeriod);
-            _initializationService.InitializeAmmoniaEmissionFactorForHousing(managementPeriod);
-
-            return managementPeriod;
-        }
-
-        #endregion
-
         #region Public Methods
 
         public void ChickenEggProductionHensManagementPeriod(Farm farm, AnimalGroup animalGroup,
             ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
-            var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
-                animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelEggLaying;
+            var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+            managementPeriod.Name = H.Core.Properties.Resources.LabelEggLaying;
             managementPeriod.Start = new DateTime(DateTime.Now.Year, 1, 1);
             managementPeriod.NumberOfDays = 358;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
@@ -43,17 +24,15 @@ namespace H.Core.Services.Animals
         public void PulletFarmPulletsManagementPeriod(Farm farm, AnimalGroup animalGroup,
             ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
-            var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
-                animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelBroodingStage;
+            var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+            managementPeriod.Name = H.Core.Properties.Resources.LabelBroodingStage;
             managementPeriod.Start = new DateTime(DateTime.Now.Year, 1, 1);
             managementPeriod.NumberOfDays = 14;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
 
-            managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
-                animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelRearingStage;
+            managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+            managementPeriod.Name = H.Core.Properties.Resources.LabelRearingStage;
             managementPeriod.NumberOfDays = 119;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
@@ -62,24 +41,21 @@ namespace H.Core.Services.Animals
         public void ChickenMultiplierBreederLayersManagementPeriod(Farm farm, AnimalGroup animalGroup,
             ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
-            var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
-                animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelBroodingStage;
+            var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+            managementPeriod.Name = H.Core.Properties.Resources.LabelBroodingStage;
             managementPeriod.Start = new DateTime(DateTime.Now.Year, 1, 1);
             managementPeriod.NumberOfDays = 14;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
 
-            managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
-                animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelRearingStage;
+            managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+            managementPeriod.Name = H.Core.Properties.Resources.LabelRearingStage;
             managementPeriod.NumberOfDays = 140;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
 
-            managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
-                animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelBreedingStage;
+            managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+            managementPeriod.Name = H.Core.Properties.Resources.LabelBreedingStage;
             managementPeriod.NumberOfDays = 344;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
@@ -88,24 +64,21 @@ namespace H.Core.Services.Animals
         public void ChickenMultiplierBreederBroilersManagementPeriod(Farm farm, AnimalGroup animalGroup,
             ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
-            var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
-                animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelBroodingStage;
+            var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+            managementPeriod.Name = H.Core.Properties.Resources.LabelBroodingStage;
             managementPeriod.Start = new DateTime(DateTime.Now.Year, 1, 1);
             managementPeriod.NumberOfDays = 14;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
 
-            managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
-                animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelRearingStage;
+            managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+            managementPeriod.Name = H.Core.Properties.Resources.LabelRearingStage;
             managementPeriod.NumberOfDays = 140;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
 
-            managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
-                animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelBreedingStage;
+            managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+            managementPeriod.Name = H.Core.Properties.Resources.LabelBreedingStage;
             managementPeriod.NumberOfDays = 294;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
@@ -114,24 +87,21 @@ namespace H.Core.Services.Animals
         public void ChickenMeatProductionBroilersManagementPeriod(Farm farm, AnimalGroup animalGroup,
             ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
-            var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
-                animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelBroodingStage;
+            var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+            managementPeriod.Name = H.Core.Properties.Resources.LabelBroodingStage;
             managementPeriod.Start = new DateTime(DateTime.Now.Year, 1, 1);
             managementPeriod.NumberOfDays = 14;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
 
-            managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
-                animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelRearingStage;
+            managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+            managementPeriod.Name = H.Core.Properties.Resources.LabelRearingStage;
             managementPeriod.NumberOfDays = 14;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
 
-            managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
-                animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelRearingStage;
+            managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+            managementPeriod.Name = H.Core.Properties.Resources.LabelRearingStage;
             managementPeriod.NumberOfDays = 14;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
@@ -140,9 +110,8 @@ namespace H.Core.Services.Animals
         public void TurkeyMultiplierBreederYoungTomsManagementPeriod(Farm farm, AnimalGroup animalGroup,
             ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
-            var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
-                animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelBroodingAndRearingStage;
+            var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+            managementPeriod.Name = H.Core.Properties.Resources.LabelBroodingAndRearingStage;
             managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 1, 1);
             managementPeriod.NumberOfDays = 210;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
@@ -152,9 +121,8 @@ namespace H.Core.Services.Animals
         public void TurkeyMultiplierBreederTomsManagementPeriod(Farm farm, AnimalGroup animalGroup,
             ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
-            var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
-                animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelBreedingStage;
+            var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+            managementPeriod.Name = H.Core.Properties.Resources.LabelBreedingStage;
             managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 7, 30);
             managementPeriod.NumberOfDays = 168;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
@@ -164,9 +132,8 @@ namespace H.Core.Services.Animals
         public void TurkeyMultiplierBreederYoungTurkeyHensManagementPeriod(Farm farm, AnimalGroup animalGroup,
             ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
-            var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
-                animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelBroodingAndRearingStage;
+            var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+            managementPeriod.Name = H.Core.Properties.Resources.LabelBroodingAndRearingStage;
             managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 1, 1);
             managementPeriod.NumberOfDays = 210;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
@@ -176,9 +143,8 @@ namespace H.Core.Services.Animals
         public void TurkeyMultiplierBreederTurkeyHensManagementPeriod(Farm farm, AnimalGroup animalGroup,
             ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
-            var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
-                animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelBreedingStage;
+            var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+            managementPeriod.Name = H.Core.Properties.Resources.LabelBreedingStage;
             managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 7, 30);
             managementPeriod.NumberOfDays = 168;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
@@ -190,7 +156,7 @@ namespace H.Core.Services.Animals
         {
             var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
                 animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelBroodingStage;
+            managementPeriod.Name = H.Core.Properties.Resources.LabelBroodingStage;
             managementPeriod.Start = new DateTime(DateTime.Now.Year, 1, 1);
             managementPeriod.NumberOfDays = 21;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
@@ -198,14 +164,14 @@ namespace H.Core.Services.Animals
 
             managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
                 animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelTurkeyBroilers;
+            managementPeriod.Name = H.Core.Properties.Resources.LabelTurkeyBroilers;
             managementPeriod.NumberOfDays = 63;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
 
             managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
                 animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelHeavyTurkeys;
+            managementPeriod.Name = H.Core.Properties.Resources.LabelHeavyTurkeys;
             managementPeriod.NumberOfDays = 112;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
@@ -216,7 +182,7 @@ namespace H.Core.Services.Animals
         {
             var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
                 animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelBroodingStage;
+            managementPeriod.Name = H.Core.Properties.Resources.LabelBroodingStage;
             managementPeriod.Start = new DateTime(DateTime.Now.Year, 1, 1);
             managementPeriod.NumberOfDays = 14;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
@@ -224,14 +190,14 @@ namespace H.Core.Services.Animals
 
             managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
                 animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelTurkeyBroilers;
+            managementPeriod.Name = H.Core.Properties.Resources.LabelTurkeyBroilers;
             managementPeriod.NumberOfDays = 56;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
 
             managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
                 animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelHeavyTurkeys;
+            managementPeriod.Name = H.Core.Properties.Resources.LabelHeavyTurkeys;
             managementPeriod.NumberOfDays = 84;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
@@ -242,7 +208,7 @@ namespace H.Core.Services.Animals
         {
             var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
                 animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelIncubation;
+            managementPeriod.Name = H.Core.Properties.Resources.LabelIncubation;
             managementPeriod.Start = new DateTime(DateTime.Now.Year, 1, 1);
             managementPeriod.NumberOfDays = 18;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
@@ -250,32 +216,32 @@ namespace H.Core.Services.Animals
 
             managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
                 animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelHatching;
+            managementPeriod.Name = H.Core.Properties.Resources.LabelHatching;
             managementPeriod.NumberOfDays = 3;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
 
             managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
                 animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelServicing;
+            managementPeriod.Name = H.Core.Properties.Resources.LabelServicing;
             managementPeriod.NumberOfDays = 1;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
 
             managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
                 animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelStorage;
+            managementPeriod.Name = H.Core.Properties.Resources.LabelStorage;
             managementPeriod.NumberOfDays = 1;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
         }
 
         public void ChickenMultiplierHatcheryPoultsManagementPeriod(Farm farm, AnimalGroup animalGroup,
-            ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
+    ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
             var managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
                 animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelIncubation;
+            managementPeriod.Name = H.Core.Properties.Resources.LabelIncubation;
             managementPeriod.Start = new DateTime(DateTime.Now.Year, 1, 1);
             managementPeriod.NumberOfDays = 25;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
@@ -283,24 +249,40 @@ namespace H.Core.Services.Animals
 
             managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
                 animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelHatching;
+            managementPeriod.Name = H.Core.Properties.Resources.LabelHatching;
             managementPeriod.NumberOfDays = 3;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
 
             managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
                 animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelServicing;
+            managementPeriod.Name = H.Core.Properties.Resources.LabelServicing;
             managementPeriod.NumberOfDays = 1;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
 
             managementPeriod = AddPoultryManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
                 animalGroupOnPropertyChanged);
-            managementPeriod.Name = Resources.LabelStorage;
+            managementPeriod.Name = H.Core.Properties.Resources.LabelStorage;
             managementPeriod.NumberOfDays = 1;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private ManagementPeriod AddPoultryManagementPeriodToAnimalGroup(Farm farm, AnimalGroup animalGroup, ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
+        {
+            var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+
+            _initializationService.InitializeDailyTanExcretion(managementPeriod);
+            _initializationService.InitializeAmmoniaEmissionFactorForManureStorage(managementPeriod);
+            _initializationService.InitializeAmmoniaEmissionFactorForLandApplication(managementPeriod);
+            _initializationService.InitializeAmmoniaEmissionFactorForHousing(managementPeriod);
+
+            return managementPeriod;
         }
 
         #endregion

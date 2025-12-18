@@ -5,7 +5,7 @@ namespace H.Core.Providers.Soil
     public class SmallAreaYieldData
     {
         /// <summary>
-        ///     The line number in the CSV
+        /// The line number in the CSV
         /// </summary>
         public int Id { get; set; }
 
@@ -17,8 +17,7 @@ namespace H.Core.Providers.Soil
 
         public override string ToString()
         {
-            return
-                $"{nameof(Year)}: {Year}, {nameof(Polygon)}: {Polygon}, {nameof(CropType)}: {CropType}, {nameof(Yield)}: {Yield}";
+            return $"{nameof(Year)}: {Year}, {nameof(Polygon)}: {Polygon}, {nameof(CropType)}: {CropType}, {nameof(Yield)}: {Yield}";
         }
     }
 }

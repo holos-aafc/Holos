@@ -1,7 +1,9 @@
-﻿namespace H.Core.Models
+﻿using Prism.Mvvm;
+
+namespace H.Core.Models
 {
     /// <summary>
-    ///     Class to specify the default visiblity of the ManureModelResultsView
+    /// Class to specify the default visiblity of the ManureModelResultsView
     /// </summary>
     public class ManureModelColumnsVisibility : ColumnVisibilityBase
     {
@@ -48,216 +50,186 @@
 
         public ManureModelColumnsVisibility()
         {
-            DefaultVisibility();
+            this.DefaultVisibility();
         }
-
+        
         public void DefaultVisibility()
         {
-            SetAllColumnsInvisible();
+            base.SetAllColumnsInvisible();
             //we can set them all visible for now
-            foreach (var prop in GetType().GetProperties()) prop.SetValue(this, true);
+            foreach (var prop in this.GetType().GetProperties())
+            {
+                prop.SetValue(this, true);
+            }
         }
 
         #endregion
 
         #region properties
-
         public bool ComponentName
         {
-            get => _componentName;
-            set => SetProperty(ref _componentName, value);
+            get { return _componentName; }
+            set { SetProperty(ref _componentName, value); }
         }
-
         public bool GroupName
         {
-            get => _groupName;
-            set => SetProperty(ref _groupName, value);
+            get { return _groupName; }
+            set { SetProperty(ref _groupName, value); }
         }
-
         public bool ManagementPeriod
         {
-            get => _managementPeriod;
-            set => SetProperty(ref _managementPeriod, value);
+            get { return _managementPeriod; }
+            set { SetProperty(ref _managementPeriod, value); }
         }
-
         public bool Month
         {
-            get => _month;
-            set => SetProperty(ref _month, value);
+            get { return _month; }
+            set { SetProperty(ref _month, value); }
         }
-
         public bool DaysInMonth
         {
-            get => _daysInMonth;
-            set => SetProperty(ref _daysInMonth, value);
+            get { return _daysInMonth; }
+            set { SetProperty(ref _daysInMonth, value); }
         }
-
         public bool HousingType
         {
-            get => _housingType;
-            set => SetProperty(ref _housingType, value);
+            get { return _housingType; }
+            set { SetProperty(ref _housingType, value); }
         }
-
         public bool PastureLocation
         {
-            get => _pastureLocation;
-            set => SetProperty(ref _pastureLocation, value);
+            get { return _pastureLocation; }
+            set { SetProperty(ref _pastureLocation, value); }
         }
-
         public bool DryMatterIntake
         {
-            get => _dryMatterIntake;
-            set => SetProperty(ref _dryMatterIntake, value);
+            get { return _dryMatterIntake; }
+            set { SetProperty(ref _dryMatterIntake, value); }
         }
-
         public bool ProteinIntake
         {
-            get => _proteinIntake;
-            set => SetProperty(ref _proteinIntake, value);
+            get { return _proteinIntake; }
+            set { SetProperty(ref _proteinIntake, value); }
         }
-
         public bool AmountCarbonFromBedding
         {
-            get => _amountCarbonFromBedding;
-            set => SetProperty(ref _amountCarbonFromBedding, value);
+            get { return _amountCarbonFromBedding; }
+            set { SetProperty(ref _amountCarbonFromBedding, value); }
         }
-
         public bool AmountNitrogenFromBedding
         {
-            get => _amountNitrogenFromBedding;
-            set => SetProperty(ref _amountNitrogenFromBedding, value);
+            get { return _amountNitrogenFromBedding; }
+            set { SetProperty(ref _amountNitrogenFromBedding, value); }
         }
-
-        public bool OrganicNitrogenInStoredManure
+        public bool OrganicNitrogenInStoredManure 
         {
-            get => _organicNitrogenInStoredManure;
-            set => SetProperty(ref _organicNitrogenInStoredManure, value);
+            get { return _organicNitrogenInStoredManure; }
+            set { SetProperty(ref _organicNitrogenInStoredManure, value); }
         }
-
-        public bool AmountOfNitrogenExcreted
+        public bool AmountOfNitrogenExcreted 
         {
-            get => _amountOfNitrogenExcreted;
-            set => SetProperty(ref _amountOfNitrogenExcreted, value);
+            get { return _amountOfNitrogenExcreted; }
+            set { SetProperty(ref _amountOfNitrogenExcreted, value); }
         }
-
-        public bool FecalNitrogenExcreted
+        public bool FecalNitrogenExcreted 
         {
-            get => _fecalNitrogenExcreted;
-            set => SetProperty(ref _fecalNitrogenExcreted, value);
+            get { return _fecalNitrogenExcreted; }
+            set { SetProperty(ref _fecalNitrogenExcreted, value); }
         }
-
-        public bool UrinaryNitrogenExcreted
+        public bool UrinaryNitrogenExcreted 
         {
-            get => _urinaryNitrogenExcretion;
-            set => SetProperty(ref _urinaryNitrogenExcretion, value);
+            get { return _urinaryNitrogenExcretion; }
+            set { SetProperty(ref _urinaryNitrogenExcretion, value); }
         }
-
         public bool FecalCarbonExcretion
         {
-            get => _fecalCarbonExcretion;
-            set => SetProperty(ref _fecalCarbonExcretion, value);
+            get { return _fecalCarbonExcretion; }
+            set { SetProperty(ref _fecalCarbonExcretion, value); }
         }
-
         public bool AmbientAirTemperatureAdjustmentForHousing
         {
-            get => _ambientAirTemperatureAdjustmentForHousing;
-            set => SetProperty(ref _ambientAirTemperatureAdjustmentForHousing, value);
+            get { return _ambientAirTemperatureAdjustmentForHousing; }
+            set { SetProperty(ref _ambientAirTemperatureAdjustmentForHousing, value); }
         }
-
         public bool AdjustedAmmoniaEmissionFactorForHousing
         {
-            get => _adjustedAmmoniaEmissionFactorForHousing;
-            set => SetProperty(ref _adjustedAmmoniaEmissionFactorForHousing, value);
+            get { return _adjustedAmmoniaEmissionFactorForHousing; }
+            set { SetProperty(ref _adjustedAmmoniaEmissionFactorForHousing, value); }
         }
-
         public bool MonthlyTanEnteringStorageSystem
         {
-            get => _monthlyTanEnteringStorageSystem;
-            set => SetProperty(ref _monthlyTanEnteringStorageSystem, value);
+            get { return _monthlyTanEnteringStorageSystem; }
+            set { SetProperty(ref _monthlyTanEnteringStorageSystem, value); }
         }
-
         public bool AdjustedAmountOfTanStoredInManure
         {
-            get => _adjustedAmountOfTanStoredInManure;
-            set => SetProperty(ref _adjustedAmountOfTanStoredInManure, value);
+            get { return _adjustedAmountOfTanStoredInManure; }
+            set { SetProperty(ref _adjustedAmountOfTanStoredInManure, value); }
         }
-
         public bool AmmoniaConcentrationInHousing
         {
-            get => _ammoniaConcentrationInHousing;
-            set => SetProperty(ref _ammoniaConcentrationInHousing, value);
+            get { return _ammoniaConcentrationInHousing; }
+            set { SetProperty(ref _ammoniaConcentrationInHousing, value); }
         }
-
         public bool AmmoniaEmissionFromHousing
         {
-            get => _ammoniaEmissionFromHousing;
-            set => SetProperty(ref _ammoniaEmissionFromHousing, value);
+            get { return _ammoniaEmissionFromHousing; }
+            set { SetProperty(ref _ammoniaEmissionFromHousing, value); }
         }
-
         public bool AmbientAirTemperatureAdjustedForStorage
         {
-            get => _ambientAirTemperatureAdjustedForStorage;
-            set => SetProperty(ref _ambientAirTemperatureAdjustedForStorage, value);
+            get { return _ambientAirTemperatureAdjustedForStorage; }
+            set { SetProperty(ref _ambientAirTemperatureAdjustedForStorage, value); }
         }
-
         public bool AdjustedAmmoniaEmissionFactorForStoredManure
         {
-            get => _adjustedAmmoniaEmissionFactorForStoredManure;
-            set => SetProperty(ref _adjustedAmmoniaEmissionFactorForStoredManure, value);
+            get { return _adjustedAmmoniaEmissionFactorForStoredManure; }
+            set { SetProperty(ref _adjustedAmmoniaEmissionFactorForStoredManure, value); }
         }
-
         public bool FractionOfManureVolatilized
         {
-            get => _fractionOfManureVolatilized;
-            set => SetProperty(ref _fractionOfManureVolatilized, value);
+            get { return _fractionOfManureVolatilized; }
+            set { SetProperty(ref _fractionOfManureVolatilized, value); }
         }
-
         public bool AmmoniaConcentrationInStorage
         {
-            get => _ammoniaConcentrationInStorage;
-            set => SetProperty(ref _ammoniaConcentrationInStorage, value);
+            get { return _ammoniaConcentrationInStorage; }
+            set { SetProperty(ref _ammoniaConcentrationInStorage, value); }
         }
-
         public bool AmmoniaEmissionFromStorage
         {
-            get => _ammoniaEmissionsFromStorage;
-            set => SetProperty(ref _ammoniaEmissionsFromStorage, value);
+            get { return _ammoniaEmissionsFromStorage; }
+            set { SetProperty(ref _ammoniaEmissionsFromStorage, value); }
         }
-
         public bool ManureCarbonToNitrogenRatio
         {
-            get => _manureCarbonToNitrogenRatio;
-            set => SetProperty(ref _manureCarbonToNitrogenRatio, value);
+            get { return _manureCarbonToNitrogenRatio; }
+            set { SetProperty(ref _manureCarbonToNitrogenRatio, value); }
         }
-
         public bool TotalCarbonInStoredManure
         {
-            get => _totalCarbonInStoredManure;
-            set => SetProperty(ref _totalCarbonInStoredManure, value);
+            get { return _totalCarbonInStoredManure; }
+            set { SetProperty(ref _totalCarbonInStoredManure, value); }
         }
-
         public bool MonthlyTanAvailableForLandApplication
         {
-            get => _monthlyTanAvailableForLandApplication;
-            set => SetProperty(ref _monthlyTanAvailableForLandApplication, value);
+            get { return _monthlyTanAvailableForLandApplication; }
+            set { SetProperty(ref _monthlyTanAvailableForLandApplication, value); }
         }
-
         public bool MonthlyOrganiceNitrogenAvailableForLandApplication
         {
-            get => _monthlyOrganicNitrogenAvailableForLandApplication;
-            set => SetProperty(ref _monthlyOrganicNitrogenAvailableForLandApplication, value);
+            get { return _monthlyOrganicNitrogenAvailableForLandApplication; }
+            set { SetProperty(ref _monthlyOrganicNitrogenAvailableForLandApplication, value); }
         }
-
         public bool TotalAvailableManureNitrogenInStoredManure
         {
-            get => _totalAvailableManureNitrogenInStoredManure;
-            set => SetProperty(ref _totalAvailableManureNitrogenInStoredManure, value);
+            get { return _totalAvailableManureNitrogenInStoredManure; }
+            set { SetProperty(ref _totalAvailableManureNitrogenInStoredManure, value); }
         }
-
-        public bool TotalVolumeOfManure
+        public bool TotalVolumeOfManure 
         {
-            get => _totalVolumeOfManure;
-            set => SetProperty(ref _totalVolumeOfManure, value);
+            get { return _totalVolumeOfManure; }
+            set { SetProperty(ref _totalVolumeOfManure, value); }
         }
 
         public bool TotalIndirectEmissionsFromLandAppliedManure

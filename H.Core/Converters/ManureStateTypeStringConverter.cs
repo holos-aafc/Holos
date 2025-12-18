@@ -12,7 +12,7 @@ namespace H.Core.Converters
                 case "pasture":
                 case "pasturerangepaddock":
                     return ManureStateType.Pasture;
-
+                    
                 case "deepbedding":
                     return ManureStateType.DeepBedding;
 
@@ -66,9 +66,8 @@ namespace H.Core.Converters
                     return ManureStateType.DailySpread;
 
                 default:
-                    Trace.TraceError(
-                        $"{nameof(ManureStateTypeStringConverter)}.{nameof(Convert)} was not able to convert" +
-                        $" ManureStateType: {input}. Returning {ManureStateType.NotSelected}");
+                    Trace.TraceError($"{nameof(ManureStateTypeStringConverter)}.{nameof(Convert)} was not able to convert" +
+                                     $" ManureStateType: {input}. Returning {ManureStateType.NotSelected}");
                     return ManureStateType.NotSelected;
             }
         }
