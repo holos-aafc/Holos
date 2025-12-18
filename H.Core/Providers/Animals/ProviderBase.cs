@@ -10,6 +10,15 @@ namespace H.Core.Providers.Animals
     /// </summary>
     public abstract class ProviderBase
     {
+        #region Fields
+
+        protected readonly AnimalTypeStringConverter _animalTypeStringConverter;
+        protected readonly ProvinceStringConverter _provinceStringConverter;
+        protected readonly ComponentTypeStringConverter _componentTypeStringConverter;
+        protected readonly ProductionStageStringConverter _productionStageStringConverter;
+
+        #endregion
+
         #region Constructors
 
         protected ProviderBase()
@@ -22,12 +31,19 @@ namespace H.Core.Providers.Animals
 
         #endregion
 
-        #region Fields
+        #region Properties
 
-        protected readonly AnimalTypeStringConverter _animalTypeStringConverter;
-        protected readonly ProvinceStringConverter _provinceStringConverter;
-        protected readonly ComponentTypeStringConverter _componentTypeStringConverter;
-        protected readonly ProductionStageStringConverter _productionStageStringConverter;
+        #endregion
+
+        #region Public Methods
+
+        #endregion
+
+        #region Private Methods
+
+        #endregion
+
+        #region Event Handlers
 
         #endregion
     }

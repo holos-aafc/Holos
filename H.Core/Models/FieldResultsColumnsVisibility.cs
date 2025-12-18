@@ -1,48 +1,10 @@
-﻿namespace H.Core.Models
+﻿using Prism.Mvvm;
+using System;
+
+namespace H.Core.Models
 {
     public class FieldResultsColumnsVisibility : ColumnVisibilityBase
     {
-        #region Constructors
-
-        public FieldResultsColumnsVisibility()
-        {
-            DefaultVisibility();
-        }
-
-        #endregion
-
-        #region Public Methods
-
-        public void DefaultVisibility()
-        {
-            // Remove current selections
-            SetAllColumnsInvisible();
-
-            Name = true;
-            Year = true;
-            CropType = true;
-            AboveGroundCarbonInput = true;
-            BelowGrounCarbonInput = true;
-            ManureCarbonInput = true;
-            DigestateCarbonInput = true;
-            SoilCarbon = true;
-            ChangeInCarbon = true;
-
-            TotalDirectNitrousOxidePerHectare = true;
-            TotalDirectNitrousOxidePerHectareExcludingRemainingAmounts = true;
-
-            TotalIndirectNitrousOxidePerHectare = true;
-            TotalIndirectNitrousOxidePerHectareExcludingRemainingAmounts = true;
-
-            DirectNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemainingAmounts = true;
-            TotalIndirectNitrousOxideForAreaExcludingRemainingAmounts = true;
-            IndirectNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemaining = true;
-
-            IndirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForArea = true;
-        }
-
-        #endregion
-
         #region Fields
 
         private bool _name;
@@ -130,409 +92,389 @@
 
         #endregion
 
+        #region Constructors
+        public FieldResultsColumnsVisibility()
+        {
+            this.DefaultVisibility();
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public void DefaultVisibility()
+        {
+            // Remove current selections
+            base.SetAllColumnsInvisible();
+
+            this.Name = true;
+            this.Year = true;
+            this.CropType = true;
+            this.AboveGroundCarbonInput = true;
+            this.BelowGrounCarbonInput = true;
+            this.ManureCarbonInput = true;
+            this.DigestateCarbonInput = true;
+            this.SoilCarbon = true;
+            this.ChangeInCarbon = true;
+
+            this.TotalDirectNitrousOxidePerHectare = true;
+            this.TotalDirectNitrousOxidePerHectareExcludingRemainingAmounts = true;
+
+            this.TotalIndirectNitrousOxidePerHectare = true;
+            this.TotalIndirectNitrousOxidePerHectareExcludingRemainingAmounts = true;
+
+            this.DirectNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemainingAmounts = true;
+            this.TotalIndirectNitrousOxideForAreaExcludingRemainingAmounts = true;
+            this.IndirectNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemaining = true;
+
+            this.IndirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForArea = true;
+        }
+
+        #endregion
+
         #region Properties
 
         public bool Name
         {
-            get => _name;
-            set => SetProperty(ref _name, value);
+            get { return _name; }
+            set { SetProperty(ref _name, value); }
         }
-
         public bool TimePeriod
         {
-            get => _timePeriod;
-            set => SetProperty(ref _timePeriod, value);
+            get { return _timePeriod; }
+            set { SetProperty(ref _timePeriod, value); }
         }
-
         public bool Year
         {
-            get => _year;
-            set => SetProperty(ref _year, value);
+            get { return _year; }
+            set { SetProperty(ref _year, value); }
         }
-
         public bool CropType
         {
-            get => _cropType;
-            set => SetProperty(ref _cropType, value);
+            get { return _cropType; }
+            set { SetProperty(ref _cropType, value); }
         }
-
         public bool ClimateParameter
         {
-            get => _climateParameter;
-            set => SetProperty(ref _climateParameter, value);
+            get { return _climateParameter; }
+            set { SetProperty(ref _climateParameter, value); }
         }
-
         public bool TillageFactor
         {
-            get => _tillageFactor;
-            set => SetProperty(ref _tillageFactor, value);
+            get { return _tillageFactor; }
+            set { SetProperty(ref _tillageFactor, value); }
         }
-
         public bool ManagementFactor
         {
-            get => _managementFactor;
-            set => SetProperty(ref _managementFactor, value);
+            get { return _managementFactor; }
+            set { SetProperty(ref _managementFactor, value); }
         }
-
         public bool PlantCarbonInAgriculturalProduct
         {
-            get => _plantCarbonInAgriculturalProduct;
-            set => SetProperty(ref _plantCarbonInAgriculturalProduct, value);
+            get { return _plantCarbonInAgriculturalProduct; }
+            set { SetProperty(ref _plantCarbonInAgriculturalProduct, value); }
         }
-
         public bool CarbonInputFromProduct
         {
-            get => _carbonInputFromProduct;
-            set => SetProperty(ref _carbonInputFromProduct, value);
+            get { return _carbonInputFromProduct; }
+            set { SetProperty(ref _carbonInputFromProduct, value); }
         }
-
         public bool CarbonInputFromRoots
         {
-            get => _carbonInputFromRoots;
-            set => SetProperty(ref _carbonInputFromRoots, value);
+            get { return _carbonInputFromRoots; }
+            set { SetProperty(ref _carbonInputFromRoots, value); }
         }
-
         public bool CarbonInputFromStraw
         {
-            get => _carbonInputFromStraw;
-            set => SetProperty(ref _carbonInputFromStraw, value);
+            get { return _carbonInputFromStraw; }
+            set { SetProperty(ref _carbonInputFromStraw, value); }
         }
-
         public bool CarbonInputFromExtraRoots
         {
-            get => _carbonInputFromExtraRoots;
-            set => SetProperty(ref _carbonInputFromExtraRoots, value);
+            get { return _carbonInputFromExtraRoots; }
+            set { SetProperty(ref _carbonInputFromExtraRoots, value); }
         }
-
         public bool ManureCarbonInput
         {
-            get => _manureCarbonInput;
-            set => SetProperty(ref _manureCarbonInput, value);
+            get { return _manureCarbonInput; }
+            set { SetProperty(ref _manureCarbonInput, value); }
         }
-
         public bool AboveGroundCarbonInput
         {
-            get => _aboveGroundCarbonInput;
-            set => SetProperty(ref _aboveGroundCarbonInput, value);
+            get { return _aboveGroundCarbonInput; }
+            set { SetProperty(ref _aboveGroundCarbonInput, value); }
         }
-
         public bool BelowGrounCarbonInput
         {
-            get => _belowGroundCarbonInput;
-            set => SetProperty(ref _belowGroundCarbonInput, value);
+            get { return _belowGroundCarbonInput; }
+            set { SetProperty(ref _belowGroundCarbonInput, value); }
         }
-
         public bool YoungPoolSoilCarbonAboveGround
         {
-            get => _youngPoolSoilCarbonAboveGround;
-            set => SetProperty(ref _youngPoolSoilCarbonAboveGround, value);
+            get { return _youngPoolSoilCarbonAboveGround; }
+            set { SetProperty(ref _youngPoolSoilCarbonAboveGround, value); }
         }
-
         public bool YoungPoolSoilCarbonBelowGround
         {
-            get => _youngPoolSoilCarbonBelowGround;
-            set => SetProperty(ref _youngPoolSoilCarbonBelowGround, value);
+            get { return _youngPoolSoilCarbonBelowGround; }
+            set { SetProperty(ref _youngPoolSoilCarbonBelowGround, value); }
         }
-
         public bool YoungPoolManureCarbon
         {
-            get => _youngPoolManureCarbon;
-            set => SetProperty(ref _youngPoolManureCarbon, value);
+            get { return _youngPoolManureCarbon; }
+            set { SetProperty(ref _youngPoolManureCarbon, value); }
         }
-
         public bool AverageSoilCarbonAcrossAllFieldsInFarm
         {
-            get => _averageSoilCarbonAcrossAllFieldsInFarm;
-            set => SetProperty(ref _averageSoilCarbonAcrossAllFieldsInFarm, value);
+            get { return _averageSoilCarbonAcrossAllFieldsInFarm; }
+            set { SetProperty(ref _averageSoilCarbonAcrossAllFieldsInFarm, value); }
         }
-
         public bool SoilCarbon
         {
-            get => _soilCarbon;
-            set => SetProperty(ref _soilCarbon, value);
+            get { return _soilCarbon; }
+            set { SetProperty(ref _soilCarbon, value); }
         }
-
         public bool OldPoolSoilCarbon
         {
-            get => _oldPoolSoilCarbon;
-            set => SetProperty(ref _oldPoolSoilCarbon, value);
+            get { return _oldPoolSoilCarbon; }
+            set { SetProperty(ref _oldPoolSoilCarbon, value); }
         }
-
         public bool ChangeInCarbon
         {
-            get => _ChangeInCarbon;
-            set => SetProperty(ref _ChangeInCarbon, value);
+            get { return _ChangeInCarbon; }
+            set { SetProperty(ref _ChangeInCarbon, value); }
         }
 
         public bool SyntheticInputsBeforeAdjustment
         {
-            get => _syntheticInputsBeforeAdjustment;
-            set => SetProperty(ref _syntheticInputsBeforeAdjustment, value);
+            get { return _syntheticInputsBeforeAdjustment; }
+            set { SetProperty(ref _syntheticInputsBeforeAdjustment, value); }
         }
-
         public bool AboveGroundNitrogenResidueForCrop
         {
-            get => _aboveGroundNitrogenResidueForCrop;
-            set => SetProperty(ref _aboveGroundNitrogenResidueForCrop, value);
+            get { return _aboveGroundNitrogenResidueForCrop; }
+            set { SetProperty(ref _aboveGroundNitrogenResidueForCrop, value); }
         }
-
         public bool BelowGroundResidueNitrogenForCrop
         {
-            get => _belowGroundResidueNitrogenForCrop;
-            set => SetProperty(ref _belowGroundResidueNitrogenForCrop, value);
+            get { return _belowGroundResidueNitrogenForCrop; }
+            set { SetProperty(ref _belowGroundResidueNitrogenForCrop, value); }
         }
-
         public bool AboveGroundResiduePool_AGresidueN
         {
-            get => _aboveGroundResiduePool_AGresidueN;
-            set => SetProperty(ref _aboveGroundResiduePool_AGresidueN, value);
+            get { return _aboveGroundResiduePool_AGresidueN; }
+            set { SetProperty(ref _aboveGroundResiduePool_AGresidueN, value); }
         }
-
         public bool BelowGroundResiduePool_BGresidueN
         {
-            get => _belowGroundResiduePool_BGredidueN;
-            set => SetProperty(ref _belowGroundResiduePool_BGredidueN, value);
+            get { return _belowGroundResiduePool_BGredidueN; }
+            set { SetProperty(ref _belowGroundResiduePool_BGredidueN, value); }
         }
-
         public bool CropResiduesBeforeAdjustment
         {
-            get => _cropResiduesBeforeAdjustment;
-            set => SetProperty(ref _cropResiduesBeforeAdjustment, value);
+            get { return _cropResiduesBeforeAdjustment; }
+            set { SetProperty(ref _cropResiduesBeforeAdjustment, value); }
         }
-
         public bool OrganicNitrogenResiduesBeforeAdjustment
         {
-            get => _organicNitrogenResiduesBeforeAdjustment;
-            set => SetProperty(ref _organicNitrogenResiduesBeforeAdjustment, value);
+            get { return _organicNitrogenResiduesBeforeAdjustment; }
+            set { SetProperty(ref _organicNitrogenResiduesBeforeAdjustment, value); }
         }
-
         public bool CropNitrogenDemand
         {
-            get => _cropNitrogenDemand;
-            set => SetProperty(ref _cropNitrogenDemand, value);
+            get { return _cropNitrogenDemand; }
+            set { SetProperty(ref _cropNitrogenDemand, value); }
         }
-
         public bool NMinFromDecompositionOfOldCarbon
         {
-            get => _nMinFromDecompositionOfOldCarbon;
-            set => SetProperty(ref _nMinFromDecompositionOfOldCarbon, value);
+            get { return _nMinFromDecompositionOfOldCarbon; }
+            set { SetProperty(ref _nMinFromDecompositionOfOldCarbon, value); }
         }
-
         public bool OldPoolNitrogenRequirement
         {
-            get => _oldPoolNitrogenRequirement;
-            set => SetProperty(ref _oldPoolNitrogenRequirement, value);
+            get { return _oldPoolNitrogenRequirement; }
+            set { SetProperty(ref _oldPoolNitrogenRequirement, value); }
         }
-
         public bool MicrobialPoolAfterCloseOfBudget
         {
-            get => _microbialPoolAfterCloseOfBudget;
-            set => SetProperty(ref _microbialPoolAfterCloseOfBudget, value);
+            get { return _microbialPoolAfterCloseOfBudget; }
+            set { SetProperty(ref _microbialPoolAfterCloseOfBudget, value); }
         }
-
         public bool MicrobialPoolAfterOldPoolDemandAdjustment
         {
-            get => _microbialPoolAfterOldPoolDemandAdjustment;
-            set => SetProperty(ref _microbialPoolAfterOldPoolDemandAdjustment, value);
+            get { return _microbialPoolAfterOldPoolDemandAdjustment; }
+            set { SetProperty(ref _microbialPoolAfterOldPoolDemandAdjustment, value); }
         }
-
         public bool MicrobialPoolAfterCropDemandAdjustment
         {
-            get => _microbialPoolAfterCropDemandAdjustment;
-            set => SetProperty(ref _microbialPoolAfterCropDemandAdjustment, value);
+            get { return _microbialPoolAfterCropDemandAdjustment; }
+            set { SetProperty(ref _microbialPoolAfterCropDemandAdjustment, value); }
         }
-
         public bool MineralNitrogenPoolNMineralN
         {
-            get => _mineralNitrogenPoolNMineralN;
-            set => SetProperty(ref _mineralNitrogenPoolNMineralN, value);
+            get { return _mineralNitrogenPoolNMineralN; }
+            set { SetProperty(ref _mineralNitrogenPoolNMineralN, value); }
         }
-
         public bool MicrobeNitrogenPoolNMicrobeN
         {
-            get => _microbeNitrogenPoolNMicrobeN;
-            set => SetProperty(ref _microbeNitrogenPoolNMicrobeN, value);
+            get { return _microbeNitrogenPoolNMicrobeN; }
+            set { SetProperty(ref _microbeNitrogenPoolNMicrobeN, value); }
         }
-
         public bool MicrobeDeath
         {
-            get => _microbeDeath;
-            set => SetProperty(ref _microbeDeath, value);
+            get { return _microbeDeath; }
+            set { SetProperty(ref _microbeDeath, value); }
         }
-
         public bool MineralNitrogenBalance
         {
-            get => _mineralNitrogenBalance;
-            set => SetProperty(ref _mineralNitrogenBalance, value);
+            get { return _mineralNitrogenBalance; }
+            set { SetProperty(ref _mineralNitrogenBalance, value); }
         }
-
         public bool MicrobialNitrogenBalance
         {
-            get => _microbialNitrogenBalance;
-            set => SetProperty(ref _microbialNitrogenBalance, value);
+            get { return _microbialNitrogenBalance; }
+            set { SetProperty(ref _microbialNitrogenBalance, value); }
         }
-
         public bool TotalNitrogenInputs
         {
-            get => _totalNitrogenInputs;
-            set => SetProperty(ref _totalNitrogenInputs, value);
+            get { return _totalNitrogenInputs; }
+            set { SetProperty(ref _totalNitrogenInputs, value); }
         }
-
         public bool TotalNitrogenEmissions
         {
-            get => _totalNitrogenEmissions;
-            set => SetProperty(ref _totalNitrogenEmissions, value);
+            get { return _totalNitrogenEmissions; }
+            set { SetProperty(ref _totalNitrogenEmissions, value); }
         }
-
         public bool TotalNitrogenOutputs
         {
-            get => _totalNitrogenOutputs;
-            set => SetProperty(ref _totalNitrogenOutputs, value);
+            get { return _totalNitrogenOutputs; }
+            set { SetProperty(ref _totalNitrogenOutputs, value); }
         }
-
         public bool TotalUptake
         {
-            get => _totalUptake;
-            set => SetProperty(ref _totalUptake, value);
+            get { return _totalUptake; }
+            set { SetProperty(ref _totalUptake, value); }
         }
-
         public bool DifferenceBetweenInputsAndOutputs
         {
-            get => _differenceBetweenInputsAndOutputs;
-            set => SetProperty(ref _differenceBetweenInputsAndOutputs, value);
+            get { return _differenceBetweenInputsAndOutputs; }
+            set { SetProperty(ref _differenceBetweenInputsAndOutputs, value); }
         }
-
         public bool SumOfMineralAndMicrobialPools
         {
-            get => _sumOfMineralAndMicrobialPools;
-            set => SetProperty(ref _sumOfMineralAndMicrobialPools, value);
+            get { return _sumOfMineralAndMicrobialPools; }
+            set { SetProperty(ref _sumOfMineralAndMicrobialPools, value); }
         }
-
         public bool Overflow
         {
-            get => _overflow;
-            set => SetProperty(ref _overflow, value);
+            get { return _overflow; }
+            set { SetProperty(ref _overflow, value); }
         }
-
         public bool Ratio
         {
-            get => _ratio;
-            set => SetProperty(ref _ratio, value);
+            get { return _ratio; }
+            set { SetProperty(ref _ratio, value); }
         }
-
         public bool TotalDirectNitrousOxideForArea
         {
-            get => _totalDirectNitrousOxideForArea;
-            set => SetProperty(ref _totalDirectNitrousOxideForArea, value);
+            get { return _totalDirectNitrousOxideForArea; }
+            set { SetProperty(ref _totalDirectNitrousOxideForArea, value); }
         }
-
         public bool DirectNitrousOxideEmissionsFromSyntheticNitrogenForArea
         {
-            get => _directNitrousOxideEmissionsFromSyntheticNitrogenForArea;
-            set => SetProperty(ref _directNitrousOxideEmissionsFromSyntheticNitrogenForArea, value);
+            get { return _directNitrousOxideEmissionsFromSyntheticNitrogenForArea; }
+            set { SetProperty(ref _directNitrousOxideEmissionsFromSyntheticNitrogenForArea, value); }
         }
-
         public bool DirectNitrousOxideEmissionsCropResiduesNitrogenForArea
         {
-            get => _directNitrousOxideEmissionsFromCropResiduesForArea;
-            set => SetProperty(ref _directNitrousOxideEmissionsFromCropResiduesForArea, value);
+            get { return _directNitrousOxideEmissionsFromCropResiduesForArea; }
+            set { SetProperty(ref _directNitrousOxideEmissionsFromCropResiduesForArea, value); }
         }
-
         public bool DirectNitrousOxideEmissionsFromMineralizedNitrogenForArea
         {
-            get => _directNitrousOxideEmissionsFromMineralizedNitrogenForArea;
-            set => SetProperty(ref _directNitrousOxideEmissionsFromMineralizedNitrogenForArea, value);
+            get { return _directNitrousOxideEmissionsFromMineralizedNitrogenForArea; }
+            set { SetProperty(ref _directNitrousOxideEmissionsFromMineralizedNitrogenForArea, value); }
         }
-
         public bool DirectNitrousOxideEmissionsFromOrganicNitrogenForArea
         {
-            get => _directNitrousOxideEmissionsFromOrganicNitrogenForArea;
-            set => SetProperty(ref _directNitrousOxideEmissionsFromOrganicNitrogenForArea, value);
+            get { return _directNitrousOxideEmissionsFromOrganicNitrogenForArea; }
+            set { SetProperty(ref _directNitrousOxideEmissionsFromOrganicNitrogenForArea, value); }
         }
 
         public bool DirectNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemainingAmounts
         {
-            get => _directNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemainingAmounts;
-            set => SetProperty(ref _directNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemainingAmounts,
-                value);
+            get { return _directNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemainingAmounts; }
+            set { SetProperty(ref _directNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemainingAmounts, value); }
         }
-
         public bool IndirectNitrousOxideEmissionsFromSyntheticNitrogenForArea
         {
-            get => _indirectNitrousOxideEmissionsFromSyntheticNitrogenForArea;
-            set => SetProperty(ref _indirectNitrousOxideEmissionsFromSyntheticNitrogenForArea, value);
+            get { return _indirectNitrousOxideEmissionsFromSyntheticNitrogenForArea; }
+            set { SetProperty(ref _indirectNitrousOxideEmissionsFromSyntheticNitrogenForArea, value); }
         }
-
         public bool IndirectNitrousOxideEmissionsCropResiduesNitrogenForArea
         {
-            get => _indirectNitrousOxideEmissionsFromCropResiduesForArea;
-            set => SetProperty(ref _indirectNitrousOxideEmissionsFromCropResiduesForArea, value);
+            get { return _indirectNitrousOxideEmissionsFromCropResiduesForArea; }
+            set { SetProperty(ref _indirectNitrousOxideEmissionsFromCropResiduesForArea, value); }
         }
-
         public bool IndirectNitrousOxideEmissionsFromMineralizedNitrogenForArea
         {
-            get => _indirectNitrousOxideEmissionsFromMineralizedNitrogenForArea;
-            set => SetProperty(ref _indirectNitrousOxideEmissionsFromMineralizedNitrogenForArea, value);
+            get { return _indirectNitrousOxideEmissionsFromMineralizedNitrogenForArea; }
+            set { SetProperty(ref _indirectNitrousOxideEmissionsFromMineralizedNitrogenForArea, value); }
         }
-
         public bool IndirectNitrousOxideEmissionsFromOrganicNitrogenForArea
         {
-            get => _indirectNitrousOxideEmissionsFromOrganicNitrogenForArea;
-            set => SetProperty(ref _indirectNitrousOxideEmissionsFromOrganicNitrogenForArea, value);
+            get { return _indirectNitrousOxideEmissionsFromOrganicNitrogenForArea; }
+            set { SetProperty(ref _indirectNitrousOxideEmissionsFromOrganicNitrogenForArea, value); }
         }
 
         public bool IndirectNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemaining
         {
-            get => _indirectNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemaining;
-            set => SetProperty(ref _indirectNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemaining, value);
+            get { return _indirectNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemaining; }
+            set { SetProperty(ref _indirectNitrousOxideEmissionsFromOrganicNitrogenForAreaExcludingRemaining, value); }
         }
 
         public bool IndirectNitrousOxideEmissionsFromVolatilizationOfSyntheticNitrogenForArea
         {
-            get => _indirectNitrousOxideEmissionsFromVolatilizationOfSyntheticNitrogenForArea;
-            set => SetProperty(ref _indirectNitrousOxideEmissionsFromVolatilizationOfSyntheticNitrogenForArea, value);
+            get { return _indirectNitrousOxideEmissionsFromVolatilizationOfSyntheticNitrogenForArea; }
+            set { SetProperty(ref _indirectNitrousOxideEmissionsFromVolatilizationOfSyntheticNitrogenForArea, value); }
         }
 
         public bool IndirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForArea
         {
-            get => _indirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForArea;
-            set => SetProperty(ref _indirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForArea, value);
+            get { return _indirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForArea; }
+            set { SetProperty(ref _indirectNitrousOxideEmissionsFromVolatilizationOfOrganicNitrogenForArea, value); }
         }
 
         public bool TotalIndirectNitrousOxideForArea
         {
-            get => _totalIndirectNitrousOxideForArea;
-            set => SetProperty(ref _totalIndirectNitrousOxideForArea, value);
+            get { return _totalIndirectNitrousOxideForArea; }
+            set { SetProperty(ref _totalIndirectNitrousOxideForArea, value); }
         }
 
         public bool TotalIndirectNitrousOxideForAreaExcludingRemainingAmounts
         {
-            get => _totalIndirectNitrousOxideForAreaExcludingRemainingAmounts;
-            set => SetProperty(ref _totalIndirectNitrousOxideForAreaExcludingRemainingAmounts, value);
+            get { return _totalIndirectNitrousOxideForAreaExcludingRemainingAmounts; }
+            set { SetProperty(ref _totalIndirectNitrousOxideForAreaExcludingRemainingAmounts, value); }
         }
-
         public bool TotalNitricOxideForArea
         {
-            get => _totalNitricOxideForArea;
-            set => SetProperty(ref _totalNitricOxideForArea, value);
+            get { return _totalNitricOxideForArea; }
+            set { SetProperty(ref _totalNitricOxideForArea, value); }
         }
-
         public bool TotalNitrateLeachingForArea
         {
-            get => _totalNitrateLeachingForArea;
-            set => SetProperty(ref _totalNitrateLeachingForArea, value);
+            get { return _totalNitrateLeachingForArea; }
+            set { SetProperty(ref _totalNitrateLeachingForArea, value); }
         }
-
         public bool TotalAmmoniaForArea
         {
-            get => _totalAmmoniaForArea;
-            set => SetProperty(ref _totalAmmoniaForArea, value);
+            get { return _totalAmmoniaForArea; }
+            set { SetProperty(ref _totalAmmoniaForArea, value); }
         }
-
         public bool DenitrificationArea
         {
-            get => _denitrificationForArea;
-            set => SetProperty(ref _denitrificationForArea, value);
+            get { return _denitrificationForArea; }
+            set { SetProperty(ref _denitrificationForArea, value); }
         }
 
         public bool PercentageOfProductReturned
@@ -604,9 +546,10 @@
         public bool DirectNitrousOxideEmissionsFromExportedCropResidues
         {
             get => _directNitrousOxideEmissionsFromExportedCropResidues;
-            set => SetProperty(ref _directNitrousOxideEmissionsFromExportedCropResidues, value);
+            set => SetProperty(ref _directNitrousOxideEmissionsFromExportedCropResidues, value); 
         }
 
         #endregion
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using H.Core.Enumerations;
+﻿using System;
+using H.Core.Enumerations;
 
 namespace H.Core.Providers.Climate
 {

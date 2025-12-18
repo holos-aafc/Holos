@@ -39,6 +39,6 @@ namespace H.Core.Enumerations
         Peat,
 
         [LocalizedDescription("Hemp", typeof(Resources))]
-        Hemp
+        Hemp,
     }
 }

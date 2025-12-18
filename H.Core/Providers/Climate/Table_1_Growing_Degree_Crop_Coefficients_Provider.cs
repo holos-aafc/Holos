@@ -1,17 +1,19 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using H.Content;
+﻿using H.Content;
 using H.Core.Converters;
+using H.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using H.Core.Enumerations;
 using H.Core.Tools;
-using H.Infrastructure;
 
 namespace H.Core.Providers.Climate
 {
     /// <summary>
-    ///     Table 1. Values for the coefficients a, b, c, d, and e required to calculate growing degree day driven crop
-    ///     coefficients (Kc) (from Martel et al. 2021)
+    /// Table 1. Values for the coefficients a, b, c, d, and e required to calculate growing degree day driven crop coefficients (Kc) (from Martel et al. 2021)
     /// </summary>
     public class Table_1_Growing_Degree_Crop_Coefficients_Provider
     {
@@ -21,12 +23,11 @@ namespace H.Core.Providers.Climate
         {
             HTraceListener.AddTraceListener();
 
-            _cache = BuildCache();
+            _cache = this.BuildCache();
         }
 
         /// <summary>
-        ///     Read the file once when the class/instance is constructed. When clients call to get values from the table/file, we
-        ///     can go directly to the cached results instead of reading the file again.
+        /// Read the file once when the class/instance is constructed. When clients call to get values from the table/file, we can go directly to the cached results instead of reading the file again.
         /// </summary>
         /// <returns></returns>
         private List<Table_1_Growing_Degree_Crop_Coefficients_Data> BuildCache()
@@ -40,18 +41,17 @@ namespace H.Core.Providers.Climate
 
             foreach (var line in fileLines.Skip(2))
             {
-                var data = new Table_1_Growing_Degree_Crop_Coefficients_Data
+                var data = new Table_1_Growing_Degree_Crop_Coefficients_Data()
                 {
                     Crop = converter.Convert(line[0]),
-                    A = double.TryParse(line[1], NumberStyles.Any, cultureInfo, out parseResult) ? parseResult : 0,
-                    B = double.TryParse(line[2], NumberStyles.Any, cultureInfo, out parseResult) ? parseResult : 0,
-                    C = double.TryParse(line[3], NumberStyles.Any, cultureInfo, out parseResult) ? parseResult : 0,
-                    D = double.TryParse(line[4], NumberStyles.Any, cultureInfo, out parseResult) ? parseResult : 0,
-                    E = double.TryParse(line[5], NumberStyles.Any, cultureInfo, out parseResult) ? parseResult : 0
+                    A = double.TryParse(line[1], System.Globalization.NumberStyles.Any, cultureInfo, out parseResult) ? parseResult : 0,
+                    B = double.TryParse(line[2], System.Globalization.NumberStyles.Any, cultureInfo, out parseResult) ? parseResult : 0,
+                    C = double.TryParse(line[3], System.Globalization.NumberStyles.Any, cultureInfo, out parseResult) ? parseResult : 0,
+                    D = double.TryParse(line[4], System.Globalization.NumberStyles.Any, cultureInfo, out parseResult) ? parseResult : 0,
+                    E = double.TryParse(line[5], System.Globalization.NumberStyles.Any, cultureInfo, out parseResult) ? parseResult : 0,
                 };
                 resultList.Add(data);
             }
-
             return resultList;
         }
 
@@ -62,17 +62,40 @@ namespace H.Core.Providers.Climate
 
         public Table_1_Growing_Degree_Crop_Coefficients_Data GetByCropType(CropType cropType)
         {
+            /*
+             * Some of the default Holos crop types don't have direct matches in the table. Closest equivalents are used instead.
+             */
+
             var result = _cache.FirstOrDefault(x => x.Crop == cropType);
-            if (result != null) return result;
-            if (cropType.IsPulseCrop()) return _cache.SingleOrDefault(x => x.Crop == CropType.FabaBeans);
+            if (result != null)
+            {
+                return result;
+            }
+            if (cropType.IsPulseCrop())
+            {
+                return _cache.SingleOrDefault(x => x.Crop == CropType.FabaBeans);
+            }
+            else if (cropType.IsSmallGrains())
+            {
+                return _cache.SingleOrDefault(x => x.Crop == CropType.MaltBarley);
+            }
+            else if (cropType.IsOilSeed())
+            {
+                return _cache.SingleOrDefault(x => x.Crop == CropType.Canola);
+            }
+            else if (cropType.IsOtherFieldCrop())
+            {
+                return _cache.SingleOrDefault(x => x.Crop == CropType.SorghumSudanGrass);
+            }
+            else if (cropType == CropType.GrassSilage)
+            {
+                return _cache.SingleOrDefault(x => x.Crop == CropType.GrassHay);
+            }
+            else
+            {
+                return new Table_1_Growing_Degree_Crop_Coefficients_Data();
+            }
 
-            if (cropType.IsSmallGrains()) return _cache.SingleOrDefault(x => x.Crop == CropType.MaltBarley);
-
-            if (cropType.IsOilSeed()) return _cache.SingleOrDefault(x => x.Crop == CropType.Canola);
-
-            if (cropType.IsOtherFieldCrop()) return _cache.SingleOrDefault(x => x.Crop == CropType.SorghumSudanGrass);
-
-            return new Table_1_Growing_Degree_Crop_Coefficients_Data();
         }
     }
 }

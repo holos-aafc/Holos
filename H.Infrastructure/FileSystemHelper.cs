@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace H.Infrastructure
 {
@@ -16,8 +20,7 @@ namespace H.Infrastructure
         //
         // 'isRecursiveScan' a boolean allowing me to accept subfolder scans
         //
-        public static StringCollection ListAllFiles(StringCollection allFiles, string path, string ext,
-            bool isRecursiveScan)
+        public static StringCollection ListAllFiles(StringCollection allFiles, string path, string ext, bool isRecursiveScan)
         {
             // listFilesCurrDir: Table containing the list of files in the 'path' folder
             string[] listFilesCurrDir;
@@ -27,16 +30,20 @@ namespace H.Infrastructure
             }
             catch (Exception)
             {
+
                 return null;
             }
 
             // read the array 'listFilesCurrDir'
-            foreach (var rowFile in listFilesCurrDir)
+            foreach (string rowFile in listFilesCurrDir)
+            {
                 // If the file is not already in the 'allFiles' list
                 if (allFiles.Contains(rowFile) == false)
+                {
                     // Add the file (at least its address) to 'allFiles'
                     allFiles.Add(rowFile);
-
+                }
+            }
             // Clear the 'listFilesCurrDir' table for the next list of subfolders
             listFilesCurrDir = null;
 
@@ -44,33 +51,35 @@ namespace H.Infrastructure
             if (isRecursiveScan)
             {
                 // List all the subfolders present in the 'path'
-                var listDirCurrDir = Directory.GetDirectories(path);
+                string[] listDirCurrDir = Directory.GetDirectories(path);
 
                 // if there are subfolders (if the list is not empty)
                 if (listDirCurrDir.Length != 0)
+                {
                     // read the array 'listDirCurrDir'
-                    foreach (var rowDir in listDirCurrDir)
+                    foreach (string rowDir in listDirCurrDir)
+                    {
                         // Restart the procedure to scan each subfolder
                         ListAllFiles(allFiles, rowDir, ext, isRecursiveScan);
+                    }
+                }
 
                 // Clear the 'listDirCurrDir' table for the next list of subfolders
                 listDirCurrDir = null;
-            }
 
+            }
             // return 'allFiles'
             return allFiles;
         }
 
-        public static bool IsFileInUse(string path)
+        public static  bool IsFileInUse(string path)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentException("'path' cannot be null or empty.", "path");
 
             try
             {
-                using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                {
-                }
+                using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read)) { }
             }
             catch (IOException)
             {
@@ -81,13 +90,12 @@ namespace H.Infrastructure
         }
 
         /// <summary>
-        ///     Sanitizes the the file name so it does not contain any special character. Replaces the special character with a
-        ///     dash(-).
+        /// Sanitizes the the file name so it does not contain any special character. Replaces the special character with a dash(-).
         /// </summary>
         public static string SanitizeFileName(string name)
         {
-            var invalidChars = Regex.Escape(new string(Path.GetInvalidFileNameChars()));
-            var invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
+            string invalidChars = Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
+            string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
 
             return Regex.Replace(name, invalidRegStr, "-");
         }

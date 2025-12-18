@@ -244,7 +244,7 @@ namespace H.Core.Enumerations
 
         [LocalizedDescription("NitrousOxidePerCubicMeterPerDay", typeof(Resources))]
         NitrousOxidePerCubicMeterPerDay,
-
+        
         [LocalizedDescription("AmmoniaPerCubicMeterPerDay", typeof(Resources))]
         AmmoniaPerCubicMeterPerDay,
 
@@ -275,6 +275,9 @@ namespace H.Core.Enumerations
         KilogramsN2ONPerField,
 
         [LocalizedDescription("KilogramsPerHectareCropWetWeight", typeof(Resources))]
-        KilogramsPerHectareCropWetWeight
+        KilogramsPerHectareCropWetWeight,
+
+        [LocalizedDescription("KilogramsN2ONPerHeadPerDay", typeof(Resources))]
+        KilogramsN2ONPerHeadPerDay,
     }
 }

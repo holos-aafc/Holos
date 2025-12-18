@@ -13,7 +13,7 @@ namespace H.Core.Providers
         ClimateData GetClimateData(int currentPolygonId, TimeFrame timeFrame);
 
         /// <summary>
-        ///     Get precip data for a polygon by timeframe
+        /// Get precip data for a polygon by timeframe
         /// </summary>
         /// <param name="polygonId">Polygon to get data for</param>
         /// <param name="timeFrame">the time frame to get data for</param>
@@ -21,7 +21,7 @@ namespace H.Core.Providers
         PrecipitationData GetPrecipitationDataByPolygonId(int polygonId, TimeFrame timeFrame);
 
         /// <summary>
-        ///     Get temperature data for a polygon by timeframe
+        /// Get temperature data for a polygon by timeframe
         /// </summary>
         /// <param name="polygonId">Polygon to get data for</param>
         /// <param name="timeFrame">time frame to get data for</param>
@@ -29,8 +29,7 @@ namespace H.Core.Providers
         TemperatureData GetTemperatureDataByPolygonId(int polygonId, TimeFrame timeFrame);
 
         /// <summary>
-        ///     Get PET for polygon by timeframe.  If you pass in an invalid timeframe it looks in the original
-        ///     ClimateNormalsByPolygon file
+        /// Get PET for polygon by timeframe.  If you pass in an invalid timeframe it looks in the original ClimateNormalsByPolygon file
         /// </summary>
         /// <param name="polygonId">the polygon to get data for</param>
         /// <param name="timeFrame">the time frame to select data from</param>

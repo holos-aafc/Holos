@@ -1,26 +1,15 @@
 ﻿using System;
 using H.Core.Enumerations;
 using H.Core.Models.Animals;
+using H.Infrastructure;
 
 namespace H.Core.Models.LandManagement.Fields
 {
     /// <summary>
-    ///     Note: can't hold references to a management period because of self referencing exceptions in JSON serialization
+    /// Note: can't hold references to a management period because of self referencing exceptions in JSON serialization
     /// </summary>
     public class GrazingViewItem : FieldActivityBase
     {
-        #region Constructors
-
-        public GrazingViewItem()
-        {
-            ForageActivity = ForageActivities.Grazed;
-            ForageGrowthStage = ForageGrowthStages.StageTwo;
-
-            Utilization = 60;
-        }
-
-        #endregion
-
         #region Fields
 
         private Guid _managementPeriodGuid;
@@ -31,12 +20,23 @@ namespace H.Core.Models.LandManagement.Fields
 
         #endregion
 
+        #region Constructors
+        
+        public GrazingViewItem()
+        {
+            base.ForageActivity = ForageActivities.Grazed;
+            base.ForageGrowthStage = ForageGrowthStages.StageTwo;
+
+            this.Utilization = 60;
+        }
+
+        #endregion
+
         #region Properties
 
         /// <summary>
-        ///     When a group of animals have their housing type set to pasture during one of their management periods, assign this
-        ///     value to the GUID
-        ///     of management period so we can track which animals have grazed on this pasture.
+        /// When a group of animals have their housing type set to pasture during one of their management periods, assign this value to the GUID
+        /// of management period so we can track which animals have grazed on this pasture. 
         /// </summary>
         public Guid ManagementPeriodGuid
         {
@@ -45,8 +45,7 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        ///     Identifies the <see cref="AnimalComponentBase" /> that contains the <see cref="AnimalGroup" /> grazing on the
-        ///     <see cref="H.Core.Models.LandManagement.Fields.CropViewItem" />.
+        /// Identifies the <see cref="AnimalComponentBase"/> that contains the <see cref="AnimalGroup"/> grazing on the <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/>.
         /// </summary>
         public Guid AnimalComponentGuid
         {
@@ -61,7 +60,7 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        ///     Indicates the ID of the animal group that is grazing on the field
+        /// Indicates the ID of the animal group that is grazing on the field
         /// </summary>
         public Guid AnimalGroupGuid
         {

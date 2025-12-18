@@ -7,6 +7,6 @@
         BorealMoist,
         BorealDry,
         WarmTemperateMoist,
-        WarmTemperateDry
+        WarmTemperateDry,
     }
 }

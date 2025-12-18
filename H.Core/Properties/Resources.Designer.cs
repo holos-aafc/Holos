@@ -236,7 +236,7 @@ namespace H.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to All manure produced by animals on the farm can be added to the anaerobic digestor. Choose which management periods will be selected as the source of manure entering the digestor. To select a management period, click the &quot;Add&quot; checkbox. By default, all daily manure (100%) produced by the selected management period is added to the digestor. This daily percentage amount can be adjusted as needed by adjusting the &quot;Daily manure added to digestor&quot; column.
         ///
-        ///If no animals exist on the farm, it is possible to use  [rest of string was truncated]&quot;;.
+        ///If no animals exist on the farm, it is possible to use im [rest of string was truncated]&quot;;.
         /// </summary>
         public static string AnaerobicDigestionStepTwoText {
             get {
@@ -7535,6 +7535,15 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to kg N2O-N head^-1 day^-1.
+        /// </summary>
+        public static string KilogramsN2ONPerHeadPerDay {
+            get {
+                return ResourceManager.GetString("KilogramsN2ONPerHeadPerDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to kg N2O-N ha^-1.
         /// </summary>
         public static string KilogramsN2ONPerHectare {
@@ -13657,7 +13666,7 @@ namespace H.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Annual Holos estimates for the livestock components represent the sum of monthly emissions for a single production cycle only (as defined by the model user on the Component Selection screen). Therefore, if one or more animal groups have more than one production cycle in a calendar year, multiply the results by the number of production cycles in a year to get an estimate of actual yearly emissions related to housing and manure management/storage.
         ///
-        ///Please note: emissions related to the deposition or applica [rest of string was truncated]&quot;;.
+        ///Please note: emissions related to the deposition or applicati [rest of string was truncated]&quot;;.
         /// </summary>
         public static string MessageAnnualDetailedReportMessage {
             get {
@@ -18167,7 +18176,7 @@ namespace H.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to In Canada, some livestock production systems are typically &quot;all in, all out&quot; systems, where all animals enter and leave the barn at the same time with a number of days between production periods to clean the facilities before the next group of animals arrives. 
         ///
-        ///These systems include feedlot cattle (steers and heifers), swine, and poultry production. Therefore, to calculate total annual emissions from a livestock operation where there are multiple production cycles per year, the number of production days  [rest of string was truncated]&quot;;.
+        ///These systems include feedlot cattle (steers and heifers), swine, and poultry production. Therefore, to calculate total annual emissions from a livestock operation where there are multiple production cycles per year, the number of production days pe [rest of string was truncated]&quot;;.
         /// </summary>
         public static string TooltipProductionDays {
             get {

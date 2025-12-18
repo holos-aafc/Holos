@@ -1,4 +1,6 @@
-﻿using H.Core.Properties;
+﻿#region Imports
+
+#endregion
 
 namespace H.Core.Models.Animals.Beef
 {
@@ -11,11 +13,31 @@ namespace H.Core.Models.Animals.Beef
         public BackgroundingComponent()
         {
             //base.ComponentNameDisplayString = Properties.Resources.TitleFinishingComponentDisplayString;
-            ComponentNameDisplayString = Resources.TitleBackgroundingComponentDisplayString;
-            ComponentCategory = ComponentCategory.BeefProduction;
-            ComponentType = ComponentType.Backgrounding;
-            ComponentDescriptionString = Resources.ToolTipBackgroundingComponent;
+            this.ComponentNameDisplayString = Properties.Resources.TitleBackgroundingComponentDisplayString;
+            this.ComponentCategory = ComponentCategory.BeefProduction;
+            this.ComponentType = ComponentType.Backgrounding;
+            this.ComponentDescriptionString = Properties.Resources.ToolTipBackgroundingComponent;
         }
+
+        #endregion
+
+        #region Fields
+
+        #endregion
+
+        #region Properties
+
+        #endregion
+
+        #region Public Methods
+
+        #endregion
+
+        #region Private Methods
+
+        #endregion
+
+        #region Event Handlers
 
         #endregion
     }

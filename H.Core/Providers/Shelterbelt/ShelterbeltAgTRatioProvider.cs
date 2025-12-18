@@ -15,14 +15,14 @@ namespace H.Core.Providers.Shelterbelt
         public ShelterbeltAgTRatioProvider()
         {
             HTraceListener.AddTraceListener();
-            GetLines();
+            this.GetLines();
         }
 
         #endregion
 
         #region Properties
 
-        private List<ShelterbeltRatioTableData> Table { get; } = new List<ShelterbeltRatioTableData>();
+        private List<ShelterbeltRatioTableData> Table { get; set; } = new List<ShelterbeltRatioTableData>();
 
         #endregion
 
@@ -37,46 +37,46 @@ namespace H.Core.Providers.Shelterbelt
             {
                 var age = int.Parse(line[0], cultureInfo);
 
-                var hybridPoplar = new ShelterbeltRatioTableData
+                var hybridPoplar = new ShelterbeltRatioTableData()
                 {
                     TreeSpecies = TreeSpecies.HybridPoplar,
                     Age = age,
-                    Ratio = double.Parse(line[1], cultureInfo)
+                    Ratio = double.Parse(line[1], cultureInfo),
                 };
 
-                var whiteSpruce = new ShelterbeltRatioTableData
+                var whiteSpruce = new ShelterbeltRatioTableData()
                 {
                     TreeSpecies = TreeSpecies.WhiteSpruce,
                     Age = age,
-                    Ratio = double.Parse(line[2], cultureInfo)
+                    Ratio = double.Parse(line[2], cultureInfo),
                 };
 
-                var scotsPine = new ShelterbeltRatioTableData
+                var scotsPine = new ShelterbeltRatioTableData()
                 {
                     TreeSpecies = TreeSpecies.ScotsPine,
                     Age = age,
-                    Ratio = double.Parse(line[3], cultureInfo)
+                    Ratio = double.Parse(line[3], cultureInfo),
                 };
 
-                var manitobaMaple = new ShelterbeltRatioTableData
+                var manitobaMaple = new ShelterbeltRatioTableData()
                 {
                     TreeSpecies = TreeSpecies.ManitobaMaple,
                     Age = age,
-                    Ratio = double.Parse(line[4], cultureInfo)
+                    Ratio = double.Parse(line[4], cultureInfo),
                 };
 
-                var greenAsh = new ShelterbeltRatioTableData
+                var greenAsh = new ShelterbeltRatioTableData()
                 {
-                    TreeSpecies = TreeSpecies.GreenAsh,
+                    TreeSpecies =  TreeSpecies.GreenAsh,
                     Age = age,
-                    Ratio = double.Parse(line[5], cultureInfo)
+                    Ratio = double.Parse(line[5], cultureInfo),
                 };
 
-                var caragana = new ShelterbeltRatioTableData
+                var caragana = new ShelterbeltRatioTableData()
                 {
                     TreeSpecies = TreeSpecies.Caragana,
                     Age = age,
-                    Ratio = double.Parse(line[6], cultureInfo)
+                    Ratio = double.Parse(line[6], cultureInfo),
                 };
 
                 Table.Add(hybridPoplar);
@@ -89,31 +89,30 @@ namespace H.Core.Providers.Shelterbelt
         }
 
         /// <summary>
-        ///     Get the ratio (AgT) that will be used to calculate the total biomass of a tree
+        /// Get the ratio (AgT) that will be used to calculate the total biomass of a tree
         /// </summary>
         /// <param name="treeSpecies">The tree species</param>
         /// <param name="age">The age of the tree (years)</param>
         /// <returns>Fraction of above ground over total biomass (total biomass = above ground + below ground)</returns>
         public double GetAboveGroundBiomassTotalTreeBiomassRatio(
-            TreeSpecies treeSpecies,
+            TreeSpecies treeSpecies, 
             int age)
         {
             if (age > 60)
+            {
                 // Table only has data up to 60 years of age
                 age = 60;
+            }
 
-            var aboveGroundBiomassTotalTreeBiomassRatio =
-                Table.Single(x => x.TreeSpecies == treeSpecies && x.Age == age).Ratio;
+            var aboveGroundBiomassTotalTreeBiomassRatio = Table.Single(x => x.TreeSpecies == treeSpecies && x.Age == age).Ratio;
             if (aboveGroundBiomassTotalTreeBiomassRatio == 0)
             {
                 var defaultValue = 0;
-                Trace.TraceError(
-                    $"{nameof(ShelterbeltAgTRatioProvider)}.{nameof(GetAboveGroundBiomassTotalTreeBiomassRatio)}" +
+                Trace.TraceError($"{nameof(ShelterbeltAgTRatioProvider)}.{nameof(this.GetAboveGroundBiomassTotalTreeBiomassRatio)}" +
                     $" unable to get data for the tree species: {treeSpecies} and age: {age}." +
                     $" Returning default value of {defaultValue}.");
                 return defaultValue;
             }
-
             return aboveGroundBiomassTotalTreeBiomassRatio;
         }
 

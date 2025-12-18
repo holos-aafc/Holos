@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using H.Content;
@@ -10,10 +11,22 @@ using H.Infrastructure;
 namespace H.Core.Providers.Soil
 {
     /// <summary>
-    ///     Used to assist in the lookup of values in Table 1.
+    /// Used to assist in the lookup of values in Table 1.
     /// </summary>
     public class EcodistrictDefaultsProvider
     {
+        #region Fields
+
+        private readonly EcozoneStringConverter _ecozoneStringConverter;
+        private readonly ProvinceStringConverter _provinceStringConverter;
+        private readonly SoilFunctionalCategoryStringConverter _soilFunctionalCategoryStringConverter;
+        private readonly SoilTextureStringConverter _soilTextureStringConverter;
+
+        private readonly Dictionary<Tuple<int, Province>, EcodistrictDefaultsData> _cacheByEcodistrictAndProvince = new Dictionary<Tuple<int, Province>, EcodistrictDefaultsData>();
+        private readonly Dictionary<int, EcodistrictDefaultsData> _cacheByEcodistrict = new Dictionary<int, EcodistrictDefaultsData>();
+
+        #endregion
+
         #region Constructors
 
         public EcodistrictDefaultsProvider()
@@ -25,14 +38,54 @@ namespace H.Core.Providers.Soil
             _soilFunctionalCategoryStringConverter = new SoilFunctionalCategoryStringConverter();
             _soilTextureStringConverter = new SoilTextureStringConverter();
 
-            Data = ReadFile();
+            foreach (var ecodistrictDefaultsData in this.ReadFile())
+            {
+                _cacheByEcodistrictAndProvince[Tuple.Create(ecodistrictDefaultsData.EcodistrictId, ecodistrictDefaultsData.Province)] = ecodistrictDefaultsData;
+                _cacheByEcodistrict[ecodistrictDefaultsData.EcodistrictId] = ecodistrictDefaultsData;
+            }
         }
 
         #endregion
 
         #region Properties
 
-        private List<EcodistrictDefaultsData> Data { get; }
+        #endregion
+
+        #region Public Methods       
+
+        /// <summary>
+        /// Multiple ecodistricts can exist in a single ecozone.
+        /// </summary>
+        public Ecozone GetEcozone(int ecodistrictId)
+        {
+            if (_cacheByEcodistrict.ContainsKey(ecodistrictId))
+            {
+                return _cacheByEcodistrict[ecodistrictId].Ecozone;
+            }
+            else
+            {
+                Trace.TraceError($"{nameof(EcodistrictDefaultsProvider)}.{nameof(EcodistrictDefaultsProvider.GetEcozone)} unable to get ecozone for ecodistrict: {ecodistrictId}. Returning default value of {Ecozone.AtlanticMaritimes.GetDescription()}.");
+
+                return Ecozone.AtlanticMaritimes;
+            }
+        }
+
+        public double GetFractionOfLandOccupiedByPortionsOfLandscape(int ecodistrictId, Province province)
+        {
+            if (_cacheByEcodistrictAndProvince.ContainsKey(new Tuple<int, Province>(ecodistrictId, province)))
+            {
+                // Convert value to a fraction not a percentage (i.e. 0.20 not 20)
+                return _cacheByEcodistrictAndProvince[new Tuple<int, Province>(ecodistrictId, province)].FTopo / 100;
+            }
+            else
+            {
+                const double defaultValue = 0;
+
+                Trace.TraceError($"{nameof(EcodistrictDefaultsProvider)}.{nameof(EcodistrictDefaultsProvider.GetEcozone)} unable to get FTopo value for ecodistrict: {ecodistrictId}. Returning default value of {defaultValue}.");
+
+                return defaultValue;
+            }
+        }
 
         #endregion
 
@@ -55,7 +108,7 @@ namespace H.Core.Providers.Soil
                 var soilType = _soilFunctionalCategoryStringConverter.Convert(line[6]);
                 var soilTexture = _soilTextureStringConverter.Convert(line[7]);
 
-                results.Add(new EcodistrictDefaultsData
+                results.Add(new EcodistrictDefaultsData()
                 {
                     EcodistrictId = ecodistrictId,
                     Ecozone = ecozone,
@@ -64,54 +117,11 @@ namespace H.Core.Providers.Soil
                     PEMayToOct = peMayToOct,
                     FTopo = fTopo,
                     SoilFunctionalCategory = soilType,
-                    SoilTexture = soilTexture
+                    SoilTexture = soilTexture,
                 });
             }
 
             return results;
-        }
-
-        #endregion
-
-        #region Fields
-
-        private readonly EcozoneStringConverter _ecozoneStringConverter;
-        private readonly ProvinceStringConverter _provinceStringConverter;
-        private readonly SoilFunctionalCategoryStringConverter _soilFunctionalCategoryStringConverter;
-        private readonly SoilTextureStringConverter _soilTextureStringConverter;
-
-        #endregion
-
-        #region Public Methods
-
-        /// <summary>
-        ///     Multiple ecodistricts can exist in a single ecozone.
-        /// </summary>
-        public Ecozone GetEcozone(int ecodistrictId)
-        {
-            var result = Data.FirstOrDefault(x => x.EcodistrictId == ecodistrictId);
-            if (result != null) return result.Ecozone;
-
-            Trace.TraceError(
-                $"{nameof(EcodistrictDefaultsProvider)}.{nameof(GetEcozone)} unable to get ecozone for ecodistrict: {ecodistrictId}. Returning default value of {Ecozone.AtlanticMaritimes.GetDescription()}.");
-
-            return Ecozone.AtlanticMaritimes;
-        }
-
-        public double GetFractionOfLandOccupiedByPortionsOfLandscape(int ecodistrictId, Province province)
-        {
-            const double defaultValue = 0;
-
-            var result = Data.FirstOrDefault(x => x.EcodistrictId == ecodistrictId &&
-                                                  x.Province == province);
-            if (result != null)
-                // Convert value to a fraction not a percentage (i.e. 0.20 not 20)
-                return result.FTopo / 100;
-
-            Trace.TraceError(
-                $"{nameof(EcodistrictDefaultsProvider)}.{nameof(GetEcozone)} unable to get FTopo value for ecodistrict: {ecodistrictId}. Returning default value of {defaultValue}.");
-
-            return defaultValue;
         }
 
         #endregion

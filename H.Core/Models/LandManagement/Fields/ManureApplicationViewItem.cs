@@ -1,51 +1,23 @@
-﻿using System;
+﻿using H.Core.Enumerations;
+using H.Infrastructure;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Transactions;
 using H.Core.CustomAttributes;
-using H.Core.Enumerations;
 using H.Core.Providers.Animals;
-using H.Infrastructure;
 
 namespace H.Core.Models.LandManagement.Fields
 {
     /// <summary>
-    ///     A class to specify the details of one application of manure to a field.
+    /// A class to specify the details of one application of manure to a field.
     /// </summary>
     public class ManureApplicationViewItem : ManureItemBase
     {
-        #region Constructors
-
-        public ManureApplicationViewItem()
-        {
-            DateOfApplication = DateTime.Now;
-            ManureLocationSourceType = ManureLocationSourceType.Livestock;
-            DefaultManureCompositionData = new DefaultManureCompositionData();
-
-            AvailableManureApplicationTypes = new ObservableCollection<ManureApplicationTypes>();
-
-            PropertyChanged += OnPropertyChanged;
-        }
-
-        #endregion
-
-        #region Methods
-
-        public bool IsImportedManure()
-        {
-            return ManureLocationSourceType == ManureLocationSourceType.Imported ||
-                   AnimalType == AnimalType.NotSelected;
-        }
-
-        #endregion
-
-        #region Event Handlers
-
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-        }
-
-        #endregion
-
         #region Fields
 
         private DateTime _dateOfApplication;
@@ -58,6 +30,21 @@ namespace H.Core.Models.LandManagement.Fields
         private ManureApplicationTypes _manureApplicationTypes;
 
         private ObservableCollection<ManureApplicationTypes> _availableManureApplicationTypes;
+
+        #endregion
+
+        #region Constructors
+
+        public ManureApplicationViewItem()
+        {
+            this.DateOfApplication = DateTime.Now;
+            this.ManureLocationSourceType = ManureLocationSourceType.Livestock;
+            this.DefaultManureCompositionData = new DefaultManureCompositionData();
+
+            this.AvailableManureApplicationTypes = new ObservableCollection<ManureApplicationTypes>();
+
+            this.PropertyChanged += OnPropertyChanged;
+        }
 
         #endregion
 
@@ -76,33 +63,41 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        ///     Indicates if the manure was sourced from beef cattle, dairy cattle, etc.
-        ///     This must be entered from the user so we can differentiate the N, C, and P fraction used by different handling
-        ///     systems (i.e. beef and dairy both have 'solid storage (stockpiled)' but
-        ///     different fractions for N, C, and P fractions
+        /// Indicates if the manure was sourced from beef cattle, dairy cattle, etc.
+        /// 
+        /// This must be entered from the user so we can differentiate the N, C, and P fraction used by different handling systems (i.e. beef and dairy both have 'solid storage (stockpiled)' but
+        /// different fractions for N, C, and P fractions
         /// </summary>
-        public ManureAnimalSourceTypes ManureAnimalSourceType
-        {
-            get => _manureAnimalSourceType;
-            set => SetProperty(ref _manureAnimalSourceType, value);
+        public ManureAnimalSourceTypes ManureAnimalSourceType 
+        { 
+            get => _manureAnimalSourceType; 
+            set => SetProperty(ref  _manureAnimalSourceType, value); 
         }
 
-        public string ManureApplicationTypeString => ManureApplicationMethod.GetDescription();
+        public string ManureApplicationTypeString
+        {
+            get
+            {
+                return this.ManureApplicationMethod.GetDescription();
+            }
+        }
 
         /// <summary>
-        ///     Amount of manure applied
-        ///     (kg)
+        /// Amount of manure applied
+        ///
+        /// (kg)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.Kilograms)]
-        public double Amount
-        {
-            get => _amount;
-            set => SetProperty(ref _amount, value);
+        public double Amount 
+        { 
+            get => _amount; 
+            set => SetProperty(ref _amount, value); 
         }
 
         /// <summary>
-        ///     Amount of nitrogen in the amount of manure applied
-        ///     (kg N)
+        /// Amount of nitrogen in the amount of manure applied
+        ///
+        /// (kg N)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramsNitrogen)]
         public double AmountOfNitrogenInManureApplied
@@ -112,7 +107,7 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        ///     Amount (volume) of manure applied per hectare (wet weight)
+        /// Amount (volume) of manure applied per hectare (wet weight)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramsPerHectare)]
         public double AmountOfManureAppliedPerHectare
@@ -122,12 +117,33 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        ///     Indicates the method that was used to apply the manure to the land
+        /// Indicates the method that was used to apply the manure to the land
         /// </summary>
         public ManureApplicationTypes ManureApplicationMethod
         {
             get => _manureApplicationTypes;
             set => SetProperty(ref _manureApplicationTypes, value);
+        }
+
+        #endregion
+
+        #region Methods
+
+        public bool IsImportedManure()
+        {
+            return this.ManureLocationSourceType == ManureLocationSourceType.Imported || this.AnimalType == AnimalType.NotSelected;
+        }
+
+        #endregion
+
+        #region Private Methods    
+
+        #endregion
+
+        #region Event Handlers
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {                     
         }
 
         #endregion

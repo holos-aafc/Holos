@@ -8,7 +8,7 @@ namespace H.Core.Converters
     {
         public Ecozone Convert(string input)
         {
-            switch (GetLettersAsLowerCase(input))
+            switch (this.GetLettersAsLowerCase(input))
             {
                 case "atlanticmaritimes":
                     return Ecozone.AtlanticMaritimes;

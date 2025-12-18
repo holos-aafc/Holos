@@ -1,38 +1,65 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>AAFC.Holos.Content</PackageId>
     <Authors>AAFC</Authors>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/holos-aafc/Holos</PackageProjectUrl>
     <RepositoryUrl>https://github.com/holos-aafc/Holos</RepositoryUrl>
     <PackageTags>holos, aafc, agriculture, ghg</PackageTags>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{272EDE97-F58A-42A9-828D-8B3524E390EB}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
-    <AssemblyTitle>H.Content</AssemblyTitle>
-    <Product>H.Content</Product>
-    <Copyright>Copyright ©  2024</Copyright>
-    <AssemblyVersion>4.0.0</AssemblyVersion>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>H.Content</RootNamespace>
+    <AssemblyName>H.Content</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName></SccProjectName>
+    <SccLocalPath></SccLocalPath>
+    <SccAuxPath></SccAuxPath>
+    <SccProvider></SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="Properties\Resource.Designer.cs">
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CsvResourceNames.cs" />
+    <Compile Include="CsvResourceReader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.9" />
-    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
-    <PackageReference Include="NuGet.Build.Tasks.Pack" Version="6.14.0">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Prism.Core" Version="9.0.537" />
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\CliTrainingGuide\figure1-1.png" />
@@ -268,20 +295,190 @@
     </Content>
     <Content Include="Scripts\addCopyright.py" />
     <Content Include="Scripts\copyright.txt" />
+    <None Include="app.config" />
+    <None Include="Documentation\Beef Training Guide\Holos_4_Training_Guide_Beef.md" />
+    <None Include="Documentation\CLI Training Guide\Holos_4_Training_Guide_CLI.md" />
+    <None Include="Documentation\Dairy Training Guide\Holos_4_Dairy_Training_Guide.md" />
+    <None Include="Documentation\Dairy Training Guide\Holos_4_Dairy_Training_Guide_French.md" />
+    <None Include="Documentation\Doxyfile" />
+    <None Include="Documentation\FAQ\FAQ_French.md" />
+    <None Include="Documentation\GitHub Guide\GitHub Guide_French.md" />
+    <None Include="Documentation\GitHub Guide\GitHub Guide.md" />
+    <None Include="Documentation\FAQ\FAQ.md" />
+    <None Include="Documentation\Input Requirements\Input_Requirements_v4.md" />
+    <None Include="Documentation\Input Requirements\Input_Requirements_v4_International.md" />
+    <None Include="Documentation\Poultry Training Guide\Holos_4_Training_Guide_Poultry.md" />
+    <None Include="Documentation\Swine Training Guide\Holos_4_Swine_Training_Guide.md" />
+    <None Include="Documentation\Swine Training Guide\Holos_4_Swine_Training_Guide_French.md" />
+    <None Include="Documentation\Training\Holos_4_Training_Guide.pdf" />
+    <None Include="Documentation\Training\Holos_4_Training_Guide_French.pdf" />
+    <None Include="Documentation\User Guide\User Guide.md" />
+    <None Include="Resources\ab_car_to_slc.csv" />
+    <None Include="Resources\ab_default_yields.csv" />
+    <None Include="Resources\Agt_Ratios.csv" />
+    <None Include="Resources\small_area_yields_updated_data.csv" />
+    <None Include="Resources\Table_10_Default_Values_For_Steady_State_Method.csv" />
+    <None Include="Resources\Table_21_Average_Milk_Production_For_Dairy_Cows_By_Province.csv" />
+    <None Include="Resources\bc_default_yields.csv" />
+    <None Include="Resources\caragana__31_allclusters_future.csv" />
+    <None Include="Resources\climateNorms_by_poly_1950_1980.csv" />
+    <None Include="Resources\climateNorms_by_poly_1960_1990.csv" />
+    <None Include="Resources\climateNorms_by_poly_1970_2000.csv" />
+    <None Include="Resources\climateNorms_by_poly_1980_2010.csv" />
+    <None Include="Resources\climateNorms_by_poly_1990_2017.csv" />
+    <None Include="Resources\CG_31_allclusters_past_CBM.csv" />
+    <None Include="Resources\CG__31_allclusters_future_DOM.csv" />
+    <None Include="Resources\climate_norms_by_poly.csv" />
+    <None Include="Resources\climate_parameter_tool_input.csv" />
+    <None Include="Resources\cmp.csv" />
+    <None Include="Resources\Condensed_LethbridgeSOCData_AllRotations.csv" />
+    <None Include="Resources\crop_economics.csv" />
+    <None Include="Resources\dairy_feed_composition.csv" />
+    <None Include="Resources\ecodistrict_to_ecozone_mapping.csv" />
+    <None Include="Resources\ednames.csv" />
+    <None Include="Resources\Table_28_Average_Number_Of_Production_Days.csv" />
+    <None Include="Resources\Table_2_Climate_Normal_Periods.csv" />
+    <None Include="Resources\Table_29_Percentage_Total_Manure_Produced_In_Systems.csv" />
+    <None Include="Resources\Table_41_Poultry_N_Excretion_Rate_Parameter_Values.csv" />
+    <None Include="Resources\Table_49_Electricity_Conversion_Values_By_Province.csv" />
+    <None Include="Resources\emission_factor_digestate_storage.csv" />
+    <None Include="Resources\feeds.csv" />
+    <None Include="Resources\Table_48_Carbon_Footprint_At_Plant_Gate_For_Direct_Fertilizer_Blends.csv" />
+    <None Include="Resources\ft-AB.csv" />
+    <None Include="Resources\Table_50_Fuel_Energy_Requirement_Estimates_By_Region.csv" />
+    <None Include="Resources\GA_31_allclusters_past_CBM.csv" />
+    <None Include="Resources\GA__31_allclusters_future_DOM.csv" />
+    <None Include="Resources\Table_61_Fractions_of_dairy_cattle_N_volatilized.csv" />
+    <None Include="Resources\Table_62_Fractions_of_swine_N_volatilized.csv" />
+    <None Include="Resources\Table_63_Indoor_Barn_Temperatures.csv" />
+    <None Include="Resources\Table_8_Globally_Calibrated_Model_Paramters_To_Estimate_SOC_Changes.csv" />
+    <None Include="Resources\Beef_Cattle_Fed_Winter_Feed_Cost.csv" />
+    <None Include="Resources\Feed_Costs_For_Beef.csv" />
+    <None Include="Resources\Beef_Cattle_Pasture_Summer_Feed_Cost.csv" />
+    <None Include="Resources\Table_55_Global_Radiative_Forcing.csv" />
+    <None Include="Resources\Table_54_Global_Warming_Potential_Of_Emissions.csv" />
+    <None Include="Resources\green_ash__31_allclusters_future.csv" />
+    <None Include="Resources\Table_1_Growing_Degree_Crop_Coefficients.csv" />
+    <None Include="Resources\Table_51_Herbicide_Energy_Requirement_Estimates_By_Region.csv" />
+    <None Include="Resources\HP_31_allclusters_past_CBM.csv" />
+    <None Include="Resources\HP__31_allclusters_future_DOM.csv" />
+    <None Include="Resources\hybrid_poplar__31_allclusters_future.csv" />
+    <None Include="Resources\Table_56_Conversion_Factors_Atomic_To_Molecular_Weight.csv" />
+    <None Include="Resources\Table_59_Output_For_Report.csv" />
+    <None Include="Resources\Table_4_Percentage_Total_Annual_Irrigation_Water_Applied.csv" />
+    <None Include="Resources\Kapuskasing.csv" />
+    <None Include="Resources\lookup_ecodistricts_clusters.csv" />
+    <None Include="Resources\manitoba_maple__31_allclusters_future.csv" />
+    <None Include="Resources\mb_default_yields.csv" />
+    <None Include="Resources\MM_31_allclusters_past_CBM.csv" />
+    <None Include="Resources\MM__31_allclusters_future_DOM.csv" />
+    <None Include="Resources\Table_9_Default_Values_For_Nitrogen_Lignin_In_Crops.csv" />
+    <None Include="Resources\on_default_yields.csv" />
+    <None Include="Resources\Table_46_Parameters_For_Calculating_Biogas_Methane_Production_In_AD_System.csv" />
+    <None Include="Resources\pat.csv" />
+    <None Include="Resources\qc_default_yields.csv" />
+    <None Include="Resources\Table_7_Relative_Biomass_Information.csv" />
+    <None Include="Resources\scots_pine__31_allclusters_future.csv" />
+    <None Include="Resources\shelterbelt_allometric_table.csv" />
+    <None Include="Resources\shelterbelt_ecodistrict_lookup_table.csv" />
+    <None Include="Resources\shelterbelt_ecodistrict_weights.csv" />
+    <None Include="Resources\Table_12_Shelterbelt_Carbon_Accumulation_Lookup_By_Hardiness_Zone.csv" />
+    <None Include="Resources\shelterbelt_lookup_table.csv" />
+    <None Include="Resources\silage_yields.csv" />
+    <None Include="Resources\sk_car_to_slc.csv" />
+    <None Include="Resources\sk_default_yields.csv" />
+    <None Include="Resources\slc_to_hardiness_zone.csv" />
+    <None Include="Resources\sl_ab.csv" />
+    <None Include="Resources\sl_bc.csv" />
+    <None Include="Resources\sl_mb.csv" />
+    <None Include="Resources\sl_nb.csv" />
+    <None Include="Resources\sl_nl.csv" />
+    <None Include="Resources\sl_ns.csv" />
+    <None Include="Resources\sl_on.csv" />
+    <None Include="Resources\sl_pe.csv" />
+    <None Include="Resources\sl_qc.csv" />
+    <None Include="Resources\sl_sk.csv" />
+    <None Include="Resources\small_area_yields.csv" />
+    <None Include="Resources\sn_ab.csv" />
+    <None Include="Resources\sn_bc.csv" />
+    <None Include="Resources\sn_mb.csv" />
+    <None Include="Resources\sn_nb.csv" />
+    <None Include="Resources\sn_nl.csv" />
+    <None Include="Resources\sn_ns.csv" />
+    <None Include="Resources\sn_on.csv" />
+    <None Include="Resources\sn_pe.csv" />
+    <None Include="Resources\sn_qc.csv" />
+    <None Include="Resources\sn_sk.csv" />
+    <None Include="Resources\SP_31_allclusters_past_CBM.csv" />
+    <None Include="Resources\SP__31_allclusters_future_DOM.csv" />
+    <None Include="Resources\Swine_Feed_Ingredient_List.csv" />
+    <None Include="Resources\LumCMax_And_KValues_For_Tillage_Practice_Change.csv" />
+    <None Include="Resources\NitrogenApplicationRatesForSpringWheatStubbleAndFallowCrops.csv" />
     <Content Include="Resources\Table_17_Beef_And_Dairy_Cattle_Feeding_Activity_Coefficients.csv" />
+    <None Include="Resources\Table_18_26_Diet_Coefficients_For_Beef_Dairy_Sheep.csv" />
+    <None Include="Resources\MCFAndNitrogenOxideEmissionsForBeefDairySwine.csv" />
+    <None Include="Resources\LumCMax_And_KValues_For_Fallow_Practice_Change.csv" />
+    <None Include="Resources\SwineVolatileExcretion_34.csv" />
+    <None Include="Resources\VS_Excretion_For_Performance_Standard_Diets_For_Swine_Group.csv" />
+    <None Include="Resources\Table_33_Daily_Feed_Intake_For_Swine_Groups.csv" />
+    <None Include="Resources\LumCMax_And_KValues_For_Perennial_Cropping_Change.csv" />
+    <None Include="Resources\Table_22_Livestock_Coefficients_For_Sheep.csv" />
+    <None Include="Resources\ShelterbeltCarbonAccumulationCoefficients.csv" />
+    <None Include="Resources\EnergyRequirementsForCrops.csv" />
+    <None Include="Resources\Table_11_Coefficients_For_AGB_Estimation_For_Shelterbelt_Trees.csv" />
+    <None Include="Resources\FertilizerApplicationRates.csv" />
+    <None Include="Resources\CropFactors.csv" />
+    <None Include="Resources\SoilCarbonEmissions.csv" />
+    <None Include="Resources\Table_5_Carbon_Input_Residue_Allocation_By_Crop_Type.csv" />
+    <None Include="Resources\Table_6_Manure_Types_And_Default_Composition.csv" />
+    <None Include="Resources\white_spruce__31_allclusters_future.csv" />
+    <None Include="Resources\WS_31_allclusters_past_CBM.csv" />
+    <None Include="Resources\WS__31_allclusters_future_DOM.csv" />
     <None Include="..\LICENSE" Pack="true" PackagePath="" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\H.Infrastructure\H.Infrastructure.csproj" />
+    <ProjectReference Include="..\H.Infrastructure\H.Infrastructure.csproj">
+      <Project>{0C9D716E-6579-4EE6-AEA6-5B019563AD95}</Project>
+      <Name>H.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Properties\Resource.resx">
+    <EmbeddedResource Include="Properties\Resource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\icons8-settings-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map - Copy.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Settings_50_px.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Images\GitHubGuide\" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CsvHelper">
+      <Version>33.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="NETStandard.Library">
+      <Version>2.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="NuGet.Build.Tasks.Pack">
+      <Version>6.11.0</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Prism.Core">
+      <Version>7.2.0.1422</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

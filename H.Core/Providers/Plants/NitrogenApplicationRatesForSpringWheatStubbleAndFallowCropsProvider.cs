@@ -8,13 +8,17 @@ namespace H.Core.Providers.Plants
 {
     public class NitrogenApplicationRatesForSpringWheatStubbleAndFallowCropsProvider
     {
-        #region Constructors
+        #region Fields
+        private readonly List<NitrogenApplicationRatesForSpringWheatStubbleAndFallowCropsData> _cache;
+        private readonly ProvinceStringConverter _provinceStringConverter = new ProvinceStringConverter();
+        private readonly SoilFunctionalCategoryStringConverter _soilFunctionalCategoryStringConverter = new SoilFunctionalCategoryStringConverter();
+        #endregion
 
+        #region Constructors
         public NitrogenApplicationRatesForSpringWheatStubbleAndFallowCropsProvider()
         {
             _cache = BuildCache();
         }
-
         #endregion
 
         #region Public Functions
@@ -24,11 +28,9 @@ namespace H.Core.Providers.Plants
         {
             return _cache;
         }
-
         #endregion
 
         #region Private Functions
-
         private List<NitrogenApplicationRatesForSpringWheatStubbleAndFallowCropsData> BuildCache()
         {
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
@@ -54,17 +56,6 @@ namespace H.Core.Providers.Plants
 
             return result;
         }
-
-        #endregion
-
-        #region Fields
-
-        private readonly List<NitrogenApplicationRatesForSpringWheatStubbleAndFallowCropsData> _cache;
-        private readonly ProvinceStringConverter _provinceStringConverter = new ProvinceStringConverter();
-
-        private readonly SoilFunctionalCategoryStringConverter _soilFunctionalCategoryStringConverter =
-            new SoilFunctionalCategoryStringConverter();
-
-        #endregion
+        #endregion  
     }
 }

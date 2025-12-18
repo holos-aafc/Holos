@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing.Design;
 using System.Linq;
 using H.Content;
 using H.Core.Enumerations;
 using H.Core.Models;
+using H.Core.Models.Animals;
+using H.Core.Providers.Animals.Table_69;
 using H.Infrastructure;
 
 namespace H.Core.Providers.Animals.Table_28
@@ -22,7 +26,7 @@ namespace H.Core.Providers.Animals.Table_28
         {
             _data = new List<ProductionDaysData>();
 
-            ReadFile(CsvResourceNames.AnimalSystemProductionDays);
+            this.ReadFile(CsvResourceNames.AnimalSystemProductionDays);
         }
 
         #endregion
@@ -30,45 +34,55 @@ namespace H.Core.Providers.Animals.Table_28
         #region Public Methods
 
         public bool HasProductionCycle(
-            AnimalType animalType,
+            AnimalType animalType, 
             ProductionStages productionStage,
             ComponentType? componentType = null)
         {
-            var result = GetData(animalType, productionStage, componentType);
+            var result = this.GetData(animalType, productionStage, componentType);
 
-            return result.EmissionsShouldBeScaled;
+            return result.EmissionsShouldBeScaled == true;
         }
 
         public ProductionDaysData GetData(
             AnimalType animalType,
-            ProductionStages productionStage,
+            ProductionStages productionStage, 
             ComponentType? componentType = null)
         {
-            var lookupType = animalType;
+            AnimalType lookupType = animalType;
 
-            if (animalType == AnimalType.SwineBoar) lookupType = AnimalType.SwineGrower;
+            if (animalType == AnimalType.SwineBoar)
+            {
+                lookupType = AnimalType.SwineGrower;
+            }
 
             ProductionDaysData result = null;
             if (lookupType == AnimalType.SwinePiglets)
+            {
                 // We only need the production stage when considering piglet groups
                 result = _data.SingleOrDefault(x => x.AnimalType == lookupType &&
-                                                    x.ProductionStage == productionStage &&
-                                                    x.ComponentType == componentType);
+                                                        x.ProductionStage == productionStage &&
+                                                        x.ComponentType == componentType);
+            }
             else if (lookupType.IsChickenType())
+            {
                 result = _data.SingleOrDefault(x => x.AnimalType == lookupType);
+            }
             else
+            {
                 result = _data.SingleOrDefault(x => x.AnimalType == lookupType &&
                                                     x.ComponentType == componentType);
+            }
 
             if (result == null)
             {
-                Trace.TraceError($"{nameof(Table_28_Production_Days_Provider)}.{nameof(GetData)}:" +
-                                 $" no data found for animal type: '{animalType}, production stage: {productionStage}, component type: {componentType}'");
+                Trace.TraceError($"{nameof(Table_28_Production_Days_Provider)}.{nameof(GetData)}:" + $" no data found for animal type: '{animalType}, production stage: {productionStage}, component type: {componentType}'");
 
                 return new ProductionDaysData();
             }
-
-            return result;
+            else
+            {
+                return result;
+            }
         }
 
         #endregion
@@ -80,7 +94,10 @@ namespace H.Core.Providers.Animals.Table_28
             foreach (var fileLine in fileLines.Skip(1))
             {
                 var animalTypeString = fileLine[3];
-                if (string.IsNullOrWhiteSpace(animalTypeString)) continue;
+                if (string.IsNullOrWhiteSpace(animalTypeString))
+                {
+                    continue;
+                }
 
                 var productionDaysData = new ProductionDaysData();
 
@@ -96,10 +113,8 @@ namespace H.Core.Providers.Animals.Table_28
 
                 productionDaysData.ProductionStage = _productionStageStringConverter.Convert(fileLine[2]);
 
-                var numberOfProductionDays = int.Parse(fileLine[4].ParseUntilOrDefault(),
-                    InfrastructureConstants.EnglishCultureInfo);
-                var numberOfNonProductionDays = int.Parse(fileLine[5].ParseUntilOrDefault(),
-                    InfrastructureConstants.EnglishCultureInfo);
+                var numberOfProductionDays = int.Parse(fileLine[4].ParseUntilOrDefault(), InfrastructureConstants.EnglishCultureInfo);
+                var numberOfNonProductionDays = int.Parse(fileLine[5].ParseUntilOrDefault(), InfrastructureConstants.EnglishCultureInfo);
 
                 productionDaysData.NumberOfDaysInProductionCycle = numberOfProductionDays;
                 productionDaysData.NumberOfNonProductionDaysBetweenCycles = numberOfNonProductionDays;
@@ -115,7 +130,7 @@ namespace H.Core.Providers.Animals.Table_28
         {
             var fileLines = CsvResourceReader.GetFileLines(resourceName).ToList();
 
-            ReadLines(fileLines);
+            this.ReadLines(fileLines);
         }
 
         #endregion

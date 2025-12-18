@@ -7,27 +7,27 @@ namespace H.Core.Providers.Animals
         AnimalType AnimalType { get; set; }
 
         /// <summary>
-        ///     C_f
+        /// C_f
         /// </summary>
         double BaselineMaintenanceCoefficient { get; set; }
 
         /// <summary>
-        ///     C_d
+        /// C_d
         /// </summary>
         double GainCoefficient { get; set; }
 
         /// <summary>
-        ///     (kg)
+        /// (kg)
         /// </summary>
         double DefaultInitialWeight { get; set; }
 
         /// <summary>
-        ///     (kg)
+        /// (kg)
         /// </summary>
         double DefaultFinalWeight { get; set; }
 
         /// <summary>
-        ///     (kg)
+        /// (kg)
         /// </summary>
         double DefaultDailyGain { get; set; }
     }

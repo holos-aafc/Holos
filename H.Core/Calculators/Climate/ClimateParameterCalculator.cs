@@ -14,6 +14,13 @@ namespace H.Core.Calculators.Climate
 {
     public class ClimateParameterCalculator : IClimateParameterCalculator
     {
+        #region Fields
+
+        private readonly Table_1_Growing_Degree_Crop_Coefficients_Provider _growingDegreeCropCoefficientsProvider;
+        private readonly EvapotranspirationCalculator _evapotranspirationCalculator;
+
+        #endregion
+
         #region Constructors
 
         public ClimateParameterCalculator()
@@ -24,35 +31,32 @@ namespace H.Core.Calculators.Climate
 
         #endregion
 
-        #region Fields
-
-        private readonly Table_1_Growing_Degree_Crop_Coefficients_Provider _growingDegreeCropCoefficientsProvider;
-        private readonly EvapotranspirationCalculator _evapotranspirationCalculator;
+        #region Properties
 
         #endregion
 
         #region Public Methods
 
         /// <summary>
-        ///     Calculates the annual climate parameter for a given set of daily temperature data points. The value returned is the
-        ///     average
-        ///     of all daily values calculated.
+        /// Calculates the annual climate parameter for a given set of daily temperature data points. The value returned is the average
+        /// of all daily values calculated.
         /// </summary>
-        public double CalculateClimateParameterForYear(
-            Farm farm,
+        public double CalculateClimateParameterForYear(Farm farm,
             CropViewItem cropViewItem,
             List<double> evapotranspirations,
             List<double> precipitations,
-            List<double> temperatures)
+            List<double> temperatures, List<double> dailyMinimumTemperatures, List<double> dailyMaximumTemperatures)
         {
-            var dailyResults = CalculateDailyClimateParameters(
-                farm,
-                cropViewItem,
-                evapotranspirations,
-                precipitations,
-                temperatures);
+            var dailyResults = this.CalculateDailyClimateParameters(
+                farm: farm,
+                cropViewItem: cropViewItem,
+                dailyEvapotranspiration: evapotranspirations,
+                dailyPrecipitation: precipitations,
+                dailyTemperature: temperatures,
+                dailyMinimumTemperature: dailyMinimumTemperatures,
+                dailyMaximumTemperature: dailyMaximumTemperatures);
 
-            // Adjust precip values so that the irrigation is included
+            // Adjust precipitation values so that the irrigation is included
 
             var climateParameter = dailyResults.Average(dailyResult => dailyResult.ClimateParameter);
 
@@ -60,58 +64,57 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        ///     Calculate the daily climate parameter for each given temperature data point (julian day). Returns a list of results
-        ///     that contain the resultant climate parameter calculations for each julian day in the year
+        /// Calculate the daily climate parameter for each given temperature data point (julian day). Returns a list of results
+        /// that contain the resultant climate parameter calculations for each julian day in the year
         /// </summary>
-        public List<ClimateParameterDailyResult> CalculateDailyClimateParameters(
-            Farm farm,
+        public List<ClimateParameterDailyResult> CalculateDailyClimateParameters(Farm farm,
             CropViewItem cropViewItem,
             List<double> dailyEvapotranspiration,
             List<double> dailyPrecipitation,
-            List<double> dailyTemperature)
+            List<double> dailyTemperature,
+            List<double> dailyMinimumTemperature,
+            List<double> dailyMaximumTemperature)
         {
             var soilData = farm.GetPreferredSoilData(cropViewItem);
 
             var defaults = farm.Defaults;
             var yield = cropViewItem.Yield;
 
-            var ripeningDay = cropViewItem.CropType.IsPerennial()
-                ? defaults.RipeningDayForPerennnials
-                : defaults.RipeningDay;
+            var ripeningDay = cropViewItem.CropType.IsPerennial() ? defaults.RipeningDayForPerennnials : defaults.RipeningDay;
             var variance = cropViewItem.CropType.IsPerennial() ? defaults.VarianceForPerennials : defaults.Variance;
-            var emergenceDay = cropViewItem.CropType.IsPerennial()
-                ? defaults.EmergenceDayForPerennials
-                : defaults.EmergenceDay;
+            var emergenceDay = cropViewItem.CropType.IsPerennial() ? defaults.EmergenceDayForPerennials : defaults.EmergenceDay;
 
-            return CalculateDailyClimateParameterResults(
-                emergenceDay,
-                ripeningDay,
-                yield,
-                soilData.ProportionOfClayInSoil,
-                soilData.ProportionOfSandInSoil,
-                soilData.TopLayerThickness,
-                soilData.ProportionOfSoilOrganicCarbon,
-                variance,
-                defaults.Alfa,
-                defaults.DecompositionMinimumTemperature,
-                defaults.DecompositionMaximumTemperature,
-                defaults.MoistureResponseFunctionAtWiltingPoint,
-                defaults.MoistureResponseFunctionAtSaturation,
-                dailyEvapotranspiration,
-                dailyPrecipitation,
-                dailyTemperature);
+            return this.CalculateDailyClimateParameterResults(
+                    emergenceDay: emergenceDay,
+                    ripeningDay: ripeningDay,
+                    yield: yield,
+                    clay: soilData.ProportionOfClayInSoil,
+                    sand: soilData.ProportionOfSandInSoil,
+                    layerThicknessInMillimeters: soilData.TopLayerThickness,
+                    percentageSoilOrganicCarbon: soilData.ProportionOfSoilOrganicCarbon,
+                    variance: variance,
+                    alfa: defaults.Alfa,
+                    decompositionMinimumTemperature: defaults.DecompositionMinimumTemperature,
+                    decompositionMaximumTemperature: defaults.DecompositionMaximumTemperature,
+                    moistureResponseFunctionAtWiltingPoint: defaults.MoistureResponseFunctionAtWiltingPoint,
+                    moistureResponseFunctionAtSaturation: defaults.MoistureResponseFunctionAtSaturation,
+                    evapotranspirations: dailyEvapotranspiration,
+                    precipitations: dailyPrecipitation,
+                    temperatures: dailyTemperature,
+                    dailyMinimumTemperatures: dailyMinimumTemperature,
+                    dailyMaximumTemperatures: dailyMaximumTemperature,
+                    cropType: cropViewItem.CropType);
         }
 
         /// <summary>
-        ///     Overload that takes in a user defined tillage factor.
+        /// Overload that takes in a user defined tillage factor.
         /// </summary>
         public double CalculateManagementFactor(double climateParameter, double tillageFactor)
         {
-            return CalculateClimateManagementFactor(climateParameter, tillageFactor);
+            return this.CalculateClimateManagementFactor(climateParameter, tillageFactor);
         }
 
-        public List<double> CalculateDailyClimateParameters(
-            int emergenceDay,
+        public List<double> CalculateDailyClimateParameters(int emergenceDay,
             int ripeningDay,
             double yield,
             double clay,
@@ -126,13 +129,14 @@ namespace H.Core.Calculators.Climate
             double moistureResponseFunctionAtSaturation,
             List<double> evapotranspirations,
             List<double> precipitations,
-            List<double> temperatures)
+            List<double> temperatures, List<double> dailyMinimumTemperatures, List<double> dailyMaximumTemperatures,
+            CropType cropType)
         {
             double soilTemperaturePrevious = 0;
             double waterTemperaturePrevious = 0;
 
             var dailyClimateParameterList = new List<double>();
-            var julianDays = GetJulianDays().ToList();
+            var julianDays = this.GetJulianDays().ToList();
 
             for (var index = 0; index < julianDays.Count(); index++)
             {
@@ -140,26 +144,31 @@ namespace H.Core.Calculators.Climate
                 var temperature = temperatures.ElementAt(index);
                 var precipitation = precipitations.ElementAt(index);
                 var evapotranspiration = evapotranspirations.ElementAt(index);
+                var dailyMinimumTemperature = dailyMinimumTemperatures.ElementAt(index);
+                var dailyMaximumTemperature = dailyMaximumTemperatures.ElementAt(index);
 
-                var dailyClimateParameter = CalculateDailyClimateParameter(emergenceDay,
-                    ripeningDay,
-                    julianDay,
-                    temperature,
-                    precipitation,
-                    evapotranspiration,
-                    percentageSoilOrganicCarbon,
-                    variance,
-                    clay,
-                    sand,
-                    layerThicknessInMillimeters,
-                    yield,
-                    alfa,
-                    decompositionMinimumTemperature,
-                    decompositionMaximumTemperature,
-                    moistureResponseFunctionAtSaturation,
-                    moistureResponseFunctionAtWiltingPoint,
-                    ref soilTemperaturePrevious,
-                    ref waterTemperaturePrevious);
+                var dailyClimateParameter = this.CalculateDailyClimateParameter(emergenceDay,
+                                                                                ripeningDay,
+                                                                                julianDay,
+                                                                                temperature,
+                                                                                precipitation,
+                                                                                evapotranspiration,
+                                                                                percentageSoilOrganicCarbon,
+                                                                                variance,
+                                                                                clay,
+                                                                                sand,
+                                                                                layerThicknessInMillimeters,
+                                                                                yield,
+                                                                                alfa,
+                                                                                decompositionMinimumTemperature,
+                                                                                decompositionMaximumTemperature,
+                                                                                moistureResponseFunctionAtSaturation,
+                                                                                moistureResponseFunctionAtWiltingPoint,
+                                                                                ref soilTemperaturePrevious,
+                                                                                ref waterTemperaturePrevious,
+                                                                                dailyMinimumTemperature,
+                                                                                dailyMaximumTemperature,
+                                                                                cropType);
 
                 dailyClimateParameterList.Add(dailyClimateParameter.ClimateParameter);
             }
@@ -167,8 +176,7 @@ namespace H.Core.Calculators.Climate
             return dailyClimateParameterList;
         }
 
-        public List<ClimateParameterDailyResult> CalculateDailyClimateParameterResults(
-            int emergenceDay,
+        public List<ClimateParameterDailyResult> CalculateDailyClimateParameterResults(int emergenceDay,
             int ripeningDay,
             double yield,
             double clay,
@@ -183,13 +191,14 @@ namespace H.Core.Calculators.Climate
             double moistureResponseFunctionAtSaturation,
             List<double> evapotranspirations,
             List<double> precipitations,
-            List<double> temperatures)
+            List<double> temperatures, List<double> dailyMinimumTemperatures, List<double> dailyMaximumTemperatures,
+            CropType cropType)
         {
             double soilTemperaturePrevious = 0;
             double waterTemperaturePrevious = 0;
 
             var dailyClimateParameterList = new List<ClimateParameterDailyResult>();
-            var julianDays = GetJulianDays().ToList();
+            var julianDays = this.GetJulianDays().ToList();
 
             for (var index = 0; index < temperatures.Count() && index < julianDays.Count(); index++)
             {
@@ -197,26 +206,30 @@ namespace H.Core.Calculators.Climate
                 var temperature = temperatures.ElementAt(index);
                 var precipitation = precipitations.ElementAt(index);
                 var evapotranspiration = evapotranspirations.ElementAt(index);
+                var dailyMinimumTemperature = dailyMinimumTemperatures.ElementAt(index);
+                var dailyMaximumTemperature = dailyMaximumTemperatures.ElementAt(index);
 
-                var dailyClimateParameter = CalculateDailyClimateParameter(emergenceDay,
-                    ripeningDay,
-                    julianDay,
-                    temperature,
-                    precipitation,
-                    evapotranspiration,
-                    percentageSoilOrganicCarbon,
-                    variance,
-                    clay,
-                    sand,
-                    layerThicknessInMillimeters,
-                    yield,
-                    alfa,
-                    decompositionMinimumTemperature,
-                    decompositionMaximumTemperature,
-                    moistureResponseFunctionAtSaturation,
-                    moistureResponseFunctionAtWiltingPoint,
-                    ref soilTemperaturePrevious,
-                    ref waterTemperaturePrevious);
+                var dailyClimateParameter = this.CalculateDailyClimateParameter(emergenceDay,
+                                                                                ripeningDay,
+                                                                                julianDay,
+                                                                                temperature,
+                                                                                precipitation,
+                                                                                evapotranspiration,
+                                                                                percentageSoilOrganicCarbon,
+                                                                                variance,
+                                                                                clay,
+                                                                                sand,
+                                                                                layerThicknessInMillimeters,
+                                                                                yield,
+                                                                                alfa,
+                                                                                decompositionMinimumTemperature,
+                                                                                decompositionMaximumTemperature,
+                                                                                moistureResponseFunctionAtSaturation,
+                                                                                moistureResponseFunctionAtWiltingPoint,
+                                                                                ref soilTemperaturePrevious,
+                                                                                ref waterTemperaturePrevious,
+                                                                                dailyMinimumTemperature,
+                                                                                dailyMaximumTemperature, cropType);
 
                 dailyClimateParameterList.Add(dailyClimateParameter);
             }
@@ -224,8 +237,7 @@ namespace H.Core.Calculators.Climate
             return dailyClimateParameterList;
         }
 
-        public double CalculateClimateParameter(
-            int emergenceDay,
+        public double CalculateClimateParameter(int emergenceDay,
             int ripeningDay,
             double yield,
             double clay,
@@ -240,32 +252,37 @@ namespace H.Core.Calculators.Climate
             double moistureResponseFunctionAtSaturation,
             List<double> evapotranspirations,
             List<double> precipitations,
-            List<double> temperatures)
+            List<double> temperatures,
+            List<double> dailyMinimumTemperatures,
+            List<double> dailyMaximumTemperatures,
+            CropType cropType)
         {
-            var dailyClimateParameterList = CalculateDailyClimateParameters(
-                emergenceDay,
-                ripeningDay,
-                yield,
-                clay,
-                sand,
-                layerThicknessInMillimeters,
-                percentageSoilOrganicCarbon,
-                variance,
-                alfa,
-                decompositionMinimumTemperature,
-                decompositionMaximumTemperature,
-                moistureResponseFunctionAtWiltingPoint,
-                moistureResponseFunctionAtSaturation,
-                evapotranspirations,
-                precipitations,
-                temperatures
-            );
+            var dailyClimateParameterList = this.CalculateDailyClimateParameters(
+                    emergenceDay,
+                    ripeningDay,
+                    yield,
+                    clay,
+                    sand,
+                    layerThicknessInMillimeters,
+                    percentageSoilOrganicCarbon,
+                    variance,
+                    alfa,
+                    decompositionMinimumTemperature,
+                    decompositionMaximumTemperature,
+                    moistureResponseFunctionAtWiltingPoint,
+                    moistureResponseFunctionAtSaturation,
+                    evapotranspirations,
+                    precipitations,
+                    temperatures,
+                    dailyMinimumTemperatures,
+                    dailyMaximumTemperatures,
+                    cropType);
 
             return dailyClimateParameterList.Average();
         }
 
         /// <summary>
-        ///     Equation 2.1.1-47
+        /// Equation 2.1.1-47
         /// </summary>
         public double CalculateClimateManagementFactor(double climateParameter, double tillageFactor)
         {
@@ -275,13 +292,19 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        ///     Eq. 1.6.2-3
+        /// Equation 1.6.2-3
+        /// Equation 1.6.2-4
         /// </summary>
-        /// <param name="maxTemperature">Maximum temperature of all temperatures considered</param>
-        /// <param name="minTemperature">Minimum temperature of all temperatures considered</param>
+        /// <param name="maximumTemperatureForDay">Maximum temperature of all temperatures considered</param>
+        /// <param name="minimumTemperatureForDay">Minimum temperature of all temperatures considered</param>
         /// <param name="cropType">Crop you wish to calculate</param>
+        /// <param name="meanTemperatureForDay"></param>
         /// <returns>Crop Coefficient</returns>
-        public double CalculateCropCoefficient(double maxTemperature, double minTemperature, CropType cropType)
+        public double CalculateCropCoefficient(
+            double maximumTemperatureForDay,
+            double minimumTemperatureForDay,
+            CropType cropType,
+            double meanTemperatureForDay)
         {
             var cropCoefficient = _growingDegreeCropCoefficientsProvider.GetByCropType(cropType);
 
@@ -290,48 +313,99 @@ namespace H.Core.Calculators.Climate
             var c = cropCoefficient.C;
             var d = cropCoefficient.D;
             var e = cropCoefficient.E;
-            var Tbase = 5;
+            const int Tbase = 5;
 
-            // Calculation in the algorithm document assumes separate values (parameters) for maximum temperature and minimum temperature, if the values that the users passes in
-            // are the same then the caller only has the mean value, in this case, don't recalculate the mean temperature
-            var meanTemperature = (maxTemperature - minTemperature) / 2;
-            if (Math.Abs(maxTemperature - minTemperature) < double.Epsilon)
-                meanTemperature = maxTemperature; // Use the max (min is the same at this point)
+            /*
+             * Equation uses the half-difference of the maximum and minimum temperatures
+             */
 
-            var innerTerm = meanTemperature - Tbase;
+            var halfDifference = (maximumTemperatureForDay - minimumTemperatureForDay) / 2.0;
+
+            /*
+             * Calculation in the algorithm document assumes separate values for maximum temperature and minimum temperature, if the values that the users passes in
+             * are the same then the caller only has the mean value. In this case we use the mean temperature as the 't' value in the equation which won't be the half difference described above, but we use this as a necessary fallback.
+             *
+             * The following check/assignment is also needed for older farm files that did not previously store the Tmax and Tmin values but only the mean temperature. Farms only began storing Tmax and Tmin beginning October 20, 2025. When
+             * older farms are loaded the Tmax and Tmin values will be zero, so we need to check for this condition and utilized the mean temperature in this situation. A similar check is needed when the user omits the Tmin and Tmax values
+             * from a custom climate file.
+             */
+
+            var userTemperatureTerm = 0d;
+            if (Math.Abs(maximumTemperatureForDay - minimumTemperatureForDay) < double.Epsilon)
+            {
+                userTemperatureTerm = meanTemperatureForDay;
+            }
+            else
+            {
+                userTemperatureTerm = halfDifference;
+            }
+
+            var kc = 0d;
+            if (cropType.IsAnnual())
+            {
+                kc = this.CalculateKcForAnnualCrops(a: a, b: b, c: c, d: d, e: e, temperatureTerm: userTemperatureTerm, Tbase: Tbase);
+            }
+            else
+            {
+                kc = this.CalculateKcForPerennialCrops(a: a, b: b, temperatureTerm: userTemperatureTerm, Tbase: Tbase);
+            }
+
+            return kc; 
+        }
+
+        /// <summary>
+        /// Equation 1.6.2-4 
+        ///  
+        /// Calculates the crop coefficient (Kc) for perennial crops using an exponential decay model.
+        /// The calculation uses the temperature difference from the base temperature (Tbase).
+        /// </summary>
+        /// <param name="a">Coefficient 'a' from Table1 (see <see cref="Table_1_Growing_Degree_Crop_Coefficients_Provider"/> and <see cref="Table_1_Growing_Degree_Crop_Coefficients_Data"/>).</param>
+        /// <param name="b">Coefficient 'b' from Table1 (see <see cref="Table_1_Growing_Degree_Crop_Coefficients_Provider.GetByCropType(CropType)"/>).</param>
+        /// <param name="temperatureTerm">Temperature value used in the equation. This is either the half-difference between maximum and minimum daily temperatures, or the mean daily temperature when Tmax and Tmin are equal or unavailable.</param>
+        /// <param name="Tbase">Base temperature for crop growth.</param>
+        /// <returns>Crop coefficient (Kc) for perennial crops.</returns>
+        /// <remarks>
+        /// The coefficients <c>a</c> and <c>b</c> are crop-specific values stored in <see cref="Table_1_Growing_Degree_Crop_Coefficients_Data"/>
+        /// and retrieved via <see cref="Table_1_Growing_Degree_Crop_Coefficients_Provider.GetByCropType(CropType)"/>.        
+        /// </remarks>
+        public double CalculateKcForPerennialCrops(double a, double b, double temperatureTerm, double Tbase)
+        {
+            var innerExponentTerm = temperatureTerm - Tbase;
+            var powerTerm = (-1.0) * b * innerExponentTerm;
+            var exponentTerm = Math.Exp(powerTerm);
+            var finalFactor = a * (1.0 - exponentTerm);
+
+            return finalFactor;
+        }
+
+        /// <summary>
+        /// Equation 1.6.2-3
+        /// Calculates the crop coefficient (Kc) for annual crops using a fourth-order polynomial
+        /// in the temperature difference from the base temperature.
+        /// </summary>
+        /// <remarks>
+        /// The coefficients (a, b, c, d, e) are crop-specific values stored in
+        /// <see cref="Table_1_Growing_Degree_Crop_Coefficients_Data"/>
+        /// and provided by <see cref="Table_1_Growing_Degree_Crop_Coefficients_Provider"/>.
+        /// </remarks>
+        /// <param name="a">Coefficient 'a' (from the table provider)</param>
+        /// <param name="b">Coefficient 'b' (from the table provider)</param>
+        /// <param name="c">Coefficient 'c' (from the table provider)</param>
+        /// <param name="d">Coefficient 'd' (from the table provider)</param>
+        /// <param name="e">Coefficient 'e' (from the table provider)</param>
+        /// <param name="temperatureTerm">Temperature term: half the difference between daily max and min temperatures, or the daily mean if Tmax==Tmin.</param>
+        /// <param name="Tbase">Base temperature for crop growth.</param>
+        /// <returns>The calculated crop coefficient (Kc) for annual crops.</returns>
+        public double CalculateKcForAnnualCrops(double a, double b, double c, double d, double e, double temperatureTerm, double Tbase)
+        {
+            var innerTerm = temperatureTerm - Tbase;
+
             var term2 = b * innerTerm;
             var term3 = c * Math.Pow(innerTerm, 2);
-            var term4 = d * Math.Pow(innerTerm, 3);
+            var term4 = d * Math.Pow(innerTerm, 3); 
             var term5 = e * Math.Pow(innerTerm, 4);
 
             return a + term2 + term3 + term4 + term5;
-        }
-
-
-        /// <summary>
-        ///     Eq. 1.6.2-4
-        /// </summary>
-        /// <param name="maxTemp">Maximum temperature of all temps considered</param>
-        /// <param name="minTemp">Minimum tempearture of all temps considered</param>
-        /// <param name="cropType">The crop you wish to measure</param>
-        /// <param name="meanDailyTemp">Mean daily temperature (C)</param>
-        /// <param name="solarRadiaton">Solar radiation (MJ m^-2 day^-1)</param>
-        /// <param name="relativeHumidity">Relative humidity(%)</param>
-        /// <returns></returns>
-        public double CalculateCropSpecificEvapotranspirationNoWaterAvailability(double maxTemp,
-            double minTemp,
-            CropType cropType,
-            double meanDailyTemp,
-            double solarRadiaton,
-            double relativeHumidity)
-
-        {
-            var cropCoefficient = CalculateCropCoefficient(maxTemp, minTemp, cropType);
-            var evapotranspiration =
-                _evapotranspirationCalculator.CalculateReferenceEvapotranspiration(meanDailyTemp, solarRadiaton,
-                    relativeHumidity);
-
-            return cropCoefficient * evapotranspiration;
         }
 
         #endregion
@@ -340,7 +414,10 @@ namespace H.Core.Calculators.Climate
 
         private IEnumerable<int> GetJulianDays()
         {
-            for (var i = 1; i <= CoreConstants.DaysInYear; i++) yield return i;
+            for (var i = 1; i <= CoreConstants.DaysInYear; i++)
+            {
+                yield return i;
+            }
         }
 
         private ClimateParameterDailyResult CalculateDailyClimateParameter(int emergenceDay,
@@ -361,7 +438,10 @@ namespace H.Core.Calculators.Climate
             double moistureResponseFunctionAtSaturation,
             double moistureResponseFunctionAtWiltingPoint,
             ref double soilTemperaturePrevious,
-            ref double waterTemperaturePrevious)
+            ref double waterTemperaturePrevious,
+            double minimumTemperatureForDay,
+            double maximumTemperatureForDay,
+            CropType cropType)
         {
             var dailyClimateParameterResult = new ClimateParameterDailyResult();
             dailyClimateParameterResult.JulianDay = julianDay;
@@ -369,70 +449,65 @@ namespace H.Core.Calculators.Climate
             dailyClimateParameterResult.InputEvapotranspiration = evapotranspiration;
             dailyClimateParameterResult.InputTemperature = temperature;
 
-            var greenAreaIndexMax = CalculateGreenAreaIndexMax(yield);
-            var midSeason = CalculateMidSeason(emergenceDay, ripeningDay);
-            var greenAreaIndex = CalculateGreenAreaIndex(greenAreaIndexMax, julianDay, midSeason, variance);
+            var greenAreaIndexMax = this.CalculateGreenAreaIndexMax(yield);
+            var midSeason = this.CalculateMidSeason(emergenceDay, ripeningDay);
+            var greenAreaIndex = this.CalculateGreenAreaIndex(greenAreaIndexMax, julianDay, midSeason, variance);
             dailyClimateParameterResult.GreenAreaIndex = greenAreaIndex;
 
-            var organicCarbonFactor = CalculateOrganicCarbonFactor(organicCarbon);
-            var clayFactor = CalculateClayFactor(clay);
-            var sandFactor = CalculateSandFactor(sand);
+            var organicCarbonFactor = this.CalculateOrganicCarbonFactor(organicCarbon);
+            var clayFactor = this.CalculateClayFactor(clay);
+            var sandFactor = this.CalculateSandFactor(sand);
 
-            var wiltingPointPercent = CalculateWiltingPointPercent(organicCarbonFactor, clayFactor, sandFactor);
-            var wiltingPoint = CalculateWiltingPoint(wiltingPointPercent);
+            var wiltingPointPercent = this.CalculateWiltingPointPercent(organicCarbonFactor, clayFactor, sandFactor);
+            var wiltingPoint = this.CalculateWiltingPoint(wiltingPointPercent);
             dailyClimateParameterResult.WiltingPoint = wiltingPoint;
 
-            var fieldCapacityPercent = CalculateFieldCapacityPercent(organicCarbonFactor, clayFactor, sandFactor);
-            var fieldCapacity = CalculateFieldCapacity(fieldCapacityPercent);
+            var fieldCapacityPercent = this.CalculateFieldCapacityPercent(organicCarbonFactor, clayFactor, sandFactor);
+            var fieldCapacity = this.CalculateFieldCapacity(fieldCapacityPercent);
             dailyClimateParameterResult.FieldCapacity = fieldCapacity;
 
-            var soilMeanDepth = CalculateSoilMeanDepth(layerThickness);
-            var leafAreaIndex = CalculateLeafAreaIndex(greenAreaIndex);
+            var soilMeanDepth = this.CalculateSoilMeanDepth(layerThickness);
+            var leafAreaIndex = this.CalculateLeafAreaIndex(greenAreaIndex);
 
-            var surfaceTemperature = CalculateSurfaceTemperature(temperature, leafAreaIndex);
+            var surfaceTemperature = this.CalculateSurfaceTemperature(temperature, leafAreaIndex);
             dailyClimateParameterResult.SurfaceTemperature = surfaceTemperature;
 
-            var soilTemperatureCurrent = CalculateSoilTemperatures(julianDay, surfaceTemperature, soilMeanDepth,
-                greenAreaIndex, ref soilTemperaturePrevious);
+            var soilTemperatureCurrent = this.CalculateSoilTemperatures(julianDay, surfaceTemperature, soilMeanDepth, greenAreaIndex, ref soilTemperaturePrevious);
             dailyClimateParameterResult.SoilTemperature = soilTemperatureCurrent;
 
-            var cropCoefficient = CalculateCropCoefficient(greenAreaIndex);
+            // Calculate Kc
+            var cropCoefficient = this.CalculateCropCoefficient(cropType, greenAreaIndex, maximumTemperatureForDay, minimumTemperatureForDay, temperature);
             dailyClimateParameterResult.CropCoefficient = cropCoefficient;
 
-            var cropEvapotranspiration = CalculateCropEvapotranspiration(evapotranspiration, cropCoefficient);
+            var cropEvapotranspiration = this.CalculateCropEvapotranspiration(evapotranspiration, cropCoefficient);
             dailyClimateParameterResult.ReferenceEvapotranspiration = cropEvapotranspiration;
 
-            var cropInterception = CalculateCropInterception(precipitation, greenAreaIndex, cropEvapotranspiration);
+            var cropInterception = this.CalculateCropInterception(precipitation, greenAreaIndex, cropEvapotranspiration);
             dailyClimateParameterResult.CropInterception = cropInterception;
 
-            var soilAvailableWater = CalculateSoilAvailableWater(precipitation, greenAreaIndex, cropEvapotranspiration);
+            var soilAvailableWater = this.CalculateSoilAvailableWater(precipitation, greenAreaIndex, cropEvapotranspiration);
             dailyClimateParameterResult.SoilAvailableWater = soilAvailableWater;
 
-            var volumetricSoilWaterContent =
-                CalculateVolumetricSoilWaterContent(ref waterTemperaturePrevious, layerThickness, fieldCapacity);
+            var volumetricSoilWaterContent = this.CalculateVolumetricSoilWaterContent(ref waterTemperaturePrevious, layerThickness, fieldCapacity);
             dailyClimateParameterResult.VolumetricSoilWaterContent = volumetricSoilWaterContent;
 
-            var soilCoefficient =
-                CalculateSoilCoefficient(fieldCapacity, volumetricSoilWaterContent, wiltingPoint, alfa);
-            var actualEvapotranspiration = CalculateActualEvapotranspiration(cropEvapotranspiration, soilCoefficient);
+            var soilCoefficient = this.CalculateSoilCoefficient(fieldCapacity, volumetricSoilWaterContent, wiltingPoint, alfa);
+            var actualEvapotranspiration = this.CalculateActualEvapotranspiration(cropEvapotranspiration, soilCoefficient);
             dailyClimateParameterResult.ActualEvapotranspiration = actualEvapotranspiration;
 
-            var deepPercolation = CalculateDeepPercolation(fieldCapacity, layerThickness, ref waterTemperaturePrevious);
+            var deepPercolation = this.CalculateDeepPercolation(fieldCapacity, layerThickness, ref waterTemperaturePrevious);
             dailyClimateParameterResult.DeepPercolation = deepPercolation;
 
-            var currentWaterStorage = CalculateJulianDayWaterStorage(fieldCapacity, layerThickness, julianDay,
-                ref waterTemperaturePrevious, soilAvailableWater, actualEvapotranspiration);
+            var currentWaterStorage = this.CalculateJulianDayWaterStorage(fieldCapacity, layerThickness, julianDay, ref waterTemperaturePrevious, soilAvailableWater, actualEvapotranspiration);
             dailyClimateParameterResult.WaterStorage = currentWaterStorage;
 
-            var temperatureResponseFactor = CalculateTemperatureResponseFactor(ref soilTemperaturePrevious,
-                decompositionMinimumTemperature, decompositionMaximumTemperature);
+            var temperatureResponseFactor = this.CalculateTemperatureResponseFactor(ref soilTemperaturePrevious, decompositionMinimumTemperature, decompositionMaximumTemperature);
             dailyClimateParameterResult.ClimateParamterTemperature = temperatureResponseFactor;
 
-            var moistureResponseFactor = CalculateMoistureResponseFactor(volumetricSoilWaterContent, fieldCapacity,
-                wiltingPoint, moistureResponseFunctionAtSaturation, moistureResponseFunctionAtWiltingPoint);
+            var moistureResponseFactor = this.CalculateMoistureResponseFactor(volumetricSoilWaterContent, fieldCapacity, wiltingPoint, moistureResponseFunctionAtSaturation, moistureResponseFunctionAtWiltingPoint);
             dailyClimateParameterResult.ClimateParameterWater = moistureResponseFactor;
 
-            var climateFactor = CalculateClimateFactor(moistureResponseFactor, temperatureResponseFactor);
+            var climateFactor = this.CalculateClimateFactor(moistureResponseFactor, temperatureResponseFactor);
             dailyClimateParameterResult.ClimateParameter = climateFactor;
 
             soilTemperaturePrevious = soilTemperatureCurrent;
@@ -442,7 +517,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        ///     Equation 2.1.1-1
+        /// Equation 2.1.1-1
         /// </summary>
         private double CalculateGreenAreaIndexMax(double yield)
         {
@@ -452,7 +527,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        ///     Equation 2.1.1-2
+        /// Equation 2.1.1-2
         /// </summary>
         private double CalculateMidSeason(int emergenceDay, int ripeningDay)
         {
@@ -462,10 +537,10 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        ///     Equation 2.1.1-3
+        /// Equation 2.1.1-3
         /// </summary>
         private double CalculateGreenAreaIndex(double greenAreaIndexMax, int julianDay, double midSeason,
-            double variance)
+                                               double variance)
         {
             var greenAreaIndex = greenAreaIndexMax * Math.Exp(-1 * Math.Pow(julianDay - midSeason, 2) / (2 * variance));
 
@@ -473,7 +548,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        ///     Equation 2.1.1-4
+        /// Equation 2.1.1-4
         /// </summary>
         private double CalculateOrganicCarbonFactor(double percentOrganicCarbon)
         {
@@ -483,7 +558,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        ///     Equation 2.1.1-5
+        /// Equation 2.1.1-5
         /// </summary>
         private double CalculateClayFactor(double clay)
         {
@@ -493,7 +568,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        ///     Equation 2.1.1-6
+        /// Equation 2.1.1-6
         /// </summary>
         private double CalculateSandFactor(double sand)
         {
@@ -503,36 +578,36 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        ///     Equation 2.1.1-7
+        /// Equation 2.1.1-7
         /// </summary>
         private double CalculateWiltingPointPercent(double organicCarbon, double clayFactor, double sandFactor)
         {
             var wiltingPointPercent = 14.2568 + 7.36318 *
-                (0.06865 + 0.108713 * organicCarbon -
-                 0.0157225 * Math.Pow(organicCarbon, 2) +
-                 0.00102805 * Math.Pow(organicCarbon, 3) +
-                 0.886569 * clayFactor -
-                 0.223581 * organicCarbon * clayFactor +
-                 0.0126379 * Math.Pow(organicCarbon, 2) * clayFactor -
-                 0.017059 * Math.Pow(clayFactor, 2) +
-                 0.0135266 * organicCarbon * Math.Pow(clayFactor, 2) -
-                 0.0334434 * Math.Pow(clayFactor, 3) -
-                 0.0535182 * sandFactor -
-                 0.0354271 * organicCarbon * sandFactor -
-                 0.00261313 * Math.Pow(organicCarbon, 2) * sandFactor -
-                 0.154563 * clayFactor * sandFactor -
-                 0.0160219 * organicCarbon * clayFactor * sandFactor -
-                 0.0400606 * Math.Pow(clayFactor, 2) * sandFactor -
-                 0.104875 * Math.Pow(sandFactor, 2) +
-                 0.0159857 * organicCarbon * Math.Pow(sandFactor, 2) -
-                 0.0671656 * clayFactor * Math.Pow(sandFactor, 2) -
-                 0.0260699 * Math.Pow(sandFactor, 3));
+                                      (0.06865 + 0.108713 * organicCarbon -
+                                       0.0157225 * Math.Pow(organicCarbon, 2) +
+                                       0.00102805 * Math.Pow(organicCarbon, 3) +
+                                       0.886569 * clayFactor -
+                                       0.223581 * organicCarbon * clayFactor +
+                                       0.0126379 * Math.Pow(organicCarbon, 2) * clayFactor -
+                                       0.017059 * Math.Pow(clayFactor, 2) +
+                                       0.0135266 * organicCarbon * Math.Pow(clayFactor, 2) -
+                                       0.0334434 * Math.Pow(clayFactor, 3) -
+                                       0.0535182 * sandFactor -
+                                       0.0354271 * organicCarbon * sandFactor -
+                                       0.00261313 * Math.Pow(organicCarbon, 2) * sandFactor -
+                                       0.154563 * clayFactor * sandFactor -
+                                       0.0160219 * organicCarbon * clayFactor * sandFactor -
+                                       0.0400606 * Math.Pow(clayFactor, 2) * sandFactor -
+                                       0.104875 * Math.Pow(sandFactor, 2) +
+                                       0.0159857 * organicCarbon * Math.Pow(sandFactor, 2) -
+                                       0.0671656 * clayFactor * Math.Pow(sandFactor, 2) -
+                                       0.0260699 * Math.Pow(sandFactor, 3));
 
             return wiltingPointPercent;
         }
 
         /// <summary>
-        ///     Equation 2.1.1-8
+        /// Equation 2.1.1-8
         /// </summary>
         private double CalculateWiltingPoint(double wiltingPointPercent)
         {
@@ -542,35 +617,35 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        ///     Equation 2.1.1-9
+        /// Equation 2.1.1-9
         /// </summary>
         private double CalculateFieldCapacityPercent(double organicCarbonFactor, double clayFactor, double sandFactor)
         {
             var fieldCapacityPercent = 29.7528 + 10.3544 * (
-                0.0461615 + 0.290955 * organicCarbonFactor -
-                0.0496845 * organicCarbonFactor * organicCarbonFactor +
-                0.00704802 * organicCarbonFactor * organicCarbonFactor *
-                organicCarbonFactor +
-                0.269101 * clayFactor -
-                0.176528 * organicCarbonFactor * clayFactor +
-                0.0543138 * organicCarbonFactor * organicCarbonFactor * clayFactor +
-                0.1982 * clayFactor * clayFactor -
-                0.060699 * clayFactor * clayFactor * clayFactor -
-                0.320249 * sandFactor -
-                0.0111693 * organicCarbonFactor * organicCarbonFactor * sandFactor +
-                0.14104 * clayFactor * sandFactor +
-                0.0657345 * organicCarbonFactor * clayFactor * sandFactor -
-                0.102026 * clayFactor * clayFactor * sandFactor -
-                0.04012 * sandFactor * sandFactor +
-                0.160838 * organicCarbonFactor * sandFactor * sandFactor -
-                0.121392 * clayFactor * sandFactor * sandFactor -
-                0.061667 * sandFactor * sandFactor * sandFactor);
+                                           0.0461615 + 0.290955 * organicCarbonFactor -
+                                           0.0496845 * organicCarbonFactor * organicCarbonFactor +
+                                           0.00704802 * organicCarbonFactor * organicCarbonFactor *
+                                           organicCarbonFactor +
+                                           0.269101 * clayFactor -
+                                           0.176528 * organicCarbonFactor * clayFactor +
+                                           0.0543138 * organicCarbonFactor * organicCarbonFactor * clayFactor +
+                                           0.1982 * clayFactor * clayFactor -
+                                           0.060699 * clayFactor * clayFactor * clayFactor -
+                                           0.320249 * sandFactor -
+                                           0.0111693 * organicCarbonFactor * organicCarbonFactor * sandFactor +
+                                           0.14104 * clayFactor * sandFactor +
+                                           0.0657345 * organicCarbonFactor * clayFactor * sandFactor -
+                                           0.102026 * clayFactor * clayFactor * sandFactor -
+                                           0.04012 * sandFactor * sandFactor +
+                                           0.160838 * organicCarbonFactor * sandFactor * sandFactor -
+                                           0.121392 * clayFactor * sandFactor * sandFactor -
+                                           0.061667 * sandFactor * sandFactor * sandFactor);
 
             return fieldCapacityPercent;
         }
 
         /// <summary>
-        ///     Equation 2.1.1-10
+        /// Equation 2.1.1-10
         /// </summary>
         private double CalculateFieldCapacity(double fieldCapacityPercent)
         {
@@ -580,7 +655,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        ///     Equation 2.1.1-11
+        /// Equation 2.1.1-11
         /// </summary>
         private double CalculateSoilMeanDepth(double layerThickness)
         {
@@ -590,7 +665,7 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        ///     Equation 2.1.1-12
+        /// Equation 2.1.1-12
         /// </summary>
         private double CalculateLeafAreaIndex(double greenAreaIndex)
         {
@@ -600,23 +675,27 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        ///     Equation 2.1.1-13
-        ///     Equation 2.1.1-14
+        /// Equation 2.1.1-13
+        /// Equation 2.1.1-14
         /// </summary>
         private double CalculateSurfaceTemperature(double temperature, double leafAreaIndex)
         {
             var surfaceTemperature = 0D;
             if (temperature < 0)
+            {
                 surfaceTemperature = 0.20 * temperature;
+            }
             else
+            {
                 surfaceTemperature = temperature * (0.95 + 0.05 * Math.Exp(-0.4 * (leafAreaIndex - 3)));
+            }
 
             return surfaceTemperature;
         }
 
         /// <summary>
-        ///     Equation 2.1.1-15
-        ///     Equation 2.1.1-16
+        /// Equation 2.1.1-15
+        /// Equation 2.1.1-16
         /// </summary>
         private double CalculateSoilTemperatures(
             int julianDay,
@@ -628,16 +707,58 @@ namespace H.Core.Calculators.Climate
             var currentSoilTemperature = 0d;
 
             if (julianDay == 1)
+            {
                 currentSoilTemperature = 0;
+            }
             else
+            {
                 currentSoilTemperature = soilTemperaturePrevious + (surfaceTemperature - soilTemperaturePrevious) *
-                    0.24 * Math.Exp(-soilMeanDepth * 0.017) * Math.Exp(-0.15 * greenAreaIndex);
+                                          0.24 * Math.Exp(-soilMeanDepth * 0.017) * Math.Exp(-0.15 * greenAreaIndex);
+            }
 
             return currentSoilTemperature;
         }
 
         /// <summary>
-        ///     Equation 2.1.1-19
+        /// Equation 1.6.2-5
+        /// </summary>
+        /// <param name="cropType"></param>
+        /// <param name="greenAreaIndex"></param>
+        /// <param name="maximumTemperatureForDay"></param>
+        /// <param name="minimumTemperatureForDay"></param>
+        /// <param name="meanTemperatureForDay"></param>
+        /// <returns></returns>
+        public double CalculateCropCoefficient(
+            CropType cropType,
+            double greenAreaIndex,
+            double maximumTemperatureForDay,
+            double minimumTemperatureForDay,
+            double meanTemperatureForDay)
+        { 
+            var result = 0.0;
+
+            if (cropType != CropType.None)
+            {
+                /*
+                 * We can calculate a crop-specific Kc value. This will result in value for Equation 1.6.2-5 (ETc).
+                 */
+
+                result = this.CalculateCropCoefficient(maximumTemperatureForDay, minimumTemperatureForDay, cropType, meanTemperatureForDay);
+            }
+            else
+            {
+                // We have no crop, so return a default Kc that is not crop-specific
+
+                result = this.CalculateCropCoefficient(greenAreaIndex);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Equation 2.1.1-19
+        ///
+        /// Calculates Kc
         /// </summary>
         private double CalculateCropCoefficient(double greenAreaIndex)
         {
@@ -647,7 +768,10 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        ///     Equation 2.1.1-20
+        /// Equation 1.6.2-5
+        /// Equation 2.1.1-20
+        ///
+        /// Calculates ETc
         /// </summary>
         private double CalculateCropEvapotranspiration(double evapotranspiration, double cropCoefficient)
         {
@@ -657,9 +781,9 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        ///     Equation 2.1.1-21
-        ///     Equation 2.1.1-22
-        ///     Equation 2.1.1-23
+        /// Equation 2.1.1-21
+        /// Equation 2.1.1-22
+        /// Equation 2.1.1-23
         /// </summary>
         private double CalculateCropInterception(
             double totalDailyPrecipitation,
@@ -668,27 +792,34 @@ namespace H.Core.Calculators.Climate
         {
             var cropInterception = 0d;
             if (totalDailyPrecipitation < 0.2 * greenAreaIndex)
+            {
                 cropInterception = totalDailyPrecipitation;
+            }
             else
+            {
                 cropInterception = 0.2 * greenAreaIndex;
+            }
 
-            if (cropInterception > cropEvapotranspiration) cropInterception = cropEvapotranspiration;
+            if (cropInterception > cropEvapotranspiration)
+            {
+                cropInterception = cropEvapotranspiration;
+            }
 
             return cropInterception;
         }
 
         /// <summary>
-        ///     Equation 2.1.1-24
+        /// Equation 2.1.1-24
         /// </summary>
         private double CalculateSoilAvailableWater(
             double totalDailyPrecipitation,
             double greenAreaIndex,
             double cropEvapotranspiration)
         {
-            var cropInterception = CalculateCropInterception(
-                totalDailyPrecipitation,
-                greenAreaIndex,
-                cropEvapotranspiration);
+            var cropInterception = this.CalculateCropInterception(
+                totalDailyPrecipitation: totalDailyPrecipitation,
+                greenAreaIndex: greenAreaIndex,
+                cropEvapotranspiration: cropEvapotranspiration);
 
             var soilAvailableWater = totalDailyPrecipitation - cropInterception;
 
@@ -696,24 +827,27 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        ///     Equation 2.1.1-25
-        ///     Equation 2.1.1-26
+        /// Equation 2.1.1-25
+        /// Equation 2.1.1-26
         /// </summary>
         private double CalculateVolumetricSoilWaterContent(ref double waterStoragePrevious,
-            double layerThickness,
-            double wiltingPoint)
+                                                           double layerThickness,
+                                                           double wiltingPoint)
         {
             var volumetricSoilWaterContent = waterStoragePrevious / layerThickness;
 
-            if (Math.Abs(volumetricSoilWaterContent) < double.Epsilon) volumetricSoilWaterContent = wiltingPoint;
+            if (Math.Abs(volumetricSoilWaterContent) < double.Epsilon)
+            {
+                volumetricSoilWaterContent = wiltingPoint;
+            }
 
             return volumetricSoilWaterContent;
         }
 
         /// <summary>
-        ///     Equation 2.1.1-27
-        ///     Equation 2.1.1-28
-        ///     Equation 2.1.1-29
+        /// Equation 2.1.1-27
+        /// Equation 2.1.1-28
+        /// Equation 2.1.1-29
         /// </summary>
         private double CalculateSoilCoefficient(
             double fieldCapacity,
@@ -725,19 +859,25 @@ namespace H.Core.Calculators.Climate
 
             var calculation =
                 Math.Pow(
-                    1 - (0.95 * fieldCapacity - volumetricSoilWaterContent) /
-                    (0.95 * fieldCapacity - alfa * wiltingPoint), 2);
+                         1 - (0.95 * fieldCapacity - volumetricSoilWaterContent) /
+                         (0.95 * fieldCapacity - alfa * wiltingPoint), 2);
             soilCoefficient = calculation > 0 ? calculation : 0;
 
-            if (soilCoefficient > 1) return 1;
+            if (soilCoefficient > 1)
+            {
+                return 1;
+            }
 
-            if (volumetricSoilWaterContent < alfa * wiltingPoint) return 0;
+            if (volumetricSoilWaterContent < alfa * wiltingPoint)
+            {
+                return 0;
+            }
 
             return soilCoefficient;
         }
 
         /// <summary>
-        ///     Equation 2.1.1-30
+        /// Equation 2.1.1-30
         /// </summary>
         private double CalculateActualEvapotranspiration(double cropEvapotranspiration, double soilCoefficient)
         {
@@ -747,8 +887,8 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        ///     Equation 2.1.1-33
-        ///     Equation 2.1.1-34
+        /// Equation 2.1.1-33
+        /// Equation 2.1.1-34
         /// </summary>
         private double CalculateDeepPercolation(
             double fieldCapacity,
@@ -757,17 +897,21 @@ namespace H.Core.Calculators.Climate
         {
             var deepPercolation = 0d;
             if (previousWaterStorage - fieldCapacity * layerThickness > 0)
+            {
                 deepPercolation = previousWaterStorage - fieldCapacity * layerThickness;
+            }
             else
+            {
                 deepPercolation = 0;
+            }
 
             return deepPercolation;
         }
 
         /// <summary>
-        ///     Equation 2.1.1-31
-        ///     Equation 2.1.1-32
-        ///     Equation 2.1.1-35
+        /// Equation 2.1.1-31
+        /// Equation 2.1.1-32
+        /// Equation 2.1.1-35
         /// </summary>
         private double CalculateJulianDayWaterStorage(
             double fieldCapacity,
@@ -785,7 +929,7 @@ namespace H.Core.Calculators.Climate
                 previousWaterStorage = fieldCapacity * layerThickness;
             }
 
-            var deepPercolation = CalculateDeepPercolation(fieldCapacity, layerThickness, ref previousWaterStorage);
+            var deepPercolation = this.CalculateDeepPercolation(fieldCapacity, layerThickness, ref previousWaterStorage);
 
             currentWaterStorage = previousWaterStorage +
                                   soilAvailableWater -
@@ -796,8 +940,8 @@ namespace H.Core.Calculators.Climate
         }
 
         /// <summary>
-        ///     Equation 2.1.1-36
-        ///     Equation 2.1.1-37
+        /// Equation 2.1.1-36
+        /// Equation 2.1.1-37
         /// </summary>
         private double CalculateTemperatureResponseFactor(
             ref double soilTemperaturePrevious,
@@ -806,20 +950,23 @@ namespace H.Core.Calculators.Climate
         {
             var temperatureResponseFactor = Math.Pow(soilTemperaturePrevious - decompositionMinimumTemperature, 2) /
                                             Math.Pow(decompositionMaximumTemperature - decompositionMinimumTemperature,
-                                                2);
+                                                     2);
 
-            if (soilTemperaturePrevious < -3.78) temperatureResponseFactor = 0;
+            if (soilTemperaturePrevious < -3.78)
+            {
+                temperatureResponseFactor = 0;
+            }
 
             return temperatureResponseFactor;
         }
 
         /// <summary>
-        ///     Equation 2.1.1-38
-        ///     Equation 2.1.1-39
-        ///     Equation 2.1.1-40
-        ///     Equation 2.1.1-41
-        ///     Equation 2.1.1-42
-        ///     Equation 2.1.1-43
+        /// Equation 2.1.1-38
+        /// Equation 2.1.1-39
+        /// Equation 2.1.1-40
+        /// Equation 2.1.1-41
+        /// Equation 2.1.1-42
+        /// Equation 2.1.1-43
         /// </summary>
         private double CalculateMoistureResponseFactor(
             double volumetricWaterContent,
@@ -833,31 +980,43 @@ namespace H.Core.Calculators.Climate
 
             var moistureResponseFactor = 0d;
             if (volumetricWaterContent > optimumWaterContent)
+            {
                 moistureResponseFactor = (1 - referenceSaturationPoint) *
-                    ((volumetricWaterContent - optimumWaterContent) /
-                     (optimumWaterContent - saturationPoint)) + 1;
+                                         ((volumetricWaterContent - optimumWaterContent) /
+                                          (optimumWaterContent - saturationPoint)) + 1;
+            }
 
             if (volumetricWaterContent < wiltingPoint)
+            {
                 moistureResponseFactor = referenceWiltingPoint * volumetricWaterContent /
                                          wiltingPoint;
+            }
 
             if (wiltingPoint <= volumetricWaterContent && volumetricWaterContent <= optimumWaterContent)
+            {
                 moistureResponseFactor = (1 - referenceWiltingPoint) *
                                          ((volumetricWaterContent - wiltingPoint) /
                                           (optimumWaterContent - wiltingPoint)) +
                                          referenceWiltingPoint;
+            }
 
-            if (moistureResponseFactor > 1) moistureResponseFactor = 1;
+            if (moistureResponseFactor > 1)
+            {
+                moistureResponseFactor = 1;
+            }
 
-            if (moistureResponseFactor < 0) moistureResponseFactor = 0;
+            if (moistureResponseFactor < 0)
+            {
+                moistureResponseFactor = 0;
+            }
 
             return moistureResponseFactor;
         }
 
         /// <summary>
-        ///     Equation 2.1.1-44
-        ///     Equation 2.1.1-45
-        ///     Equation 2.1.1-46
+        /// Equation 2.1.1-44
+        /// Equation 2.1.1-45
+        /// Equation 2.1.1-46
         /// </summary>
         private double CalculateClimateFactor(double moistureResponseFactor, double temperatureResponseFactor)
         {
@@ -866,6 +1025,10 @@ namespace H.Core.Calculators.Climate
 
             return climateParameterDaily;
         }
+
+        #endregion
+
+        #region Event Handlers
 
         #endregion
     }

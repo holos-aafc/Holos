@@ -9,6 +9,6 @@ namespace H.Core.Enumerations
         Mechanical,
 
         [LocalizedDescription("EnumChemicalFallow", typeof(Resources))]
-        Chemical
+        Chemical,
     }
 }

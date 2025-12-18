@@ -1,11 +1,13 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using H.Core.Enumerations;
 
 namespace H.Core.Providers.Animals
 {
     /// <summary>
-    ///     Table 37.
-    ///     Methane conversion factors (MCF) by climate zone and manure handling system
+    /// Table 37.
+    ///
+    /// Methane conversion factors (MCF) by climate zone and manure handling system
     /// </summary>
     public class Table_37_MCF_By_Climate_Livestock_MansureSystem_Provider
     {
@@ -17,12 +19,13 @@ namespace H.Core.Providers.Animals
             double meanAnnualPotentialEvapotranspiration,
             double meanAnnualTemperature)
         {
-            var climateZone = GetClimateZone(
-                meanAnnualTemperature,
-                meanAnnualPrecipitation,
-                meanAnnualPotentialEvapotranspiration);
+            var climateZone = this.GetClimateZone(
+                temperature: meanAnnualTemperature,
+                precipitation: meanAnnualPrecipitation,
+                potentialEvapotranspiration: meanAnnualPotentialEvapotranspiration);
 
             if (manureStateType == ManureStateType.SolidStorage || manureStateType == ManureStateType.Solid)
+            {
                 switch (climateZone)
                 {
                     case ClimateZones.CoolTemperateMoist:
@@ -35,8 +38,10 @@ namespace H.Core.Providers.Animals
                     case ClimateZones.WarmTemperateMoist:
                         return 0.04;
                 }
+            }
 
             if (manureStateType == ManureStateType.CompostIntensive)
+            {
                 switch (climateZone)
                 {
                     case ClimateZones.CoolTemperateMoist:
@@ -49,8 +54,10 @@ namespace H.Core.Providers.Animals
                     case ClimateZones.WarmTemperateMoist:
                         return 0.01;
                 }
+            }
 
             if (manureStateType == ManureStateType.CompostPassive)
+            {
                 switch (climateZone)
                 {
                     case ClimateZones.CoolTemperateMoist:
@@ -63,8 +70,10 @@ namespace H.Core.Providers.Animals
                     case ClimateZones.WarmTemperateMoist:
                         return 0.02;
                 }
+            }
 
             if (manureStateType == ManureStateType.DeepBedding)
+            {
                 switch (climateZone)
                 {
                     case ClimateZones.CoolTemperateMoist:
@@ -79,8 +88,10 @@ namespace H.Core.Providers.Animals
                     case ClimateZones.WarmTemperateMoist:
                         return 0.41;
                 }
+            }
 
             if (manureStateType == ManureStateType.CompostedInVessel)
+            {
                 switch (climateZone)
                 {
                     case ClimateZones.CoolTemperateMoist:
@@ -91,8 +102,10 @@ namespace H.Core.Providers.Animals
                     case ClimateZones.WarmTemperateMoist:
                         return 0.005;
                 }
+            }
 
             if (manureStateType == ManureStateType.DailySpread)
+            {
                 switch (climateZone)
                 {
                     case ClimateZones.CoolTemperateMoist:
@@ -105,8 +118,10 @@ namespace H.Core.Providers.Animals
                     case ClimateZones.WarmTemperateMoist:
                         return 0.005;
                 }
+            }
 
             if (manureStateType == ManureStateType.DeepPit)
+            {
                 switch (climateZone)
                 {
                     case ClimateZones.CoolTemperateMoist:
@@ -122,6 +137,7 @@ namespace H.Core.Providers.Animals
                     case ClimateZones.WarmTemperateMoist:
                         return 0.13;
                 }
+            }
 
             // Pasture, etc. have non-temperature dependent values
             return 0;
@@ -138,28 +154,43 @@ namespace H.Core.Providers.Animals
 
             if (temperature >= 10)
             {
-                if (isWetClimate) return ClimateZones.WarmTemperateMoist;
-
-                return ClimateZones.WarmTemperateDry;
+                if (isWetClimate)
+                {
+                    return ClimateZones.WarmTemperateMoist;
+                }
+                else
+                {
+                    return ClimateZones.WarmTemperateDry;
+                }
             }
 
             if (temperature > 0 && temperature < 10)
             {
-                if (isWetClimate) return ClimateZones.CoolTemperateMoist;
-
-                return ClimateZones.CoolTemperateDry;
+                if (isWetClimate)
+                {
+                    return ClimateZones.CoolTemperateMoist;
+                }
+                else
+                {
+                    return ClimateZones.CoolTemperateDry;
+                }
             }
 
             if (temperature <= 0)
             {
-                if (isWetClimate) return ClimateZones.BorealMoist;
-
-                return ClimateZones.BorealDry;
+                if (isWetClimate)
+                {
+                    return ClimateZones.BorealMoist;
+                }
+                else
+                {
+                    return ClimateZones.BorealDry;
+                }
             }
 
-            Trace.TraceError($"{nameof(GetClimateZone)}" +
-                             " unable to get data for methane conversion factor since climate zone is unknown" +
-                             " Returning default value of 0.");
+            Trace.TraceError($"{nameof(Table_37_MCF_By_Climate_Livestock_MansureSystem_Provider.GetClimateZone)}" +
+                             $" unable to get data for methane conversion factor since climate zone is unknown" +
+                             $" Returning default value of 0.");
             return 0;
         }
 

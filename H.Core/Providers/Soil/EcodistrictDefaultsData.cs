@@ -11,10 +11,9 @@ namespace H.Core.Providers.Soil
         public int PEMayToOct { get; set; }
 
         /// <summary>
-        ///     (percentage %)
+        /// (percentage %)
         /// </summary>
         public double FTopo { get; set; }
-
         public SoilFunctionalCategory SoilFunctionalCategory { get; set; }
         public SoilTexture SoilTexture { get; set; }
     }

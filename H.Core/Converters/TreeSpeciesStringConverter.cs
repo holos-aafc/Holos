@@ -8,7 +8,7 @@ namespace H.Core.Converters
     {
         public TreeSpecies Convert(string input)
         {
-            switch (GetLettersAsLowerCase(input))
+            switch (this.GetLettersAsLowerCase(input))
             {
                 case "hybridpoplar":
                     return TreeSpecies.HybridPoplar;

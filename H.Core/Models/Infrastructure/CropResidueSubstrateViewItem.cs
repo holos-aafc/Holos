@@ -11,12 +11,12 @@ namespace H.Core.Models.Infrastructure
         #endregion
 
         #region Properties
-
+        
         public CropType CropType
         {
             get => _cropType;
             set => SetProperty(ref _cropType, value);
-        }
+        } 
 
         #endregion
     }

@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using H.Content;
-using H.Core.Converters;
 using H.Infrastructure;
+using H.Core.Converters;
 
 namespace H.Core.Providers.Shelterbelt
 {
     /// <summary>
-    ///     If speed is needed, try using the same provider object everywhere.
-    ///     It will cache the table and load it only once, after which things can be accessed in constant time
-    ///     instead of O(n) time where n may be large enough to take a second.
+    /// If speed is needed, try using the same provider object everywhere.
+    /// It will cache the table and load it only once, after which things can be accessed in constant time
+    /// instead of O(n) time where n may be large enough to take a second.
     /// </summary>
     public static class ShelterbeltEcodistrictLookupTableProvider
     {
@@ -26,7 +26,7 @@ namespace H.Core.Providers.Shelterbelt
             var filename = CsvResourceNames.ShelterbeltEcodistrictLookupTable;
             var filelines = CsvResourceReader.GetFileLines(filename);
             var result = new List<ShelterbeltEcodistrictLookupTableData>();
-            var converter = new TreeSpeciesStringConverter();
+            TreeSpeciesStringConverter converter = new TreeSpeciesStringConverter();
             foreach (var line in filelines.Skip(1))
             {
                 var entry = new ShelterbeltEcodistrictLookupTableData();
@@ -39,7 +39,6 @@ namespace H.Core.Providers.Shelterbelt
                 entry.FinerootsKgCperTree = double.Parse(line[6], cultureInfo);
                 result.Add(entry);
             }
-
             return result;
         }
 

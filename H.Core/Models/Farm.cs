@@ -1,16 +1,6 @@
 ﻿#region Imports
 
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using H.Core.Converters;
 using H.Core.Enumerations;
-using H.Core.Models.Animals;
-using H.Core.Models.Infrastructure;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models.LandManagement.Shelterbelt;
 using H.Core.Providers;
@@ -19,7 +9,22 @@ using H.Core.Providers.Climate;
 using H.Core.Providers.Feed;
 using H.Core.Providers.Soil;
 using H.Core.Tools;
+using H.Core.Models.Infrastructure;
 using H.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Security.Permissions;
+using System.Windows.Controls.Primitives;
+using System.Windows.Navigation;
+using AutoMapper.Configuration.Conventions;
+using H.Core.Models.Animals;
+using H.Core.Converters;
+using H.Core.Emissions.Results;
 
 #endregion
 
@@ -32,25 +37,24 @@ namespace H.Core.Models
         public enum ChosenClimateAcquisition
         {
             /// <summary>
-            ///     Uses the 'old' default (non-daily) temperatures where normals were used to extract daily values. This is deprecated
-            ///     in favor of NASA climate data
+            /// Uses the 'old' default (non-daily) temperatures where normals were used to extract daily values. This is deprecated in favor of NASA climate data
             /// </summary>
             SLC,
 
             /// <summary>
-            ///     Used with the CLI where the user can specify default monthly values in a climate settings file
+            /// Used with the CLI where the user can specify default monthly values in a climate settings file
             /// </summary>
             Custom,
 
             /// <summary>
-            ///     Daily climate data is downloaded from NASA website API
+            /// Daily climate data is downloaded from NASA website API
             /// </summary>
             NASA,
 
             /// <summary>
-            ///     Used with the CLI where the user can specify default daily values in a custom CSV file
+            /// Used with the CLI where the user can specify default daily values in a custom CSV file
             /// </summary>
-            InputFile
+            InputFile,
         }
 
         private string _comments;
@@ -97,9 +101,7 @@ namespace H.Core.Models
         private YieldAssignmentMethod _yieldAssignmentMethod;
 
         private List<TimeFrame> _availableTimeFrame;
-
-        private readonly ShelterbeltEnabledFromHardinessZoneConverter _shelterbeltFromHardinessZoneConverter =
-            new ShelterbeltEnabledFromHardinessZoneConverter();
+        private readonly ShelterbeltEnabledFromHardinessZoneConverter _shelterbeltFromHardinessZoneConverter = new ShelterbeltEnabledFromHardinessZoneConverter();
 
         #endregion
 
@@ -109,55 +111,59 @@ namespace H.Core.Models
         {
             HTraceListener.AddTraceListener();
 
-            Defaults = new Defaults();
-            Diets = new ObservableCollection<Diet>();
-            DefaultManureCompositionData = new ObservableCollection<DefaultManureCompositionData>();
-            DefaultsCompositionOfBeddingMaterials =
-                new ObservableCollection<Table_30_Default_Bedding_Material_Composition_Data>();
-            YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData;
-            CarbonModellingEquilibriumYear = CoreConstants.IcbmEquilibriumYear;
-            CarbonModellingEquilibriumStartDate = new DateTime(CarbonModellingEquilibriumYear, 1, 1);
-            CarbonModellingEndDate = new DateTime(DateTime.Now.Year + CoreConstants.IcbmProjectionPeriod, 12, 31);
+            this.Defaults = new Defaults();
+            this.Diets = new ObservableCollection<Diet>();
+            this.DefaultManureCompositionData = new ObservableCollection<DefaultManureCompositionData>();
+            this.DefaultsCompositionOfBeddingMaterials = new ObservableCollection<Table_30_Default_Bedding_Material_Composition_Data>();
+            this.YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData;
+            this.CarbonModellingEquilibriumYear = CoreConstants.IcbmEquilibriumYear;
+            this.CarbonModellingEquilibriumStartDate = new DateTime(this.CarbonModellingEquilibriumYear, 1, 1);
+            this.CarbonModellingEndDate = new DateTime(DateTime.Now.Year + CoreConstants.IcbmProjectionPeriod, 12, 31);
 
-            ShowAvailableComponentsList = true;
-            ShowSimplifiedResults = false;
-            IsBasicMode = false;
-            EnableCarbonModelling = true;
-            ShowExportEmissionsInFinalReport = true;
+            this.ShowAvailableComponentsList = true;
+            this.ShowSimplifiedResults = false;
+            this.IsBasicMode = false;
+            this.EnableCarbonModelling = true;
+            this.ShowExportEmissionsInFinalReport = true;
 
-            StageStates = new List<StageStateBase>();
-            Components.CollectionChanged += ComponentsOnCollectionChanged;
+            this.StageStates = new List<StageStateBase>();
+            this.Components.CollectionChanged += ComponentsOnCollectionChanged;
 
-            PropertyChanged += FarmPropertyChanged;
+            this.PropertyChanged += FarmPropertyChanged;
 
-            ClimateData = new ClimateData();
-            GeographicData = new GeographicData();
-            AnnualSoilN2OBreakdown = new Table_15_Default_Soil_N2O_Emission_BreakDown_Provider();
+            this.ClimateData = new ClimateData();
+            this.GeographicData = new GeographicData();
+            this.AnnualSoilN2OBreakdown = new Table_15_Default_Soil_N2O_Emission_BreakDown_Provider();
         }
 
         /// <summary>
-        ///     we need this to set the available timeframes when we set climate acquisition
+        /// we need this to set the available timeframes when we set climate acquisition
         /// </summary>
         /// <param name="chosenClimateAcquisition">our type of climate acquisition</param>
         public void SetAvailableTimeFrame(ChosenClimateAcquisition chosenClimateAcquisition)
         {
             if (chosenClimateAcquisition == ChosenClimateAcquisition.NASA)
-                AvailableTimeFrames = new List<TimeFrame>
-                {
-                    TimeFrame.TwoThousandToCurrent,
-                    TimeFrame.NineteenNinetyToTwoThousand,
-                    TimeFrame.NineteenEightyToNineteenNinety,
-                    TimeFrame.ProjectionPeriod
-                };
+            {
+                this.AvailableTimeFrames = new List<TimeFrame>()
+                    {
+                        TimeFrame.TwoThousandToCurrent,
+                        TimeFrame.NineteenNinetyToTwoThousand,
+                        TimeFrame.NineteenEightyToNineteenNinety,
+                        TimeFrame.ProjectionPeriod
+                    };
+            }
             else if (chosenClimateAcquisition == ChosenClimateAcquisition.SLC)
-                AvailableTimeFrames = new List<TimeFrame>
-                {
-                    TimeFrame.NineteenFiftyToNineteenEighty,
-                    TimeFrame.NineteenSixtyToNineteenNinety,
-                    TimeFrame.NineteenSeventyToTwoThousand,
-                    TimeFrame.NineteenEightyToTwoThousandTen,
-                    TimeFrame.NineteenNinetyToTwoThousandSeventeen
-                };
+            {
+                this.AvailableTimeFrames = new List<TimeFrame>()
+                    {
+                        TimeFrame.NineteenFiftyToNineteenEighty,
+                        TimeFrame.NineteenSixtyToNineteenNinety,
+                        TimeFrame.NineteenSeventyToTwoThousand,
+                        TimeFrame.NineteenEightyToTwoThousandTen,
+                        TimeFrame.NineteenNinetyToTwoThousandSeventeen
+                    };
+
+            }
         }
 
         #endregion
@@ -168,166 +174,184 @@ namespace H.Core.Models
         {
             get
             {
-                if (Components.Any() == false) return false;
+                if (this.Components.Any() == false)
+                {
+                    return false;
+                }
 
-                return Components.All(x => x.ResultsCalculated);
+                return this.Components.All(x => x.ResultsCalculated);
             }
         }
 
         public bool IsBasicMode
         {
-            get => _isBasicMode;
-            set { SetProperty(ref _isBasicMode, value, () => { RaisePropertyChanged(nameof(IsAdvancedMode)); }); }
+            get { return _isBasicMode; }
+            set { SetProperty(ref _isBasicMode, value, () => { this.RaisePropertyChanged(nameof(IsAdvancedMode)); }); }
         }
 
-        public bool IsAdvancedMode => IsBasicMode == false;
+        public bool IsAdvancedMode
+        {
+            get { return this.IsBasicMode == false; }
+        }
 
         public List<TimeFrame> AvailableTimeFrames
         {
-            get => _availableTimeFrame;
-            set => SetProperty(ref _availableTimeFrame, value);
+            get { return _availableTimeFrame; }
+            set { SetProperty(ref _availableTimeFrame, value); }
         }
 
         public YieldAssignmentMethod YieldAssignmentMethod
         {
-            get => _yieldAssignmentMethod;
-            set => SetProperty(ref _yieldAssignmentMethod, value);
+            get { return _yieldAssignmentMethod; }
+            set { SetProperty(ref _yieldAssignmentMethod, value); }
         }
 
         public bool IsSelectedForComparison { get; set; }
 
         public ChosenClimateAcquisition ClimateAcquisition
         {
-            get => _climateAcquisition;
-            set => SetProperty(ref _climateAcquisition, value);
+            get { return _climateAcquisition; }
+            set { SetProperty(ref _climateAcquisition, value); }
         }
 
         public MeasurementSystemType MeasurementSystemType
         {
-            get => _measurementSystemType;
-            set => SetProperty(ref _measurementSystemType, value);
+            get { return _measurementSystemType; }
+            set { this.SetProperty(ref _measurementSystemType, value); }
         }
 
         public bool MeasurementSystemSelected
         {
-            get => _measurementSystemSelected;
-            set => SetProperty(ref _measurementSystemSelected, value);
+            get { return _measurementSystemSelected; }
+            set { this.SetProperty(ref _measurementSystemSelected, value); }
         }
 
         public ObservableCollection<Diet> Diets { get; set; }
 
-        public ObservableCollection<DefaultManureCompositionData> DefaultManureCompositionData { get; set; }
+        public ObservableCollection<DefaultManureCompositionData> DefaultManureCompositionData
+        {
+            get;
+            set;
+        }
 
-        public ObservableCollection<Table_30_Default_Bedding_Material_Composition_Data>
-            DefaultsCompositionOfBeddingMaterials { get; set; }
+        public ObservableCollection<Table_30_Default_Bedding_Material_Composition_Data> DefaultsCompositionOfBeddingMaterials { get; set; }
 
         /// <summary>
-        ///     Indicates the location of the farm
+        /// Indicates the location of the farm
         /// </summary>
         public int PolygonId
         {
-            get => _polygonId;
-            set => SetProperty(ref _polygonId, value);
+            get { return _polygonId; }
+            set { this.SetProperty(ref _polygonId, value); }
         }
 
         public double Longitude
         {
-            get => _longitude;
-            set => SetProperty(ref _longitude, value);
+            get { return _longitude; }
+            set { this.SetProperty(ref _longitude, value); }
         }
 
         public double Latitude
         {
-            get => _latitude;
-            set => SetProperty(ref _latitude, value);
+            get { return _latitude; }
+            set { this.SetProperty(ref _latitude, value); }
         }
 
         public List<StageStateBase> StageStates { get; set; }
 
         /// <summary>
-        ///     A collection of all the components the user has selected for this farm.
+        /// A collection of all the components the user has selected for this farm.
         /// </summary>
         public ObservableCollection<ComponentBase> Components { get; set; } = new ObservableCollection<ComponentBase>();
 
         /// <summary>
-        ///     The default allocation of total N2O emissions within the year
+        /// The default allocation of total N2O emissions within the year
         /// </summary>
         public Table_15_Default_Soil_N2O_Emission_BreakDown_Provider AnnualSoilN2OBreakdown
         {
-            get => _annualSoilN2OBreakdown;
-            set => SetProperty(ref _annualSoilN2OBreakdown, value);
+            get
+            {
+                return _annualSoilN2OBreakdown;
+            }
+            set
+            {
+                SetProperty(ref _annualSoilN2OBreakdown, value);
+            }
         }
 
         /// <summary>
-        ///     This property has to be held in the farm (or storage) and not on base view model. If this property is held in base
-        ///     view model, then
-        ///     each instance of a view model (timeline, results, etc.) would each have a separate instance of the property and
-        ///     that won't work.
+        /// This property has to be held in the farm (or storage) and not on base view model. If this property is held in base view model, then
+        /// each instance of a view model (timeline, results, etc.) would each have a separate instance of the property and that won't work.
         /// </summary>
         public bool EnableDebugDisplay
         {
-            get => _enableDebugDisplay;
-            set => SetProperty(ref _enableDebugDisplay, value);
+            get { return _enableDebugDisplay; }
+            set { SetProperty(ref _enableDebugDisplay, value); }
         }
 
         /// <summary>
-        ///     Additional user comments for the <see cref="Farm" />.
+        /// Additional user comments for the <see cref="Farm"/>.
         /// </summary>
         public string Comments
         {
-            get => _comments;
-            set => SetProperty(ref _comments, value);
+            get { return _comments; }
+            set { this.SetProperty(ref _comments, value); }
         }
 
         /// <summary>
-        ///     Indicates which province the user has selected. Do not use this value for calculations/lookups. Use the province
-        ///     associated with the
-        ///     <see cref="DefaultSoilData" /> instead since the two values for the province could differ if the selected polygon
-        ///     spans two polygons.
+        /// Indicates which province the user has selected. Do not use this value for calculations/lookups. Use the province associated with the
+        /// <see cref="DefaultSoilData"/> instead since the two values for the province could differ if the selected polygon spans two polygons.
         /// </summary>
         public Province Province
         {
-            get => _province;
-            set { SetProperty(ref _province, value, () => { RaisePropertyChanged(nameof(ProvinceDescription)); }); }
+            get { return _province; }
+            set { this.SetProperty(ref _province, value, () => { this.RaisePropertyChanged(nameof(this.ProvinceDescription)); }); }
         }
 
-        public string ProvinceDescription => Province.GetDescription();
+        public string ProvinceDescription
+        {
+            get { return this.Province.GetDescription(); }
+        }
 
         public GeographicData GeographicData
         {
-            get => _geographicData;
-            set => SetProperty(ref _geographicData, value);
+            get { return _geographicData; }
+            set { this.SetProperty(ref _geographicData, value); }
         }
 
         /// <summary>
-        ///     The default soil data selected by the user if there was more than one soil component found within the selected
-        ///     polygon. The user
-        ///     has the option to define a field-level soil type as well <see cref="FieldSystemComponent.SoilData" />.
+        /// The default soil data selected by the user if there was more than one soil component found within the selected polygon. The user
+        /// has the option to define a field-level soil type as well <see cref="FieldSystemComponent.SoilData"/>.
         /// </summary>
-        public SoilData DefaultSoilData => GeographicData?.DefaultSoilData;
-
+        public SoilData DefaultSoilData
+        {
+            get
+            {
+                return GeographicData?.DefaultSoilData;
+            }
+        }
         public bool ShowAdditionalColumnsOnDietForumtorView
         {
-            get => _showAdditionalColumnsOnDietForumtorView;
-            set => SetProperty(ref _showAdditionalColumnsOnDietForumtorView, value);
+            get { return _showAdditionalColumnsOnDietForumtorView; }
+            set { this.SetProperty(ref _showAdditionalColumnsOnDietForumtorView, value); }
         }
 
         public bool ShowDefaultDietsInDietFormulator
         {
-            get => _showDefaultDietsInDietFormulator;
-            set => SetProperty(ref _showDefaultDietsInDietFormulator, value);
+            get { return _showDefaultDietsInDietFormulator; }
+            set { this.SetProperty(ref _showDefaultDietsInDietFormulator, value); }
         }
 
         public bool ShowDetailsOnComponentSelectionView
         {
-            get => _showDetailsOnComponentSelectionView;
-            set => SetProperty(ref _showDetailsOnComponentSelectionView, value);
+            get { return _showDetailsOnComponentSelectionView; }
+            set { SetProperty(ref _showDetailsOnComponentSelectionView, value); }
         }
 
         public bool EnableCarbonModelling
         {
-            get => _enableCarbonModelling;
-            set => SetProperty(ref _enableCarbonModelling, value);
+            get { return _enableCarbonModelling; }
+            set { SetProperty(ref _enableCarbonModelling, value); }
         }
 
         public bool ShowAdditionalInformationInADView
@@ -337,85 +361,106 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        ///     Checks if hardiness zone data exists for the selected farm. The shelterbelt component is
-        ///     only available if we have hardiness zone data available for the selected location.
-        ///     Returns True if data is available.
-        ///     Return False otherwise.
+        /// Checks if hardiness zone data exists for the selected farm. The shelterbelt component is
+        /// only available if we have hardiness zone data available for the selected location.
+        /// Returns True if data is available.
+        /// Return False otherwise.
         /// </summary>
-        public bool IsShelterbeltComponentAvailable =>
-            _shelterbeltFromHardinessZoneConverter.Convert(GeographicData.HardinessZone);
-
-        public IEnumerable<AnimalComponentBase> AnimalComponents =>
-            DairyComponents.Concat(BeefCattleComponents)
-                .Concat(SwineComponents)
-                .Concat(SheepComponents)
-                .Concat(PoultryComponents)
-                .Concat(OtherLivestockComponents).Cast<AnimalComponentBase>();
+        public bool IsShelterbeltComponentAvailable
+        {
+            get => _shelterbeltFromHardinessZoneConverter.Convert(GeographicData.HardinessZone);
+        }
+        public IEnumerable<AnimalComponentBase> AnimalComponents
+        {
+            get
+            {
+                return this.DairyComponents.Concat(this.BeefCattleComponents)
+                                           .Concat(this.SwineComponents)
+                                           .Concat(this.SheepComponents)
+                                           .Concat(this.PoultryComponents)
+                                           .Concat(this.OtherLivestockComponents).Cast<AnimalComponentBase>();
+            }
+        }
 
         /// <summary>
-        ///     Indicates if the farm has any components in which multi-year inputs are possible
+        /// Indicates if the farm has any components in which multi-year inputs are possible
         /// </summary>
-        public bool HasMultiYearComponents =>
-            FieldSystemComponents.Any() || Components.OfType<ShelterbeltComponent>().Any();
+        public bool HasMultiYearComponents
+        {
+            get
+            {
+                return this.FieldSystemComponents.Any() || this.Components.OfType<ShelterbeltComponent>().Any();
+            }
+        }
 
         public IEnumerable<ComponentBase> DairyComponents
         {
-            get { return Components.Where(x => x.ComponentCategory == ComponentCategory.Dairy); }
+            get { return this.Components.Where(x => x.ComponentCategory == ComponentCategory.Dairy); }
         }
 
         public IEnumerable<FieldSystemComponent> FieldSystemComponents
         {
-            get
-            {
-                return Components.Where(x => x.GetType() == typeof(FieldSystemComponent)).Cast<FieldSystemComponent>();
-            }
+            get { return this.Components.Where(x => x.GetType() == typeof(FieldSystemComponent)).Cast<FieldSystemComponent>(); }
         }
 
-        public IEnumerable<AnaerobicDigestionComponent> AnaerobicDigestionComponents => Components
-            .Where(x => x.GetType() == typeof(AnaerobicDigestionComponent)).Cast<AnaerobicDigestionComponent>();
+        public IEnumerable<AnaerobicDigestionComponent> AnaerobicDigestionComponents
+        {
+            get => this.Components.Where(x => x.GetType() == typeof(AnaerobicDigestionComponent)).Cast<AnaerobicDigestionComponent>();
+        }
 
         public IEnumerable<ComponentBase> BeefCattleComponents
         {
-            get { return Components.Where(x => x.ComponentCategory == ComponentCategory.BeefProduction); }
+            get
+            {
+                return this.Components.Where(x => x.ComponentCategory == ComponentCategory.BeefProduction);
+            }
         }
 
         public IEnumerable<ComponentBase> SwineComponents
         {
-            get { return Components.Where(x => x.ComponentCategory == ComponentCategory.Swine); }
+            get
+            {
+                return this.Components.Where(x => x.ComponentCategory == ComponentCategory.Swine);
+            }
         }
 
         public IEnumerable<ComponentBase> SheepComponents
         {
-            get { return Components.Where(x => x.ComponentCategory == ComponentCategory.Sheep); }
+            get
+            {
+                return this.Components.Where(x => x.ComponentCategory == ComponentCategory.Sheep);
+            }
         }
 
         public IEnumerable<ComponentBase> PoultryComponents
         {
-            get { return Components.Where(x => x.ComponentCategory == ComponentCategory.Poultry); }
+            get
+            {
+                return this.Components.Where(x => x.ComponentCategory == ComponentCategory.Poultry);
+            }
         }
 
         public IEnumerable<ComponentBase> OtherLivestockComponents
         {
-            get { return Components.Where(x => x.ComponentCategory == ComponentCategory.OtherLivestock); }
+            get
+            {
+                return this.Components.Where(x => x.ComponentCategory == ComponentCategory.OtherLivestock);
+            }
         }
 
         /// <summary>
-        ///     A collection of Animal Types on the farm based on the currently added animal components to the farm by the user. If
-        ///     a component is part of a specific group
-        ///     then a single entry of an animal represents that entire group. The "OtherLiveStock" component category is
-        ///     representing by each individual animal type
-        ///     inside the category.
+        /// A collection of Animal Types on the farm based on the currently added animal components to the farm by the user. If a component is part of a specific group
+        /// then a single entry of an animal represents that entire group. The "OtherLiveStock" component category is representing by each individual animal type
+        /// inside the category.
         /// </summary>
-        public ObservableCollection<AnimalType> FarmAnimalComponentsAnimalTypes { get; set; } =
-            new ObservableCollection<AnimalType>();
+        public ObservableCollection<AnimalType> FarmAnimalComponentsAnimalTypes { get; set; } = new ObservableCollection<AnimalType>();
 
 
         public double TotalAgriculturalArea
         {
             get
             {
-                return FieldSystemComponents.Where(x => x.GetSingleYearViewItem() != null)
-                    .Sum(x => x.GetSingleYearViewItem().Area);
+                return this.FieldSystemComponents.Where(x => x.GetSingleYearViewItem() != null).Sum(x => x.GetSingleYearViewItem().Area);
             }
         }
 
@@ -423,7 +468,7 @@ namespace H.Core.Models
         {
             get
             {
-                var fieldSystemComponents = FieldSystemComponents.Where(x => x.IsIrrigated);
+                var fieldSystemComponents = this.FieldSystemComponents.Where(x => x.IsIrrigated);
                 var sum = fieldSystemComponents.Sum(x => x.GetSingleYearViewItem().Area);
 
                 return sum;
@@ -431,114 +476,113 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        ///     Used to indicate the default starting date for the history of a field.
+        /// Used to indicate the default starting date for the history of a field.
         /// </summary>
         public DateTime CarbonModellingEquilibriumStartDate
         {
-            get => _carbonModellingEquilibriumStartDate;
-            set => SetProperty(ref _carbonModellingEquilibriumStartDate, value);
+            get { return _carbonModellingEquilibriumStartDate; }
+            set { SetProperty(ref _carbonModellingEquilibriumStartDate, value); }
         }
 
         /// <summary>
-        ///     Used to indicate the end date for the history of a field.
+        /// Used to indicate the end date for the history of a field.
         /// </summary>
         public DateTime CarbonModellingEndDate
         {
-            get => _carbonModellingEndDate;
-            set => SetProperty(ref _carbonModellingEndDate, value);
+            get { return _carbonModellingEndDate; }
+            set { SetProperty(ref _carbonModellingEndDate, value); }
         }
 
         /// <summary>
-        ///     Used to indicate the default starting year for the history of a field.
+        /// Used to indicate the default starting year for the history of a field.
         /// </summary>
         public int CarbonModellingEquilibriumYear
         {
-            get => _carbonModellingEquilibriumYear;
-            set
-            {
-                SetProperty(ref _carbonModellingEquilibriumYear, value,
-                    () => { CarbonModellingEquilibriumStartDate = new DateTime(value, 1, 1); });
-            }
+            get { return _carbonModellingEquilibriumYear; }
+            set { SetProperty(ref _carbonModellingEquilibriumYear, value, () => { this.CarbonModellingEquilibriumStartDate = new DateTime(value, 1, 1); }); }
         }
 
         public bool ShowFieldSystemResultsAsGrid
         {
-            get => _showFieldSystemResultsAsGrid;
-            set => SetProperty(ref _showFieldSystemResultsAsGrid, value);
+            get { return _showFieldSystemResultsAsGrid; }
+            set { SetProperty(ref _showFieldSystemResultsAsGrid, value); }
         }
+
 
 
         public Defaults Defaults
         {
-            get => _defaults;
-            set => SetProperty(ref _defaults, value);
+            get { return _defaults; }
+            set { SetProperty(ref _defaults, value); }
         }
 
         /// <summary>
-        ///     For CLI, this is the path to the directory that contains all the input files for the farm.
+        /// For CLI, this is the path to the directory that contains all the input files for the farm.
         /// </summary>
         public string CliInputPath { get; set; }
 
         /// <summary>
-        ///     For CLI, the name of the settings file for the farm.
+        /// For CLI, the name of the settings file for the farm.
         /// </summary>
         public string SettingsFileName { get; set; }
 
         /// <summary>
-        ///     The path to a custom daily climate data file.
+        /// The path to a custom daily climate data file.
         /// </summary>
         public string ClimateDataFileName { get; set; }
 
         /// <summary>
-        ///     Climate data for the farm
+        /// Climate data for the farm
         /// </summary>
         public ClimateData ClimateData
         {
-            get => _climateData;
-            set => SetProperty(ref _climateData, value);
+            get { return _climateData; }
+            set { SetProperty(ref _climateData, value); }
         }
 
         public string PathToYieldInputFile
         {
-            get => _pathToYieldInputFile;
-            set => SetProperty(ref _pathToYieldInputFile, value);
+            get { return _pathToYieldInputFile; }
+            set { SetProperty(ref _pathToYieldInputFile, value); }
         }
 
         /// <summary>
-        ///     Determines if the details view should be displayed based on the components in the <see cref="Farm" />.
-        /// </summary>
+        /// Determines if the details view should be displayed based on the components in the <see cref="Farm"/>.
+        /// </summary>        
         public bool HasComponentsThatRequireDetailsView()
         {
-            return Components.OfType<FieldSystemComponent>().Any();
+            return this.Components.OfType<FieldSystemComponent>().Any();
         }
 
         public double StartingSoilOrganicCarbon
         {
-            get => _startingSoilOrganicCarbon;
-            set => SetProperty(ref _startingSoilOrganicCarbon, value);
+            get { return _startingSoilOrganicCarbon; }
+            set { SetProperty(ref _startingSoilOrganicCarbon, value); }
         }
 
         public bool UseCustomStartingSoilOrganicCarbon
         {
-            get => _useCustomStartingSoilOrganicCarbon;
-            set => SetProperty(ref _useCustomStartingSoilOrganicCarbon, value);
+            get { return _useCustomStartingSoilOrganicCarbon; }
+            set { SetProperty(ref _useCustomStartingSoilOrganicCarbon, value); }
         }
 
         /// <summary>
-        ///     When enabled, will show a simplified results screen instead of the composite results view (with the various
-        ///     associated tabs). Also, enabling this will skip over the details
-        ///     view. Detail view items must still be created when skipping over the details view.
+        /// When enabled, will show a simplified results screen instead of the composite results view (with the various associated tabs). Also, enabling this will skip over the details
+        /// view. Detail view items must still be created when skipping over the details view.
         /// </summary>
         public bool ShowSimplifiedResults
         {
-            get => _showSimplifiedResults;
-            set => SetProperty(ref _showSimplifiedResults, value);
+            get { return _showSimplifiedResults; }
+            set { SetProperty(ref _showSimplifiedResults, value); }
         }
 
-        public bool HasComponents => Components.Any();
+        public bool HasComponents
+        {
+            get { return this.Components.Any(); }
+        }
 
         /// <summary>
-        ///     This is the total amount of bales that were produced by harvests on the farm from all fields
+        /// This is the total amount of bales that were produced by harvests on the farm from all fields
         /// </summary>
         public int TotalBalesProducedByFarm
         {
@@ -547,8 +591,7 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        ///     This is the total amount of bales that are remaining after placing bales on pasture for supplemental feed to
-        ///     grazing animals
+        /// This is the total amount of bales that are remaining after placing bales on pasture for supplemental feed to grazing animals
         /// </summary>
         public int TotalBalesRemainingOnFarm
         {
@@ -557,7 +600,7 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        ///     The total number of bales that have been applied to all fields on the farm.
+        /// The total number of bales that have been applied to all fields on the farm.
         /// </summary>
         public int TotalNumberOfBalesAppliedToFarm
         {
@@ -593,29 +636,43 @@ namespace H.Core.Models
 
         public double GetTotalAreaOfFarm(bool includeNativeGrasslands, int year)
         {
-            var fields = FieldSystemComponents.Where(x =>
-                x.CropViewItems.All(y => y.CropType.IsNativeGrassland() == includeNativeGrasslands));
+            var fields = this.FieldSystemComponents.Where(x => x.CropViewItems.All(y => y.CropType.IsNativeGrassland() == includeNativeGrasslands));
 
             var area = fields.Sum(x => x.FieldArea);
-            if (area > 0) return area;
-
-            return 1;
+            if (area > 0)
+            {
+                return area;
+            }
+            else
+            {
+                return 1;
+            }
         }
 
         public List<int> GetYearsWithAnimals()
         {
             var years = new List<int>();
 
-            foreach (var animalComponentBase in AnimalComponents)
-            foreach (var animalGroup in animalComponentBase.Groups)
-            foreach (var animalGroupManagementPeriod in animalGroup.ManagementPeriods)
+            foreach (var animalComponentBase in this.AnimalComponents)
             {
-                var startYear = animalGroupManagementPeriod.Start.Year;
-                var endYear = animalGroupManagementPeriod.End.Year;
+                foreach (var animalGroup in animalComponentBase.Groups)
+                {
+                    foreach (var animalGroupManagementPeriod in animalGroup.ManagementPeriods)
+                    {
+                        var startYear = animalGroupManagementPeriod.Start.Year;
+                        var endYear = animalGroupManagementPeriod.End.Year;
 
-                if (years.Contains(startYear) == false) years.Add(startYear);
+                        if (years.Contains(startYear) == false)
+                        {
+                            years.Add(startYear);
+                        }
 
-                if (years.Contains(endYear) == false) years.Add(endYear);
+                        if (years.Contains(endYear) == false)
+                        {
+                            years.Add(endYear);
+                        }
+                    }
+                }
             }
 
             return years;
@@ -627,52 +684,68 @@ namespace H.Core.Models
             var components = new List<AnimalComponentBase>();
 
             if (componentCategory == ComponentCategory.BeefProduction)
-                components.AddRange(BeefCattleComponents.Cast<AnimalComponentBase>());
+            {
+                components.AddRange(this.BeefCattleComponents.Cast<AnimalComponentBase>());
+            }
             else if (componentCategory == ComponentCategory.Dairy)
-                components.AddRange(DairyComponents.Cast<AnimalComponentBase>());
+            {
+                components.AddRange(this.DairyComponents.Cast<AnimalComponentBase>());
+            }
             else if (componentCategory == ComponentCategory.Swine)
-                components.AddRange(SwineComponents.Cast<AnimalComponentBase>());
+            {
+                components.AddRange(this.SwineComponents.Cast<AnimalComponentBase>());
+            }
             else if (componentCategory == ComponentCategory.Sheep)
-                components.AddRange(SheepComponents.Cast<AnimalComponentBase>());
+            {
+                components.AddRange(this.SheepComponents.Cast<AnimalComponentBase>());
+            }
             else if (componentCategory == ComponentCategory.Poultry)
-                components.AddRange(PoultryComponents.Cast<AnimalComponentBase>());
+            {
+                components.AddRange(this.PoultryComponents.Cast<AnimalComponentBase>());
+            }
             else
-                components.AddRange(OtherLivestockComponents.Cast<AnimalComponentBase>());
+            {
+                components.AddRange(this.OtherLivestockComponents.Cast<AnimalComponentBase>());
+            }
 
             var stateTypes = new List<ManureStateType>();
             foreach (var animalComponentBase in components)
-            foreach (var animalGroup in animalComponentBase.Groups)
-            foreach (var animalGroupManagementPeriod in animalGroup.ManagementPeriods)
             {
-                var manureHandlingSystem = animalGroupManagementPeriod.ManureDetails.StateType;
-                stateTypes.Add(manureHandlingSystem);
+                foreach (var animalGroup in animalComponentBase.Groups)
+                {
+                    foreach (var animalGroupManagementPeriod in animalGroup.ManagementPeriods)
+                    {
+                        var manureHandlingSystem = animalGroupManagementPeriod.ManureDetails.StateType;
+                        stateTypes.Add(manureHandlingSystem);
+                    }
+                }
             }
 
             return stateTypes.Distinct().ToList();
         }
 
         /// <summary>
-        ///     When user add/removes/edits a manure application, the animal results cache needs to be cleared so that we
-        ///     recalculate manure spreading emissions
+        /// When user add/removes/edits a manure application, the animal results cache needs to be cleared so that we recalculate manure spreading emissions
         /// </summary>
         public void ResetAnimalResults()
         {
-            foreach (var animalComponent in AnimalComponents) animalComponent.ResultsCalculated = false;
+            foreach (var animalComponent in this.AnimalComponents)
+            {
+                animalComponent.ResultsCalculated = false;
+            }
         }
 
         /// <summary>
-        ///     Returns the total volume of all manure applications made on a particular date using a particular type of manure
-        ///     (beef, dairy, etc.)
+        /// Returns the total volume of all manure applications made on a particular date using a particular type of manure (beef, dairy, etc.)
         /// </summary>
         public double GetTotalVolumeOfManureAppliedByDate(DateTime dateTime, AnimalType animalType)
         {
             var result = 0.0;
 
-            foreach (var fieldSystemComponent in FieldSystemComponents)
+            foreach (var fieldSystemComponent in this.FieldSystemComponents)
             {
                 var viewItem = fieldSystemComponent.GetSingleYearViewItem();
-                var manureApplications = viewItem.ManureApplicationViewItems.Where(x =>
-                    x.DateOfApplication.Date.Equals(dateTime.Date)
+                var manureApplications = viewItem.ManureApplicationViewItems.Where(x => x.DateOfApplication.Date.Equals(dateTime.Date)
                     && x.AnimalType == animalType
                     && x.ManureLocationSourceType == ManureLocationSourceType.Livestock);
 
@@ -690,32 +763,38 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        ///     Determines if a component exists for this farm with the associated GUID.
+        /// Determines if a component exists for this farm with the associated GUID.
         /// </summary>
         public bool ComponentExists(Guid guid)
         {
-            return Components.Any(component => component.Guid == guid);
+            return this.Components.Any(component => component.Guid == guid);
         }
 
         /// <summary>
-        ///     Determines if an animal group exists in one of the animal components on the farm.
+        /// Determines if an animal group exists in one of the animal components on the farm.
         /// </summary>
         public bool AnimalGroupExists(Guid guid)
         {
-            foreach (var componentBase in Components)
+            foreach (var componentBase in this.Components)
+            {
                 if (componentBase is AnimalComponentBase animalComponent)
+                {
                     foreach (var animalGroup in animalComponent.Groups)
+                    {
                         if (animalGroup.Guid == guid)
+                        {
                             return true;
+                        }
+                    }
+                }
+            }
 
             return false;
         }
 
         /// <summary>
-        ///     When a farm is initialized, defaults are assigned to the farm. The user can then change these values if they wish.
-        ///     This data is therefore held here in the farm object since it is specific
-        ///     to this farm instance and lookups should be made here and not from the provider class since this method will
-        ///     persist changes.
+        /// When a farm is initialized, defaults are assigned to the farm. The user can then change these values if they wish. This data is therefore held here in the farm object since it is specific
+        /// to this farm instance and lookups should be made here and not from the provider class since this method will persist changes.
         /// </summary>
         public Table_30_Default_Bedding_Material_Composition_Data GetBeddingMaterialComposition(
             BeddingMaterialType beddingMaterialType,
@@ -725,73 +804,108 @@ namespace H.Core.Models
 
             AnimalType animalLookupType;
             if (animalType.IsBeefCattleType())
+            {
                 animalLookupType = AnimalType.Beef;
+            }
             else if (animalType.IsDairyCattleType())
+            {
                 animalLookupType = AnimalType.Dairy;
+            }
             else if (animalType.IsSheepType())
+            {
                 animalLookupType = AnimalType.Sheep;
+            }
             else if (animalType.IsSwineType())
+            {
                 animalLookupType = AnimalType.Swine;
+            }
             else if (animalType.IsPoultryType())
+            {
                 animalLookupType = AnimalType.Poultry;
+            }
             else
+            {
                 // Other animals have a value for animal group (Horses, Goats, etc.)
                 animalLookupType = animalType;
+            }
 
-            result = DefaultsCompositionOfBeddingMaterials.SingleOrDefault(x =>
-                x.BeddingMaterial == beddingMaterialType && x.AnimalType == animalLookupType);
-            if (result != null) return result;
+            result = this.DefaultsCompositionOfBeddingMaterials.SingleOrDefault(x => x.BeddingMaterial == beddingMaterialType && x.AnimalType == animalLookupType);
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                Trace.TraceError($"{nameof(Farm)}.{nameof(GetBeddingMaterialComposition)}: unable to return bedding material data for {animalType.GetDescription()}, and {beddingMaterialType.GetHashCode()}. Returning default value of 1.");
 
-            Trace.TraceError(
-                $"{nameof(Farm)}.{nameof(GetBeddingMaterialComposition)}: unable to return bedding material data for {animalType.GetDescription()}, and {beddingMaterialType.GetHashCode()}. Returning default value of 1.");
-
-            return new Table_30_Default_Bedding_Material_Composition_Data();
+                return new Table_30_Default_Bedding_Material_Composition_Data();
+            }
         }
 
         public void ClearStageStates()
         {
-            foreach (var stageState in StageStates) stageState.ClearState();
+            foreach (var stageState in this.StageStates)
+            {
+                stageState.ClearState();
+            }
         }
 
         public int GetStartYearOfEarliestRotation()
         {
-            var stageState = StageStates.OfType<FieldSystemDetailsStageState>().Single();
+            var stageState = this.StageStates.OfType<FieldSystemDetailsStageState>().Single();
 
             if (stageState.DetailsScreenViewCropViewItems.Any() == false)
-                return ClimateData.DailyClimateData.Min(x => x.Date.Year);
-
-            return stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Min();
+            {
+                return this.ClimateData.DailyClimateData.Min(x => x.Date.Year);
+            }
+            else
+            {
+                return stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Min();
+            }
         }
 
         public int GetEndYearOfEarliestRotation()
         {
-            var stageState = StageStates.OfType<FieldSystemDetailsStageState>().Single();
+            var stageState = this.StageStates.OfType<FieldSystemDetailsStageState>().Single();
 
             if (stageState.DetailsScreenViewCropViewItems.Any() == false)
-                return ClimateData.DailyClimateData.Max(x => x.Date.Year);
-
-            return stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Max();
+            {
+                return this.ClimateData.DailyClimateData.Max(x => x.Date.Year);
+            }
+            else
+            {
+                return stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Max();
+            }
         }
 
         public void Initialize()
         {
-            IsInitialized = true;
+            this.IsInitialized = true;
         }
 
         public ChosenClimateAcquisition ClimateAcquisitionStringToEnum(string climateAcquisitionString)
         {
-            if (climateAcquisitionString == "Custom") return ChosenClimateAcquisition.Custom;
-
-            if (climateAcquisitionString == "NASA") return ChosenClimateAcquisition.NASA;
-
-            if (climateAcquisitionString == "InputFile") return ChosenClimateAcquisition.InputFile;
-
-            return ChosenClimateAcquisition.SLC;
+            if (climateAcquisitionString == "Custom")
+            {
+                return ChosenClimateAcquisition.Custom;
+            }
+            else if (climateAcquisitionString == "NASA")
+            {
+                return ChosenClimateAcquisition.NASA;
+            }
+            else if (climateAcquisitionString == "InputFile")
+            {
+                return ChosenClimateAcquisition.InputFile;
+            }
+            else
+            {
+                return ChosenClimateAcquisition.SLC;
+            }
         }
 
         public FieldSystemComponent GetFieldSystemComponent(Guid guid)
         {
-            var result = FieldSystemComponents.SingleOrDefault(x => x.Guid == guid);
+            var result = this.FieldSystemComponents.SingleOrDefault(x => x.Guid == guid);
 
             return result;
         }
@@ -803,10 +917,13 @@ namespace H.Core.Models
 
             var totalArea = 0d;
 
-            foreach (var fieldSystemComponent in FieldSystemComponents)
+            foreach (var fieldSystemComponent in this.FieldSystemComponents)
             {
                 var singleYearViewItem = fieldSystemComponent.GetSingleYearViewItem();
-                if (singleYearViewItem != null) totalArea += singleYearViewItem.Area;
+                if (singleYearViewItem != null)
+                {
+                    totalArea += singleYearViewItem.Area;
+                }
             }
 
             return totalArea;
@@ -814,26 +931,26 @@ namespace H.Core.Models
 
         public double GetAnnualPrecipitation(int year)
         {
-            return ClimateData.GetTotalPrecipitationForYear(year);
+            return this.ClimateData.GetTotalPrecipitationForYear(year);
         }
 
         public double GetAnnualEvapotranspiration(int year)
         {
-            return ClimateData.GetTotalEvapotranspirationForYear(year);
+            return this.ClimateData.GetTotalEvapotranspirationForYear(year);
         }
 
         public double GetGrowingSeasonPrecipitation(int year)
         {
-            return ClimateData.GetGrowingSeasonPrecipitation(year);
+            return this.ClimateData.GetGrowingSeasonPrecipitation(year);
         }
 
         public double GetGrowingSeasonEvapotranspiration(int year)
         {
-            return ClimateData.GetGrowingSeasonEvapotranspiration(year);
+            return this.ClimateData.GetGrowingSeasonEvapotranspiration(year);
         }
 
         /// <summary>
-        ///     Returns all manure application made on this farm
+        /// Returns all manure application made on this farm
         /// </summary>
         /// <param name="monthsAndDaysData">The month to check for manure applications</param>
         /// <param name="animalType">The type of animal manure</param>
@@ -842,13 +959,11 @@ namespace H.Core.Models
             MonthsAndDaysData monthsAndDaysData,
             AnimalType animalType)
         {
-            var fields = FieldSystemComponents.ToList();
+            var fields = this.FieldSystemComponents.ToList();
             var crops = fields.Select(field => field.GetSingleYearViewItem()).ToList();
             var manureApplications = crops.SelectMany(crop => crop.ManureApplicationViewItems).ToList();
-            var manureApplicationsByManureType =
-                manureApplications.Where(application => application.AnimalType == animalType).ToList();
-            var manureApplicationsInMonth = manureApplicationsByManureType.Where(manureApplication =>
-                monthsAndDaysData.DateIsInMonth(manureApplication.DateOfApplication)).ToList();
+            var manureApplicationsByManureType = manureApplications.Where(application => application.AnimalType == animalType).ToList();
+            var manureApplicationsInMonth = manureApplicationsByManureType.Where(manureApplication => monthsAndDaysData.DateIsInMonth(manureApplication.DateOfApplication)).ToList();
 
             return manureApplicationsInMonth;
         }
@@ -861,7 +976,7 @@ namespace H.Core.Models
 
             var animalSearchCategory = animalType.GetCategory();
 
-            foreach (var fieldSystemComponent in FieldSystemComponents)
+            foreach (var fieldSystemComponent in this.FieldSystemComponents)
             {
                 var crop = fieldSystemComponent.GetSingleYearViewItem();
                 foreach (var manureApplicationViewItem in crop.ManureApplicationViewItems)
@@ -869,7 +984,9 @@ namespace H.Core.Models
                     var dateIsInMonth = monthsAndDaysData.DateIsInMonth(manureApplicationViewItem.DateOfApplication);
                     var categoryOfManureApplication = manureApplicationViewItem.AnimalType.GetCategory();
                     if (categoryOfManureApplication == animalSearchCategory && dateIsInMonth)
+                    {
                         result += manureApplicationViewItem.AmountOfManureAppliedPerHectare * crop.Area;
+                    }
                 }
             }
 
@@ -878,10 +995,15 @@ namespace H.Core.Models
 
         public FieldSystemDetailsStageState GetFieldSystemDetailsStageState()
         {
-            var stageState = StageStates.OfType<FieldSystemDetailsStageState>().SingleOrDefault();
-            if (stageState != null) return stageState;
-
-            return new FieldSystemDetailsStageState();
+            var stageState = this.StageStates.OfType<FieldSystemDetailsStageState>().SingleOrDefault();
+            if (stageState != null)
+            {
+                return stageState;
+            }
+            else
+            {
+                return new FieldSystemDetailsStageState();
+            }
         }
 
         public ObservableCollection<ErrorInformation> GetErrors()
@@ -891,51 +1013,66 @@ namespace H.Core.Models
 
             var errors = new ObservableCollection<ErrorInformation>();
             foreach (var component in Components)
+            {
                 if (component is FieldSystemComponent comp)
+                {
                     errors.AddRange(comp.GetErrors());
-
+                }
+            }
             return errors;
         }
 
         public bool HasCoordinates()
         {
-            return Latitude != 0 && Latitude != 0;
+            return this.Latitude != 0 && this.Latitude != 0;
         }
 
         public Diet GetDietByName(DietType dietType)
         {
-            var result = Diets.FirstOrDefault(x => x.DietType == dietType);
-            if (result != null) return result;
-
-            // Old farms will not have newly added diets - return a catch-all diet in this case
-            return Diets.FirstOrDefault(x => x.AnimalType == AnimalType.NotSelected);
+            var result = this.Diets.FirstOrDefault(x => x.DietType == dietType);
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                // Old farms will not have newly added diets - return a catch-all diet in this case
+                return this.Diets.FirstOrDefault(x => x.AnimalType == AnimalType.NotSelected);
+            }
         }
 
         /// <summary>
-        ///     Returns a list of <see cref="H.Core.Models.LandManagement.Fields.CropViewItem" /> for a given
-        ///     <see cref="FieldSystemComponent" />.
+        /// Returns a list of <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/> for a given <see cref="FieldSystemComponent"/>.
         /// </summary>
         public IList<CropViewItem> GetDetailViewItemsForField(FieldSystemComponent fieldSystemComponent)
         {
-            var detailsStageState = GetFieldSystemDetailsStageState();
-            if (detailsStageState == null) return new List<CropViewItem>();
-
-            return detailsStageState.GetMainCropsByField(fieldSystemComponent);
+            var detailsStageState = this.GetFieldSystemDetailsStageState();
+            if (detailsStageState == null)
+            {
+                return new List<CropViewItem>();
+            }
+            else
+            {
+                return detailsStageState.GetMainCropsByField(fieldSystemComponent);
+            }
         }
 
         public IList<CropViewItem> GetCropDetailViewItems()
         {
-            return GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems;
+            return this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems;
         }
 
         public List<CropViewItem> GetCropViewItemsByYear(int year, bool includeNativeGrassland = false)
         {
             var result = new List<CropViewItem>();
 
-            foreach (var fieldSystemComponent in FieldSystemComponents)
-            foreach (var cropViewItem in fieldSystemComponent.CropViewItems.Where(x =>
-                         x.Year == year && x.CropType.IsNativeGrassland() == includeNativeGrassland))
-                result.Add(cropViewItem);
+            foreach (var fieldSystemComponent in this.FieldSystemComponents)
+            {
+                foreach (var cropViewItem in fieldSystemComponent.CropViewItems.Where(x => x.Year == year && x.CropType.IsNativeGrassland() == includeNativeGrassland))
+                {
+                    result.Add(cropViewItem);
+                }
+            }
 
             return result;
         }
@@ -943,11 +1080,13 @@ namespace H.Core.Models
         public List<CropViewItem> GetCropDetailViewItemsByYear(int year, bool includeRangeland)
         {
             if (includeRangeland)
-                return GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems.Where(x => x.Year == year)
-                    .ToList();
-
-            return GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems
-                .Where(x => x.Year == year && x.IsNativeGrassland == false).ToList();
+            {
+                return this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems.Where(x => x.Year == year).ToList();
+            }
+            else
+            {
+                return this.GetFieldSystemDetailsStageState().DetailsScreenViewCropViewItems.Where(x => x.Year == year && x.IsNativeGrassland == false).ToList();
+            }
         }
 
         public List<int> GetListOfActiveYears()
@@ -955,21 +1094,29 @@ namespace H.Core.Models
             var result = new List<int>();
 
             // Fields
-            var stageState = GetFieldSystemDetailsStageState();
+            var stageState = this.GetFieldSystemDetailsStageState();
             var distinctYears = stageState.DetailsScreenViewCropViewItems.Select(x => x.Year).Distinct().ToList();
             result.AddRange(distinctYears);
 
             // Animals
-            foreach (var animalComponentBase in AnimalComponents)
-            foreach (var animalGroup in animalComponentBase.Groups)
-            foreach (var animalGroupManagementPeriod in animalGroup.ManagementPeriods)
+            foreach (var animalComponentBase in this.AnimalComponents)
             {
-                var startYear = animalGroupManagementPeriod.Start.Year;
-                var endYear = animalGroupManagementPeriod.End.Year;
+                foreach (var animalGroup in animalComponentBase.Groups)
+                {
+                    foreach (var animalGroupManagementPeriod in animalGroup.ManagementPeriods)
+                    {
+                        var startYear = animalGroupManagementPeriod.Start.Year;
+                        var endYear = animalGroupManagementPeriod.End.Year;
 
-                for (var i = startYear; i <= endYear; i++)
-                    if (result.Contains(i) == false)
-                        result.Add(i);
+                        for (int i = startYear; i <= endYear; i++)
+                        {
+                            if (result.Contains(i) == false)
+                            {
+                                result.Add(i);
+                            }
+                        }
+                    }
+                }
             }
 
             return result;
@@ -979,55 +1126,80 @@ namespace H.Core.Models
         {
             var result = new List<ManagementPeriod>();
 
-            foreach (var animalComponentBase in AnimalComponents)
-            foreach (var animalGroup in animalComponentBase.Groups)
-            foreach (var managementPeriod in animalGroup.ManagementPeriods)
-                result.Add(managementPeriod);
+            foreach (var animalComponentBase in this.AnimalComponents)
+            {
+                foreach (var animalGroup in animalComponentBase.Groups)
+                {
+                    foreach (var managementPeriod in animalGroup.ManagementPeriods)
+                    {
+                        result.Add(managementPeriod);
+                    }
+                }
+            }
 
             return result;
         }
 
         public SoilData GetPreferredSoilData(CropViewItem cropViewItem)
         {
-            var fieldComponent = GetFieldSystemComponent(cropViewItem.FieldSystemComponentGuid);
+            var fieldComponent = this.GetFieldSystemComponent(cropViewItem.FieldSystemComponentGuid);
             if (fieldComponent == null || fieldComponent.SoilData == null || fieldComponent.SoilData.PolygonId == 0)
+            {
                 // Old farms won't have soil data set on fields, use farm level soil data instead
+
                 // Return farm soil type
-                return DefaultSoilData;
-
-            if (fieldComponent.UseFieldLevelSoilData) return fieldComponent.SoilData;
-
-            return DefaultSoilData;
+                return this.DefaultSoilData;
+            }
+            else
+            {
+                if (fieldComponent.UseFieldLevelSoilData)
+                {
+                    return fieldComponent.SoilData;
+                }
+                else
+                {
+                    return this.DefaultSoilData;
+                }
+            }
         }
 
         public List<CropViewItem> GetAllCropViewItems()
         {
             var result = new List<CropViewItem>();
 
-            foreach (var fieldSystemComponent in FieldSystemComponents)
+            foreach (var fieldSystemComponent in this.FieldSystemComponents)
             {
-                foreach (var viewItem in fieldSystemComponent.CropViewItems) result.Add(viewItem);
+                foreach (var viewItem in fieldSystemComponent.CropViewItems)
+                {
+                    result.Add(viewItem);
+                }
 
-                foreach (var viewItem in fieldSystemComponent.CoverCrops) result.Add(viewItem);
+                foreach (var viewItem in fieldSystemComponent.CoverCrops)
+                {
+                    result.Add(viewItem);
+                }
             }
 
-            var stageState = GetFieldSystemDetailsStageState();
-            foreach (var viewItem in stageState.DetailsScreenViewCropViewItems) result.Add(viewItem);
+            var stageState = this.GetFieldSystemDetailsStageState();
+            foreach (var viewItem in stageState.DetailsScreenViewCropViewItems)
+            {
+                result.Add(viewItem);
+            }
 
             return result;
         }
 
-        public List<HayImportViewItem> GetHayImportsUsingImportedHayFromSourceField(
-            FieldSystemComponent fieldUsedAsSource)
+        public List<HayImportViewItem> GetHayImportsUsingImportedHayFromSourceField(FieldSystemComponent fieldUsedAsSource)
         {
             var result = new List<HayImportViewItem>();
 
-            foreach (var fieldSystemComponent in FieldSystemComponents)
-            foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+            foreach (var fieldSystemComponent in this.FieldSystemComponents)
             {
-                var hayImports =
-                    cropViewItem.HayImportViewItems.Where(x => x.FieldSourceGuid.Equals(fieldUsedAsSource.Guid));
-                result.AddRange(hayImports);
+                foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+                {
+                    var hayImports = cropViewItem.HayImportViewItems.Where(x => x.FieldSourceGuid.Equals(fieldUsedAsSource.Guid));
+                    result.AddRange(hayImports);
+                }
             }
 
             return result;
@@ -1035,28 +1207,31 @@ namespace H.Core.Models
 
         public List<HayImportViewItem> GetHayImportsUsingImportedHayFromSourceField(Guid fieldSystemGuid)
         {
-            var field = GetFieldSystemComponent(fieldSystemGuid);
-            if (field != null) return GetHayImportsUsingImportedHayFromSourceField(field);
-
-            return new List<HayImportViewItem>();
+            var field = this.GetFieldSystemComponent(fieldSystemGuid);
+            if (field != null)
+            {
+                return this.GetHayImportsUsingImportedHayFromSourceField(field);
+            }
+            else
+            {
+                return new List<HayImportViewItem>();
+            }
         }
 
         /// <summary>
-        ///     Returns all <see cref="HayImportViewItem" /> that have used harvests from the <see cref="FieldSystemComponent" />
-        ///     identified by the <see cref="Guid" />.
+        /// Returns all <see cref="HayImportViewItem"/> that have used harvests from the <see cref="FieldSystemComponent"/> identified by the <see cref="Guid"/>.
         /// </summary>
-        public List<HayImportViewItem> GetHayImportsUsingImportedHayFromSourceFieldByYear(Guid fieldSystemGuid,
-            int year)
+        public List<HayImportViewItem> GetHayImportsUsingImportedHayFromSourceFieldByYear(Guid fieldSystemGuid, int year)
         {
-            var field = GetFieldSystemComponent(fieldSystemGuid);
+            var field = this.GetFieldSystemComponent(fieldSystemGuid);
             if (field != null)
             {
-                return GetHayImportsUsingImportedHayFromSourceField(field).Where(x => x.Start.Year.Equals(year))
-                    .ToList();
-                ;
+                return this.GetHayImportsUsingImportedHayFromSourceField(field).Where(x => x.Start.Year.Equals(year)).ToList(); ;
             }
-
-            return new List<HayImportViewItem>();
+            else
+            {
+                return new List<HayImportViewItem>();
+            }
         }
 
         #endregion
@@ -1065,30 +1240,29 @@ namespace H.Core.Models
 
         private void OnTotalBalesProducedByFarmChanged()
         {
-            FarmHasBales = TotalBalesProducedByFarm > 0;
+            this.FarmHasBales = this.TotalBalesProducedByFarm > 0;
         }
 
         private void FarmPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName.Equals(nameof(IsBasicMode), StringComparison.InvariantCultureIgnoreCase))
+            if (e.PropertyName.Equals(nameof(this.IsBasicMode), StringComparison.InvariantCultureIgnoreCase))
             {
-                if (IsBasicMode)
+                if (this.IsBasicMode)
                 {
-                    EnableCarbonModelling = false;
-                    ShowSimplifiedResults = true;
-                    ShowDetailsOnComponentSelectionView = false;
+                    this.EnableCarbonModelling = false;
+                    this.ShowSimplifiedResults = true;
+                    this.ShowDetailsOnComponentSelectionView = false;
                 }
                 else
                 {
-                    ShowSimplifiedResults = false;
+                    this.ShowSimplifiedResults = false;
                 }
             }
         }
 
-        private void ComponentsOnCollectionChanged(object sender,
-            NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        private void ComponentsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
-            RaisePropertyChanged(nameof(HasComponents));
+            this.RaisePropertyChanged(nameof(this.HasComponents));
             if (notifyCollectionChangedEventArgs.Action == NotifyCollectionChangedAction.Add)
             {
             }
@@ -1097,6 +1271,12 @@ namespace H.Core.Models
             {
             }
         }
+
+        #endregion
+
+        #region Private Methods
+
+
 
         #endregion
     }

@@ -4,16 +4,25 @@ using System.Linq;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
+using H.Core.Models.Animals.Sheep;
+using H.Core.Providers.Plants;
 using H.Core.Tools;
 using H.Infrastructure;
 
 namespace H.Core.Providers.Animals
 {
     /// <summary>
-    ///     Table 22. Livestock coefficients for sheep.
+    /// Table 22. Livestock coefficients for sheep.
     /// </summary>
     public class Table_22_Livestock_Coefficients_Sheep_Provider : ISheepCoefficientDataProvider
     {
+        #region Fields
+
+        private readonly AnimalTypeStringConverter _converter = new AnimalTypeStringConverter();
+        private readonly List<Table_22_Livestock_Coefficients_Sheep_Data> _cache;
+
+        #endregion
+
         #region Constructors
 
         public Table_22_Livestock_Coefficients_Sheep_Provider()
@@ -30,14 +39,16 @@ namespace H.Core.Providers.Animals
             ProductionStages? productionStage = null)
         {
             var lookupType = animalType;
-            if (animalType == AnimalType.SheepFeedlot) lookupType = AnimalType.Ram;
+            if (animalType == AnimalType.SheepFeedlot)
+            {
+                lookupType = AnimalType.Ram;
+            }
 
-            var result = GetSheepCoefficients().SingleOrDefault(x => x.AnimalType == lookupType);
+            var result = this.GetSheepCoefficients().SingleOrDefault(x => x.AnimalType == lookupType);
             if (result == null)
             {
-                var defaultValue = GetSheepCoefficients().Single(x => x.AnimalType == AnimalType.Lambs);
-                Trace.TraceError(
-                    $"{nameof(Table_22_Livestock_Coefficients_Sheep_Provider)}.{nameof(GetCoefficientsByAnimalType)}" +
+                var defaultValue = this.GetSheepCoefficients().Single(x => x.AnimalType == AnimalType.Lambs);
+                Trace.TraceError($"{nameof(Table_22_Livestock_Coefficients_Sheep_Provider)}.{nameof(Table_22_Livestock_Coefficients_Sheep_Provider.GetCoefficientsByAnimalType)}" +
                     $" unable to get data for animal type: {animalType}." +
                     $" Returning default value of {defaultValue}.");
 
@@ -46,14 +57,6 @@ namespace H.Core.Providers.Animals
 
             return result;
         }
-
-        #endregion
-
-        #region Fields
-
-        private readonly AnimalTypeStringConverter _converter = new AnimalTypeStringConverter();
-        private readonly List<Table_22_Livestock_Coefficients_Sheep_Data> _cache;
-
         #endregion
 
         #region Private Methods
@@ -98,7 +101,7 @@ namespace H.Core.Providers.Animals
 
             return result;
         }
-
         #endregion
+
     }
 }

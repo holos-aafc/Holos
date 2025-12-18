@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using H.Content;
 using H.Core.Converters;
@@ -14,12 +13,12 @@ namespace H.Core.Providers.Soil
         public const int DefaultValueForBadPolygonInput = 0;
 
         private static readonly ProvinceStringConverter _provinceConverter = new ProvinceStringConverter();
-        private readonly List<CanadianAgriculturalRegionIdToSlcIdData> _cachedData;
+        private List<CanadianAgriculturalRegionIdToSlcIdData> _cachedData;
 
         public CanadianAgriculturalRegionIdToSlcIdProvider()
         {
             HTraceListener.AddTraceListener();
-            _cachedData = GetData();
+            this._cachedData = this.GetData();
         }
 
         private List<CanadianAgriculturalRegionIdToSlcIdData> GetData()
@@ -34,35 +33,36 @@ namespace H.Core.Providers.Soil
 
             foreach (var filename in files)
             {
-                var filelines = CsvResourceReader.GetFileLines(filename);
+                var filelines = CsvResourceReader.GetFileLines(filename);                
                 int i;
 
                 foreach (var line in filelines.Skip(1))
                 {
-                    var entry = new CanadianAgriculturalRegionIdToSlcIdData
+                    var entry = new CanadianAgriculturalRegionIdToSlcIdData()
                     {
                         PrId = int.Parse(line[0], cultureInfo),
                         PrName = _provinceConverter.Convert(line[1]),
                         CarId = int.Parse(line[2], cultureInfo),
                         CarName = line[3],
-                        SplitPolys = int.TryParse(line[4], NumberStyles.Integer, cultureInfo, out i) ? i : -99,
+                        SplitPolys = int.TryParse(line[4], System.Globalization.NumberStyles.Integer, cultureInfo, out i) ? i : -99,
                         PolygonId = int.Parse(line[5], cultureInfo),
-                        EcodistrictId = int.Parse(line[6], cultureInfo)
+                        EcodistrictId = int.Parse(line[6], cultureInfo),
                     };
                     result.Add(entry);
                 }
             }
-
             return result;
         }
 
         public int GetCarId(int polyId)
         {
             var result = _cachedData.FirstOrDefault(x => x.PolygonId.Equals(polyId));
-            if (result != null) return result.CarId;
+            if (result != null)
+            {
+                return result.CarId;
+            }            
 
-            Trace.TraceError(
-                $"{nameof(CanadianAgriculturalRegionIdToSlcIdProvider)}.{nameof(GetCarId)} unable to get car id for {polyId}. Returning default value of {DefaultValueForBadPolygonInput}.");
+            Trace.TraceError($"{nameof(CanadianAgriculturalRegionIdToSlcIdProvider)}.{nameof(CanadianAgriculturalRegionIdToSlcIdProvider.GetCarId)} unable to get car id for {polyId}. Returning default value of {DefaultValueForBadPolygonInput}.");
 
             return DefaultValueForBadPolygonInput;
         }
@@ -70,10 +70,12 @@ namespace H.Core.Providers.Soil
         public int GetCarId(int polyId, int SplitPolys)
         {
             var result = _cachedData.FirstOrDefault(x => x.PolygonId.Equals(polyId) && x.SplitPolys.Equals(SplitPolys));
-            if (result != null) return result.CarId;
+            if (result != null)
+            {
+                return result.CarId;
+            }
 
-            Trace.TraceError(
-                $"{nameof(CanadianAgriculturalRegionIdToSlcIdProvider)}{nameof(GetCarId)} unable to get car id for {polyId} and {SplitPolys} Returning default value of {DefaultValueForBadPolygonInput}.");
+            Trace.TraceError($"{nameof(CanadianAgriculturalRegionIdToSlcIdProvider)}{nameof(CanadianAgriculturalRegionIdToSlcIdProvider.GetCarId)} unable to get car id for {polyId} and {SplitPolys} Returning default value of {DefaultValueForBadPolygonInput}.");
 
             return DefaultValueForBadPolygonInput;
         }

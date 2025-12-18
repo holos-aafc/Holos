@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using AutoMapper.Configuration.Annotations;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
+using H.Core.Models.Animals;
 using H.Core.Models.LandManagement.Fields;
 
 namespace H.Core.Services.LandManagement
@@ -15,29 +20,62 @@ namespace H.Core.Services.LandManagement
         {
             var viewItem = adjoiningYears.CurrentYearViewItem;
 
-            CalculateFactors(viewItem, farm);
+            this.CalculateFactors(viewItem, farm);
         }
 
         public void CalculateFactors(List<CropViewItem> viewItems, Farm farm)
         {
-            foreach (var cropViewItem in viewItems) CalculateFactors(cropViewItem, farm);
+            foreach (var cropViewItem in viewItems)
+            {
+                this.CalculateFactors(cropViewItem, farm);
+            }
         }
 
         /// <summary>
-        ///     Although climate/management factors are not used in the Tier 2 carbon modelling, they are used in the N budget and
-        ///     so must be calculated when user specifies Tier 2 or ICBM modelling
+        /// Although climate/management factors are not used in the Tier 2 carbon modelling, they are used in the N budget and so must be calculated when user specifies Tier 2 or ICBM modelling
         /// </summary>
         public void CalculateFactors(CropViewItem viewItem, Farm farm)
         {
-            viewItem.ClimateParameter = _climateService.CalculateClimateParameter(viewItem, farm);
-            viewItem.TillageFactor = CalculateTillageFactor(viewItem, farm);
-            viewItem.ManagementFactor = CalculateManagementFactor(viewItem.ClimateParameter, viewItem.TillageFactor);
+            if (farm.IsCommandLineMode)
+            {
+                /*
+                 * In CLI
+                 *
+                 * These factors can never be zero.
+                 *
+                 * If they are not zero, don't overwrite them so that we use what was in the input files.
+                 */
+
+                if (viewItem.ClimateParameter == 0)
+                {
+                    viewItem.ClimateParameter = _climateService.CalculateClimateParameter(viewItem, farm);
+                }
+
+                if (viewItem.TillageFactor == 0)
+                {
+                    viewItem.TillageFactor = this.CalculateTillageFactor(viewItem, farm);
+                }
+
+                if (viewItem.ManagementFactor == 0)
+                {
+                    viewItem.ManagementFactor = this.CalculateManagementFactor(viewItem.ClimateParameter, viewItem.TillageFactor);
+                }
+            }
+            else
+            {
+                /*
+                 * In GUI
+                 */
+
+                viewItem.ClimateParameter = _climateService.CalculateClimateParameter(viewItem, farm);
+                viewItem.TillageFactor = this.CalculateTillageFactor(viewItem, farm);
+                viewItem.ManagementFactor = this.CalculateManagementFactor(viewItem.ClimateParameter, viewItem.TillageFactor);
+            }
         }
 
         /// <summary>
-        ///     Before carbon change can be calculated, all view items must have yields assigned so that we can determine the total
-        ///     carbon inputs from all crops, manure applications, supplemental
-        ///     hay applications, etc. Then we can proceed to the actual carbon change calculations.
+        /// Before carbon change can be calculated, all view items must have yields assigned so that we can determine the total carbon inputs from all crops, manure applications, supplemental 
+        /// hay applications, etc. Then we can proceed to the actual carbon change calculations.
         /// </summary>
         public void AssignCarbonInputs(IEnumerable<CropViewItem> viewItems,
             Farm farm)
@@ -50,7 +88,7 @@ namespace H.Core.Services.LandManagement
             _carbonService.AssignInputsAndLosses(mainCrops, farm, animalResults);
             _carbonService.AssignInputsAndLosses(secondaryCrops, farm, animalResults);
 
-            CalculateFactors(mainCrops, farm);
+            this.CalculateFactors(mainCrops, farm);
         }
 
         public void AssignNitrogenInputs(List<CropViewItem> viewItems, Farm farm)
@@ -63,19 +101,24 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        ///     If there is a year where a perennial crop has a 0 yield, it means it wasn't harvested that year. Therefore, when a
-        ///     perennial year has a 0 yield,
-        ///     we must set the percentage of product returned to soil to 100% (instead of the default 35% for perennials) since
-        ///     everything stayed in the field that year.
-        ///     This method has to be called after we assign yields.
+        /// If there is a year where a perennial crop has a 0 yield, it means it wasn't harvested that year. Therefore, when a perennial year has a 0 yield,
+        /// we must set the percentage of product returned to soil to 100% (instead of the default 35% for perennials) since everything stayed in the field that year.
+        ///
+        /// This method has to be called after we assign yields.
         /// </summary>
         public void UpdatePercentageReturnsForPerennials(IEnumerable<CropViewItem> viewItems)
         {
             foreach (var cropViewItem in viewItems)
+            {
                 if (cropViewItem.CropType.IsPerennial())
+                {
                     if (cropViewItem.Yield == 0)
+                    {
                         cropViewItem.PercentageOfProductYieldReturnedToSoil =
                             100; // Now C inputs will be calculated correctly for this year
+                    }
+                }
+            }
         }
 
         #endregion
@@ -83,7 +126,7 @@ namespace H.Core.Services.LandManagement
         #region Private Methods
 
         /// <summary>
-        ///     Calculates the average soil organic carbon value for all fields on the farm.
+        /// Calculates the average soil organic carbon value for all fields on the farm.
         /// </summary>
         private void CalculateAverageSoilOrganicCarbonForFields(
             IEnumerable<CropViewItem> viewItems)
@@ -99,7 +142,9 @@ namespace H.Core.Services.LandManagement
 
                 // Assign this common value to each item.
                 foreach (var viewItem in viewItemsByYear)
+                {
                     viewItem.AverageSoilCarbonAcrossAllFieldsInFarm = averageSoilOrganicCarbon;
+                }
             }
         }
 
@@ -109,19 +154,27 @@ namespace H.Core.Services.LandManagement
 
             var currentComponentId = fieldSystemComponent.CurrentPeriodComponentGuid;
             if (currentComponentId.Equals(Guid.Empty))
+            {
                 currentFieldComponent = fieldSystemComponent;
+            }
             else
+            {
                 currentFieldComponent = farm.GetFieldSystemComponent(currentComponentId);
+            }
 
             if (currentFieldComponent.HistoricalComponents.Any())
+            {
                 return currentFieldComponent.HistoricalComponents.Cast<FieldSystemComponent>().OrderBy(x => x.StartYear)
                     .First();
-
-            return currentFieldComponent;
+            }
+            else
+            {
+                return currentFieldComponent;
+            }
         }
 
         /// <summary>
-        ///     Calculates final results for one field. Results will be assigned to view items
+        /// Calculates final results for one field. Results will be assigned to view items
         /// </summary>
         private void CalculateFinalResultsForField(
             List<CropViewItem> viewItemsForField,
@@ -131,10 +184,10 @@ namespace H.Core.Services.LandManagement
             var fieldSystemComponent = farm.GetFieldSystemComponent(fieldSystemGuid);
 
             // Need to get leftmost component here
-            var leftMost = GetLeftMostComponent(fieldSystemComponent, farm);
+            var leftMost = this.GetLeftMostComponent(fieldSystemComponent, farm);
 
             // Create run in period items
-            var runInPeriodItems = GetRunInPeriodItems(farm, leftMost.CropViewItems, leftMost.StartYear,
+            var runInPeriodItems = this.GetRunInPeriodItems(farm, leftMost.CropViewItems, leftMost.StartYear,
                 viewItemsForField, leftMost);
 
             _initializationService.InitializeYieldForAllYears(runInPeriodItems, farm, leftMost);
@@ -142,13 +195,13 @@ namespace H.Core.Services.LandManagement
             // Check if user specified ICBM or Tier 2 carbon modelling
             if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2)
             {
-                _tier2SoilCarbonCalculator.AnimalComponentEmissionsResults = AnimalResults;
+                _tier2SoilCarbonCalculator.AnimalComponentEmissionsResults = this.AnimalResults;
 
                 /*
                  * Process run in period items
                  */
 
-                _carbonService.AssignInputsAndLosses(runInPeriodItems, farm, AnimalResults);
+                _carbonService.AssignInputsAndLosses(runInPeriodItems, farm, this.AnimalResults);
                 _nitrogenService.AssignNitrogenInputs(runInPeriodItems, farm);
 
                 /*
@@ -162,48 +215,48 @@ namespace H.Core.Services.LandManagement
                      * When in CLI mode, we need to check if there are missing values and process any missing input values before calculating final results
                      */
 
-                    _carbonService.ProcessCommandLineItems(viewItemsForField.ToList(), farm, AnimalResults);
+                    _carbonService.ProcessCommandLineItems(viewItemsForField.ToList(), farm, this.AnimalResults);
                     _nitrogenService.ProcessCommandLineItems(viewItemsForField.ToList(), farm);
-                    CombineInputsForAllCropsInSameYear(farm, viewItemsForField.ToList());
+                    this.CalculateFactors(viewItemsForField.ToList(), farm);
+                    this.CombineInputsForAllCropsInSameYear(farm, viewItemsForField.ToList());
                 }
 
                 // Combine inputs now that we have C and N inputs set for all items
-                CombineInputsForAllCropsInSameYear(farm, runInPeriodItems);
+                this.CombineInputsForAllCropsInSameYear(farm, runInPeriodItems);
 
                 // Merge all run in period items
-                var mergedRunInItems = MergeDetailViewItems(runInPeriodItems, leftMost);
+                var mergedRunInItems = this.MergeDetailViewItems(runInPeriodItems, leftMost);
 
                 // Combine inputs for run in period
-                CombineInputsForAllCropsInSameYear(farm, mergedRunInItems);
+                this.CombineInputsForAllCropsInSameYear(farm, mergedRunInItems);
 
                 _tier2SoilCarbonCalculator.CalculateResults(
-                    farm,
-                    viewItemsForField,
-                    leftMost,
-                    mergedRunInItems);
+                    farm: farm,
+                    viewItemsByField: viewItemsForField,
+                    fieldSystemComponent: leftMost,
+                    runInPeriodItems: mergedRunInItems);
             }
             else
             {
-                _icbmSoilCarbonCalculator.AnimalComponentEmissionsResults = AnimalResults;
+                _icbmSoilCarbonCalculator.AnimalComponentEmissionsResults = this.AnimalResults;
 
-
-                if (farm.IsCommandLineMode)
+                 if (farm.IsCommandLineMode)
                 {
                     /*
                      * When in GUI mode, the inputs for the main view items will already have been assigned at AssignCarbonInputs() and AssignNitrogenInputs().
                      * When in CLI mode, we need to check if there are missing values and process any missing input values before calculating final results
                      */
 
-                    _carbonService.ProcessCommandLineItems(viewItemsForField.ToList(), farm, AnimalResults);
+                    _carbonService.ProcessCommandLineItems(viewItemsForField.ToList(), farm, this.AnimalResults);
                     _nitrogenService.ProcessCommandLineItems(viewItemsForField.ToList(), farm);
-                    CombineInputsForAllCropsInSameYear(farm, viewItemsForField.ToList());
+                    this.CalculateFactors(viewItemsForField.ToList(), farm);
+                    this.CombineInputsForAllCropsInSameYear(farm, viewItemsForField.ToList());
                 }
 
                 // Create the item with the steady state (equilibrium) values
-                var equilibriumYearResults =
-                    _icbmSoilCarbonCalculator.CalculateEquilibriumYear(viewItemsForField, farm, fieldSystemGuid);
+                var equilibriumYearResults = _icbmSoilCarbonCalculator.CalculateEquilibriumYear(viewItemsForField, farm, fieldSystemGuid);
 
-                for (var i = 0; i < viewItemsForField.Count; i++)
+                for (int i = 0; i < viewItemsForField.Count; i++)
                 {
                     var currentYearResults = viewItemsForField.ElementAt(i);
 
@@ -212,25 +265,24 @@ namespace H.Core.Services.LandManagement
 
                     // Carbon must be calculated before nitrogen
                     _icbmSoilCarbonCalculator.CalculateCarbonAtInterval(
-                        previousYearResults,
-                        currentYearResults,
-                        farm);
+                        previousYearResults: previousYearResults,
+                        currentYearResults: currentYearResults,
+                        farm: farm);
 
                     _icbmSoilCarbonCalculator.CalculateNitrogenAtInterval(
-                        previousYearResults,
-                        currentYearResults,
-                        null,
-                        farm,
-                        i);
+                        previousYearResults: previousYearResults,
+                        currentYearResults: currentYearResults,
+                        nextYearResults: null,
+                        farm: farm,
+                        yearIndex: i);
                 }
             }
 
             foreach (var cropViewItem in viewItemsForField)
             {
-                var energyResults = CalculateCropEnergyResults(cropViewItem, farm);
+                var energyResults = this.CalculateCropEnergyResults(cropViewItem, farm);
                 cropViewItem.CropEnergyResults = energyResults;
-                cropViewItem.EstimatesOfProductionResultsViewItem =
-                    CalculateEstimateOfProduction(cropViewItem, fieldSystemComponent);
+                cropViewItem.EstimatesOfProductionResultsViewItem = this.CalculateEstimateOfProduction(cropViewItem, fieldSystemComponent);
             }
         }
 

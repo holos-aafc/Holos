@@ -8,7 +8,7 @@ namespace H.Core.Converters
     {
         public SoilTexture Convert(string input)
         {
-            switch (GetLettersAsLowerCase(input))
+            switch (this.GetLettersAsLowerCase(input))
             {
                 case "fine":
                     return SoilTexture.Fine;

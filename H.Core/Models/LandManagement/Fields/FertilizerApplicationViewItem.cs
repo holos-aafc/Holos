@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Core.Providers.Fertilizer;
@@ -8,19 +9,6 @@ namespace H.Core.Models.LandManagement.Fields
 {
     public class FertilizerApplicationViewItem : ModelBase
     {
-        #region Constructors
-
-        public FertilizerApplicationViewItem()
-        {
-            FertilizerEfficiencyPercentage = 75;
-
-            FertilizerBlendData = new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data();
-            FertilizerBlendData.PropertyChanged += FertilizerBlendDataOnPropertyChanged;
-            PropertyChanged += OnPropertyChanged;
-        }
-
-        #endregion
-
         #region Fields
 
         private FertilizerApplicationMethodologies _fertilizerApplicationMethodology;
@@ -35,6 +23,19 @@ namespace H.Core.Models.LandManagement.Fields
         private double _amountOfSulphurApplied;
 
         private double _fertilizerEfficiencyPercentage;
+
+        #endregion
+
+        #region Constructors
+
+        public FertilizerApplicationViewItem()
+        {
+            this.FertilizerEfficiencyPercentage = 75;
+
+            this.FertilizerBlendData = new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data();
+            this.FertilizerBlendData.PropertyChanged += FertilizerBlendDataOnPropertyChanged;
+            this.PropertyChanged += OnPropertyChanged;
+        }
 
         #endregion
 
@@ -59,8 +60,9 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        ///     Amount of fertilizer applied
-        ///     (kg product ha^-1)
+        /// Amount of fertilizer applied
+        ///
+        /// (kg product ha^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramsPerHectare)]
         public double AmountOfBlendedProductApplied
@@ -70,8 +72,9 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        ///     Amount of N applied based on the percentage composition of N in the fertilizer blend
-        ///     (kg N ha^-1)
+        /// Amount of N applied based on the percentage composition of N in the fertilizer blend
+        ///
+        /// (kg N ha^-1)
         /// </summary>
         public double AmountOfNitrogenApplied
         {
@@ -80,8 +83,9 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        ///     Amount of P applied based on the percentage composition of P in the fertilizer blend
-        ///     (kg P ha^-1)
+        /// Amount of P applied based on the percentage composition of P in the fertilizer blend
+        ///
+        /// (kg P ha^-1)
         /// </summary>
         public double AmountOfPhosphorusApplied
         {
@@ -90,8 +94,9 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        ///     Amount of K applied based on the percentage composition of K in the fertilizer blend
-        ///     (kg K ha^-1)
+        /// Amount of K applied based on the percentage composition of K in the fertilizer blend
+        ///
+        /// (kg K ha^-1)
         /// </summary>
         public double AmountOfPotassiumApplied
         {
@@ -100,8 +105,9 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        ///     Amount of sulphur applied
-        ///     (kg S ha^-1)
+        /// Amount of sulphur applied
+        ///
+        /// (kg S ha^-1)
         /// </summary>
         public double AmountOfSulphurApplied
         {
@@ -110,7 +116,7 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        ///     (%)
+        /// (%)
         /// </summary>
         public double FertilizerEfficiencyPercentage
         {
@@ -119,9 +125,12 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        ///     (Fraction)
+        /// (Fraction)
         /// </summary>
-        public double FertilizerEfficiencyFraction => FertilizerEfficiencyPercentage / 100;
+        public double FertilizerEfficiencyFraction
+        {
+            get => this.FertilizerEfficiencyPercentage / 100;
+        }
 
         #endregion
 
@@ -129,22 +138,22 @@ namespace H.Core.Models.LandManagement.Fields
 
         private void UpdateAmountOfNitrogenApplied()
         {
-            AmountOfNitrogenApplied = FertilizerBlendData.PercentageNitrogen / 100 * AmountOfBlendedProductApplied;
+            this.AmountOfNitrogenApplied = (this.FertilizerBlendData.PercentageNitrogen / 100) * this.AmountOfBlendedProductApplied;
         }
 
         private void UpdateAmountOfPhosphorusApplied()
         {
-            AmountOfPhosphorusApplied = FertilizerBlendData.PercentagePhosphorus / 100 * AmountOfBlendedProductApplied;
+            this.AmountOfPhosphorusApplied = (this.FertilizerBlendData.PercentagePhosphorus / 100) * this.AmountOfBlendedProductApplied;
         }
 
         private void UpdateAmountOfPotassiumApplied()
         {
-            AmountOfPotassiumApplied = FertilizerBlendData.PercentagePotassium / 100 * AmountOfBlendedProductApplied;
+            this.AmountOfPotassiumApplied = (this.FertilizerBlendData.PercentagePotassium / 100) * this.AmountOfBlendedProductApplied;
         }
 
         private void UpdateAmountOfSulphurApplied()
         {
-            AmountOfSulphurApplied = FertilizerBlendData.PercentageSulphur / 100 * AmountOfBlendedProductApplied;
+            this.AmountOfSulphurApplied = (this.FertilizerBlendData.PercentageSulphur / 100) * this.AmountOfBlendedProductApplied;
         }
 
         #endregion
@@ -156,20 +165,28 @@ namespace H.Core.Models.LandManagement.Fields
             if (sender is Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data fertilizerBlendData)
             {
                 if (e.PropertyName.Equals(nameof(FertilizerBlendData.PercentageNitrogen)))
+                {
                     // When the percentage of N is changed, the amount of nitrogen applied from the amount of product applied will change
-                    UpdateAmountOfNitrogenApplied();
+                    this.UpdateAmountOfNitrogenApplied();
+                }
 
                 if (e.PropertyName.Equals(nameof(FertilizerBlendData.PercentagePhosphorus)))
+                {
                     // When the percentage of P is changed, the amount of phosphorus applied from the amount of product applied will change
-                    UpdateAmountOfPhosphorusApplied();
+                    this.UpdateAmountOfPhosphorusApplied();
+                }
 
                 if (e.PropertyName.Equals(nameof(FertilizerBlendData.PercentagePotassium)))
+                {
                     // When the percentage of K is changed, the amount of potassium applied from the amount of product applied will change
-                    UpdateAmountOfPotassiumApplied();
+                    this.UpdateAmountOfPotassiumApplied();
+                }
 
                 if (e.PropertyName.Equals(nameof(FertilizerBlendData.PercentageSulphur)))
+                {
                     // When the percentage of S is changed, the amount of sulphur applied from the amount of product applied will change
-                    UpdateAmountOfSulphurApplied();
+                    this.UpdateAmountOfSulphurApplied();
+                }
             }
         }
 
@@ -177,10 +194,10 @@ namespace H.Core.Models.LandManagement.Fields
         {
             if (e.PropertyName.Equals(nameof(AmountOfBlendedProductApplied)))
             {
-                UpdateAmountOfNitrogenApplied();
-                UpdateAmountOfPhosphorusApplied();
-                UpdateAmountOfPotassiumApplied();
-                UpdateAmountOfSulphurApplied();
+                this.UpdateAmountOfNitrogenApplied();
+                this.UpdateAmountOfPhosphorusApplied();
+                this.UpdateAmountOfPotassiumApplied();
+                this.UpdateAmountOfSulphurApplied();
             }
         }
 

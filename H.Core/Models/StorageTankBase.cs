@@ -1,31 +1,10 @@
-﻿using H.Infrastructure;
+﻿using System;
+using H.Infrastructure;
 
 namespace H.Core.Models
 {
     public abstract class StorageTankBase : ModelBase
     {
-        #region Public Methods
-
-        public virtual void ResetTank()
-        {
-            VolumeRemainingInTank = 0;
-            TotalOrganicNitrogenAvailableForLandApplication = 0;
-            TotalTanAvailableForLandApplication = 0;
-            TotalAmountOfCarbonInStoredManure = 0;
-            TotalNitrogenAvailableForLandApplication = 0;
-            TotalNitrogenAvailableAfterAllLandApplications = 0;
-            NitrogenSumOfAllManureApplicationsMade = 0;
-            VolumeSumOfAllManureApplicationsMade = 0;
-            VolumeOfManureAvailableForLandApplication = 0;
-        }
-
-        #endregion
-
-        public override string ToString()
-        {
-            return $"{base.ToString()}, {nameof(Year)}: {Year}";
-        }
-
         #region Fields
 
         private double _volumeRemainingInTank;
@@ -40,16 +19,21 @@ namespace H.Core.Models
 
         #endregion
 
+        protected StorageTankBase()
+        {
+        }
+
         #region Properties
 
         /// <summary>
-        ///     When user defines multiple years for a field history, there will need to be a tank for each year of the history
+        /// When user defines multiple years for a field history, there will need to be a tank for each year of the history
         /// </summary>
         public int Year { get; set; }
 
         /// <summary>
-        ///     The volume of manure or digestate remaining in the storage tank
-        ///     (1000 kg wet weight for solid manure, 1000 L for liquid manure)
+        /// The volume of manure or digestate remaining in the storage tank
+        ///
+        /// (1000 kg wet weight for solid manure, 1000 L for liquid manure)
         /// </summary>
         public double VolumeRemainingInTank
         {
@@ -64,7 +48,7 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        ///     (kg)
+        /// (kg)
         /// </summary>
         public double TotalTanAvailableForLandApplication
         {
@@ -73,7 +57,7 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        ///     (kg C)
+        /// (kg C)
         /// </summary>
         public double TotalAmountOfCarbonInStoredManure
         {
@@ -94,7 +78,7 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        ///     Total amount of nitrogen applied to fields from manure produced on farm (does not include imports)
+        /// Total amount of nitrogen applied to fields from manure produced on farm (does not include imports)
         /// </summary>
         public double NitrogenSumOfAllManureApplicationsMade
         {
@@ -111,12 +95,11 @@ namespace H.Core.Models
         public double VolumeSumOfAllManureApplicationsMade
         {
             get => _volumeSumOfAllManureApplicationsMade;
-            set => SetProperty(ref _volumeSumOfAllManureApplicationsMade, value,
-                OnVolumeSumOfAllManureApplicationsMade);
+            set => SetProperty(ref _volumeSumOfAllManureApplicationsMade, value, OnVolumeSumOfAllManureApplicationsMade);
         }
 
         /// <summary>
-        ///     (kg)
+        /// (kg)
         /// </summary>
         public double VolumeOfManureAvailableForLandApplication
         {
@@ -126,19 +109,40 @@ namespace H.Core.Models
 
         #endregion
 
-        #region Private Methods
+        #region Public Methods
 
+        public virtual void ResetTank()
+        {
+            this.VolumeRemainingInTank = 0;
+            this.TotalOrganicNitrogenAvailableForLandApplication = 0;
+            this.TotalTanAvailableForLandApplication = 0;
+            this.TotalAmountOfCarbonInStoredManure = 0;
+            this.TotalNitrogenAvailableForLandApplication = 0;
+            this.TotalNitrogenAvailableAfterAllLandApplications = 0;
+            this.NitrogenSumOfAllManureApplicationsMade = 0;
+            this.VolumeSumOfAllManureApplicationsMade = 0;
+            this.VolumeOfManureAvailableForLandApplication = 0;
+        }
+
+        #endregion
+
+        #region Private Methods
+        
         private void OnSumOfAllManureApplicationsMade()
         {
-            TotalNitrogenAvailableAfterAllLandApplications =
-                TotalNitrogenAvailableForLandApplication - NitrogenSumOfAllManureApplicationsMade;
+            this.TotalNitrogenAvailableAfterAllLandApplications = this.TotalNitrogenAvailableForLandApplication - this.NitrogenSumOfAllManureApplicationsMade;
         }
 
         private void OnVolumeSumOfAllManureApplicationsMade()
         {
-            VolumeRemainingInTank = VolumeOfManureAvailableForLandApplication - VolumeSumOfAllManureApplicationsMade;
-        }
+            this.VolumeRemainingInTank = this.VolumeOfManureAvailableForLandApplication - this.VolumeSumOfAllManureApplicationsMade;
+        } 
 
         #endregion
+
+        public override string ToString()
+        {
+            return $"{base.ToString()}, {nameof(Year)}: {Year}";
+        }
     }
 }

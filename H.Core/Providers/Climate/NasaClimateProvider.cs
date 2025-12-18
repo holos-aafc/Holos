@@ -1,46 +1,52 @@
-﻿using System;
+﻿using H.Core.Calculators.Climate;
+using H.Core.Tools;
+using Newtonsoft.Json.Linq;
+using SharpKml.Dom;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using H.Core.Calculators.Climate;
-using H.Core.Tools;
-using H.Infrastructure;
-using Newtonsoft.Json.Linq;
+using TimeSpan = System.TimeSpan;
 
 namespace H.Core.Providers.Climate
 {
     /// <summary>
-    ///     Web viewer
-    ///     https://power.larc.nasa.gov/data-access-viewer/
-    ///     Daily API sample guide
-    ///     https://power.larc.nasa.gov/docs/services/api/temporal/daily/
-    ///     Sample request
-    ///     https://power.larc.nasa.gov/api/pages/?urls.primaryName=Daily
-    ///     Parameter definitions:
-    ///     https://power.larc.nasa.gov/#resources
+    /// Web viewer
+    /// https://power.larc.nasa.gov/data-access-viewer/
+    ///
+    /// Daily API sample guide 
+    /// https://power.larc.nasa.gov/docs/services/api/temporal/daily/
+    /// 
+    /// Sample request
+    /// https://power.larc.nasa.gov/api/pages/?urls.primaryName=Daily
+    ///
+    /// Parameter definitions:
+    /// https://power.larc.nasa.gov/#resources
+    ///
+    /// All parameters:
+    /// https://power.larc.nasa.gov/parameters/
     /// </summary>
     public class NasaClimateProvider
     {
+        #region Fields
+
+        private EvapotranspirationCalculator _evapotranspirationCalculator = new EvapotranspirationCalculator();
+
+        // Timeout is in seconds. 60s = 1 minute.
+        private const int Timeout = 60;
+        private const int DataUndefined = -999;
+
+        #endregion
+
         #region Constructors
 
         public NasaClimateProvider()
         {
             HTraceListener.AddTraceListener();
         }
-
-        #endregion
-
-        #region Fields
-
-        private readonly EvapotranspirationCalculator
-            _evapotranspirationCalculator = new EvapotranspirationCalculator();
-
-        // Timeout is in seconds. 60s = 1 minute.
-        private const int Timeout = 60;
-        private const int DataUndefined = -999;
 
         #endregion
 
@@ -52,11 +58,11 @@ namespace H.Core.Providers.Climate
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods        
 
         public bool IsCached(double latitude, double longitude)
         {
-            var path = GetCachedPath(latitude, longitude);
+            var path = this.GetCachedPath(latitude, longitude);
 
             return File.Exists(path);
         }
@@ -64,11 +70,10 @@ namespace H.Core.Providers.Climate
         public List<DailyClimateData> GetCustomClimateData(double latitude, double longitude)
         {
             var url = GetCorrectApiUrl(latitude, longitude);
-            var content = GetCachedData(latitude, longitude);
+            var content = this.GetCachedData(latitude, longitude);
             if (string.IsNullOrWhiteSpace(content))
             {
-                Trace.TraceInformation(
-                    $"Cached climate data for lat: {latitude}, long: {longitude} not found. Downloading now.");
+                Trace.TraceInformation($"Cached climate data for lat: {latitude}, long: {longitude} not found. Downloading now.");
 
                 try
                 {
@@ -78,52 +83,47 @@ namespace H.Core.Providers.Climate
                     var getNasaApi = Task.Run(() => GetNasaApiString(url));
                     if (getNasaApi.Wait(TimeSpan.FromSeconds(Timeout)))
                     {
-                        Trace.TraceInformation(
-                            $"{nameof(NasaClimateProvider)}.{nameof(GetCustomClimateData)}, NASA API Task Status: {getNasaApi.Status}");
+                        Trace.TraceInformation($"{nameof(NasaClimateProvider)}.{nameof(GetCustomClimateData)}, NASA API Task Status: {getNasaApi.Status}");
                         content = getNasaApi.Result;
                     }
                     else
                     {
-                        Trace.TraceError(
-                            $"{nameof(NasaClimateProvider)}.{nameof(GetCustomClimateData)}, NASA API Task Status: {getNasaApi.Status}");
+                        Trace.TraceError($"{nameof(NasaClimateProvider)}.{nameof(GetCustomClimateData)}, NASA API Task Status: {getNasaApi.Status}");
                         throw new Exception("NASA API couldn't be reached or connection timed out.");
                     }
                 }
                 catch (Exception e)
                 {
-                    Trace.TraceInformation("Could not load data from NASA API. Exception thrown.");
-                    Trace.TraceError(
-                        $"Exception occurred in {nameof(NasaClimateProvider)}.{nameof(GetCustomClimateData)}. Exception message: {e.Message}");
+                    Trace.TraceInformation($"Could not load data from NASA API. Exception thrown.");
+                    Trace.TraceError($"Exception occurred in {nameof(NasaClimateProvider)}.{nameof(GetCustomClimateData)}. Exception message: {e.Message}");
                     Trace.TraceError($"Inner Exception message: {e.InnerException}");
-                    Trace.TraceInformation("Returning SLC Data.");
+                    Trace.TraceInformation($"Returning SLC Data.");
                     return new List<DailyClimateData>();
                 }
 
                 if (string.IsNullOrWhiteSpace(content) == false)
                 {
-                    CacheData(latitude, longitude, content);
+                    this.CacheData(latitude, longitude, content);
                 }
                 else
                 {
                     // For some reason we got an empty string from web call
 
-                    Trace.TraceError(
-                        $"{nameof(NasaClimateProvider)}: there was an error while trying to download NASA climate data. String was empty.");
-                    Trace.TraceInformation("Returning SLC Data.");
+                    Trace.TraceError($"{nameof(NasaClimateProvider)}: there was an error while trying to download NASA climate data. String was empty.");
+                    Trace.TraceInformation($"Returning SLC Data.");
                     return new List<DailyClimateData>();
                 }
             }
 
             Trace.TraceInformation($"{nameof(NasaClimateProvider)}: Processing data received from NASA API.");
 
-            var jObject = JObject.Parse(content);
+            JObject jObject = JObject.Parse(content);
 
             var featuresValueArray = (JObject)jObject["properties"];
             if (featuresValueArray == null)
             {
                 // This can occur when NASA takes the API offline for maintenance
-                Trace.TraceInformation(
-                    $"{nameof(NasaClimateProvider)}: there was an error while trying to download NASA climate data");
+                Trace.TraceInformation($"{nameof(NasaClimateProvider)}: there was an error while trying to download NASA climate data");
                 return new List<DailyClimateData>();
             }
 
@@ -143,14 +143,26 @@ namespace H.Core.Providers.Climate
             var solarRadiation = (JObject)featuresValueArray["parameter"]["ALLSKY_SFC_SW_DWN"];
             var solarRadiationE = solarRadiation.GetEnumerator();
 
+            // Minimum temperature and its enumerator to access the next data
+            var minimumTemperature = (JObject)featuresValueArray["parameter"]["T2M_MIN"];
+            var minimumTemperatureE = minimumTemperature.GetEnumerator();
+
+            // Maximum temperature and its enumerator to access the next data
+            var maximumTemperature = (JObject)featuresValueArray["parameter"]["T2M_MAX"];
+            var maximumTemperatureE = maximumTemperature.GetEnumerator();
+
             // Creating a temp file for the NASA data
 
             var customClimateData = new List<DailyClimateData>();
 
             // NOTE: NASA API does not provide evapotranspiration - this needs to be calculated by caller
-            var julian = 1;
-            while (rainE.MoveNext() && temperatureE.MoveNext() && relativeHumidityE.MoveNext() &&
-                   solarRadiationE.MoveNext())
+            int julian = 1;
+            while (rainE.MoveNext() && 
+                   temperatureE.MoveNext() && 
+                   relativeHumidityE.MoveNext() && 
+                   solarRadiationE.MoveNext() &&
+                   minimumTemperatureE.MoveNext() &&
+                   maximumTemperatureE.MoveNext())
             {
                 var data = new DailyClimateData();
                 if (rainE.Current.Key.Substring(4, 4) == "0101")
@@ -161,27 +173,38 @@ namespace H.Core.Providers.Climate
 
                 data.Year = int.Parse(rainE.Current.Key.Substring(0, 4));
                 data.MeanDailyAirTemperature = (double)temperatureE.Current.Value;
+                data.MinimumAirTemperature = (double)minimumTemperatureE.Current.Value;
+                data.MaximumAirTemperature = (double)maximumTemperatureE.Current.Value;
                 data.MeanDailyPrecipitation = (double)rainE.Current.Value;
                 data.RelativeHumidity = (double)relativeHumidityE.Current.Value;
-                data.SolarRadiation =
-                    (double)solarRadiationE.Current
-                        .Value; // Note: Nasa provides this value with units of measurement of MJ/m^2/day which is what the evapotranspiration calculator expects. No conversion is needed here
-                data.MeanDailyPET =
-                    _evapotranspirationCalculator.CalculateReferenceEvapotranspiration(data.MeanDailyAirTemperature,
-                        data.SolarRadiation, data.RelativeHumidity);
+                data.SolarRadiation = (double)solarRadiationE.Current.Value; // Note: Nasa provides this value with units of measurement of MJ/m^2/day which is what the evapotranspiration calculator expects. No conversion is needed here
+
+                if (this.IsValidDailyData(data) == false)
+                {
+                    continue;
+                }
+
+                data.MeanDailyPET = _evapotranspirationCalculator.CalculateReferenceEvapotranspiration(data.MeanDailyAirTemperature, data.SolarRadiation, data.RelativeHumidity);
                 data.JulianDay = julian++;
 
                 // Nasa will return -999 for unknown data values, replace with 0 for now until better solution is found
                 if (Math.Abs(data.MeanDailyAirTemperature - DataUndefined) < double.Epsilon)
+                {
                     data.MeanDailyAirTemperature = 0;
+                }
 
                 if (Math.Abs(data.MeanDailyPrecipitation - DataUndefined) < double.Epsilon)
+                {
                     data.MeanDailyPrecipitation = 0;
+                }
 
-                if (Math.Abs(data.RelativeHumidity - DataUndefined) < double.Epsilon) data.RelativeHumidity = 0;
+                if (Math.Abs(data.RelativeHumidity - DataUndefined) < double.Epsilon)
+                {
+                    data.RelativeHumidity = 0;
+                }
 
                 data.Date = new DateTime(data.Year, 1, 1).AddDays(data.JulianDay - 1);
-
+                
                 customClimateData.Add(data);
             }
 
@@ -189,8 +212,27 @@ namespace H.Core.Providers.Climate
         }
 
         /// <summary>
-        ///     Get a correct api url depending on the user's locale. French users need to tweak the url from using ',' to '.'
-        ///     in the coordinate strings to make NASA accept the GET request
+        /// In 2025, US government was shutdown in October. Data after ~ October 5th is missing all values (we just check solar radiation here since that is sufficient to determine if the data set is missing).
+        ///
+        /// If solar radiation is undefined, skip this entry as it is needed for PET calculation. When this value is not returned, climate normals will need to be used
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public bool IsValidDailyData(DailyClimateData data)
+        {
+            if ((Math.Abs(data.SolarRadiation - (-999)) < double.Epsilon) && data.Year == 2025)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Get a correct api url depending on the user's locale. French users need to tweak the url from using ',' to '.' 
+        /// in the coordinate strings to make NASA accept the GET request
         /// </summary>
         /// <param name="latitude">the farm latitude</param>
         /// <param name="longitude">the farm longitude</param>
@@ -198,8 +240,8 @@ namespace H.Core.Providers.Climate
         public string GetCorrectApiUrl(double latitude, double longitude)
         {
             var currentCulture = Thread.CurrentThread.CurrentCulture;
-            var startDate = StartDate.ToString("yyyyMMdd");
-            var endDate = EndDate.ToString("yyyyMMdd");
+            var startDate = this.StartDate.ToString("yyyyMMdd");
+            var endDate = this.EndDate.ToString("yyyyMMdd");
             var format = "JSON";
             var baseUrl = @"https://power.larc.nasa.gov";
             var basePath = @"/api/temporal/daily/point?";
@@ -208,17 +250,24 @@ namespace H.Core.Providers.Climate
             // AG: Agroclimatology
             var userCommunity = "AG";
 
+            /*
+             * All parameters:
+             *
+             * https://power.larc.nasa.gov/parameters/
+             */
+
             // T2M: temperature at 2 meters (C)
+            // T2M_MIN: temperature at 2 meters (C) Minimum
+            // T2M_MAX: temperature at 2 meters (C) Maximum
             // PRECTOT: Precipitation Corrected (mm)
             // RH2M: relative humidity @ 2 m.
             // ALLSKY_SFC_SW_DWN: All Sky Insolation Incident on a Horizontal Surface (AKA solar radiation) (MJ/m^2/day *when AG community type is specified)
-            var parameters = "T2M,PRECTOTCORR,RH2M,ALLSKY_SFC_SW_DWN";
+            var parameters = "T2M,PRECTOTCORR,RH2M,ALLSKY_SFC_SW_DWN,T2M_MIN,T2M_MAX";
 
-            var latitudeString = latitude.ToString(InfrastructureConstants.EnglishCultureInfo.NumberFormat);
-            var longitudeString = longitude.ToString(InfrastructureConstants.EnglishCultureInfo.NumberFormat);
+            var latitudeString = latitude.ToString(Infrastructure.InfrastructureConstants.EnglishCultureInfo.NumberFormat);
+            var longitudeString = longitude.ToString(Infrastructure.InfrastructureConstants.EnglishCultureInfo.NumberFormat);
 
-            var parameterPath =
-                $"parameters={parameters}&community={userCommunity}&longitude={longitudeString}&latitude={latitudeString}&start={startDate}&end={endDate}&format={format}";
+            var parameterPath = $"parameters={parameters}&community={userCommunity}&longitude={longitudeString}&latitude={latitudeString}&start={startDate}&end={endDate}&format={format}";
 
             var englishURL = baseUrl + basePath + parameterPath;
             return englishURL;
@@ -232,16 +281,23 @@ namespace H.Core.Providers.Climate
             {
                 var fileInfo = new FileInfo(path);
                 var expired = DateTime.Now.Subtract(fileInfo.LastAccessTime) > Expiry;
-                if (expired) return string.Empty;
-
-                fileInfo.LastAccessTime = DateTime.Now;
+                if (expired)
+                {
+                    return string.Empty;
+                }
+                else
+                {
+                    fileInfo.LastAccessTime = DateTime.Now;
+                }
 
                 Trace.TraceInformation($"{nameof(NasaClimateProvider)}: cached data was found.");
 
                 return File.ReadAllText(path);
             }
-
-            return string.Empty;
+            else
+            {
+                return string.Empty;
+            }
         }
 
         private string GetCachedPath(double latitude, double longitude)
@@ -253,23 +309,21 @@ namespace H.Core.Providers.Climate
         {
             Trace.TraceInformation($"Caching NASA climate data for lat: {latitude}, long: {longitude}");
 
-            var path = GetCachedPath(latitude, longitude);
+            var path = this.GetCachedPath(latitude, longitude);
 
             File.WriteAllText(path, content); // Overwrite any existing file for now
         }
 
         /// <summary>
-        ///     Makes a call to the WebClient class to download the API url string. Used to setup a task that runs on a timer to
-        ///     initiate a timeout if the NASA API doesn't respond.
+        /// Makes a call to the WebClient class to download the API url string. Used to setup a task that runs on a timer to initiate a timeout if the NASA API doesn't respond.
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
         private string GetNasaApiString(string url)
         {
-            Trace.TraceInformation(
-                $"{nameof(NasaClimateProvider)}.{nameof(GetNasaApiString)} : Trying to access NASA API.");
+            Trace.TraceInformation($"{nameof(NasaClimateProvider)}.{nameof(GetNasaApiString)} : Trying to access NASA API.");
             var webClient = new WebClient();
-            var content = string.Empty;
+            string content = string.Empty;
 
             try
             {
@@ -282,13 +336,11 @@ namespace H.Core.Providers.Climate
 
             if (content != string.Empty)
             {
-                Trace.TraceInformation(
-                    $"{nameof(NasaClimateProvider)}.{nameof(GetNasaApiString)} : API content downloaded successfully.");
+                Trace.TraceInformation($"{nameof(NasaClimateProvider)}.{nameof(GetNasaApiString)} : API content downloaded successfully.");
             }
             else
             {
-                Trace.TraceError(
-                    $"{nameof(NasaClimateProvider)}.{nameof(GetNasaApiString)}, API content could not be downloaded.");
+                Trace.TraceError($"{nameof(NasaClimateProvider)}.{nameof(GetNasaApiString)}, API content could not be downloaded.");
                 Trace.TraceError($"{nameof(NasaClimateProvider)}.{nameof(GetNasaApiString)}, API url: {url}");
             }
 

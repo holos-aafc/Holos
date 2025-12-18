@@ -9,6 +9,6 @@ namespace H.Core.Enumerations
         Centrifuge,
 
         [LocalizedDescription("EnumBeltPress", typeof(Resources))]
-        BeltPress
+        BeltPress,
     }
 }

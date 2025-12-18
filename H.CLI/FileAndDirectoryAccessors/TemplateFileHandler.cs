@@ -51,7 +51,7 @@ namespace H.CLI.FileAndDirectoryAccessors
         /// "_Example", than create a new template file based on the component type (retrieved from the fileName). The corresponding
         /// ComponentKey will also be set based on the component type and passed in to the SetTemplateExcelFile method.
         /// </summary>
-        public void validateTemplateFiles(List<string> validComponentDirectoryPaths)
+        public void ValidateTemplateFiles(List<string> validComponentDirectoryPaths)
         {
             
             foreach (var componentDirectoryPath in validComponentDirectoryPaths)

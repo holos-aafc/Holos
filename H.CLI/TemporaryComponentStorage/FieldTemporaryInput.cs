@@ -123,8 +123,7 @@ namespace H.CLI.TemporaryComponentStorage
                     return;
                 }
 
-                //var convertedBoolean = bool.Parse(value);
-                var convertedBoolean = value.ToLower(new CultureInfo("en-CA")) == "yes";
+                var convertedBoolean = value.ToLower(new CultureInfo("en-CA")) == "true";
                 propertyInfo.SetValue(this, Convert.ChangeType(convertedBoolean, propertyInfo.PropertyType, CLILanguageConstants.culture), null);
 
                 return;
@@ -375,6 +374,27 @@ namespace H.CLI.TemporaryComponentStorage
                 }
             }
 
+            if (propertyInfo.PropertyType == typeof(FertilizerApplicationMethodologies))
+            {
+
+                try
+                {
+                    if (_inputHelper.IsNotApplicableInput(value))
+                    {
+                        FertilizerApplicationMethod = FertilizerApplicationMethodologies.Broadcast;
+                        return;
+                    }
+
+                    FertilizerApplicationMethod = (FertilizerApplicationMethodologies)Enum.Parse(typeof(FertilizerApplicationMethodologies), value, true);
+                    return;
+                }
+
+                catch (Exception)
+                {
+                    throw new FormatException(String.Format(Properties.Resources.InvalidDataInput, value, row + 1, col + 1, fileName));
+                }
+            }
+
             if (propertyInfo.PropertyType == typeof(TillageType))
             {
                 try
@@ -415,9 +435,16 @@ namespace H.CLI.TemporaryComponentStorage
         }
         #endregion
 
-        //List of Properties. When adding a new property, follow the format: NewProperty. If you add a new property here
-        //Make sure to add the appropriate key to the list of keys in the FieldKeys class.
+        /*
+         * List of Properties. When adding a new property, follow the format: NewProperty. If you add a new property here
+         * Make sure to add the appropriate key to the list of keys in the FieldKeys class.
+         *
+         * NOTE: Ensure property names match exactly with the keys in FieldKeys.cs
+         */
+
+
         #region Properties
+
         //The Guid refers to the Perennial Stand Group GUID
         public Guid Guid { get; set; }
         public Guid PerennialStandID { get; set; }
@@ -465,6 +492,7 @@ namespace H.CLI.TemporaryComponentStorage
         public CoverCropTypes CoverCropType { get; set; }
         public ManureAnimalSourceTypes ManureAnimalSourceType { get; set; }
         public IrrigationType IrrigationType { get; set; }
+        public FertilizerApplicationMethodologies FertilizerApplicationMethod { get; set; }
         public FertilizerBlends FertilizerBlend { get; set; }
         public CropType CropType { get; set; }
         public HarvestMethods HarvestMethod { get; set; }

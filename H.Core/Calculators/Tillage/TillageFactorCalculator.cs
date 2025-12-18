@@ -11,8 +11,8 @@ using H.Core.Tools;
 namespace H.Core.Calculators.Tillage
 {
     /// <summary>
-    ///     Calculates the tillage factor for various types.
-    ///     Table 3 -  rc factor – Alberta, Saskatchewan, Manitoba only.
+    /// Calculates the tillage factor for various types.
+    /// Table 3 -  rc factor – Alberta, Saskatchewan, Manitoba only.
     /// </summary>
     public class TillageFactorCalculator : ITillageFactorCalculator
     {
@@ -99,53 +99,76 @@ namespace H.Core.Calculators.Tillage
         #region Public Methods
 
         public double CalculateTillageFactor(Province province,
-            SoilFunctionalCategory soilFunctionalCategory,
-            TillageType tillageType,
-            CropType cropType,
-            int perennialYear)
+                                             SoilFunctionalCategory soilFunctionalCategory,
+                                             TillageType tillageType,
+                                             CropType cropType,
+                                             int perennialYear)
         {
-            if (cropType.IsRootCrop()) return 1.13;
+            if (cropType.IsRootCrop())
+            {
+                return 1.13;
+            }
 
-            if (cropType.IsAnnual() && province.IsPrairieProvince() == false) return 1;
+            if (cropType.IsAnnual() && province.IsPrairieProvince() == false)
+            {
+                return 1;
+            }
 
             var simplifiedSoilCategory = soilFunctionalCategory.GetSimplifiedSoilCategory();
             if (cropType.IsPerennial())
-                return CalculateTillageFactorForPerennials(simplifiedSoilCategory, perennialYear, province);
+            {
+                return this.CalculateTillageFactorForPerennials(simplifiedSoilCategory, perennialYear, province);
+            }
 
-            return CalculateCropTillageFactor(simplifiedSoilCategory, tillageType);
+            return this.CalculateCropTillageFactor(simplifiedSoilCategory, tillageType);
         }
 
         #endregion
 
-        #region Private Methods
+        #region Properties
+
+        #endregion
+
+        #region Private Methods     
 
         /// <summary>
-        ///     For perennials, the 0.9 value is applied in the first year (year of planting), in the years, after the no-till
-        ///     factor is used.
+        /// For perennials, the 0.9 value is applied in the first year (year of planting), in the years, after the no-till factor is used.
         /// </summary>
         private double CalculateTillageFactorForPerennials(
             SoilFunctionalCategory soilFunctionalCategory,
             int perennialYear,
             Province province)
         {
-            if (province.IsPrairieProvince() == false) return 0.9;
-
-            return CalculateCropTillageFactor(soilFunctionalCategory, TillageType.NoTill);
+            if (province.IsPrairieProvince() == false)
+            {
+                return 0.9;
+            }
+            else
+            {
+                return this.CalculateCropTillageFactor(soilFunctionalCategory, TillageType.NoTill);
+            }
         }
 
         private double CalculateCropTillageFactor(
-            SoilFunctionalCategory soilFunctionalCategory,
+            SoilFunctionalCategory soilFunctionalCategory, 
             TillageType tillageType)
         {
-            var result = _tillageFactorTableRows.SingleOrDefault(x =>
-                x.SoilFunctionalCategory == soilFunctionalCategory && x.TillageType == tillageType);
-            if (result != null) return result.TillageFactor;
+            var result = _tillageFactorTableRows.SingleOrDefault(x => x.SoilFunctionalCategory == soilFunctionalCategory && x.TillageType == tillageType);
+            if (result != null)
+            {
+                return result.TillageFactor;
+            }
+            else
+            {
+                Trace.TraceError($"{nameof(TillageFactorCalculator)}.{nameof(CalculateCropTillageFactor)}: unable to calculate factor for {soilFunctionalCategory} and {tillageType}. Returning 1.");
 
-            Trace.TraceError(
-                $"{nameof(TillageFactorCalculator)}.{nameof(CalculateCropTillageFactor)}: unable to calculate factor for {soilFunctionalCategory} and {tillageType}. Returning 1.");
+                return 1;
+            }
+        }      
 
-            return 1;
-        }
+        #endregion
+
+        #region Event Handlers
 
         #endregion
     }

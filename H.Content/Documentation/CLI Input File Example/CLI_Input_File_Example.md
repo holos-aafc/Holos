@@ -17,7 +17,7 @@ Holos has a default value: No
 
 note: Deprecated. Do not use. Will be removed in future version 
 
-Source (source code file, table, algorithm document, etc.): 
+Source (source code file, table, algorithm document, etc.):
 
 ***
 ## Name
@@ -136,7 +136,7 @@ Source (source code file, table, algorithm document, etc.): https://github.com/h
 ***
 ## YearInPerennialStand
 
-Example value: 2018
+Example value: 1
 
 Type value: Int (Integer/Numeric)
 
@@ -144,7 +144,7 @@ Does user have to provide value: Yes
 
 Holos has a default value: No 
 
-Possible values: 1985-(current year)
+Possible values: 1 up to length of perennial stand
 
 note: Each year of a perennial stand must have the year identified in the row of the input file. E.g. a six year perennial stand would have one row with this value set 1 for the first year, 2 for the second year, etc 
 

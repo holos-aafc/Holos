@@ -11,28 +11,38 @@ namespace H.Core.Providers.Climate
         public int JulianDay { get; set; }
 
         /// <summary>
-        ///     (degrees C)
+        /// (degrees C)
         /// </summary>
         public double MeanDailyAirTemperature { get; set; }
 
         /// <summary>
-        ///     (mm)
+        /// (degrees C)
+        /// </summary>
+        public double MaximumAirTemperature { get; set; }
+
+        /// <summary>
+        /// (degrees C)
+        /// </summary>
+        public double MinimumAirTemperature { get; set; }
+
+        /// <summary>
+        /// (mm)
         /// </summary>
         public double MeanDailyPrecipitation { get; set; }
 
         /// <summary>
-        ///     (mm)
+        /// (mm)
         /// </summary>
         public double MeanDailyPET { get; set; }
 
         public double RelativeHumidity { get; set; }
 
         /// <summary>
-        ///     (MJ m^-2 day^-1)
+        /// (MJ m^-2 day^-1)
         /// </summary>
         public double SolarRadiation { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime Date { get;  set; }
 
         #endregion
 
@@ -40,8 +50,7 @@ namespace H.Core.Providers.Climate
 
         public override string ToString()
         {
-            return
-                $"{nameof(Year)}: {Year}, {nameof(JulianDay)}: {JulianDay}, {nameof(MeanDailyAirTemperature)}: {MeanDailyAirTemperature}, {nameof(MeanDailyPrecipitation)}: {MeanDailyPrecipitation}, {nameof(MeanDailyPET)}: {MeanDailyPET}";
+            return $"{nameof(Year)}: {Year}, {nameof(JulianDay)}: {JulianDay}, {nameof(MeanDailyAirTemperature)}: {MeanDailyAirTemperature}, {nameof(MeanDailyPrecipitation)}: {MeanDailyPrecipitation}, {nameof(MeanDailyPET)}: {MeanDailyPET}";
         }
 
         public string ToCustomFileFormatString()

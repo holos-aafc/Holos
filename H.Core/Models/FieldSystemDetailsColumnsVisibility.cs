@@ -1,92 +1,127 @@
-﻿namespace H.Core.Models
+﻿using Prism.Mvvm;
+
+namespace H.Core.Models
 {
     /// <summary>
-    ///     The class used to store the visibility of the columns related to the FieldSystemsDetailView when the user has
-    ///     selected the ICBM carbon modelling approach
+    /// The class used to store the visibility of the columns related to the FieldSystemsDetailView when the user has selected the ICBM carbon modelling approach
     /// </summary>
     public class FieldSystemDetailsColumnsVisibility : ColumnVisibilityBase
     {
+        #region fields
+
+        private bool _fieldName;
+        private bool _timePeriod;
+        private bool _year;
+        private bool _cropType;
+        private bool _tillageType;
+        private bool _yield;
+        private bool _aboveGroundCarbonInput;
+        private bool _belowGroundCarbonInput;
+        private bool _manureCarbonInput;
+        private bool _digestateCarbonInput;
+        private bool _climateParameter;
+        private bool _tillageFactor;
+        private bool _managementFactor;
+        private bool _edit;
+        private bool _percentageOfProductReturned;
+        private bool _percentageOfStrawReturned;
+        private bool _percentageOfRootsReturned;
+        private bool _description;
+        private bool _plantCarbonInAgriculturalProduct;
+
+        #endregion
+
         public FieldSystemDetailsColumnsVisibility()
         {
-            DefaultVisibility();
+            this.DefaultVisibility();
+        }
+
+        public void DefaultVisibility()
+        {
+            //clear current selection
+            base.SetAllColumnsInvisible();
+
+            //the default columns for the grid
+            this.FieldName = true;
+            this.TimePeriod = true;
+            this.Year = true;
+            this.CropType = true;
+            this.Yield = true;
+            this.PercentageOfProductReturned = false;
+            this.PercentageOfStrawReturned = false;
+            this.PercentageOfRootsReturned = false;
+            this.AboveGroundCarbonInput = false;
+            this.BelowGroundCarbonInput = false;
+            this.Description = true;
+            this.PlantCarbonInAgriculturalProduct = false;
         }
 
         public bool FieldName
         {
-            get => _fieldName;
-            set => SetProperty(ref _fieldName, value);
+            get { return _fieldName; }
+            set { SetProperty(ref _fieldName, value); }
         }
-
         public bool TimePeriod
         {
-            get => _timePeriod;
-            set => SetProperty(ref _timePeriod, value);
+            get { return _timePeriod; }
+            set { SetProperty(ref _timePeriod, value); }
         }
-
         public bool Year
         {
-            get => _year;
-            set => SetProperty(ref _year, value);
+            get { return _year; }
+            set { SetProperty(ref _year, value); }
         }
-
         public bool CropType
         {
-            get => _cropType;
-            set => SetProperty(ref _cropType, value);
+            get { return _cropType; }
+            set { SetProperty(ref _cropType, value); }
         }
-
         public bool TillageType
         {
-            get => _tillageType;
-            set => SetProperty(ref _tillageType, value);
+            get { return _tillageType; }
+            set { SetProperty(ref _tillageType, value); }
         }
-
         public bool Yield
         {
-            get => _yield;
-            set => SetProperty(ref _yield, value);
+            get { return _yield; }
+            set { SetProperty(ref _yield, value); }
         }
-
         public bool AboveGroundCarbonInput
         {
-            get => _aboveGroundCarbonInput;
-            set => SetProperty(ref _aboveGroundCarbonInput, value);
+            get { return _aboveGroundCarbonInput; }
+            set { SetProperty(ref _aboveGroundCarbonInput, value); }
         }
-
         public bool BelowGroundCarbonInput
         {
-            get => _belowGroundCarbonInput;
-            set => SetProperty(ref _belowGroundCarbonInput, value);
+            get { return _belowGroundCarbonInput; }
+            set { SetProperty(ref _belowGroundCarbonInput, value); }
         }
 
         public bool ManureCarbonInput
         {
-            get => _manureCarbonInput;
-            set => SetProperty(ref _manureCarbonInput, value);
+            get { return _manureCarbonInput; }
+            set { SetProperty(ref _manureCarbonInput, value); }
         }
 
         public bool ClimateParameter
         {
-            get => _climateParameter;
-            set => SetProperty(ref _climateParameter, value);
+            get { return _climateParameter; }
+            set { SetProperty(ref _climateParameter, value); }
         }
-
         public bool TillageFactor
         {
-            get => _tillageFactor;
-            set => SetProperty(ref _tillageFactor, value);
+            get { return _tillageFactor; }
+            set { SetProperty(ref _tillageFactor, value); }
         }
-
         public bool ManagementFactor
         {
-            get => _managementFactor;
-            set => SetProperty(ref _managementFactor, value);
+            get { return _managementFactor; }
+            set { SetProperty(ref _managementFactor, value); }
         }
-
         public bool Edit
         {
-            get => _edit;
-            set => SetProperty(ref _edit, value);
+            get { return _edit; }
+            set { SetProperty(ref _edit, value); }
         }
 
         public bool PlantCarbonInAgriculturalProduct
@@ -116,7 +151,7 @@
         public bool Description
         {
             get => _description;
-            set => SetProperty(ref _description, value);
+            set => SetProperty(ref  _description, value);
         }
 
         public bool DigestateCarbonInput
@@ -124,49 +159,5 @@
             get => _digestateCarbonInput;
             set => SetProperty(ref _digestateCarbonInput, value);
         }
-
-        public void DefaultVisibility()
-        {
-            //clear current selection
-            SetAllColumnsInvisible();
-
-            //the default columns for the grid
-            FieldName = true;
-            TimePeriod = true;
-            Year = true;
-            CropType = true;
-            Yield = true;
-            PercentageOfProductReturned = false;
-            PercentageOfStrawReturned = false;
-            PercentageOfRootsReturned = false;
-            AboveGroundCarbonInput = false;
-            BelowGroundCarbonInput = false;
-            Description = true;
-            PlantCarbonInAgriculturalProduct = false;
-        }
-
-        #region fields
-
-        private bool _fieldName;
-        private bool _timePeriod;
-        private bool _year;
-        private bool _cropType;
-        private bool _tillageType;
-        private bool _yield;
-        private bool _aboveGroundCarbonInput;
-        private bool _belowGroundCarbonInput;
-        private bool _manureCarbonInput;
-        private bool _digestateCarbonInput;
-        private bool _climateParameter;
-        private bool _tillageFactor;
-        private bool _managementFactor;
-        private bool _edit;
-        private bool _percentageOfProductReturned;
-        private bool _percentageOfStrawReturned;
-        private bool _percentageOfRootsReturned;
-        private bool _description;
-        private bool _plantCarbonInAgriculturalProduct;
-
-        #endregion
     }
 }

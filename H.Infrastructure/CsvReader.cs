@@ -10,9 +10,9 @@ using System.Text.RegularExpressions;
 namespace H.Infrastructure
 {
     /// <summary>
-    ///     This custom "CsvReader" class is used to deal with csv files that have commas within quotes i.e. \"Barley, Dry\".
-    ///     Splitting on commas would cause problems in these cases. The "CsvReader" deals
-    ///     with these cases nicely.
+    /// This custom "CsvReader" class is used to deal with csv files that have commas within quotes i.e. \"Barley, Dry\".
+    /// Splitting on commas would cause problems in these cases. The "CsvReader" deals
+    /// with these cases nicely.
     /// </summary>
     public sealed class CsvReader : IDisposable
     {
@@ -37,9 +37,12 @@ namespace H.Infrastructure
         {
             get
             {
-                if (null == __reader) throw new ApplicationException("I can't start reading without CSV input.");
+                if (null == __reader)
+                {
+                    throw new ApplicationException("I can't start reading without CSV input.");
+                }
 
-                RowIndex = 0;
+                this.RowIndex = 0;
                 string sLine;
                 string sNextLine;
 
@@ -48,10 +51,13 @@ namespace H.Infrastructure
                     while (rexRunOnLine.IsMatch(sLine) && null != (sNextLine = __reader.ReadLine()))
                         sLine += "\n" + sNextLine;
 
-                    RowIndex++;
+                    this.RowIndex++;
                     var values = rexCsvSplitter.Split(sLine);
 
-                    for (var i = 0; i < values.Length; i++) values[i] = Csv.Unescape(values[i]);
+                    for (var i = 0; i < values.Length; i++)
+                    {
+                        values[i] = Csv.Unescape(values[i]);
+                    }
 
                     yield return values;
                 }
@@ -64,7 +70,10 @@ namespace H.Infrastructure
 
         public void Dispose()
         {
-            if (null != __reader) __reader.Dispose();
+            if (null != __reader)
+            {
+                __reader.Dispose();
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using H.Core.Enumerations;
+using H.Core.Properties;
 
 namespace H.Core.Converters
 {
@@ -7,7 +9,7 @@ namespace H.Core.Converters
     {
         public AnimalType Convert(string input)
         {
-            var cleanedInput = GetLettersAsLowerCase(input);
+            var cleanedInput = this.GetLettersAsLowerCase(input);
 
             switch (cleanedInput)
             {
@@ -164,11 +166,10 @@ namespace H.Core.Converters
 
                 default:
                 {
-                    Trace.TraceError(
-                        $"{nameof(AnimalTypeStringConverter)}.{nameof(Convert)}: unknown animal type {input}. Returning {AnimalType.BeefBackgrounder}");
+                    Trace.TraceError($"{nameof(AnimalTypeStringConverter)}.{nameof(AnimalTypeStringConverter.Convert)}: unknown animal type {input}. Returning {AnimalType.BeefBackgrounder}");
 
                     return AnimalType.BeefBackgrounder;
-                }
+                }                    
             }
         }
     }

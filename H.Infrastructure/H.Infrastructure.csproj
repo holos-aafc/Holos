@@ -1,44 +1,109 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>AAFC.Holos.Infrastructure</PackageId>
     <Authors>AAFC</Authors>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/holos-aafc/Holos</PackageProjectUrl>
     <RepositoryUrl>https://github.com/holos-aafc/Holos</RepositoryUrl>
     <PackageTags>holos, aafc, agriculture, ghg</PackageTags>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0C9D716E-6579-4EE6-AEA6-5B019563AD95}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
-    <UseWPF>true</UseWPF>
-    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>H.Infrastructure</RootNamespace>
+    <AssemblyName>H.Infrastructure</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CommonServiceLocator" Version="2.0.7" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.9" />
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
-    <PackageReference Include="NuGet.Build.Tasks.Pack" Version="6.14.0">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Prism.Wpf" Version="9.0.537" />
-    <PackageReference Include="SharpKml.Core" Version="6.1.0" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.9" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\LICENSE" Pack="true" PackagePath="" />
+    <Compile Include="Controls\TreeHelper.cs" />
+    <Compile Include="Controls\ValueConverters\BooleanToHeightConverter.cs" />
+    <Compile Include="Controls\ValueConverters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Controls\ValueConverters\BoolRadioConverter.cs" />
+    <Compile Include="Controls\ValueConverters\DebugDataBindingConverter.cs" />
+    <Compile Include="Controls\ValueConverters\EmptyStringToBooleanConverter.cs" />
+    <Compile Include="Controls\ValueConverters\EmptyStringToVisibilityConverter.cs" />
+    <Compile Include="Controls\ValueConverters\EnumDescriptionConverter.cs" />
+    <Compile Include="Controls\ValueConverters\InvertableBooleanConverter.cs" />
+    <Compile Include="Controls\ValueConverters\InvertibleBooleanToVisibilityConverter.cs" />
+    <Compile Include="Controls\ValueConverters\InvertedVisibilityConverter.cs" />
+    <Compile Include="Controls\ValueConverters\NotificationsFilterOnScopeConverter.cs" />
+    <Compile Include="Controls\ValueConverters\NullToVisibilityConverter.cs" />
+    <Compile Include="Controls\ValueConverters\ObjectToTypeStringConverter.cs" />
+    <Compile Include="Controls\ValueConverters\EmptyCollectionToVisibilityConverter.cs" />
+    <Compile Include="Controls\ValueConverters\ToLowerStringConverter.cs" />
+    <Compile Include="Controls\ValueConverters\VisibilityToSharedSizeGroupConverter.cs" />
+    <Compile Include="Csv.cs" />
+    <Compile Include="CsvReader.cs" />
+    <Compile Include="EnumHelper.cs" />
+    <Compile Include="KmlHelpers.cs" />
+    <Compile Include="MathHelpers.cs" />
+    <Compile Include="MessageBase.cs" />
+    <Compile Include="MultiKeyDictionary.cs" />
+    <Compile Include="NetworkHelper.cs" />
+    <Compile Include="NotificationInformation.cs" />
+    <Compile Include="ObservableCollectionExtensions.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="StringHelper.cs" />
+    <Compile Include="WeightedAverageInput.cs" />
+    <Compile Include="FileSystemHelper.cs" />
+    <Compile Include="InfrastructureConstants.cs" />
+    <Compile Include="ListExtensions.cs" />
+    <Compile Include="LocalizedDescriptionAttribute.cs" />
+    <Compile Include="ModelBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <EmbeddedResource Include="Resources\Alberta_No_Styles.kml" />
     <EmbeddedResource Include="Resources\BC_No_Styles.kml" />
     <EmbeddedResource Include="Resources\MB_No_Styles.kml" />
@@ -50,4 +115,33 @@
     <EmbeddedResource Include="Resources\QC_No_Styles.kml" />
     <EmbeddedResource Include="Resources\SK_No_Styles.kml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CommonServiceLocator">
+      <Version>2.0.7</Version>
+    </PackageReference>
+    <PackageReference Include="CsvHelper">
+      <Version>33.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="NETStandard.Library">
+      <Version>2.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="NuGet.Build.Tasks.Pack">
+      <Version>6.11.0</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Prism.Wpf">
+      <Version>7.2.0.1422</Version>
+    </PackageReference>
+    <PackageReference Include="SharpKml.Core">
+      <Version>6.1.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

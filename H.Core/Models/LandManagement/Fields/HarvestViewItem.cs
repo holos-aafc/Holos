@@ -1,46 +1,15 @@
 ﻿using System;
 using System.ComponentModel;
 using H.Core.Enumerations;
+using H.Infrastructure;
 
 namespace H.Core.Models.LandManagement.Fields
 {
     /// <summary>
-    ///     A class to hold harvest information so total yield calculations can be made.
+    /// A class to hold harvest information so total yield calculations can be made.
     /// </summary>
     public class HarvestViewItem : BaleActivityBase
     {
-        #region Constructors
-
-        public HarvestViewItem()
-        {
-            Start = new DateTime(DateTime.Now.Year - 1, 8, 31);
-            End = new DateTime(DateTime.Now.Year - 1, 8, 31);
-            ForageActivity = ForageActivities.Hayed;
-
-            // https://hayforks.com/blog/how-much-does-a-bale-of-hay-weigh
-            BaleWeight = 500;
-
-            PropertyChanged -= OnPropertyChanged;
-            PropertyChanged += OnPropertyChanged;
-        }
-
-        #endregion
-
-        #region Public Methods
-
-        public bool BaleHasExpiredLifespan()
-        {
-            var dateHarvested = Start;
-            var elapsedTime = DateTime.Now.Subtract(dateHarvested);
-
-            // Bales of hay last for 5 years, straw bales last for 2 years.
-            if (ForageActivity == ForageActivities.Hayed) return elapsedTime.Days > 5 * 365;
-
-            return elapsedTime.Days > 2 * 365;
-        }
-
-        #endregion
-
         #region Fields
 
         private int _totalNumberOfBalesHarvested;
@@ -50,10 +19,27 @@ namespace H.Core.Models.LandManagement.Fields
 
         #endregion
 
+        #region Constructors
+
+        public HarvestViewItem()
+        {
+            base.Start = new DateTime(DateTime.Now.Year - 1, 8, 31);
+            base.End = new DateTime(DateTime.Now.Year - 1, 8, 31);
+            base.ForageActivity = ForageActivities.Hayed;
+
+            // https://hayforks.com/blog/how-much-does-a-bale-of-hay-weigh
+            this.BaleWeight = 500;
+
+            base.PropertyChanged -= OnPropertyChanged;
+            base.PropertyChanged += OnPropertyChanged;
+        }
+
+        #endregion
+
         #region Properties
 
         /// <summary>
-        ///     The total number of bales that were created from the harvest.
+        /// The total number of bales that were created from the harvest.
         /// </summary>
         public int TotalNumberOfBalesHarvested
         {
@@ -62,8 +48,9 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        ///     The percentage of the yield lost during harvest
-        ///     (%)
+        /// The percentage of the yield lost during harvest
+        ///
+        /// (%)
         /// </summary>
         public double HarvestLossPercentage
         {
@@ -72,7 +59,7 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        ///     The <see cref="FieldSystemComponent" /> GUID that produced this harvest.
+        /// The <see cref="FieldSystemComponent"/> GUID that produced this harvest.
         /// </summary>
         public Guid FieldGuid
         {
@@ -82,20 +69,39 @@ namespace H.Core.Models.LandManagement.Fields
 
         #endregion
 
+        #region Public Methods
+
+        public bool BaleHasExpiredLifespan()
+        {
+            var dateHarvested = this.Start;
+            var elapsedTime = DateTime.Now.Subtract(dateHarvested);
+
+            // Bales of hay last for 5 years, straw bales last for 2 years.
+            if (this.ForageActivity == ForageActivities.Hayed)
+            {
+                return elapsedTime.Days > (5 * 365);
+            }
+            else
+            {
+                return elapsedTime.Days > (2 * 365);
+            }
+        }
+
+        #endregion
+
         #region Private Methods
 
         /// <summary>
-        ///     Returns the wet weight of all bales harvested
+        /// Returns the wet weight of all bales harvested
         /// </summary>
         private void CalculateYield()
         {
-            AboveGroundBiomass = TotalNumberOfBalesHarvested * BaleWeight;
+            this.AboveGroundBiomass = this.TotalNumberOfBalesHarvested * this.BaleWeight;
         }
 
         private void CalculateDryWeightYield()
         {
-            AboveGroundBiomassDryWeight =
-                TotalNumberOfBalesHarvested * BaleWeight * (1 - MoistureContentAsPercentage / 100.0);
+            this.AboveGroundBiomassDryWeight = this.TotalNumberOfBalesHarvested * this.BaleWeight * (1 - (MoistureContentAsPercentage / 100.0));
         }
 
         #endregion
@@ -107,18 +113,18 @@ namespace H.Core.Models.LandManagement.Fields
             // Need to update the total yield for the field if the weight of the bales changes.
             if (e.PropertyName.Equals(nameof(MoistureContentAsPercentage)) || e.PropertyName.Equals(nameof(BaleWeight)))
             {
-                CalculateYield();
-                CalculateDryWeightYield();
+                this.CalculateYield();
+                this.CalculateDryWeightYield();
             }
         }
 
         /// <summary>
-        ///     Need to update the total yield for the field if the number of bales changes.
+        /// Need to update the total yield for the field if the number of bales changes.
         /// </summary>
         private void OnTotalNumberOFBalesHarvestedChanged()
         {
-            CalculateYield();
-            CalculateDryWeightYield();
+            this.CalculateYield();
+            this.CalculateDryWeightYield();
         }
 
         #endregion

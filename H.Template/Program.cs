@@ -92,8 +92,8 @@ namespace H.TemplateT
 
         static void Main(string[] args)
         {
-            //CroppingExample();
-            AnimalExample();
+            CroppingExample();
+            //AnimalExample();
         }
 
         static void AnimalExample()

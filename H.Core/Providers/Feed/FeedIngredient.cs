@@ -6,7 +6,6 @@ using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Infrastructure;
-using Microsoft.Extensions.Logging.Abstractions;
 
 #endregion
 
@@ -16,30 +15,6 @@ namespace H.Core.Providers.Feed
     /// </summary>
     public class FeedIngredient : ModelBase
     {
-        #region Constructors
-
-        static FeedIngredient()
-        {
-            var mapperConfig =
-                new MapperConfiguration(
-                    x =>
-                    {
-                        x.CreateMap<FeedIngredient, FeedIngredient>().ForMember(prop => prop.Guid, opt => opt.Ignore());
-                    }, new NullLoggerFactory());
-
-            _ingredientMapper = mapperConfig.CreateMapper();
-        }
-
-        #endregion
-
-        #region Calculated Properties
-
-        public double Nemf =>
-            // NEmf (MJ/kg DM) = [NEma (Mcal/kg DM) + NEga (Mcal/kg DM)] * 4.184 (conversion factor for Mcal to MJ)
-            (NEga + NEma) * 4.184;
-
-        #endregion
-
         #region Fields
 
         private bool _isCustomIngredient;
@@ -230,209 +205,219 @@ namespace H.Core.Providers.Feed
 
         #endregion
 
+        #region Constructors
+
+        static FeedIngredient()
+        {
+            var mapperConfig = new MapperConfiguration(x =>
+            {
+                x.CreateMap<FeedIngredient, FeedIngredient>().ForMember(prop => prop.Guid, opt => opt.Ignore());
+            });
+            _ingredientMapper = mapperConfig.CreateMapper();
+
+        }
+        #endregion
+
         #region Properties
 
         /// <summary>
-        ///     Used when display system (default) ingredients that should not be modifiable by user.
+        /// Used when display system (default) ingredients that should not be modifiable by user.
         /// </summary>
         public bool IsReadonly { get; set; }
 
         public string IngredientTypeString
         {
-            get => _ingredientStringType;
-            set => SetProperty(ref _ingredientStringType, value);
+            get { return _ingredientStringType; }
+            set { this.SetProperty(ref _ingredientStringType, value); }
         }
 
         public IngredientType IngredientType
         {
-            get => _ingredientType;
-            set
-            {
-                SetProperty(ref _ingredientType, value, () => { RaisePropertyChanged(nameof(IngredientTypeString)); });
-            }
+            get { return _ingredientType; }
+            set { this.SetProperty(ref _ingredientType, value, () => { this.RaisePropertyChanged(nameof(this.IngredientTypeString)); }); }
         }
 
         public double Sugars
         {
-            get => _sugars;
-            set => SetProperty(ref _sugars, value);
+            get { return _sugars; }
+            set { this.SetProperty(ref _sugars, value); }
         }
 
         public double SolubleCrudeProtein
         {
-            get => _solubleCrudeProtein;
-            set => SetProperty(ref _solubleCrudeProtein, value);
+            get { return _solubleCrudeProtein; }
+            set { this.SetProperty(ref _solubleCrudeProtein, value); }
         }
 
         public double DryMatter
         {
-            get => _dryMatter;
-            set => SetProperty(ref _dryMatter, value);
+            get { return _dryMatter; }
+            set { this.SetProperty(ref _dryMatter, value); }
         }
 
         public double CrudeProtein
         {
-            get => _crudeProtein;
-            set => SetProperty(ref _crudeProtein, value);
+            get { return _crudeProtein; }
+            set { this.SetProperty(ref _crudeProtein, value); }
         }
 
         public double CrudeFiber
         {
-            get => _crudeFiber;
-            set => SetProperty(ref _crudeFiber, value);
+            get { return _crudeFiber; }
+            set { this.SetProperty(ref _crudeFiber, value); }
         }
 
         public double AcidEtherExtract
         {
-            get => _acidEtherExtract;
-            set => SetProperty(ref _acidEtherExtract, value);
+            get { return _acidEtherExtract; }
+            set { this.SetProperty(ref _acidEtherExtract, value); }
         }
 
         [Units(MetricUnitsOfMeasurement.KiloCaloriePerKilogram)]
         public double GrossEnergy
         {
-            get => _grossEnergy;
-            set => SetProperty(ref _grossEnergy, value);
+            get { return _grossEnergy; }
+            set { this.SetProperty(ref _grossEnergy, value); }
         }
 
         public double Fat
         {
-            get => _fat;
-            set => SetProperty(ref _fat, value);
+            get { return _fat; }
+            set { this.SetProperty(ref _fat, value); }
         }
 
         public double TotalDigestibleNutrient
         {
-            get => _totalDigestibleNutrient;
-            set => SetProperty(ref _totalDigestibleNutrient, value);
+            get { return _totalDigestibleNutrient; }
+            set { this.SetProperty(ref _totalDigestibleNutrient, value); }
         }
 
         public double Starch
         {
-            get => _starch;
-            set => SetProperty(ref _starch, value);
+            get { return _starch; }
+            set { this.SetProperty(ref _starch, value); }
         }
 
         public string IFN
         {
-            get => _ifn;
-            set => SetProperty(ref _ifn, value);
+            get { return _ifn; }
+            set { this.SetProperty(ref _ifn, value); }
         }
 
         public double Cost
         {
-            get => _cost;
-            set => SetProperty(ref _cost, value);
+            get { return _cost; }
+            set { this.SetProperty(ref _cost, value); }
         }
 
         public double Forage
         {
-            get => _forage;
-            set => SetProperty(ref _forage, value);
+            get { return _forage; }
+            set { this.SetProperty(ref _forage, value); }
         }
 
         public double RDP
         {
-            get => _rdp;
-            set => SetProperty(ref _rdp, value);
+            get { return _rdp; }
+            set { this.SetProperty(ref _rdp, value); }
         }
 
         public double ADF
         {
-            get => _adf;
-            set => SetProperty(ref _adf, value);
+            get { return _adf; }
+            set { this.SetProperty(ref _adf, value); }
         }
 
         public double ADL
         {
-            get => _adl;
-            set => SetProperty(ref _adl, value);
+            get { return _adl; }
+            set { this.SetProperty(ref _adl, value); }
         }
 
         public double Hemicellulose
         {
-            get => _hemicellulose;
-            set => SetProperty(ref _hemicellulose, value);
+            get { return _hemicellulose; }
+            set { this.SetProperty(ref _hemicellulose, value); }
         }
 
         public double TDF
         {
-            get => _tdf;
-            set => SetProperty(ref _tdf, value);
+            get { return _tdf; }
+            set { this.SetProperty(ref _tdf, value); }
         }
 
         public double IDF
         {
-            get => _idf;
-            set => SetProperty(ref _idf, value);
+            get { return _idf; }
+            set { this.SetProperty(ref _idf, value); }
         }
 
         public double SDF
         {
-            get => _sdf;
-            set => SetProperty(ref _sdf, value);
+            get { return _sdf; }
+            set { this.SetProperty(ref _sdf, value); }
         }
 
         public double Sucrose
         {
-            get => _sucrose;
-            set => SetProperty(ref _sucrose, value);
+            get { return _sucrose; }
+            set { this.SetProperty(ref _sucrose, value); }
         }
 
         public double Lactose
         {
-            get => _lactose;
-            set => SetProperty(ref _lactose, value);
+            get { return _lactose; }
+            set { this.SetProperty(ref _lactose, value); }
         }
 
         public double Glucose
         {
-            get => _glucose;
-            set => SetProperty(ref _glucose, value);
+            get { return _glucose; }
+            set { this.SetProperty(ref _glucose, value); }
         }
 
         public double Oligosaccharides
         {
-            get => _oligosaccharides;
-            set => SetProperty(ref _oligosaccharides, value);
+            get { return _oligosaccharides; }
+            set { this.SetProperty(ref _oligosaccharides, value); }
         }
 
         public double Raffinose
         {
-            get => _raffinose;
-            set => SetProperty(ref _raffinose, value);
+            get { return _raffinose; }
+            set { this.SetProperty(ref _raffinose, value); }
         }
 
         public double Stachyose
         {
-            get => _stachyose;
-            set => SetProperty(ref _stachyose, value);
+            get { return _stachyose; }
+            set { this.SetProperty(ref _stachyose, value); }
         }
 
         public double Verbascose
         {
-            get => _verbascose;
-            set => SetProperty(ref _verbascose, value);
+            get { return _verbascose; }
+            set { this.SetProperty(ref _verbascose, value); }
         }
 
         public double Mo
         {
-            get => _mo;
-            set => SetProperty(ref _mo, value);
+            get { return _mo; }
+            set { this.SetProperty(ref _mo, value); }
         }
 
         /// <summary>
-        ///     used for cattle diets
+        /// used for cattle diets
         /// </summary>
         [Units(MetricUnitsOfMeasurement.MegaCaloriePerKilogram)]
         public double DE
         {
-            get => _de;
-            set => SetProperty(ref _de, value);
+            get { return _de; }
+            set { this.SetProperty(ref _de, value); }
         }
 
         /// <summary>
-        ///     used only for swine diets
+        /// used only for swine diets
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KiloCaloriePerKilogram)]
         public double DeSwine
@@ -444,445 +429,442 @@ namespace H.Core.Providers.Feed
 
         public double SP
         {
-            get => _sp;
-            set => SetProperty(ref _sp, value);
+            get { return _sp; }
+            set { this.SetProperty(ref _sp, value); }
         }
 
         public double ADICP
         {
-            get => _adicp;
-            set => SetProperty(ref _adicp, value);
+            get { return _adicp; }
+            set { this.SetProperty(ref _adicp, value); }
         }
 
         public double OA
         {
-            get => _oa;
-            set => SetProperty(ref _oa, value);
+            get { return _oa; }
+            set { this.SetProperty(ref _oa, value); }
         }
 
         public double Ash
         {
-            get => _ash;
-            set => SetProperty(ref _ash, value);
+            get { return _ash; }
+            set { this.SetProperty(ref _ash, value); }
         }
 
         public double NDF
         {
-            get => _ndf;
-            set => SetProperty(ref _ndf, value);
+            get { return _ndf; }
+            set { this.SetProperty(ref _ndf, value); }
         }
 
         public double Lignin
         {
-            get => _lignin;
-            set => SetProperty(ref _lignin, value);
+            get { return _lignin; }
+            set { this.SetProperty(ref _lignin, value); }
         }
 
         public double Pef
         {
-            get => _pef;
-            set => SetProperty(ref _pef, value);
+            get { return _pef; }
+            set { this.SetProperty(ref _pef, value); }
         }
 
         [Units(MetricUnitsOfMeasurement.MegaCaloriePerKilogram)]
         public double ME
         {
-            get => _me;
-            set => SetProperty(ref _me, value);
+            get { return _me; }
+            set { this.SetProperty(ref _me, value); }
         }
 
         public double NEma
         {
-            get => _nEma;
-            set { SetProperty(ref _nEma, value, () => RaisePropertyChanged(nameof(Nemf))); }
+            get { return _nEma; }
+            set { this.SetProperty(ref _nEma, value, this.UpdateNemf); }
         }
 
         public double NEga
         {
-            get => _nEga;
-            set { SetProperty(ref _nEga, value, () => RaisePropertyChanged(nameof(Nemf))); }
+            get { return _nEga; }
+            set { this.SetProperty(ref _nEga, value, this.UpdateNemf); }
         }
 
         public double RUP
         {
-            get => _rup;
-            set => SetProperty(ref _rup, value);
+            get { return _rup; }
+            set { this.SetProperty(ref _rup, value); }
         }
 
         public double kdPB
         {
-            get => _kdPb;
-            set => SetProperty(ref _kdPb, value);
+            get { return _kdPb; }
+            set { this.SetProperty(ref _kdPb, value); }
         }
 
         public double KdCB1
         {
-            get => _kdCb1;
-            set => SetProperty(ref _kdCb1, value);
+            get { return _kdCb1; }
+            set { this.SetProperty(ref _kdCb1, value); }
         }
 
         public double KdCB2
         {
-            get => _kdCb2;
-            set => SetProperty(ref _kdCb2, value);
+            get { return _kdCb2; }
+            set { this.SetProperty(ref _kdCb2, value); }
         }
 
         public double KdCB3
         {
-            get => _kdCb3;
-            set => SetProperty(ref _kdCb3, value);
+            get { return _kdCb3; }
+            set { this.SetProperty(ref _kdCb3, value); }
         }
 
         public double PBID
         {
-            get => _pbid;
-            set => SetProperty(ref _pbid, value);
+            get { return _pbid; }
+            set { this.SetProperty(ref _pbid, value); }
         }
 
         public double CB1ID
         {
-            get => _cb1id;
-            set => SetProperty(ref _cb1id, value);
+            get { return _cb1id; }
+            set { this.SetProperty(ref _cb1id, value); }
         }
 
         public double CB2ID
         {
-            get => _cb2id;
-            set => SetProperty(ref _cb2id, value);
+            get { return _cb2id; }
+            set { this.SetProperty(ref _cb2id, value); }
         }
 
         public double ARG
         {
-            get => _arg;
-            set => SetProperty(ref _arg, value);
+            get { return _arg; }
+            set { this.SetProperty(ref _arg, value); }
         }
 
         public double HIS
         {
-            get => _his;
-            set => SetProperty(ref _his, value);
+            get { return _his; }
+            set { this.SetProperty(ref _his, value); }
         }
 
         public double ILE
         {
-            get => _ile;
-            set => SetProperty(ref _ile, value);
+            get { return _ile; }
+            set { this.SetProperty(ref _ile, value); }
         }
 
         public double LEU
         {
-            get => _leu;
-            set => SetProperty(ref _leu, value);
+            get { return _leu; }
+            set { this.SetProperty(ref _leu, value); }
         }
 
         public double LYS
         {
-            get => _lys;
-            set => SetProperty(ref _lys, value);
+            get { return _lys; }
+            set { this.SetProperty(ref _lys, value); }
         }
 
         public double MET
         {
-            get => _met;
-            set => SetProperty(ref _met, value);
+            get { return _met; }
+            set { this.SetProperty(ref _met, value); }
         }
 
         public double CYS
         {
-            get => _cys;
-            set => SetProperty(ref _cys, value);
+            get { return _cys; }
+            set { this.SetProperty(ref _cys, value); }
         }
 
         public double PHE
         {
-            get => _phe;
-            set => SetProperty(ref _phe, value);
+            get { return _phe; }
+            set { this.SetProperty(ref _phe, value); }
         }
 
         public double TYR
         {
-            get => _tyr;
-            set => SetProperty(ref _tyr, value);
+            get { return _tyr; }
+            set { this.SetProperty(ref _tyr, value); }
         }
 
         public double THR
         {
-            get => _thr;
-            set => SetProperty(ref _thr, value);
+            get { return _thr; }
+            set { this.SetProperty(ref _thr, value); }
         }
 
         public double TRP
         {
-            get => _trp;
-            set => SetProperty(ref _trp, value);
+            get { return _trp; }
+            set { this.SetProperty(ref _trp, value); }
         }
 
         public double VAL
         {
-            get => _val;
-            set => SetProperty(ref _val, value);
+            get { return _val; }
+            set { this.SetProperty(ref _val, value); }
         }
 
         public double ALA
         {
-            get => _ala;
-            set => SetProperty(ref _ala, value);
+            get { return _ala; }
+            set { this.SetProperty(ref _ala, value); }
         }
 
         public double ASP
         {
-            get => _asp;
-            set => SetProperty(ref _asp, value);
+            get { return _asp; }
+            set { this.SetProperty(ref _asp, value); }
         }
 
         public double GLU
         {
-            get => _glu;
-            set => SetProperty(ref _glu, value);
+            get { return _glu; }
+            set { this.SetProperty(ref _glu, value); }
         }
 
         public double GLY
         {
-            get => _gly;
-            set => SetProperty(ref _gly, value);
+            get { return _gly; }
+            set { this.SetProperty(ref _gly, value); }
         }
 
         public double PRO
         {
-            get => _pro;
-            set => SetProperty(ref _pro, value);
+            get { return _pro; }
+            set { this.SetProperty(ref _pro, value); }
         }
 
         public double SER
         {
-            get => _ser;
-            set => SetProperty(ref _ser, value);
+            get { return _ser; }
+            set { this.SetProperty(ref _ser, value); }
         }
 
         public double CR
         {
-            get => _cr;
-            set => SetProperty(ref _cr, value);
+            get { return _cr; }
+            set { this.SetProperty(ref _cr, value); }
         }
 
         public double Ca
         {
-            get => _ca;
-            set => SetProperty(ref _ca, value);
+            get { return _ca; }
+            set { this.SetProperty(ref _ca, value); }
         }
 
         public double P
         {
-            get => _p;
-            set => SetProperty(ref _p, value);
+            get { return _p; }
+            set { this.SetProperty(ref _p, value); }
         }
 
         public double Mg
         {
-            get => _mg;
-            set => SetProperty(ref _mg, value);
+            get { return _mg; }
+            set { this.SetProperty(ref _mg, value); }
         }
 
         public double Cl
         {
-            get => _cl;
-            set => SetProperty(ref _cl, value);
+            get { return _cl; }
+            set { this.SetProperty(ref _cl, value); }
         }
 
         public double K
         {
-            get => _k;
-            set => SetProperty(ref _k, value);
+            get { return _k; }
+            set { this.SetProperty(ref _k, value); }
         }
 
         public double Na
         {
-            get => _na;
-            set => SetProperty(ref _na, value);
+            get { return _na; }
+            set { this.SetProperty(ref _na, value); }
         }
 
         public double S
         {
-            get => _s;
-            set => SetProperty(ref _s, value);
+            get { return _s; }
+            set { this.SetProperty(ref _s, value); }
         }
 
         public double Co
         {
-            get => _co;
-            set => SetProperty(ref _co, value);
+            get { return _co; }
+            set { this.SetProperty(ref _co, value); }
         }
 
         public double Cu
         {
-            get => _cu;
-            set => SetProperty(ref _cu, value);
+            get { return _cu; }
+            set { this.SetProperty(ref _cu, value); }
         }
 
         public double I
         {
-            get => _i;
-            set => SetProperty(ref _i, value);
+            get { return _i; }
+            set { this.SetProperty(ref _i, value); }
         }
 
         public double Fe
         {
-            get => _fe;
-            set => SetProperty(ref _fe, value);
+            get { return _fe; }
+            set { this.SetProperty(ref _fe, value); }
         }
 
         public double Mn
         {
-            get => _mn;
-            set => SetProperty(ref _mn, value);
+            get { return _mn; }
+            set { this.SetProperty(ref _mn, value); }
         }
 
         public double Se
         {
-            get => _se;
-            set => SetProperty(ref _se, value);
+            get { return _se; }
+            set { this.SetProperty(ref _se, value); }
         }
 
         public double Zn
         {
-            get => _zn;
-            set => SetProperty(ref _zn, value);
+            get { return _zn; }
+            set { this.SetProperty(ref _zn, value); }
         }
 
         public double VitA
         {
-            get => _vitA;
-            set => SetProperty(ref _vitA, value);
+            get { return _vitA; }
+            set { this.SetProperty(ref _vitA, value); }
         }
 
         public double VitD
         {
-            get => _vitD;
-            set => SetProperty(ref _vitD, value);
+            get { return _vitD; }
+            set { this.SetProperty(ref _vitD, value); }
         }
 
         public double VitE
         {
-            get => _vitE;
-            set => SetProperty(ref _vitE, value);
+            get { return _vitE; }
+            set { this.SetProperty(ref _vitE, value); }
         }
 
         public double VitD3
         {
-            get => _vitD3;
-            set => SetProperty(ref _vitD3, value);
+            get { return _vitD3; }
+            set { this.SetProperty(ref _vitD3, value); }
         }
 
         public double vitB1
         {
-            get => _vitB1;
-            set => SetProperty(ref _vitB1, value);
+            get { return _vitB1; }
+            set { this.SetProperty(ref _vitB1, value); }
         }
 
         public double VitB2
         {
-            get => _vitB2;
-            set => SetProperty(ref _vitB2, value);
+            get { return _vitB2; }
+            set { this.SetProperty(ref _vitB2, value); }
         }
 
         public double VitB3
         {
-            get => _vitB3;
-            set => SetProperty(ref _vitB3, value);
+            get { return _vitB3; }
+            set { this.SetProperty(ref _vitB3, value); }
         }
 
         public double VitB5
         {
-            get => _vitB5;
-            set => SetProperty(ref _vitB5, value);
+            get { return _vitB5; }
+            set { this.SetProperty(ref _vitB5, value); }
         }
 
         public double VitB6
         {
-            get => _vitB6;
-            set => SetProperty(ref _vitB6, value);
+            get { return _vitB6; }
+            set { this.SetProperty(ref _vitB6, value); }
         }
 
         public double VitB7
         {
-            get => _vitB7;
-            set => SetProperty(ref _vitB7, value);
+            get { return _vitB7; }
+            set { this.SetProperty(ref _vitB7, value); }
         }
 
         public double VitB12
         {
-            get => _vitB12;
-            set => SetProperty(ref _vitB12, value);
+            get { return _vitB12; }
+            set { this.SetProperty(ref _vitB12, value); }
         }
 
         public double PercentageInDiet
         {
-            get => _percentageInDiet;
-            set => SetProperty(ref _percentageInDiet, value);
+            get { return _percentageInDiet; }
+            set { this.SetProperty(ref _percentageInDiet, value); }
         }
 
         public bool IsCustomIngredient
         {
-            get => _isCustomIngredient;
-            set => SetProperty(ref _isCustomIngredient, value);
+            get { return _isCustomIngredient; }
+            set { this.SetProperty(ref _isCustomIngredient, value); }
         }
 
         public string FeedNumber
         {
-            get => _feedNumber;
-            set => SetProperty(ref _feedNumber, value);
+            get { return _feedNumber; }
+            set { this.SetProperty(ref _feedNumber, value); }
         }
 
         public DairyFeedClassType DairyFeedClass
         {
-            get => _dairyFeedClass;
-            set
-            {
-                SetProperty(ref _dairyFeedClass, value, () => { RaisePropertyChanged(nameof(IngredientTypeString)); });
-            }
+            get { return _dairyFeedClass; }
+            set { this.SetProperty(ref _dairyFeedClass, value, () => { this.RaisePropertyChanged(nameof(this.IngredientTypeString)); }); }
         }
 
         public double PAF
         {
-            get => _paf;
-            set => SetProperty(ref _paf, value);
+            get { return _paf; }
+            set { this.SetProperty(ref _paf, value); }
         }
 
         [Units(MetricUnitsOfMeasurement.MegaCaloriePerKilogram)]
         public double NEL_ThreeX
         {
-            get => _nel_threex;
-            set => SetProperty(ref _nel_threex, value);
+            get { return _nel_threex; }
+            set { this.SetProperty(ref _nel_threex, value); }
         }
 
         public double NEL_FourX
         {
-            get => _nel_fourx;
-            set => SetProperty(ref _nel_fourx, value);
+            get { return _nel_fourx; }
+            set { this.SetProperty(ref _nel_fourx, value); }
         }
 
         public double NEM
         {
-            get => _nem;
-            set => SetProperty(ref _nem, value);
+            get { return _nem; }
+            set { this.SetProperty(ref _nem, value); }
         }
 
         public double NEG
         {
-            get => _neg;
-            set => SetProperty(ref _neg, value);
+            get { return _neg; }
+            set { this.SetProperty(ref _neg, value); }
         }
 
         public double NDICP
         {
-            get => _ndicp;
-            set => SetProperty(ref _ndicp, value);
+            get { return _ndicp; }
+            set { this.SetProperty(ref _ndicp, value); }
         }
 
         public double EE
         {
-            get => _ee;
-            set => SetProperty(ref _ee, value);
+            get { return _ee; }
+            set { this.SetProperty(ref _ee, value); }
         }
 
         /*
@@ -894,473 +876,451 @@ namespace H.Core.Providers.Feed
         */
         public double Phytate
         {
-            get => _phytate;
-            set => SetProperty(ref _phytate, value);
+            get { return _phytate; }
+            set { this.SetProperty(ref _phytate, value); }
         }
 
         public double PhytatePhosphorus
         {
-            get => _phytatePhosphorus;
-            set => SetProperty(ref _phytatePhosphorus, value);
+            get { return _phytatePhosphorus; }
+            set { this.SetProperty(ref _phytatePhosphorus, value); }
         }
 
         public double NonPhytatePhosphorus
         {
-            get => _nonphytatePhosphorus;
-            set => SetProperty(ref _nonphytatePhosphorus, value);
+            get { return _nonphytatePhosphorus; }
+            set { this.SetProperty(ref _nonphytatePhosphorus, value); }
         }
 
         public double BetaCarotene
         {
-            get => _betaCarotene;
-            set => SetProperty(ref _betaCarotene, value);
+            get { return _betaCarotene; }
+            set { this.SetProperty(ref _betaCarotene, value); }
         }
 
         public double Choline
         {
-            get => _choline;
-            set => SetProperty(ref _choline, value);
+            get { return _choline; }
+            set { this.SetProperty(ref _choline, value); }
         }
 
         [Units(MetricUnitsOfMeasurement.KiloCaloriePerKilogram)]
         public double NE
         {
-            get => _ne;
-            set => SetProperty(ref _ne, value);
+            get { return _ne; }
+            set { this.SetProperty(ref _ne, value); }
         }
-
         // Digestability
         public double CpDigestAID
         {
-            get => _cpDigestAID;
-            set => SetProperty(ref _cpDigestAID, value);
+            get { return _cpDigestAID; }
+            set { this.SetProperty(ref _cpDigestAID, value); }
         }
 
         public double ArgDigestAID
         {
-            get => _argDigestAID;
-            set => SetProperty(ref _argDigestAID, value);
+            get { return _argDigestAID; }
+            set { this.SetProperty(ref _argDigestAID, value); }
         }
 
         public double HisDigestAID
         {
-            get => _hisDigestAID;
-            set => SetProperty(ref _hisDigestAID, value);
+            get { return _hisDigestAID; }
+            set { this.SetProperty(ref _hisDigestAID, value); }
         }
 
         public double IleDigestAID
         {
-            get => _ileDigestAID;
-            set => SetProperty(ref _ileDigestAID, value);
+            get { return _ileDigestAID; }
+            set { this.SetProperty(ref _ileDigestAID, value); }
         }
 
         public double LeuDigestAID
         {
-            get => _leuDigestAID;
-            set => SetProperty(ref _leuDigestAID, value);
+            get { return _leuDigestAID; }
+            set { this.SetProperty(ref _leuDigestAID, value); }
         }
 
         public double LysDigestAID
         {
-            get => _lysDigestAID;
-            set => SetProperty(ref _lysDigestAID, value);
+            get { return _lysDigestAID; }
+            set { this.SetProperty(ref _lysDigestAID, value); }
         }
 
         public double MetDigestAID
         {
-            get => _metDigestAID;
-            set => SetProperty(ref _metDigestAID, value);
+            get { return _metDigestAID; }
+            set { this.SetProperty(ref _metDigestAID, value); }
         }
 
         public double PheDigestAID
         {
-            get => _pheDigestAID;
-            set => SetProperty(ref _pheDigestAID, value);
+            get { return _pheDigestAID; }
+            set { this.SetProperty(ref _pheDigestAID, value); }
         }
 
         public double ThrDigestAID
         {
-            get => _thrDigestAID;
-            set => SetProperty(ref _thrDigestAID, value);
+            get { return _thrDigestAID; }
+            set { this.SetProperty(ref _thrDigestAID, value); }
         }
 
         public double TrpDigestAID
         {
-            get => _trpDigestAID;
-            set => SetProperty(ref _trpDigestAID, value);
+            get { return _trpDigestAID; }
+            set { this.SetProperty(ref _trpDigestAID, value); }
         }
 
         public double ValDigestAID
         {
-            get => _valDigestAID;
-            set => SetProperty(ref _valDigestAID, value);
+            get { return _valDigestAID; }
+            set { this.SetProperty(ref _valDigestAID, value); }
         }
 
         public double AlaDigestAID
         {
-            get => _alaDigestAID;
-            set => SetProperty(ref _alaDigestAID, value);
+            get { return _alaDigestAID; }
+            set { this.SetProperty(ref _alaDigestAID, value); }
         }
 
         public double AspDigestAID
         {
-            get => _aspDigestAID;
-            set => SetProperty(ref _aspDigestAID, value);
+            get { return _aspDigestAID; }
+            set { this.SetProperty(ref _aspDigestAID, value); }
         }
 
         public double CysDigestAID
         {
-            get => _cysDigestAID;
-            set => SetProperty(ref _cysDigestAID, value);
+            get { return _cysDigestAID; }
+            set { this.SetProperty(ref _cysDigestAID, value); }
         }
 
         public double GluDigestAID
         {
-            get => _gluDigestAID;
-            set => SetProperty(ref _gluDigestAID, value);
+            get { return _gluDigestAID; }
+            set { this.SetProperty(ref _gluDigestAID, value); }
         }
 
         public double GlyDigestAID
         {
-            get => _glyDigestAID;
-            set => SetProperty(ref _glyDigestAID, value);
+            get { return _glyDigestAID; }
+            set { this.SetProperty(ref _glyDigestAID, value); }
         }
 
         public double ProDigestAID
         {
-            get => _proDigestAID;
-            set => SetProperty(ref _proDigestAID, value);
+            get { return _proDigestAID; }
+            set { this.SetProperty(ref _proDigestAID, value); }
         }
 
         public double SerDigestAID
         {
-            get => _serDigestAID;
-            set => SetProperty(ref _serDigestAID, value);
+            get { return _serDigestAID; }
+            set { this.SetProperty(ref _serDigestAID, value); }
         }
 
         public double TyrDigestAID
         {
-            get => _tyrDigestAID;
-            set => SetProperty(ref _tyrDigestAID, value);
+            get { return _tyrDigestAID; }
+            set { this.SetProperty(ref _tyrDigestAID, value); }
         }
 
 
         public double CpDigestSID
         {
-            get => _cpDigestSID;
-            set => SetProperty(ref _cpDigestSID, value);
+            get { return _cpDigestSID; }
+            set { this.SetProperty(ref _cpDigestSID, value); }
         }
 
         public double ArgDigestSID
         {
-            get => _argDigestSID;
-            set => SetProperty(ref _argDigestSID, value);
+            get { return _argDigestSID; }
+            set { this.SetProperty(ref _argDigestSID, value); }
         }
 
         public double HisDigestSID
         {
-            get => _hisDigestSID;
-            set => SetProperty(ref _hisDigestSID, value);
+            get { return _hisDigestSID; }
+            set { this.SetProperty(ref _hisDigestSID, value); }
         }
 
         public double IleDigestSID
         {
-            get => _ileDigestSID;
-            set => SetProperty(ref _ileDigestSID, value);
+            get { return _ileDigestSID; }
+            set { this.SetProperty(ref _ileDigestSID, value); }
         }
 
         public double LeuDigestSID
         {
-            get => _leuDigestSID;
-            set => SetProperty(ref _leuDigestSID, value);
+            get { return _leuDigestSID; }
+            set { this.SetProperty(ref _leuDigestSID, value); }
         }
 
         public double LysDigestSID
         {
-            get => _lysDigestSID;
-            set => SetProperty(ref _lysDigestSID, value);
+            get { return _lysDigestSID; }
+            set { this.SetProperty(ref _lysDigestSID, value); }
         }
 
         public double MetDigestSID
         {
-            get => _metDigestSID;
-            set => SetProperty(ref _metDigestSID, value);
+            get { return _metDigestSID; }
+            set { this.SetProperty(ref _metDigestSID, value); }
         }
 
         public double PheDigestSID
         {
-            get => _pheDigestSID;
-            set => SetProperty(ref _pheDigestSID, value);
+            get { return _pheDigestSID; }
+            set { this.SetProperty(ref _pheDigestSID, value); }
         }
 
         public double ThrDigestSID
         {
-            get => _thrDigestSID;
-            set => SetProperty(ref _thrDigestSID, value);
+            get { return _thrDigestSID; }
+            set { this.SetProperty(ref _thrDigestSID, value); }
         }
 
         public double TrpDigestSID
         {
-            get => _trpDigestSID;
-            set => SetProperty(ref _trpDigestSID, value);
+            get { return _trpDigestSID; }
+            set { this.SetProperty(ref _trpDigestSID, value); }
         }
 
         public double ValDigestSID
         {
-            get => _valDigestSID;
-            set => SetProperty(ref _valDigestSID, value);
+            get { return _valDigestSID; }
+            set { this.SetProperty(ref _valDigestSID, value); }
         }
 
         public double AlaDigestSID
         {
-            get => _alaDigestSID;
-            set => SetProperty(ref _alaDigestSID, value);
+            get { return _alaDigestSID; }
+            set { this.SetProperty(ref _alaDigestSID, value); }
         }
 
         public double AspDigestSID
         {
-            get => _aspDigestSID;
-            set => SetProperty(ref _aspDigestSID, value);
+            get { return _aspDigestSID; }
+            set { this.SetProperty(ref _aspDigestSID, value); }
         }
 
         public double CysDigestSID
         {
-            get => _cysDigestSID;
-            set => SetProperty(ref _cysDigestSID, value);
+            get { return _cysDigestSID; }
+            set { this.SetProperty(ref _cysDigestSID, value); }
         }
 
         public double GluDigestSID
         {
-            get => _gluDigestSID;
-            set => SetProperty(ref _gluDigestSID, value);
+            get { return _gluDigestSID; }
+            set { this.SetProperty(ref _gluDigestSID, value); }
         }
 
         public double GlyDigestSID
         {
-            get => _glyDigestSID;
-            set => SetProperty(ref _glyDigestSID, value);
+            get { return _glyDigestSID; }
+            set { this.SetProperty(ref _glyDigestSID, value); }
         }
 
         public double ProDigestSID
         {
-            get => _proDigestSID;
-            set => SetProperty(ref _proDigestSID, value);
+            get { return _proDigestSID; }
+            set { this.SetProperty(ref _proDigestSID, value); }
         }
 
         public double SerDigestSID
         {
-            get => _serDigestSID;
-            set => SetProperty(ref _serDigestSID, value);
+            get { return _serDigestSID; }
+            set { this.SetProperty(ref _serDigestSID, value); }
         }
 
         public double TyrDigestSID
         {
-            get => _tyrDigestSID;
-            set => SetProperty(ref _tyrDigestSID, value);
+            get { return _tyrDigestSID; }
+            set { this.SetProperty(ref _tyrDigestSID, value); }
         }
-
         public string AAFCO
         {
-            get => _aafco;
-            set => SetProperty(ref _aafco, value);
+            get { return _aafco; }
+            set { this.SetProperty(ref _aafco, value); }
         }
-
         public string AAFCO2010
         {
-            get => _aafco2010;
-            set => SetProperty(ref _aafco2010, value);
+            get { return _aafco2010; }
+            set { this.SetProperty(ref _aafco2010, value); }
         }
 
         public double ATTDPhosphorus
         {
-            get => _attdPhosphorous;
-            set => SetProperty(ref _attdPhosphorous, value);
+            get { return _attdPhosphorous; }
+            set { this.SetProperty(ref _attdPhosphorous, value); }
         }
-
         public double STTDPhosphorus
         {
-            get => _sttdPhosphorous;
-            set => SetProperty(ref _sttdPhosphorous, value);
+            get { return _sttdPhosphorous; }
+            set { this.SetProperty(ref _sttdPhosphorous, value); }
         }
-
         public double Biotin
         {
-            get => _biotin;
-            set => SetProperty(ref _biotin, value);
+            get { return _biotin; }
+            set { this.SetProperty(ref _biotin, value); }
         }
-
         public double Folacin
         {
-            get => _folacin;
-            set => SetProperty(ref _folacin, value);
+            get { return _folacin; }
+            set { this.SetProperty(ref _folacin, value); }
         }
-
         public double Niacin
         {
-            get => _niacin;
-            set => SetProperty(ref _niacin, value);
+            get { return _niacin; }
+            set { this.SetProperty(ref _niacin, value); }
         }
-
         public double PantothenicAcid
         {
-            get => _pantothenicAcid;
-            set => SetProperty(ref _pantothenicAcid, value);
+            get { return _pantothenicAcid; }
+            set { this.SetProperty(ref _pantothenicAcid, value); }
         }
-
         public double Riboflavin
         {
-            get => _riboflavin;
-            set => SetProperty(ref _riboflavin, value);
+            get { return _riboflavin; }
+            set { this.SetProperty(ref _riboflavin, value); }
         }
-
         public double Thiamin
         {
-            get => _thiamin;
-            set => SetProperty(ref _thiamin, value);
+            get { return _thiamin; }
+            set { this.SetProperty(ref _thiamin, value); }
         }
-
         public double EtherExtractDup
         {
-            get => _etherExtractDup;
-            set => SetProperty(ref _etherExtractDup, value);
+            get { return _etherExtractDup; }
+            set { this.SetProperty(ref _etherExtractDup, value); }
         }
 
         public double C120
         {
-            get => _c120;
-            set => SetProperty(ref _c120, value);
+            get { return _c120; }
+            set { this.SetProperty(ref _c120, value); }
         }
-
         public double C140
         {
-            get => _c140;
-            set => SetProperty(ref _c140, value);
+            get { return _c140; }
+            set { this.SetProperty(ref _c140, value); }
         }
-
         public double C160
         {
-            get => _c160;
-            set => SetProperty(ref _c160, value);
+            get { return _c160; }
+            set { this.SetProperty(ref _c160, value); }
         }
-
         public double C161
         {
-            get => _c161;
-            set => SetProperty(ref _c161, value);
+            get { return _c161; }
+            set { this.SetProperty(ref _c161, value); }
         }
-
         public double C180
         {
-            get => _c180;
-            set => SetProperty(ref _c180, value);
+            get { return _c180; }
+            set { this.SetProperty(ref _c180, value); }
         }
-
         public double C181
         {
-            get => _c181;
-            set => SetProperty(ref _c181, value);
+            get { return _c181; }
+            set { this.SetProperty(ref _c181, value); }
         }
-
         public double C182
         {
-            get => _c182;
-            set => SetProperty(ref _c182, value);
+            get { return _c182; }
+            set { this.SetProperty(ref _c182, value); }
         }
-
         public double C183
         {
-            get => _c183;
-            set => SetProperty(ref _c183, value);
+            get { return _c183; }
+            set { this.SetProperty(ref _c183, value); }
         }
-
         public double C184
         {
-            get => _c184;
-            set => SetProperty(ref _c184, value);
+            get { return _c184; }
+            set { this.SetProperty(ref _c184, value); }
         }
-
         public double C200
         {
-            get => _c200;
-            set => SetProperty(ref _c200, value);
+            get { return _c200; }
+            set { this.SetProperty(ref _c200, value); }
         }
-
         public double C201
         {
-            get => _c201;
-            set => SetProperty(ref _c201, value);
+            get { return _c201; }
+            set { this.SetProperty(ref _c201, value); }
         }
-
         public double C204
         {
-            get => _c204;
-            set => SetProperty(ref _c204, value);
+            get { return _c204; }
+            set { this.SetProperty(ref _c204, value); }
         }
-
         public double C205
         {
-            get => _c205;
-            set => SetProperty(ref _c205, value);
+            get { return _c205; }
+            set { this.SetProperty(ref _c205, value); }
         }
-
         public double C220
         {
-            get => _c220;
-            set => SetProperty(ref _c220, value);
+            get { return _c220; }
+            set { this.SetProperty(ref _c220, value); }
         }
-
         public double C221
         {
-            get => _c221;
-            set => SetProperty(ref _c221, value);
+            get { return _c221; }
+            set { this.SetProperty(ref _c221, value); }
         }
-
         public double C225
         {
-            get => _c225;
-            set => SetProperty(ref _c225, value);
+            get { return _c225; }
+            set { this.SetProperty(ref _c225, value); }
         }
-
         public double C226
         {
-            get => _c226;
-            set => SetProperty(ref _c226, value);
+            get { return _c226; }
+            set { this.SetProperty(ref _c226, value); }
         }
-
         public double C240
         {
-            get => _c240;
-            set => SetProperty(ref _c240, value);
+            get { return _c240; }
+            set { this.SetProperty(ref _c240, value); }
         }
-
         public double SFA
         {
-            get => _sfa;
-            set => SetProperty(ref _sfa, value);
+            get { return _sfa; }
+            set { this.SetProperty(ref _sfa, value); }
         }
-
         public double MUFA
         {
-            get => _mufa;
-            set => SetProperty(ref _mufa, value);
+            get { return _mufa; }
+            set { this.SetProperty(ref _mufa, value); }
         }
-
         public double PUFA
         {
-            get => _pufa;
-            set => SetProperty(ref _pufa, value);
+            get { return _pufa; }
+            set { this.SetProperty(ref _pufa, value); }
         }
-
         public double IV
         {
-            get => _iv;
-            set => SetProperty(ref _iv, value);
+            get { return _iv; }
+            set { this.SetProperty(ref _iv, value); }
         }
-
         public double IVP
         {
-            get => _ivp;
-            set => SetProperty(ref _ivp, value);
+            get { return _ivp; }
+            set { this.SetProperty(ref _ivp, value); }
+        }
+
+        #endregion
+
+        #region Calculated Properties
+
+        private double _nemf;
+        public double Nemf
+        {
+            get { return _nemf; }
+            set { this.SetProperty(ref _nemf, value); }
         }
 
         #endregion
@@ -1374,7 +1334,7 @@ namespace H.Core.Providers.Feed
 
         public static FeedIngredient ConvertFeedIngredientToImperial(FeedIngredient ingredient)
         {
-            var copiedIngredient = CopyFeedIngredient(ingredient);
+            var copiedIngredient = FeedIngredient.CopyFeedIngredient(ingredient);
 
             var unitCalculator = new UnitsOfMeasurementCalculator();
 
@@ -1407,9 +1367,24 @@ namespace H.Core.Providers.Feed
 
         public override string ToString()
         {
-            return $"{nameof(IngredientType)}: {IngredientType.GetDescription()}";
+            return $"{nameof(this.IngredientType)}: {this.IngredientType.GetDescription()}";
         }
+
+        #endregion
+
+        #region Private Methods
+
+        private void UpdateNemf()
+        {
+            this.Nemf = (this.NEga + this.NEma) * 4.184;
+        }
+
+        #endregion
+
+        #region Event Handlers
 
         #endregion
     }
 }
+
+

@@ -1519,6 +1519,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fertilizer Application Method.
+        /// </summary>
+        public static string Key_FertilizerApplicationMethod {
+            get {
+                return ResourceManager.GetString("Key_FertilizerApplicationMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fertilizer Blend.
         /// </summary>
         public static string Key_FertilizerBlend {
@@ -3334,6 +3343,15 @@ namespace H.CLI.Properties {
         public static string Settings_OldPoolCarbonN {
             get {
                 return ResourceManager.GetString("Settings_OldPoolCarbonN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path To Custom Yield Input File.
+        /// </summary>
+        public static string Settings_PathToCustomYieldFile {
+            get {
+                return ResourceManager.GetString("Settings_PathToCustomYieldFile", resourceCulture);
             }
         }
         

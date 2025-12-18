@@ -5,17 +5,6 @@ namespace H.Core.Models.LandManagement.Fields
 {
     public partial class CropViewItem
     {
-        #region Public Methods
-
-        public double GetAverageUtilizationFromGrazingAnimals()
-        {
-            if (HasGrazingViewItems) return GrazingViewItems.Average(x => x.Utilization);
-
-            return 0;
-        }
-
-        #endregion
-
         #region Fields
 
         private double _totalCarbonLossesFromGrazingAnimals;
@@ -33,7 +22,7 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        ///     (kg C)
+        /// (kg C)
         /// </summary>
         public double TotalCarbonLossesByGrazingAnimals
         {
@@ -42,16 +31,32 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        ///     (kg C ha^-1)
+        /// (kg C ha^-1)
         /// </summary>
         public double TotalCarbonInputFromManureFromAnimalsGrazingOnPasture { get; set; }
 
         /// <summary>
-        ///     (kg N ha^-1)
+        /// (kg N ha^-1)
         /// </summary>
         public double TotalNitrogenInputFromManureFromAnimalsGrazingOnPasture { get; set; }
 
         public double TotalCarbonUptakeByAnimals { get; set; }
+
+        #endregion
+
+        #region Public Methods
+
+        public double GetAverageUtilizationFromGrazingAnimals()
+        {
+            if (this.HasGrazingViewItems)
+            {
+                return this.GrazingViewItems.Average(x => x.Utilization);
+            }
+            else
+            {
+                return 0;
+            }
+        }
 
         #endregion
     }

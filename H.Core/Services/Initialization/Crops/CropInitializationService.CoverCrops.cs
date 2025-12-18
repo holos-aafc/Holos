@@ -2,7 +2,6 @@
 using System.Linq;
 using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
-using H.Core.Properties;
 
 namespace H.Core.Services.Initialization.Crops
 {
@@ -10,7 +9,7 @@ namespace H.Core.Services.Initialization.Crops
     {
         public void InitializeCoverCrops(IEnumerable<CropViewItem> viewItems)
         {
-            AssignCoverCropViewItemsDescription(viewItems);
+            this.AssignCoverCropViewItemsDescription(viewItems);
         }
 
         public void AssignCoverCropViewItemsDescription(IEnumerable<CropViewItem> viewItems)
@@ -21,10 +20,13 @@ namespace H.Core.Services.Initialization.Crops
             {
                 var year = yearGroup.Key;
                 foreach (var cropViewItem in yearGroup)
+                {
                     // Check for undersown status since that will be a  different description string being used
-                    if (cropViewItem.IsSecondaryCrop && cropViewItem.UnderSownCropsUsed == false &&
-                        cropViewItem.CropType.IsFallow() == false)
-                        cropViewItem.Description = $"{Resources.CoverCropGrowingType}";
+                    if (cropViewItem.IsSecondaryCrop && cropViewItem.UnderSownCropsUsed == false && cropViewItem.CropType.IsFallow() == false)
+                    {
+                        cropViewItem.Description = $"{H.Core.Properties.Resources.CoverCropGrowingType}";
+                    }
+                }
             }
         }
     }

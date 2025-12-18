@@ -1,9 +1,13 @@
-﻿using H.Core.Enumerations;
+﻿#region Imports
+
+#endregion
+
+using H.Core.Enumerations;
 
 namespace H.Core.Providers.Soil
 {
     /// <summary>
-    ///     http://sis.agr.gc.ca/cansis/nsdb/soil/v2/snt/index.html
+    /// http://sis.agr.gc.ca/cansis/nsdb/soil/v2/snt/index.html
     /// </summary>
     internal class SoilNameTableData
     {

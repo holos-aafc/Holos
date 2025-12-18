@@ -18,17 +18,27 @@ namespace H.Core.Models
 
         public bool IsInitialized
         {
-            get => _isInitialized;
-            set => SetProperty(ref _isInitialized, value);
+            get { return _isInitialized; }
+            set { this.SetProperty(ref _isInitialized, value); }
         }
+
+        #endregion
+
+        #region Constructors
 
         #endregion
 
         #region Public Methods
 
-        public virtual void ClearState()
-        {
-        }
+        public virtual void ClearState() {}
+
+        #endregion
+
+        #region Private Methods
+
+        #endregion
+
+        #region Event Handlers
 
         #endregion
     }

@@ -7,7 +7,7 @@ namespace H.Core.Providers.Feed
         IList<FeedIngredient> GetBeefFeedIngredients();
         IList<FeedIngredient> GetDairyFeedIngredients();
         IList<FeedIngredient> GetSwineFeedIngredients();
-
+        
         FeedIngredient CopyIngredient(FeedIngredient ingredient, double defaultPercentageInDiet);
     }
 }

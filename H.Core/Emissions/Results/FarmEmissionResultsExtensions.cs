@@ -6,8 +6,9 @@ namespace H.Core.Emissions.Results
     public static class FarmEmissionResultsExtensions
     {
         /// <summary>
-        ///     Returns the total enteric methane produced from all farms.
-        ///     (kg CH4)
+        /// Returns the total enteric methane produced from all farms.
+        ///
+        /// (kg CH4)
         /// </summary>
         public static double TotalEntericMethaneForAllFarms(this IEnumerable<FarmEmissionResults> farmEmissionResults)
         {
@@ -15,8 +16,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Returns the total manure methane produced from all farms.
-        ///     (kg CH4)
+        /// Returns the total manure methane produced from all farms.
+        ///
+        /// (kg CH4)
         /// </summary>
         public static double TotalManureMethaneForAllFarms(this IEnumerable<FarmEmissionResults> farmEmissionResults)
         {
@@ -24,31 +26,31 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Returns the total direct nitrous oxide produced from all farms.
-        ///     (kg N2O)
+        /// Returns the total direct nitrous oxide produced from all farms.
+        ///
+        /// (kg N2O)
         /// </summary>
-        public static double TotalDirectNitrousOxideForAllFarms(
-            this IEnumerable<FarmEmissionResults> farmEmissionResults)
+        public static double TotalDirectNitrousOxideForAllFarms(this IEnumerable<FarmEmissionResults> farmEmissionResults)
         {
             return farmEmissionResults.Sum(result => result.TotalDirectNitrousOxideFromFarm);
         }
 
         /// <summary>
-        ///     Returns the total indirect nitrous oxide produced from all farms.
-        ///     (kg N2O)
+        /// Returns the total indirect nitrous oxide produced from all farms.
+        ///
+        /// (kg N2O)
         /// </summary>
-        public static double TotalIndirectNitrousOxideForAllFarms(
-            this IEnumerable<FarmEmissionResults> farmEmissionResults)
+        public static double TotalIndirectNitrousOxideForAllFarms(this IEnumerable<FarmEmissionResults> farmEmissionResults)
         {
             return farmEmissionResults.Sum(result => result.TotalIndirectNitrousOxideFromFarm);
         }
 
         /// <summary>
-        ///     Returns the total energy carbon dioxide produced from all farms.
-        ///     (kg CO2)
+        /// Returns the total energy carbon dioxide produced from all farms.
+        ///
+        /// (kg CO2)
         /// </summary>
-        public static double TotalEnergyCarbonDioxideForAllFarms(
-            this IEnumerable<FarmEmissionResults> farmEmissionResults)
+        public static double TotalEnergyCarbonDioxideForAllFarms(this IEnumerable<FarmEmissionResults> farmEmissionResults)
         {
             return farmEmissionResults.Sum(result => result.TotalEnergyCarbonDioxideFromFarm);
         }

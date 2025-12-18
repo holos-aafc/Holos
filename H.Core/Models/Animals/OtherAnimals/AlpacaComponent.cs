@@ -1,5 +1,4 @@
-﻿using H.Core.Properties;
-using H.Infrastructure;
+﻿using H.Infrastructure;
 
 namespace H.Core.Models.Animals.OtherAnimals
 {
@@ -9,11 +8,31 @@ namespace H.Core.Models.Animals.OtherAnimals
 
         public AlpacaComponent()
         {
-            ComponentNameDisplayString = ComponentType.Alpaca.GetDescription();
-            ComponentDescriptionString = Resources.ToolTipAlpacaComponent;
-            ComponentCategory = ComponentCategory.OtherLivestock;
-            ComponentType = ComponentType.Alpaca;
+            this.ComponentNameDisplayString = ComponentType.Alpaca.GetDescription();
+            this.ComponentDescriptionString = Properties.Resources.ToolTipAlpacaComponent;
+            this.ComponentCategory = ComponentCategory.OtherLivestock;
+            this.ComponentType = ComponentType.Alpaca;
         }
+
+        #endregion
+
+        #region Fields
+
+        #endregion
+
+        #region Properties
+
+        #endregion
+
+        #region Public Methods
+
+        #endregion
+
+        #region Private Methods
+
+        #endregion
+
+        #region Event Handlers
 
         #endregion
     }

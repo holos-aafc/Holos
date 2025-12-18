@@ -9,12 +9,12 @@ namespace H.Core.Models
         public LandUseCarbonChangeSource CarbonChangeSource { get; set; }
 
         /// <summary>
-        ///     (kg C year^-1)
+        /// (kg C year^-1)
         /// </summary>
         public double CarbonChangeForSoil { get; set; }
 
         /// <summary>
-        ///     (kg CO2 year^-1)
+        /// (kg CO2 year^-1)
         /// </summary>
         public double CarbonDioxideChangeForSoil { get; set; }
 

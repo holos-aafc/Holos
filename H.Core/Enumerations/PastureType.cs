@@ -15,6 +15,6 @@ namespace H.Core.Enumerations
         PastureGrassLow,
 
         [LocalizedDescription("None", typeof(Resource))]
-        None
+        None,
     }
 }

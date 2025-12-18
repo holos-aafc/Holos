@@ -6,17 +6,26 @@ using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models.LandManagement.Rotation;
+using H.Core.Services.LandManagement;
 using H.Infrastructure;
-using Microsoft.Extensions.Logging.Abstractions;
 
 namespace H.Core.Services
 {
     public class RotationComponentHelper
     {
-        #region Constructors
+        #region Fields
+        
+        private readonly IMapper _cropViewItemMapper;
+        private readonly FieldComponentHelper _fieldComponentHelper;
 
+        #endregion
+
+        #region Constructors
+        
         public RotationComponentHelper()
         {
+
+
             _fieldComponentHelper = new FieldComponentHelper();
 
             var cropViewItemMappingConfiguration = new MapperConfiguration(configuration =>
@@ -24,24 +33,28 @@ namespace H.Core.Services
                 configuration.CreateMap<CropViewItem, CropViewItem>()
                     .ForMember(x => x.IsInitialized, options => options.Ignore())
                     .ForMember(x => x.Guid, options => options.Ignore());
-            }, new NullLoggerFactory());
+            });
 
             _cropViewItemMapper = cropViewItemMappingConfiguration.CreateMapper();
         }
 
         #endregion
 
-        public void CreateRotation(IEnumerable<CropViewItem> cropViewItems, RotationComponent rotationComponent,
-            GlobalSettings globalSettings, Farm farm)
+        public void CreateRotation(IEnumerable<CropViewItem> cropViewItems, RotationComponent rotationComponent, GlobalSettings globalSettings, Farm farm)
         {
             foreach (var cropViewItem in cropViewItems)
-                AddCropToRotation(cropViewItem, farm, rotationComponent, globalSettings);
+            {
+                this.AddCropToRotation(cropViewItem, farm, rotationComponent, globalSettings);
+            }
         }
 
         public void ApplyRotations(Farm farm, RotationComponent rotationComponent)
         {
             var cropsForRotation = rotationComponent.FieldSystemComponent.CropViewItems;
-            if (cropsForRotation.Any() == false) return;
+            if (cropsForRotation.Any() == false)
+            {
+                return;
+            }
 
             /*
              * This is a separate list (collection) containing field system components and is not the same as the list (collection) found on the Farm object. This list contains all the field components
@@ -54,17 +67,21 @@ namespace H.Core.Services
             {
                 var component = farm.GetFieldSystemComponent(mapping.FieldSystemComponent.Guid);
                 if (component is FieldSystemComponent fieldComponentFromFarm)
+                {
                     listOfFieldComponentsFromFarm.Add(fieldComponentFromFarm);
+                }
             }
 
             // Reset view items for each field system component since we need to start fresh.
             foreach (var otherFieldComponent in listOfFieldComponentsFromFarm)
+            {
                 otherFieldComponent.CropViewItems.Clear();
+            }
 
 
             // Shift the crops across the field component
-            var shiftedViewItems = CreateShiftedRotations(cropsForRotation.ToList(), rotationComponent).ToList();
-            for (var i = listOfFieldComponentsFromFarm.Count - 1; i >= 0; i--)
+            var shiftedViewItems = this.CreateShiftedRotations(cropsForRotation.ToList(), rotationComponent).ToList();
+            for (int i = listOfFieldComponentsFromFarm.Count - 1; i >= 0; i--)
             {
                 var fieldSystemComponentAtIndex = listOfFieldComponentsFromFarm.ElementAt(i);
                 var shiftedViewItemsAtIndex = shiftedViewItems.ElementAt(i);
@@ -73,7 +90,7 @@ namespace H.Core.Services
             }
 
             // Update the mapped field components and view items of the rotation component
-            for (var i = listOfFieldComponentsFromFarm.Count - 1; i >= 0; i--)
+            for (int i = listOfFieldComponentsFromFarm.Count - 1; i >= 0; i--)
             {
                 var mappedItem = rotationComponent.FieldSystemComponentsMappedByViewItems.ElementAt(i);
                 mappedItem.FieldSystemComponent.CropViewItems.Clear();
@@ -82,15 +99,14 @@ namespace H.Core.Services
             }
 
             // Rename fields in sequential order (both the mapped property and the actual field components)
-            for (var i = 0; i < rotationComponent.FieldSystemComponentsMappedByViewItems.Count; i++)
+            for (int i = 0; i < rotationComponent.FieldSystemComponentsMappedByViewItems.Count; i++)
             {
                 var fieldNumber = i + 1;
 
                 var mapping = rotationComponent.FieldSystemComponentsMappedByViewItems.ElementAt(i);
 
                 // Add in name of crop for more recent year since user must see what is being grown when they are putting animals on field from a rotation
-                var cropName = mapping.FieldSystemComponent.CropViewItems.OrderByDescending(x => x.Year).First()
-                    .CropType.GetDescription();
+                var cropName = mapping.FieldSystemComponent.CropViewItems.OrderByDescending(x => x.Year).First().CropType.GetDescription();
                 var name = rotationComponent.Name + " [Field #" + fieldNumber + "] - " + cropName;
                 mapping.FieldSystemComponent.Name = name;
                 var fieldComponentFromFarm = farm.GetFieldSystemComponent(mapping.FieldSystemComponent.Guid);
@@ -100,8 +116,7 @@ namespace H.Core.Services
             }
         }
 
-        public void AddCropToRotation(CropViewItem crop, Farm farm, RotationComponent rotationComponent,
-            GlobalSettings globalSettings)
+        public void AddCropToRotation(CropViewItem crop, Farm farm, RotationComponent rotationComponent, GlobalSettings globalSettings)
         {
             crop.Name = rotationComponent.FieldSystemComponent.Name;
             crop.Area = rotationComponent.FieldSystemComponent.FieldArea;
@@ -111,9 +126,13 @@ namespace H.Core.Services
 
             var year = 0;
             if (rotationComponent.FieldSystemComponent.CropViewItems.Any() == false)
+            {
                 year = rotationComponent.FieldSystemComponent.YearOfObservation;
+            }
             else
+            {
                 year = rotationComponent.FieldSystemComponent.CropViewItems.OrderBy(x => x.Year).First().Year - 1;
+            }
 
             crop.Year = year;
             coverCrop.Year = year;
@@ -132,15 +151,14 @@ namespace H.Core.Services
             var fieldSystemComponent = new FieldSystemComponent();
             fieldSystemComponent.HideComponentInListOfMyComponents = true;
             fieldSystemComponent.IsPartOfRotationComponent = true;
-            fieldSystemComponent.BeginOrderingAtStartYearOfRotation =
-                fieldSystemComponent.BeginOrderingAtStartYearOfRotation;
+            fieldSystemComponent.BeginOrderingAtStartYearOfRotation = fieldSystemComponent.BeginOrderingAtStartYearOfRotation;
 
             _fieldComponentHelper.InitializeComponent(fieldSystemComponent, farm);
 
-            var mapping = new MappedFieldComponents
+            var mapping = new MappedFieldComponents()
             {
                 CropViewItem = crop,
-                FieldSystemComponent = fieldSystemComponent
+                FieldSystemComponent = fieldSystemComponent,
             };
 
             rotationComponent.FieldSystemComponentsMappedByViewItems.Add(mapping);
@@ -156,7 +174,7 @@ namespace H.Core.Services
             crop.Area = fieldSystemComponent.FieldArea;
 
 
-            ApplyRotations(farm, rotationComponent);
+            this.ApplyRotations(farm, rotationComponent);
         }
 
         public void AssignYears(IEnumerable<CropViewItem> viewItems, FieldSystemComponent fieldSystemComponent)
@@ -165,39 +183,48 @@ namespace H.Core.Services
             var totalViewItems = viewItems.Count();
 
             if (fieldSystemComponent.BeginOrderingAtStartYearOfRotation == false)
+            {
                 for (var i = 0; i < totalViewItems; i++)
                 {
                     var viewItem = viewItems.ElementAt(totalViewItems - (i + 1));
                     viewItem.Year = fieldSystemComponent.EndYear - i;
                 }
+            }
             else
-                for (var i = 0; i < viewItems.Count(); i++)
+            {
+                for (int i = 0; i < viewItems.Count(); i++)
                 {
                     var viewItem = viewItems.ElementAt(i);
                     viewItem.Year = fieldSystemComponent.StartYear + i;
                 }
+            }
         }
 
         /// <summary>
-        ///     Create a list of lists where each inner list is one specific ordering of crops that are the result of a 'shift' of
-        ///     the
-        ///     crops in the rotation.
+        /// Create a list of lists where each inner list is one specific ordering of crops that are the result of a 'shift' of the
+        /// crops in the rotation.
         /// </summary>
-        public IEnumerable<IEnumerable<CropViewItem>> CreateShiftedRotations(
-            List<CropViewItem> cropsThatDefineTheRotation, RotationComponent rotationComponent)
+        public IEnumerable<IEnumerable<CropViewItem>> CreateShiftedRotations(List<CropViewItem> cropsThatDefineTheRotation, RotationComponent rotationComponent)
         {
             var results = new List<List<CropViewItem>>();
             var shifts = new List<List<CropViewItem>>();
 
-            for (var i = 0; i < cropsThatDefineTheRotation.Count; i++)
+            for (int i = 0; i < cropsThatDefineTheRotation.Count; i++)
+            {
                 /*
                  * This is how Holos has always shifted the crops. But yield input files might be shifted right which would cause improper yields being set
                  * if the correct shift direction is not set
                  */
+
                 if (rotationComponent.ShiftLeft)
+                {
                     shifts.Add(new List<CropViewItem>(cropsThatDefineTheRotation.ShiftLeft(i)));
+                }
                 else
+                {
                     shifts.Add(new List<CropViewItem>(cropsThatDefineTheRotation.ShiftRight(i)));
+                }
+            }
 
             // Map all of the properties from the rotation crop to the field crop
             foreach (var shift in shifts)
@@ -211,21 +238,17 @@ namespace H.Core.Services
                     result.Add(viewItem);
                 }
 
-                AssignYears(result, rotationComponent.FieldSystemComponent);
+                this.AssignYears(result, rotationComponent.FieldSystemComponent);
 
-                foreach (var cropViewItem in result) cropViewItem.IsInitialized = true;
+                foreach (var cropViewItem in result)
+                {
+                    cropViewItem.IsInitialized = true;
+                }
 
                 results.Add(result);
             }
 
             return results;
         }
-
-        #region Fields
-
-        private readonly IMapper _cropViewItemMapper;
-        private readonly FieldComponentHelper _fieldComponentHelper;
-
-        #endregion
     }
 }

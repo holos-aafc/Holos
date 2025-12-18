@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
@@ -16,11 +18,7 @@ namespace H.Core.Services.LandManagement
         private const double HerbicideConversion = 5.8;
         private const double NitrogenFertilizerConversion = 3.59;
         private const double PhosphorusFertilizerConversion = 0.5699;
-
-        private const double
-            PotassiumConversion =
-                1.0; // We do not have data for potassium conversion value yet, so temporarily use 1.0 for now.
-
+        private const double PotassiumConversion = 1.0;  // We do not have data for potassium conversion value yet, so temporarily use 1.0 for now.
         private const double IrrigationConversion = 367;
 
         #endregion
@@ -28,7 +26,7 @@ namespace H.Core.Services.LandManagement
         #region Public Methods
 
         /// <summary>
-        ///     Equation 6.3.1-2
+        /// Equation 6.3.1-2
         /// </summary>
         public List<MonthlyManureSpreadingEmissions> GetManureSpreadingEmissions(
             CropViewItem viewItem,
@@ -41,18 +39,18 @@ namespace H.Core.Services.LandManagement
             if (monthlySpreadingData.Any() == false)
             {
                 var volume = _n2OEmissionFactorCalculator.CalculateVolumeFromLeftOverManureForField(farm, viewItem);
-                for (var i = 0; i < 12; i++)
+                for (int i = 0; i < 12; i++)
                 {
-                    var monthlyEmissions = new MonthlyManureSpreadingEmissions
+                    var monthlyEmissions = new MonthlyManureSpreadingEmissions()
                     {
                         Month = i + 1,
                         Year = viewItem.Year,
-                        TotalVolume = volume / 12.0
+                        TotalVolume = volume / 12.0,
                     };
 
                     var volumeForMonth = volume / 12.0;
                     var reducedVolume = volumeForMonth / 1000.0;
-                    var emissionsForMonth = CalculateManureSpreadingEmissions(reducedVolume);
+                    var emissionsForMonth = this.CalculateManureSpreadingEmissions(reducedVolume);
 
                     monthlyEmissions.TotalVolume = volumeForMonth;
                     monthlyEmissions.TotalEmissions = emissionsForMonth;
@@ -72,14 +70,13 @@ namespace H.Core.Services.LandManagement
                 var totalVolume = monthlyManureSpreadingData.TotalVolume / 1000;
 
                 // Calculate the total emissions based on the volume of manure spread.
-                monthlyEmissions.TotalEmissions = CalculateManureSpreadingEmissions(totalVolume);
+                monthlyEmissions.TotalEmissions = this.CalculateManureSpreadingEmissions(volumeOfLandAppliedManure: totalVolume);
 
                 result.Add(monthlyEmissions);
             }
 
             // Calculate the amount of manure left over for the entire year associated with this field
-            var volumeOfManureLeftOver =
-                _n2OEmissionFactorCalculator.CalculateVolumeFromLeftOverManureForField(farm, viewItem);
+            var volumeOfManureLeftOver = _n2OEmissionFactorCalculator.CalculateVolumeFromLeftOverManureForField(farm, viewItem);
 
             // Assumption is that any remaining amounts will be added to the total volume of manure made in any given month
             var volumeAmountAttributedToEachMonth = volumeOfManureLeftOver / monthlySpreadingData.Count;
@@ -88,15 +85,18 @@ namespace H.Core.Services.LandManagement
             volumeAmountAttributedToEachMonth /= 1000;
 
             // Calculate emissions from the application of this left over amount
-            var emissionsAttributedToEachMonth = CalculateManureSpreadingEmissions(volumeAmountAttributedToEachMonth);
+            var emissionsAttributedToEachMonth = this.CalculateManureSpreadingEmissions(volumeAmountAttributedToEachMonth);
 
             // Assumption is that all remaining (non-used) amounts are considered for the year
-            var includeRemainingAMounts = true;
+            bool includeRemainingAMounts = true;
             if (includeRemainingAMounts)
+            {
                 foreach (var monthlyData in result)
+                {
                     // Add to existing amounts from actual field applications
                     monthlyData.TotalEmissions += emissionsAttributedToEachMonth;
-
+                }
+            }
             return result;
         }
 
@@ -104,41 +104,47 @@ namespace H.Core.Services.LandManagement
         {
             var results = new CropEnergyResults();
 
-            if (viewItem == null) return results;
+            if (viewItem == null)
+            {
+                return results;
+            }
 
             // No fuel is used on grasslands/pasture
             if (viewItem.CropType.IsNativeGrassland() == false)
-                results.EnergyCarbonDioxideFromFuelUse = CalculateCarbonDioxideEmissionsFromCroppingFuelUse(
-                    viewItem.FuelEnergy,
-                    viewItem.Area,
-                    DieselConversion);
+            {
+                results.EnergyCarbonDioxideFromFuelUse = this.CalculateCarbonDioxideEmissionsFromCroppingFuelUse(
+                    energyFromFuelUse: viewItem.FuelEnergy,
+                    area: viewItem.Area,
+                    dieselConversion: DieselConversion);
+            }
 
             if (viewItem.IsHerbicideUsed)
+            {
                 // Upstream emissions
-                results.UpstreamEnergyCarbonDioxideFromHerbicideUse =
-                    CalculateCarbonDioxideEmissionsFromCroppingHerbicideProduction(
-                        viewItem.HerbicideEnergy,
-                        viewItem.Area,
-                        HerbicideConversion);
+                results.UpstreamEnergyCarbonDioxideFromHerbicideUse = this.CalculateCarbonDioxideEmissionsFromCroppingHerbicideProduction(
+                    energyForHerbicideProduction: viewItem.HerbicideEnergy,
+                    area: viewItem.Area,
+                    herbicideConversion: HerbicideConversion);
+            }
 
             // Upstream emissions
-            results.UpstreamEnergyFromFertilizerProduction =
-                CalculateUpstreamEnergyEmissionsFromFertilizer(viewItem, farm);
+            results.UpstreamEnergyFromFertilizerProduction = this.CalculateUpstreamEnergyEmissionsFromFertilizer(viewItem, farm);
 
             // Application (on-farm) emissions
-            results.EnergyCarbonDioxideFromFertilizerUse =
-                CalculateOnFarmEnergyEmissionsFromFertilizerUse(viewItem, farm);
-            results.EnergyCarbonDioxideFromLimeUse = CalculateEnergyEmissionsFromLimeFertilizer(viewItem);
+            results.EnergyCarbonDioxideFromFertilizerUse = this.CalculateOnFarmEnergyEmissionsFromFertilizerUse(viewItem, farm);
+            results.EnergyCarbonDioxideFromLimeUse = this.CalculateEnergyEmissionsFromLimeFertilizer(viewItem);
 
             if (viewItem.AmountOfIrrigation > 0)
-                results.EnergyCarbonDioxideFromIrrigation = CalculateTotalCarbonDioxideEmissionsFromIrrigation(
-                    viewItem.Area,
-                    viewItem.AmountOfIrrigation,
-                    farm.Defaults.PumpEmissionFactor);
+            {
+                results.EnergyCarbonDioxideFromIrrigation = this.CalculateTotalCarbonDioxideEmissionsFromIrrigation(
+                    areaOfCropIrrigated: viewItem.Area,
+                    amountOfIrrigation: viewItem.AmountOfIrrigation,
+                    pumpEmissionsFactor: farm.Defaults.PumpEmissionFactor);
+            }
 
-            var manureSpreadingResults = GetManureSpreadingEmissions(
-                viewItem,
-                farm);
+            var manureSpreadingResults = this.GetManureSpreadingEmissions(
+                viewItem: viewItem,
+                farm: farm);
 
             results.ManureSpreadingResults.AddRange(manureSpreadingResults);
 
@@ -152,16 +158,16 @@ namespace H.Core.Services.LandManagement
         /// <param name="dieselConversion">Conversion of GJ of diesel to kg CO2 (kg CO2 GJ^-1)</param>
         /// <returns>CO2 emissions from cropping fuel use (kg CO2 year^-1)</returns>
         public double CalculateCarbonDioxideEmissionsFromCroppingFuelUse(
-            double energyFromFuelUse,
-            double area,
+            double energyFromFuelUse, 
+            double area, 
             double dieselConversion)
         {
             return energyFromFuelUse * area * dieselConversion;
         }
 
         /// <summary>
-        ///     Equation 6.1.2-1
-        ///     Equation 6.1.2-2
+        /// Equation 6.1.2-1
+        /// Equation 6.1.2-2
         /// </summary>
         /// <param name="energyForHerbicideProduction">Energy for herbicide production (GJ ha^1)</param>
         /// <param name="area">Area (ha)</param>
@@ -176,7 +182,7 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        ///     Equation 6.3.1-2
+        /// Equation 6.3.1-2
         /// </summary>
         public double CalculateManureSpreadingEmissions(
             double volumeOfLandAppliedManure)
@@ -185,9 +191,9 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        ///     Equation 6.1.3-1
-        ///     Equation 6.1.3-3
-        ///     Equation 6.1.3-4
+        /// Equation 6.1.3-1
+        /// Equation 6.1.3-3
+        /// Equation 6.1.3-4
         /// </summary>
         /// <param name="viewItem">The crop details for the year</param>
         /// <param name="farm"></param>
@@ -196,14 +202,12 @@ namespace H.Core.Services.LandManagement
         {
             var upstreamEmissions = 0.0;
 
+            var filteredItems = viewItem.FertilizerApplicationViewItems.Where(x => x.FertilizerBlendData.FertilizerBlend != FertilizerBlends.CustomOrganic && x.FertilizerBlendData.FertilizerBlend != FertilizerBlends.Lime).ToList();
+
             // There are no upstream emissions associated with organic fertilizer applications
-            foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems.Where(x =>
-                         x.FertilizerBlendData.FertilizerBlend != FertilizerBlends.CustomOrganic &&
-                         x.FertilizerBlendData.FertilizerBlend != FertilizerBlends.Lime))
+            foreach (var fertilizerApplicationViewItem in filteredItems)
             {
-                var blendEmissions =
-                    _carbonFootprintForFertilizerBlendsProvider.GetData(fertilizerApplicationViewItem
-                        .FertilizerBlendData.FertilizerBlend);
+                var blendEmissions = _carbonFootprintForFertilizerBlendsProvider.GetData(fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend);
 
                 var amountOfProduct = fertilizerApplicationViewItem.AmountOfBlendedProductApplied;
                 var area = viewItem.Area;
@@ -216,20 +220,18 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        ///     Equation 6.1.3-2
+        /// Equation 6.1.3-2
         /// </summary>
         /// <param name="viewItem">The crop details for the year</param>
         /// <param name="farm"></param>
         /// <returns>CO2 emissions from fertilizer production (kg CO2 year^-1)</returns>
         public double CalculateOnFarmEnergyEmissionsFromFertilizerUse(
-            CropViewItem viewItem,
+            CropViewItem viewItem, 
             Farm farm)
         {
             var onFarmEmissions = 0.0;
 
-            foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems.Where(x =>
-                         x.FertilizerBlendData.FertilizerBlend != FertilizerBlends.CustomOrganic &&
-                         x.FertilizerBlendData.FertilizerBlend != FertilizerBlends.Lime))
+            foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems.Where(x => x.FertilizerBlendData.FertilizerBlend != FertilizerBlends.CustomOrganic && x.FertilizerBlendData.FertilizerBlend != FertilizerBlends.Lime))
             {
                 var blend = fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend;
                 var amountOfNitrogenApplied = fertilizerApplicationViewItem.AmountOfBlendedProductApplied;
@@ -238,11 +240,17 @@ namespace H.Core.Services.LandManagement
 
                 var emissionFactor = blendEmissions.ApplicationEmissions;
                 if (blend.IsNitrogenFertilizer() && farm.Defaults.UseCustomNitrogenFertilizerConversionFactor)
+                {
                     emissionFactor = farm.Defaults.NitrogenFertilizerConversionFactor;
+                }
                 else if (blend.IsPhosphorusFertilizer() && farm.Defaults.UseCustomPhosphorusFertilizerConversionFactor)
+                {
                     emissionFactor = farm.Defaults.PhosphorusFertilizerConversionFactor;
+                }
                 else if (blend.IsPotassiumFertilizer() && farm.Defaults.UseCustomPotassiumConversionFactor)
+                {
                     emissionFactor = farm.Defaults.PotassiumConversionFactor;
+                }
 
                 onFarmEmissions += amountOfNitrogenApplied * area * emissionFactor;
             }
@@ -251,8 +259,8 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        ///     Equation 6.1.3.5
-        ///     Equation 6.1.3.6
+        /// Equation 6.1.3.5
+        /// Equation 6.1.3.6
         /// </summary>
         /// <returns>Total CO2 emissions from liming application (kg CO2 year^-1)</returns>
         private double CalculateEnergyEmissionsFromLimeFertilizer(CropViewItem viewItem)
@@ -261,37 +269,34 @@ namespace H.Core.Services.LandManagement
 
             const double emissionsFactor = 0.12;
 
-            foreach (var viewItemFertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems.Where(x =>
-                         x.FertilizerBlendData.FertilizerBlend == FertilizerBlends.Lime))
-                result += viewItemFertilizerApplicationViewItem.AmountOfBlendedProductApplied * emissionsFactor *
-                          CoreConstants.ConvertFromCToCO2;
+            foreach (var viewItemFertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems.Where(x => x.FertilizerBlendData.FertilizerBlend == FertilizerBlends.Lime))
+            {
+                result += (viewItemFertilizerApplicationViewItem.AmountOfBlendedProductApplied * emissionsFactor) * CoreConstants.ConvertFromCToCO2;
+            }
 
             return result;
         }
 
         /// <summary>
-        ///     Equation 6.1.4-1
+        /// Equation 6.1.4-1
         /// </summary>
         /// <param name="areaOfCropIrrigated">area of crop irrigated (ha)</param>
         /// <param name="amountOfIrrigation">Amount of irrigation (mm ha^-1 yr^-1)</param>
         /// <param name="pumpEmissionsFactor">For electric pump = 0.266 kg CO2 mm^-1, for natural gas pump = 1.145 kg CO2 mm^-1</param>
         /// <returns>Total CO2 emissions from irrigation (kg CO2 year^-1)</returns>
         public double CalculateTotalCarbonDioxideEmissionsFromIrrigation(
-            double areaOfCropIrrigated,
-            double amountOfIrrigation,
-            double pumpEmissionsFactor)
+               double areaOfCropIrrigated, 
+               double amountOfIrrigation,
+               double pumpEmissionsFactor)
         {
             return areaOfCropIrrigated * amountOfIrrigation * pumpEmissionsFactor;
         }
 
         /// <summary>
-        ///     Equation 4.1.5-1
+        /// Equation 4.1.5-1
         /// </summary>
         /// <param name="carbonDioxideEmissionsFromCroppingFuelUse">CO2emissions from cropping/fallow fuel use (kg CO2year^-1)</param>
-        /// <param name="carbonDioxideEmissionsFromCroppingHerbicideProduction">
-        ///     CO2emissions from cropping/fallow herbicide
-        ///     production (kg CO2year^-1)
-        /// </param>
+        /// <param name="carbonDioxideEmissionsFromCroppingHerbicideProduction">CO2emissions from cropping/fallow herbicide production (kg CO2year^-1)</param>
         /// <param name="NFertilizerProduction">CO2emissions from N fertilizer production (kg CO2year^-1)</param>
         /// <param name="phosphorusPentoxideFertilizerProduction">CO2emissions from P2O5 fertilizer production (kg CO2year^-1)</param>
         /// <param name="potassiumProduction">CO2emissions from K2O fertilizer production (kg CO2year^-1)</param>
@@ -311,7 +316,7 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        ///     Equation 4.4.1-1
+        /// Equation 4.4.1-1
         /// </summary>
         /// <param name="totalCarbonDioxideEmissionsFromFallowingFuelUse"></param>
         /// <param name="totalCarbonDioxideEmissionsFromCroppingHerbicideProduction"></param>
@@ -321,8 +326,7 @@ namespace H.Core.Services.LandManagement
         /// <param name="totalCarbonDioxideEmissionsFromPotassiumProduction"></param>
         /// <param name="totalCarbonDioxideEmissionsFromIrrigation"></param>
         /// <returns></returns>
-        public double CalculateTotalCarbonDioxideEmissionsFromCroppingEnergyUse(
-            double totalCarbonDioxideEmissionsFromFallowingFuelUse,
+        public double CalculateTotalCarbonDioxideEmissionsFromCroppingEnergyUse(double totalCarbonDioxideEmissionsFromFallowingFuelUse,
             double totalCarbonDioxideEmissionsFromCroppingHerbicideProduction,
             double totalCarbonDioxideEmissionsFromFallowHerbicideProduction,
             double totalCarbonDioxideEmissionsFromNitrogenFertilizerProduction,
@@ -337,7 +341,7 @@ namespace H.Core.Services.LandManagement
                    totalCarbonDioxideEmissionsFromP2O5FertilizerProduction +
                    totalCarbonDioxideEmissionsFromPotassiumProduction +
                    totalCarbonDioxideEmissionsFromIrrigation;
-        }
+        } 
 
         #endregion
     }

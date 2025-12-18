@@ -9,44 +9,56 @@ namespace H.Core.Providers.Animals
         public ManureStateType HandlingSystem { get; set; }
 
         /// <summary>
-        ///     Methane conversion factor of manure
-        ///     MCF
-        ///     (kg kg^-1)
+        /// Methane conversion factor of manure
+        ///
+        /// MCF
+        ///
+        /// (kg kg^-1)
         /// </summary>
         public double MethaneConversionFactor { get; set; }
 
         /// <summary>
-        ///     Direct N2O emission factor
-        ///     EF_direct
-        ///     [kg N2O-N (kg N)^-1]
+        /// Direct N2O emission factor
+        /// 
+        /// EF_direct
+        ///
+        /// [kg N2O-N (kg N)^-1]
         /// </summary>
         public double N20DirectEmissionFactor { get; set; }
 
         /// <summary>
-        ///     Fraction of volatilization
-        ///     Frac_volatilization
-        ///     [kg NH3-N (kg N)^-1]
+        /// Fraction of volatilization
+        ///
+        /// Frac_volatilization
+        /// 
+        /// [kg NH3-N (kg N)^-1]
         /// </summary>
         public double VolatilizationFraction { get; set; }
 
         /// <summary>
-        ///     Emission factor for volatilization
-        ///     EF_volatilization
-        ///     [kg n2O-N (kg N)^-1]
+        /// Emission factor for volatilization
+        ///
+        /// EF_volatilization
+        /// 
+        /// [kg n2O-N (kg N)^-1] 
         /// </summary>
         public double EmissionFactorVolatilization { get; set; }
 
         /// <summary>
-        ///     Fraction of leaching
-        ///     Frac_leach
-        ///     [kg N (kg N)^-1]
+        /// Fraction of leaching
+        ///
+        /// Frac_leach
+        ///
+        /// [kg N (kg N)^-1]
         /// </summary>
         public double LeachingFraction { get; set; }
 
         /// <summary>
-        ///     Emission factor for leaching
-        ///     EF_leach
-        ///     [kg N2O-N (kg N)^-1]
+        /// Emission factor for leaching
+        ///
+        /// EF_leach
+        ///
+        /// [kg N2O-N (kg N)^-1]
         /// </summary>
         public double EmissionFactorLeach { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using H.Content;
 using H.Core.Tools;
 using H.Infrastructure;
@@ -11,7 +12,7 @@ namespace H.Core.Providers.Shelterbelt
     {
         #region Constructors
 
-        static ShelterbeltEcodistrictToClusterLookupProvider()
+         static ShelterbeltEcodistrictToClusterLookupProvider()
         {
             HTraceListener.AddTraceListener();
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
@@ -39,7 +40,7 @@ namespace H.Core.Providers.Shelterbelt
         #endregion
 
         #region Public Methods
-
+        
         public static EcodistrictToClusterData GetClusterData(int ecodistrictId)
         {
             var clusterData = Data.SingleOrDefault(x => x.EcodistrictId == ecodistrictId);
@@ -47,21 +48,25 @@ namespace H.Core.Providers.Shelterbelt
             {
                 var defaultValue = new EcodistrictToClusterData();
                 Trace.TraceError($"{nameof(ShelterbeltEcodistrictToClusterLookupProvider)}.{nameof(GetClusterData)}" +
-                                 $" unable to get data for the ecodistrict id: {ecodistrictId}." +
-                                 $" Returning default value of {defaultValue}.");
+                    $" unable to get data for the ecodistrict id: {ecodistrictId}." +
+                    $" Returning default value of {defaultValue}.");
                 return defaultValue;
             }
-
             return clusterData;
         }
 
         public static bool CanLookupByEcodistrict(int ecodistrict)
         {
             var clusterData = GetClusterData(ecodistrict);
-            if (string.IsNullOrWhiteSpace(clusterData.ClusterId)) return false;
-
-            return true;
-        }
+            if (string.IsNullOrWhiteSpace(clusterData.ClusterId))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        } 
 
         #endregion
     }

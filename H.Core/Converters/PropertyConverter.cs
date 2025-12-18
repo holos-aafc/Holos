@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
@@ -21,18 +23,17 @@ namespace H.Core.Converters
         #region Constructors
 
         /// <summary>
-        ///     A converter to be used alongside the <see cref="UnitsAttribute" />
+        /// A converter to be used alongside the <see cref="UnitsAttribute"/>
         /// </summary>
-        /// <param name="instance">any type that has properties using attribute <see cref="UnitsAttribute" /></param>
+        /// <param name="instance">any type that has properties using attribute <see cref="UnitsAttribute"/></param>
         public PropertyConverter(T instance)
         {
             //sometimes we will get null instances so lets handle that
             if (instance != null)
             {
-                Instance = instance;
-                Type = instance.GetType();
-                PropertyInfos = Type.GetProperties().Where(x => Attribute.IsDefined(x, typeof(UnitsAttribute)))
-                    .ToList();
+                this.Instance = instance;
+                this.Type = instance.GetType();
+                this.PropertyInfos = this.Type.GetProperties().Where(x => Attribute.IsDefined(x, typeof(UnitsAttribute))).ToList();
                 _unitsCalculator = new UnitsOfMeasurementCalculator();
             }
         }
@@ -54,20 +55,18 @@ namespace H.Core.Converters
             if (PropertyInfos != null)
             {
                 //check that the property is something that we can work on
-                var prop = PropertyInfos.FirstOrDefault(x => x.Name == propertyName);
+                var prop = this.PropertyInfos.FirstOrDefault(x => x.Name == propertyName);
                 if (prop == null)
                 {
-                    Trace.TraceInformation(
-                        $"{nameof(PropertyConverter<T>)}.{nameof(GetSystemValueFromBinding)}: {propertyName} cannot be converted or doesn't exist. Returning 0");
+                    Trace.TraceInformation($"{nameof(PropertyConverter<T>)}.{nameof(GetSystemValueFromBinding)}: {propertyName} cannot be converted or doesn't exist. Returning 0");
                     return 0;
                 }
 
                 //using reflection we will set the value of the property prop
-                return GetSystemValueFromBinding(prop);
+                return this.GetSystemValueFromBinding(prop);
             }
 
-            Trace.TraceInformation(
-                $"{nameof(PropertyConverter<T>)}.{nameof(GetSystemValueFromBinding)}: {nameof(PropertyInfos)} is null. Returning 0");
+            Trace.TraceInformation($"{nameof(PropertyConverter<T>)}.{nameof(GetSystemValueFromBinding)}: {nameof(PropertyInfos)} is null. Returning 0");
             return 0;
         }
 
@@ -75,19 +74,17 @@ namespace H.Core.Converters
         {
             if (PropertyInfos != null)
             {
-                var prop = PropertyInfos.FirstOrDefault(x => x.Name == propertyName);
+                var prop = this.PropertyInfos.FirstOrDefault(x => x.Name == propertyName);
                 if (prop == null)
                 {
-                    Trace.TraceInformation(
-                        $"{nameof(PropertyConverter<T>)}.{nameof(GetBindingValueFromSystem)}: {propertyName} cannot be converted or doesn't exist. Returning 0");
+                    Trace.TraceInformation($"{nameof(PropertyConverter<T>)}.{nameof(GetBindingValueFromSystem)}: {propertyName} cannot be converted or doesn't exist. Returning 0");
                     return 0;
                 }
 
-                return GetBindingValueFromSystem(prop);
+                return this.GetBindingValueFromSystem(prop);
             }
 
-            Trace.TraceInformation(
-                $"{nameof(PropertyConverter<T>)}.{nameof(GetSystemValueFromBinding)}: {nameof(PropertyInfos)} is null. Returning 0");
+            Trace.TraceInformation($"{nameof(PropertyConverter<T>)}.{nameof(GetSystemValueFromBinding)}: {nameof(PropertyInfos)} is null. Returning 0");
             return 0;
         }
 
@@ -98,25 +95,25 @@ namespace H.Core.Converters
             var attrs = prop.GetCustomAttributes(typeof(UnitsAttribute), false);
 
             if (Settings.Default.MeasurementSystem == MeasurementSystemType.Metric)
+            {
                 //the gui is in metric so just return system value
-                return (double)prop.GetValue(Instance);
+                return (double)prop.GetValue(this.Instance);
+            }
             //convert for imperial
-            if (Instance != null && attrs.Length > 0)
+            if (this.Instance != null && attrs.Length > 0)
             {
                 //I now have the metricUnit of the property in the system
                 var metricUnit = ((UnitsAttribute)attrs[0]).SourceUnit;
 
                 //now I need to get the value of the property
-                var propValue = (double)prop.GetValue(Instance);
+                var propValue = (double)prop.GetValue(this.Instance);
 
                 //the imperial value for the binding
                 var imperialValue = _unitsCalculator.ConvertValueToImperialFromMetric(metricUnit, propValue);
 
                 return imperialValue;
             }
-
-            Trace.TraceError(
-                $"{nameof(PropertyConverter<T>)}.{nameof(GetSystemValueFromBinding)}: unable to convert {prop.Name} value, returning 0.");
+            Trace.TraceError($"{nameof(PropertyConverter<T>)}.{nameof(GetSystemValueFromBinding)}: unable to convert {prop.Name} value, returning 0.");
             return 0;
         }
 
@@ -125,11 +122,13 @@ namespace H.Core.Converters
         {
             //nothing to convert and return
             if (Settings.Default.MeasurementSystem == MeasurementSystemType.Metric)
-                return (double)prop.GetValue(Instance);
+            {
+                return (double)prop.GetValue(this.Instance);
+            }
 
             //get the attribute on the property first
             var attrs = prop.GetCustomAttributes(typeof(UnitsAttribute), false);
-            if (Instance != null && attrs.Length > 0)
+            if (this.Instance != null && attrs.Length > 0)
             {
                 //I now have the metricUnit of the property
                 var metricUnit = ((UnitsAttribute)attrs[0]).SourceUnit;
@@ -138,16 +137,13 @@ namespace H.Core.Converters
                 var imperialUnit = _unitsCalculator.GetImperialUnitsOfMeasurement(metricUnit);
 
                 //now I need to get the value of the property
-                var propValue = (double)prop.GetValue(Instance);
+                var propValue = (double)prop.GetValue(this.Instance);
 
                 //Convert to Metric the value entered from imperial to metric
-                var convertedValue =
-                    _unitsCalculator.ConvertValueToMetricFromImperial(imperialUnit, propValue, metricUnit);
+                var convertedValue = _unitsCalculator.ConvertValueToMetricFromImperial(imperialUnit, propValue, metricUnit);
                 return convertedValue;
             }
-
-            Trace.TraceError(
-                $"{nameof(PropertyConverter<T>)}.{nameof(GetSystemValueFromBinding)}: unable to convert {prop.Name} value, returning 0.");
+            Trace.TraceError($"{nameof(PropertyConverter<T>)}.{nameof(GetSystemValueFromBinding)}: unable to convert {prop.Name} value, returning 0.");
             return 0;
         }
 

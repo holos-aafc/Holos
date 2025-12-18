@@ -76,7 +76,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
                 @"H.CLI.TestFiles\TestTemplateFileHandler\Swine",
             };
 
-            templateFileHandler.validateTemplateFiles(validDirectoryPaths);
+            templateFileHandler.ValidateTemplateFiles(validDirectoryPaths);
             Assert.IsTrue(File.Exists(@"H.CLI.TestFiles\TestTemplateFileHandler\Shelterbelts\Shelterbelts_Example-en-CA.csv"));
             Assert.IsTrue(File.Exists(@"H.CLI.TestFiles\TestTemplateFileHandler\Beef\Beef_Example-en-CA.csv"));
             Assert.IsTrue(File.Exists(@"H.CLI.TestFiles\TestTemplateFileHandler\Dairy\Dairy_Example-en-CA.csv"));

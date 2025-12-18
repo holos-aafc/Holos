@@ -69,7 +69,7 @@ namespace H.Content.Properties {
         ///48,Alberta,4870,Census Agricultural Region 7,1,242024,242
         ///48,Alberta,4870,Census Agricultural Region 7,,242025,242
         ///48,Alberta,4870,Census Agricultural Region 7,,242026,242
-        ///48,Alberta,4860,Census Agricultural Region 6,0,2 [rest of string was truncated]&quot;;.
+        ///48,Alberta,4860,Census Agricultural Region 6,0,242027,24 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ab_car_to_slc {
             get {
@@ -82,7 +82,7 @@ namespace H.Content.Properties {
         ///48,4810,4810,1985,Barley,113000,45700,87000,35200,77.00%,41.7,-99,2200,2488,-99,54200,28.6,-99,1540,-30%
         ///48,4810,4810,1985,Canary seed,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99
         ///48,4810,4810,1985,Canola,21900,8900,21900,8900,100.00%,19.6,-99,1100,405,-99,9200,18.5,-99,1034,-6%
-        ///48,4810,4810,1985,Chick peas,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99 [rest of string was truncated]&quot;;.
+        ///48,4810,4810,1985,Chick peas,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ab_default_yields {
             get {
@@ -99,7 +99,7 @@ namespace H.Content.Properties {
         ///4,0.708328459,0.554135546,0.469712801,0.573688849,0.707073171,0.880614184
         ///5,0.722196319,0.573494916,0.526232539,0.659527611,0.721697977,0.887372778
         ///6,0.732407352,0.588865575,0.566276594,0.690564858,0.732400258,0.891397731
-        ///7,0.739 [rest of string was truncated]&quot;;.
+        ///7,0.739519781,0 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Agt_Ratios {
             get {
@@ -112,7 +112,7 @@ namespace H.Content.Properties {
         ///59,5901,5901,1985,Barley,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99.0,-99,-99,-99.00,&quot;Non Peace, 1 - British Columbia&quot;
         ///59,5901,5901,1985,Canola,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99.0,-99,-99,-99.00,&quot;Non Peace, 1 - British Columbia&quot;
         ///59,5901,5901,1985,Oats,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99.0,-99,-99,-99.00,&quot;Non Peace, 1 - British Columbia&quot;
-        ///59,5 [rest of string was truncated]&quot;;.
+        ///59,5901, [rest of string was truncated]&quot;;.
         /// </summary>
         public static string bc_default_yields {
             get {
@@ -142,7 +142,7 @@ namespace H.Content.Properties {
         ///Cow-calf,Medium energy/protein ,Pasture Grass/Medium quality ,0.92,0.92,0.24,0.44
         ///Cow-calf,Low energy/protein,Pasture Grass/Low quality,0.76,0.92,0.24,0.44
         ///Stockers,High energy/protein ,Pasture Grass/High quality,0.9,8.31,0.08,0.02
-        ///Stockers,Medium en [rest of string was truncated]&quot;;.
+        ///Stockers,Medium energy/ [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Beef_Cattle_Pasture_Summer_Feed_Cost {
             get {
@@ -153,7 +153,7 @@ namespace H.Content.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Soil_Z,Cluster,Mortality_pct,Year,Age,Stems,DBH_cm,Height_m,Kg_pertree,km_per_ha,Stems_tosum1ha,Biomass_Mgkm,Volume_m3km,Roots_Mgkm,Fineroots_Mgkm,TEC_MgCkmyr,TEC_MgCkm,Biom_MgCkmyr,Biom_MgCkm,DOM_MgCkmyr,DOM_MgCkm
         ///BLK_,BLK_1,0,2016,1,527,0.267289221,0,0.000948767,27.62313388,13811.56694,1.81E-05,0.026164808,1.81E-05,8.15E-06,,115.0363,,0,,115.0363
-        ///BLK_,BLK_1,0,2017,2,527,3.295552969,1.566848874,0.613009453,12.21011683,6105.058415,0.026458059,1.216759745,0.005822744,0.002620235,-0.3796265,114.6567,0,0,-0. [rest of string was truncated]&quot;;.
+        ///BLK_,BLK_1,0,2017,2,527,3.295552969,1.566848874,0.613009453,12.21011683,6105.058415,0.026458059,1.216759745,0.005822744,0.002620235,-0.3796265,114.6567,0,0,-0.37 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string caragana__31_allclusters_future {
             get {
@@ -167,7 +167,7 @@ namespace H.Content.Properties {
         ///BLK_,2016,Caragana,BLK_2,0,1,,115.0363007,,0,,115.0363007,527,27.62313388,13811.56694
         ///BLK_,2016,Caragana,BLK_3,0,1,,115.0363007,,0,,115.0363007,527,27.62313388,13811.56694
         ///BLK_,2016,Caragana,BLK_4,0,1,,101.5771027,,0,,101.5771027,527,27.62313388,13811.56694
-        ///BLK_,2016,Caragana [rest of string was truncated]&quot;;.
+        ///BLK_,2016,Caragana,BLK_ [rest of string was truncated]&quot;;.
         /// </summary>
         public static string CG__31_allclusters_future_DOM {
             get {
@@ -181,7 +181,7 @@ namespace H.Content.Properties {
         ///BLK_,1956,Caragana,BLK_2,0,1,,115.0363007,,0,,115.0363007,527,27.62313388,13811.56694
         ///BLK_,1956,Caragana,BLK_3,0,1,,115.0363007,,0,,115.0363007,527,27.62313388,13811.56694
         ///BLK_,1956,Caragana,BLK_4,0,1,,101.5771027,,0,,101.5771027,527,27.62313388,13811.56694
-        ///BLK_,1956,Caragana [rest of string was truncated]&quot;;.
+        ///BLK_,1956,Caragana,BLK_ [rest of string was truncated]&quot;;.
         /// </summary>
         public static string CG_31_allclusters_past_CBM {
             get {
@@ -198,7 +198,7 @@ namespace H.Content.Properties {
         ///11002,5,1.536666055,-4.900829907,-1.682082082,32.59340555,16.24813135
         ///11002,6,7.626342001,0.61676796,4.121554949,47.47991911,84.31680966
         ///11002,7,12.52566527,4.56587496,8.54577013,61.78348927,105.5276527
-        ///11002,8,11.53468338,4.427 [rest of string was truncated]&quot;;.
+        ///11002,8,11.53468338,4.427498379,7 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string climate_norms_by_poly {
             get {
@@ -236,7 +236,9 @@ namespace H.Content.Properties {
         ///1985,27,-5.3,0.3,0
         ///1985,28,-5,3.3,0
         ///1985,29,-21.3,0,0
-        ///1985,30,-23,0 [rest of string was truncated]&quot;;.
+        ///1985,30,-23,0,0
+        ///1985,31,-22.5,0,0
+        ///1985,32, [rest of string was truncated]&quot;;.
         /// </summary>
         public static string climate_parameter_tool_input {
             get {
@@ -253,7 +255,7 @@ namespace H.Content.Properties {
         ///1001009,5,11.4838543179889,15.7803942595465,104.572234563532
         ///1001009,6,15.4858275840413,24.1277419203979,125.394948246184
         ///1001009,7,18.6767796236203,16.7030465797418,148.927639842536
-        ///1001009,8,17.9166512238538,23.1398566099131,123 [rest of string was truncated]&quot;;.
+        ///1001009,8,17.9166512238538,23.1398566099131,123.4521343 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string climateNorms_by_poly_1950_1980 {
             get {
@@ -270,7 +272,7 @@ namespace H.Content.Properties {
         ///1001009,5,11.3834654277637,21.6987096760088,105.004736008086
         ///1001009,6,15.8119834021133,23.8418279381796,130.950927555985
         ///1001009,7,18.7099012281865,23.7869175317761,151.478907374712
-        ///1001009,8,18.443656167984,24.4067383311742,129 [rest of string was truncated]&quot;;.
+        ///1001009,8,18.443656167984,24.4067383311742,129.8081006 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string climateNorms_by_poly_1960_1990 {
             get {
@@ -287,7 +289,7 @@ namespace H.Content.Properties {
         ///1001009,5,11.8190753088616,23.9391039385056,106.796227030893
         ///1001009,6,15.7596366597318,29.8116845682691,128.20855702441
         ///1001009,7,18.8299327135675,27.003584211058,149.504408479812
-        ///1001009,8,18.719449379297,25.2244802826221,131.46 [rest of string was truncated]&quot;;.
+        ///1001009,8,18.719449379297,25.2244802826221,131.4642798921 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string climateNorms_by_poly_1970_2000 {
             get {
@@ -304,7 +306,7 @@ namespace H.Content.Properties {
         ///1001009,5,12.1219253099848,27.899175601968,106.848321081153
         ///1001009,6,16.0090855725728,34.3969892402009,128.145209629529
         ///1001009,7,19.4011061731974,27.8694265089048,151.593086622988
-        ///1001009,8,19.0092049384412,23.9029748918869,132. [rest of string was truncated]&quot;;.
+        ///1001009,8,19.0092049384412,23.9029748918869,132.82856565 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string climateNorms_by_poly_1980_2010 {
             get {
@@ -322,7 +324,7 @@ namespace H.Content.Properties {
         ///1001009,6,14.5580517344396,33.5084523938833,128.242002165471
         ///1001009,7,18.0369518559067,25.7105952546533,155.416328661533
         ///1001009,8,17.6194518460168,20.3147619012448,136.523519546446
-        ///1001 [rest of string was truncated]&quot;;.
+        ///1001009,9,13. [rest of string was truncated]&quot;;.
         /// </summary>
         public static string climateNorms_by_poly_1990_2017 {
             get {
@@ -339,7 +341,7 @@ namespace H.Content.Properties {
         ///242022,2,30,A,N,F13,AB,MLD,~~~~~,N,ABMLD~~~~~N,24202202
         ///242022,3,30,A,N,U,AB,SEN,~~~~~,N,ABSEN~~~~~N,24202203
         ///242023,1,40,A,N,B07,AB,MKW,~~~~~,N,ABMKW~~~~~N,24202301
-        ///242023,2,30,A,N,F13,AB,MLD,~~ [rest of string was truncated]&quot;;.
+        ///242023,2,30,A,N,F13,AB,MLD,~~~~~,N,AB [rest of string was truncated]&quot;;.
         /// </summary>
         public static string cmp {
             get {
@@ -351,7 +353,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to year,W_N0P0,W_N45P0,W_N0P20,W_N45P20,FW_N0P0 all phases,FW_N45P0 all phases,FW_N0P20 all phases,FW_N45P20 all phases,FWW_N0P0 all phases,FWW_N45P0 all phases,FWW_N0P20 all phases,FWW_N45P20 all phases
         ///1912,33541.59,33541.59,33541.59,33541.59,32698.05,32698.05,32698.05,32698.05,30015.7,30015.7,30015.7,30015.7
         ///1922,34008,34008,34008,34008,27376.57,27376.57,27376.57,27376.57,25871.3,25871.3,25871.3,25871.3
-        ///1940,30944.16,30944.16,30944.16,30944.16,27728.87,27728.87,27728.87,27728.87,24025.89,24025.89,24025.8 [rest of string was truncated]&quot;;.
+        ///1940,30944.16,30944.16,30944.16,30944.16,27728.87,27728.87,27728.87,27728.87,24025.89,24025.89,24025.89,2 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Condensed_LethbridgeSOCData_AllRotations {
             get {
@@ -379,7 +381,7 @@ namespace H.Content.Properties {
         ///Coloured/white faba beans,0.13,0.01,0.01,0.46,0.34,0.2,975
         ///Dry peas,0.13,0.018,0.01,0.29,0.51,0.2,943
         ///Durum,0.12,0.006,0.01,0.34,0.51,0.15,1333
-        ///Flax,0.08,0.00 [rest of string was truncated]&quot;;.
+        ///Flax,0.08,0.007,0.01,0.2 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string CropFactors {
             get {
@@ -391,7 +393,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to TABLE: Nutrient Composition and Variability of Some Feedstuffs Commonly Fed to Dairy Cattle (all values on a dry basis) ,,,,,,,,,,,,,,,,,,
         ///#,Feed,Class,TDN (1 x %),DM (%),CP (%),NDICP (%),ADICP (%),EE (%),NDF (%),ADF (%),Lignin (%),Ash (%),DE-1x (Mcal/kg,ME-3x (Mcal/kg),NEL-3x (Mcal/kg),NEL-4x (Mcal/kg),NEM-3x (Mcal/kg),NEG-3x (Mcal/kg)
         ///1,ALFALFA (Medicago Sativa  17% CP),Forage,56.4,90.3,19.2,3.1,2.4,2.5,41.6,32.8,7.6,11,2.6,1.96,1.19,1.11,1.27,0.7
-        ///2,ALMOND Hulls,Conc,58.4,86.9,6.5,2.3,1.8,2.9,36.8,28.7 [rest of string was truncated]&quot;;.
+        ///2,ALMOND Hulls,Conc,58.4,86.9,6.5,2.3,1.8,2.9,36.8,28.7,14 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string dairy_feed_composition {
             get {
@@ -407,7 +409,7 @@ namespace H.Content.Properties {
         ///371,Boreal Shield West,Ontario,376,581,0.33,Eastern Canada,Fine
         ///375,Boreal Shield West,Manitoba,411,579,0.33,Black/Gray Chernozem,Fine
         ///377,Boreal Shield West,Manitoba,501,492,3.38,Eastern Canada,Fine
-        ///377,Boreal Shield West, [rest of string was truncated]&quot;;.
+        ///377,Boreal Shield West,Ontario [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ecodistrict_to_ecozone_mapping {
             get {
@@ -438,7 +440,8 @@ namespace H.Content.Properties {
         ///19,Lake Hazen
         ///20,Greely Fiord
         ///21,Eureka
-        ///2 [rest of string was truncated]&quot;;.
+        ///22,East Axel Heiburg
+        ///23 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ednames {
             get {
@@ -453,7 +456,7 @@ namespace H.Content.Properties {
         ///Methane,Solid Fraction,0.01,Fraction of biodegraded TC in SF digestate during storage
         ///Ammonia,Raw Digestate,0.36,Fraction of TAN in digestate before storage
         ///Ammonia,Liquid Fraction,0.44,Fraction of TAN in LF digestate before storage
-        ///Ammonia,Solid Fraction,0.44,Fraction of TAN in [rest of string was truncated]&quot;;.
+        ///Ammonia,Solid Fraction,0.44,Fraction of TAN in SF di [rest of string was truncated]&quot;;.
         /// </summary>
         public static string emission_factor_digestate_storage {
             get {
@@ -464,7 +467,7 @@ namespace H.Content.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Table 38a. Fuel usage induced emissions for various crops in diffferent regions of Canada for specific soils and tillage operations (in GJ ha-1),,,,,,,,,,,,,,,,,,Table 38b. Herbicide usage induced emissions for various crops in diffferent regions of Canada for specific soils and tillage operations (in GJ ha-1),,,,,,,,,,,,,,,
         ///,&quot;Alberta, Saskatchewan, Manitoba&quot;,,,,,,&quot;Atlanctic Canada, Ontario, Quebec&quot;,,,BC,,,,,,,,,&quot;Alberta, Saskatchewan, Manitoba&quot;,,,,,,&quot;Atlanctic Canada, Ontario, Quebec&quot;,,,BC,,,,,
-        ///,Black,,, [rest of string was truncated]&quot;;.
+        ///,Black,,,Br [rest of string was truncated]&quot;;.
         /// </summary>
         public static string EnergyRequirementsForCrops {
             get {
@@ -492,7 +495,7 @@ namespace H.Content.Properties {
         /// <summary>
         ///   Looks up a localized string similar to 1,Alfalfa cubes,,,100,91,18.1,39.3,8.2,,,2.1,12,1.3,45.5,7.6,56,2,1.2,0.6,31,5.1,30,30,5.5,49.3,75,75,92,1.16,0.47,1.09,1.67,1.09,0.13,,1.14,,0.9,0.33,1.29,1.49,0.28,0.28,0.7,2.05,0.16,0.25,0.77,8.54,,648.5,44.1,0.8,24.3,19.3,1,
         ///2,Alfalfa dehy,,,100,93.8,18.5,28,17,,,4,10.3,0.9,40.4,14.4,62.4,2.3,1.4,0.8,46,5.4,37,37,10,54.1,75,75,6,1.18,0.48,1.11,1.71,1.11,0.13,,1.17,,0.92,0.34,1.32,2.23,0.32,0.32,0.27,2.32,0.05,0.28,0.19,11.17,0.1,309,65.3,0.3,50.2,33,,91
-        ///3,Alfalfa fresh,,,100,30.7,23.1,50,8.7,,,1.5,6.2 [rest of string was truncated]&quot;;.
+        ///3,Alfalfa fresh,,,100,30.7,23.1,50,8.7,,,1.5,6.2,2 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string feeds {
             get {
@@ -514,7 +517,7 @@ namespace H.Content.Properties {
         ///Barley silage,Manitoba,All,80,40
         ///Barley silage,New Brunswick,All,80,40
         ///Barley silage,Newfoundland and Labrador,All,80,40
-        ///Barley [rest of string was truncated]&quot;;.
+        ///Barley silage,Nova  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string FertilizerApplicationRates {
             get {
@@ -524,7 +527,7 @@ namespace H.Content.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to name,geometry
-        ///244061,&quot;{&quot;&quot;type&quot;&quot;:&quot;&quot;Feature&quot;&quot;,&quot;&quot;geometry&quot;&quot;:{&quot;&quot;type&quot;&quot;:&quot;&quot;Polygon&quot;&quot;,&quot;&quot;coordinates&quot;&quot;:[[[-113.958097,59.360371,0],[-113.956784,59.359349,0],[-113.950569,59.354542,0],[-113.939385,59.333388,0],[-113.920045,59.302456,0],[-113.910746,59.283058,0],[-113.908583,59.272701,0],[-113.907632,59.261931,0],[-113.909313,59.256122,0],[-113.911683,59.251864,0],[-113.909979,59.249979,0],[-113.908438,59.243545,0],[-113.905776,59.232419,0],[-113.899309,59.213678,0],[-113.902441,59.18658,0],[-113.905245,59.175026,0] [rest of string was truncated]&quot;;.
+        ///244061,&quot;{&quot;&quot;type&quot;&quot;:&quot;&quot;Feature&quot;&quot;,&quot;&quot;geometry&quot;&quot;:{&quot;&quot;type&quot;&quot;:&quot;&quot;Polygon&quot;&quot;,&quot;&quot;coordinates&quot;&quot;:[[[-113.958097,59.360371,0],[-113.956784,59.359349,0],[-113.950569,59.354542,0],[-113.939385,59.333388,0],[-113.920045,59.302456,0],[-113.910746,59.283058,0],[-113.908583,59.272701,0],[-113.907632,59.261931,0],[-113.909313,59.256122,0],[-113.911683,59.251864,0],[-113.909979,59.249979,0],[-113.908438,59.243545,0],[-113.905776,59.232419,0],[-113.899309,59.213678,0],[-113.902441,59.18658,0],[-113.905245,59.175026,0], [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ft_AB {
             get {
@@ -538,7 +541,7 @@ namespace H.Content.Properties {
         ///BLK_,2016,Green Ash,BLK_2,0,1,,80.71433258,,0,,80.71433258,751,7.478855154,3739.427577
         ///BLK_,2016,Green Ash,BLK_3,0,1,,80.71433258,,0,,80.71433258,751,7.478855154,3739.427577
         ///BLK_,2016,Green Ash,BLK_4,0,1,,71.27082825,,0,,71.27082825,751,7.478855154,3739.427577
-        ///BLK_,2016,Gree [rest of string was truncated]&quot;;.
+        ///BLK_,2016,Green Ash [rest of string was truncated]&quot;;.
         /// </summary>
         public static string GA__31_allclusters_future_DOM {
             get {
@@ -552,7 +555,7 @@ namespace H.Content.Properties {
         ///BLK_,1956,Green Ash,BLK_2,0,1,,80.71433258,,0,,80.71433258,751,7.478855154,3739.427577
         ///BLK_,1956,Green Ash,BLK_3,0,1,,80.71433258,,0,,80.71433258,751,7.478855154,3739.427577
         ///BLK_,1956,Green Ash,BLK_4,0,1,,71.27082825,,0,,71.27082825,751,7.478855154,3739.427577
-        ///BLK_,1956,Gree [rest of string was truncated]&quot;;.
+        ///BLK_,1956,Green Ash [rest of string was truncated]&quot;;.
         /// </summary>
         public static string GA_31_allclusters_past_CBM {
             get {
@@ -564,7 +567,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to Soil_Z,Cluster,Mortality_pct,Year,Age,Stems,DBH_cm,Height_m,Kg_pertree,km_per_ha,Stems_tosum1ha,Biomass_Mgkm,Volume_m3km,Roots_Mgkm,Fineroots_Mgkm
         ///BLK_,BLK_1,0,2016,1,751,0.813430071,0,0.133155793,7.478855154,3739.427577,0.01337103,0.294054313,0.01337103,0.006016964
         ///BLK_,BLK_1,0,2017,2,751,1.536061645,0.809283078,0.513031065,4.821803199,2410.901599,0.079905032,1.096551794,0.044391579,0.01997621
-        ///BLK_,BLK_1,0,2018,3,751,2.346818924,1.182612658,1.260931611,4.196095822,2098.047911,0.225676359,2.261485222,0.0 [rest of string was truncated]&quot;;.
+        ///BLK_,BLK_1,0,2018,3,751,2.346818924,1.182612658,1.260931611,4.196095822,2098.047911,0.225676359,2.261485222,0.0992 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string green_ash__31_allclusters_future {
             get {
@@ -578,7 +581,7 @@ namespace H.Content.Properties {
         ///BLK_,2016,Hybrid poplar,BLK_2,0,1,,170.280304,,0,,170.280304,356,23.64490768,11822.45384
         ///BLK_,2016,Hybrid poplar,BLK_3,0,1,,170.280304,,0,,170.280304,356,23.64490768,11822.45384
         ///BLK_,2016,Hybrid poplar,BLK_4,0,1,,150.3576965,,0,,150.3576965,356,23.64490768,11822.45384
-        ///BLK_ [rest of string was truncated]&quot;;.
+        ///BLK_,2016 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string HP__31_allclusters_future_DOM {
             get {
@@ -592,7 +595,7 @@ namespace H.Content.Properties {
         ///BLK_,1956,Hybrid poplar,BLK_2,0,1,,170.280304,,0,,170.280304,356,23.64490768,11822.45384
         ///BLK_,1956,Hybrid poplar,BLK_3,0,1,,170.280304,,0,,170.280304,356,23.64490768,11822.45384
         ///BLK_,1956,Hybrid poplar,BLK_4,0,1,,150.3576965,,0,,150.3576965,356,23.64490768,11822.45384
-        ///BLK_ [rest of string was truncated]&quot;;.
+        ///BLK_,1956 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string HP_31_allclusters_past_CBM {
             get {
@@ -604,11 +607,21 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to Soil_Z,Cluster,Mortality_pct,Year,Age,Stems,DBH_cm,Height_m,Kg_pertree,km_per_ha,Stems_tosum1ha,Biomass_Mgkm,Volume_m3km,Roots_Mgkm,Fineroots_Mgkm
         ///BLK_,BLK_1,30,2020,5,249,6.056245327,6.543235302,5.767980099,5.320487677,2660.243838,0.269942741,3.430527194,0.096106215,0.043247797
         ///BLK_,BLK_1,30,2021,6,249,8.189120293,7.351447105,11.5493288,4.712381975,2356.190987,0.61026099,6.231823162,0.206424767,0.092891145
-        ///BLK_,BLK_1,30,2022,7,249,10.44325542,8.074858665,20.20964813,4.252790687,2126.395344,1.183270654,1 [rest of string was truncated]&quot;;.
+        ///BLK_,BLK_1,30,2022,7,249,10.44325542,8.074858665,20.20964813,4.252790687,2126.395344,1.183270654,10.1 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string hybrid_poplar__31_allclusters_future {
             get {
                 return ResourceManager.GetString("hybrid_poplar__31_allclusters_future", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icons8_settings_50 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_settings_50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -631,7 +644,7 @@ namespace H.Content.Properties {
         ///96,1970,01,16,16,-12.2,3,0
         ///96,1970,01,17,17,-26.4,0,0
         ///96,1970,01,18,18,-29.15,0,0
-        ///96,19 [rest of string was truncated]&quot;;.
+        ///96,1970,01,19,19,-30.55 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Kapuskasing {
             get {
@@ -662,7 +675,7 @@ namespace H.Content.Properties {
         ///19,695,BLK_4,BLACK
         ///20,696,D_GRAY_3,DARK GRAY
         ///21,697,D_GRAY_2,DARK GRAY
-        /// [rest of string was truncated]&quot;;.
+        ///22,698,D_GRAY_4,DARK G [rest of string was truncated]&quot;;.
         /// </summary>
         public static string lookup_ecodistricts_clusters {
             get {
@@ -679,7 +692,7 @@ namespace H.Content.Properties {
         ///Boreal Shield West,Fine,FallowCroppingToContinous,1314,0.0305
         ///Boreal Shield West,Fine,ContinousToFallowCropping,-1314,0.0305
         ///Atlantic Maritimes,Coarse,FallowCroppingToContinous,1314,0.0305
-        ///Atlantic M [rest of string was truncated]&quot;;.
+        ///Atlantic Maritimes [rest of string was truncated]&quot;;.
         /// </summary>
         public static string LumCMax_And_KValues_For_Fallow_Practice_Change {
             get {
@@ -695,7 +708,7 @@ namespace H.Content.Properties {
         ///Boreal Shield West,Medium,DecreaseInPerennialCroppingArea,-2757,0.0253
         ///Boreal Shield West,Fine,IncreaseInPerennialCroppingArea,3532,0.0218
         ///Boreal Shield West,Fine,DecreaseInPerennialCroppingArea,-3532,0.0218
-        ///Atlantic Maritimes,Coarse,IncreaseInPe [rest of string was truncated]&quot;;.
+        ///Atlantic Maritimes,Coarse,IncreaseInPerennial [rest of string was truncated]&quot;;.
         /// </summary>
         public static string LumCMax_And_KValues_For_Perennial_Cropping_Change {
             get {
@@ -713,7 +726,7 @@ namespace H.Content.Properties {
         ///Boreal Shield West,Coarse,NoneToIntense,0.0306,-584
         ///Boreal Shield West,Medium,IntenseToReduced,0.0253,217
         ///Boreal Shield West,Medium,ReducedToNone,0.0282,478
-        ///Boreal Shield West,Medium,IntenseT [rest of string was truncated]&quot;;.
+        ///Boreal Shield West,Medium,IntenseToNone,0.0 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string LumCMax_And_KValues_For_Tillage_Practice_Change {
             get {
@@ -725,7 +738,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to Soil_Z,Cluster,Mortality_pct,Year,Age,Stems,DBH_cm,Height_m,Kg_pertree,km_per_ha,Stems_tosum1ha,Biomass_Mgkm,Volume_m3km,Roots_Mgkm,Fineroots_Mgkm
         ///BLK_,BLK_1,0,2016,1,791,0.03929482,0,0.000632111,4.747211014,2373.605507,0.000105325,0.002380612,0.000105325,4.73963E-05
         ///BLK_,BLK_1,0,2017,2,791,0.063703857,0.339404494,0.001581441,3.941596728,1970.798364,0.000317364,0.005934413,0.001278753,0.000575439
-        ///BLK_,BLK_1,0,2018,3,791,0.464991033,0.972052097,0.068795711,3.535305134,1767.652567,0.015392562,0.131942381,0 [rest of string was truncated]&quot;;.
+        ///BLK_,BLK_1,0,2018,3,791,0.464991033,0.972052097,0.068795711,3.535305134,1767.652567,0.015392562,0.131942381,0.02 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string manitoba_maple__31_allclusters_future {
             get {
@@ -762,7 +775,8 @@ namespace H.Content.Properties {
         ///			width: 100%;
         ///		}
         ///
-        ///		#he [rest of string was truncated]&quot;;.
+        ///		#header {
+        ///			background-color:  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string map {
             get {
@@ -787,7 +801,8 @@ namespace H.Content.Properties {
         ///           }
         ///
         ///           /* Optional: Makes the sample page fill the window. */
-        ///           h [rest of string was truncated]&quot;;.
+        ///           html,
+        ///            [rest of string was truncated]&quot;;.
         /// </summary>
         public static string map___Copy {
             get {
@@ -800,7 +815,7 @@ namespace H.Content.Properties {
         ///46,4601,4601,1985,Barley,167000,67600,166000,67200,0.994011976,65.9,-99,3500,10939,-99,238200,66,-99,3544.64,0.012755102,
         ///46,4601,4601,1985,Canary seed,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99.00,-99,
         ///46,4601,4601,1985,Canola,116500,47100,116500,47100,1,26.8,-99,1500,3118,-99,70700,27,-99,1501.06,0.000707714,
-        ///46,4601,4601,1985,Chick peas,-99,-99,-99,-99,-99,-99 [rest of string was truncated]&quot;;.
+        ///46,4601,4601,1985,Chick peas,-99,-99,-99,-99,-99,-99,-99 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string mb_default_yields {
             get {
@@ -822,7 +837,8 @@ namespace H.Content.Properties {
         ///Dairy,Liquid No Crust,0.17,0,0.4
         ///Dairy,Liquid Crust,0.283,0.005,0.4
         ///Dairy,Pasture,0.01,0.02,0.2
-        ///Dairy,Solid Storage,0. [rest of string was truncated]&quot;;.
+        ///Dairy,Solid Storage,0.02,0.005,0.3
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         public static string MCFAndNitrogenOxideEmissionsForBeefDairySwine {
             get {
@@ -835,7 +851,7 @@ namespace H.Content.Properties {
         ///BLK_,2016,Manitoba maple,BLK_1,0,1,,76.63770294,,0,,76.63770294,791,4.747211014,2373.605507
         ///BLK_,2016,Manitoba maple,BLK_2,0,1,,76.63770294,,0,,76.63770294,791,4.747211014,2373.605507
         ///BLK_,2016,Manitoba maple,BLK_3,0,1,,76.63770294,,0,,76.63770294,791,4.747211014,2373.605507
-        ///BLK_,2016,Manitoba maple,BLK_4,0,1,,67.67115021,,0,,67.67115021,791,4.747211014,2373.60 [rest of string was truncated]&quot;;.
+        ///BLK_,2016,Manitoba maple,BLK_4,0,1,,67.67115021,,0,,67.67115021,791,4.747211014,2373.605507 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string MM__31_allclusters_future_DOM {
             get {
@@ -848,7 +864,7 @@ namespace H.Content.Properties {
         ///BLK_,1956,Manitoba maple,BLK_1,0,1,,76.63770294,,0,,76.63770294,791,4.747211014,2373.605507
         ///BLK_,1956,Manitoba maple,BLK_2,0,1,,76.63770294,,0,,76.63770294,791,4.747211014,2373.605507
         ///BLK_,1956,Manitoba maple,BLK_3,0,1,,76.63770294,,0,,76.63770294,791,4.747211014,2373.605507
-        ///BLK_,1956,Manitoba maple,BLK_4,0,1,,67.67115021,,0,,67.67115021,791,4.747211014,2373.60 [rest of string was truncated]&quot;;.
+        ///BLK_,1956,Manitoba maple,BLK_4,0,1,,67.67115021,,0,,67.67115021,791,4.747211014,2373.605507 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string MM_31_allclusters_past_CBM {
             get {
@@ -879,7 +895,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to PR,CARUID,PRSAD,YEAR,CROP,SEEDED,ESEED,HARV,EHARV,PERHARV,YIELD,YLDLBS,EYIELD,PRODN,PRDLBS,EPRODN,NYIELD,NYLDLBS,NEYIELD,PPYIELD,CSAD
         ///35,3501,3501,1985,Barley,69500,28000,69500,28000,1,67.8,-99,3700,4714,-99,102600,67.8,-99,3664,-0.01,Southern Ontario Region 1 - Ontario
         ///35,3501,3501,1985,Corn for grain,1116900,452000,1116900,452000,1,113,-99,7100,126224,-99,3206300,113.0,-99,7094,0.00,Southern Ontario Region 1 - Ontario
-        ///35,3501,3501,1985,Oats,59500,24000,59500,24000,1,73.5,-99,2800,4373,-99,67500,73.5,-9 [rest of string was truncated]&quot;;.
+        ///35,3501,3501,1985,Oats,59500,24000,59500,24000,1,73.5,-99,2800,4373,-99,67500,73.5,-99,2 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string on_default_yields {
             get {
@@ -903,7 +919,7 @@ namespace H.Content.Properties {
         ///0.955917764,14.80560676,17002,17
         ///0.032024911,1.033832089,14012,14
         ///1.37990242,18.14177082,1005,1
-        ///1.338231855,8 [rest of string was truncated]&quot;;.
+        ///1.338231855,8.813159309,1401 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string pat {
             get {
@@ -915,7 +931,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to PR,CARUID,PRSAD,YEAR,CROP,SEEDED,ESEED,HARV,EHARV,PERHARV,YIELD,YLDLBS,EYIELD,PRODN,PRDLBS,EPRODN,NYIELD,NYLDLBS,NEYIELD,PPYIELD,CSAD
         ///24,2401,2401,1985,Barley,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,&quot;Bas-Saint-Laurent and Gaspésie-Îles de-la-Madeleine, 1 - Québec&quot;
         ///24,2401,2401,1985,Corn for grain,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,&quot;Bas-Saint-Laurent and Gaspésie-Îles de-la-Madeleine, 1 - Québec&quot;
-        ///24,2401,2401,1985,Oats,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-9 [rest of string was truncated]&quot;;.
+        ///24,2401,2401,1985,Oats,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,- [rest of string was truncated]&quot;;.
         /// </summary>
         public static string qc_default_yields {
             get {
@@ -927,11 +943,21 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to Soil_Z,Cluster,Mortality_pct,Year,Age,Stems,DBH_cm,Height_m,Kg_pertree,km_per_ha,Stems_tosum1ha,Biomass_Mgkm,Volume_m3km,Roots_Mgkm,Fineroots_Mgkm
         ///BLK_,BLK_1,0,2016,1,610,0.122228466,0,0.008196721,6.199675663,3099.837832,0.000806494,0.87517141,0.000806494,0.000362922
         ///BLK_,BLK_1,0,2017,2,610,0.427164644,1.215685368,0.086909093,4.305439211,2152.719605,0.012313389,2.834525107,0.029920969,0.013464436
-        ///BLK_,BLK_1,0,2018,3,610,0.98821795,1.895201325,0.423067451,3.704292001,1852.146,0.069668145,5.672346451,0.113 [rest of string was truncated]&quot;;.
+        ///BLK_,BLK_1,0,2018,3,610,0.98821795,1.895201325,0.423067451,3.704292001,1852.146,0.069668145,5.672346451,0.113118 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string scots_pine__31_allclusters_future {
             get {
                 return ResourceManager.GetString("scots_pine__31_allclusters_future", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Settings_50_px {
+            get {
+                object obj = ResourceManager.GetObject("Settings_50_px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -941,7 +967,7 @@ namespace H.Content.Properties {
         ///White Spruce,0.00660,3.1832,97,22,27,19,1.3-38.0,1.9-21.5,0.6-1128.1,6-76,0.5-4.0,0-66
         ///Scots Pine,0.43264,1.8870,74,19,1,15,17.5-63.0,6.9-16.7,93.0-326.9,15-74,1.0-3.2,0-50
         ///Manitoba Maple,0.29428,1.8980,66,32,-9,32,3.2-43.6,2.9-15.2,2.8-380.1,5-100,1.0-5.0,0-47
-        ///Green Ash,0.20637,2.1217,71,48,-0. [rest of string was truncated]&quot;;.
+        ///Green Ash,0.20637,2.1217,71,48,-0.3,36, [rest of string was truncated]&quot;;.
         /// </summary>
         public static string shelterbelt_allometric_table {
             get {
@@ -954,7 +980,7 @@ namespace H.Content.Properties {
         ///Caragana,709,0,1,0.267289221286774000000000000000,0.000036201540500000000000000000,0.000016290693225000000000000000
         ///Caragana,733,0,1,0.267289221286774000000000000000,0.000036201540500000000000000000,0.000016290693225000000000000000
         ///Caragana,745,0,1,0.267289221286774000000000000000,0.000036201540500000000000000000,0.000016290693225000000000000000
-        ///Caragana,747,0,1,0.267289221286774000000000000000,0.000036201540500000000000000000 [rest of string was truncated]&quot;;.
+        ///Caragana,747,0,1,0.267289221286774000000000000000,0.000036201540500000000000000000,0.0 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string shelterbelt_ecodistrict_lookup_table {
             get {
@@ -964,7 +990,7 @@ namespace H.Content.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to SLC_FULL_POLY_SQM,ECODISTRIC,ECOREGION,ECOPROVINC,ECOZONE,Zone: 0B,Zone: 1A,Zone: 1B,Zone: 2A,Zone: 2B,Zone: 3A,Zone: 3B,Zone: 4A,Zone: 4B,Zone: 5A,Zone: 5B,Zone: 6A,Zone: 6B,Zone: 7A,Zone: 7B,Zone: 8A,Zone: 8B,Zone: 9A,Tabulated Area Estimate of Plant Hardiness Zone Raster Overlapping SLC Polygon
-        ///954749210.841000,647,139,9.2,9,0.000000,0.000000,0.000000,0.000000,955750000.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,955750000.0 [rest of string was truncated]&quot;;.
+        ///954749210.841000,647,139,9.2,9,0.000000,0.000000,0.000000,0.000000,955750000.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,955750000.00 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string shelterbelt_ecodistrict_weights {
             get {
@@ -976,7 +1002,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to Species,ECO_ID,Mortality_pct,Age,DBH_cm,km_per_ha,Stems_tosum1ha,Roots_Mgkm,Fineroots_Mgkm
         ///Caragana,709,0,1,0.267289221286774000000000000000,27.623133882935200000000000000000,13811.566941467600000000000000000000,0.000018100770250000000000000000,0.000008145346612500000000000000
         ///Caragana,733,0,1,0.267289221286774000000000000000,27.623133882935200000000000000000,13811.566941467600000000000000000000,0.000018100770250000000000000000,0.000008145346612500000000000000
-        ///Caragana,745,0,1,0.2672892212867740000000000 [rest of string was truncated]&quot;;.
+        ///Caragana,745,0,1,0.2672892212867740000000000000 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string shelterbelt_lookup_table {
             get {
@@ -992,7 +1018,8 @@ namespace H.Content.Properties {
         ///Manitoba Maple,0.0916,1.0568,0.0654,1.0568,0.1177,1.0568,2.5
         ///Poplar,0.2089,0.9651,0.3232,0.9651,0.7679,0.9651,2.5
         ///Scots Pine,0.2266,0.6716,0.2895,0.6716,0.3159,0.6716,3.5
-        ///Siberian Elm,1.6595,0.2551,2.0672,0.2551,2.6801,0.2551,2.5 [rest of string was truncated]&quot;;.
+        ///Siberian Elm,1.6595,0.2551,2.0672,0.2551,2.6801,0.2551,2.5
+        ///White  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ShelterbeltCarbonAccumulationCoefficients {
             get {
@@ -1012,7 +1039,8 @@ namespace H.Content.Properties {
         ///2001,29390,23850,32330,32330,32330,56070
         ///2002,31110,27590,25650,25650,25650,44910
         ///2003,33710,32220,29910,29910,29910,35930
-        ///2004,37770,35870,31500,31500,31500,419 [rest of string was truncated]&quot;;.
+        ///2004,37770,35870,31500,31500,31500,41980
+        ///2005,404 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string silage_yields {
             get {
@@ -1023,7 +1051,7 @@ namespace H.Content.Properties {
         /// <summary>
         ///   Looks up a localized string similar to PRUID,PRNAME,CARUID,CARNAME,Split_polys,POLY_ID,ECO_ID,OID_,POLY_ID_1,LAND_AREA,WATER_AREA,FRESH_AREA,OCEAN_AREA,TOTAL_AREA,OID_1,POLY_ID_12,CMP,PERCENT,SLOPE,STONE,LOCSF,PROVINCE,SOIL_CODE,MODIFIER,PROFILE,SOIL_ID,CMP_ID,OID_12,ECO_ID_1,ECODISTRIC,ECOREGION,ECOPROVINC,ECOZONE,Shape_Leng,Shape_Area
         ///47,Saskatchewan,4791,Census Agricultural Region 9B,,647012,647,7720,647012,28670,1412,1412,0,30082,9731,647012,1,21,A,N,U,SK,SYA,~~~~~,A,SKSYA~~~~~A,64701201,643,647,647,139,9.2,9,1.020507299,0.041732563
-        ///47,Sas [rest of string was truncated]&quot;;.
+        ///47,Saska [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sk_car_to_slc {
             get {
@@ -1036,7 +1064,7 @@ namespace H.Content.Properties {
         ///47,all,all,1976,Barley,3100000,1255500,2950000,1194000,0.951612903,46.1,-99,2500,136000,-99,2961000,46.10169492,-99,2479.899497,-0.008040201
         ///47,all,all,1976,Canary seed,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99,-99
         ///47,all,all,1976,Canola,750000,303500,750000,303500,1,22.8,-99,1300,17100,-99,387800,22.8,-99,1277.759473,-0.017108098
-        ///47,all,all,1976,Chick peas,-99,- [rest of string was truncated]&quot;;.
+        ///47,all,all,1976,Chick peas,-99,-99,- [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sk_default_yields {
             get {
@@ -1048,7 +1076,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to SOIL_ID,PROVINCE,SOIL_CODE,MODIFIER,PROFILE,LAYER_NO,UDEPTH,LDEPTH,HZN_LIT,HZN_MAS,HZN_SUF,HZN_MOD,COFRAG,DOMSAND,VFSAND,TSAND,TSILT,TCLAY,ORGCARB,PHCA,PH2,BASES,CEC,KSAT,KP0,KP10,KP33,KP1500,BD,EC,CACO3,VONPOST,WOOD
         ///ABABCgl~~~N,AB,ABC,gl~~~,N,1,-5,0,,LH,,,0,-,-9,-9,-9,-9,40,5.8,6.4,83,70,30,80,60,-9,20,0.1,0,0,4,5
         ///ABABCgl~~~N,AB,ABC,gl~~~,N,2,0,13,,A,e,,5,F,13,50,39,11,0.3,5.3,5.9,74,5,10,49,-9,18,8,1.35,0,0,-9,-9
-        ///ABABCgl~~~N,AB,ABC,gl~~~,N,3,13,23,,AB,,,5,F,11,43,29,28,0.4,4.7,5.2,74,13,10,45,-9,28,15, [rest of string was truncated]&quot;;.
+        ///ABABCgl~~~N,AB,ABC,gl~~~,N,3,13,23,,AB,,,5,F,11,43,29,28,0.4,4.7,5.2,74,13,10,45,-9,28,15,1.4 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sl_ab {
             get {
@@ -1060,7 +1088,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to SOIL_ID,PROVINCE,SOIL_CODE,MODIFIER,PROFILE,LAYER_NO,UDEPTH,LDEPTH,HZN_LIT,HZN_MAS,HZN_SUF,HZN_MOD,COFRAG,DOMSAND,VFSAND,TSAND,TSILT,TCLAY,ORGCARB,PHCA,PH2,BASES,CEC,KSAT,KP0,KP10,KP33,KP1500,BD,EC,CACO3,VONPOST,WOOD
         ///BC$AR~~~~~N,BC,$AR,~~~~~,N,1,-6,0,,LFH,,,0,-,-9,-9,-9,-9,30,5.2,5.7,30,90,21,92,35,21,14,0.3,0,0,-9,-9
         ///BC$AR~~~~~N,BC,$AR,~~~~~,N,2,0,100,,R,,,-9,-,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,2.65,-9,-9,-9,-9
-        ///BC$BR~~~~~N,BC,$BR,~~~~~,N,1,-4,0,,LFH,,,0,-,-9,-9,-9,-9,45,6,6.5,88,65,21,92,35,21,1 [rest of string was truncated]&quot;;.
+        ///BC$BR~~~~~N,BC,$BR,~~~~~,N,1,-4,0,,LFH,,,0,-,-9,-9,-9,-9,45,6,6.5,88,65,21,92,35,21,14,0 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sl_bc {
             get {
@@ -1072,7 +1100,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to SOIL_ID,PROVINCE,SOIL_CODE,MODIFIER,PROFILE,LAYER_NO,UDEPTH,LDEPTH,HZN_LIT,HZN_MAS,HZN_SUF,HZN_MOD,COFRAG,DOMSAND,VFSAND,TSAND,TSILT,TCLAY,ORGCARB,PHCA,PH2,BASES,CEC,KSAT,KP0,KP10,KP33,KP1500,BD,EC,CACO3,VONPOST,WOOD
         ///MB$AR~~~~~N,MB,$AR,~~~~~,N,1,-5,0,,LH,,,0,-,-9,-9,-9,-9,34.8,4.9,5.4,60,89,10,85,70,50,15,0.15,0,0,-9,0
         ///MB$AR~~~~~N,MB,$AR,~~~~~,N,2,0,100,,R,,,-9,-,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,2.8,-9,-9,-9,-9
-        ///MB$CB~~~~~N,MB,$CB,~~~~~,N,1,0,20,,C,k,1,75,C,0,100,0,0,0.1,7.8,8.2,100,0,60,34,6,5,1 [rest of string was truncated]&quot;;.
+        ///MB$CB~~~~~N,MB,$CB,~~~~~,N,1,0,20,,C,k,1,75,C,0,100,0,0,0.1,7.8,8.2,100,0,60,34,6,5,1,1. [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sl_mb {
             get {
@@ -1084,7 +1112,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to SOIL_ID,PROVINCE,SOIL_CODE,MODIFIER,PROFILE,LAYER_NO,UDEPTH,LDEPTH,HZN_LIT,HZN_MAS,HZN_SUF,HZN_MOD,COFRAG,DOMSAND,VFSAND,TSAND,TSILT,TCLAY,ORGCARB,PHCA,PH2,BASES,CEC,KSAT,KP0,KP10,KP33,KP1500,BD,EC,CACO3,VONPOST,WOOD
         ///NBACD125~~A,NB,ACD,125~~,A,1,0,15,,A,p,,0,VF,7,13,57,30,4,4.9,5.4,92,28,10,53,45,41,17,1.25,1,0,-9,-9
         ///NBACD125~~A,NB,ACD,125~~,A,2,15,100,,C,g,,0,VF,5,11,58,31,1.2,6,6.5,99,16,1,42,38,36,15,1.45,3,0,-9,-9
-        ///NBACD125~~N,NB,ACD,125~~,N,1,-5,0,,O,m,,-9,-,-9,-9,-9,-9,45,4.5,5,10,85,60,93,37,26,12, [rest of string was truncated]&quot;;.
+        ///NBACD125~~N,NB,ACD,125~~,N,1,-5,0,,O,m,,-9,-,-9,-9,-9,-9,45,4.5,5,10,85,60,93,37,26,12,0.1 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sl_nb {
             get {
@@ -1096,7 +1124,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to SOIL_ID,PROVINCE,SOIL_CODE,MODIFIER,PROFILE,LAYER_NO,UDEPTH,LDEPTH,HZN_LIT,HZN_MAS,HZN_SUF,HZN_MOD,COFRAG,DOMSAND,VFSAND,TSAND,TSILT,TCLAY,ORGCARB,PHCA,PH2,BASES,CEC,KSAT,KP0,KP10,KP33,KP1500,BD,EC,CACO3,VONPOST,WOOD
         ///NLAARE1~~~N,NL,AAR,E1~~~,N,2,-15,-1,,F,,,0,-,-9,-9,-9,-9,28,3.4,3.8,0,120,50,90,40,30,10,0.29,0,0,-9,-9
         ///NLAARE1~~~N,NL,AAR,E1~~~,N,3,-1,0,,H,,,0,-,-9,-9,-9,-9,28,3.3,3.8,0,120,50,90,40,30,10,0.38,0,0,-9,-9
-        ///NLAARE1~~~N,NL,AAR,E1~~~,N,4,0,15,,A,e,,0,VF,20,60,35,5,2.1,3.5,4.2,0,14,7,42,24,18,5, [rest of string was truncated]&quot;;.
+        ///NLAARE1~~~N,NL,AAR,E1~~~,N,4,0,15,,A,e,,0,VF,20,60,35,5,2.1,3.5,4.2,0,14,7,42,24,18,5,1.4 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sl_nl {
             get {
@@ -1109,7 +1137,7 @@ namespace H.Content.Properties {
         ///NSACA4~~~~A,NS,ACA,4~~~~,A,1,0,15,,A,p,,0,VF,25,30,60,10,1,5,6,100,11,10,51,36,30,9,1,0,0,-9,-9
         ///NSACA4~~~~A,NS,ACA,4~~~~,A,2,15,100,,C,,,0,VF,25,30,60,10,0,5,6,92,6,3,43,32,28,10,2,0,0,-9,-9
         ///NSACA5~~~~A,NS,ACA,5~~~~,A,1,0,15,,A,p,,0,VF,15,20,55,25,2,5,6,100,16,3,55,41,36,15,1,0,0,-9,-9
-        ///NSAC [rest of string was truncated]&quot;;.
+        ///NSACA5~~ [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sl_ns {
             get {
@@ -1121,7 +1149,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to SOIL_ID,PROVINCE,SOIL_CODE,MODIFIER,PROFILE,LAYER_NO,UDEPTH,LDEPTH,HZN_LIT,HZN_MAS,HZN_SUF,HZN_MOD,COFRAG,DOMSAND,VFSAND,TSAND,TSILT,TCLAY,ORGCARB,PHCA,PH2,BASES,CEC,KSAT,KP0,KP10,KP33,KP1500,BD,EC,CACO3,VONPOST,WOOD
         ///ONABM~~~~~A,ON,ABM,~~~~~,A,1,0,20,,A,p,,0,VF,11,23,54,23,3.1,6.4,5.9,100,39,0.511,57,50,43,14,1.16,0,0,-9,-9
         ///ONABM~~~~~A,ON,ABM,~~~~~,A,2,20,39,,B,m,,0,VF,10,23,50,27,0.5,6.3,5.8,100,27,0.312,48,40,37,19,1.39,0,0,-9,-9
-        ///ONABM~~~~~A,ON,ABM,~~~~~,A,3,39,78,,B,tg,,0,VF,0,8,30,62,0.2,6.7,6.2,100, [rest of string was truncated]&quot;;.
+        ///ONABM~~~~~A,ON,ABM,~~~~~,A,3,39,78,,B,tg,,0,VF,0,8,30,62,0.2,6.7,6.2,100,54, [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sl_on {
             get {
@@ -1133,7 +1161,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to SOIL_ID,PROVINCE,SOIL_CODE,MODIFIER,PROFILE,LAYER_NO,UDEPTH,LDEPTH,HZN_LIT,HZN_MAS,HZN_SUF,HZN_MOD,COFRAG,DOMSAND,VFSAND,TSAND,TSILT,TCLAY,ORGCARB,PHCA,PH2,BASES,CEC,KSAT,KP0,KP10,KP33,KP1500,BD,EC,CACO3,VONPOST,WOOD
         ///PEAND612~~N,PE,AND,612~~,N,1,0,10,,O,m,1,-9,-,-9,-9,-9,-9,50,5.3,6,57,147,-9,-9,-9,-9,-9,0.09,0,0,6,10
         ///PEAND612~~N,PE,AND,612~~,N,2,10,20,,O,m,2,-9,-,-9,-9,-9,-9,48,5.2,6,56,161,-9,-9,-9,-9,-9,0.12,0,0,6,5
-        ///PEAND612~~N,PE,AND,612~~,N,3,20,55,,O,m,3,-9,-,-9,-9,-9,-9,40,5.2,6,54,140,-9,-9,-9,-9 [rest of string was truncated]&quot;;.
+        ///PEAND612~~N,PE,AND,612~~,N,3,20,55,,O,m,3,-9,-,-9,-9,-9,-9,40,5.2,6,54,140,-9,-9,-9,-9,-9 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sl_pe {
             get {
@@ -1145,7 +1173,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to SOIL_ID,PROVINCE,SOIL_CODE,MODIFIER,PROFILE,LAYER_NO,UDEPTH,LDEPTH,HZN_LIT,HZN_MAS,HZN_SUF,HZN_MOD,COFRAG,DOMSAND,VFSAND,TSAND,TSILT,TCLAY,ORGCARB,PHCA,PH2,BASES,CEC,KSAT,KP0,KP10,KP33,KP1500,BD,EC,CACO3,VONPOST,WOOD
         ///QCABT50000A,QC,ABT,50000,A,1,0,17,,A,hp,,0,-,0,0,51,49,2.3,4.4,5.2,17,18,10,60,47,42,21,1.05,0,0,-9,-9
         ///QCABT50000A,QC,ABT,50000,A,2,17,29,,A,egj,,0,-,0,0,54,46,0.3,5,6.2,59,15,10,60,47,42,20,1.05,0,0,-9,-9
-        ///QCABT50000A,QC,ABT,50000,A,3,29,39,,B,tgj,,0,-,0,0,52,48,0.3,5.7,6.8,68,21,3.25,49,42, [rest of string was truncated]&quot;;.
+        ///QCABT50000A,QC,ABT,50000,A,3,29,39,,B,tgj,,0,-,0,0,52,48,0.3,5.7,6.8,68,21,3.25,49,42,39, [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sl_qc {
             get {
@@ -1157,7 +1185,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to SOIL_ID,PROVINCE,SOIL_CODE,MODIFIER,PROFILE,LAYER_NO,UDEPTH,LDEPTH,HZN_LIT,HZN_MAS,HZN_SUF,HZN_MOD,COFRAG,DOMSAND,VFSAND,TSAND,TSILT,TCLAY,ORGCARB,PHCA,PH2,BASES,CEC,KSAT,KP0,KP10,KP33,KP1500,BD,EC,CACO3,VONPOST,WOOD
         ///SKADA43~~~A,SK,ADA,43~~~,A,1,0,13,,A,p,,0,VF,12,39,32,29,1.9,6.8,7,100,25,3.1,51,-9,34,21,1.4,1,0,-9,-9
         ///SKADA43~~~A,SK,ADA,43~~~,A,2,13,40,,B,m,,0,VF,13,35,32,33,1,7.2,7.4,100,24,2.35,47,-9,35,21,1.4,1,0,-9,-9
-        ///SKADA43~~~A,SK,ADA,43~~~,A,3,40,100,,C,k,,0,F,11,35,32,33,0.1,8.3,8.3,100,20,2.35, [rest of string was truncated]&quot;;.
+        ///SKADA43~~~A,SK,ADA,43~~~,A,3,40,100,,C,k,,0,F,11,35,32,33,0.1,8.3,8.3,100,20,2.35,43, [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sl_sk {
             get {
@@ -1167,7 +1195,7 @@ namespace H.Content.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to POLY_ID,Zone: 0B,Zone: 1A,Zone: 1B,Zone: 2A,Zone: 2B,Zone: 3A,Zone: 3B,Zone: 4A,Zone: 4B,Zone: 5A,Zone: 5B,Zone: 6A,Zone: 6B,Zone: 7A,Zone: 7B,Zone: 8A,Zone: 8B,Zone: 9A,Sum Total Ratio Estimates of PHZ in SLC v3.2 Polygon
-        ///244007,0.000000000000000000000000000000,0.000000000000000000000000000000,0.000000000000000000000000000000,0.000000000000000000000000000000,0.692235952436465000000000000000,0.307764047563535000000000000000,0.000000000000000000000000000000,0.000000000000000000000000000000,0.000000000000000 [rest of string was truncated]&quot;;.
+        ///244007,0.000000000000000000000000000000,0.000000000000000000000000000000,0.000000000000000000000000000000,0.000000000000000000000000000000,0.692235952436465000000000000000,0.307764047563535000000000000000,0.000000000000000000000000000000,0.000000000000000000000000000000,0.0000000000000000 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string slc_to_hardiness_zone {
             get {
@@ -1178,7 +1206,7 @@ namespace H.Content.Properties {
         /// <summary>
         ///   Looks up a localized string similar to OBJECTID,YEAR,PROVINCE,POLY_ID,POLYID_YEAR,BARLEY,CANOLA,CORNGR,FLAXSD,OATS,SOYBNS,WHTDUR,WHTSPG,WHTWINT,ODFBNS,BORAGE,BUCWHT,CANARY,CARAWAY,CHICPEA,CORIANDER,CORNSLG,FABABEAN,LENTIL,MXDGRN,MUSTSD,DFPEAS,RYEALL,RYEFAL,RYESPG,SAFFLWR,SUGARB,SUNFLS,OHAYFD,TRITCL,WHTALL,POTATS,SUMMRF,WHITB,DFBNS,TOBACO
         ///1,1971,AB,244061,2440611971,2120,900,5165,810,1970,1885,1645,1790,1790,1730,,760,1106,330,,,13600,2452,942,2165,845,1650,1505,1550,1120,690,36500,565,3740,2200,1780,17170,,1730,1730,
-        ///2,1971,AB,244070,244070197 [rest of string was truncated]&quot;;.
+        ///2,1971,AB,244070,2440701971, [rest of string was truncated]&quot;;.
         /// </summary>
         public static string small_area_yields {
             get {
@@ -1190,7 +1218,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to OBJECTID,Year,Province,POLY_ID,POLYID_YEAR,BARLEY,CANARYSEED,CANOLA,CHICKPEAS,GRAINCORN,DRYPEAS,DURUMWHEAT,FALLRYE,FLAXSEED,LENTILS,MUSTARDSEED,OATS,RYE,SOYBEANS,SPRINGRYE,SPRINGWHEAT,SUNFLOWERSEED,TRITICALE,WHEAT,WINTERWHEAT
         ///1,1976,AB,538001,Small Area Data Region 10 - Alberta,2300,,,,,,1900,,1000,,,1900,,,,1900,,,1900,2300
         ///2,1977,AB,538001,Small Area Data Region 10 - Alberta,1700,,,,,,1100,,800,,,1000,,,,1100,,,1100,1600
-        ///3,1978,AB,538001,Small Area Data Region 10 - Alberta,2100,,900,,,,1700,,1300,,,140 [rest of string was truncated]&quot;;.
+        ///3,1978,AB,538001,Small Area Data Region 10 - Alberta,2100,,900,,,,1700,,1300,,,1400,, [rest of string was truncated]&quot;;.
         /// </summary>
         public static string small_area_yields_updated_data {
             get {
@@ -1203,7 +1231,7 @@ namespace H.Content.Properties {
         ///ABABCgl~~~N,AB,ABC,gl~~~,N,ATHABASCA,M,YU,0,-,I,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,GL
         ///ABABCst~~~A,AB,ABC,st~~~,A,ATHABASCA,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
         ///ABABCst~~~N,AB,ABC,st~~~,N,ATHABASCA,M,NO,0,-,W,MF,-,-,WC,-,-,TILL,-,-,,,,LU,GL,O
-        ///ABABC~~~~~A,AB,ABC,~~~~~,A,ATHABASCA,M,NO,0,-,W,MF [rest of string was truncated]&quot;;.
+        ///ABABC~~~~~A,AB,ABC,~~~~~,A,ATHABASCA,M,NO,0,-,W,MF,-,- [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sn_ab {
             get {
@@ -1216,7 +1244,7 @@ namespace H.Content.Properties {
         ///BC$AN~~~~~N,BC,$AN,~~~~~,N,ANTHROPOGENIC,U,-,-,-,-,-,-,-,-,-,-,ANTH,-,-,-,-,-,-,-,-
         ///BC$AR~~~~~N,BC,$AR,~~~~~,N,BEDROCK ACIDIC,N,NO,-,-,-,-,-,-,-,-,-,RKIA,-,-,-,-,-,-,-,-
         ///BC$BR~~~~~N,BC,$BR,~~~~~,N,BEDROCK BASIC,N,NO,-,-,-,-,-,-,-,-,-,RKIB,-,-,-,-,-,-,-,-
-        ///BC$CB~~~~~N,BC,$CB,~~~~~,N,COASTAL BEACHES [rest of string was truncated]&quot;;.
+        ///BC$CB~~~~~N,BC,$CB,~~~~~,N,COASTAL BEACHES,N,- [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sn_bc {
             get {
@@ -1229,7 +1257,7 @@ namespace H.Content.Properties {
         ///MB$AR~~~~~N,MB,$AR,~~~~~,N,Acidic Bedrock,N,-,-,-,-,-,-,-,-,-,-,RKIA,-,-,-,-,-,-,-,-
         ///MB$CB~~~~~N,MB,$CB,~~~~~,N,Cobble Beach,M,YU,0,-,I,FR,-,-,UD,-,-,LACU,-,-,RG,R,O,RG,R,O
         ///MB$CR~~~~~N,MB,$CR,~~~~~,N,Carbonate Bedrock,N,NO,-,-,-,-,-,-,-,-,-,RKLS,-,-,-,-,-,-,-,-
-        ///MB$ER~~~~~N,MB,$ER,~~~~~,N,Eroded S [rest of string was truncated]&quot;;.
+        ///MB$ER~~~~~N,MB,$ER,~~~~~,N,Eroded Slope [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sn_mb {
             get {
@@ -1242,7 +1270,7 @@ namespace H.Content.Properties {
         ///NBACD125~~A,NB,ACD,125~~,A,ACADIA,M,YB,0,-,P,MF,-,-,EA,-,-,MARI,-,-,GL,HG,R,GL,HG,R
         ///NBACD125~~N,NB,ACD,125~~,N,ACADIA,M,YB,0,-,P,MF,-,-,EA,-,-,MARI,-,-,GL,G,R,GL,G,R
         ///NBACD71~~~A,NB,ACD,71~~~,A,ACADIA,M,YB,0,-,MW,MF,-,-,AN,-,-,MARI,-,-,RG,HR,GL,RG,HR,GL
-        ///NBACD71~~~N,NB,ACD,71~~~,N,ACADIA,M,YB,0,-,M [rest of string was truncated]&quot;;.
+        ///NBACD71~~~N,NB,ACD,71~~~,N,ACADIA,M,YB,0,-,MW,MF [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sn_nb {
             get {
@@ -1255,7 +1283,7 @@ namespace H.Content.Properties {
         ///NLAARE1~~~N,NL,AAR,E1~~~,N,Aaron Cove,M,YU,4,PL,MW,MS,MS,-,EA,EA,EA,GLFL,-,-,PZ,FHP,GL,PZ,FHP,GL
         ///NLABH~~~~~N,NL,ABH,~~~~~,N,Abraham,M,YU,0,-,MW,F,F,-,EA,AN,UD,TILL,-,-,BR,DYB,GLE,BR,DYB,GLE
         ///NLABNE1~~~N,NL,ABN,E1~~~,N,Alderburn,M,YN,0,-,W,MS,MS,-,EA,EA,EA,TILL,-,-,PZ,HFP,O,PZ,HFP,O
-        ///NLABNE2~~~N,NL, [rest of string was truncated]&quot;;.
+        ///NLABNE2~~~N,NL,ABN, [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sn_nl {
             get {
@@ -1268,7 +1296,7 @@ namespace H.Content.Properties {
         ///NSACA4~~~~A,NS,ACA,4~~~~,A,Acadia,M,YB,0,-,MW,MF,-,-,EA,-,-,MARI,-,-,RG,GL,GL,RG,RG,GL
         ///NSACA5~~~~A,NS,ACA,5~~~~,A,Acadia,M,YB,0,-,I,MF,-,-,EA,-,-,MARI,-,-,RG,GL,GL,RG,RG,GL
         ///NSACA6~~~~A,NS,ACA,6~~~~,A,Acadia,M,YB,0,-,P,MF,-,-,EA,-,-,MARI,-,-,GL,GL,RG,GL,GL,RG
-        ///NSACA~~~~~A,NS,ACA,~~~~~,A,Acadia,M,YB [rest of string was truncated]&quot;;.
+        ///NSACA~~~~~A,NS,ACA,~~~~~,A,Acadia,M,YB,0,- [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sn_ns {
             get {
@@ -1281,7 +1309,7 @@ namespace H.Content.Properties {
         ///ONABM~~~~~A,ON,ABM,~~~~~,A,ABRAM,M,YU,0,-,I,MF,-,-,VC,-,-,LACU,-,-,LU,GL,GL,LU,GL,GL
         ///ONABO~~~~~N,ON,ABO,~~~~~,N,ALBERTON,M,YU,0,-,I,MF,-,-,AN,-,-,FLUV,-,-,RG,HR,GL,RG,HR,GL
         ///ONACE~~~~~A,ON,ACE,~~~~~,A,ANCASTER,M,YU,0,-,W,MF,-,-,VC,-,-,TILL,-,-,BR,MB,E,BR,MB,E
-        ///ONAHGSH~~~A,ON,AHG,SH~~~,A,ACHIGAN,M,Y [rest of string was truncated]&quot;;.
+        ///ONAHGSH~~~A,ON,AHG,SH~~~,A,ACHIGAN,M,YG,0, [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sn_on {
             get {
@@ -1294,7 +1322,7 @@ namespace H.Content.Properties {
         ///PEAND612~~N,PE,AND,612~~,N,Abney Road,U,YB,0,-,VP,,,-,,,-,FOPT,UNDM,-,OR,M,T,OR,M,T
         ///PEAPT~~~~~N,PE,APT,~~~~~,N,Airport,N,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
         ///PEARN611~~N,PE,ARN,611~~,N,Arlington,U,YB,0,-,VP,,-,-,,-,-,SPPT,-,-,OR,F,TY,OR,F,TY
-        ///PEARYAB~~~A,PE,ARY,AB~~~,A,Alberry,M,YU,0,-,MW,MC,-,-, [rest of string was truncated]&quot;;.
+        ///PEARYAB~~~A,PE,ARY,AB~~~,A,Alberry,M,YU,0,-,MW,MC,-,-,EA,- [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sn_pe {
             get {
@@ -1307,7 +1335,7 @@ namespace H.Content.Properties {
         ///QCABT50000A,QC,ABT,50000,A,ABITIBI,M,YB,0,-,I,VF,-,-,AN,-,-,GLLC,-,-,GL,LG,O,GL,LG,O
         ///QCAGO33000N,QC,AGO,33000,N,ARAGO,M,NO,7,FP,W,MS,-,-,EA,-,-,TILL,-,-,PZ,HFP,FR,PZ,HFP,FR
         ///QCAGR30000A,QC,AGR,30000,A,ANGE-GARDIEN,M,YB,3,CT,P,MS,-,-,AN,-,-,TILL,-,-,GL,HG,O,GL,HG,O
-        ///QCAHG10000N,QC,AHG,10000,N,ACHIGA [rest of string was truncated]&quot;;.
+        ///QCAHG10000N,QC,AHG,10000,N,ACHIGAN,M, [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sn_qc {
             get {
@@ -1320,7 +1348,7 @@ namespace H.Content.Properties {
         ///SKADA43~~~A,SK,ADA,43~~~,A,ARDILL O.BC,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,CH,B,O,CH,BC,O
         ///SKADA49~~~A,SK,ADA,49~~~,A,ARDILL O.BC,M,NO,0,-,W,MF,-,-,VC,-,-,TILL,-,-,CH,B,O,CH,BC,O
         ///SKADAR43~~A,SK,ADA,R43~~,A,ARDILL O.BC,M,NO,4,LI,W,MF,VF,-,VC,AN,-,TILL,RESD,-,CH,B,O,CH,BC,O
-        ///SKADAR49~~A,SK,ADA,R49~~,A, [rest of string was truncated]&quot;;.
+        ///SKADAR49~~A,SK,ADA,R49~~,A,ARDI [rest of string was truncated]&quot;;.
         /// </summary>
         public static string sn_sk {
             get {
@@ -1332,7 +1360,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to Ecozone,Texture,LItR,KItR,LRtN,KRtN,LItN,KItN,LRtI,KRtI,LNtR,KNtR,LNtI,KNtI,LDF,KDF,LIF,KIF,LIP,KIP,LDP,KDP
         ///Atlantic Maritimes,Medium,246,0.0227,241,0.0219,486,0.0211,-246,0.0227,-241,0.0219,-486,0.0211,1314,0.0305,-1314,0.0305,4813,0.019,-4813,0.019
         ///Boreal Plains,Medium,233,0.0219,464,0.0238,698,0.0258,-233,0.0219,-464,0.0238,-698,0.0258,1314,0.0305,-1314,0.0305,3241,0.0216,-3241,0.0216
-        ///Boreal Shield East,Medium,238,0.0266,311,0.023,549,0.0193,-238,0.0266,-311,0.023,-549,0.0193,1314,0.0305,-1314,0.0305, [rest of string was truncated]&quot;;.
+        ///Boreal Shield East,Medium,238,0.0266,311,0.023,549,0.0193,-238,0.0266,-311,0.023,-549,0.0193,1314,0.0305,-1314,0.0305,494 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string SoilCarbonEmissions {
             get {
@@ -1346,7 +1374,7 @@ namespace H.Content.Properties {
         ///BLK_,2016,Scots pine,BLK_2,0,1,,99.46031189,,0,,99.46031189,610,6.199675663,3099.837832
         ///BLK_,2016,Scots pine,BLK_3,0,1,,99.46031189,,0,,99.46031189,610,6.199675663,3099.837832
         ///BLK_,2016,Scots pine,BLK_4,0,1,,87.82353973,,0,,87.82353973,610,6.199675663,3099.837832
-        ///BLK_,2016, [rest of string was truncated]&quot;;.
+        ///BLK_,2016,Scots [rest of string was truncated]&quot;;.
         /// </summary>
         public static string SP__31_allclusters_future_DOM {
             get {
@@ -1360,7 +1388,7 @@ namespace H.Content.Properties {
         ///BLK_,1956,Hybrid poplar,BLK_2,0,1,,170.280304,,0,,170.280304,356,23.64490768,11822.45384
         ///BLK_,1956,Hybrid poplar,BLK_3,0,1,,170.280304,,0,,170.280304,356,23.64490768,11822.45384
         ///BLK_,1956,Hybrid poplar,BLK_4,0,1,,150.3576965,,0,,150.3576965,356,23.64490768,11822.45384
-        ///BLK_ [rest of string was truncated]&quot;;.
+        ///BLK_,1956 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string SP_31_allclusters_past_CBM {
             get {
@@ -1393,7 +1421,8 @@ namespace H.Content.Properties {
         ///Lactating Sow,Alberta,0.1228,
         ///Boar,Saskatchewan,0.1321,
         ///Starter,Saskatchewan,0.1292,
-        ///Grower,Saskatchewan,0.153 [rest of string was truncated]&quot;;.
+        ///Grower,Saskatchewan,0.1539,
+        ///SwineFinishe [rest of string was truncated]&quot;;.
         /// </summary>
         public static string SwineVolatileExcretion_34 {
             get {
@@ -1402,14 +1431,14 @@ namespace H.Content.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Table 1. Values for the coefficients a, b, c, d, and e required to calculate growing degree day driven crop coefficients (Kc)(from Martel et al. 2021)&quot;
-        ///Crop,a,b,c,d,e
+        ///   Looks up a localized string similar to &quot;Table 1. Values for the coefficients a; b; c; d; and e required to calculate growing degree day driven crop coefficients (Kc)(from Martel et al. 2021)&quot;,,,,,
+        ///Crop type, a, b, c, d, e
         ///Alfalfa seed,1.05E-01,3.82E-03,-6.77E-06,4.83E-09,-1.25E-12
         ///Tame legume,1.05E-01,3.82E-03,-6.77E-06,4.83E-09,-1.25E-12
         ///Barley,4.22E-02,1.51E-03,4.89E-06,-8.69E-09,2.49E-12
         ///Barley silage,4.48E-02,1.44E-03,5.25E-06,-9.33E-09,2.84E-12
         ///Barley silage underseed,4.52E-02,1.44E-03,5.23E-06,-9.26E-09,2.79E-12
-        ///Undersown Barley,4.52E-02,1.44E-03, [rest of string was truncated]&quot;;.
+        ///Undersown Barley,4.52E-02,1 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_1_Growing_Degree_Crop_Coefficients {
             get {
@@ -1429,7 +1458,7 @@ namespace H.Content.Properties {
         ///,,,
         ///Sources,&quot;: Chen et al. (2003) for Dairy Cattle, Beef Cattle, Poultry and Swine; ASAE (2005) for Horses/Mules/Asses; MWPS (2004), Hébert et al. (1991), Sørensen and Jensen (1995), Rees and Castle (2002) for Sheep  &quot;,,
         ///,,,
-        /// [rest of string was truncated]&quot;;.
+        ///-1,Average  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_10_Default_Values_For_Steady_State_Method {
             get {
@@ -1446,7 +1475,8 @@ namespace H.Content.Properties {
         ///GreenAsh,0.20637,2.1217,10.9,37,4.1,14.2,12,79,1,5,0,68
         ///Caragana,0.0284,2.576,5.3,24.2,2.5,13.6,7,43,0.4,2.4,0,29
         ///,,,,,,,,,,,,
-        ///,,,,,,, [rest of string was truncated]&quot;;.
+        ///,,,,,,,,,,,,
+        ///&quot;( [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_11_Coefficients_For_AGB_Estimation_For_Shelterbelt_Trees {
             get {
@@ -1456,7 +1486,7 @@ namespace H.Content.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to Hardiness,Species,Mortality_pct,Age,TEC_MgCkmyr_min,TEC_MgCkmyr_max,TEC_MgCkmyr_wavg,TEC_MgCkm_min,TEC_MgCkm_max,TEC_MgCkm_wavg,Biom_MgCkmyr_min,Biom_MgCkmyr_max,Biom_MgCkmyr_wavg,Biom_MgCkm_min,Biom_MgCkm_max,Biom_MgCkm_wavg,DOM_MgCkmyr_min,DOM_MgCkmyr_max,DOM_MgCkmyr_wavg,DOM_MgCkm_min,DOM_MgCkm_max,DOM_MgCkm_wavg,Stems_min,Stems_max,Stems_wavg,km_per_ha_min,km_per_ha_max,km_per_ha_wavg,Stems_tosum1ha_min,Stems_tosum1ha_max,Stems_tosum1ha_wavg
-        ///2A,Caragana,0,1,,,,59.07855988,107.8836899,64.48021885,,,,0,0 [rest of string was truncated]&quot;;.
+        ///2A,Caragana,0,1,,,,59.07855988,107.8836899,64.48021885,,,,0,0, [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_12_Shelterbelt_Carbon_Accumulation_Lookup_By_Hardiness_Zone {
             get {
@@ -1497,7 +1527,7 @@ namespace H.Content.Properties {
         ///CowCalf,High Energy/ptn,85,0.177,0.07,0.099,0.451,0,60,2.14,0,0
         ///Stockers,Low Energy/ptn (2),100,0.057,0.07,0.055,0.714,0,48,1.73,0,0
         ///Stockers,Medium Energy/ptn,97,0.124,0.07,0.071,0.535,0,55,1.97,0,0
-        ///Stockers,High Energy/ptn [rest of string was truncated]&quot;;.
+        ///Stockers,High Energy/ptn,85,0. [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_18_26_Diet_Coefficients_For_Beef_Dairy_Sheep {
             get {
@@ -1545,7 +1575,8 @@ namespace H.Content.Properties {
         ///2011,30.7,30.2,30.1,28.3,28,27.4,27,28.3,27.9,28.5
         ///2012,30.4,30.9,30.6,28.4,28.4,27.4,27.1,27.9,27.9,28.5
         ///2013,32.7,32.8,32,30.7,30.2,28.7,28.5,29.1,29.6,29.7
-        ///2014,32.6,33,32.9,29.8,29.5,28.8,27.6,28.4,30 [rest of string was truncated]&quot;;.
+        ///2014,32.6,33,32.9,29.8,29.5,28.8,27.6,28.4,30,29.3
+        ///201 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_21_Average_Milk_Production_For_Dairy_Cows_By_Province {
             get {
@@ -1583,7 +1614,7 @@ namespace H.Content.Properties {
         ///,Farrow to wean,Weaning,Piglets,21,119,
         ///,Farrow to finish,,Sows (2),140,0,
         ///,Farrow to finish,Weaned,Piglets,21,119 (3),
-        ///,Farrow to finish,Weani [rest of string was truncated]&quot;;.
+        ///,Farrow to finish,Weaning,Weaners, [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_28_Average_Number_Of_Production_Days {
             get {
@@ -1603,7 +1634,8 @@ namespace H.Content.Properties {
         ///Chicken layers,7,92,0.6,0.6,0.12 (2)
         ///Turkeys,7,92,0.6,0.6,0.32 (2)
         ///Ducks,7,92,0.6,0.6,0.2 (3)
-        ///Geese,7,92,0.6,0.6,0 [rest of string was truncated]&quot;;.
+        ///Geese,7,92,0.6,0.6,0.2 (3)(4)
+        ///L [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_29_Percentage_Total_Manure_Produced_In_Systems {
             get {
@@ -1622,7 +1654,7 @@ namespace H.Content.Properties {
         ///Grower/Finisher diet 2 (1),2.134,50,65,,17
         ///Grower/Finisher diet 3 (1),2.55,65,90,,27
         ///Grower/Finisher diet 4 (1),2.934,90,130,,45
-        ///Boar,3 [rest of string was truncated]&quot;;.
+        ///Boar,3.00,198,19 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_33_Daily_Feed_Intake_For_Swine_Groups {
             get {
@@ -1652,7 +1684,7 @@ namespace H.Content.Properties {
         ///Pullets,0.0447 (1),18.2 (4),0,0,0,0,1.37 (11),0.043 (11),133 (14)
         ///Broilers,0.095 (2),19 (5),0,0,0,0,2 (12),0.043 (11),42 (15)
         ///Cockerels,0.095,19,0,0,0,0,2,0.043,42
-        ///Roasters,0.095 (2),1 [rest of string was truncated]&quot;;.
+        ///Roasters,0.095 (2),19 (5 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_41_Poultry_N_Excretion_Rate_Parameter_Values {
             get {
@@ -1672,7 +1704,8 @@ namespace H.Content.Properties {
         ///Chicken,None,244,0.54,0,0,0,&quot;A,G&quot;
         ///Turkey,None,288,0.65,0,0,0,A
         ///Farm residues,,,,,,
-        ///Paddy straw (4),,470,0.6,90,940,6.5, [rest of string was truncated]&quot;;.
+        ///Paddy straw (4),,470,0.6,90,940,6.5,&quot;H,L&quot;
+        ///Straw [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_46_Parameters_For_Calculating_Biogas_Methane_Production_In_AD_System {
             get {
@@ -1689,7 +1722,7 @@ namespace H.Content.Properties {
         ///Urea ammonium nitrate,UAN,30,0,0,0,1.33,0.25,Brentrup et al. 2018.,
         ///Ammonium nitrate (prilled),AN,33.5,0,0,0,2.25,,Brentrup et al. 2018.,
         ///Ammonium nitrate (granulated),AN,33.5,0,0,0,2.28,,Brentrup et al. 2018.,
-        ///Calcium ammonium nitrate,CAN,27,0,0,0,1.87,,Brentrup et al [rest of string was truncated]&quot;;.
+        ///Calcium ammonium nitrate,CAN,27,0,0,0,1.87,,Brentrup et al. 2018., [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_48_Carbon_Footprint_At_Plant_Gate_For_Direct_Fertilizer_Blends {
             get {
@@ -1707,7 +1740,7 @@ namespace H.Content.Properties {
         ///1995,0.05,0.97,0.86,0.01,0.12,0.002,0.55,0.75,0.03,1.73
         ///1996,0.01,0.99,0.86,0.01,0.13,0.002,0.393,0.723,0.032,2.222
         ///1997,0.01,0.99,0.9,0.01,0.17,0.002,0.513,0.74,0.03,1.429
-        ///1998,0.03,0. [rest of string was truncated]&quot;;.
+        ///1998,0.03,0.97,0.91,0 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_49_Electricity_Conversion_Values_By_Province {
             get {
@@ -1733,7 +1766,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to ,AB,AB,AB,AB,AB,AB,SK,SK,SK,SK,SK,SK,MB,MB,MB,MB,MB,MB,ON,ON,ON,QC,QC,QC,NB,NB,NB,NS,NS,NS,NFLD,NFLD,NFLD,PEI,PEI,PEI,BC,BC,BC,BC,BC,BC
         ///,Black,Black,Black,Brown,Brown,Brown,Black,Black,Black,Brown,Brown,Brown,Black,Black,Black,Brown,Brown,Brown,East,East,East,East,East,East,East,East,East,East,East,East,East,East,East,East,East,East,Black,Black,Black,Brown,Brown,Brown
         ///CROP,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT
-        ///Fallow, [rest of string was truncated]&quot;;.
+        ///Fallow,2.3 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_50_Fuel_Energy_Requirement_Estimates_By_Region {
             get {
@@ -1745,7 +1778,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to ,AB,AB,AB,AB,AB,AB,SK,SK,SK,SK,SK,SK,MB,MB,MB,MB,MB,MB,ON,ON,ON,QC,QC,QC,NB,NB,NB,NS,NS,NS,NFLD,NFLD,NFLD,PEI,PEI,PEI,BC,BC,BC,BC,BC,BC
         ///,Black,Black,Black,Brown,Brown,Brown,Black,Black,Black,Brown,Brown,Brown,Black,Black,Black,Brown,Brown,Brown,East,East,East,East,East,East,East,East,East,East,East,East,East,East,East,East,East,East,Black,Black,Black,Brown,Brown,Brown
         ///,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT,IT,RT,NT
-        ///Fallow,0.06 [rest of string was truncated]&quot;;.
+        ///Fallow,0.06,0. [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_51_Herbicide_Energy_Requirement_Estimates_By_Region {
             get {
@@ -1793,7 +1826,8 @@ namespace H.Content.Properties {
         ///1996,1.41,0.473,0.139
         ///1997,1.426,0.474,0.142
         ///1998,1.465,0.478,0.145
-        ///1999,1.495,0.481,0.1 [rest of string was truncated]&quot;;.
+        ///1999,1.495,0.481,0.148
+        ///2000,1.513,0.481,0 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_55_Global_Radiative_Forcing {
             get {
@@ -1825,7 +1859,7 @@ namespace H.Content.Properties {
         ///,Dairy,daily,daily,daily,monthly,monthly,-,monthly
         ///,Sheep,daily,daily,daily,monthly,monthly,-,monthly
         ///,Swine,daily,daily,daily,monthly,monthly,-,monthly
-        ///,P [rest of string was truncated]&quot;;.
+        ///,Poultry,da [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_59_Output_For_Report {
             get {
@@ -1840,7 +1874,7 @@ namespace H.Content.Properties {
         ///Beef cattle,Solid storage (3),60.43,0.722,8.58,0.254,11.88,3.377
         ///Beef cattle,Compost - passive windrow (4),62.35,0.659,9.16,0.255,13.9,7.814
         ///Beef cattle,Compost - intensive windrow (5),37.42,1.041,14.48,0.398,13.91,7.814
-        ///Dairy cattle,P [rest of string was truncated]&quot;;.
+        ///Dairy cattle,Pasture [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_6_Manure_Types_And_Default_Composition {
             get {
@@ -1856,7 +1890,7 @@ namespace H.Content.Properties {
         ///1990,0.1,0.13,0.15,0.16,0.18,0.17,0.2,0.2,0.19,0.18,
         ///1995,0.09,0.13,0.15,0.16,0.18,0.17,0.19,0.19,0.19,0.18,
         ///2000,0.09,0.12,0.14,0.15,0.17,0.16,0.18,0.18,0.19,0.18,
-        ///2005,0.08,0.11,0.13,0.14,0.17,0.15,0.16,0 [rest of string was truncated]&quot;;.
+        ///2005,0.08,0.11,0.13,0.14,0.17,0.15,0.16,0.17,0.1 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_61_Fractions_of_dairy_cattle_N_volatilized {
             get {
@@ -1872,7 +1906,7 @@ namespace H.Content.Properties {
         ///1990,0.22,0.14,0.15,0.14,0.21,0.26,0.28,0.28,0.22,0.28,
         ///1995,0.22,0.13,0.13,0.12,0.21,0.25,0.27,0.27,0.22,0.27,
         ///2000,0.22,0.13,0.12,0.11,0.2,0.25,0.25,0.25,0.23,0.26,
-        ///2005,0.22,0.12,0.12,0.11,0.2,0.24,0.24,0.25,0. [rest of string was truncated]&quot;;.
+        ///2005,0.22,0.12,0.12,0.11,0.2,0.24,0.24,0.25,0.22,0.25 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_62_Fractions_of_swine_N_volatilized {
             get {
@@ -1885,7 +1919,7 @@ namespace H.Content.Properties {
         ///,,Jan ,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec
         ///British Columbia,,6.201752804,6.552435083,6.918192633,9.242312884,12.96939757,19.1135931,21.3558599,21.58294402,17.90813532,13.32843929,8.99802474,7.377690249
         ///Alberta,,2.767742149,2.376671756,4.950975575,7.786454463,12.21275064,17.70633217,19.00274808,17.92325531,14.18188056,7.394590455,4.870277062,3.824933543
-        ///Saskatchewan,,2.767742149,2.376671756,4.950975575,7.786454463,12.21275064,17.7 [rest of string was truncated]&quot;;.
+        ///Saskatchewan,,2.767742149,2.376671756,4.950975575,7.786454463,12.21275064,17.70633 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_63_Indoor_Barn_Temperatures {
             get {
@@ -1899,7 +1933,7 @@ namespace H.Content.Properties {
         ///,,,,,Rp Product,Rs Straw,Rr Root,Re Extra-root,,,Np Product,Ns Straw,Nr Root / Ne Extra-root,,,,,,,,
         ///,,,,,,,,,,,,,,,,,,,,,
         ///,,,,,,,,,,,,,,,,,,,,,
-        ///,Summerfallow,,0,,0,0,0,0,,,0,0,0,Janz [rest of string was truncated]&quot;;.
+        ///,Summerfallow,,0,,0,0,0,0,,,0,0,0,Janzen et [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_7_Relative_Biomass_Information {
             get {
@@ -1914,7 +1948,7 @@ namespace H.Content.Properties {
         ///TillFac,No-till,1,0,0,0,Tillage disturbance modifier for decay rates
         ///Ws,Conventional,1.331,0.8,2,0.386,Slope parameter for mappeti term to estimate wfac
         ///Ws,Reduced,1.331,0.8,2,0.386,Slope parameter for mappeti term to estimate wfac
-        ///Ws,No-till,1.331,0.8,2,0.386,Slope parameter for  [rest of string was truncated]&quot;;.
+        ///Ws,No-till,1.331,0.8,2,0.386,Slope parameter for mappet [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_8_Globally_Calibrated_Model_Paramters_To_Estimate_SOC_Changes {
             get {
@@ -1928,7 +1962,7 @@ namespace H.Content.Properties {
         ///,,,,,,,,,,,,
         ///Small-grain cereals,Small-grain cereals,0.38,0.015,0.248,0.0083,0.073,12,,,,,
         ///,Spring wheat,0.344 (3),0.015 (3),0.229,0.007,0.053,12,162,0.6,90,880,7.8
-        ///,Barley,0.373 (3),0.028 (3),0.21,0.009,0.046,12 [rest of string was truncated]&quot;;.
+        ///,Barley,0.373 (3),0.028 (3),0.21,0.009,0.046,12,267, [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Table_9_Default_Values_For_Nitrogen_Lignin_In_Crops {
             get {
@@ -1953,7 +1987,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to Soil_Z,Cluster,Mortality_pct,Year,Age,Stems,DBH_cm,Height_m,Kg_pertree,km_per_ha,Stems_tosum1ha,Biomass_Mgkm,Volume_m3km,Roots_Mgkm,Fineroots_Mgkm
         ///BLK_,BLK_1,15,2073,58,541,35.33924103,16.43406487,560.0194702,1.497544028,748.7720139,202.3116025,240.7484049,22.96962561,10.33633152
         ///BLK_,BLK_1,15,2074,59,541,35.57034302,16.53334999,571.7608032,1.497544028,748.7720139,206.5532577,244.7723625,22.81210979,10.26544941
-        ///BLK_,BLK_1,15,2075,60,541,35.81144714,16.63687706,584.1889648,1.497544028,748.7720139,211.0430 [rest of string was truncated]&quot;;.
+        ///BLK_,BLK_1,15,2075,60,541,35.81144714,16.63687706,584.1889648,1.497544028,748.7720139,211.0430225 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string white_spruce__31_allclusters_future {
             get {
@@ -1965,7 +1999,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to Soil_Z,Year,Species,Cluster,Mortality_pct,Age,TEC_MgCkmyr,TEC_MgCkm,Biom_MgCkmyr,Biom_MgCkm,DOM_MgCkmyr,DOM_MgCkm,Stems,km_per_ha,Stems_tosum1ha
         ///BLK_,2051,White spruce,BLK_1,30,36,3.275836468,143.8815002,2.837223768,45.25704193,0.438612729,98.62446594,446,2.020495911,1010.247955
         ///BLK_,2052,White spruce,BLK_1,30,37,3.016026735,146.8975372,2.923733234,48.18077469,0.092293337,98.71675873,446,1.965887913,982.9439565
-        ///BLK_,2053,White spruce,BLK_1,30,38,3.481854916,150.3793945,3.056187868,51.23696136,0.425667018 [rest of string was truncated]&quot;;.
+        ///BLK_,2053,White spruce,BLK_1,30,38,3.481854916,150.3793945,3.056187868,51.23696136,0.425667018,99 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string WS__31_allclusters_future_DOM {
             get {
@@ -1977,7 +2011,7 @@ namespace H.Content.Properties {
         ///   Looks up a localized string similar to Soil_Z,Year,Species,Cluster,Mortality_pct,Age,TEC_MgCkmyr,TEC_MgCkm,Biom_MgCkmyr,Biom_MgCkm,DOM_MgCkmyr,DOM_MgCkm,Stems,km_per_ha,Stems_tosum1ha
         ///BLK_,1993,White spruce,BLK_1,50,38,2.716645956,138.160675,2.115757704,37.8881073,0.600888133,100.2725677,318,2.679815629,1339.907814
         ///BLK_,1994,White spruce,BLK_1,50,39,2.678153038,140.8388214,2.140276432,40.02838516,0.537876606,100.8104401,318,2.611102407,1305.551204
-        ///BLK_,1995,White spruce,BLK_1,50,40,2.936226845,143.7750549,2.388517857,42.41690063,0.547708988,1 [rest of string was truncated]&quot;;.
+        ///BLK_,1995,White spruce,BLK_1,50,40,2.936226845,143.7750549,2.388517857,42.41690063,0.547708988,101. [rest of string was truncated]&quot;;.
         /// </summary>
         public static string WS_31_allclusters_past_CBM {
             get {

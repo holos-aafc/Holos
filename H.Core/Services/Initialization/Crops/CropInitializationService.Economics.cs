@@ -9,7 +9,10 @@ namespace H.Core.Services.Initialization.Crops
 
         public void InitializeEconomicDefaults(Farm farm)
         {
-            foreach (var viewItem in farm.GetAllCropViewItems()) InitializeEconomicDefaults(viewItem, farm);
+            foreach (var viewItem in farm.GetAllCropViewItems())
+            {
+                this.InitializeEconomicDefaults(viewItem, farm);
+            }
         }
 
         public void InitializeEconomicDefaults(
@@ -21,9 +24,9 @@ namespace H.Core.Services.Initialization.Crops
             cropViewItem.CropEconomicData.IsInitialized = false;
 
             cropViewItem.CropEconomicData = _economicsProvider.Get(
-                cropViewItem.CropType,
-                soilData.SoilFunctionalCategory,
-                soilData.Province);
+                cropType: cropViewItem.CropType,
+                soilFunctionalCategory: soilData.SoilFunctionalCategory,
+                province: soilData.Province);
 
             _economicsHelper.ConvertValuesToMetricIfNecessary(cropViewItem.CropEconomicData, farm);
 

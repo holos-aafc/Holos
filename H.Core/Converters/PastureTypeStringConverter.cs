@@ -1,11 +1,16 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using H.Core.Enumerations;
 
 namespace H.Core.Converters
 {
     public class PastureTypeStringConverter : ConverterBase
     {
-        public PastureType Convert(string input)
+        public PastureType Convert (string input)
         {
             switch (GetLettersAsLowerCase(input))
             {

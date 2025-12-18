@@ -44,7 +44,7 @@ namespace H.CLI.FileAndDirectoryAccessors
             ValidateComponentDirectories(farmDirectoryPath);
             var componentDirectories = Directory.GetDirectories(farmDirectoryPath).ToList();
             var validComponentDirectories = PrioritizeDirectoryKeys(componentDirectories);
-            _templateFileHandler.validateTemplateFiles(validComponentDirectories);
+            _templateFileHandler.ValidateTemplateFiles(validComponentDirectories);
         }
 
         public void CheckForInvalidComponentDirectoryNames(List<string> componentDirectoryPathsInAFarm, string farmDirectoryPath)
@@ -107,7 +107,7 @@ namespace H.CLI.FileAndDirectoryAccessors
         public void ValidateAndCreateLandManagementDirectories(string baseOutputDirectory, string farmName)
         {
             var listOfLandManagements = _directoryKeys.directoryWeights.Keys.Where(x => x == Properties.Resources.DefaultShelterbeltInputFolder || x == Properties.Resources.DefaultFieldsInputFolder);
-            var pathToFarmDirectory = baseOutputDirectory + @"\" + Properties.Resources.Outputs + @"\" + farmName + Properties.Resources.Results;
+            var pathToFarmDirectory = baseOutputDirectory + @"\" + farmName + Properties.Resources.Results;
             foreach (var key in listOfLandManagements)
             {
                 var landManagementComponentPath = Path.GetFullPath(String.Format(@"{0}\{1}", pathToFarmDirectory, key));
@@ -192,6 +192,9 @@ namespace H.CLI.FileAndDirectoryAccessors
         /// </summary>
         public void GetUsersFarmsPath(string[] args)
         {
+            // Needs to be reset after each complete scenario run
+            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+
             //Check if our data file that stores the Users Farms Path is made or not, if it isn't make the directory.
             Directory.CreateDirectory("FarmsPathFile");
 
@@ -251,7 +254,10 @@ namespace H.CLI.FileAndDirectoryAccessors
         {
             if (!argvalues.IsFileNameFound && !argvalues.IsFolderNameFound)
             {
-                return Directory.GetDirectories(farmsFolderPath); 
+                var directories = Directory.GetDirectories(farmsFolderPath);
+                var noOutputDirectories = directories.Where(x => x.IndexOf("output", StringComparison.InvariantCultureIgnoreCase) == -1);
+
+                return noOutputDirectories.ToArray();
             }
 
             List<string> listOfFarms = new List<string>();

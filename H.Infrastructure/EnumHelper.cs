@@ -18,12 +18,17 @@ namespace H.Infrastructure
 
         public static string GetDescription<T>(this T enumerationValue) where T : struct
         {
-            if (Dictionary.ContainsKey(enumerationValue)) return Dictionary[enumerationValue];
+            if (Dictionary.ContainsKey(enumerationValue))
+            {
+                return Dictionary[enumerationValue];
+            }
 
             var type = enumerationValue.GetType();
             if (!type.IsEnum)
+            {
                 throw new ArgumentException($"{nameof(enumerationValue)} must be of Enum type",
-                    nameof(enumerationValue));
+                                            nameof(enumerationValue));
+            }
 
             var memberInfo = type.GetMember(enumerationValue.ToString());
             if (memberInfo.Length > 0)
@@ -35,7 +40,7 @@ namespace H.Infrastructure
                 {
                     var result = ((DescriptionAttribute)attrs[0]).Description;
 
-                    if (Dictionary.ContainsKey(enumerationValue) == false) Dictionary.Add(enumerationValue, result);
+                    Dictionary.Add(enumerationValue, result);
 
                     return result;
                 }
@@ -43,6 +48,26 @@ namespace H.Infrastructure
 
             return enumerationValue.ToString();
         }
+
+        #endregion
+
+        #region Constructors
+
+        #endregion
+
+        #region Fields
+
+        #endregion
+
+        #region Properties
+
+        #endregion
+
+        #region Private Methods
+
+        #endregion
+
+        #region Event Handlers
 
         #endregion
     }

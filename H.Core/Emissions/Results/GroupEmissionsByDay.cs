@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Configuration;
+using H.Core.Providers.Animals;
 using H.Infrastructure;
 
 namespace H.Core.Emissions.Results
@@ -178,22 +180,27 @@ namespace H.Core.Emissions.Results
         public double NumberOfAnimals { get; set; }
 
         /// <summary>
-        ///     Emission factor for volatilization
-        ///     EF_volatilization
-        ///     [kg N2O-N (kg N)^-1]
+        /// Emission factor for volatilization
+        /// 
+        /// EF_volatilization
+        ///
+        /// [kg N2O-N (kg N)^-1]
         /// </summary>
         public double EmissionFactorForVolatilization { get; set; }
 
         /// <summary>
-        ///     Emission factor for leaching
-        ///     EF_leach
-        ///     [kg N2O-N (kg N)^-1]
+        /// Emission factor for leaching
+        /// 
+        /// EF_leach
+        ///
+        /// [kg N2O-N (kg N)^-1]
         /// </summary>
         public double EmissionFactorForLeaching { get; set; }
 
         /// <summary>
-        ///     Frac_leach
-        ///     (unitless)
+        /// Frac_leach
+        ///
+        /// (unitless)
         /// </summary>
         public double LeachingFraction { get; set; }
 
@@ -204,8 +211,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.1.1-1
-        ///     (kg head^-1)
+        /// Equation 3.1.1-1
+        /// 
+        /// (kg head^-1)
         /// </summary>
         public double AnimalWeight
         {
@@ -214,8 +222,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.1.1-2
-        ///     (MJ day^-1 kg^-1)
+        /// Equation 3.1.1-2
+        /// 
+        /// (MJ day^-1 kg^-1)
         /// </summary>
         public double AdjustedMaintenanceCoefficient
         {
@@ -224,10 +233,11 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.1.1-3
-        ///     Equation 3.2.1-2
-        ///     Equation 3.3.1-3
-        ///     (MJ head^-1 day^-1)
+        /// Equation 3.1.1-3
+        /// Equation 3.2.1-2
+        /// Equation 3.3.1-3
+        /// 
+        /// (MJ head^-1 day^-1)
         /// </summary>
         public double NetEnergyForMaintenance
         {
@@ -236,10 +246,11 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.1.1-4
-        ///     Equation 3.1.1-3
-        ///     Equation 3.3.1-4
-        ///     (MJ head^-1 day^-1)
+        /// Equation 3.1.1-4
+        /// Equation 3.1.1-3
+        /// Equation 3.3.1-4
+        ///
+        /// (MJ head^-1 day^-1)
         /// </summary>
         public double NetEnergyForActivity
         {
@@ -248,10 +259,11 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.1.1-5
-        ///     Equation 3.2.1-4
-        ///     Equation 3.3.1-5
-        ///     (MJ head^-1 day^-1)
+        /// Equation 3.1.1-5
+        /// Equation 3.2.1-4
+        /// Equation 3.3.1-5
+        ///
+        /// (MJ head^-1 day^-1)
         /// </summary>
         public double NetEnergyForLactation
         {
@@ -260,9 +272,10 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.1.1-6
-        ///     Equation 3.3.1-5
-        ///     (MJ head^-1 day^-1)
+        /// Equation 3.1.1-6
+        /// Equation 3.3.1-5
+        ///
+        /// (MJ head^-1 day^-1)
         /// </summary>
         public double NetEnergyForPregnancy
         {
@@ -271,9 +284,10 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.1.1-7
-        ///     Equation 3.3.1-8
-        ///     (kg head^-1 day^-1)
+        /// Equation 3.1.1-7
+        /// Equation 3.3.1-8
+        ///
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double AverageDailyGain
         {
@@ -282,9 +296,10 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.1.1-8
-        ///     Equation 3.2.1-7
-        ///     (MJ head^-1 day^-1)
+        /// Equation 3.1.1-8
+        /// Equation 3.2.1-7
+        /// 
+        /// (MJ head^-1 day^-1)
         /// </summary>
         public double NetEnergyForGain
         {
@@ -293,10 +308,11 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.1.1-9
-        ///     Equation 3.2.1-8
-        ///     Equation 3.3.1-10
-        ///     (unitless)
+        /// Equation 3.1.1-9
+        /// Equation 3.2.1-8
+        /// Equation 3.3.1-10
+        /// 
+        /// (unitless)
         /// </summary>
         public double RatioOfEnergyAvailableForMaintenance
         {
@@ -305,10 +321,11 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.1.1-10
-        ///     Equation 3.2.1-9
-        ///     Equation 3.3.1-11
-        ///     (unitless)
+        /// Equation 3.1.1-10
+        /// Equation 3.2.1-9
+        /// Equation 3.3.1-11
+        /// 
+        /// (unitless)
         /// </summary>
         public double RatioOfEnergyAvailableForGain
         {
@@ -317,20 +334,21 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.1.1-11
-        ///     Equation 3.2.1-10
-        ///     Equation 3.1.2-3
-        ///     Equation 3.3.1-12
-        ///     (MJ head^-1 day^-1)
+        /// Equation 3.1.1-11
+        /// Equation 3.2.1-10
+        /// Equation 3.1.2-3
+        /// Equation 3.3.1-12
+        /// 
+        /// (MJ head^-1 day^-1)
         /// </summary>
         public double GrossEnergyIntake
         {
             get => _grossEnergyIntake;
-            set => SetProperty(ref _grossEnergyIntake, value);
+            set => SetProperty(ref  _grossEnergyIntake, value);
         }
 
         /// <summary>
-        ///     (unitless)
+        /// (unitless)
         /// </summary>
         public double AdditiveReductionFactor
         {
@@ -339,10 +357,11 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.1.1-12
-        ///     Equation 3.2.1-11
-        ///     Equation 3.3.1-13
-        ///     (kg CH4 head^-1 day^-1)
+        /// Equation 3.1.1-12
+        /// Equation 3.2.1-11
+        /// Equation 3.3.1-13
+        ///
+        /// (kg CH4 head^-1 day^-1)
         /// </summary>
         public double EntericMethaneEmissionRate
         {
@@ -351,12 +370,13 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.1.1-13
-        ///     Equation 3.2.1-12
-        ///     Equation 3.2.2-1
-        ///     Equation 3.3.1-14
-        ///     Equation 3.4.1-1
-        ///     (kg CH4)
+        /// Equation 3.1.1-13
+        /// Equation 3.2.1-12
+        /// Equation 3.2.2-1
+        /// Equation 3.3.1-14
+        /// Equation 3.4.1-1
+        ///
+        /// (kg CH4)
         /// </summary>
         public double EntericMethaneEmission
         {
@@ -365,8 +385,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 12.3.1-1
-        ///     (kg head^-1 day^-1)
+        /// Equation 12.3.1-1
+        ///
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double DryMatterIntake
         {
@@ -375,9 +396,11 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 12.3.1-4
-        ///     Amount of carbon foraged by all animals in group
-        ///     (kg C day^-1)
+        /// Equation 12.3.1-4
+        ///
+        /// Amount of carbon foraged by all animals in group
+        ///
+        /// (kg C day^-1)
         /// </summary>
         public double TotalCarbonUptakeForGroup
         {
@@ -385,11 +408,18 @@ namespace H.Core.Emissions.Results
             set => SetProperty(ref _carbonUptake, value);
         }
 
-        public double TotalDmiUptakeForGroup => TotalCarbonUptakeForGroup / CoreConstants.CarbonConcentration;
+        public double TotalDmiUptakeForGroup
+        {
+            get
+            {
+                return this.TotalCarbonUptakeForGroup / CoreConstants.CarbonConcentration;
+            }
+        }
 
         /// <summary>
-        ///     Crude fat/ether extract intake
-        ///     (kg head^-1 day^-1)
+        /// Crude fat/ether extract intake
+        /// 
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double CrudeFatIntake
         {
@@ -398,7 +428,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg head^-1 day^-1)
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double CrudeProteinIntake
         {
@@ -407,7 +437,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg head^-1 day^-1)
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double NeutralDetergentFiberIntake
         {
@@ -416,7 +446,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg head^-1 day^-1)
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double StarchIntake
         {
@@ -425,7 +455,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg head^-1 day^-1)
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double AcidDetergentFiberIntake
         {
@@ -434,8 +464,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.1.1-14, 3.1.1-18
-        ///     (kg CH4)
+        /// Equation 3.1.1-14, 3.1.1-18
+        ///
+        /// (kg CH4)
         /// </summary>
         public double EntericMethaneEscobarEtAlAlOrBeef
         {
@@ -444,8 +475,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.1.1-15, 3.1.1-18
-        ///     (kg CH4)
+        /// Equation 3.1.1-15, 3.1.1-18
+        ///
+        /// (kg CH4)
         /// </summary>
         public double EntericMethaneLingenEtAlBeef
         {
@@ -454,8 +486,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.1.1-16, 3.1.1-18
-        ///     (kg CH4)
+        /// Equation 3.1.1-16, 3.1.1-18
+        /// 
+        /// (kg CH4)
         /// </summary>
         public double EntericMethaneEscobarEtAlLfMcBeef
         {
@@ -464,8 +497,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.1.1-17, 3.1.1-18
-        ///     (kg CH4)
+        /// Equation 3.1.1-17, 3.1.1-18
+        /// 
+        /// (kg CH4)
         /// </summary>
         public double EntericMethaneEllisEtAlBeef
         {
@@ -474,10 +508,11 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.1.1-1
-        ///     Equation 4.1.1-3
-        ///     Equation 4.1.1-2
-        ///     (kg head^-1 day^-1)
+        /// Equation 4.1.1-1
+        /// Equation 4.1.1-3
+        /// Equation 4.1.1-2
+        /// 
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double FecalCarbonExcretionRate
         {
@@ -486,8 +521,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.1.1-4
-        ///     (kg C)
+        /// Equation 4.1.1-4
+        ///
+        /// (kg C)
         /// </summary>
         public double FecalCarbonExcretion
         {
@@ -496,7 +532,8 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg C head^-1 day^-1)
+        ///
+        /// (kg C head^-1 day^-1)
         /// </summary>
         public double RateOfCarbonAddedFromBeddingMaterial
         {
@@ -505,8 +542,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.1.1-6
-        ///     (kg C)
+        /// Equation 4.1.1-6
+        ///
+        /// (kg C)
         /// </summary>
         public double CarbonAddedFromBeddingMaterial
         {
@@ -515,8 +553,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.1.1-7
-        ///     (kg C)
+        /// Equation 4.1.1-7
+        ///
+        /// (kg C)
         /// </summary>
         public double CarbonFromManureAndBedding
         {
@@ -525,19 +564,21 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.1.2-1
-        ///     Equation 4.1.2-2
-        ///     (kg head^-1 day^-1)
+        /// Equation 4.1.2-1
+        /// Equation 4.1.2-2
+        /// 
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double VolatileSolids
         {
             get => _volatileSolids;
-            set => SetProperty(ref _volatileSolids, value);
+            set => SetProperty(ref  _volatileSolids, value);
         }
 
         /// <summary>
-        ///     Equation 4.1.2-4
-        ///     (kg CH4 head^-1 day^-1)
+        /// Equation 4.1.2-4
+        ///
+        /// (kg CH4 head^-1 day^-1)
         /// </summary>
         public double ManureMethaneEmissionRate
         {
@@ -546,10 +587,11 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.1.2-5
-        ///     Equation 4.1.3-8
-        ///     Equation 4.1.3-9
-        ///     (kg CH4)
+        /// Equation 4.1.2-5
+        /// Equation 4.1.3-8
+        /// Equation 4.1.3-9
+        ///
+        /// (kg CH4)
         /// </summary>
         public double ManureMethaneEmission
         {
@@ -558,8 +600,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Total C lost as methane during manure management (kg C day^-1)
-        ///     (kg C)
+        /// Total C lost as methane during manure management (kg C day^-1)
+        /// 
+        /// (kg C)
         /// </summary>
         public double AmountOfCarbonLostAsMethaneDuringManagement
         {
@@ -568,9 +611,11 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.1.3-14
-        ///     Total amount of C flowing into storage each day (non-accumulated value)
-        ///     (kg C day^-1)
+        /// Equation 4.1.3-14
+        /// 
+        /// Total amount of C flowing into storage each day (non-accumulated value)
+        /// 
+        /// (kg C day^-1)
         /// </summary>
         public double AmountOfCarbonInStoredManure
         {
@@ -579,13 +624,14 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Amount of C in stored manure on the current day
-        ///     (kg C)
+        /// Amount of C in stored manure on the current day
+        ///
+        /// (kg C)
         /// </summary>
         public double AccumulatedAmountOfCarbonInStoredManureOnDay { get; set; }
 
         /// <summary>
-        ///     (kg head^-1 day^-1)
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double ProteinIntake
         {
@@ -594,8 +640,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.2.1-2
-        ///     (kg head^-1 day^-1)
+        /// Equation 4.2.1-2
+        /// 
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double ProteinRetainedForPregnancy
         {
@@ -604,7 +651,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg head^-1 day^-1)
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double ProteinRetainedForLactation
         {
@@ -613,8 +660,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.2.1-4
-        ///     (kg head^-1)
+        /// Equation 4.2.1-4
+        /// 
+        /// (kg head^-1)
         /// </summary>
         public double EmptyBodyWeight
         {
@@ -623,8 +671,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.2.1-5
-        ///     (kg head^-1 day^-1)
+        /// Equation 4.2.1-5
+        /// 
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double EmptyBodyGain
         {
@@ -633,8 +682,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.2.1-6
-        ///     (Mcal head^-1 day^-1)
+        /// Equation 4.2.1-6
+        /// 
+        /// (Mcal head^-1 day^-1)
         /// </summary>
         public double RetainedEnergy
         {
@@ -643,8 +693,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.2.1-7
-        ///     (kg head^-1 day^-1)
+        /// Equation 4.2.1-7
+        /// 
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double ProteinRetainedForGain
         {
@@ -653,7 +704,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg head^-1 day^-1)
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double NitrogenExcretionRate
         {
@@ -662,8 +713,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.2.1-29
-        ///     (kg N day^-1)
+        /// Equation 4.2.1-29
+        /// 
+        /// (kg N day^-1)
         /// </summary>
         public double AmountOfNitrogenExcreted
         {
@@ -672,8 +724,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.2.1-30
-        ///     (kg N head^-1 day^-1)
+        /// Equation 4.2.1-30
+        /// 
+        /// (kg N head^-1 day^-1)
         /// </summary>
         public double RateOfNitrogenAddedFromBeddingMaterial
         {
@@ -682,8 +735,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.2.1-31
-        ///     (kg N)
+        /// Equation 4.2.1-31
+        /// 
+        /// (kg N)
         /// </summary>
         public double AmountOfNitrogenAddedFromBedding
         {
@@ -692,8 +746,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.2.2-1
-        ///     (kg N2O-N head^-1 day^-1)
+        /// Equation 4.2.2-1
+        /// 
+        /// (kg N2O-N head^-1 day^-1)
         /// </summary>
         public double ManureDirectN2ONEmissionRate
         {
@@ -702,8 +757,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.2.2-2
-        ///     (kg N2O-N)
+        /// Equation 4.2.2-2
+        /// 
+        /// (kg N2O-N)
         /// </summary>
         public double ManureDirectN2ONEmission
         {
@@ -712,9 +768,10 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.3.1-1
-        ///     Equation 4.3.1-2
-        ///     (kg TAN (kg manure-N)^-1)
+        /// Equation 4.3.1-1
+        /// Equation 4.3.1-2
+        /// 
+        /// (kg TAN (kg manure-N)^-1)
         /// </summary>
         public double FractionOfNitrogenExcretedInUrine
         {
@@ -723,8 +780,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.3.1-3
-        ///     (kg TAN head^-1 day^-1)
+        /// Equation 4.3.1-3
+        /// 
+        /// (kg TAN head^-1 day^-1)
         /// </summary>
         public double TanExcretionRate
         {
@@ -733,8 +791,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.3.1-4
-        ///     (kg TAN)
+        /// Equation 4.3.1-4
+        /// 
+        /// (kg TAN)
         /// </summary>
         public double TanExcretion
         {
@@ -743,17 +802,18 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg N head^-1 day^-1)
+        /// (kg N head^-1 day^-1)
         /// </summary>
         public double FecalNitrogenExcretionRate
         {
             get => _fecalNitrogenExcretionRate;
-            set => SetProperty(ref _fecalNitrogenExcretionRate, value);
+            set => SetProperty(ref  _fecalNitrogenExcretionRate, value);
         }
 
         /// <summary>
-        ///     Equation 4.3.1-6
-        ///     (kg N day^-1)
+        /// Equation 4.3.1-6
+        /// 
+        /// (kg N day^-1)
         /// </summary>
         public double FecalNitrogenExcretion
         {
@@ -762,7 +822,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg N)
+        /// (kg N)
         /// </summary>
         public double OrganicNitrogenInStoredManure
         {
@@ -771,8 +831,8 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.3.1-8
-        ///     (unitless)
+        /// Equation 4.3.1-8
+        /// (unitless)
         /// </summary>
         public double AmbientAirTemperatureAdjustmentForHousing
         {
@@ -781,8 +841,8 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.3.1-9
-        ///     (kg NH3-N (kg TAN)^-1)
+        /// Equation 4.3.1-9
+        /// (kg NH3-N (kg TAN)^-1)
         /// </summary>
         public double AdjustedAmmoniaEmissionFactorForHousing
         {
@@ -791,10 +851,10 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.3.1-10
-        ///     Equation 4.3.1-14
-        ///     Equation 4.3.3-5
-        ///     (kg NH3-N head^-1 day^-1)
+        /// Equation 4.3.1-10
+        /// Equation 4.3.1-14
+        /// Equation 4.3.3-5
+        /// (kg NH3-N head^-1 day^-1)
         /// </summary>
         public double AmmoniaEmissionRateFromHousing
         {
@@ -803,10 +863,10 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.3.1-11
-        ///     Equation 4.3.1-15
-        ///     Equation 4.3.3-6
-        ///     (kg NH3-N)
+        /// Equation 4.3.1-11
+        /// Equation 4.3.1-15
+        /// Equation 4.3.3-6
+        /// (kg NH3-N)
         /// </summary>
         public double AmmoniaConcentrationInHousing
         {
@@ -815,7 +875,8 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg NH3)
+        ///
+        /// (kg NH3)
         /// </summary>
         public double AmmoniaEmissionsFromHousingSystem
         {
@@ -824,8 +885,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.3.2-1
-        ///     (kg TAN)
+        /// Equation 4.3.2-1
+        ///
+        /// (kg TAN)
         /// </summary>
         public double TanEnteringStorageSystem
         {
@@ -834,10 +896,12 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.3.2-8
-        ///     Equation 4.3.3-11
-        ///     The non-accumulated amount on one day
-        ///     (kg TAN)
+        /// Equation 4.3.2-8
+        /// Equation 4.3.3-11
+        /// 
+        /// The non-accumulated amount on one day
+        /// 
+        /// (kg TAN)
         /// </summary>
         public double AdjustedAmountOfTanInStoredManureOnDay
         {
@@ -846,10 +910,11 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.3.2-3
-        ///     Equation 4.3.2-4
-        ///     Equation 4.3.2-5
-        ///     (degrees C)
+        /// Equation 4.3.2-3
+        /// Equation 4.3.2-4
+        /// Equation 4.3.2-5
+        ///
+        /// (degrees C)
         /// </summary>
         public double AmbientAirTemperatureAdjustmentForStorage
         {
@@ -858,7 +923,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     kg NH3-N (kg TAN)^-1
+        /// kg NH3-N (kg TAN)^-1
         /// </summary>
         public double AdjustedAmmoniaEmissionFactorForStorage
         {
@@ -867,7 +932,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg NH3-N)
+        /// (kg NH3-N)
         /// </summary>
         public double AmmoniaLostFromStorage
         {
@@ -876,7 +941,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg NH3)
+        /// (kg NH3)
         /// </summary>
         public double AmmoniaEmissionsFromStorageSystem
         {
@@ -885,8 +950,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.3.3-1
-        ///     (fraction)
+        /// Equation 4.3.3-1
+        ///
+        /// (fraction)
         /// </summary>
         public double FractionOfManureVolatilized
         {
@@ -895,8 +961,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.3.4-2
-        ///     (kg N2O-N head^-1 day^-1)
+        /// Equation 4.3.4-2
+        ///
+        /// (kg N2O-N head^-1 day^-1)
         /// </summary>
         public double ManureVolatilizationRate
         {
@@ -905,7 +972,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg N2O-N)
+        /// (kg N2O-N)
         /// </summary>
         public double ManureVolatilizationN2ONEmission
         {
@@ -914,8 +981,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.3.4-1
-        ///     (kg N2O-N head^-1 day^-1)
+        /// Equation 4.3.4-1
+        ///
+        /// (kg N2O-N head^-1 day^-1)
         /// </summary>
         public double ManureNitrogenLeachingRate
         {
@@ -924,8 +992,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.3.4-2
-        ///     (kg N2O-N)
+        /// Equation 4.3.4-2
+        ///
+        /// (kg N2O-N)
         /// </summary>
         public double ManureN2ONLeachingEmission
         {
@@ -934,8 +1003,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.3.5-1
-        ///     (kg N2O-N)
+        /// Equation 4.3.5-1
+        ///
+        /// (kg N2O-N)
         /// </summary>
         public double ManureIndirectN2ONEmission
         {
@@ -944,7 +1014,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg N2O-N)
+        /// (kg N2O-N)
         /// </summary>
         public double ManureN2ONEmission
         {
@@ -953,7 +1023,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg TAN day^-1)
+        /// (kg TAN day^-1)
         /// </summary>
         public double AccumulatedTANAvailableForLandApplicationOnDay
         {
@@ -962,7 +1032,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg N day^-1)
+        /// (kg N day^-1)
         /// </summary>
         public double AccumulatedOrganicNitrogenAvailableForLandApplicationOnDay
         {
@@ -971,8 +1041,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.5.2-21
-        ///     (kg N day^-1)
+        /// Equation 4.5.2-21
+        /// 
+        /// (kg N day^-1)
         /// </summary>
         public double AccumulatedNitrogenAvailableForLandApplicationOnDay
         {
@@ -981,18 +1052,20 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.2.1-13
-        ///     (kg CH4)
+        /// Equation 3.2.1-13
+        ///
+        /// (kg CH4)
         /// </summary>
         public double EntericMethaneRaminHuhtanenDairy
         {
             get => _entericMethaneRaminHuhtanenDairy;
-            set => SetProperty(ref _entericMethaneRaminHuhtanenDairy, value);
+            set => SetProperty(ref  _entericMethaneRaminHuhtanenDairy, value);
         }
 
         /// <summary>
-        ///     Equation 3.2.1-14
-        ///     (kg CH4)
+        /// Equation 3.2.1-14
+        ///
+        /// (kg CH4)
         /// </summary>
         public double EntericMethaneMillsEtAlDairy
         {
@@ -1001,8 +1074,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.2.1-15
-        ///     (kg CH4)
+        /// Equation 3.2.1-15
+        ///
+        /// (kg CH4)
         /// </summary>
         public double EntericMethaneEllisEtAlDairy
         {
@@ -1011,8 +1085,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.2.1-16
-        ///     (kg CH4)
+        /// Equation 3.2.1-16
+        ///
+        /// (kg CH4)
         /// </summary>
         public double EntericMethaneNuiEtAlDairy
         {
@@ -1021,8 +1096,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.1.3-8
-        ///     (degrees Kelvin)
+        /// Equation 4.1.3-8
+        ///
+        /// (degrees Kelvin)
         /// </summary>
         public double KelvinAirTemperature
         {
@@ -1031,8 +1107,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.1.3-9
-        ///     (unitless)
+        /// Equation 4.1.3-9
+        ///
+        /// (unitless)
         /// </summary>
         public double ClimateFactor
         {
@@ -1041,8 +1118,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.1.3-3
-        ///     (kg day^-1)
+        /// Equation 4.1.3-3
+        ///
+        /// (kg day^-1)
         /// </summary>
         public double VolatileSolidsProduced
         {
@@ -1051,8 +1129,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.1.3-4
-        ///     (kg day^-1)
+        /// Equation 4.1.3-4
+        ///
+        /// (kg day^-1)
         /// </summary>
         public double VolatileSolidsLoaded
         {
@@ -1061,8 +1140,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.1.3-5
-        ///     (kg day^-1)
+        /// Equation 4.1.3-5
+        ///
+        /// (kg day^-1)
         /// </summary>
         public double VolatileSolidsAvailable
         {
@@ -1071,8 +1151,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.1.3-7
-        ///     (kg day^-1)
+        /// Equation 4.1.3-7
+        ///
+        /// (kg day^-1)
         /// </summary>
         public double VolatileSolidsConsumed
         {
@@ -1081,8 +1162,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.5.3-1
-        ///     (fraction)
+        /// Equation 4.5.3-1
+        ///
+        /// (fraction)
         /// </summary>
         public double ManureCarbonNitrogenRatio
         {
@@ -1091,8 +1173,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.5.3-2
-        ///     (1000 kg wet weight for solid manure, 1000 L for liquid manure)
+        /// Equation 4.5.3-2
+        ///
+        /// (1000 kg wet weight for solid manure, 1000 L for liquid manure)
         /// </summary>
         public double TotalVolumeOfManureAvailableForLandApplication
         {
@@ -1103,23 +1186,27 @@ namespace H.Core.Emissions.Results
         private double _totalAmountOfNitrogenInStoredManureAvailableForDay;
 
         /// <summary>
-        ///     This is the total amount available for this day only, not the accumulated amount day-to-day
-        ///     (kg N)
+        /// This is the total amount available for this day only, not the accumulated amount day-to-day
+        /// 
+        /// (kg N)
         /// </summary>
         public double TotalAmountOfNitrogenInStoredManureAvailableForDay
         {
-            get => _totalAmountOfNitrogenInStoredManureAvailableForDay;
-            set => SetProperty(ref _totalAmountOfNitrogenInStoredManureAvailableForDay, value);
+            get { return _totalAmountOfNitrogenInStoredManureAvailableForDay;}
+            set { SetProperty(ref _totalAmountOfNitrogenInStoredManureAvailableForDay, value); }
         }
 
         /// <summary>
-        ///     (kg)
+        /// (kg)
         /// </summary>
-        public double TotalVolumeOfManureAvailableForLandApplicationInKilograms =>
-            TotalVolumeOfManureAvailableForLandApplication * 1000;
+        public double TotalVolumeOfManureAvailableForLandApplicationInKilograms {
+            get
+            {
+                return this.TotalVolumeOfManureAvailableForLandApplication * 1000;
+            } }
 
         /// <summary>
-        ///     (kg NH3)
+        /// (kg NH3)
         /// </summary>
         public double AmmoniaEmissionsFromLandAppliedManure
         {
@@ -1128,7 +1215,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg NH3)
+        /// (kg NH3)
         /// </summary>
         public double NH3FromGrazingAnimals
         {
@@ -1137,8 +1224,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.2.1-9
-        ///     (kg head^-1 day^-1)
+        /// Equation 4.2.1-9
+        ///
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double ProteinIntakeFromSolidFood
         {
@@ -1147,8 +1235,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.2.1-10
-        ///     (kg head^-1 day^-1)
+        /// Equation 4.2.1-10
+        ///
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double ProteinIntakeFromMilk
         {
@@ -1157,8 +1246,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.2.1-12
-        ///     (kg head^-1 day^-1)
+        /// Equation 4.2.1-12
+        ///
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double ProteinRetainedFromSolidFood
         {
@@ -1167,8 +1257,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.2.1-13
-        ///     (kg head^-1 day^-1)
+        /// Equation 4.2.1-13
+        ///
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double ProteinRetainedFromMilk
         {
@@ -1177,11 +1268,12 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.2.1-14
-        ///     Equation 4.2.1-20
-        ///     Equation 4.2.1-23
-        ///     Equation 4.2.1-23
-        ///     (kg head^-1 day^-1)
+        /// Equation 4.2.1-14
+        /// Equation 4.2.1-20
+        /// Equation 4.2.1-23
+        /// Equation 4.2.1-23
+        ///
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double ProteinRetained
         {
@@ -1196,8 +1288,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.4.1-7
-        ///     (MJ head^-1 day^-1)
+        /// Equation 3.4.1-7
+        ///
+        /// (MJ head^-1 day^-1)
         /// </summary>
         public double NetEnergyForWoolProduction
         {
@@ -1206,7 +1299,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg)
+        /// (kg)
         /// </summary>
         public double AmountOfBeefProduced
         {
@@ -1215,8 +1308,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 3.3.1-2
-        ///     (unitless)
+        /// Equation 3.3.1-2
+        /// 
+        /// (unitless)
         /// </summary>
         public double LambEweRatio
         {
@@ -1225,8 +1319,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.1.2-2
-        ///     (unitless)
+        /// Equation 4.1.2-2
+        ///
+        /// (unitless)
         /// </summary>
         public double VolatileSolidsAdjusted
         {
@@ -1235,8 +1330,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 4.2.1-22
-        ///     (kg head^-1 day^-1)
+        /// Equation 4.2.1-22
+        ///
+        /// (kg head^-1 day^-1)
         /// </summary>
         public double ProteinRetainedByPiglets
         {
@@ -1245,27 +1341,29 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Equation 12.3.1-5
+        /// Equation 12.3.1-5
         /// </summary>
-        public double DryMatterIntakeMax
-        {
-            get => _dryMatterIntakeMax;
-            set => SetProperty(ref _dryMatterIntakeMax, value);
+        public double DryMatterIntakeMax 
+        { 
+            get => _dryMatterIntakeMax; 
+            set => SetProperty(ref _dryMatterIntakeMax, value); 
         }
 
         /// <summary>
-        ///     This is the TDN value that is needed so that the DMI does not go over the DMI_max (no equation)
-        ///     (% DM)
+        /// This is the TDN value that is needed so that the DMI does not go over the DMI_max (no equation)
+        /// 
+        /// (% DM)
         /// </summary>
-        public double OptimumTdn
-        {
-            get => _optimumTdn;
-            set => SetProperty(ref _optimumTdn, value);
+        public double OptimumTdn 
+        { 
+            get => _optimumTdn; 
+            set => SetProperty(ref _optimumTdn, value); 
         }
 
         /// <summary>
-        ///     Equation 12.3.1-2
-        ///     (kg group^-1 day^-1)
+        /// Equation 12.3.1-2
+        ///
+        /// (kg group^-1 day^-1)
         /// </summary>
         public double DryMatterIntakeForGroup
         {
@@ -1273,46 +1371,46 @@ namespace H.Core.Emissions.Results
             set => SetProperty(ref _dryMatterIntakeForGroup, value);
         }
 
-        public double FlowOfVolatileSolidsFromEnteringDigesterFreshManure
-        {
-            get => _flowOfVolatileSolidsFromEnteringDigesterFreshManure;
-            set => SetProperty(ref _flowOfVolatileSolidsFromEnteringDigesterFreshManure, value);
+        public double FlowOfVolatileSolidsFromEnteringDigesterFreshManure 
+        { 
+            get => _flowOfVolatileSolidsFromEnteringDigesterFreshManure; 
+            set => SetProperty(ref _flowOfVolatileSolidsFromEnteringDigesterFreshManure, value); 
         }
 
-        public double FlowOfNitrogenEnteringDigesterFromFreshManure
-        {
-            get => _flowOfNitrogenEnteringDigesterFromFreshManure;
-            set => SetProperty(ref _flowOfNitrogenEnteringDigesterFromFreshManure, value);
+        public double FlowOfNitrogenEnteringDigesterFromFreshManure 
+        { 
+            get => _flowOfNitrogenEnteringDigesterFromFreshManure; 
+            set => SetProperty(ref _flowOfNitrogenEnteringDigesterFromFreshManure, value); 
         }
 
-        public double FlowOfOrganicNitrogenEnteringDigesterFromFreshManure
-        {
-            get => _flowOfOrganicNitrogenEnteringDigesterFromFreshManure;
-            set => SetProperty(ref _flowOfOrganicNitrogenEnteringDigesterFromFreshManure, value);
+        public double FlowOfOrganicNitrogenEnteringDigesterFromFreshManure 
+        { 
+            get => _flowOfOrganicNitrogenEnteringDigesterFromFreshManure; 
+            set => SetProperty(ref _flowOfOrganicNitrogenEnteringDigesterFromFreshManure, value); 
         }
 
-        public double FlowOfTanEnteringDigesterFromFreshManure
-        {
-            get => _flowOfTanEnteringDigesterFromFreshManure;
-            set => SetProperty(ref _flowOfTanEnteringDigesterFromFreshManure, value);
+        public double FlowOfTanEnteringDigesterFromFreshManure 
+        { 
+            get => _flowOfTanEnteringDigesterFromFreshManure; 
+            set => SetProperty(ref _flowOfTanEnteringDigesterFromFreshManure, value); 
         }
 
-        public double FlowOfCarbonEnteringDigesterFromFreshManure
-        {
-            get => _flowOfCarbonEnteringDigesterFromFreshManure;
-            set => SetProperty(ref _flowOfCarbonEnteringDigesterFromFreshManure, value);
+        public double FlowOfCarbonEnteringDigesterFromFreshManure 
+        { 
+            get => _flowOfCarbonEnteringDigesterFromFreshManure; 
+            set => SetProperty(ref _flowOfCarbonEnteringDigesterFromFreshManure, value); 
         }
 
-        public double FlowRateOfNitrogenEnteringDigesterFromStoredManure
-        {
-            get => _flowRateOfNitrogenEnteringDigesterFromStoredManure;
-            set => SetProperty(ref _flowRateOfNitrogenEnteringDigesterFromStoredManure, value);
+        public double FlowRateOfNitrogenEnteringDigesterFromStoredManure 
+        { 
+            get => _flowRateOfNitrogenEnteringDigesterFromStoredManure; 
+            set => SetProperty(ref _flowRateOfNitrogenEnteringDigesterFromStoredManure, value); 
         }
 
-        public double FlowOfVolatileSolidsEnteringDigesterFromStoredManure
-        {
-            get => _flowOfVolatileSolidsEnteringDigesterFromStoredManure;
-            set => SetProperty(ref _flowOfVolatileSolidsEnteringDigesterFromStoredManure, value);
+        public double FlowOfVolatileSolidsEnteringDigesterFromStoredManure 
+        { 
+            get => _flowOfVolatileSolidsEnteringDigesterFromStoredManure; 
+            set => SetProperty(ref _flowOfVolatileSolidsEnteringDigesterFromStoredManure, value); 
         }
 
         public double TotalMassEnteringDigesterFromFreshManure
@@ -1402,11 +1500,11 @@ namespace H.Core.Emissions.Results
         public double PrimaryEnergyProduced
         {
             get => _primaryEnergyProduced;
-            set => SetProperty(ref _primaryEnergyProduced, value);
+            set => SetProperty(ref  _primaryEnergyProduced, value);
         }
 
         /// <summary>
-        ///     (kWh day^-1)
+        /// (kWh day^-1)
         /// </summary>
         public double ElectricityProducedFromAnaerobicDigestion
         {
@@ -1415,7 +1513,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kWh day^-1)
+        /// (kWh day^-1)
         /// </summary>
         public double HeatProducedFromAnaerobicDigestion
         {
@@ -1424,7 +1522,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kWh day^-1)
+        /// (kWh day^-1)
         /// </summary>
         public double PotentialMethaneInjectionIntoGridFromAnaerobicDigestion
         {
@@ -1577,7 +1675,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg NH3-N)
+        /// (kg NH3-N)
         /// </summary>
         public double AdjustedNH3NFromHousing
         {
@@ -1586,7 +1684,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg NH3-N)
+        /// (kg NH3-N)
         /// </summary>
         public double AdjustedAmmoniaFromStorage
         {
@@ -1595,9 +1693,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy
-        ///     have separate results for housing and storage)
-        ///     (kg NH3-N)
+        /// Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy have separate results for housing and storage)
+        ///
+        /// (kg NH3-N)
         /// </summary>
         public double AmmoniaEmissionsFromHousingAndStorage
         {
@@ -1606,9 +1704,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy
-        ///     have separate results for housing and storage)
-        ///     (kg NH3-N)
+        /// Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy have separate results for housing and storage)
+        ///
+        /// (kg NH3-N)
         /// </summary>
         public double TotalNitrogenLossesFromHousingAndStorage
         {
@@ -1617,9 +1715,9 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy
-        ///     have separate results for housing and storage)
-        ///     (kg NH3-N)
+        /// Sheep, swine, and other livestock have a combined result for emissions from housing and storage (beef and dairy have separate results for housing and storage)
+        ///
+        /// (kg NH3-N)
         /// </summary>
         public double AmmoniaEmissionRateFromHousingAndStorage
         {
@@ -1628,7 +1726,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg NH3-N)
+        /// (kg NH3-N)
         /// </summary>
         public double AdjustedTotalNitrogenEmissionsFromHousingAndStorage
         {
@@ -1637,7 +1735,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg NH3)
+        /// (kg NH3)
         /// </summary>
         public double AdjustedAmmoniaEmissionsFromHousingAndStorage
         {
@@ -1646,7 +1744,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg NO3-N)
+        /// (kg NO3-N)
         /// </summary>
         public double ManureNitrateLeachingEmission
         {
@@ -1655,51 +1753,61 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (kg N2O-N)
+        /// (kg N2O-N)
         /// </summary>
         public double N2ONLeachingEmissionsFromLandAppliedManure { get; set; }
 
         /// <summary>
-        ///     (kg N2O)
+        /// (kg N2O)
         /// </summary>
-        public double N2OLeachingEmissionsFromLandAppliedManure =>
-            CoreConstants.ConvertToN2O(N2ONLeachingEmissionsFromLandAppliedManure);
+        public double N2OLeachingEmissionsFromLandAppliedManure 
+        {
+            get
+            {
+                return CoreConstants.ConvertToN2O(this.N2ONLeachingEmissionsFromLandAppliedManure);
+            }
+        }
 
         /// <summary>
-        ///     (kg N2O)
+        /// (kg N2O)
         /// </summary>
         public double TotalIndirectN2OFromLandAppliedManure { get; set; }
 
         /// <summary>
-        ///     (kg NH3-N)
+        /// (kg NH3-N)
         /// </summary>
         public double AmmoniacalNitrogenFromLandAppliedManure { get; set; }
 
         /// <summary>
-        ///     (kg NH3)
+        /// (kg NH3)
         /// </summary>
-        public double AmmoniaFromLandAppliedManure =>
-            CoreConstants.ConvertToNH3(AmmoniacalNitrogenFromLandAppliedManure);
+        public double AmmoniaFromLandAppliedManure
+        {
+            get
+            {
+                return CoreConstants.ConvertToNH3(this.AmmoniacalNitrogenFromLandAppliedManure);
+            }
+        }
 
         /// <summary>
-        ///     (kg N2O-N)
+        /// (kg N2O-N)
         /// </summary>
         public double NitrogenEmissionsFromVolatilizedLandManureApplication { get; set; }
 
         public double AdjustedAmmoniaEmissionsFromLandApplication { get; set; }
 
         /// <summary>
-        ///     (kg TAN)
+        /// (kg TAN)
         /// </summary>
         public double AccumulatedTanInStorageOnDay { get; set; }
 
         /// <summary>
-        ///     This is the amount created each day (not the accumulated value)
+        /// This is the amount created each day (not the accumulated value)
         /// </summary>
         public double OrganicNitrogenCreatedOnDay { get; set; }
 
         /// <summary>
-        ///     This is the amount created each day (not the accumulated value)
+        /// This is the amount created each day (not the accumulated value)
         /// </summary>
         public double NonAccumulatedCarbonCreatedOnDay { get; set; }
 
@@ -1707,7 +1815,7 @@ namespace H.Core.Emissions.Results
         public double AccumulatedVolume { get; set; }
 
         /// <summary>
-        ///     Equation 4.5.2-15
+        /// Equation 4.5.2-15
         /// </summary>
         public double NonAccumulatedNitrogenEnteringPoolAvailableInStorage
         {
@@ -1716,7 +1824,7 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        ///     (degrees kelvin)
+        /// (degrees kelvin)
         /// </summary>
         public double AverageTemperatureOverLast30Days { get; set; }
 

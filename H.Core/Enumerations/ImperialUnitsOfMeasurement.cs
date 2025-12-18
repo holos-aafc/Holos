@@ -1,4 +1,5 @@
-﻿using H.Core.Properties;
+﻿using AutoMapper;
+using H.Core.Properties;
 using H.Infrastructure;
 
 namespace H.Core.Enumerations
@@ -242,6 +243,6 @@ namespace H.Core.Enumerations
         PoundsN2OPerAcre,
 
         [LocalizedDescription("PoundsN2ONPerField", typeof(Resources))]
-        PoundsN2ONPerField
+        PoundsN2ONPerField,
     }
 }

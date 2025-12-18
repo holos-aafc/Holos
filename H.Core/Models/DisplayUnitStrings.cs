@@ -1,4 +1,5 @@
-﻿using H.Core.Enumerations;
+﻿using System;
+using H.Core.Enumerations;
 using H.Core.Properties;
 using H.Infrastructure;
 
@@ -130,6 +131,14 @@ namespace H.Core.Models
 
         #endregion
 
+        #region Constructors
+
+        public DisplayUnitStrings()
+        {
+        }
+
+        #endregion
+
         #region Properties
 
         private string _kilogramsCO2;
@@ -142,14 +151,14 @@ namespace H.Core.Models
 
         public string KilogramsPerDayString
         {
-            get => _kilogramsPerDayString;
-            set => SetProperty(ref _kilogramsPerDayString, value);
+            get { return _kilogramsPerDayString; }
+            set { SetProperty(ref _kilogramsPerDayString, value); }
         }
 
         public string KilogramsPerHectareString
         {
-            get => _kilogramsPerHectareString;
-            set => SetProperty(ref _kilogramsPerHectareString, value);
+            get { return _kilogramsPerHectareString; }
+            set { SetProperty(ref _kilogramsPerHectareString, value); }
         }
 
         public string FertilizerKilogramsPerHectareString
@@ -160,494 +169,495 @@ namespace H.Core.Models
 
         public string HectaresString
         {
-            get => _hectaresString;
-            set => SetProperty(ref _hectaresString, value);
+            get { return _hectaresString; }
+            set { SetProperty(ref _hectaresString, value); }
         }
 
         public string MillimetersString
         {
-            get => _millimetersString;
-            set => SetProperty(ref _millimetersString, value);
+            get { return _millimetersString; }
+            set { SetProperty(ref _millimetersString, value); }
         }
 
         public string KilogramsString
         {
-            get => _kilogramsString;
-            set => SetProperty(ref _kilogramsString, value);
+            get { return _kilogramsString; }
+            set { SetProperty(ref _kilogramsString, value); }
         }
 
         public string MillimetersPerYearString
         {
-            get => _millimetersPerYearString;
-            set => SetProperty(ref _millimetersPerYearString, value);
+            get { return _millimetersPerYearString; }
+            set { SetProperty(ref _millimetersPerYearString, value); }
         }
 
         public string PercentageString
         {
-            get => _percentageString;
-            set => SetProperty(ref _percentageString, value);
+            get { return _percentageString; }
+            set { SetProperty(ref _percentageString, value); }
         }
 
         public string DegreesCelsiusString
         {
-            get => _degreesCelsiusString;
-            set => SetProperty(ref _degreesCelsiusString, value);
+            get { return _degreesCelsiusString; }
+            set { SetProperty(ref _degreesCelsiusString, value); }
         }
 
         public string PercentageDryMatterString
         {
-            get => _percentageDryMatterString;
-            set => SetProperty(ref _percentageDryMatterString, value);
+            get { return _percentageDryMatterString; }
+            set { SetProperty(ref _percentageDryMatterString, value); }
         }
 
         public string OneTimesPercentageString
         {
-            get => _oneTimesPercentageString;
-            set => SetProperty(ref _oneTimesPercentageString, value);
+            get { return _oneTimesPercentageString; }
+            set { SetProperty(ref _oneTimesPercentageString, value); }
         }
 
         public string PercentageCrudeProteinString
         {
-            get => _percentageCrudeProteinString;
-            set => SetProperty(ref _percentageCrudeProteinString, value);
+            get { return _percentageCrudeProteinString; }
+            set { SetProperty(ref _percentageCrudeProteinString, value); }
         }
 
         public string PercentageAFString
         {
-            get => _percentageAfString;
-            set => SetProperty(ref _percentageAfString, value);
+            get { return _percentageAfString; }
+            set { SetProperty(ref _percentageAfString, value); }
         }
 
         public string McalKgString
         {
-            get => _mCalKgString;
-            set => SetProperty(ref _mCalKgString, value);
+            get { return _mCalKgString; }
+            set { SetProperty(ref _mCalKgString, value); }
         }
 
         public string KilogramPerKilogramString
         {
-            get => _kilogramPerKilogramString;
-            set => SetProperty(ref _kilogramPerKilogramString, value);
+            get { return _kilogramPerKilogramString; }
+            set { SetProperty(ref _kilogramPerKilogramString, value); }
         }
 
         public string KilogramPerHeadPerYearString
         {
-            get => _kilogramsPerHeadPerYearString;
-            set => SetProperty(ref _kilogramsPerHeadPerYearString, value);
+            get { return _kilogramsPerHeadPerYearString; }
+            set { SetProperty(ref _kilogramsPerHeadPerYearString, value); }
         }
 
         public string KilogramPerHeadPerDayString
         {
-            get => _kilogramsPerHeadPerDayString;
-            set => SetProperty(ref _kilogramsPerHeadPerDayString, value);
+            get { return _kilogramsPerHeadPerDayString; }
+            set { SetProperty(ref _kilogramsPerHeadPerDayString, value); }
         }
 
         public string KilogramsPerKilogramProteinIntakeString
         {
-            get => _kilogramsPerKilogramProteinIntakeString;
-            set => SetProperty(ref _kilogramsPerKilogramProteinIntakeString, value);
+            get { return _kilogramsPerKilogramProteinIntakeString; }
+            set { SetProperty(ref _kilogramsPerKilogramProteinIntakeString, value); }
         }
 
         public string KilogramsN2ONPerKilogramNString
         {
-            get => _kilogramsN2OnPerKilogramNString;
-            set => SetProperty(ref _kilogramsN2OnPerKilogramNString, value);
+            get { return _kilogramsN2OnPerKilogramNString; }
+            set { SetProperty(ref _kilogramsN2OnPerKilogramNString, value); }
         }
 
         public string KilogramsN20NPerYearString
         {
-            get => _kilogramsN20NPerYearString;
-            set => SetProperty(ref _kilogramsN20NPerYearString, value);
+            get { return _kilogramsN20NPerYearString; }
+            set { SetProperty(ref _kilogramsN20NPerYearString, value); }
         }
 
         public string KilogramsN20PerYearString
         {
-            get => _kilogramsN20PerYearString;
-            set => SetProperty(ref _kilogramsN20PerYearString, value);
+            get { return _kilogramsN20PerYearString; }
+            set { SetProperty(ref _kilogramsN20PerYearString, value); }
         }
 
         public string KilogramsN20NString
         {
-            get => _kilogramsN20NString;
-            set => SetProperty(ref _kilogramsN20NString, value);
+            get { return _kilogramsN20NString; }
+            set { SetProperty(ref _kilogramsN20NString, value); }
         }
 
         public string KilogramsN2OPerHectareString
         {
-            get => _kilogramsN2OPerHectareString;
-            set => SetProperty(ref _kilogramsN2OPerHectareString, value);
+            get { return _kilogramsN2OPerHectareString; }
+            set { SetProperty(ref _kilogramsN2OPerHectareString, value); }
         }
 
         public string KilogramsNONPerHectareString
         {
-            get => _kilogramsNONPerHectareString;
-            set => SetProperty(ref _kilogramsNONPerHectareString, value);
+            get { return _kilogramsNONPerHectareString; }
+            set { SetProperty(ref _kilogramsNONPerHectareString, value); }
         }
 
         public string KilogramsNO3NPerHectareString
         {
-            get => _kilogramsNO3NPerHectareString;
-            set => SetProperty(ref _kilogramsNO3NPerHectareString, value);
+            get { return _kilogramsNO3NPerHectareString; }
+            set { SetProperty(ref _kilogramsNO3NPerHectareString, value); }
         }
 
         public string KilogramsNH4NPerHectareString
         {
-            get => _kilogramsNH4NPerHectareString;
-            set => SetProperty(ref _kilogramsNH4NPerHectareString, value);
+            get { return _kilogramsNH4NPerHectareString; }
+            set { SetProperty(ref _kilogramsNH4NPerHectareString, value); }
         }
 
         public string KilogramsN2NPerHectareString
         {
-            get => _kilogramsN2NPerHectareString;
-            set => SetProperty(ref _kilogramsN2NPerHectareString, value);
+            get { return _kilogramsN2NPerHectareString; }
+            set { SetProperty(ref _kilogramsN2NPerHectareString, value); }
         }
 
         public string DaysString
         {
-            get => _daysString;
-            set => SetProperty(ref _daysString, value);
+            get { return _daysString; }
+            set { SetProperty(ref _daysString, value); }
         }
 
         public string KilogramsCO2Equivalents
         {
-            get => _cO2Equivalents;
-            set => SetProperty(ref _cO2Equivalents, value);
+            get { return _cO2Equivalents; }
+            set { SetProperty(ref _cO2Equivalents, value); }
         }
 
         public string MegagramsCO2e
         {
-            get => _megagramsCo2E;
-            set => SetProperty(ref _megagramsCo2E, value);
+            get { return _megagramsCo2E; }
+            set { SetProperty(ref _megagramsCo2E, value); }
+
         }
 
         public string KilogramsGhgs
         {
-            get => _kilogramsGhgs;
-            set => SetProperty(ref _kilogramsGhgs, value);
+            get { return _kilogramsGhgs; }
+            set { SetProperty(ref _kilogramsGhgs, value); }
         }
 
         public string KilogramsNitrogenString
         {
-            get => _kilogramsNitrogenString;
-            set => SetProperty(ref _kilogramsNitrogenString, value);
+            get { return _kilogramsNitrogenString; }
+            set { SetProperty(ref _kilogramsNitrogenString, value); }
         }
 
         public string KilogramsNitrogenPerYearString
         {
-            get => _kilogramsNitrogenPerYearString;
-            set => SetProperty(ref _kilogramsNitrogenPerYearString, value);
+            get { return _kilogramsNitrogenPerYearString; }
+            set { SetProperty(ref _kilogramsNitrogenPerYearString, value); }
         }
 
         public string KilogramsNitrogenPerMonthPerAnimalString
         {
-            get => _kilogramsNitrogenPerMonthPerAnimalString;
-            set => SetProperty(ref _kilogramsNitrogenPerMonthPerAnimalString, value);
+            get { return _kilogramsNitrogenPerMonthPerAnimalString; }
+            set { SetProperty(ref _kilogramsNitrogenPerMonthPerAnimalString, value); }
         }
 
         public string KilogramsNH3NString
         {
-            get => _kilogramsNH3NString;
-            set => SetProperty(ref _kilogramsNH3NString, value);
+            get { return _kilogramsNH3NString; }
+            set { SetProperty(ref _kilogramsNH3NString, value); }
         }
 
         public string KilogramsNH3String
         {
-            get => _kilogramsNH3String;
-            set => SetProperty(ref _kilogramsNH3String, value);
+            get { return _kilogramsNH3String; }
+            set { SetProperty(ref _kilogramsNH3String, value); }
         }
 
         public string KilogramsCarbonString
         {
-            get => _kilogramsCarbonString;
-            set => SetProperty(ref _kilogramsCarbonString, value);
+            get { return _kilogramsCarbonString; }
+            set { SetProperty(ref _kilogramsCarbonString, value); }
         }
 
         public string KilogramsCarbonPerYearString
         {
-            get => _kilogramsCarbonPerYearString;
-            set => SetProperty(ref _kilogramsCarbonPerYearString, value);
+            get { return _kilogramsCarbonPerYearString; }
+            set { SetProperty(ref _kilogramsCarbonPerYearString, value); }
         }
 
         public string KilogramsNitrogenPerHectareString
         {
-            get => _kilogramsNitrogenPerHectareString;
-            set => SetProperty(ref _kilogramsNitrogenPerHectareString, value);
+            get { return _kilogramsNitrogenPerHectareString; }
+            set { SetProperty(ref _kilogramsNitrogenPerHectareString, value); }
         }
 
         public string KilogramsNitrogenPerHectarePerYearString
         {
-            get => _kilogramsNitrogenPerHectarePerYearString;
-            set => SetProperty(ref _kilogramsNitrogenPerHectarePerYearString, value);
+            get { return _kilogramsNitrogenPerHectarePerYearString; }
+            set { SetProperty(ref _kilogramsNitrogenPerHectarePerYearString, value); }
         }
 
         public string KilogramsPhosphorusPerHectareString
         {
-            get => _kilogramsPhosphorusPerHectareString;
-            set => SetProperty(ref _kilogramsPhosphorusPerHectareString, value);
+            get { return _kilogramsPhosphorusPerHectareString; }
+            set { SetProperty(ref _kilogramsPhosphorusPerHectareString, value); }
         }
 
         public string CubicMetersMethanePerKilogramVolatileSolidsString
         {
-            get => _cubicMetersMethanePerKilogramVolatileSolidsString;
-            set => SetProperty(ref _cubicMetersMethanePerKilogramVolatileSolidsString, value);
+            get { return _cubicMetersMethanePerKilogramVolatileSolidsString; }
+            set { SetProperty(ref _cubicMetersMethanePerKilogramVolatileSolidsString, value); }
         }
 
         public string KilogramsMethaneString
         {
-            get => _kilogramsMethaneString;
-            set => SetProperty(ref _kilogramsMethaneString, value);
+            get { return _kilogramsMethaneString; }
+            set { SetProperty(ref _kilogramsMethaneString, value); }
         }
 
         public string KilogramsNitrousOxideString
         {
-            get => _kilogramsNitrousOxideString;
-            set => SetProperty(ref _kilogramsNitrousOxideString, value);
+            get { return _kilogramsNitrousOxideString; }
+            set { SetProperty(ref _kilogramsNitrousOxideString, value); }
         }
 
         public string KilogramsMethanePerKilogramsMethaneString
         {
-            get => _kilogramsMethanePerKilogramsMethaneString;
-            set => SetProperty(ref _kilogramsMethanePerKilogramsMethaneString, value);
+            get { return _kilogramsMethanePerKilogramsMethaneString; }
+            set { SetProperty(ref _kilogramsMethanePerKilogramsMethaneString, value); }
         }
 
         public string KilogramsMethanePerYearString
         {
-            get => _kilogramsMethanePerYearString;
-            set => SetProperty(ref _kilogramsMethanePerYearString, value);
+            get { return _kilogramsMethanePerYearString; }
+            set { SetProperty(ref _kilogramsMethanePerYearString, value); }
         }
 
         public string MegaJoulesPerDayPerKilogramString
         {
-            get => _megaJoulesPerDayPerKilogramString;
-            set => SetProperty(ref _megaJoulesPerDayPerKilogramString, value);
+            get { return _megaJoulesPerDayPerKilogramString; }
+            set { SetProperty(ref _megaJoulesPerDayPerKilogramString, value); }
         }
 
         public string MegaJoulesPerKilogramSquaredString
         {
-            get => _megaJoulesPerKilogramSquaredString;
-            set => SetProperty(ref _megaJoulesPerKilogramSquaredString, value);
+            get { return _megaJoulesPerKilogramSquaredString; }
+            set { SetProperty(ref _megaJoulesPerKilogramSquaredString, value); }
         }
 
         public string KilogramsNitrogenPerKilogramString
         {
-            get => _kilogramsNitrogenPerKilogramString;
-            set => SetProperty(ref _kilogramsNitrogenPerKilogramString, value);
+            get { return _kilogramsNitrogenPerKilogramString; }
+            set { SetProperty(ref _kilogramsNitrogenPerKilogramString, value); }
         }
 
         public string GigajoulesPerHectareString
         {
-            get => _gigajoulesPerHectareString;
-            set => SetProperty(ref _gigajoulesPerHectareString, value);
+            get { return _gigajoulesPerHectareString; }
+            set { SetProperty(ref _gigajoulesPerHectareString, value); }
         }
 
         public string KilogramsPerYearString
         {
-            get => _kilogramsPerYearString;
-            set => SetProperty(ref _kilogramsPerYearString, value);
+            get { return _kilogramsPerYearString; }
+            set { SetProperty(ref _kilogramsPerYearString, value); }
         }
 
         public string MonthsString
         {
-            get => _monthsString;
-            set => SetProperty(ref _monthsString, value);
+            get { return _monthsString; }
+            set { SetProperty(ref _monthsString, value); }
         }
 
         public string YearsString
         {
-            get => _yearsString;
-            set => SetProperty(ref _yearsString, value);
+            get { return _yearsString; }
+            set { SetProperty(ref _yearsString, value); }
         }
 
         public string KilogramsCarbonPerHectareString
         {
-            get => _kilogramsCarbonPerHectareString;
-            set => SetProperty(ref _kilogramsCarbonPerHectareString, value);
+            get { return _kilogramsCarbonPerHectareString; }
+            set { SetProperty(ref _kilogramsCarbonPerHectareString, value); }
         }
 
         public string KilogramsCarbonPerTreeString
         {
-            get => _kilogramsCarbonPerTreeString;
-            set => SetProperty(ref _kilogramsCarbonPerTreeString, value);
+            get { return _kilogramsCarbonPerTreeString; }
+            set { SetProperty(ref _kilogramsCarbonPerTreeString, value); }
         }
 
         public string KilogramsCarbonPerPlantingString
         {
-            get => _kilogramsCarbonPerPlantingString;
-            set => SetProperty(ref _kilogramsCarbonPerPlantingString, value);
+            get { return _kilogramsCarbonPerPlantingString; }
+            set { SetProperty(ref _kilogramsCarbonPerPlantingString, value); }
         }
 
         public string KilogramsCarbonDioxidePerShelterbeltString
         {
-            get => _kilogramsCarbonDioxidePerShelterbeltString;
-            set => SetProperty(ref _kilogramsCarbonDioxidePerShelterbeltString, value);
+            get { return _kilogramsCarbonDioxidePerShelterbeltString; }
+            set { SetProperty(ref _kilogramsCarbonDioxidePerShelterbeltString, value); }
         }
 
         public string KilogramsVolatileSolidsPerKilogramFeedString
         {
-            get => _kilogramsVolatileSolidsPerKilogramFeedString;
-            set => SetProperty(ref _kilogramsVolatileSolidsPerKilogramFeedString, value);
+            get { return _kilogramsVolatileSolidsPerKilogramFeedString; }
+            set { SetProperty(ref _kilogramsVolatileSolidsPerKilogramFeedString, value); }
         }
 
         public string MegaJoulesPerKilogramString
         {
-            get => _megaJoulesPerKilogramString;
-            set => SetProperty(ref _megaJoulesPerKilogramString, value);
+            get { return _megaJoulesPerKilogramString; }
+            set { SetProperty(ref _megaJoulesPerKilogramString, value); }
         }
 
         public string GramsPerSquaredMeterString
         {
-            get => _gramsPerSquaredMeterString;
-            set => SetProperty(ref _gramsPerSquaredMeterString, value);
+            get { return _gramsPerSquaredMeterString; }
+            set { SetProperty(ref _gramsPerSquaredMeterString, value); }
         }
 
         public string PartsPerMillionString
         {
-            get => _partsPerMillionString;
-            set => SetProperty(ref _partsPerMillionString, value);
+            get { return _partsPerMillionString; }
+            set { SetProperty(ref _partsPerMillionString, value); }
         }
 
         public string MicrogramsPerKilogramString
         {
-            get => _microgramsPerKilogramString;
-            set => SetProperty(ref _microgramsPerKilogramString, value);
+            get { return _microgramsPerKilogramString; }
+            set { SetProperty(ref _microgramsPerKilogramString, value); }
         }
 
         public string PercentageEtherExtractString
         {
-            get => _percentageEtherExtractString;
-            set => SetProperty(ref _percentageEtherExtractString, value);
+            get { return _percentageEtherExtractString; }
+            set { SetProperty(ref _percentageEtherExtractString, value); }
         }
 
         public string KilogramsTanString
         {
-            get => _kilogramsTanString;
-            set => SetProperty(ref _kilogramsTanString, value);
+            get { return _kilogramsTanString; }
+            set { SetProperty(ref _kilogramsTanString, value); }
         }
 
         public string KilogramsTanPerAnimalPerMonthString
         {
-            get => _kilogramsTanPerAnimalPerMonthString;
-            set => SetProperty(ref _kilogramsTanPerAnimalPerMonthString, value);
+            get { return _kilogramsTanPerAnimalPerMonthString; }
+            set { SetProperty(ref _kilogramsTanPerAnimalPerMonthString, value); }
         }
 
         public string WetWeight
         {
-            get => _wetWeight;
-            set => SetProperty(ref _wetWeight, value);
+            get { return _wetWeight; }
+            set { SetProperty(ref _wetWeight, value); }
         }
 
         public string PercentageHString
         {
-            get => _percentageHString;
-            set => SetProperty(ref _percentageHString, value);
+            get { return _percentageHString; }
+            set { SetProperty(ref _percentageHString, value); }
         }
 
         public string PercentageNdfString
         {
-            get => _percentageNdfString;
-            set => SetProperty(ref _percentageNdfString, value);
+            get { return _percentageNdfString; }
+            set { SetProperty(ref _percentageNdfString, value); }
         }
 
         public string MilligramsPerKilogramString
         {
-            get => _milligramsPerKilogramString;
-            set => SetProperty(ref _milligramsPerKilogramString, value);
+            get { return _milligramsPerKilogramString; }
+            set { SetProperty(ref _milligramsPerKilogramString, value); }
         }
 
         public string InternationalUnitsPerGramString
         {
-            get => _internationalUnitsPerGramString;
-            set => SetProperty(ref _internationalUnitsPerGramString, value);
+            get { return _internationalUnitsPerGramString; }
+            set { SetProperty(ref _internationalUnitsPerGramString, value); }
         }
 
         public string MegagramsGhgs
         {
-            get => _megagramsGhgs;
-            set => SetProperty(ref _megagramsGhgs, value);
+            get { return _megagramsGhgs; }
+            set { SetProperty(ref _megagramsGhgs, value); }
         }
 
         public string KilogramsCo2PerKilogWattHour
         {
-            get => _kilogramsCO2PerKilogWattHour;
-            set => SetProperty(ref _kilogramsCO2PerKilogWattHour, value);
+            get { return _kilogramsCO2PerKilogWattHour; }
+            set { SetProperty(ref _kilogramsCO2PerKilogWattHour, value); }
         }
 
         public string KilogramsCo2PerGj
         {
-            get => _kilogramsCO2PerGJ;
-            set => SetProperty(ref _kilogramsCO2PerGJ, value);
+            get { return _kilogramsCO2PerGJ; }
+            set { SetProperty(ref _kilogramsCO2PerGJ, value); }
         }
 
         public string KilogramsCo2PerKilogramN
         {
-            get => _kilogramsCO2PerKilogramN;
-            set => SetProperty(ref _kilogramsCO2PerKilogramN, value);
+            get { return _kilogramsCO2PerKilogramN; }
+            set { SetProperty(ref _kilogramsCO2PerKilogramN, value); }
         }
 
         public string KilogramsCo2PerKilogramP2O5
         {
-            get => _kilogramsCO2PerKilogramP2O5;
-            set => SetProperty(ref _kilogramsCO2PerKilogramP2O5, value);
+            get { return _kilogramsCO2PerKilogramP2O5; }
+            set { SetProperty(ref _kilogramsCO2PerKilogramP2O5, value); }
         }
 
         public string KilogramsCo2PerKilogramK2O
         {
-            get => _kilogramsCO2PerKilogramK2O;
-            set => SetProperty(ref _kilogramsCO2PerKilogramK2O, value);
+            get { return _kilogramsCO2PerKilogramK2O; }
+            set { SetProperty(ref _kilogramsCO2PerKilogramK2O, value); }
         }
 
         public string KilogramsCo2PerHectare
         {
-            get => _kilogramsCO2PerHectare;
-            set => SetProperty(ref _kilogramsCO2PerHectare, value);
+            get { return _kilogramsCO2PerHectare; }
+            set { SetProperty(ref _kilogramsCO2PerHectare, value); }
         }
 
         public string KilowattHourPerAnimal
         {
-            get => _kilowattHourPerAnimal;
-            set => SetProperty(ref _kilowattHourPerAnimal, value);
+            get { return _kilowattHourPerAnimal; }
+            set { SetProperty(ref _kilowattHourPerAnimal, value); }
         }
 
         public string KilowattHourPerPoultryPlacement
         {
-            get => _kilowattHourPerPoultryPlacement;
-            set => SetProperty(ref _kilowattHourPerPoultryPlacement, value);
+            get { return _kilowattHourPerPoultryPlacement; }
+            set { SetProperty(ref _kilowattHourPerPoultryPlacement, value); }
         }
 
         public string GigajoulesPer1000Litres
         {
-            get => _gigajoulesPer1000Litres;
-            set => SetProperty(ref _gigajoulesPer1000Litres, value);
+            get { return _gigajoulesPer1000Litres; }
+            set { SetProperty(ref _gigajoulesPer1000Litres, value); }
         }
 
         public string KilogramsNPer1000Litres
         {
-            get => _kilogramsNPer1000Litres;
-            set => SetProperty(ref _kilogramsNPer1000Litres, value);
+            get { return _kilogramsNPer1000Litres; }
+            set { SetProperty(ref _kilogramsNPer1000Litres, value); }
         }
 
         public string KilogramsNitrogenPerKilogramDryMatter
         {
-            get => _kilogramsNitrogenPerKilogramDryMatter;
-            set => SetProperty(ref _kilogramsNitrogenPerKilogramDryMatter, value);
+            get { return _kilogramsNitrogenPerKilogramDryMatter; }
+            set { SetProperty(ref _kilogramsNitrogenPerKilogramDryMatter, value); }
         }
 
         public string KilogramsCarbonPerKilogramDryMatter
         {
-            get => _kilogramsCarbonPerKilogramDryMatter;
-            set => SetProperty(ref _kilogramsCarbonPerKilogramDryMatter, value);
+            get { return _kilogramsCarbonPerKilogramDryMatter; }
+            set { SetProperty(ref _kilogramsCarbonPerKilogramDryMatter, value); }
         }
 
         public string KilogramsPhosphorusPerKilogramDryMatter
         {
-            get => _kilogramsPhosphorusPerKilogramDryMatter;
-            set => SetProperty(ref _kilogramsPhosphorusPerKilogramDryMatter, value);
+            get { return _kilogramsPhosphorusPerKilogramDryMatter; }
+            set { SetProperty(ref _kilogramsPhosphorusPerKilogramDryMatter, value); }
         }
 
         public string PercentageWetWeight
         {
-            get => _percentageWetWeight;
-            set => SetProperty(ref _percentageWetWeight, value);
+            get { return _percentageWetWeight; }
+            set { SetProperty(ref _percentageWetWeight, value); }
         }
 
         public string KCalKgString
@@ -715,17 +725,16 @@ namespace H.Core.Models
             get => _kilogramsMethanePerHeadPerDayString;
             set => SetProperty(ref _kilogramsMethanePerHeadPerDayString, value);
         }
-
-        public string KilogramsPerGroupPerTimePeriodString
-        {
-            get => _kilogramsPerGroupPerTimePeriodString;
+        public string KilogramsPerGroupPerTimePeriodString 
+        { 
+            get => _kilogramsPerGroupPerTimePeriodString; 
             set => SetProperty(ref _kilogramsPerGroupPerTimePeriodString, value);
         }
 
-        public string KilogramsCarbonPerTreeTypeString
-        {
-            get => _kilogramsCarbonPerTreeTypeString;
-            set => SetProperty(ref _kilogramsCarbonPerTreeTypeString, value);
+        public string KilogramsCarbonPerTreeTypeString 
+        { 
+            get => _kilogramsCarbonPerTreeTypeString; 
+            set => SetProperty(ref _kilogramsCarbonPerTreeTypeString, value); 
         }
 
         public string FractionString
@@ -864,10 +873,8 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        ///     Sets the units of measurement strings for display in both the CLI and GUI. This call should be only made when using
-        ///     the XAML designer
-        ///     or once when the CLI initializes a new farm and/or once when the GUI initializes a new farm (or opens an existing
-        ///     farm).
+        /// Sets the units of measurement strings for display in both the CLI and GUI. This call should be only made when using the XAML designer
+        /// or once when the CLI initializes a new farm and/or once when the GUI initializes a new farm (or opens an existing farm).
         /// </summary>
         /// <param name="measurementSystemType"></param>
         public void SetStrings(MeasurementSystemType measurementSystemType)
@@ -912,8 +919,7 @@ namespace H.Core.Models
                 KilogramsPotassiumPerHectareString = WrapString(Resources.KilogramsPotassiumPerHectare);
                 KilogramsSulphurPerHectareString = WrapString(Resources.KilogramsSulphurPerHectare);
                 KilogramsPhosphorusPerHectareString = WrapString(Resources.KilogramsPhosphorousPerHectare);
-                CubicMetersMethanePerKilogramVolatileSolidsString =
-                    WrapString(Resources.CubicMetersMethanePerKilogramVolatileSolids);
+                CubicMetersMethanePerKilogramVolatileSolidsString = WrapString(Resources.CubicMetersMethanePerKilogramVolatileSolids);
                 KilogramsMethanePerKilogramsMethaneString = WrapString(Resources.KilogramsMethanePerKilogramMethane);
                 MegaJoulesPerDayPerKilogramString = WrapString(Resources.MegaJoulesPerDayPerKilogram);
                 KilogramsNitrogenPerKilogramString = WrapString(Resources.KilogramsNitrogenPerKilogram);
@@ -941,8 +947,7 @@ namespace H.Core.Models
                 KilogramsPerYearString = WrapString(Resources.KilogramsPerYear);
                 MegaJoulesPerKilogramSquaredString = WrapString(Resources.MegaJoulesPerKilogramSquared);
                 KilogramsPerKilogramProteinIntakeString = WrapString(Resources.KilogramsPerKilogramProteinIntake);
-                KilogramsVolatileSolidsPerKilogramFeedString =
-                    WrapString(Resources.KilogramsVolatileSolidsPerKilogramFeed);
+                KilogramsVolatileSolidsPerKilogramFeedString = WrapString(Resources.KilogramsVolatileSolidsPerKilogramFeed);
                 MegaJoulesPerKilogramString = WrapString(Resources.MegaJoulesPerKilogram);
                 OneTimesPercentageString = WrapString("1x, %");
                 GramsPerSquaredMeterString = WrapString(Resources.LabelGramsPerMeterSquared);
@@ -1036,8 +1041,7 @@ namespace H.Core.Models
                 KilogramsPhosphorusPerHectareString = WrapString(Resources.PoundsPhosphorousPerAcre);
                 KilogramsPotassiumPerHectareString = WrapString(Resources.PoundsPotassiumPerAcre);
                 KilogramsSulphurPerHectareString = WrapString(Resources.PoundsSulphurPerAcre);
-                CubicMetersMethanePerKilogramVolatileSolidsString =
-                    WrapString(Resources.CubicYardsMethanePerPoundVolatileSolids);
+                CubicMetersMethanePerKilogramVolatileSolidsString = WrapString(Resources.CubicYardsMethanePerPoundVolatileSolids);
                 KilogramsMethanePerKilogramsMethaneString = WrapString(Resources.PoundsMethanePerPoundMethane);
                 MegaJoulesPerDayPerKilogramString = WrapString(Resources.BritishThermalUnitPerDayPerPound);
                 KilogramsNitrogenPerKilogramString = WrapString(Resources.PoundsNitrogenPerPound);

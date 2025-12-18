@@ -12,19 +12,6 @@ namespace H.Core.Models
     /// </summary>
     public class TimePeriodBase : ModelBase, ITimePeriodItem
     {
-        #region Constructors
-
-        public TimePeriodBase()
-        {
-            Start = DateTime.Now;
-            StartYear = Start.Year;
-            End = DateTime.Now;
-            EndYear = End.Year;
-            NumberOfDays = 0;
-        }
-
-        #endregion
-
         #region Fields
 
         private DateTime _start;
@@ -35,25 +22,38 @@ namespace H.Core.Models
 
         #endregion
 
+        #region Constructors
+
+        public TimePeriodBase()
+        {
+            this.Start = DateTime.Now;
+            this.StartYear = this.Start.Year;
+            this.End = DateTime.Now;
+            this.EndYear = this.End.Year;
+            this.NumberOfDays = 0;
+        }
+
+        #endregion
+
         #region Properties
 
         public DateTime Start
         {
-            get => _start;
-            set => SetProperty(ref _start, value, OnStartChanged);
+            get { return _start; }
+            set { this.SetProperty(ref _start, value, this.OnStartChanged); }
         }
 
         public DateTime End
         {
-            get => _end;
-            set => SetProperty(ref _end, value, OnEndChanged);
+            get { return _end; }
+            set { this.SetProperty(ref _end, value, this.OnEndChanged); }
         }
 
         public TimeSpan Duration
         {
             get
             {
-                var numberOfYears = EndYear - StartYear + 1;
+                var numberOfYears = (this.EndYear - this.StartYear) + 1;
                 var numberOfDays = numberOfYears * 365 - 1;
 
                 return TimeSpan.FromDays(numberOfDays);
@@ -62,30 +62,43 @@ namespace H.Core.Models
 
         public int NumberOfDays
         {
-            get => _numberOfDays;
-            set => SetProperty(ref _numberOfDays, value, OnNumberOfDaysChanged);
+            get { return _numberOfDays; }
+            set { this.SetProperty(ref _numberOfDays, value, this.OnNumberOfDaysChanged); }
         }
 
         /// <summary>
-        ///     The start year of the period. This is used for some components that need a beginning year. (i.e. a
-        ///     <see cref="FieldSystemComponent" /> needs to have a starting ICBM equilibrium year)
+        /// The start year of the period. This is used for some components that need a beginning year. (i.e. a <see cref="FieldSystemComponent"/> needs to have a starting ICBM equilibrium year)
         /// </summary>
         public int StartYear
         {
-            get => _startYear;
-            set => SetProperty(ref _startYear, value, OnStartYearChanged);
+            get { return _startYear; }
+            set
+            {
+                this.SetProperty(ref _startYear, value, this.OnStartYearChanged);
+            }
         }
 
         public int EndYear
         {
-            get => _endYear;
-            set
+            get { return _endYear; }
+            set 
             {
-                if (value < StartYear) return;
-
-                SetProperty(ref _endYear, value, OnEndYearChanged);
+                if (value < this.StartYear)
+                {
+                    return;
+                }
+                
+                this.SetProperty(ref _endYear, value, this.OnEndYearChanged);
             }
         }
+
+        #endregion
+
+        #region Public Methods
+
+        #endregion
+
+        #region Private Methods
 
         #endregion
 
@@ -93,38 +106,41 @@ namespace H.Core.Models
 
         private void OnStartYearChanged()
         {
-            if (StartYear == 0) return;
+            if (this.StartYear == 0)
+            {
+                return;
+            }
 
-            Start = new DateTime(StartYear, 1, 1);
+            this.Start = new DateTime(this.StartYear, 1, 1);
 
-            var numberOfYears = EndYear - StartYear + 1;
+            var numberOfYears = this.EndYear - this.StartYear + 1;
 
             var numberOfDays = numberOfYears * 365;
-            NumberOfDays = numberOfDays;
+            this.NumberOfDays = numberOfDays;
         }
 
         private void OnEndYearChanged()
         {
-            End = new DateTime(EndYear, End.Month, End.Day);
+            this.End = new DateTime(this.EndYear, this.End.Month, this.End.Day);
         }
 
         private void OnStartChanged()
         {
-            RaisePropertyChanged(nameof(Duration));
-            End = Start.AddDays(_numberOfDays);
+            this.RaisePropertyChanged(nameof(this.Duration));
+            this.End = this.Start.AddDays(_numberOfDays);
         }
 
         private void OnEndChanged()
         {
-            RaisePropertyChanged(nameof(Duration));
+            this.RaisePropertyChanged(nameof(this.Duration));
         }
 
         private void OnNumberOfDaysChanged()
         {
-            End = Start.AddDays(_numberOfDays);
-            EndYear = End.Year;
+            this.End = this.Start.AddDays(_numberOfDays);
+            this.EndYear = this.End.Year;
         }
 
-        #endregion
+        #endregion 
     }
 }

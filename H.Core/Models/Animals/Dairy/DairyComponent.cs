@@ -1,4 +1,7 @@
-﻿using H.Core.Properties;
+﻿#region Imports
+
+#endregion
+
 using H.Infrastructure;
 
 namespace H.Core.Models.Animals.Dairy
@@ -7,15 +10,34 @@ namespace H.Core.Models.Animals.Dairy
     /// </summary>
     public class DairyComponent : AnimalComponentBase
     {
+        #region Fields        
+
+        #endregion
+
         #region Constructors
 
         public DairyComponent()
         {
-            ComponentNameDisplayString = ComponentType.Dairy.GetDescription();
-            ComponentDescriptionString = Resources.ToolTipDairyComponent;
-            ComponentCategory = ComponentCategory.Dairy;
-            ComponentType = ComponentType.Dairy;
+            this.ComponentNameDisplayString = ComponentType.Dairy.GetDescription();
+            this.ComponentDescriptionString = Properties.Resources.ToolTipDairyComponent;
+            this.ComponentCategory = ComponentCategory.Dairy;
+            this.ComponentType = ComponentType.Dairy;
         }
+
+        #endregion
+
+        #region Properties       
+
+        #endregion
+
+        #region Public Methods
+
+        #endregion
+
+        #region Private Methods
+        #endregion
+
+        #region Event Handlers
 
         #endregion
     }

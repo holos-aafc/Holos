@@ -9,53 +9,59 @@ namespace H.Core.Providers.Animals
         ManureStateType HandlingSystem { get; set; }
 
         /// <summary>
-        ///     Methane conversion factor of manure
-        ///     (kg kg^-1)
+        /// Methane conversion factor of manure
+        ///
+        /// (kg kg^-1)
         /// </summary>
         double MethaneConversionFactor { get; set; }
 
         /// <summary>
-        ///     Ef_direct
-        ///     [kg N2O-N (kg N)^-1]
+        /// Ef_direct
+        ///
+        /// [kg N2O-N (kg N)^-1]
         /// </summary>
         double N20DirectEmissionFactor { get; set; }
 
         /// <summary>
-        ///     Frac_volatilization
-        ///     [kg NH3-N (kg)^-1]
+        /// Frac_volatilization
+        ///
+        /// [kg NH3-N (kg)^-1]
         /// </summary>
         double VolatilizationFraction { get; set; }
 
         /// <summary>
-        ///     EF_volatilization
-        ///     [kg N2O-N (kg N)^-1]
+        /// EF_volatilization
+        ///
+        /// [kg N2O-N (kg N)^-1]
         /// </summary>
         double EmissionFactorVolatilization { get; set; }
 
         /// <summary>
-        ///     Frac_leach
-        ///     (unitless)
+        /// Frac_leach
+        ///
+        /// (unitless)
         /// </summary>
         double LeachingFraction { get; set; }
 
         /// <summary>
-        ///     EF_leach
-        ///     [kg N2O-N (kg N)^-1]
+        /// EF_leach
+        ///
+        /// [kg N2O-N (kg N)^-1] 
         /// </summary>
         double EmissionFactorLeach { get; set; }
 
         /// <summary>
-        ///     CH4 Enteric Rate
+        /// CH4 Enteric Rate
         /// </summary>
         double MethaneEntericRate { get; set; }
 
         /// <summary>
-        ///     CH4 Manure Rate
+        /// CH4 Manure Rate
         /// </summary>
         double MethaneManureRate { get; set; }
 
         /// <summary>
-        ///     N Excretion Rate
+        /// N Excretion Rate
         /// </summary>
         double NitrogenExcretionRate { get; set; }
     }

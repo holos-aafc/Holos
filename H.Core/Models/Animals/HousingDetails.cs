@@ -1,27 +1,17 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using AutoMapper;
 using H.Core.Converters;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 using H.Infrastructure;
-using Microsoft.Extensions.Logging.Abstractions;
 
 namespace H.Core.Models.Animals
 {
     public class HousingDetails : ModelBase
     {
-        #region Event Handlers
-
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (sender is HousingDetails housingDetails)
-            {
-            }
-        }
-
-        #endregion
-
         #region Fields
 
         private FieldSystemComponent _pastureLocation;
@@ -61,18 +51,17 @@ namespace H.Core.Models.Animals
                 config.CreateMap<HousingDetails, HousingDetails>()
                     .ForMember(housingDetails => housingDetails.Guid, opt => opt.Ignore())
                     .ForMember(housingDetails => housingDetails.Name, opt => opt.Ignore());
-            }, new NullLoggerFactory());
+            });
 
             _housingDetailsMapper = housingDetailsConfiguration.CreateMapper();
         }
-
         public HousingDetails()
         {
-            GrazingSystemType = null; // No grazing by default
-            UseCustomIndoorHousingTemperature = false;
+            this.GrazingSystemType = null; // No grazing by default
+            this.UseCustomIndoorHousingTemperature = false;
 
-            PropertyChanged -= OnPropertyChanged;
-            PropertyChanged += OnPropertyChanged;
+            this.PropertyChanged -= OnPropertyChanged;
+            this.PropertyChanged += OnPropertyChanged;
         }
 
         #endregion
@@ -81,88 +70,100 @@ namespace H.Core.Models.Animals
 
         public HousingType HousingType
         {
-            get => _housingType;
-            set => SetProperty(ref _housingType, value);
+            get { return _housingType; }
+            set { this.SetProperty(ref _housingType, value); }
         }
 
-        public string HousingTypeString => HousingType.GetDescription();
+        public string HousingTypeString
+        {
+            get { return this.HousingType.GetDescription(); }
+        }
 
         /// <summary>
-        ///     Will be set the name of the field component when animals are housed on a pasture.
+        /// Will be set the name of the field component when animals are housed on a pasture.
         /// </summary>
         public string NameOfPastureLocation
         {
             get
             {
-                if (PastureLocation != null) return PastureLocation.Name;
-
-                return CoreConstants.NotApplicableOutputString;
+                if (this.PastureLocation != null)
+                {
+                    return this.PastureLocation.Name;
+                }
+                else
+                {
+                    return CoreConstants.NotApplicableOutputString;
+                }
             }
         }
 
         /// <summary>
-        ///     CA
-        ///     (MJ day^-1 kg^-1)
+        /// CA
+        ///
+        /// (MJ day^-1 kg^-1)
         /// </summary>
         public double ActivityCeofficientOfFeedingSituation
         {
-            get => _activityCeofficientOfFeedingSituation;
-            set => SetProperty(ref _activityCeofficientOfFeedingSituation, value);
+            get { return _activityCeofficientOfFeedingSituation; }
+            set { this.SetProperty(ref _activityCeofficientOfFeedingSituation, value); }
         }
 
         /// <summary>
-        ///     C_f
-        ///     (MJ day^-1 kg^-1)
+        /// C_f
+        ///
+        /// (MJ day^-1 kg^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.MegaJoulesPerDayPerKilogram)]
         public double BaselineMaintenanceCoefficient
         {
-            get => _baselineMaintenanceCoefficient;
-            set => SetProperty(ref _baselineMaintenanceCoefficient, value);
+            get { return _baselineMaintenanceCoefficient; }
+            set { SetProperty(ref _baselineMaintenanceCoefficient, value); }
         }
 
         /// <summary>
-        ///     C_f_adjusted
-        ///     (MJ day⁻¹ kg⁻¹)
+        /// C_f_adjusted
+        ///
+        /// (MJ day⁻¹ kg⁻¹)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.MegaJoulesPerDayPerKilogram)]
         public double MaintenanceCoefficientModifiedByTemperature
         {
-            get => _maintenanceCoefficientModifiedByTemperature;
-            set => SetProperty(ref _maintenanceCoefficientModifiedByTemperature, value);
+            get { return _maintenanceCoefficientModifiedByTemperature; }
+            set { this.SetProperty(ref _maintenanceCoefficientModifiedByTemperature, value); }
         }
 
         /// <summary>
-        ///     A reference to the <see cref="FieldSystemComponent" /> when animals are housed on pasture.
+        /// A reference to the <see cref="FieldSystemComponent"/> when animals are housed on pasture.
         /// </summary>
         public FieldSystemComponent PastureLocation
         {
-            get => _pastureLocation;
-            set => SetProperty(ref _pastureLocation, value);
+            get { return _pastureLocation; }
+            set { this.SetProperty(ref _pastureLocation, value); }
         }
 
         /// <summary>
-        ///     The type of bedding material being used (if any).
+        /// The type of bedding material being used (if any).
         /// </summary>
         public BeddingMaterialType BeddingMaterialType
         {
-            get => _beddingMaterialType;
-            set => SetProperty(ref _beddingMaterialType, value);
+            get { return _beddingMaterialType; }
+            set { SetProperty(ref _beddingMaterialType, value); }
         }
 
         /// <summary>
-        ///     The rate of bedding material added to the housing system
-        ///     (kg head-1 day-1)
+        /// The rate of bedding material added to the housing system
+        ///
+        /// (kg head-1 day-1) 
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramPerHeadPerDay)]
         public double UserDefinedBeddingRate
         {
-            get => _userDefinedBeddingRate;
-            set => SetProperty(ref _userDefinedBeddingRate, value);
+            get { return _userDefinedBeddingRate; }
+            set { SetProperty(ref _userDefinedBeddingRate, value); }
         }
 
         /// <summary>
-        ///     Used to specify the type of grazing system when animals are housed on a pasture.
+        /// Used to specify the type of grazing system when animals are housed on a pasture.
         /// </summary>
         public GrazingSystemTypes? GrazingSystemType
         {
@@ -171,7 +172,7 @@ namespace H.Core.Models.Animals
         }
 
         /// <summary>
-        ///     (kg N/kg DM)
+        /// (kg N/kg DM)
         /// </summary>
         public double TotalNitrogenKilogramsDryMatterForBedding
         {
@@ -180,7 +181,7 @@ namespace H.Core.Models.Animals
         }
 
         /// <summary>
-        ///     (kg C/kg DM)
+        /// (kg C/kg DM)
         /// </summary>
         public double TotalCarbonKilogramsDryMatterForBedding
         {
@@ -189,7 +190,7 @@ namespace H.Core.Models.Animals
         }
 
         /// <summary>
-        ///     (kg P/kg DM)
+        /// (kg P/kg DM)
         /// </summary>
         public double TotalPhosphorusKilogramsDryMatterForBedding
         {
@@ -198,12 +199,12 @@ namespace H.Core.Models.Animals
         }
 
         /// <summary>
-        ///     (unitless)
+        /// (unitless)
         /// </summary>
         public double CarbonToNitrogenRatioOfBeddingMaterial
         {
             get => _carbonToNitrogenRatioOfBeddingMaterial;
-            set => SetProperty(ref _carbonToNitrogenRatioOfBeddingMaterial, value);
+            set => SetProperty(ref _carbonToNitrogenRatioOfBeddingMaterial,value );
         }
 
         public double AmmoniaEmissionFactorForHousing
@@ -213,7 +214,7 @@ namespace H.Core.Models.Animals
         }
 
         /// <summary>
-        ///     (%)
+        /// (%)
         /// </summary>
         public double MoistureContentOfBeddingMaterial
         {
@@ -222,7 +223,7 @@ namespace H.Core.Models.Animals
         }
 
         /// <summary>
-        ///     (degrees celsius)
+        /// (degrees celsius)
         /// </summary>
         public double IndoorHousingTemperature
         {
@@ -259,7 +260,6 @@ namespace H.Core.Models.Animals
                 //set the systemCopy to contain that metric value 
                 propertyInfo.SetValue(systemCopy, systemValue);
             }
-
             return systemCopy;
         }
 
@@ -275,8 +275,18 @@ namespace H.Core.Models.Animals
                 //set the systemCopy to contain that metric value 
                 propertyInfo.SetValue(bindingHousingDetails, bindingValue);
             }
-
             return bindingHousingDetails;
+        }
+
+        #endregion
+
+        #region Event Handlers
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (sender is HousingDetails housingDetails)
+            {
+            }
         }
 
         #endregion

@@ -1,5 +1,4 @@
-﻿using H.Core.Properties;
-using H.Infrastructure;
+﻿using H.Infrastructure;
 
 namespace H.Core.Models.Animals.OtherAnimals
 {
@@ -7,10 +6,10 @@ namespace H.Core.Models.Animals.OtherAnimals
     {
         public DeerComponent()
         {
-            ComponentNameDisplayString = ComponentType.Deer.GetDescription();
-            ComponentDescriptionString = Resources.ToolTipDeerComponent;
-            ComponentCategory = ComponentCategory.OtherLivestock;
-            ComponentType = ComponentType.Deer;
+            this.ComponentNameDisplayString = ComponentType.Deer.GetDescription();
+            this.ComponentDescriptionString = Properties.Resources.ToolTipDeerComponent;
+            this.ComponentCategory = ComponentCategory.OtherLivestock;
+            this.ComponentType = ComponentType.Deer;
         }
     }
 }

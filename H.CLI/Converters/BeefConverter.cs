@@ -93,7 +93,7 @@ namespace H.CLI.Converters
                 row.Add(CLILanguageConstants.NotApplicableString);
             }
 
-                row.Add(managementPeriod.ManureDetails.MethaneConversionFactor.ToString(DoubleFormat));
+            row.Add(managementPeriod.ManureDetails.MethaneConversionFactor.ToString(DoubleFormat));
             row.Add(managementPeriod.ManureDetails.N2ODirectEmissionFactor.ToString(DoubleFormat));
             row.Add(managementPeriod.ManureDetails.EmissionFactorVolatilization.ToString(DoubleFormat));
             row.Add(managementPeriod.ManureDetails.VolatilizationFraction.ToString(DoubleFormat));

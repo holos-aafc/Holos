@@ -12,10 +12,14 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <SccProjectName>%24/Holos 4/H/H.CLI</SccProjectName>
-    <SccLocalPath>.</SccLocalPath>
-    <SccAuxPath>https://aafcholos.visualstudio.com</SccAuxPath>
-    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <TargetFrameworkProfile />
     <PublishUrl>C:\Users\Aaron\Documents\WORK\Projects\Holos\Software\ClickOnce output\CLI\</PublishUrl>
@@ -33,10 +37,10 @@
     <ProductName>Holos 4 CLI</ProductName>
     <PublisherName>AAFC-AAC</PublisherName>
     <SuiteName>Holos</SuiteName>
-    <MinimumRequiredVersion>1.0.1.37</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.1.49</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>38</ApplicationRevision>
+    <ApplicationRevision>50</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -73,7 +77,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>HolosIcon.ico</ApplicationIcon>
@@ -180,24 +184,6 @@
     <None Include="H.CLI_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="Microsoft.Office.Core">
-      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>8</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="Microsoft.Office.Interop.Excel">
-      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>9</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="VBIDE">
       <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>5</VersionMajor>
@@ -253,17 +239,17 @@
     <PackageReference Include="CommonServiceLocator">
       <Version>2.0.7</Version>
     </PackageReference>
+    <PackageReference Include="CsvHelper">
+      <Version>33.1.0</Version>
+    </PackageReference>
     <PackageReference Include="Moq">
-      <Version>4.20.72</Version>
+      <Version>4.20.71</Version>
     </PackageReference>
     <PackageReference Include="Prism.Wpf">
-      <Version>9.0.537</Version>
-    </PackageReference>
-    <PackageReference Include="System.Configuration.ConfigurationManager">
-      <Version>9.0.9</Version>
+      <Version>7.2.0.1422</Version>
     </PackageReference>
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
-      <Version>6.1.2</Version>
+      <Version>6.0.0</Version>
     </PackageReference>
     <PackageReference Include="System.Threading.Tasks.Extensions">
       <Version>4.5.4</Version>

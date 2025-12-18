@@ -1,5 +1,9 @@
 ﻿using H.Core.Enumerations;
+using H.Core.Models.Animals.Dairy;
 using H.Core.Models;
+using System.Collections.Generic;
+using System;
+using System.Linq;
 using H.Core.Models.Animals;
 using H.Core.Providers.Soil;
 
@@ -10,15 +14,18 @@ namespace H.Core.Services.Initialization.Animals
         #region Public Method
 
         /// <summary>
-        ///     Reinitialize the MilkProduction value for each ManagementPeriod for each animalGroup in the DairyComponent of a
-        ///     <see cref="Farm" /> with new default values from table 21.
+        /// Reinitialize the MilkProduction value for each ManagementPeriod for each animalGroup in the DairyComponent of a <see cref="Farm"/> with new default values from table 21.
         /// </summary>
-        /// <param name="farm">The <see cref="Farm" /> that will be reinitialized to new default value for the MilkProduction</param>
+        /// <param name="farm">The <see cref="Farm"/> that will be reinitialized to new default value for the MilkProduction</param>
         public void InitializeMilkProduction(Farm farm)
         {
             if (farm != null)
+            {
                 foreach (var managementPeriod in farm.GetAllManagementPeriods())
-                    InitializeMilkProduction(managementPeriod, farm.DefaultSoilData);
+                {
+                    this.InitializeMilkProduction(managementPeriod, farm.DefaultSoilData);
+                }
+            }
         }
 
         public void InitializeMilkProduction(ManagementPeriod managementPeriod, SoilData soilData)
@@ -30,16 +37,13 @@ namespace H.Core.Services.Initialization.Animals
 
                 if (managementPeriod.AnimalType.IsLactatingType())
                 {
-                    if (managementPeriod.AnimalType.IsSheepType() &&
-                        managementPeriod.ProductionStage == ProductionStages.Gestating)
+                    if (managementPeriod.AnimalType.IsSheepType() && managementPeriod.ProductionStage == ProductionStages.Gestating)
                     {
                         managementPeriod.MilkProduction = 2;
                     }
-                    else if (managementPeriod.AnimalType.IsDairyCattleType())
+                    else if(managementPeriod.AnimalType.IsDairyCattleType())
                     {
-                        var milkProduction =
-                            _averageMilkProductionDairyCowsProvider.GetAverageMilkProductionForDairyCowsValue(year,
-                                province);
+                        var milkProduction = _averageMilkProductionDairyCowsProvider.GetAverageMilkProductionForDairyCowsValue(year, province);
                         managementPeriod.MilkProduction = milkProduction;
                     }
                     else

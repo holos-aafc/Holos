@@ -1,5 +1,4 @@
-﻿using H.Core.Properties;
-using H.Infrastructure;
+﻿using H.Infrastructure;
 
 namespace H.Core.Models.Animals.Sheep
 {
@@ -7,10 +6,10 @@ namespace H.Core.Models.Animals.Sheep
     {
         public RamsComponent()
         {
-            ComponentNameDisplayString = ComponentType.Rams.GetDescription();
-            ComponentDescriptionString = Resources.ToolTipRamsComponent;
-            ComponentCategory = ComponentCategory.Sheep;
-            ComponentType = ComponentType.Rams;
+            this.ComponentNameDisplayString = ComponentType.Rams.GetDescription();
+            this.ComponentDescriptionString = Properties.Resources.ToolTipRamsComponent;
+            this.ComponentCategory = ComponentCategory.Sheep;
+            this.ComponentType = ComponentType.Rams;
         }
     }
 }

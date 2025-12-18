@@ -30,9 +30,8 @@ namespace H.Core.Enumerations
 
                 default:
                 {
-                    Trace.TraceError(
-                        $"Unknown manure animal source type: {manureAnimalSourceType.GetDescription()}. Returning {ComponentCategory.BeefProduction.GetDescription()}");
-
+                    Trace.TraceError($"Unknown manure animal source type: {manureAnimalSourceType.GetDescription()}. Returning {ComponentCategory.BeefProduction.GetDescription()}");
+                    
                     return ComponentCategory.BeefProduction;
                 }
             }

@@ -12,11 +12,26 @@ namespace H.Infrastructure
     /// </summary>
     public static class ListExtensions
     {
+        #region Constructors
+
+        #endregion
+
+        #region Fields
+
+        #endregion
+
+        #region Properties
+
+        #endregion
+
         #region Public Methods
 
         public static List<T> ShiftLeft<T>(this List<T> list, int shiftBy)
         {
-            if (list.Count <= shiftBy) return list;
+            if (list.Count <= shiftBy)
+            {
+                return list;
+            }
 
             var result = list.GetRange(shiftBy, list.Count - shiftBy);
             result.AddRange(list.GetRange(0, shiftBy));
@@ -25,27 +40,35 @@ namespace H.Infrastructure
 
         public static List<T> ShiftRight<T>(this List<T> list, int shiftBy)
         {
-            if (list.Count <= shiftBy) return list;
+            if (list.Count <= shiftBy)
+            {
+                return list;
+            }
 
             var result = list.GetRange(list.Count - shiftBy, shiftBy);
             result.AddRange(list.GetRange(0, list.Count - shiftBy));
             return result;
         }
 
-        public static double WeightedAverage<T>(this IEnumerable<T> records,
-            Func<T, double> value,
-            Func<T, double> weight)
+        public static double WeightedAverage<T>(this IEnumerable<T> records, 
+                                                Func<T, double> value,
+                                                Func<T, double> weight)
         {
             var weightedValueSum = records.Sum(record => value(record) * weight(record));
             var weightSum = records.Sum(record => weight(record));
 
-            if (Math.Abs(weightSum) > double.Epsilon) return weightedValueSum / weightSum;
-
-            return 0;
+            if (Math.Abs(weightSum) > double.Epsilon)
+            {
+                return weightedValueSum / weightSum;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         /// <summary>
-        ///     Hash code depending on the content and order of the elements of the collection
+        /// Hash code depending on the content and order of the elements of the collection
         /// </summary>
         /// <param name="lst">Collection</param>
         /// <typeparam name="T">The type of items in the collection</typeparam>
@@ -54,11 +77,22 @@ namespace H.Infrastructure
         {
             unchecked
             {
-                var hash = 19;
-                foreach (var item in lst) hash = hash * 31 + (item != null ? item.GetHashCode() : 1);
+                int hash = 19;
+                foreach (T item in lst)
+                {
+                    hash = hash * 31 + (item != null ? item.GetHashCode() : 1);
+                }
                 return hash;
             }
         }
+
+        #endregion
+
+        #region Private Methods
+
+        #endregion
+
+        #region Event Handlers
 
         #endregion
     }

@@ -1,5 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using H.Core.Enumerations;
+using H.Core.Properties;
 using H.Infrastructure;
 
 namespace H.Core.Converters
@@ -8,7 +10,7 @@ namespace H.Core.Converters
     {
         public Province Convert(string input)
         {
-            switch (GetLettersAsLowerCase(input))
+            switch (this.GetLettersAsLowerCase(input))
             {
                 case "alberta":
                 case "ab":
@@ -85,12 +87,11 @@ namespace H.Core.Converters
                     return Province.Nunavut;
                 default:
                 {
-                    Trace.TraceError(
-                        $"{nameof(ProvinceStringConverter)}.{nameof(Convert)}: unknown input '{input}'. Returning default value of {Province.Alberta.GetDescription()}");
+                    Trace.TraceError($"{nameof(ProvinceStringConverter)}.{nameof(ProvinceStringConverter.Convert)}: unknown input '{input}'. Returning default value of {Province.Alberta.GetDescription()}");
 
                     return Province.Alberta;
-                }
-            }
+                }                    
+            }            
         }
     }
 }

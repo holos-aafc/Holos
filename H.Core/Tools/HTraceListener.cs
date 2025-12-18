@@ -1,4 +1,8 @@
-﻿namespace H.Core.Tools
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+
+namespace H.Core.Tools
 {
     public class HTraceListener
     {
@@ -10,5 +14,6 @@
             //TextWriterTraceListener listener = new TextWriterTraceListener(filestream);
             //Trace.Listeners.Add(listener);
         }
+
     }
 }

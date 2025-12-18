@@ -7,7 +7,6 @@ namespace H.Core.Providers.Climate
     public interface IClimateProvider
     {
         void OutputDailyClimateData(Farm farm, string outputPath);
-        ClimateData Get(double latitude, double longitude, TimeFrame climateNormalTimeFrame);
         double GetMeanTemperatureForDay(Farm farm, DateTime dateTime);
         double GetAnnualEvapotranspiration(Farm farm, DateTime dateTime);
         double GetAnnualPrecipitation(Farm farm, DateTime dateTime);
@@ -18,7 +17,7 @@ namespace H.Core.Providers.Climate
         double GetGrowingSeasonPrecipitation(Farm farm, int year);
         double GetGrowingSeasonEvapotranspiration(Farm farm, int year);
         ClimateData Get(double latitude, double longitude, TimeFrame climateNormalTimeFrame, Farm farm);
-        ClimateData Get(string filepath, TimeFrame normalCalculationTimeFrame);
+        ClimateData Get(string filepath, TimeFrame normalCalculationTimeFrame, Farm farm);
         ClimateData GetClimateData(int polygonId, TimeFrame timeFrame);
     }
 }

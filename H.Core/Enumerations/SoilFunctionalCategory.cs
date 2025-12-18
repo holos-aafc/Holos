@@ -4,7 +4,7 @@ using H.Infrastructure;
 namespace H.Core.Enumerations
 {
     /// <summary>
-    ///     Holos version 3 called this 'Soil Type'
+    /// Holos version 3 called this 'Soil Type'
     /// </summary>
     public enum SoilFunctionalCategory
     {

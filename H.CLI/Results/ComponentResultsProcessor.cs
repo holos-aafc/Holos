@@ -138,7 +138,7 @@ namespace H.CLI.Results
 
         private void WriteFieldCarbonResultsToFile()
         {
-            var path = InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.Outputs + @"\" + Properties.Resources.TotalResultsForAllFarms + @"\" + Properties.Resources.TotalResultsAllFields + CLILanguageConstants.OutputLanguageAddOn;
+            var path = InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.TotalResultsForAllFarms + @"\" + Properties.Resources.TotalResultsAllFields + CLILanguageConstants.OutputLanguageAddOn;
 
             //_fieldResultsService.ExportAllResultsToFile(path: path,
             //    measurementSystemType: CLIUnitsOfMeasurementConstants.measurementSystem,
@@ -160,8 +160,8 @@ namespace H.CLI.Results
 
                 // Build the path depending on which output file we are building
                 var path = outputType == EmissionDisplayUnits.KilogramsGhgs ? 
-                    InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.Outputs + @"\" + Properties.Resources.TotalResultsForAllFarms + @"\" + Properties.Resources.TotalResultsGHG + CLILanguageConstants.OutputLanguageAddOn : 
-                    InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.Outputs + @"\" + Properties.Resources.TotalResultsForAllFarms + @"\" + Properties.Resources.TotalResultsCO2E + CLILanguageConstants.OutputLanguageAddOn;
+                    InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.TotalResultsForAllFarms + @"\" + Properties.Resources.TotalResultsGHG + CLILanguageConstants.OutputLanguageAddOn : 
+                    InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.TotalResultsForAllFarms + @"\" + Properties.Resources.TotalResultsCO2E + CLILanguageConstants.OutputLanguageAddOn;
 
                 // Build the headers
                 stringBuilder.AppendLine(this.GetHeadersAllFarms(applicationData, outputType));
@@ -450,8 +450,8 @@ namespace H.CLI.Results
 
                     // Build the path depending on which output file we are building
                     var path = outputType == EmissionDisplayUnits.KilogramsGhgs ?
-                        InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.Outputs + @"\" + farmEmissionResult.Farm.Name + Properties.Resources.Results + @"\" + farmEmissionResult.Farm.Name + Properties.Resources.FarmResultsGHG + farmEmissionResult.Farm.SettingsFileName + CLILanguageConstants.OutputLanguageAddOn :
-                        InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.Outputs + @"\" + farmEmissionResult.Farm.Name + Properties.Resources.Results + @"\" + farmEmissionResult.Farm.Name + Properties.Resources.FarmResultsCO2E + farmEmissionResult.Farm.SettingsFileName + CLILanguageConstants.OutputLanguageAddOn;
+                        InfrastructureConstants.BaseOutputDirectoryPath + @"\" + farmEmissionResult.Farm.Name + Properties.Resources.Results + @"\" + farmEmissionResult.Farm.Name + Properties.Resources.FarmResultsGHG + farmEmissionResult.Farm.SettingsFileName + CLILanguageConstants.OutputLanguageAddOn :
+                        InfrastructureConstants.BaseOutputDirectoryPath + @"\" + farmEmissionResult.Farm.Name + Properties.Resources.Results + @"\" + farmEmissionResult.Farm.Name + Properties.Resources.FarmResultsCO2E + farmEmissionResult.Farm.SettingsFileName + CLILanguageConstants.OutputLanguageAddOn;
 
                     var stringBuilder = new StringBuilder();
 
@@ -716,7 +716,7 @@ namespace H.CLI.Results
         public void WriteEstimatesOfProductionToFile()
         {
             #region Setting Up Path For Total Results For All Farms
-            var path = InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.Outputs + @"\" + Properties.Resources.TotalResultsForAllFarms + @"\" + Properties.Resources.TotalResultsEP + CLILanguageConstants.OutputLanguageAddOn;
+            var path = InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.TotalResultsForAllFarms + @"\" + Properties.Resources.TotalResultsEP + CLILanguageConstants.OutputLanguageAddOn;
             var stringBuilder = new StringBuilder();
             var results = new EstimatesOfProductionResults();
             #endregion
@@ -1196,7 +1196,7 @@ namespace H.CLI.Results
                 var farmName = splitFarmNameToSettingsFileToOutputPath[0];
                 var farmSettingsFile = splitFarmNameToSettingsFileToOutputPath[1];
 
-                path = InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.Outputs + @"\" + farmName + Properties.Resources.Results + @"\" + farmName + Properties.Resources.FarmResultsEP + farmSettingsFile + CLILanguageConstants.OutputLanguageAddOn;
+                path = InfrastructureConstants.BaseOutputDirectoryPath + @"\" + farmName + Properties.Resources.Results + @"\" + farmName + Properties.Resources.FarmResultsEP + farmSettingsFile + CLILanguageConstants.OutputLanguageAddOn;
                 #endregion
 
                 var filteredFarmComponents = groupedComponentsForAFarm.SelectMany(x => x.Value.Where(y => y.Component.ComponentType != ComponentType.Rams &&
@@ -1719,7 +1719,7 @@ namespace H.CLI.Results
         public void WriteFeedEstimatesToFile()
         {
             #region Setting Up Path For Total Results For All Farms
-            var path = InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.Outputs + @"\" + Properties.Resources.TotalResultsForAllFarms + @"\" + Properties.Resources.TotalResultsFE + CLILanguageConstants.OutputLanguageAddOn;
+            var path = InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.TotalResultsForAllFarms + @"\" + Properties.Resources.TotalResultsFE + CLILanguageConstants.OutputLanguageAddOn;
             var stringBuilder = new StringBuilder();
             var results = new FeedEstimateResults();
             #endregion
@@ -1921,7 +1921,7 @@ namespace H.CLI.Results
                 var farmName = splitFarmNameToSettingsFileToOutputPath[0];
                 var farmSettingsFile = splitFarmNameToSettingsFileToOutputPath[1];
 
-                var path = InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.Outputs + @"\" + farmName + Properties.Resources.Results + @"\" + farmName + Properties.Resources.FarmResultsFE + farmSettingsFile + CLILanguageConstants.OutputLanguageAddOn;
+                var path = InfrastructureConstants.BaseOutputDirectoryPath + @"\" + farmName + Properties.Resources.Results + @"\" + farmName + Properties.Resources.FarmResultsFE + farmSettingsFile + CLILanguageConstants.OutputLanguageAddOn;
 
                 var filteredFarmComponents = groupedComponentsForAFarm.SelectMany(x => x.Value.Where(y => y.Component.ComponentCategory == ComponentCategory.Sheep ||
                                                                                                       y.Component.ComponentCategory == ComponentCategory.BeefProduction ||
@@ -2121,7 +2121,7 @@ namespace H.CLI.Results
                 
                 var farmName = farmEmissionResult.Farm.Name;
                 var settingsFileName = farmEmissionResult.Farm.SettingsFileName;
-                var path = InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.Outputs + @"\" + farmName + Properties.Resources.Results + @"\" + farmName + Properties.Resources.FarmResultsFE + settingsFileName + CLILanguageConstants.OutputLanguageAddOn;
+                var path = InfrastructureConstants.BaseOutputDirectoryPath + @"\" + farmName + Properties.Resources.Results + @"\" + farmName + Properties.Resources.FarmResultsFE + settingsFileName + CLILanguageConstants.OutputLanguageAddOn;
 
                 // Farm name
                 stringBuilder.AppendLine(farmName + "_" + settingsFileName);

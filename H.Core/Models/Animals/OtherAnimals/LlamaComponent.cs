@@ -1,5 +1,4 @@
-﻿using H.Core.Properties;
-using H.Infrastructure;
+﻿using H.Infrastructure;
 
 namespace H.Core.Models.Animals.OtherAnimals
 {
@@ -7,10 +6,10 @@ namespace H.Core.Models.Animals.OtherAnimals
     {
         public LlamaComponent()
         {
-            ComponentNameDisplayString = ComponentType.Llamas.GetDescription();
-            ComponentDescriptionString = Resources.ToolTipLlamasComponent;
-            ComponentCategory = ComponentCategory.OtherLivestock;
-            ComponentType = ComponentType.Llamas;
+            this.ComponentNameDisplayString = ComponentType.Llamas.GetDescription();
+            this.ComponentDescriptionString = Properties.Resources.ToolTipLlamasComponent;
+            this.ComponentCategory = ComponentCategory.OtherLivestock;
+            this.ComponentType = ComponentType.Llamas;
         }
     }
 }

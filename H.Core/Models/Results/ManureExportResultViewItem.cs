@@ -1,4 +1,5 @@
-﻿using H.Core.CustomAttributes;
+﻿using System;
+using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 
 namespace H.Core.Models.Results
@@ -15,9 +16,11 @@ namespace H.Core.Models.Results
 
         #region Properties
 
+
         /// <summary>
-        ///     Direct N2O-N from exported manure
-        ///     (kg NO3-N ha^-1)
+        /// Direct N2O-N from exported manure
+        /// 
+        /// (kg NO3-N ha^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramsNO3NPerHectare)]
         public double NitrateLeachedEmissions
@@ -27,8 +30,9 @@ namespace H.Core.Models.Results
         }
 
         /// <summary>
-        ///     NH3-N from exported manure
-        ///     (kg NH3-N ha^-1)
+        /// NH3-N from exported manure
+        ///
+        /// (kg NH3-N ha^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramsNH3NPerHectare)]
         public double VolatilizationEmissions
@@ -38,8 +42,9 @@ namespace H.Core.Models.Results
         }
 
         /// <summary>
-        ///     Adjusted NH3-N from exported manure
-        ///     (kg NH3-N ha^-1)
+        /// Adjusted NH3-N from exported manure
+        ///
+        /// (kg NH3-N ha^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramsNH3NPerHectare)]
         public double AdjustedVolatilizationEmissions

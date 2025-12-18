@@ -8,8 +8,6 @@ namespace H.Core.Services.Animals
     public interface IAnimalResultsService
     {
         IList<AnimalGroupEmissionResults> CalculateResultsForComponent(AnimalComponentBase animalComponent, Farm farm);
-
-        List<AnimalComponentEmissionsResults> CalculateResultsForAnimalComponents(
-            IEnumerable<AnimalComponentBase> components, Farm farm);
+        List<AnimalComponentEmissionsResults> CalculateResultsForAnimalComponents(IEnumerable<AnimalComponentBase> components, Farm farm);
     }
 }

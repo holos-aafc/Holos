@@ -4,7 +4,7 @@ using H.Infrastructure;
 namespace H.Core.Enumerations
 {
     /// <summary>
-    ///     Indicates the animal category source of the manure (beef, dairy, etc.)
+    /// Indicates the animal category source of the manure (beef, dairy, etc.)
     /// </summary>
     public enum ManureAnimalSourceTypes
     {
@@ -27,6 +27,6 @@ namespace H.Core.Enumerations
         SheepManure,
 
         [LocalizedDescription("EnumOtherLivestockManure", typeof(Resources))]
-        OtherLivestockManure
+        OtherLivestockManure,
     }
 }

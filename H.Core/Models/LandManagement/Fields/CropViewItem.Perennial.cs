@@ -6,7 +6,7 @@
 
         public bool IsFinalYearInPerennialStand()
         {
-            return YearInPerennialStand == PerennialStandLength;
+            return this.YearInPerennialStand == this.PerennialStandLength;
         }
 
         #endregion

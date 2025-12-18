@@ -8,7 +8,7 @@ namespace H.Core.Providers.Shelterbelt
 {
     public static class ShelterbeltEcodistrictFutureLookupTableProvider
     {
-        private static readonly List<ShelterbeltEcodistrictLookupTableData> _data;
+        private static List<ShelterbeltEcodistrictLookupTableData> _data;
 
         static ShelterbeltEcodistrictFutureLookupTableProvider()
         {
@@ -21,7 +21,7 @@ namespace H.Core.Providers.Shelterbelt
         }
 
         private static List<ShelterbeltEcodistrictLookupTableData> CacheTable()
-        {
+        {            
             var result = new List<ShelterbeltEcodistrictLookupTableData>();
 
             result.AddRange(GetLines(TreeSpecies.Caragana, CsvResourceNames.CaraganaAllClustersFuture));
@@ -35,7 +35,7 @@ namespace H.Core.Providers.Shelterbelt
         }
 
         private static List<ShelterbeltEcodistrictLookupTableData> GetLines(
-            TreeSpecies species,
+            TreeSpecies species, 
             CsvResourceNames resourceName)
         {
             var result = new List<ShelterbeltEcodistrictLookupTableData>();
@@ -57,5 +57,6 @@ namespace H.Core.Providers.Shelterbelt
 
             return result;
         }
+
     }
 }
