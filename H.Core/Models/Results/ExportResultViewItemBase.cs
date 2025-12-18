@@ -1,11 +1,11 @@
-﻿using H.Core.CustomAttributes;
+﻿using System;
+using H.Core.CustomAttributes;
 using H.Core.Enumerations;
-using System;
 
 namespace H.Core.Models.Results
 {
     /// <summary>
-    /// A base class for <see cref="ManureExportResultViewItem"/>s and <see cref="CropResidueExportResultViewItem"/>s.
+    ///     A base class for <see cref="ManureExportResultViewItem" />s and <see cref="CropResidueExportResultViewItem" />s.
     /// </summary>
     public abstract class ExportResultViewItemBase : ResultsViewItemBase
     {
@@ -14,14 +14,6 @@ namespace H.Core.Models.Results
         private DateTime _dateOfExport;
         private double _directN2ON;
         private double _indirectN2ON;
-
-        #endregion
-
-        #region Constructors
-
-        protected ExportResultViewItemBase()
-        {
-        }
 
         #endregion
 
@@ -34,9 +26,8 @@ namespace H.Core.Models.Results
         }
 
         /// <summary>
-        /// Direct N2O-N from exports
-        /// 
-        /// (kg N2O-N ha^-1)
+        ///     Direct N2O-N from exports
+        ///     (kg N2O-N ha^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramsN2ONPerHectare)]
         public double DirectN2ON
@@ -46,9 +37,8 @@ namespace H.Core.Models.Results
         }
 
         /// <summary>
-        /// Indirect N2O-N from exports
-        /// 
-        /// (kg N2O-N ha^-1)
+        ///     Indirect N2O-N from exports
+        ///     (kg N2O-N ha^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramsN2ONPerHectare)]
         public double IndirectN2ON

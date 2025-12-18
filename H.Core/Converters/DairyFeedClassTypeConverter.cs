@@ -1,6 +1,6 @@
-﻿using H.Core.Enumerations;
+﻿using System;
+using H.Core.Enumerations;
 using H.Core.Properties;
-using System;
 
 namespace H.Core.Converters
 {
@@ -8,7 +8,7 @@ namespace H.Core.Converters
     {
         public DairyFeedClassType Convert(string input)
         {
-            input = this.GetLettersAsLowerCase(input);
+            input = GetLettersAsLowerCase(input);
             switch (input)
             {
                 case "animal":
@@ -24,7 +24,6 @@ namespace H.Core.Converters
                 default:
                     throw new Exception(string.Format(Resources.UnknownDairyFeedClassType, input));
             }
-
         }
     }
 }

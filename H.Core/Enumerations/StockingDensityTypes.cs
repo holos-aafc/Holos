@@ -15,6 +15,6 @@ namespace H.Core.Enumerations
         Medium,
 
         [LocalizedDescription("EnumHeavy", typeof(Resources))]
-        Heavy,
+        Heavy
     }
 }

@@ -3,7 +3,7 @@
     public static class DietAdditiveExtensions
     {
         /// <summary>
-        /// Returns the fractional value of the diet additive that is fat.
+        ///     Returns the fractional value of the diet additive that is fat.
         /// </summary>
         /// <param name="dietAdditiveType">The type of additive</param>
         /// <returns>Fraction of diet additive that is fat</returns>

@@ -1,25 +1,38 @@
-﻿using System;
-using System.Globalization;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
-using System.Windows.Media.Animation;
+using AutoMapper;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
 using H.Infrastructure;
-using AutoMapper;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace H.Core.Providers.Economics
 {
     public class CropEconomicsProvider
     {
+        #region Constructors
+
+        public CropEconomicsProvider()
+        {
+            _cache = ReadFile();
+        }
+
+        #endregion
+
         #region Fields
 
         private readonly CropTypeStringConverter _cropTypeStringConverter = new CropTypeStringConverter();
-        private readonly SoilFunctionalCategoryStringConverter _soilFunctionalCategoryStringConverter = new SoilFunctionalCategoryStringConverter();
+
+        private readonly SoilFunctionalCategoryStringConverter _soilFunctionalCategoryStringConverter =
+            new SoilFunctionalCategoryStringConverter();
+
         private readonly ProvinceStringConverter _provinceStringConverter = new ProvinceStringConverter();
-        private readonly EconomicsMeasurementStringConverter _economicsMeasurementStringConverter = new EconomicsMeasurementStringConverter();
+
+        private readonly EconomicsMeasurementStringConverter _economicsMeasurementStringConverter =
+            new EconomicsMeasurementStringConverter();
 
         private readonly List<CropEconomicData> _cache;
 
@@ -32,14 +45,6 @@ namespace H.Core.Providers.Economics
         private const string SaskCroppingGuideLink = "https://bit.ly/3hHzxXC";
         private const string ManitobaCroppingGuideLink = "https://bit.ly/3v80uaO";
         private const string OntarioCroppingGuideLink = "https://bit.ly/3wnvofC";
-        #endregion
-
-        #region Constructors
-
-        public CropEconomicsProvider()
-        {
-            _cache = this.ReadFile();
-        }
 
         #endregion
 
@@ -69,112 +74,116 @@ namespace H.Core.Providers.Economics
         }
 
         /// <summary>
-        /// Get economic data for a crop in a given soil region in a given province.
+        ///     Get economic data for a crop in a given soil region in a given province.
         /// </summary>
         /// <param name="cropType">the crop to get economics for</param>
         /// <param name="soilFunctionalCategory">the soil zone to search</param>
         /// <param name="province">the province to search</param>
-        /// <returns><see cref="CropEconomicData"/> for the given crop</returns>
+        /// <returns><see cref="CropEconomicData" /> for the given crop</returns>
         public CropEconomicData Get(CropType cropType, SoilFunctionalCategory soilFunctionalCategory, Province province)
         {
             //we need a deep copy of the econ data
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<CropEconomicData, CropEconomicData>());
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<CropEconomicData, CropEconomicData>(),
+                new NullLoggerFactory());
             var mapper = config.CreateMapper();
 
             var soilCategory = soilFunctionalCategory.GetBaseSoilFunctionalCategory();
 
-            var econCropType = this.FarmCropTypeToEconCropType(cropType, soilFunctionalCategory, province);
+            var econCropType = FarmCropTypeToEconCropType(cropType, soilFunctionalCategory, province);
 
             //We look for a direct match of croptype, soil, and province
-            var result = this.GetDirectMatch(cropType, province, soilCategory, econCropType, mapper);
+            var result = GetDirectMatch(cropType, province, soilCategory, econCropType, mapper);
             if (result != null)
             {
-                this.FinalizeCropEconomicData(result, cropType);
+                FinalizeCropEconomicData(result, cropType);
                 return result;
             }
 
             //if no direct match then we should look at other soilcategories in the same province
-            result = this.GetMatchAcrossTheProvince(province, econCropType, soilCategory, mapper);
+            result = GetMatchAcrossTheProvince(province, econCropType, soilCategory, mapper);
             if (result != null)
             {
-                this.FinalizeCropEconomicData(result, cropType);
+                FinalizeCropEconomicData(result, cropType);
                 return result;
             }
 
             //if no match in other soil regions in the province then look to neighbouring provinces
-            result = this.GetMatchInNeighbouringProvince(province, cropType, soilCategory, mapper);
+            result = GetMatchInNeighbouringProvince(province, cropType, soilCategory, mapper);
             if (result != null)
             {
-                this.FinalizeCropEconomicData(result, cropType);
+                FinalizeCropEconomicData(result, cropType);
                 return result;
             }
 
-            Trace.TraceError($"{nameof(CropEconomicsProvider)}.{nameof(Get)}: no economic data found for '{cropType.GetDescription()}','{soilFunctionalCategory.GetDescription()}, and '{province.GetDescription()}''. Returning default value");
+            Trace.TraceError(
+                $"{nameof(CropEconomicsProvider)}.{nameof(Get)}: no economic data found for '{cropType.GetDescription()}','{soilFunctionalCategory.GetDescription()}, and '{province.GetDescription()}''. Returning default value");
 
-            return new CropEconomicData() { Province = province };
+            return new CropEconomicData { Province = province };
         }
 
 
         /// <summary>
-        /// Map a farm crop to the appropriate economics crop. There isn't a 1-to-1 match so there will still be holes for a lot of farm crops
+        ///     Map a farm crop to the appropriate economics crop. There isn't a 1-to-1 match so there will still be holes for a
+        ///     lot of farm crops
         /// </summary>
         /// <param name="cropType">the economic data from the original CropViewItem</param>
         /// <param name="soilCategory">the soil functional category for the region</param>
         /// <param name="province">the province of the farm</param>
         /// <returns>CropEconomicData</returns>
-        public CropType FarmCropTypeToEconCropType(CropType cropType, SoilFunctionalCategory soilCategory, Province province)
+        public CropType FarmCropTypeToEconCropType(CropType cropType, SoilFunctionalCategory soilCategory,
+            Province province)
         {
-            var cropsTypesForProvinceAndSoilCategory = this.GetCropEconomicDataByProvinceAndSoilZone(province, soilCategory).Select(x => x.CropType).ToList();
+            var cropsTypesForProvinceAndSoilCategory = GetCropEconomicDataByProvinceAndSoilZone(province, soilCategory)
+                .Select(x => x.CropType).ToList();
 
-            if (cropsTypesForProvinceAndSoilCategory.Contains(cropType))
-            {
-                return cropType;
-            }
+            if (cropsTypesForProvinceAndSoilCategory.Contains(cropType)) return cropType;
 
             //if they don't match we need to find a suitable replacement for the farm crop for the given province
             switch (province)
             {
                 case Province.Alberta:
-                    return this.MapAlbertaFarmCropToEconomiCropType(cropType);
+                    return MapAlbertaFarmCropToEconomiCropType(cropType);
                 case Province.Saskatchewan:
-                    return this.MapSaskFarmCropToEconomicCropType(cropType);
+                    return MapSaskFarmCropToEconomicCropType(cropType);
                 case Province.Manitoba:
-                    return this.MapManitobaFarmCropToEconomicCropType(cropType);
+                    return MapManitobaFarmCropToEconomicCropType(cropType);
                 case Province.Ontario:
-                    return this.MapOntarioFarmCropToEconomicCropType(cropType);
+                    return MapOntarioFarmCropToEconomicCropType(cropType);
                 default:
-                    Trace.TraceError($"{nameof(CropEconomicsProvider)}.{nameof(this.FarmCropTypeToEconCropType)}: {province} is invalid and something wasn't handled correctly");
+                    Trace.TraceError(
+                        $"{nameof(CropEconomicsProvider)}.{nameof(FarmCropTypeToEconCropType)}: {province} is invalid and something wasn't handled correctly");
                     return CropType.NotSelected;
             }
         }
 
         /// <summary>
-        /// Check the cache for the crop.
+        ///     Check the cache for the crop.
         /// </summary>
         /// <param name="cropType">The crop to look for.</param>
         /// <returns>True if crop is in the cache, false otherwise.</returns>
         public bool HasDataForCropType(CropType cropType)
         {
-            bool result = _cache.Any(x => x.CropType == cropType);
+            var result = _cache.Any(x => x.CropType == cropType);
             return result;
         }
+
         /// <summary>
-        /// Check the cache for the province
+        ///     Check the cache for the province
         /// </summary>
         /// <param name="province">The province to look for.</param>
         /// <returns>True if province exists in cache, false otherwise.</returns>
         public bool HasDataForProvince(Province province)
         {
-            bool result = _cache.Any(x => x.Province == province);
+            var result = _cache.Any(x => x.Province == province);
             return result;
         }
 
         /// <summary>
-        /// Get all the economic data for a given <see cref="SoilFunctionalCategory"/> in a given <see cref="Province"/>.
+        ///     Get all the economic data for a given <see cref="SoilFunctionalCategory" /> in a given <see cref="Province" />.
         /// </summary>
         /// <param name="province">The province to search for.</param>
         /// <param name="soilCategory">The soil category to search for.</param>
-        /// <returns>List of <see cref="CropEconomicData"/> in that soil zone and province.</returns>
+        /// <returns>List of <see cref="CropEconomicData" /> in that soil zone and province.</returns>
         public IEnumerable<CropEconomicData> GetCropEconomicDataByProvinceAndSoilZone(Province province,
             SoilFunctionalCategory soilCategory)
         {
@@ -188,7 +197,7 @@ namespace H.Core.Providers.Economics
         #region Private Methods
 
         /// <summary>
-        /// Search for crop in another province
+        ///     Search for crop in another province
         /// </summary>
         /// <param name="province">the original searched province</param>
         /// <param name="originalCropType">the ORIGINAL crop. NOT economic type</param>
@@ -209,7 +218,7 @@ namespace H.Core.Providers.Economics
             for (var i = 0; i < searchLimit; i++)
             {
                 //we need to get the econ croptype everytime we look a new province
-                var econCropType = this.FarmCropTypeToEconCropType(originalCropType, soilCategory, provinceNeighbour);
+                var econCropType = FarmCropTypeToEconCropType(originalCropType, soilCategory, provinceNeighbour);
 
                 if (econCropType != CropType.NotSelected)
                 {
@@ -220,7 +229,7 @@ namespace H.Core.Providers.Economics
                     if (econData != null) break;
 
                     //need to search through all the province's soil zones also if I strike out with the given soil zone in a new province
-                    econData = this.GetMatchAcrossTheProvince(provinceNeighbour, econCropType, soilCategory, mapper);
+                    econData = GetMatchAcrossTheProvince(provinceNeighbour, econCropType, soilCategory, mapper);
 
                     if (econData != null) break;
                 }
@@ -228,10 +237,7 @@ namespace H.Core.Providers.Economics
                 provinceNeighbour = provinceNeighbour.GetNeigbouringProvince();
 
                 //this way we actually loop through all the provinces and don't check something we have already checked
-                if (provinceNeighbour == province)
-                {
-                    provinceNeighbour = Province.Alberta;
-                }
+                if (provinceNeighbour == province) provinceNeighbour = Province.Alberta;
             }
 
             var result = mapper.Map<CropEconomicData>(econData);
@@ -239,7 +245,7 @@ namespace H.Core.Providers.Economics
         }
 
         /// <summary>
-        /// Cycle through all of the soil zones in the province and try and find economic data for the croptype
+        ///     Cycle through all of the soil zones in the province and try and find economic data for the croptype
         /// </summary>
         private CropEconomicData GetMatchAcrossTheProvince(Province province, CropType econCropType,
             SoilFunctionalCategory soilFunctionalCategory, IMapper mapper)
@@ -262,11 +268,10 @@ namespace H.Core.Providers.Economics
 
             var result = mapper.Map<CropEconomicData>(econData);
             return result;
-
         }
 
         /// <summary>
-        /// Get economic data that matches directly to province, soil zone, and croptype
+        ///     Get economic data that matches directly to province, soil zone, and croptype
         /// </summary>
         private CropEconomicData GetDirectMatch(CropType cropType, Province province,
             SoilFunctionalCategory soilCategory, CropType econCropType, IMapper mapper)
@@ -303,6 +308,7 @@ namespace H.Core.Providers.Economics
 
             return result;
         }
+
         private List<CropEconomicData> ReadFile()
         {
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
@@ -323,7 +329,6 @@ namespace H.Core.Providers.Economics
                 {
                     var fallowCrops = cropType == CropType.Fallow || cropType == CropType.SummerFallow;
                     if (!fallowCrops) continue;
-
                 }
 
                 var unit = _economicsMeasurementStringConverter.Convert(line[3]);
@@ -333,7 +338,9 @@ namespace H.Core.Providers.Economics
                 var seedCleaningAndTreatment = double.Parse(line[7], cultureInfo);
                 var fertilizer = double.Parse(line[8], cultureInfo);
                 var chemical = double.Parse(line[10], cultureInfo);
-                var hailCropInsurance = double.TryParse(line[11], NumberStyles.Float, cultureInfo, out parseResult) ? parseResult : 0;
+                var hailCropInsurance = double.TryParse(line[11], NumberStyles.Float, cultureInfo, out parseResult)
+                    ? parseResult
+                    : 0;
                 var truckingMarketing = double.Parse(line[12], cultureInfo);
                 var fuelOilLube = double.Parse(line[13], cultureInfo);
                 var machineryRepairs = double.Parse(line[14], cultureInfo);
@@ -345,8 +352,12 @@ namespace H.Core.Providers.Economics
                 var operatingInterest = double.Parse(line[20], cultureInfo);
                 var totalCost = double.Parse(line[21], cultureInfo);
                 var contributionMargin = double.Parse(line[22], cultureInfo);
-                var totalCostPerUnit = double.TryParse(line[23], NumberStyles.Float, cultureInfo, out parseResult) ? parseResult : 0;
-                var breakEvenYield = double.TryParse(line[24], NumberStyles.Float, cultureInfo, out parseResult) ? parseResult : 0;
+                var totalCostPerUnit = double.TryParse(line[23], NumberStyles.Float, cultureInfo, out parseResult)
+                    ? parseResult
+                    : 0;
+                var breakEvenYield = double.TryParse(line[24], NumberStyles.Float, cultureInfo, out parseResult)
+                    ? parseResult
+                    : 0;
                 var herbicideCost = double.Parse(line[25], cultureInfo);
                 var nitrogenCost = double.Parse(line[26], cultureInfo);
                 var phosphorusCost = double.Parse(line[27], cultureInfo);
@@ -388,6 +399,7 @@ namespace H.Core.Providers.Economics
 
             return result;
         }
+
         private CropType MapAlbertaFarmCropToEconomiCropType(CropType cropType)
         {
             switch (cropType)
@@ -431,6 +443,7 @@ namespace H.Core.Providers.Economics
                     return CropType.NotSelected;
             }
         }
+
         private CropType MapSaskFarmCropToEconomicCropType(CropType cropType)
         {
             switch (cropType)
@@ -474,6 +487,7 @@ namespace H.Core.Providers.Economics
                     return CropType.NotSelected;
             }
         }
+
         private CropType MapManitobaFarmCropToEconomicCropType(CropType cropType)
         {
             switch (cropType)
@@ -507,6 +521,7 @@ namespace H.Core.Providers.Economics
                     return CropType.NotSelected;
             }
         }
+
         private CropType MapOntarioFarmCropToEconomicCropType(CropType cropType)
         {
             //not a lot of the ontario crops map nicely to the 'ValidCropTypes'
@@ -532,6 +547,7 @@ namespace H.Core.Providers.Economics
                     return CropType.NotSelected;
             }
         }
+
         #endregion
     }
 }

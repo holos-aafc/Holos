@@ -1,19 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using H.Core.Enumerations;
 using H.Core.Providers.Animals;
-using H.Infrastructure;
 
 namespace H.Core.Models.Infrastructure
 {
     public class ManureSubstrateViewItem : SubstrateViewItemBase
     {
+        #region Constructors
+
+        public ManureSubstrateViewItem()
+        {
+            ValidManureStateTypesForSelectedTypeOfAnimalManure = new ObservableCollection<ManureStateType>
+            {
+                ManureStateType.NotSelected
+            };
+
+            ManureCompositionData = new DefaultManureCompositionData();
+        }
+
+        #endregion
+
         #region Fields
-        
+
         private AnimalType _animalType;
         private BeddingMaterialType _beddingMaterialType;
         private double _dailyManureAddedToDigester;
@@ -24,24 +32,11 @@ namespace H.Core.Models.Infrastructure
 
         #endregion
 
-        #region Constructors
-
-        public ManureSubstrateViewItem()
-        {
-            this.ValidManureStateTypesForSelectedTypeOfAnimalManure = new ObservableCollection<ManureStateType>()
-            {
-                ManureStateType.NotSelected,
-            };
-
-            this.ManureCompositionData = new DefaultManureCompositionData();
-        }
-
-        #endregion
-
         #region Properties
 
         /// <summary>
-        /// Each view item must have its own collection of valid state types so the table rows presented to the user will have their own distinct collection
+        ///     Each view item must have its own collection of valid state types so the table rows presented to the user will have
+        ///     their own distinct collection
         /// </summary>
         public ObservableCollection<ManureStateType> ValidManureStateTypesForSelectedTypeOfAnimalManure
         {
@@ -52,19 +47,19 @@ namespace H.Core.Models.Infrastructure
         public AnimalType AnimalType
         {
             get => _animalType;
-            set => this.SetProperty(ref _animalType, value);
+            set => SetProperty(ref _animalType, value);
         }
 
         public BeddingMaterialType BeddingMaterialType
         {
             get => _beddingMaterialType;
-            set => this.SetProperty(ref _beddingMaterialType, value);
+            set => SetProperty(ref _beddingMaterialType, value);
         }
 
         public double DailyManureAddedToDigester
         {
             get => _dailyManureAddedToDigester;
-            set => this.SetProperty(ref _dailyManureAddedToDigester, value);
+            set => SetProperty(ref _dailyManureAddedToDigester, value);
         }
 
         public ManureSubstrateState ManureSubstrateState

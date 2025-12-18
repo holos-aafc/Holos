@@ -7,12 +7,12 @@ namespace H.Core.Providers.Animals
     {
         IEmissionData GetFactors(
             ManureStateType manureStateType,
-            double meanAnnualPrecipitation, 
+            double meanAnnualPrecipitation,
             double meanAnnualTemperature,
-            double meanAnnualEvapotranspiration, 
+            double meanAnnualEvapotranspiration,
             double beddingRate,
-            AnimalType animalType, 
-            Farm farm, 
+            AnimalType animalType,
+            Farm farm,
             int year);
 
         IEmissionData GetLandApplicationFactors(

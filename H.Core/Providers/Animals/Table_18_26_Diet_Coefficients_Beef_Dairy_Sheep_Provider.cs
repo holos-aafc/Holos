@@ -1,31 +1,20 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Windows.Markup;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
-using H.Core.Providers.Climate;
-using H.Core.Providers.Plants;
 using H.Infrastructure;
 
 namespace H.Core.Providers.Animals
 {
     /// <summary>
-    /// Implements two tables:
-    /// <para>Table 18: Diet coefficients by livestock group and diet for beef cattle and dairy cattle.</para>
-    /// <para>Table 26: Diet coefficients for sheep.</para>
+    ///     Implements two tables:
+    ///     <para>Table 18: Diet coefficients by livestock group and diet for beef cattle and dairy cattle.</para>
+    ///     <para>Table 26: Diet coefficients for sheep.</para>
     /// </summary>
     public class Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Provider
     {
-        #region Fields
-
-        private readonly DietTypeStringConverter _dietConverter = new DietTypeStringConverter();
-        private readonly AnimalTypeStringConverter _animalConverter = new AnimalTypeStringConverter();
-        private readonly List<Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Data> _fileData;
-
-        #endregion
-
         #region Constructors
 
         public Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Provider()
@@ -38,41 +27,43 @@ namespace H.Core.Providers.Animals
         #region Public Methods
 
         /// <summary>
-        /// Returns an instance of <see cref="Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Data"/> given an AnimalType and DietType.
+        ///     Returns an instance of <see cref="Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Data" /> given an AnimalType and
+        ///     DietType.
         /// </summary>
         /// <param name="animalType">The type of animal for which data is needed.</param>
         /// <param name="dietType">The type of diet corresponding to the animal.</param>
-        /// <returns>Returns a corresponding instance of <see cref="Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Data"/> if data is found, otherwise
-        /// returns null.</returns>
-        public Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Data GetDietCoefficientsDataInstance(AnimalType animalType, 
-                                                                                                   DietType dietType)
+        /// <returns>
+        ///     Returns a corresponding instance of <see cref="Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Data" /> if data is
+        ///     found, otherwise
+        ///     returns null.
+        /// </returns>
+        public Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Data GetDietCoefficientsDataInstance(
+            AnimalType animalType,
+            DietType dietType)
         {
-            Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Data dataInstance = _fileData.FirstOrDefault(x => 
-                                                                                                        x.AnimalType == animalType && 
-                                                                                                        x.DietType == dietType);
-            if (dataInstance != null)
-            {
-                return dataInstance;
-            }
-            
+            var dataInstance = _fileData.FirstOrDefault(x =>
+                x.AnimalType == animalType &&
+                x.DietType == dietType);
+            if (dataInstance != null) return dataInstance;
+
             dataInstance = _fileData.Find(x => x.AnimalType == animalType);
 
             if (dataInstance == null)
-            {
-                Trace.TraceError($"{nameof(Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Provider)}.{nameof(GetDietCoefficientsDataInstance)}" +
-                                 $" the AnimalType: {animalType} was not found in the available data. Returning null.");
-            }
+                Trace.TraceError(
+                    $"{nameof(Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Provider)}.{nameof(GetDietCoefficientsDataInstance)}" +
+                    $" the AnimalType: {animalType} was not found in the available data. Returning null.");
             else
-            {
-                Trace.TraceError($"{nameof(Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Provider)}.{nameof(GetDietCoefficientsDataInstance)}" +
-                                 $" the DietType: {dietType} was not found in the available data. Returning null.");
-            }
+                Trace.TraceError(
+                    $"{nameof(Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Provider)}.{nameof(GetDietCoefficientsDataInstance)}" +
+                    $" the DietType: {dietType} was not found in the available data. Returning null.");
 
             return null;
         }
+
         #endregion
 
         #region Private Methods
+
         private List<Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Data> BuildCache()
         {
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
@@ -85,8 +76,9 @@ namespace H.Core.Providers.Animals
             {
                 if (string.IsNullOrWhiteSpace(line[0]))
                 {
-                    Trace.Write($"{nameof(Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Provider)}.{nameof(BuildCache)}" +
-                                $" - File: {nameof(CsvResourceNames.DietCoefficientsForDairyBeefSheep)} : first cell of the line is empty. Exiting loop to stop reading more lines inside .csv file.");
+                    Trace.Write(
+                        $"{nameof(Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Provider)}.{nameof(BuildCache)}" +
+                        $" - File: {nameof(CsvResourceNames.DietCoefficientsForDairyBeefSheep)} : first cell of the line is empty. Exiting loop to stop reading more lines inside .csv file.");
                     break;
                 }
 
@@ -102,9 +94,9 @@ namespace H.Core.Providers.Animals
                 var me = double.Parse(line[9], cultureInfo);
                 var ee = double.Parse(line[10], cultureInfo);
                 var nel3X = double.Parse(line[11], cultureInfo);
-                
 
-                var entry = new Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Data()
+
+                var entry = new Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Data
                 {
                     AnimalType = animalType,
                     DietType = dietType,
@@ -117,14 +109,22 @@ namespace H.Core.Providers.Animals
                     TotalDigestibleNutrients = tdn,
                     MetabolizableEnergy = me,
                     EtherExtract = ee,
-                    NetEnergyLactation = nel3X,
+                    NetEnergyLactation = nel3X
                 };
                 result.Add(entry);
-
             }
 
             return result;
         }
+
+        #endregion
+
+        #region Fields
+
+        private readonly DietTypeStringConverter _dietConverter = new DietTypeStringConverter();
+        private readonly AnimalTypeStringConverter _animalConverter = new AnimalTypeStringConverter();
+        private readonly List<Table_18_26_Diet_Coefficients_Beef_Dairy_Sheep_Data> _fileData;
+
         #endregion
     }
 }

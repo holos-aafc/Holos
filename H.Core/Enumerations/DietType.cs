@@ -73,7 +73,7 @@ namespace H.Core.Enumerations
 
         [LocalizedDescription("CornGrainBasedDietType", typeof(Resources))]
         CornGrainBased,
-        
+
         [LocalizedDescription("GestationDietType", typeof(Resources))]
         Gestation,
 
@@ -120,6 +120,6 @@ namespace H.Core.Enumerations
         Boars,
 
         [LocalizedDescription("EnumGiltDeveloperDietType", typeof(Resources))]
-        GiltDeveloperDiet,
+        GiltDeveloperDiet
     }
 }

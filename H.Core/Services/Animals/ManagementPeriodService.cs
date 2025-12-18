@@ -1,21 +1,15 @@
-﻿using H.Core.Properties;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Feed;
 using H.Core.Services.Initialization;
-using Prism.Regions;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
-using H.Core.Models.Animals.Beef;
-using H.Core.Models.LandManagement.Fields;
-using System.Collections.Specialized;
 
 namespace H.Core.Services.Animals
 {
@@ -24,7 +18,9 @@ namespace H.Core.Services.Animals
         #region Fields
 
         protected readonly HousingTypeProvider _housingTypeProvider = new HousingTypeProvider();
-        protected readonly ManureHandlingSystemProvider _manureHandlingSystemProvider = new ManureHandlingSystemProvider();
+
+        protected readonly ManureHandlingSystemProvider _manureHandlingSystemProvider =
+            new ManureHandlingSystemProvider();
 
         protected readonly IAnimalComponentHelper _animalComponentHelper;
         protected readonly IInitializationService _initializationService;
@@ -37,37 +33,28 @@ namespace H.Core.Services.Animals
         {
         }
 
-        public ManagementPeriodService(IInitializationService initializationService, IAnimalComponentHelper animalComponentHelper)
+        public ManagementPeriodService(IInitializationService initializationService,
+            IAnimalComponentHelper animalComponentHelper)
         {
             if (initializationService != null)
-            {
                 _initializationService = initializationService;
-            }
             else
-            {
                 throw new ArgumentNullException(nameof(initializationService));
-            }
 
             if (animalComponentHelper != null)
-            {
                 _animalComponentHelper = animalComponentHelper;
-            }
             else
-            {
                 throw new ArgumentNullException(nameof(animalComponentHelper));
-            }
         }
 
         #endregion
 
         #region Private Methods
 
-        private ManagementPeriod AddManagementPeriodToAnimalGroup(Farm farm, AnimalGroup group, ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
+        private ManagementPeriod AddManagementPeriodToAnimalGroup(Farm farm, AnimalGroup group,
+            ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
-            if (group == null)
-            {
-                return null;
-            }
+            if (group == null) return null;
 
             group.PropertyChanged -= animalGroupOnPropertyChanged;
 
@@ -92,7 +79,8 @@ namespace H.Core.Services.Animals
 
                 managementPeriod.NumberOfDays = numberOfDays;
                 managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
-                managementPeriod.EndWeight = managementPeriod.StartWeight + managementPeriod.NumberOfDays * managementPeriod.PeriodDailyGain;
+                managementPeriod.EndWeight = managementPeriod.StartWeight +
+                                             managementPeriod.NumberOfDays * managementPeriod.PeriodDailyGain;
 
                 group.ManagementPeriods.Add(managementPeriod);
 
@@ -112,21 +100,23 @@ namespace H.Core.Services.Animals
                 managementPeriod.NumberOfDays = 31; // Inclusive of all calendar days
                 managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
 
-                var firstDefaultDietForAnimalType = farm.Diets.FirstOrDefault(x => x.IsDefaultDiet && x.AnimalType.GetCategory() == managementPeriod.AnimalType.GetCategory());
+                var firstDefaultDietForAnimalType = farm.Diets.FirstOrDefault(x =>
+                    x.IsDefaultDiet && x.AnimalType.GetCategory() == managementPeriod.AnimalType.GetCategory());
 
                 // These animal types do not have a default diet. Diet information is specified manually by user.
                 if (managementPeriod.AnimalType.IsPoultryType() ||
                     managementPeriod.AnimalType.IsOtherAnimalType())
-                {
                     firstDefaultDietForAnimalType = farm.Diets.SingleOrDefault(x => x.IsCustomPlaceholderDiet);
-                }
 
                 managementPeriod.SelectedDiet = firstDefaultDietForAnimalType;
                 managementPeriod.DietAdditive = DietAdditiveType.None;
-                
-                managementPeriod.HousingDetails.HousingType = this.GetValidHousingTypes(farm, managementPeriod, group.GroupType).FirstOrDefault();
-                managementPeriod.HousingDetails.BeddingMaterialType = this.GetValidBeddingTypes(group.GroupType).FirstOrDefault();
-                managementPeriod.ManureDetails.StateType = this.GetValidManureStateType(group.GroupType, farm, managementPeriod).FirstOrDefault();
+
+                managementPeriod.HousingDetails.HousingType =
+                    GetValidHousingTypes(farm, managementPeriod, group.GroupType).FirstOrDefault();
+                managementPeriod.HousingDetails.BeddingMaterialType =
+                    GetValidBeddingTypes(group.GroupType).FirstOrDefault();
+                managementPeriod.ManureDetails.StateType =
+                    GetValidManureStateType(group.GroupType, farm, managementPeriod).FirstOrDefault();
 
                 group.ManagementPeriods.Add(managementPeriod);
 
@@ -134,25 +124,29 @@ namespace H.Core.Services.Animals
             }
         }
 
-        private ManagementPeriod AddOtherManagementPeriodToAnimalGroup(Farm farm, AnimalGroup animalGroup, ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
+        private ManagementPeriod AddOtherManagementPeriodToAnimalGroup(Farm farm, AnimalGroup animalGroup,
+            ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
-            var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+            var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
+                animalGroupOnPropertyChanged);
             return managementPeriod;
         }
 
         private Diet GetDefaultDietForGroup(Farm farm, AnimalType animalType, DietType dietType)
         {
-            var result = farm.Diets.FirstOrDefault(x => x.IsDefaultDiet && x.AnimalType.GetCategory() == animalType.GetCategory() && x.DietType == dietType);
+            var result = farm.Diets.FirstOrDefault(x =>
+                x.IsDefaultDiet && x.AnimalType.GetCategory() == animalType.GetCategory() && x.DietType == dietType);
             if (result == null)
-            {
-                result = farm.Diets.FirstOrDefault(x => x.IsDefaultDiet && x.AnimalType.GetCategory() == animalType.GetCategory());
-            }
+                result = farm.Diets.FirstOrDefault(x =>
+                    x.IsDefaultDiet && x.AnimalType.GetCategory() == animalType.GetCategory());
             return result;
         }
 
         /// <summary>
-        /// The available housing types depends on the type of components on the farm. If there is an animal component on the farm that is housed on a pasture, there must be
-        /// at least 1 field component on that farm as well. Therefore, pasture should not be an item in the list unless 1 field has been added to the farm
+        ///     The available housing types depends on the type of components on the farm. If there is an animal component on the
+        ///     farm that is housed on a pasture, there must be
+        ///     at least 1 field component on that farm as well. Therefore, pasture should not be an item in the list unless 1
+        ///     field has been added to the farm
         /// </summary>
         public List<HousingType> GetValidHousingTypes(Farm farm, ManagementPeriod bindingManagementPeriod,
             AnimalType animalType)
@@ -168,12 +162,8 @@ namespace H.Core.Services.Animals
             if (farmContainsFields)
             {
                 if (thisAnimalCategoryCanHavePasture)
-                {
                     if (types.Contains(HousingType.Pasture) == false)
-                    {
                         types.Add(HousingType.Pasture);
-                    }
-                }
             }
             else
             {
@@ -181,25 +171,27 @@ namespace H.Core.Services.Animals
 
                 types.Remove(HousingType.Pasture);
                 if (bindingManagementPeriod != null)
-                {
                     bindingManagementPeriod.HousingDetails.HousingType = types.FirstOrDefault();
-                }
             }
 
             return types;
         }
 
         /// <summary>
-        /// The available manure handling systems depend on the type of components on the farm. If there is an animal component on the farm that is housed on pasture, there must be
-        /// at least 1 field component on that farm as well. Therefore, pasture should not be an item in the list unless 1 field has been added to the farm
+        ///     The available manure handling systems depend on the type of components on the farm. If there is an animal component
+        ///     on the farm that is housed on pasture, there must be
+        ///     at least 1 field component on that farm as well. Therefore, pasture should not be an item in the list unless 1
+        ///     field has been added to the farm
         /// </summary>
-        public List<ManureStateType> GetValidManureStateType(AnimalType animalType, Farm farm, ManagementPeriod managementPeriod)
+        public List<ManureStateType> GetValidManureStateType(AnimalType animalType, Farm farm,
+            ManagementPeriod managementPeriod)
         {
             var manureStateTypes = new List<ManureStateType>();
 
             var animalCategory = animalType.GetCategory();
 
-            var validHandlingSystems = _manureHandlingSystemProvider.GetValidManureStateTypesByAnimalCategory(animalCategory);
+            var validHandlingSystems =
+                _manureHandlingSystemProvider.GetValidManureStateTypesByAnimalCategory(animalCategory);
             manureStateTypes.AddRange(validHandlingSystems);
 
             var thisAnimalCategoryCanHavePasture = validHandlingSystems.Any(x => x == ManureStateType.Pasture);
@@ -208,20 +200,14 @@ namespace H.Core.Services.Animals
             if (farmContainsFields)
             {
                 if (thisAnimalCategoryCanHavePasture)
-                {
                     if (manureStateTypes.Contains(ManureStateType.Pasture) == false)
-                    {
                         manureStateTypes.Add(ManureStateType.Pasture);
-                    }
-                }
             }
             else
             {
                 manureStateTypes.Remove(ManureStateType.Pasture);
                 if (managementPeriod != null)
-                { 
                     managementPeriod.ManureDetails.StateType = manureStateTypes.FirstOrDefault();
-                }
             }
 
             return manureStateTypes;
@@ -279,6 +265,7 @@ namespace H.Core.Services.Animals
 
             return validTypes;
         }
+
         #endregion
     }
 }

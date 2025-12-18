@@ -1,10 +1,10 @@
-﻿using H.Core.Enumerations;
-using H.Core.Models.LandManagement.Fields;
-using H.Core.Models;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using H.Core.Enumerations;
+using H.Core.Models;
+using H.Core.Models.LandManagement.Fields;
 using H.Infrastructure;
-using System;
 
 namespace H.Core.Services.Initialization.Crops
 {
@@ -13,7 +13,7 @@ namespace H.Core.Services.Initialization.Crops
         #region Public Methods
 
         /// <summary>
-        /// Determines the amount of N fertilizer required for the specified crop type and yield
+        ///     Determines the amount of N fertilizer required for the specified crop type and yield
         /// </summary>
         public double CalculateRequiredNitrogenFertilizer(
             Farm farm,
@@ -21,23 +21,23 @@ namespace H.Core.Services.Initialization.Crops
             FertilizerApplicationViewItem fertilizerApplicationViewItem)
         {
             var plantCarbonInAgriculturalProduct = _icbmCarbonInputCalculator.CalculatePlantCarbonInAgriculturalProduct(
-                previousYearViewItem: null,
-                currentYearViewItem: viewItem,
-                farm: farm);
+                null,
+                viewItem,
+                farm);
 
             var nitrogenContentOfGrainReturnedToSoil = _icbmNitrogenInputCalculator.CalculateGrainNitrogenTotal(
-                carbonInputFromAgriculturalProduct: plantCarbonInAgriculturalProduct,
-                nitrogenConcentrationInProduct: viewItem.NitrogenContentInProduct);
+                plantCarbonInAgriculturalProduct,
+                viewItem.NitrogenContentInProduct);
 
             var isLeguminousCrop = viewItem.CropType.IsLeguminousCoverCrop() || viewItem.CropType.IsPulseCrop();
 
             var syntheticFertilizerApplied = _icbmNitrogenInputCalculator.CalculateSyntheticFertilizerApplied(
-                nitrogenContentOfGrainReturnedToSoil: nitrogenContentOfGrainReturnedToSoil,
-                fertilizerEfficiencyFraction: fertilizerApplicationViewItem.FertilizerEfficiencyFraction,
-                soilTestN: viewItem.SoilTestNitrogen,
-                isNitrogenFixingCrop: isLeguminousCrop,
-                nitrogenFixationAmount: viewItem.NitrogenFixation,
-                atmosphericNitrogenDeposition: viewItem.NitrogenDepositionAmount);
+                nitrogenContentOfGrainReturnedToSoil,
+                fertilizerApplicationViewItem.FertilizerEfficiencyFraction,
+                viewItem.SoilTestNitrogen,
+                isLeguminousCrop,
+                viewItem.NitrogenFixation,
+                viewItem.NitrogenDepositionAmount);
 
             return syntheticFertilizerApplied;
         }
@@ -45,17 +45,14 @@ namespace H.Core.Services.Initialization.Crops
         public void InitializeFertilizerBlendData(Farm farm)
         {
             foreach (var cropViewItem in farm.GetAllCropViewItems())
-            {
-                foreach (var fertilizerApplicationViewItem in cropViewItem.FertilizerApplicationViewItems)
-                {
-                    this.InitializeFertilizerBlendData(fertilizerApplicationViewItem);
-                }
-            }
+            foreach (var fertilizerApplicationViewItem in cropViewItem.FertilizerApplicationViewItems)
+                InitializeFertilizerBlendData(fertilizerApplicationViewItem);
         }
 
         public void InitializeFertilizerBlendData(FertilizerApplicationViewItem fertilizerApplicationViewItem)
         {
-            var data = _carbonFootprintForFertilizerBlendsProvider.GetData(fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend);
+            var data = _carbonFootprintForFertilizerBlendsProvider.GetData(fertilizerApplicationViewItem
+                .FertilizerBlendData.FertilizerBlend);
             if (data != null)
             {
                 /*
@@ -68,23 +65,22 @@ namespace H.Core.Services.Initialization.Crops
                 fertilizerApplicationViewItem.FertilizerBlendData.PercentagePotassium = data.PercentagePotassium;
                 fertilizerApplicationViewItem.FertilizerBlendData.PercentageSulphur = data.PercentageSulphur;
                 fertilizerApplicationViewItem.FertilizerBlendData.ApplicationEmissions = data.ApplicationEmissions;
-                fertilizerApplicationViewItem.FertilizerBlendData.CarbonDioxideEmissionsAtTheGate = data.CarbonDioxideEmissionsAtTheGate;
+                fertilizerApplicationViewItem.FertilizerBlendData.CarbonDioxideEmissionsAtTheGate =
+                    data.CarbonDioxideEmissionsAtTheGate;
             }
         }
 
         /// <summary>
-        /// When not using a blended P fertilizer approach, use this to assign a P rate directly to the crop
+        ///     When not using a blended P fertilizer approach, use this to assign a P rate directly to the crop
         /// </summary>
         public void InitializePhosphorusFertilizerRate(Farm farm)
         {
             foreach (var cropViewItem in farm.GetAllCropViewItems())
-            {
-               this.InitializePhosphorusFertilizerRate(cropViewItem, farm);
-            }
+                InitializePhosphorusFertilizerRate(cropViewItem, farm);
         }
 
         /// <summary>
-        /// When not using a blended P fertilizer approach, use this to assign a P rate directly to the crop
+        ///     When not using a blended P fertilizer approach, use this to assign a P rate directly to the crop
         /// </summary>
         public void InitializePhosphorusFertilizerRate(CropViewItem viewItem, Farm farm)
         {
@@ -94,9 +90,8 @@ namespace H.Core.Services.Initialization.Crops
             // Start with a default then get lookup value if one is available
             viewItem.PhosphorusFertilizerRate = 25;
 
-            var residueData = this.GetResidueData(farm, viewItem);
+            var residueData = GetResidueData(farm, viewItem);
             if (residueData != null)
-            {
                 if (residueData.PhosphorusFertilizerRateTable.ContainsKey(province))
                 {
                     var phosphorusFertilizerTable = residueData.PhosphorusFertilizerRateTable[province];
@@ -106,14 +101,13 @@ namespace H.Core.Services.Initialization.Crops
                         viewItem.PhosphorusFertilizerRate = rate;
                     }
                 }
-            }
         }
 
         /// <summary>
-        /// Equation 2.5.5-7
-        ///
-        /// Calculates the amount of the fertilizer blend needed to support the yield that was input.This considers the amount of nitrogen uptake by the plant and then
-        /// converts that value into an amount of fertilizer blend/product
+        ///     Equation 2.5.5-7
+        ///     Calculates the amount of the fertilizer blend needed to support the yield that was input.This considers the amount
+        ///     of nitrogen uptake by the plant and then
+        ///     converts that value into an amount of fertilizer blend/product
         /// </summary>
         /// <returns>The amount of product required (kg product ha^-1)</returns>
         public double CalculateAmountOfProductRequired(
@@ -121,19 +115,17 @@ namespace H.Core.Services.Initialization.Crops
             CropViewItem viewItem,
             FertilizerApplicationViewItem fertilizerApplicationViewItem)
         {
-            var requiredNitrogen = this.CalculateRequiredNitrogenFertilizer(
-                farm: farm,
-                viewItem: viewItem,
-                fertilizerApplicationViewItem: fertilizerApplicationViewItem);
+            var requiredNitrogen = CalculateRequiredNitrogenFertilizer(
+                farm,
+                viewItem,
+                fertilizerApplicationViewItem);
 
             // If blend is custom, default N value will be zero and so we can't calculate the amount of product required
-            if (fertilizerApplicationViewItem.FertilizerBlendData.PercentageNitrogen == 0)
-            {
-                return 0;
-            }
+            if (fertilizerApplicationViewItem.FertilizerBlendData.PercentageNitrogen == 0) return 0;
 
             // Need to convert to amount of fertilizer product from required nitrogen
-            var requiredAmountOfProduct = (requiredNitrogen / (fertilizerApplicationViewItem.FertilizerBlendData.PercentageNitrogen / 100));
+            var requiredAmountOfProduct = requiredNitrogen /
+                                          (fertilizerApplicationViewItem.FertilizerBlendData.PercentageNitrogen / 100);
 
             return requiredAmountOfProduct;
         }
@@ -143,61 +135,55 @@ namespace H.Core.Services.Initialization.Crops
             var validManureAppliciationTypes = _manureService.GetValidManureApplicationTypes();
 
             foreach (var viewItem in farm.GetAllCropViewItems())
-            {
-                foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
-                {
-                    this.InitializeManureApplicationMethod(viewItem, manureApplicationViewItem, validManureAppliciationTypes);
-                }
-            }
+            foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
+                InitializeManureApplicationMethod(viewItem, manureApplicationViewItem, validManureAppliciationTypes);
         }
 
-        public void InitializeManureApplicationMethod(CropViewItem viewItem, ManureApplicationViewItem manureApplicationViewItem, List<ManureApplicationTypes> validManureApplicationTypes)
+        public void InitializeManureApplicationMethod(CropViewItem viewItem,
+            ManureApplicationViewItem manureApplicationViewItem,
+            List<ManureApplicationTypes> validManureApplicationTypes)
         {
             if (manureApplicationViewItem.AnimalType.IsBeefCattleType())
             {
-                var validBeefCattleApplicationMethods = new List<ManureApplicationTypes>()
+                var validBeefCattleApplicationMethods = new List<ManureApplicationTypes>
                 {
                     ManureApplicationTypes.UntilledLandSolidSpread,
-                    ManureApplicationTypes.TilledLandSolidSpread,
+                    ManureApplicationTypes.TilledLandSolidSpread
                 };
 
-                manureApplicationViewItem.AvailableManureApplicationTypes.UpdateItems(validBeefCattleApplicationMethods);
+                manureApplicationViewItem.AvailableManureApplicationTypes
+                    .UpdateItems(validBeefCattleApplicationMethods);
 
                 // Update the selected item based on the tillage type of the field
                 if (viewItem.TillageType == TillageType.NoTill)
-                {
                     manureApplicationViewItem.ManureApplicationMethod = ManureApplicationTypes.UntilledLandSolidSpread;
-                }
                 else
-                {
                     manureApplicationViewItem.ManureApplicationMethod = ManureApplicationTypes.TilledLandSolidSpread;
-                }
             }
             else if (manureApplicationViewItem.AnimalType.IsDairyCattleType())
             {
-                var validDairyCattleApplicationMethods = new List<ManureApplicationTypes>()
+                var validDairyCattleApplicationMethods = new List<ManureApplicationTypes>
                 {
                     ManureApplicationTypes.UntilledLandSolidSpread,
                     ManureApplicationTypes.TilledLandSolidSpread,
                     ManureApplicationTypes.SlurryBroadcasting,
                     ManureApplicationTypes.DropHoseBanding,
                     ManureApplicationTypes.ShallowInjection,
-                    ManureApplicationTypes.DeepInjection,
+                    ManureApplicationTypes.DeepInjection
                 };
 
                 // Can't use ObservableCollection.Clear(),
-                manureApplicationViewItem.AvailableManureApplicationTypes.UpdateItems(validDairyCattleApplicationMethods);
+                manureApplicationViewItem.AvailableManureApplicationTypes.UpdateItems(
+                    validDairyCattleApplicationMethods);
 
                 if (manureApplicationViewItem.ManureStateType.IsSolidManure())
                 {
                     if (viewItem.TillageType == TillageType.NoTill)
-                    {
-                        manureApplicationViewItem.ManureApplicationMethod = ManureApplicationTypes.UntilledLandSolidSpread;
-                    }
+                        manureApplicationViewItem.ManureApplicationMethod =
+                            ManureApplicationTypes.UntilledLandSolidSpread;
                     else
-                    {
-                        manureApplicationViewItem.ManureApplicationMethod = ManureApplicationTypes.TilledLandSolidSpread;
-                    }
+                        manureApplicationViewItem.ManureApplicationMethod =
+                            ManureApplicationTypes.TilledLandSolidSpread;
                 }
                 else
                 {
@@ -218,30 +204,26 @@ namespace H.Core.Services.Initialization.Crops
         public void InitializeFertilizerApplicationMethod(Farm farm)
         {
             foreach (var cropViewItem in farm.GetAllCropViewItems())
-            {
-                foreach (var fertilizerApplicationViewItem in cropViewItem.FertilizerApplicationViewItems)
-                {
-                    this.InitializeFertilizerApplicationMethod(cropViewItem, fertilizerApplicationViewItem);
-                }
-            }
+            foreach (var fertilizerApplicationViewItem in cropViewItem.FertilizerApplicationViewItems)
+                InitializeFertilizerApplicationMethod(cropViewItem, fertilizerApplicationViewItem);
         }
 
-        public void InitializeFertilizerApplicationMethod(CropViewItem viewItem, FertilizerApplicationViewItem fertilizerApplicationViewItem)
+        public void InitializeFertilizerApplicationMethod(CropViewItem viewItem,
+            FertilizerApplicationViewItem fertilizerApplicationViewItem)
         {
             if (viewItem != null && fertilizerApplicationViewItem != null)
             {
                 if (viewItem.CropType.IsPerennial())
-                {
-                    fertilizerApplicationViewItem.FertilizerApplicationMethodology = FertilizerApplicationMethodologies.Broadcast;
-                }
+                    fertilizerApplicationViewItem.FertilizerApplicationMethodology =
+                        FertilizerApplicationMethodologies.Broadcast;
                 else
-                {
-                    fertilizerApplicationViewItem.FertilizerApplicationMethodology = FertilizerApplicationMethodologies.IncorporatedOrPartiallyInjected;
-                } 
+                    fertilizerApplicationViewItem.FertilizerApplicationMethodology =
+                        FertilizerApplicationMethodologies.IncorporatedOrPartiallyInjected;
             }
         }
 
-        public void InitializeAmountOfBlendedProduct(Farm farm, CropViewItem viewItem, FertilizerApplicationViewItem fertilizerApplicationViewItem)
+        public void InitializeAmountOfBlendedProduct(Farm farm, CropViewItem viewItem,
+            FertilizerApplicationViewItem fertilizerApplicationViewItem)
         {
             var selectedBlend = fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend;
 
@@ -257,7 +239,7 @@ namespace H.Core.Services.Initialization.Crops
             }
             else
             {
-                var amountSuggested = this.CalculateAmountOfProductRequired(farm, viewItem, fertilizerApplicationViewItem);
+                var amountSuggested = CalculateAmountOfProductRequired(farm, viewItem, fertilizerApplicationViewItem);
                 fertilizerApplicationViewItem.AmountOfBlendedProductApplied = amountSuggested;
             }
         }

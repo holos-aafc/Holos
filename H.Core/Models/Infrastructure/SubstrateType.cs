@@ -6,6 +6,6 @@
         FreshManure,
         FarmResidues,
         CropResidues,
-        ImportedManure,
+        ImportedManure
     }
 }

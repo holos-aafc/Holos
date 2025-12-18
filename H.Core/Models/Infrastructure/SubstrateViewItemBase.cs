@@ -6,8 +6,18 @@ namespace H.Core.Models.Infrastructure
 {
     public class SubstrateViewItemBase : ModelBase
     {
+        #region Constructors
+
+        public SubstrateViewItemBase()
+        {
+            StartDate = DateTime.Now;
+            EndDate = DateTime.Now.AddDays(1);
+        }
+
+        #endregion
+
         #region Fields
-        
+
         private double _biomethanePotential;
         private double _methaneFraction;
         private double _volatileSolids;
@@ -27,103 +37,81 @@ namespace H.Core.Models.Infrastructure
 
         #endregion
 
-        #region Constructors
-
-        public SubstrateViewItemBase()
-        {
-            this.StartDate = DateTime.Now;
-            this.EndDate = DateTime.Now.AddDays(1);
-        }
-
-        #endregion
-
         #region Properties
 
         /// <summary>
-        /// (Nm^3 kg VS^-1)
+        ///     (Nm^3 kg VS^-1)
         /// </summary>
         public double BiomethanePotential
         {
             get => _biomethanePotential;
-            set => this.SetProperty(ref _biomethanePotential, value);
+            set => SetProperty(ref _biomethanePotential, value);
         }
 
         public double MethaneFraction
         {
             get => _methaneFraction;
-            set => this.SetProperty(ref _methaneFraction, value);
+            set => SetProperty(ref _methaneFraction, value);
         }
 
         /// <summary>
-        /// (kg kg^-1)
+        ///     (kg kg^-1)
         /// </summary>
         public double VolatileSolids
         {
             get => _volatileSolids;
-            set => this.SetProperty(ref _volatileSolids, value);
+            set => SetProperty(ref _volatileSolids, value);
         }
 
         /// <summary>
-        /// This is the VS content of the substrate - not the same as the <see cref="VolatileSolids"/> which is the flow rate of the VS as entered by the user
-        ///
-        /// (fraction wet weight)
+        ///     This is the VS content of the substrate - not the same as the <see cref="VolatileSolids" /> which is the flow rate
+        ///     of the VS as entered by the user
+        ///     (fraction wet weight)
         /// </summary>
-        public double VolatileSolidsContent {
-            get
-            {
-                return _volatileSolidsContent;
-            }
-            set
-            {
-                SetProperty(ref _volatileSolidsContent, value);
-            } }
+        public double VolatileSolidsContent
+        {
+            get => _volatileSolidsContent;
+            set => SetProperty(ref _volatileSolidsContent, value);
+        }
 
         /// <summary>
-        /// (fraction wet weight)
+        ///     (fraction wet weight)
         /// </summary>
-        public double NitrogenContent {
-            get
-            {
-                return _nitrogenContent;
-            }
-            set
-            {
-                SetProperty(ref _nitrogenContent, value);
-            } }
+        public double NitrogenContent
+        {
+            get => _nitrogenContent;
+            set => SetProperty(ref _nitrogenContent, value);
+        }
 
         /// <summary>
-        /// (fraction wet weight)
+        ///     (fraction wet weight)
         /// </summary>
-        public double CarbonContent {
-            get
-            {
-                return _carbonContent;
-            }
-            set
-            {
-                SetProperty(ref _carbonContent, value);
-            } }
+        public double CarbonContent
+        {
+            get => _carbonContent;
+            set => SetProperty(ref _carbonContent, value);
+        }
 
         /// <summary>
-        /// (kg kg^-1)
+        ///     (kg kg^-1)
         /// </summary>
         public double TotalSolids
         {
             get => _totalSolids;
-            set => this.SetProperty(ref _totalSolids, value);
+            set => SetProperty(ref _totalSolids, value);
         }
 
         /// <summary>
-        /// (kg kg^-1)
+        ///     (kg kg^-1)
         /// </summary>
         public double TotalNitrogen
         {
             get => _totalNitrogen;
-            set => this.SetProperty(ref _totalNitrogen, value);
+            set => SetProperty(ref _totalNitrogen, value);
         }
 
         /// <summary>
-        /// (kg day^-1)
+        ///     (kg day^-1)
         /// </summary>
         public double FlowRate
         {
@@ -144,7 +132,7 @@ namespace H.Core.Models.Infrastructure
         }
 
         /// <summary>
-        /// (kg kg^-1)
+        ///     (kg kg^-1)
         /// </summary>
         public double TotalCarbon
         {
@@ -165,7 +153,7 @@ namespace H.Core.Models.Infrastructure
         }
 
         /// <summary>
-        /// The source of the digestate material (local/imported)
+        ///     The source of the digestate material (local/imported)
         /// </summary>
         public ManureLocationSourceType SourceType
         {
@@ -174,7 +162,7 @@ namespace H.Core.Models.Infrastructure
         }
 
         /// <summary>
-        /// (%)
+        ///     (%)
         /// </summary>
         public double MoistureContentPercentage
         {

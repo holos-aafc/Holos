@@ -1,166 +1,167 @@
-﻿using H.Infrastructure;
+﻿using H.Core.Properties;
+using H.Infrastructure;
 
 namespace H.Core.Models
 {
     public enum ComponentType
     {
-        [LocalizedDescription("EnumRotation", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumRotation", typeof(Resources))]
         Rotation,
 
-        [LocalizedDescription("EnumPasture", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumPasture", typeof(Resources))]
         Pasture,
 
-        [LocalizedDescription("EnumRange", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumRange", typeof(Resources))]
         Range,
 
-        [LocalizedDescription("EnumShelterbelt", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumShelterbelt", typeof(Resources))]
         Shelterbelt,
 
-        [LocalizedDescription("EnumField", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumField", typeof(Resources))]
         Field,
 
-        [LocalizedDescription("EnumCowCalf", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumCowCalf", typeof(Resources))]
         CowCalf,
 
-        [LocalizedDescription("EnumBackgrounding", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumBackgrounding", typeof(Resources))]
         Backgrounding,
 
-        [LocalizedDescription("EnumFinishing", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumFinishing", typeof(Resources))]
         Finishing,
 
-        [LocalizedDescription("EnumGrassland", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumGrassland", typeof(Resources))]
         Grassland,
 
-        [LocalizedDescription("EnumDairy", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumDairy", typeof(Resources))]
         Dairy,
 
-        [LocalizedDescription("EnumDairyLactating", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumDairyLactating", typeof(Resources))]
         DairyLactating,
 
-        [LocalizedDescription("EnumDairyHeifer", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumDairyHeifer", typeof(Resources))]
         DairyHeifer,
 
-        [LocalizedDescription("EnumDairyDry", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumDairyDry", typeof(Resources))]
         DairyDry,
 
-        [LocalizedDescription("EnumDairyCalf", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumDairyCalf", typeof(Resources))]
         DairyCalf,
 
-        [LocalizedDescription("EnumDairyBulls", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumDairyBulls", typeof(Resources))]
         DairyBulls,
 
-        [LocalizedDescription("EnumSwine", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumSwine", typeof(Resources))]
         Swine,
 
-        [LocalizedDescription("EnumBoar", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumBoar", typeof(Resources))]
         Boar,
 
-        [LocalizedDescription("EnumSwineFinishers", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumSwineFinishers", typeof(Resources))]
         SwineFinishers,
 
-        [LocalizedDescription("EnumSwineStarters", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumSwineStarters", typeof(Resources))]
         SwineStarters,
 
-        [LocalizedDescription("EnumSwineLactatingSows", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumSwineLactatingSows", typeof(Resources))]
         SwineLactatingSows,
 
-        [LocalizedDescription("EnumSwineDrySows", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumSwineDrySows", typeof(Resources))]
         SwineDrySows,
 
-        [LocalizedDescription("EnumSwineGrowers", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumSwineGrowers", typeof(Resources))]
         SwineGrowers,
 
-        [LocalizedDescription("EnumPoultry", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumPoultry", typeof(Resources))]
         Poultry,
 
-        [LocalizedDescription("EnumPoultryLayersWet", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumPoultryLayersWet", typeof(Resources))]
         PoultryLayersWet,
 
-        [LocalizedDescription("EnumPoultryTurkeys", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumPoultryTurkeys", typeof(Resources))]
         PoultryTurkeys,
 
-        [LocalizedDescription("EnumPoultryGeese", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumPoultryGeese", typeof(Resources))]
         PoultryGeese,
 
-        [LocalizedDescription("EnumPoultryBroilers", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumPoultryBroilers", typeof(Resources))]
         PoultryBroilers,
 
-        [LocalizedDescription("EnumPoultryDucks", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumPoultryDucks", typeof(Resources))]
         PoultryDucks,
 
-        [LocalizedDescription("EnumPoultryLayersDry", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumPoultryLayersDry", typeof(Resources))]
         PoultryLayersDry,
 
-        [LocalizedDescription("EnumSheep", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumSheep", typeof(Resources))]
         Sheep,
 
-        [LocalizedDescription("EnumSheepFeedlot", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumSheepFeedlot", typeof(Resources))]
         SheepFeedlot,
 
-        [LocalizedDescription("EnumRams", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumRams", typeof(Resources))]
         Rams,
 
-        [LocalizedDescription("EnumLambsAndEwes", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumLambsAndEwes", typeof(Resources))]
         LambsAndEwes,
 
-        [LocalizedDescription("EnumOtherLivestock", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumOtherLivestock", typeof(Resources))]
         OtherLivestock,
 
-        [LocalizedDescription("EnumAlpaca", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumAlpaca", typeof(Resources))]
         Alpaca,
 
-        [LocalizedDescription("EnumElk", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumElk", typeof(Resources))]
         Elk,
 
-        [LocalizedDescription("EnumGoats", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumGoats", typeof(Resources))]
         Goats,
 
-        [LocalizedDescription("EnumDeer", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumDeer", typeof(Resources))]
         Deer,
 
-        [LocalizedDescription("EnumHorses", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumHorses", typeof(Resources))]
         Horses,
 
-        [LocalizedDescription("EnumMules", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumMules", typeof(Resources))]
         Mules,
 
-        [LocalizedDescription("EnumBison", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumBison", typeof(Resources))]
         Bison,
 
-        [LocalizedDescription("EnumLlamas", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumLlamas", typeof(Resources))]
         Llamas,
 
-        [LocalizedDescription("EnumFarrowToWean", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumFarrowToWean", typeof(Resources))]
         FarrowToWean,
 
-        [LocalizedDescription("EnumSwineIsoWean", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumSwineIsoWean", typeof(Resources))]
         IsoWean,
 
-        [LocalizedDescription("EnumSwineSwineFarrowToFinish", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumSwineSwineFarrowToFinish", typeof(Resources))]
         FarrowToFinish,
 
-        [LocalizedDescription("EnumPulletFarm", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumPulletFarm", typeof(Resources))]
         ChickenPulletFarm,
 
-        [LocalizedDescription("EnumChickenMultiplierBreeder", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumChickenMultiplierBreeder", typeof(Resources))]
         ChickenMultiplierBreeder,
 
-        [LocalizedDescription("EnumChickenMeatProduction", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumChickenMeatProduction", typeof(Resources))]
         ChickenMeatProduction,
 
-        [LocalizedDescription("EnumTurkeyMultiplierBreeder", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumTurkeyMultiplierBreeder", typeof(Resources))]
         TurkeyMultiplierBreeder,
 
-        [LocalizedDescription("EnumTurkeyMeatProduction", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumTurkeyMeatProduction", typeof(Resources))]
         TurkeyMeatProduction,
 
-        [LocalizedDescription("EnumChickenEggProduction", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumChickenEggProduction", typeof(Resources))]
         ChickenEggProduction,
 
-        [LocalizedDescription("EnumChickenMultiplierHatchery", typeof(Properties.Resources))]
+        [LocalizedDescription("EnumChickenMultiplierHatchery", typeof(Resources))]
         ChickenMultiplierHatchery,
 
-        [LocalizedDescription("EnumAnaerobicDigestion", typeof(Properties.Resources))]
-        AnaerobicDigestion,
+        [LocalizedDescription("EnumAnaerobicDigestion", typeof(Resources))]
+        AnaerobicDigestion
     }
 }

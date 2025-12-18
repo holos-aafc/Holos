@@ -1,52 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using AutoMapper;
-using H.Core.Calculators.Carbon;
-using H.Core.Calculators.Economics;
-using H.Core.Calculators.Nitrogen;
+﻿using System.Collections.Generic;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
-using H.Core.Models.Animals.Dairy;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Carbon;
-using H.Core.Providers.Climate;
-using H.Core.Providers.Economics;
-using H.Core.Providers.Energy;
-using H.Core.Providers.Fertilizer;
-using H.Core.Providers.Irrigation;
-using H.Core.Providers.Nitrogen;
-using H.Core.Providers.Plants;
 using H.Core.Providers.Soil;
 using H.Core.Services.Initialization.Animals;
 using H.Core.Services.Initialization.Crops;
-using H.Core.Services.LandManagement;
-using H.Infrastructure;
 
 namespace H.Core.Services.Initialization
 {
-    public partial class InitializationService :  IInitializationService
+    public class InitializationService : IInitializationService
     {
+        #region Constructors
+
+        public InitializationService()
+        {
+            _cropInitializationService = new CropInitializationService();
+            _animalInitializationService = new AnimalInitializationService();
+        }
+
+        #endregion
+
         #region Fields
 
         private readonly ICropInitializationService _cropInitializationService;
         private readonly IAnimalInitializationService _animalInitializationService;
         private IInitializationService _initializationServiceImplementation;
 
-        #endregion
-
-        #region Constructors
-
-        public InitializationService()
-        {
-            _cropInitializationService = new CropInitializationService();
-            _animalInitializationService =new AnimalInitializationService();
-        }
-        
         #endregion
 
         #region Public Methods
@@ -56,55 +38,55 @@ namespace H.Core.Services.Initialization
             foreach (var farm in farms)
             {
                 // Defaults (carbon concentration)
-                this.InitializeCarbonConcentration(farm);
+                InitializeCarbonConcentration(farm);
 
                 // Nitrogen Fixation
                 _cropInitializationService.InitializeNitrogenFixation(farm);
 
                 // Table 4
-                this.InitializeIrrigationWaterApplication(farm);
+                InitializeIrrigationWaterApplication(farm);
 
                 // Table 6
-                this.ReinitializeManureCompositionData(farm);
+                ReinitializeManureCompositionData(farm);
 
                 // Table 17
-                this.InitializeFeedingActivityCoefficient(farm);
+                InitializeFeedingActivityCoefficient(farm);
 
                 // Table 21
-                this.InitializeMilkProduction(farm);
+                InitializeMilkProduction(farm);
 
                 // Table 22
-                this.InitializeLivestockCoefficientSheep(farm);
+                InitializeLivestockCoefficientSheep(farm);
 
                 // Table 27
-                this.InitializeAnnualEntericMethaneEmissionRate(farm);
+                InitializeAnnualEntericMethaneEmissionRate(farm);
 
                 // Table 29
-                this.InitializeManureExcretionRate(farm);
+                InitializeManureExcretionRate(farm);
 
                 // Table 31
-                this.InitializeVolatileSolidsExcretion(farm);
+                InitializeVolatileSolidsExcretion(farm);
 
                 // Table 35
-                this.InitializeMethaneProducingCapacityOfManure(farm);
+                InitializeMethaneProducingCapacityOfManure(farm);
 
                 // Table 36
-                this.InitializeDefaultEmissionFactors(farm);
+                InitializeDefaultEmissionFactors(farm);
 
                 //Table 38
-                this.InitializeDailyManureMethaneEmissionRate(farm);
+                InitializeDailyManureMethaneEmissionRate(farm);
 
                 // Table 44
-                this.InitializeManureMineralizationFractions(farm);
+                InitializeManureMineralizationFractions(farm);
 
                 // Table 50
-                this.InitializeFuelEnergy(farm);
+                InitializeFuelEnergy(farm);
 
                 // Table 51
-                this.InitializeHerbicideEnergy(farm);
+                InitializeHerbicideEnergy(farm);
 
                 // Table 63
-                this.InitializeBarnTemperature(farm);
+                InitializeBarnTemperature(farm);
             }
         }
 
@@ -118,10 +100,11 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeCarbonConcentration(viewItem, defaults);
         }
 
-        public void InitializeBiomassCoefficients (Farm farm)
+        public void InitializeBiomassCoefficients(Farm farm)
         {
             _cropInitializationService.InitializeBiomassCoefficients(farm);
         }
+
         public void InitializeBiomassCoefficients(CropViewItem viewItem, Farm farm)
         {
             _cropInitializationService.InitializeBiomassCoefficients(viewItem, farm);
@@ -131,10 +114,12 @@ namespace H.Core.Services.Initialization
         {
             _cropInitializationService.InitializeLumCMaxValues(cropViewItem, farm);
         }
+
         public void InitializePercentageReturns(Farm farm)
         {
             _cropInitializationService.InitializePercentageReturns(farm);
         }
+
         public void InitializePercentageReturns(Farm farm, CropViewItem viewItem)
         {
             _cropInitializationService.InitializePercentageReturns(farm, viewItem);
@@ -144,6 +129,7 @@ namespace H.Core.Services.Initialization
         {
             _cropInitializationService.InitializeYield(farm);
         }
+
         public void InitializeYield(CropViewItem viewItem, Farm farm)
         {
             _cropInitializationService.InitializeYield(viewItem, farm);
@@ -154,7 +140,8 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeSilageCropYield(silageCropViewItem, farm);
         }
 
-        public void InitializeYieldForAllYears(IEnumerable<CropViewItem> cropViewItems, Farm farm, FieldSystemComponent fieldSystemComponent)
+        public void InitializeYieldForAllYears(IEnumerable<CropViewItem> cropViewItems, Farm farm,
+            FieldSystemComponent fieldSystemComponent)
         {
             _cropInitializationService.InitializeYieldForAllYears(cropViewItems, farm, fieldSystemComponent);
         }
@@ -163,10 +150,12 @@ namespace H.Core.Services.Initialization
         {
             _cropInitializationService.InitializeYieldForYear(farm, viewItem, fieldSystemComponent);
         }
-        public void InitializeEconomicDefaults( Farm farm)
+
+        public void InitializeEconomicDefaults(Farm farm)
         {
             _cropInitializationService.InitializeEconomicDefaults(farm);
         }
+
         public void InitializeEconomicDefaults(CropViewItem cropViewItem, Farm farm)
         {
             _cropInitializationService.InitializeEconomicDefaults(cropViewItem, farm);
@@ -175,7 +164,8 @@ namespace H.Core.Services.Initialization
         public double CalculateAmountOfProductRequired(Farm farm, CropViewItem viewItem,
             FertilizerApplicationViewItem fertilizerApplicationViewItem)
         {
-            return _cropInitializationService.CalculateAmountOfProductRequired(farm, viewItem, fertilizerApplicationViewItem);
+            return _cropInitializationService.CalculateAmountOfProductRequired(farm, viewItem,
+                fertilizerApplicationViewItem);
         }
 
         public void InitializePhosphorusFertilizerRate(CropViewItem viewItem, Farm farm)
@@ -191,13 +181,15 @@ namespace H.Core.Services.Initialization
         public double CalculateRequiredNitrogenFertilizer(Farm farm, CropViewItem viewItem,
             FertilizerApplicationViewItem fertilizerApplicationViewItem)
         {
-            return _cropInitializationService.CalculateRequiredNitrogenFertilizer(farm, viewItem, fertilizerApplicationViewItem);
+            return _cropInitializationService.CalculateRequiredNitrogenFertilizer(farm, viewItem,
+                fertilizerApplicationViewItem);
         }
 
         public void InitializeNitrogenContent(Farm farm)
         {
             _cropInitializationService.InitializeNitrogenContent(farm);
         }
+
         public void InitializeNitrogenContent(CropViewItem viewItem, Farm farm)
         {
             _cropInitializationService.InitializeNitrogenContent(viewItem, farm);
@@ -238,7 +230,8 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeMoistureContent(farm);
         }
 
-        public void InitializeMoistureContent(Table_7_Relative_Biomass_Information_Data residueData, CropViewItem cropViewItem)
+        public void InitializeMoistureContent(Table_7_Relative_Biomass_Information_Data residueData,
+            CropViewItem cropViewItem)
         {
             _cropInitializationService.InitializeMoistureContent(residueData, cropViewItem);
         }
@@ -247,10 +240,12 @@ namespace H.Core.Services.Initialization
         {
             _cropInitializationService.InitializeMoistureContent(viewItem, farm);
         }
+
         public void InitializeSoilProperties(Farm farm)
         {
             _cropInitializationService.InitializeSoilProperties(farm);
         }
+
         public void InitializeSoilProperties(CropViewItem viewItem, Farm farm)
         {
             _cropInitializationService.InitializeSoilProperties(viewItem, farm);
@@ -265,26 +260,32 @@ namespace H.Core.Services.Initialization
         {
             _cropInitializationService.InitializeFuelEnergy(farm, viewItem);
         }
+
         public void InitializeHarvestMethod(Farm farm)
         {
             _cropInitializationService.InitializeHarvestMethod(farm);
         }
+
         public void InitializeHarvestMethod(CropViewItem viewItem)
         {
             _cropInitializationService.InitializeHarvestMethod(viewItem);
         }
-        public void InitializeFallow( Farm farm)
+
+        public void InitializeFallow(Farm farm)
         {
             _cropInitializationService.InitializeFallow(farm);
         }
+
         public void InitializeFallow(CropViewItem viewItem, Farm farm)
         {
             _cropInitializationService.InitializeFallow(viewItem, farm);
         }
+
         public void InitializeTillageType(Farm farm)
         {
-            _cropInitializationService.InitializeTillageType( farm);
+            _cropInitializationService.InitializeTillageType(farm);
         }
+
         public void InitializeTillageType(CropViewItem viewItem, Farm farm)
         {
             _cropInitializationService.InitializeTillageType(viewItem, farm);
@@ -299,10 +300,12 @@ namespace H.Core.Services.Initialization
         {
             _cropInitializationService.InitializeUserDefaults(viewItem, globalSettings);
         }
-        public void InitializePerennialDefaults( Farm farm)
+
+        public void InitializePerennialDefaults(Farm farm)
         {
-            _cropInitializationService.InitializePerennialDefaults( farm);
+            _cropInitializationService.InitializePerennialDefaults(farm);
         }
+
         public void InitializePerennialDefaults(CropViewItem viewItem, Farm farm)
         {
             _cropInitializationService.InitializePerennialDefaults(viewItem, farm);
@@ -328,10 +331,12 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeDefaultSoilForField(farm, fieldSystemComponent);
         }
 
-        public void InitializeManureApplicationMethod(CropViewItem viewItem, ManureApplicationViewItem manureApplicationViewItem,
+        public void InitializeManureApplicationMethod(CropViewItem viewItem,
+            ManureApplicationViewItem manureApplicationViewItem,
             List<ManureApplicationTypes> validManureApplicationTypes)
         {
-            _cropInitializationService.InitializeManureApplicationMethod(viewItem, manureApplicationViewItem, validManureApplicationTypes);
+            _cropInitializationService.InitializeManureApplicationMethod(viewItem, manureApplicationViewItem,
+                validManureApplicationTypes);
         }
 
         public void InitializeFertilizerApplicationMethod(
@@ -400,7 +405,8 @@ namespace H.Core.Services.Initialization
         public void InitializeGrazingViewItem(GrazingViewItem grazingViewItem, ManagementPeriod managementPeriod,
             AnimalComponentBase animalComponent, AnimalGroup animalGroup, CropViewItem cropViewItem)
         {
-            _cropInitializationService.InitializeGrazingViewItem(grazingViewItem, managementPeriod, animalComponent, animalGroup, cropViewItem);
+            _cropInitializationService.InitializeGrazingViewItem(grazingViewItem, managementPeriod, animalComponent,
+                animalGroup, cropViewItem);
         }
 
         public void InitializeNitrogenContent(List<CropViewItem> viewItem, Farm farm)

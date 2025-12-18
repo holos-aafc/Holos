@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace H.Core.Enumerations
+﻿namespace H.Core.Enumerations
 {
     public static class SoilFunctionalCategoryExtensions
     {
         /// <summary>
-        /// General rule of soil zones:  Brown <=> Dark Brown <=> Black.
-        /// As in pull from the direct neighbor, and jump if the neighbor doesnt have the info you are looking for.
-        /// Likely used for just the economics module
-        ///
-        /// this function will return the next soil category from above or the next best 
+        ///     General rule of soil zones:  Brown <=> Dark Brown <=> Black.
+        ///     As in pull from the direct neighbor, and jump if the neighbor doesnt have the info you are looking for.
+        ///     Likely used for just the economics module
+        ///     this function will return the next soil category from above or the next best
         /// </summary>
         public static SoilFunctionalCategory GetNeighbouringCategory(this SoilFunctionalCategory soilFunctionalCategory)
         {
@@ -21,7 +14,9 @@ namespace H.Core.Enumerations
 
             if (soilFunctionalCategory.IsDarkBrown()) return SoilFunctionalCategory.Black;
 
-            return soilFunctionalCategory.IsBrown() ? SoilFunctionalCategory.DarkBrown : SoilFunctionalCategory.NotApplicable;
+            return soilFunctionalCategory.IsBrown()
+                ? SoilFunctionalCategory.DarkBrown
+                : SoilFunctionalCategory.NotApplicable;
         }
 
         public static bool IsBlack(this SoilFunctionalCategory soilFunctionalCategory)

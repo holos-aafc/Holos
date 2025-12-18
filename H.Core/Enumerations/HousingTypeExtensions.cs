@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Markup;
-
-namespace H.Core.Enumerations
+﻿namespace H.Core.Enumerations
 {
     public static class HousingTypeExtensions
     {
@@ -42,13 +35,11 @@ namespace H.Core.Enumerations
 
         public static bool IsElectricalConsumingHousingType(this HousingType housingType)
         {
-            if (housingType.IsFreeStall() || 
+            if (housingType.IsFreeStall() ||
                 housingType.IsBarn() ||
                 housingType.IsTieStall() ||
                 housingType.IsFeedlot())
-            {
                 return true;
-            }
 
             switch (housingType)
             {

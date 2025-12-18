@@ -7,6 +7,11 @@ namespace H.Core.Services.LandManagement.Soil
 {
     public interface ISoilService
     {
+        GeographicData GetGeographicalData(int polygonId);
+        SoilData CreateDefaultSoilDataForEmptyPolygon(GeographicData geographicData, Farm farm);
+        bool HasValidSoilData(Farm farm);
+        List<SoilData> SelectValidSoilData(IEnumerable<SoilData> soils);
+
         #region Public Methods
 
         List<SoilData> GetSoilData(Farm farm);
@@ -15,10 +20,5 @@ namespace H.Core.Services.LandManagement.Soil
         void SetGeographicalData(Farm farm);
 
         #endregion
-
-        GeographicData GetGeographicalData(int polygonId);
-        SoilData CreateDefaultSoilDataForEmptyPolygon(GeographicData geographicData, Farm farm);
-        bool HasValidSoilData(Farm farm);
-        List<SoilData> SelectValidSoilData(IEnumerable<SoilData> soils);
     }
 }

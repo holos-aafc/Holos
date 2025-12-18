@@ -9,6 +9,6 @@ namespace H.Core.Enumerations
         TilledLand,
 
         [LocalizedDescription("UntilledLand", typeof(Resources))]
-        UntilledLand,
+        UntilledLand
     }
 }

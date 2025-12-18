@@ -1,30 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using H.Content;
-using System.Globalization;
 using System.Linq;
+using H.Content;
 using H.Core.Enumerations;
 using H.Infrastructure;
 
 namespace H.Core.Providers.Animals.Table_69
 {
-    public class Table_61_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider : IVolatilizationFractionsFromLandAppliedManureProvider
+    public class
+        Table_61_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider :
+        IVolatilizationFractionsFromLandAppliedManureProvider
     {
-        #region Fields
-
-        protected readonly MultiKeyDictionary<int, Province, VolatilizationFractionsFromLandAppliedManureData> _data;
-        protected readonly List<Province> _validProvinces;
-
-        #endregion
-
         #region Constructors
 
         public Table_61_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider()
         {
             _data = new MultiKeyDictionary<int, Province, VolatilizationFractionsFromLandAppliedManureData>();
 
-            _validProvinces = new List<Province>()
+            _validProvinces = new List<Province>
             {
                 Province.BritishColumbia,
                 Province.Alberta,
@@ -35,32 +28,35 @@ namespace H.Core.Providers.Animals.Table_69
                 Province.NovaScotia,
                 Province.NewBrunswick,
                 Province.Newfoundland,
-                Province.PrinceEdwardIsland,
+                Province.PrinceEdwardIsland
             };
 
-            this.ReadFile(CsvResourceNames.DairyFractionOfNAmmoniaLandAppliedManure);
+            ReadFile(CsvResourceNames.DairyFractionOfNAmmoniaLandAppliedManure);
         }
 
         #endregion
 
         #region Public Methods
 
-        public virtual VolatilizationFractionsFromLandAppliedManureData GetData(AnimalType animalType, Province province, int year)
+        public virtual VolatilizationFractionsFromLandAppliedManureData GetData(AnimalType animalType,
+            Province province, int year)
         {
             var notFound = new VolatilizationFractionsFromLandAppliedManureData();
 
             if (animalType.IsDairyCattleType() == false)
             {
-                Trace.TraceError($"{nameof(Table_61_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider)}.{nameof(GetData)}" +
-                                 $" can only provide data for {AnimalType.Dairy.GetDescription()} animals.");
+                Trace.TraceError(
+                    $"{nameof(Table_61_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider)}.{nameof(GetData)}" +
+                    $" can only provide data for {AnimalType.Dairy.GetDescription()} animals.");
 
                 return notFound;
             }
 
             if (_validProvinces.Contains(province) == false)
             {
-                Trace.TraceError($"{nameof(Table_61_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider)}.{nameof(GetData)}" +
-                                 $" unable to find province {province} in the available data.");
+                Trace.TraceError(
+                    $"{nameof(Table_61_Volatilization_Fractions_From_Land_Applied_Dairy_Manure_Provider)}.{nameof(GetData)}" +
+                    $" unable to find province {province} in the available data.");
 
                 return notFound;
             }
@@ -72,23 +68,27 @@ namespace H.Core.Providers.Animals.Table_69
 
         #endregion
 
+        #region Fields
+
+        protected readonly MultiKeyDictionary<int, Province, VolatilizationFractionsFromLandAppliedManureData> _data;
+        protected readonly List<Province> _validProvinces;
+
+        #endregion
+
         #region Private Methods
 
         protected void ReadLines(List<string[]> lines)
         {
             foreach (var line in lines.Skip(4))
             {
-                if (string.IsNullOrWhiteSpace(line[0]))
-                {
-                    continue;
-                }
+                if (string.IsNullOrWhiteSpace(line[0])) continue;
 
                 var year = int.Parse(line[0]);
                 var column = 1;
 
                 foreach (var province in _validProvinces)
                 {
-                    _data[year][province] = new VolatilizationFractionsFromLandAppliedManureData()
+                    _data[year][province] = new VolatilizationFractionsFromLandAppliedManureData
                     {
                         Year = year,
                         Province = province,
@@ -104,9 +104,9 @@ namespace H.Core.Providers.Animals.Table_69
         {
             var fileLines = CsvResourceReader.GetFileLines(resourceName).ToList();
 
-            this.ReadLines(fileLines);
+            ReadLines(fileLines);
         }
 
         #endregion
     }
-} 
+}

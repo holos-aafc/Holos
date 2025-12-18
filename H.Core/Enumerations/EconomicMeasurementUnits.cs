@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace H.Core.Enumerations
+﻿namespace H.Core.Enumerations
 {
     public enum EconomicMeasurementUnits
     {
@@ -12,6 +6,6 @@ namespace H.Core.Enumerations
         Bushel,
         Pound,
         Tonne,
-        HundredWeight,
+        HundredWeight
     }
 }

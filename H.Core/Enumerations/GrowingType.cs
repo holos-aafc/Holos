@@ -5,7 +5,6 @@ namespace H.Core.Enumerations
 {
     public enum GrowingType
     {
-
         Annual,
 
         Perennial,
@@ -33,6 +32,6 @@ namespace H.Core.Enumerations
         OtherFieldCrops,
 
         [LocalizedDescription("PulseCrops", typeof(Resources))]
-        PulseCrops,
+        PulseCrops
     }
 }

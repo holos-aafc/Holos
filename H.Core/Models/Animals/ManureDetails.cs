@@ -1,15 +1,26 @@
 ﻿using System.ComponentModel;
-using System.Diagnostics;
 using AutoMapper;
 using H.Core.Converters;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Infrastructure;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace H.Core.Models.Animals
 {
     public class ManureDetails : ModelBase
     {
+        #region Event Handlers
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (sender is ManureDetails manureDetails)
+            {
+            }
+        }
+
+        #endregion
+
         #region Fields
 
         private ManureStateType _manureStateType;
@@ -43,6 +54,7 @@ namespace H.Core.Models.Animals
         private bool _useCustomMethaneConversionFactor;
 
         private static IMapper _manureDetailsMapper;
+
         #endregion
 
         #region Constructors
@@ -54,18 +66,19 @@ namespace H.Core.Models.Animals
                 config.CreateMap<ManureDetails, ManureDetails>()
                     .ForMember(manureDetails => manureDetails.Guid, opt => opt.Ignore())
                     .ForMember(manureDetails => manureDetails.Name, opt => opt.Ignore());
-            });
+            }, new NullLoggerFactory());
+
             _manureDetailsMapper = manureDetailsMapperConfiguration.CreateMapper();
         }
 
         public ManureDetails()
         {
-            this.AshContentOfManure = 8;
+            AshContentOfManure = 8;
 
-            this.PropertyChanged -= OnPropertyChanged;
-            this.PropertyChanged += OnPropertyChanged;
+            PropertyChanged -= OnPropertyChanged;
+            PropertyChanged += OnPropertyChanged;
 
-            this.UseCustomVolatilizationFraction = false;
+            UseCustomVolatilizationFraction = false;
         }
 
         #endregion
@@ -79,127 +92,114 @@ namespace H.Core.Models.Animals
         }
 
         /// <summary>
-        /// The manure storage/handling system being used.
+        ///     The manure storage/handling system being used.
         /// </summary>
         public ManureStateType StateType
         {
-            get { return _manureStateType; }
-            set { this.SetProperty(ref _manureStateType, value); }
+            get => _manureStateType;
+            set => SetProperty(ref _manureStateType, value);
         }
 
         /// <summary>
-        /// Methane conversion factor of manure
-        ///
-        /// MCF
-        /// 
-        /// (kg kg^-1)
+        ///     Methane conversion factor of manure
+        ///     MCF
+        ///     (kg kg^-1)
         /// </summary>
         public double MethaneConversionFactor
         {
-            get { return _methaneConversionFactor; }
-            set { this.SetProperty(ref _methaneConversionFactor, value); }
+            get => _methaneConversionFactor;
+            set => SetProperty(ref _methaneConversionFactor, value);
         }
 
         /// <summary>
-        /// N2O direct emission factor
-        /// 
-        /// EF Direct
-        ///
-        /// [kg N2O-N (kg N)^1]
+        ///     N2O direct emission factor
+        ///     EF Direct
+        ///     [kg N2O-N (kg N)^1]
         /// </summary>
         public double N2ODirectEmissionFactor
         {
-            get { return _n2ODirectEmissionFactor; }
-            set { this.SetProperty(ref _n2ODirectEmissionFactor, value); }
+            get => _n2ODirectEmissionFactor;
+            set => SetProperty(ref _n2ODirectEmissionFactor, value);
         }
 
         /// <summary>
-        /// Volatilization fraction
-        ///
-        /// Some animal types do not have a methodology for calculating this fraction and so default values are used in those situations (e.g. sheep, swine, other animals category)
-        ///
-        /// [kg NH3-N (kg N)^-1]
+        ///     Volatilization fraction
+        ///     Some animal types do not have a methodology for calculating this fraction and so default values are used in those
+        ///     situations (e.g. sheep, swine, other animals category)
+        ///     [kg NH3-N (kg N)^-1]
         /// </summary>
         public double VolatilizationFraction
         {
-            get { return _volatilizationFraction; }
-            set { this.SetProperty(ref _volatilizationFraction, value); }
+            get => _volatilizationFraction;
+            set => SetProperty(ref _volatilizationFraction, value);
         }
 
         /// <summary>
-        /// Ash content of manure
-        ///
-        /// (%)
+        ///     Ash content of manure
+        ///     (%)
         /// </summary>
         public double AshContentOfManure
         {
-            get { return _ashContentOfManure; }
-            set { this.SetProperty(ref _ashContentOfManure, value); }
+            get => _ashContentOfManure;
+            set => SetProperty(ref _ashContentOfManure, value);
         }
 
         /// <summary>
-        /// Methane producing capacity of manure
-        /// 
-        /// B_o
-        ///
-        /// (m^3 CH4 kg^-1 VS)
+        ///     Methane producing capacity of manure
+        ///     B_o
+        ///     (m^3 CH4 kg^-1 VS)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.CubicMetersMethanePerKilogramVolatileSolids)]
         public double MethaneProducingCapacityOfManure
         {
-            get { return _methaneProducingCapacityOfManure; }
-            set { this.SetProperty(ref _methaneProducingCapacityOfManure, value); }
+            get => _methaneProducingCapacityOfManure;
+            set => SetProperty(ref _methaneProducingCapacityOfManure, value);
         }
 
         /// <summary>
-        /// Frac_leach
-        ///
-        /// (unitless)
+        ///     Frac_leach
+        ///     (unitless)
         /// </summary>
         public double LeachingFraction
         {
-            get { return _leachingFraction; }
-            set { SetProperty(ref _leachingFraction, value); }
+            get => _leachingFraction;
+            set => SetProperty(ref _leachingFraction, value);
         }
 
         /// <summary>
-        /// Emission factor for leaching
-        /// 
-        /// EF_leach
-        ///
-        /// [kg N2O-N (kg N)^-1]
+        ///     Emission factor for leaching
+        ///     EF_leach
+        ///     [kg N2O-N (kg N)^-1]
         /// </summary>
         public double EmissionFactorLeaching
         {
-            get { return _emissionFactorLeaching; }
-            set { SetProperty(ref _emissionFactorLeaching, value); }
+            get => _emissionFactorLeaching;
+            set => SetProperty(ref _emissionFactorLeaching, value);
         }
 
         /// <summary>
-        /// Emission factor for volatilization
-        /// 
-        /// EF_volatilization
-        ///
-        /// [kg N2O-N (kg N)^-1]
+        ///     Emission factor for volatilization
+        ///     EF_volatilization
+        ///     [kg N2O-N (kg N)^-1]
         /// </summary>
         public double EmissionFactorVolatilization
         {
-            get { return _emissionFactorVolatilization; }
-            set { SetProperty(ref _emissionFactorVolatilization, value); }
+            get => _emissionFactorVolatilization;
+            set => SetProperty(ref _emissionFactorVolatilization, value);
         }
 
         /// <summary>
-        /// (kg VS kg^-1 feed)
+        ///     (kg VS kg^-1 feed)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramPerHeadPerDay)]
         public double VolatileSolidExcretion
         {
-            get { return _volatileSolidExcretion; }
-            set { this.SetProperty(ref _volatileSolidExcretion, value); }
+            get => _volatileSolidExcretion;
+            set => SetProperty(ref _volatileSolidExcretion, value);
         }
 
         /// <summary>
-        /// (kg head^-1 day^-1)
+        ///     (kg head^-1 day^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramPerHeadPerDay)]
         public double VolatileSolids
@@ -209,50 +209,49 @@ namespace H.Core.Models.Animals
         }
 
         /// <summary>
-        /// (kg CH4 head^-1 year^-1)
+        ///     (kg CH4 head^-1 year^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramPerHeadPerYear)]
         public double YearlyEntericMethaneRate
         {
-            get { return _yearlyEntericMethaneRate; }
-            set { this.SetProperty(ref _yearlyEntericMethaneRate, value); }
+            get => _yearlyEntericMethaneRate;
+            set => SetProperty(ref _yearlyEntericMethaneRate, value);
         }
 
         /// <summary>
-        /// (kg CH4 head^-1 year^-1)
+        ///     (kg CH4 head^-1 year^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramPerHeadPerYear)]
         public double YearlyManureMethaneRate
         {
-            get { return _yearlyManureMethaneRate; }
-            set { SetProperty(ref _yearlyManureMethaneRate, value); }
+            get => _yearlyManureMethaneRate;
+            set => SetProperty(ref _yearlyManureMethaneRate, value);
         }
 
         /// <summary>
-        /// Some animals have this value calculated, other animal groups have this set to a constant value (i.e. chickens use a non-calculated rate)
-        /// 
-        /// (kg head^-1 day^-1)
+        ///     Some animals have this value calculated, other animal groups have this set to a constant value (i.e. chickens use a
+        ///     non-calculated rate)
+        ///     (kg head^-1 day^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramPerHeadPerYear)]
         public double NitrogenExretionRate
         {
-            get { return _nitrogenExretionRate; }
-            set { SetProperty(ref _nitrogenExretionRate, value); }
+            get => _nitrogenExretionRate;
+            set => SetProperty(ref _nitrogenExretionRate, value);
         }
 
         /// <summary>
-        /// The default ammonia emission factor for housing
-        ///
-        /// (kg NH3-N kg^-1 TAN)
+        ///     The default ammonia emission factor for housing
+        ///     (kg NH3-N kg^-1 TAN)
         /// </summary>
         public double AmmoniaEmissionFactorForManureStorage
         {
             get => _ammoniaEmissionFactorForManureStorage;
             set => SetProperty(ref _ammoniaEmissionFactorForManureStorage, value);
         }
-        
+
         /// <summary>
-        /// (unitless)
+        ///     (unitless)
         /// </summary>
         public double FractionOfOrganicNitrogenImmobilized
         {
@@ -261,7 +260,7 @@ namespace H.Core.Models.Animals
         }
 
         /// <summary>
-        /// (unitless)
+        ///     (unitless)
         /// </summary>
         public double FractionOfOrganicNitrogenNitrified
         {
@@ -270,7 +269,7 @@ namespace H.Core.Models.Animals
         }
 
         /// <summary>
-        /// (unitless)
+        ///     (unitless)
         /// </summary>
         public double FractionOfOrganicNitrogenMineralized
         {
@@ -279,7 +278,7 @@ namespace H.Core.Models.Animals
         }
 
         /// <summary>
-        /// (kg head^-1 day^-1)
+        ///     (kg head^-1 day^-1)
         /// </summary>
         public double ManureExcretionRate
         {
@@ -288,7 +287,7 @@ namespace H.Core.Models.Animals
         }
 
         /// <summary>
-        /// User can indicate if a custom methane conversion factor should be used.
+        ///     User can indicate if a custom methane conversion factor should be used.
         /// </summary>
         public bool UseCustomMethaneConversionFactor
         {
@@ -297,36 +296,35 @@ namespace H.Core.Models.Animals
         }
 
         /// <summary>
-        /// (% wet weight)
+        ///     (% wet weight)
         /// </summary>
-        public double FractionOfNitrogenInManure 
-        { 
+        public double FractionOfNitrogenInManure
+        {
             get => _fractionOfNitrogenInManure;
             set => SetProperty(ref _fractionOfNitrogenInManure, value);
         }
 
         /// <summary>
-        /// (% wet weight)
+        ///     (% wet weight)
         /// </summary>
-        public double FractionOfCarbonInManure 
-        { 
-            get => _fractionOfCarbonInManure; 
-            set => SetProperty(ref _fractionOfCarbonInManure, value); 
+        public double FractionOfCarbonInManure
+        {
+            get => _fractionOfCarbonInManure;
+            set => SetProperty(ref _fractionOfCarbonInManure, value);
         }
 
         /// <summary>
-        /// (% wet weight)
+        ///     (% wet weight)
         /// </summary>
-        public double FractionOfPhosphorusInManure 
-        { 
-            get => _fractionOfPhosphorusInManure; 
-            set => SetProperty(ref _fractionOfPhosphorusInManure, value); 
+        public double FractionOfPhosphorusInManure
+        {
+            get => _fractionOfPhosphorusInManure;
+            set => SetProperty(ref _fractionOfPhosphorusInManure, value);
         }
 
         /// <summary>
-        /// Turkeys, deer, etc. have a non-calculated manure methane rate
-        /// 
-        /// (kg head^-1 day^-1)
+        ///     Turkeys, deer, etc. have a non-calculated manure methane rate
+        ///     (kg head^-1 day^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramPerHeadPerDay)]
         public double DailyManureMethaneEmissionRate
@@ -342,9 +340,8 @@ namespace H.Core.Models.Animals
         }
 
         /// <summary>
-        /// Currently used by poultry groups only
-        ///
-        /// (kg TAN head^-1 day^-1)
+        ///     Currently used by poultry groups only
+        ///     (kg TAN head^-1 day^-1)
         /// </summary>
         public double DailyTanExcretion { get; set; }
 
@@ -364,13 +361,13 @@ namespace H.Core.Models.Animals
         }
 
         /// <summary>
-        /// Get a metric value for system converted from the GUI binding instance (metric/imperial)
+        ///     Get a metric value for system converted from the GUI binding instance (metric/imperial)
         /// </summary>
         /// <param name="bindingManureDetails">the GUI binding manure details</param>
         /// <returns>manure details converted to metric</returns>
         public static ManureDetails GetSystemManureDetailsFromBinding(ManureDetails bindingManureDetails)
         {
-            var systemManureDetails= CopyManureDetails(bindingManureDetails);
+            var systemManureDetails = CopyManureDetails(bindingManureDetails);
             var systemPropertyConverter = new PropertyConverter<ManureDetails>(systemManureDetails);
             var attrProps = systemPropertyConverter.PropertyInfos;
 
@@ -384,7 +381,7 @@ namespace H.Core.Models.Animals
         }
 
         /// <summary>
-        /// Get appropriate binding manure details (in metric/imperial) for GUI converted from the system (metric)
+        ///     Get appropriate binding manure details (in metric/imperial) for GUI converted from the system (metric)
         /// </summary>
         /// <param name="systemManureDetails">the system manure details</param>
         /// <returns>metric or imperial converted manure details</returns>
@@ -401,21 +398,6 @@ namespace H.Core.Models.Animals
             }
 
             return bindingManureDetails;
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
-
-        #region Event Handlers
-
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (sender is ManureDetails manureDetails)
-            {
-            }
         }
 
         #endregion

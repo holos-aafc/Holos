@@ -1,4 +1,6 @@
-﻿namespace H.Core.Models.Animals.Swine
+﻿using H.Core.Properties;
+
+namespace H.Core.Models.Animals.Swine
 {
     public class IsoWeanComponent : AnimalComponentBase
     {
@@ -6,10 +8,10 @@
 
         public IsoWeanComponent()
         {
-            this.ComponentNameDisplayString = H.Core.Properties.Resources.TitleIsoWean;
-            this.ComponentCategory = ComponentCategory.Swine;
-            this.ComponentType = ComponentType.IsoWean;
-            this.ComponentDescriptionString = H.Core.Properties.Resources.ToolTipIsoWeanProductionSystem;
+            ComponentNameDisplayString = Resources.TitleIsoWean;
+            ComponentCategory = ComponentCategory.Swine;
+            ComponentType = ComponentType.IsoWean;
+            ComponentDescriptionString = Resources.ToolTipIsoWeanProductionSystem;
         }
 
         #endregion

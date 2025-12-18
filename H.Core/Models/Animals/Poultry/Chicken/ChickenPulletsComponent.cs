@@ -1,4 +1,5 @@
-﻿using H.Infrastructure;
+﻿using H.Core.Properties;
+using H.Infrastructure;
 
 namespace H.Core.Models.Animals.Poultry.Chicken
 {
@@ -6,11 +7,11 @@ namespace H.Core.Models.Animals.Poultry.Chicken
     {
         public ChickenPulletsComponent()
         {
-            this.ComponentNameDisplayString = ComponentType.ChickenPulletFarm.GetDescription();
-            this.ComponentCategory = ComponentCategory.Poultry;
-            this.ComponentType = ComponentType.ChickenPulletFarm;
+            ComponentNameDisplayString = ComponentType.ChickenPulletFarm.GetDescription();
+            ComponentCategory = ComponentCategory.Poultry;
+            ComponentType = ComponentType.ChickenPulletFarm;
 
-            this.ComponentDescriptionString = H.Core.Properties.Resources.ToolTipPulletFarm;
+            ComponentDescriptionString = Resources.ToolTipPulletFarm;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace H.Core.Enumerations
         NotSelected,
 
         /// <summary>
-        /// Also known as 'Confined no barn (feedlot)'
+        ///     Also known as 'Confined no barn (feedlot)'
         /// </summary>
         [LocalizedDescription("ConfinedNoBarn", typeof(Resources))]
         ConfinedNoBarn,
@@ -57,13 +57,13 @@ namespace H.Core.Enumerations
         HillyPastureOrOpenRange,
 
         /// <summary>
-        /// Pasture, range, or paddock
+        ///     Pasture, range, or paddock
         /// </summary>
         [LocalizedDescription("Pasture", typeof(Resources))]
         Pasture,
 
         /// <summary>
-        /// Also known as 'Standing or exercise yard'
+        ///     Also known as 'Standing or exercise yard'
         /// </summary>
         [LocalizedDescription("Drylot", typeof(Resources))]
         DryLot,
@@ -84,21 +84,21 @@ namespace H.Core.Enumerations
         FreeStallBarnFlushing,
 
         /// <summary>
-        /// Also known as 'Milking parlour (slurry - flushing)'
+        ///     Also known as 'Milking parlour (slurry - flushing)'
         /// </summary>
         [LocalizedDescription("EnumFreeStallBarnMilkParlourSlurryFlushing", typeof(Resources))]
         FreeStallBarnMilkParlourSlurryFlushing,
 
         /// <summary>
-        /// Also known as 'Tie-stall barn (solid)'
+        ///     Also known as 'Tie-stall barn (solid)'
         /// </summary>
         [LocalizedDescription("EnumTieStallSolidLitter", typeof(Resources))]
         TieStallSolidLitter,
 
         /// <summary>
-        /// Also known as 'Tie-stall barn (slurry)'
+        ///     Also known as 'Tie-stall barn (slurry)'
         /// </summary>
         [LocalizedDescription("EnumTieStallSlurry", typeof(Resources))]
-        TieStallSlurry,
+        TieStallSlurry
     }
 }

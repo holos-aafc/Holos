@@ -1,4 +1,5 @@
-﻿using H.Infrastructure;
+﻿using H.Core.Properties;
+using H.Infrastructure;
 
 namespace H.Core.Models.Animals.Sheep
 {
@@ -6,10 +7,10 @@ namespace H.Core.Models.Animals.Sheep
     {
         public SheepFeedlotComponent()
         {
-            this.ComponentNameDisplayString = ComponentType.SheepFeedlot.GetDescription();
-            this.ComponentDescriptionString = Properties.Resources.ToolTipSheepFeedlotComponent;
-            this.ComponentCategory = ComponentCategory.Sheep;
-            this.ComponentType = ComponentType.SheepFeedlot;
+            ComponentNameDisplayString = ComponentType.SheepFeedlot.GetDescription();
+            ComponentDescriptionString = Resources.ToolTipSheepFeedlotComponent;
+            ComponentCategory = ComponentCategory.Sheep;
+            ComponentType = ComponentType.SheepFeedlot;
         }
     }
 }

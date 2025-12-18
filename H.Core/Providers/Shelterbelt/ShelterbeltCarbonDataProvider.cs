@@ -2,33 +2,18 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using H.Content;
-using H.Core.Calculators.Shelterbelt;
 using H.Core.Enumerations;
 using H.Infrastructure;
 
 namespace H.Core.Providers.Shelterbelt
 {
     /// <summary>
-    /// Allows for the lookup of biomass carbon values by using an ecodistrict to cluster id mapping. Currently, only trees inside of Saskatchewan can use this method of lookup.
+    ///     Allows for the lookup of biomass carbon values by using an ecodistrict to cluster id mapping. Currently, only trees
+    ///     inside of Saskatchewan can use this method of lookup.
     /// </summary>
     public static class ShelterbeltCarbonDataProvider
     {
-        #region Fields
-
-        /// <summary>
-        /// Past data ranges from 1956 to 2015
-        /// </summary>
-        private static readonly List<ShelterbeltDomProviderData> _pastData;
-
-        /// <summary>
-        /// Future data ranges from 2016 to 2075
-        /// </summary>
-        private static readonly List<ShelterbeltDomProviderData> _futureData;
-
-        #endregion
-
         #region Constructors
 
         static ShelterbeltCarbonDataProvider()
@@ -42,12 +27,26 @@ namespace H.Core.Providers.Shelterbelt
         #region Public Methods
 
         /// <summary>
-        /// Returns the future or past data set.
+        ///     Returns the future or past data set.
         /// </summary>
         public static List<ShelterbeltDomProviderData> GetData()
         {
             return _futureData;
         }
+
+        #endregion
+
+        #region Fields
+
+        /// <summary>
+        ///     Past data ranges from 1956 to 2015
+        /// </summary>
+        private static readonly List<ShelterbeltDomProviderData> _pastData;
+
+        /// <summary>
+        ///     Future data ranges from 2016 to 2075
+        /// </summary>
+        private static readonly List<ShelterbeltDomProviderData> _futureData;
 
         #endregion
 
@@ -98,34 +97,21 @@ namespace H.Core.Providers.Shelterbelt
                 entry.Age = int.Parse(line[5], cultureInfo);
 
                 if (double.TryParse(line[6], out var tecPerKilometerPerYear))
-                {
                     entry.TecPerKilometerPerYear = tecPerKilometerPerYear;
-                }
 
-                if (double.TryParse(line[7], out var tecPerKilometer))
-                {
-                    entry.TecPerKilometer = tecPerKilometer;
-                }
+                if (double.TryParse(line[7], out var tecPerKilometer)) entry.TecPerKilometer = tecPerKilometer;
 
                 if (double.TryParse(line[8], out var biomassCarbonPerKilometerPerYear))
-                {
                     entry.BiomassCarbonPerKilometerPerYear = biomassCarbonPerKilometerPerYear;
-                }
 
                 if (double.TryParse(line[9], out var biomassCarbonPerKilometer))
-                {
                     entry.BiomassCarbonPerKilometer = biomassCarbonPerKilometer;
-                }
 
                 if (double.TryParse(line[10], out var deadOrganicMatterCarbonPerKilometerPerYear))
-                {
                     entry.DeadOrganicMatterCarbonPerKilometerPerYear = deadOrganicMatterCarbonPerKilometerPerYear;
-                }
 
                 if (double.TryParse(line[11], out var deadOrganicMatterCarbonPerKilometer))
-                {
                     entry.DeadOrganicMatterCarbonPerKilometer = deadOrganicMatterCarbonPerKilometer;
-                }
 
                 result.Add(entry);
             }
@@ -134,22 +120,20 @@ namespace H.Core.Providers.Shelterbelt
         }
 
         /// <summary>
-        /// If we are in Saskatchewan, we can do lookups for biomass directly by using the cluster id.
-        ///
-        /// If we are not in Saskatchewan, we use <see cref="Table_12_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue"/> instead.
+        ///     If we are in Saskatchewan, we can do lookups for biomass directly by using the cluster id.
+        ///     If we are not in Saskatchewan, we use
+        ///     <see cref="Table_12_Shelterbelt_Hardiness_Zone_Lookup_Provider.GetLookupValue" /> instead.
         /// </summary>
         public static double GetLookupValue(TreeSpecies treeSpecies,
-                                            int ecodistrictId,
-                                            double percentMortality,
-                                            double mortalityLow,
-                                            double mortalityHigh,
-                                            int age,
-                                            ShelterbeltCarbonDataProviderColumns column)
+            int ecodistrictId,
+            double percentMortality,
+            double mortalityLow,
+            double mortalityHigh,
+            int age,
+            ShelterbeltCarbonDataProviderColumns column)
         {
             if (age > CoreConstants.ShelterbeltCarbonTablesMaximumAge)
-            {
                 age = CoreConstants.ShelterbeltCarbonTablesMaximumAge;
-            }
 
             // Data in table is indexed by cluster. Get the cluster id from the ecodistrict now
             var clusterData = ShelterbeltEcodistrictToClusterLookupProvider.GetClusterData(ecodistrictId);
@@ -183,24 +167,23 @@ namespace H.Core.Providers.Shelterbelt
                     targetLow = tableLookupLow.BiomassCarbonPerKilometer;
                     targetHigh = tableLookupHigh.BiomassCarbonPerKilometer;
                 }
-              
+
                 else if (column == ShelterbeltCarbonDataProviderColumns.Tec_Mg_C_km)
                 {
                     targetLow = tableLookupLow.TecPerKilometer;
                     targetHigh = tableLookupHigh.TecPerKilometer;
                 }
+
                 var ratio = (targetLow - targetHigh) / (mortalityHigh - mortalityLow);
                 var product = (percentMortality - mortalityLow) * ratio;
                 var result = targetLow - product;
 
                 return result;
             }
-            else
-            {
-                Trace.TraceError((nameof(ShelterbeltCarbonDataProvider) + " cannot find value in lookup table."));
 
-                return 0;
-            }
+            Trace.TraceError(nameof(ShelterbeltCarbonDataProvider) + " cannot find value in lookup table.");
+
+            return 0;
         }
 
         #endregion

@@ -7,8 +7,9 @@ using AutoMapper;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
-using H.Core.Models.Animals.Beef;
+using H.Core.Properties;
 using H.Core.Providers.Feed;
+using Microsoft.Extensions.Logging.Abstractions;
 
 #endregion
 
@@ -18,14 +19,6 @@ namespace H.Core.Services
     /// </summary>
     public class AnimalComponentHelper : IAnimalComponentHelper
     {
-        #region Fields
-
-        private readonly IMapper _animalGroupMapper;
-        private readonly IMapper _managementPeriodMapper;
-        private readonly ITimePeriodHelper _timePeriodHelper = new TimePeriodHelper(); 
-
-        #endregion
-
         #region Constructors
 
         public AnimalComponentHelper()
@@ -35,7 +28,7 @@ namespace H.Core.Services
                 x.CreateMap<AnimalGroup, AnimalGroup>()
                     .ForMember(y => y.Guid, z => z.Ignore())
                     .ForMember(y => y.ManagementPeriods, z => z.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _animalGroupMapper = animalGroupMapperConfiguration.CreateMapper();
 
@@ -45,14 +38,40 @@ namespace H.Core.Services
                     .ForMember(y => y.Guid, z => z.Ignore())
                     .ForMember(y => y.HousingDetails, z => z.Ignore())
                     .ForMember(y => y.ManureDetails, z => z.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _managementPeriodMapper = managementPeriodMapperConfiguration.CreateMapper();
         }
 
         #endregion
 
-        #region Properties
+        #region Private Methods
+
+        /// <summary>
+        ///     Create a unique name for each animal component.
+        /// </summary>
+        private string GetUniqueComponentName(AnimalComponentBase component, Farm farm)
+        {
+            var i = 2;
+
+            // Don't add number to component name at first (i.e. just use "Cow-Calf" and not "Cow-Calf #1") since it is more cleaner.
+            var proposedName = component.ComponentNameDisplayString;
+
+            // While the names are the same, try and make a unique name for this component.
+            while (farm.Components.Where(x => string.IsNullOrWhiteSpace(x.Name) == false)
+                   .Any(y => y.Name.Equals(proposedName)))
+                proposedName = component.ComponentNameDisplayString + " #" + i++;
+
+            return proposedName;
+        }
+
+        #endregion
+
+        #region Fields
+
+        private readonly IMapper _animalGroupMapper;
+        private readonly IMapper _managementPeriodMapper;
+        private readonly ITimePeriodHelper _timePeriodHelper = new TimePeriodHelper();
 
         #endregion
 
@@ -68,7 +87,7 @@ namespace H.Core.Services
 
             // Get list of months and years in time period
             var monthsAndYearsList = _timePeriodHelper.GetMonthsBetweenDates(start, end).ToList();
-            for (int i = 0; i < monthsAndYearsList.Count(); i++)
+            for (var i = 0; i < monthsAndYearsList.Count(); i++)
             {
                 var monthlyObject = monthsAndYearsList.ElementAt(i);
 
@@ -80,14 +99,16 @@ namespace H.Core.Services
                     Month = month,
                     Year = year,
                     DaysInMonth = _timePeriodHelper.GetNumberOfDaysOccupyingMonth(start, duration, month, year),
-                    StartDay = i == 0 ? start.Day : 1, // Only the first object will have the startdate of the management period, all others will start on the first day of the month
+                    StartDay = i == 0
+                        ? start.Day
+                        : 1 // Only the first object will have the startdate of the management period, all others will start on the first day of the month
                 };
 
                 result.Add(monthlyInputData);
             }
 
             // Calculate start and end weights of the animals for each of the months in the management period
-            for (int i = 0; i < result.Count; i++)
+            for (var i = 0; i < result.Count; i++)
             {
                 var monthlyData = result.ElementAt(i);
 
@@ -111,17 +132,17 @@ namespace H.Core.Services
 
             return result;
         }
-        
-        public string GetUniqueGroupName(IEnumerable<AnimalGroup> animalGroups, AnimalGroup animalGroup, string suggestedName = null)
+
+        public string GetUniqueGroupName(IEnumerable<AnimalGroup> animalGroups, AnimalGroup animalGroup,
+            string suggestedName = null)
         {
             var i = 1;
 
             // Don't add number to group name at first (i.e. just use "Heifers group" and not "Heifer group #1") since it is more cleaner.
             var proposedName = suggestedName == null ? animalGroup.AnimalTypeString : suggestedName;
             while (animalGroups.Any(group => group.Name == proposedName))
-            {
-                proposedName = animalGroup.AnimalTypeString + " " + string.Format(Properties.Resources.InterpolatedGroupNumber, ++i);
-            }
+                proposedName = animalGroup.AnimalTypeString + " " +
+                               string.Format(Resources.InterpolatedGroupNumber, ++i);
 
             return proposedName;
         }
@@ -140,7 +161,7 @@ namespace H.Core.Services
 
         public string GetUniqueManagementPeriodName(AnimalGroup group)
         {
-            return this.GetUniqueManagementPeriodName(group.ManagementPeriods);
+            return GetUniqueManagementPeriodName(group.ManagementPeriods);
         }
 
         public string GetUniqueManagementPeriodName(IEnumerable<ManagementPeriod> animalGroupManagementPeriods)
@@ -148,9 +169,9 @@ namespace H.Core.Services
             var i = 1;
             var periodCount = animalGroupManagementPeriods.Count();
 
-            var proposedName = string.Format(Properties.Resources.InterpolatedManagementPeriodNumber, i);
+            var proposedName = string.Format(Resources.InterpolatedManagementPeriodNumber, i);
             while (animalGroupManagementPeriods.Any(group => group.Name == proposedName))
-                proposedName = string.Format(Properties.Resources.InterpolatedManagementPeriodNumber, ++i);
+                proposedName = string.Format(Resources.InterpolatedManagementPeriodNumber, ++i);
 
             return proposedName;
         }
@@ -163,8 +184,8 @@ namespace H.Core.Services
 
             managementPeriod.SelectedDiet = Diet.CopyDiet(managementPeriodToReplicate.SelectedDiet);
 
-            this.ReplicateHousingDetails(managementPeriodToReplicate, managementPeriod);
-            this.ReplicateManureDetails(managementPeriodToReplicate, managementPeriod);
+            ReplicateHousingDetails(managementPeriodToReplicate, managementPeriod);
+            ReplicateManureDetails(managementPeriodToReplicate, managementPeriod);
 
             return managementPeriod;
         }
@@ -174,9 +195,9 @@ namespace H.Core.Services
             var configuration = new MapperConfiguration(x =>
             {
                 x.CreateMap<ManureDetails, ManureDetails>()
-                 .ForMember(y => y.Name, z => z.Ignore())
-                 .ForMember(y => y.Guid, z => z.Ignore());
-            });
+                    .ForMember(y => y.Name, z => z.Ignore())
+                    .ForMember(y => y.Guid, z => z.Ignore());
+            }, new NullLoggerFactory());
 
             var mapper = configuration.CreateMapper();
 
@@ -190,9 +211,9 @@ namespace H.Core.Services
             var configuration = new MapperConfiguration(x =>
             {
                 x.CreateMap<HousingDetails, HousingDetails>()
-                 .ForMember(y => y.Name, z => z.Ignore())
-                 .ForMember(y => y.Guid, z => z.Ignore());
-            });
+                    .ForMember(y => y.Name, z => z.Ignore())
+                    .ForMember(y => y.Guid, z => z.Ignore());
+            }, new NullLoggerFactory());
 
             var mapper = configuration.CreateMapper();
 
@@ -205,7 +226,7 @@ namespace H.Core.Services
         {
             var animalComponent = (AnimalComponentBase)Activator.CreateInstance(component.GetType());
 
-            this.ReplicateAnimalComponent(animalComponent, component);
+            ReplicateAnimalComponent(animalComponent, component);
             animalComponent.Name = component.Name;
 
             /*
@@ -230,7 +251,6 @@ namespace H.Core.Services
             var from = source as AnimalComponentBase;
 
             foreach (var animalGroup in from.Groups)
-            {
                 if (animalGroup is AnimalGroup group)
                 {
                     var copiedGroup = new AnimalGroup();
@@ -239,16 +259,15 @@ namespace H.Core.Services
 
                     foreach (var managementPeriod in group.ManagementPeriods)
                     {
-                        var copiedManagementPeriod = this.ReplicateManagementPeriod(managementPeriod);
+                        var copiedManagementPeriod = ReplicateManagementPeriod(managementPeriod);
                         copiedGroup.ManagementPeriods.Add(copiedManagementPeriod);
                     }
                 }
-            }
         }
 
         public void InitializeComponent(AnimalComponentBase component, Farm farm)
         {
-            var name = this.GetUniqueComponentName(component, farm);
+            var name = GetUniqueComponentName(component, farm);
 
             component.Name = name;
             component.ComponentDescriptionString = name;
@@ -261,42 +280,11 @@ namespace H.Core.Services
 
         public bool AnimalGroupHasDmiCalculations(AnimalGroup animalGroup)
         {
-            if (animalGroup.GroupType.IsOtherAnimalType() || animalGroup.GroupType.IsPoultryType() || animalGroup.GroupType == AnimalType.DairyCalves)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            if (animalGroup.GroupType.IsOtherAnimalType() || animalGroup.GroupType.IsPoultryType() ||
+                animalGroup.GroupType == AnimalType.DairyCalves) return false;
+
+            return true;
         }
-
-        #endregion
-
-        #region Private Methods
-
-        /// <summary>
-        /// Create a unique name for each animal component.
-        /// </summary>
-        private string GetUniqueComponentName(AnimalComponentBase component, Farm farm)
-        {
-            var i = 2;
-
-            // Don't add number to component name at first (i.e. just use "Cow-Calf" and not "Cow-Calf #1") since it is more cleaner.
-            var proposedName = component.ComponentNameDisplayString;
-
-            // While the names are the same, try and make a unique name for this component.
-            while (farm.Components.Where(x => string.IsNullOrWhiteSpace(x.Name) == false).Any(y => y.Name.Equals(proposedName)))
-            {                
-                proposedName = component.ComponentNameDisplayString + " #" + (i++);
-            }
-
-            return proposedName;
-        }
-
-        #endregion
-
-        #region Event Handlers
 
         #endregion
     }

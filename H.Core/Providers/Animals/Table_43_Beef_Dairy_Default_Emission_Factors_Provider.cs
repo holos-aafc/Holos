@@ -1,23 +1,23 @@
-﻿using H.Core.Enumerations;
-using H.Core.Tools;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Tools;
 using H.Infrastructure;
 
 namespace H.Core.Providers.Animals
 {
     /// <summary>
-    /// Table 43. Default emission factors (kg NH3-N kg-1 TAN) for housing, storage and land application of beef
-    /// and dairy cattle manure at the reference temperature of 15 °C (Chai et al., 2014,2016).
+    ///     Table 43. Default emission factors (kg NH3-N kg-1 TAN) for housing, storage and land application of beef
+    ///     and dairy cattle manure at the reference temperature of 15 °C (Chai et al., 2014,2016).
     /// </summary>
     public class Table_43_Beef_Dairy_Default_Emission_Factors_Provider : IAnimalAmmoniaEmissionFactorProvider
     {
         #region Constructors
-        
+
         public Table_43_Beef_Dairy_Default_Emission_Factors_Provider()
         {
             HTraceListener.AddTraceListener();
-        } 
+        }
 
         #endregion
 
@@ -25,89 +25,57 @@ namespace H.Core.Providers.Animals
 
         public double GetEmissionFactorByHousing(HousingType housingType)
         {
-            if (housingType.IsFeedlot())
-            {
-                return 0.78;
-            }
-            else if (housingType == HousingType.HousedInBarnSolid)
-            {
-                return 0.21;
-            }
-            else if (housingType.IsPasture())
-            {
-                return 0.10;
-            }
-            else if (housingType == HousingType.FreeStallBarnSolidLitter)
-            {
-                return 0.22;
-            }
-            else if (housingType == HousingType.FreeStallBarnSlurryScraping)
-            {
-                return 0.33;
-            }
-            else if (housingType == HousingType.FreeStallBarnFlushing)
-            {
-                return 0.28;
-            }
-            else if (housingType == HousingType.FreeStallBarnMilkParlourSlurryFlushing)
-            {
-                return 0.28;
-            }
-            else if (housingType == HousingType.TieStallSolidLitter)
-            {
-                return 0.17;
-            }
-            else if (housingType == HousingType.TieStallSlurry)
-            {
-                return 0.22;
-            }
-            else if (housingType == HousingType.DryLot)
-            {
-                return 0.4;
-            }
-            else
-            {
-                Trace.TraceError($"{nameof(Table_43_Beef_Dairy_Default_Emission_Factors_Provider)}.{nameof(Table_43_Beef_Dairy_Default_Emission_Factors_Provider.GetEmissionFactorByHousing)}" +
-                                 $" unable to get data for housing type: {housingType}.");
+            if (housingType.IsFeedlot()) return 0.78;
 
-                return 0;
-            }
+            if (housingType == HousingType.HousedInBarnSolid) return 0.21;
+
+            if (housingType.IsPasture()) return 0.10;
+
+            if (housingType == HousingType.FreeStallBarnSolidLitter) return 0.22;
+
+            if (housingType == HousingType.FreeStallBarnSlurryScraping) return 0.33;
+
+            if (housingType == HousingType.FreeStallBarnFlushing) return 0.28;
+
+            if (housingType == HousingType.FreeStallBarnMilkParlourSlurryFlushing) return 0.28;
+
+            if (housingType == HousingType.TieStallSolidLitter) return 0.17;
+
+            if (housingType == HousingType.TieStallSlurry) return 0.22;
+
+            if (housingType == HousingType.DryLot) return 0.4;
+
+            Trace.TraceError(
+                $"{nameof(Table_43_Beef_Dairy_Default_Emission_Factors_Provider)}.{nameof(GetEmissionFactorByHousing)}" +
+                $" unable to get data for housing type: {housingType}.");
+
+            return 0;
         }
 
         public double GetByManureStorageType(ManureStateType storageType)
         {
             // Footnote 1: Read for data reference information.
 
-            if (storageType.IsLiquidManure() || storageType == ManureStateType.DeepPit)
-            {
-                return 0.13;
-            }
-            else if (storageType.IsCompost())
-            {
-                return 0.7;
-            }
-            else if (storageType == ManureStateType.SolidStorage || storageType == ManureStateType.DeepBedding)
-            {
-                return 0.35;
-            }
-            else 
-            {
-                Trace.TraceError($"{nameof(Table_43_Beef_Dairy_Default_Emission_Factors_Provider)}.{nameof(Table_43_Beef_Dairy_Default_Emission_Factors_Provider.GetByManureStorageType)}" +
-                                 $" unable to get data for storage type: {storageType}.");
-                return 0;
-            }
+            if (storageType.IsLiquidManure() || storageType == ManureStateType.DeepPit) return 0.13;
+
+            if (storageType.IsCompost()) return 0.7;
+
+            if (storageType == ManureStateType.SolidStorage || storageType == ManureStateType.DeepBedding) return 0.35;
+
+            Trace.TraceError(
+                $"{nameof(Table_43_Beef_Dairy_Default_Emission_Factors_Provider)}.{nameof(GetByManureStorageType)}" +
+                $" unable to get data for storage type: {storageType}.");
+            return 0;
         }
 
-        public double GetEmissionFactorForLandAppliedManure(ManureApplicationViewItem manureApplicationViewItem, CropViewItem viewItem)
+        public double GetEmissionFactorForLandAppliedManure(ManureApplicationViewItem manureApplicationViewItem,
+            CropViewItem viewItem)
         {
             if (manureApplicationViewItem.ManureStateType.IsLiquidManure())
-            {
-                return this.GetAmmoniaEmissionFactorForLiquidAppliedManure(manureApplicationViewItem.ManureApplicationMethod);
-            }
-            else
-            {
-                return this.GetAmmoniaEmissionFactorForSolidAppliedManure(viewItem.TillageType);
-            }
+                return GetAmmoniaEmissionFactorForLiquidAppliedManure(manureApplicationViewItem
+                    .ManureApplicationMethod);
+
+            return GetAmmoniaEmissionFactorForSolidAppliedManure(viewItem.TillageType);
         }
 
         public double GetAmmoniaEmissionFactorForLiquidAppliedManure(ManureApplicationTypes manureApplicationType)
@@ -129,8 +97,9 @@ namespace H.Core.Providers.Animals
                     return 0.02;
 
                 default:
-                    Trace.TraceError($"{nameof(Table_43_Beef_Dairy_Default_Emission_Factors_Provider)}.{nameof(Table_43_Beef_Dairy_Default_Emission_Factors_Provider.GetAmmoniaEmissionFactorForLiquidAppliedManure)}" +
-                                     $" unable to get data for spreading method: {manureApplicationType.GetDescription()}.");
+                    Trace.TraceError(
+                        $"{nameof(Table_43_Beef_Dairy_Default_Emission_Factors_Provider)}.{nameof(GetAmmoniaEmissionFactorForLiquidAppliedManure)}" +
+                        $" unable to get data for spreading method: {manureApplicationType.GetDescription()}.");
                     return 0;
             }
         }
@@ -142,12 +111,13 @@ namespace H.Core.Providers.Animals
                 case TillageType.Intensive:
                 case TillageType.Reduced:
                     return 0.69;
-               
+
                 case TillageType.NoTill:
                     return 0.79;
 
                 default:
-                    Trace.TraceError($"{nameof(Table_43_Beef_Dairy_Default_Emission_Factors_Provider)}.{nameof(Table_43_Beef_Dairy_Default_Emission_Factors_Provider.GetAmmoniaEmissionFactorForSolidAppliedManure)}" +
+                    Trace.TraceError(
+                        $"{nameof(Table_43_Beef_Dairy_Default_Emission_Factors_Provider)}.{nameof(GetAmmoniaEmissionFactorForSolidAppliedManure)}" +
                         $" unable to get data for land application type: {tillageType}.");
                     return 0;
             }

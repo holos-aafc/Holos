@@ -23,12 +23,13 @@ namespace H.Core.Calculators.Nitrogen
         double CalculateVolatilizationEmissionsFromExportedManure(Farm farm, ManureExportViewItem manureExportViewItem);
 
         /// <summary>
-        /// (kg NH3-N)
+        ///     (kg NH3-N)
         /// </summary>
-        double CalculateAdjustedNH3NLossFromManureExports(Farm farm, int year, ManureExportViewItem manureExportViewItem);
+        double CalculateAdjustedNH3NLossFromManureExports(Farm farm, int year,
+            ManureExportViewItem manureExportViewItem);
 
         /// <summary>
-        /// (kg NH3-N)
+        ///     (kg NH3-N)
         /// </summary>
         double CalculateAdjustedNH3NLossFromManureExports(Farm farm, ManureExportViewItem manureExportViewItem);
     }

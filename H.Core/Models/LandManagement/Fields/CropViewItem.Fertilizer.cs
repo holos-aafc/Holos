@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
@@ -10,6 +9,29 @@ namespace H.Core.Models.LandManagement.Fields
 {
     public partial class CropViewItem
     {
+        #region Private Methods
+
+        /// <summary>
+        ///     Sums up the total individual fertilizer component (N-P-K-S) application rates for the entire year.
+        /// </summary>
+        public void UpdateApplicationRateTotals()
+        {
+            // Update total N fertilizer rate from all fertilizer applications
+            NitrogenFertilizerRate = FertilizerApplicationViewItems.Sum(viewItem => viewItem.AmountOfNitrogenApplied);
+
+            // Update total P fertilizer rate from all fertilizer applications
+            PhosphorusFertilizerRate =
+                FertilizerApplicationViewItems.Sum(viewItem => viewItem.AmountOfPhosphorusApplied);
+
+            // Update total K fertilizer rate from all fertilizer applications
+            PotassiumFertilizerRate = FertilizerApplicationViewItems.Sum(viewItem => viewItem.AmountOfPotassiumApplied);
+
+            // Update total S fertilizer rate from all fertilizer applications
+            SulphurFertilizerRate = FertilizerApplicationViewItems.Sum(viewItem => viewItem.AmountOfSulphurApplied);
+        }
+
+        #endregion
+
         #region Fields
 
         private double _nitrogenFertilizerRate;
@@ -29,17 +51,16 @@ namespace H.Core.Models.LandManagement.Fields
 
         #region Properties
 
-
         public SoilReductionFactors SoilReductionFactor
         {
             get => _soilReductionFactor;
             set => SetProperty(ref _soilReductionFactor, value);
         }
 
-        public bool HasFertilizerApplicationViewItems => this.FertilizerApplicationViewItems.Count > 0;
+        public bool HasFertilizerApplicationViewItems => FertilizerApplicationViewItems.Count > 0;
 
         /// <summary>
-        /// A collection to hold information about each fertilizer application the user applies to a field/crop.
+        ///     A collection to hold information about each fertilizer application the user applies to a field/crop.
         /// </summary>
         public ObservableCollection<FertilizerApplicationViewItem> FertilizerApplicationViewItems
         {
@@ -48,9 +69,8 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// The total amount of nitrogen fertilizer applied to a field
-        ///
-        /// (kg N ha^-1)
+        ///     The total amount of nitrogen fertilizer applied to a field
+        ///     (kg N ha^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare)]
         public double NitrogenFertilizerRate
@@ -60,21 +80,19 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// The total amount of phosphorus fertilizer applied to a field
-        ///
-        /// (kg P ha^-1)
+        ///     The total amount of phosphorus fertilizer applied to a field
+        ///     (kg P ha^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramsPhosphorousPerHectare)]
         public double PhosphorusFertilizerRate
         {
             get => _phosphorusFertilizerRate > 0 ? _phosphorusFertilizerRate : 0;
-            set => this.SetProperty(ref _phosphorusFertilizerRate, value);
+            set => SetProperty(ref _phosphorusFertilizerRate, value);
         }
 
         /// <summary>
-        /// The total amount of potassium fertilizer applied to a field
-        ///
-        /// (kg K ha^-1)
+        ///     The total amount of potassium fertilizer applied to a field
+        ///     (kg K ha^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramsPotassiumPerHectare)]
         public double PotassiumFertilizerRate
@@ -84,9 +102,8 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// The total amount of sulphur fertilizer applied to a field
-        ///
-        /// (kg S ha^-1)
+        ///     The total amount of sulphur fertilizer applied to a field
+        ///     (kg S ha^-1)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.KilogramsSulphurPerHectare)]
         public double SulphurFertilizerRate
@@ -102,8 +119,9 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// Used by CLI to indicate which blend is used. Currently only one blend can be specified when using CLI. Amount of blend
-        /// is taken from value in <see cref="NitrogenFertilizerRate"/>
+        ///     Used by CLI to indicate which blend is used. Currently only one blend can be specified when using CLI. Amount of
+        ///     blend
+        ///     is taken from value in <see cref="NitrogenFertilizerRate" />
         /// </summary>
         public FertilizerBlends FertilizerBlend
         {
@@ -113,61 +131,34 @@ namespace H.Core.Models.LandManagement.Fields
 
         #endregion
 
-        #region Private Methods
-
-        /// <summary>
-        /// Sums up the total individual fertilizer component (N-P-K-S) application rates for the entire year.
-        /// </summary>
-        public void UpdateApplicationRateTotals()
-        {
-            // Update total N fertilizer rate from all fertilizer applications
-            this.NitrogenFertilizerRate = this.FertilizerApplicationViewItems.Sum(viewItem => viewItem.AmountOfNitrogenApplied);
-
-            // Update total P fertilizer rate from all fertilizer applications
-            this.PhosphorusFertilizerRate = this.FertilizerApplicationViewItems.Sum(viewItem => viewItem.AmountOfPhosphorusApplied);
-
-            // Update total K fertilizer rate from all fertilizer applications
-            this.PotassiumFertilizerRate = this.FertilizerApplicationViewItems.Sum(viewItem => viewItem.AmountOfPotassiumApplied);
-
-            // Update total S fertilizer rate from all fertilizer applications
-            this.SulphurFertilizerRate = this.FertilizerApplicationViewItems.Sum(viewItem => viewItem.AmountOfSulphurApplied);
-        }
-
-        #endregion
-
         #region Event Handlers
 
-        private void FertilizerApplicationViewItemsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void FertilizerApplicationViewItemsOnCollectionChanged(object sender,
+            NotifyCollectionChangedEventArgs e)
         {
-            this.RaisePropertyChanged(nameof(this.HasFertilizerApplicationViewItems));
+            RaisePropertyChanged(nameof(HasFertilizerApplicationViewItems));
 
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 if (e.NewItems[0] is FertilizerApplicationViewItem addedItem)
-                {
                     addedItem.PropertyChanged += FertilizerApplicationViewItemOnPropertyChanged;
-                }
             }
             else if (e.Action == NotifyCollectionChangedAction.Remove)
             {
                 // When a user removes a fertilizer application we have to update total application rates
-                this.UpdateApplicationRateTotals();
+                UpdateApplicationRateTotals();
             }
         }
 
         private void FertilizerApplicationViewItemOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (sender is FertilizerApplicationViewItem fertilizerApplicationViewItem)
-            {
                 if (e.PropertyName.Equals(nameof(FertilizerApplicationViewItem.AmountOfNitrogenApplied)) ||
                     e.PropertyName.Equals(nameof(FertilizerApplicationViewItem.AmountOfPotassiumApplied)) ||
                     e.PropertyName.Equals(nameof(FertilizerApplicationViewItem.AmountOfSulphurApplied)) ||
                     e.PropertyName.Equals(nameof(FertilizerApplicationViewItem.AmountOfPhosphorusApplied)))
-                {
                     // When the component amounts of the fertilizer blend changes, we need to update the total application rates for the year (sum up individual rates)
-                    this.UpdateApplicationRateTotals();
-                }
-            }
+                    UpdateApplicationRateTotals();
         }
 
         #endregion

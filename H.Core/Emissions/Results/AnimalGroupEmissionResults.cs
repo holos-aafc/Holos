@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using H.Core.Converters;
 using H.Core.Enumerations;
-using H.Core.Models;
 using H.Core.Models.Animals;
 
 namespace H.Core.Emissions.Results
 {
     /// <summary>
-    /// A class to hold emission results for an animal group and all the management periods for the animal group. This class holds a collection of
-    /// <see cref="GroupEmissionsByMonths"/> which is a collection of emissions results for the <see cref="AnimalGroup"/> for each month.
+    ///     A class to hold emission results for an animal group and all the management periods for the animal group. This
+    ///     class holds a collection of
+    ///     <see cref="GroupEmissionsByMonths" /> which is a collection of emissions results for the <see cref="AnimalGroup" />
+    ///     for each month.
     /// </summary>
     public class AnimalGroupEmissionResults
     {
         #region Fields
-        
-        private readonly EmissionTypeConverter _emissionsConverter; 
+
+        private readonly EmissionTypeConverter _emissionsConverter;
 
         #endregion
 
@@ -32,45 +33,38 @@ namespace H.Core.Emissions.Results
         #region Properties
 
         /// <summary>
-        /// The <see cref="AnimalGroup"/> that caused the emissions.
+        ///     The <see cref="AnimalGroup" /> that caused the emissions.
         /// </summary>
         public AnimalGroup AnimalGroup { get; set; }
 
         /// <summary>
-        /// A collection of emissions for each month created by the <see cref="AnimalGroup"/>.
+        ///     A collection of emissions for each month created by the <see cref="AnimalGroup" />.
         /// </summary>
         public List<GroupEmissionsByMonth> GroupEmissionsByMonths { get; set; } = new List<GroupEmissionsByMonth>();
 
         /// <summary>
-        /// Total emissions (all types) emitted from all animals in this group over all months.
-        ///
-        /// (kg CO2e)
+        ///     Total emissions (all types) emitted from all animals in this group over all months.
+        ///     (kg CO2e)
         /// </summary>
-        public double TotalCarbonDioxideEquivalentEmissionsFromAnimalGroup
-        {
-            get
-            {
-                return _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsCH4, EmissionDisplayUnits.KilogramsC02e, this.TotalEntericMethane) +
-                       _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsCH4, EmissionDisplayUnits.KilogramsC02e, this.TotalManureMethane) +
-                       _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsN2O, EmissionDisplayUnits.KilogramsC02e, this.TotalDirectNitrousOxide) +
-                       _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsN2O, EmissionDisplayUnits.KilogramsC02e, this.TotalIndirectNitrousOxide) +
-                       _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsC02, EmissionDisplayUnits.KilogramsC02e, this.TotalEnergyCarbonDioxide);
-            }
-        }
+        public double TotalCarbonDioxideEquivalentEmissionsFromAnimalGroup =>
+            _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsCH4, EmissionDisplayUnits.KilogramsC02e,
+                TotalEntericMethane) +
+            _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsCH4, EmissionDisplayUnits.KilogramsC02e,
+                TotalManureMethane) +
+            _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsN2O, EmissionDisplayUnits.KilogramsC02e,
+                TotalDirectNitrousOxide) +
+            _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsN2O, EmissionDisplayUnits.KilogramsC02e,
+                TotalIndirectNitrousOxide) +
+            _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsC02, EmissionDisplayUnits.KilogramsC02e,
+                TotalEnergyCarbonDioxide);
 
         /// <summary>
-        /// (kg CO2)
+        ///     (kg CO2)
         /// </summary>
-        public double TotalCarbonDioxideFromAnimals
-        {
-            get
-            {
-                return this.TotalEnergyCarbonDioxide;
-            }
-        }
+        public double TotalCarbonDioxideFromAnimals => TotalEnergyCarbonDioxide;
 
         /// <summary>
-        /// (kg C)
+        ///     (kg C)
         /// </summary>
         public double TotalCarbonUptakeByAnimals()
         {
@@ -78,47 +72,45 @@ namespace H.Core.Emissions.Results
         }
 
         /// <summary>
-        /// (kg)
+        ///     (kg)
         /// </summary>
         public double TotalDmiUptakeByAnimals()
         {
-            return GroupEmissionsByMonths.Sum(groupEmissionsByMonth => groupEmissionsByMonth.TotalMonthlyDmiUptakeForGroup);
+            return GroupEmissionsByMonths.Sum(groupEmissionsByMonth =>
+                groupEmissionsByMonth.TotalMonthlyDmiUptakeForGroup);
         }
 
         /// <summary>
-        /// (kg head^-1 day^-1)
+        ///     (kg head^-1 day^-1)
         /// </summary>
         public double TotalDryMatterIntake
         {
-            get
-            {
-                return this.GroupEmissionsByMonths.Sum(x => x.DryMatterIntake);
-            }
+            get { return GroupEmissionsByMonths.Sum(x => x.DryMatterIntake); }
         }
 
         /// <summary>
-        /// The total enteric methane emitted from all animals in this group over all months.
-        /// 
-        /// (kg CH4)
+        ///     The total enteric methane emitted from all animals in this group over all months.
+        ///     (kg CH4)
         /// </summary>
-        public double TotalEntericMethane 
+        public double TotalEntericMethane
         {
             get
             {
-                return this.GroupEmissionsByMonths.Sum(groupEmissionsByMonth => groupEmissionsByMonth.MonthlyEntericMethaneEmission);
+                return GroupEmissionsByMonths.Sum(groupEmissionsByMonth =>
+                    groupEmissionsByMonth.MonthlyEntericMethaneEmission);
             }
         }
 
         /// <summary>
-        /// The total manure methane emitted from all animals in this group over all months.
-        /// 
-        /// (kg CH4)
+        ///     The total manure methane emitted from all animals in this group over all months.
+        ///     (kg CH4)
         /// </summary>
         public double TotalManureMethane
         {
             get
             {
-                return this.GroupEmissionsByMonths.Sum(groupEmissionsByMonth => groupEmissionsByMonth.MonthlyManureMethaneEmission);
+                return GroupEmissionsByMonths.Sum(groupEmissionsByMonth =>
+                    groupEmissionsByMonth.MonthlyManureMethaneEmission);
             }
         }
 
@@ -126,68 +118,71 @@ namespace H.Core.Emissions.Results
         {
             get
             {
-                return this.GroupEmissionsByMonths.Sum(groupEmissionsByMonth => groupEmissionsByMonth.TotalVolumeOfManureAvailableForLandApplication);
+                return GroupEmissionsByMonths.Sum(groupEmissionsByMonth =>
+                    groupEmissionsByMonth.TotalVolumeOfManureAvailableForLandApplication);
             }
         }
 
         /// <summary>
-        /// Total direct nitrous oxide emitted from all animals in this group over all months.
-        ///
-        /// (kg N2O)
+        ///     Total direct nitrous oxide emitted from all animals in this group over all months.
+        ///     (kg N2O)
         /// </summary>
         public double TotalDirectNitrousOxide
         {
             get
             {
-                return this.GroupEmissionsByMonths.Sum(groupEmissionsByMonth => groupEmissionsByMonth.MonthlyManureDirectN2OEmission);
+                return GroupEmissionsByMonths.Sum(groupEmissionsByMonth =>
+                    groupEmissionsByMonth.MonthlyManureDirectN2OEmission);
             }
         }
 
         /// <summary>
-        /// Total indirect nitrous oxide emitted from all animals in this group over all months.
-        ///
-        /// (kg N2O)
+        ///     Total indirect nitrous oxide emitted from all animals in this group over all months.
+        ///     (kg N2O)
         /// </summary>
         public double TotalIndirectNitrousOxide
         {
             get
             {
-                return this.GroupEmissionsByMonths.Sum(groupEmissionsByMonth => groupEmissionsByMonth.MonthlyManureIndirectN2OEmission);
+                return GroupEmissionsByMonths.Sum(groupEmissionsByMonth =>
+                    groupEmissionsByMonth.MonthlyManureIndirectN2OEmission);
             }
         }
 
         /// <summary>
-        /// Total energy carbon dioxide emitted from all animals in this group over all months.
-        ///
-        /// (kg CO2)
+        ///     Total energy carbon dioxide emitted from all animals in this group over all months.
+        ///     (kg CO2)
         /// </summary>
         public double TotalEnergyCarbonDioxide
         {
             get
             {
-                return this.GroupEmissionsByMonths.Sum(groupEmissionsByMonth => groupEmissionsByMonth.MonthlyEnergyCarbonDioxide);
+                return GroupEmissionsByMonths.Sum(groupEmissionsByMonth =>
+                    groupEmissionsByMonth.MonthlyEnergyCarbonDioxide);
             }
         }
 
         /// <summary>
-        /// (kg N)
+        ///     (kg N)
         /// </summary>
         public double TotalNitrogenAvailableForLandApplication
         {
             get
             {
-                return this.GroupEmissionsByMonths.Sum(groupEmissionsByMonth => groupEmissionsByMonth.MonthlyNitrogenAvailableForLandApplication);
+                return GroupEmissionsByMonths.Sum(groupEmissionsByMonth =>
+                    groupEmissionsByMonth.MonthlyNitrogenAvailableForLandApplication);
             }
         }
 
         /// <summary>
-        /// (kg C)
+        ///     (kg C)
         /// </summary>
         public double TotalCarbonExcreted
         {
             get
             {
-                return this.GroupEmissionsByMonths.Sum(groupEmissionsByMonth => groupEmissionsByMonth.MonthlyFecalCarbonExcretion);
+                return GroupEmissionsByMonths.Sum(groupEmissionsByMonth =>
+                    groupEmissionsByMonth.MonthlyFecalCarbonExcretion);
             }
         }
 
@@ -196,46 +191,41 @@ namespace H.Core.Emissions.Results
         #region Methods
 
         /// <summary>
-        /// Determines if the animals are being fed a poor quality diet by checking each <see cref="GroupEmissionsByDay"/> to see if the DMI > DMI_max.
-        ///
-        /// DMI over check needs to consider JUST the dates that the animals have the specific diet
+        ///     Determines if the animals are being fed a poor quality diet by checking each <see cref="GroupEmissionsByDay" /> to
+        ///     see if the DMI > DMI_max.
+        ///     DMI over check needs to consider JUST the dates that the animals have the specific diet
         /// </summary>
         /// <param name="managementPeriod"></param>
         public bool IsDmiOverDmiMaxForPeriod(ManagementPeriod managementPeriod)
         {
             if (managementPeriod != null)
-            {
-                foreach (var groupEmissionsByMonth in this.GroupEmissionsByMonths)
+                foreach (var groupEmissionsByMonth in GroupEmissionsByMonths)
                 {
-                    var dates = groupEmissionsByMonth.GetDatesWhereDmiIsGreaterThanDmiMax().Where(x => x >= managementPeriod.Start && x <= managementPeriod.End);
-                    if (dates.Any())
-                    {
-                        return true;
-                    }
-                } 
-            }
+                    var dates = groupEmissionsByMonth.GetDatesWhereDmiIsGreaterThanDmiMax()
+                        .Where(x => x >= managementPeriod.Start && x <= managementPeriod.End);
+                    if (dates.Any()) return true;
+                }
 
             return false;
         }
 
         /// <summary>
-        /// Get a list of dates when the animal group has a DMI > DMI_max
+        ///     Get a list of dates when the animal group has a DMI > DMI_max
         /// </summary>
         public List<DateTime> GetDatesWhenGroupIsOverDmiMax()
         {
             var result = new List<DateTime>();
 
-            foreach (var groupEmissionsForMonth in this.GroupEmissionsByMonths)
-            {
+            foreach (var groupEmissionsForMonth in GroupEmissionsByMonths)
                 result.AddRange(groupEmissionsForMonth.GetDatesWhereDmiIsGreaterThanDmiMax());
-            }
 
             return result;
         }
 
         public override string ToString()
         {
-            return $"{nameof(AnimalGroup)}: {AnimalGroup}, {nameof(TotalEnergyCarbonDioxide)}: {TotalEnergyCarbonDioxide}, {nameof(GroupEmissionsByMonths)}: {GroupEmissionsByMonths}";
+            return
+                $"{nameof(AnimalGroup)}: {AnimalGroup}, {nameof(TotalEnergyCarbonDioxide)}: {TotalEnergyCarbonDioxide}, {nameof(GroupEmissionsByMonths)}: {GroupEmissionsByMonths}";
         }
 
         #endregion

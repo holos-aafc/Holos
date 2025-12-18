@@ -8,7 +8,7 @@ namespace H.Core.Enumerations
     {
         public static IEnumerable<CoverCropTerminationType> GetValidCoverCropTerminationTypes()
         {
-            return new List<CoverCropTerminationType>()
+            return new List<CoverCropTerminationType>
             {
                 CoverCropTerminationType.Chemical, CoverCropTerminationType.Mechanical
             }.OrderBy(terminationType => terminationType.GetDescription());

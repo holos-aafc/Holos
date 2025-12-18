@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace H.Core.Providers.Soil
 {
@@ -10,7 +6,7 @@ namespace H.Core.Providers.Soil
     {
         public SOCData()
         {
-            this.SocDataByRotationName = new Dictionary<string, double>();
+            SocDataByRotationName = new Dictionary<string, double>();
         }
 
         public double MeasuredCarbonAtYear { get; set; }

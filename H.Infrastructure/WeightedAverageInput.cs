@@ -1,8 +1,4 @@
-﻿#region Imports
-
-#endregion
-
-namespace H.Infrastructure
+﻿namespace H.Infrastructure
 {
     public class WeightedAverageInput
     {

@@ -9,6 +9,6 @@ namespace H.Core.Enumerations
         FallowCroppingToContinous,
 
         [LocalizedDescription("ContinousToFallowCropping", typeof(Resources))]
-        ContinousToFallowCropping,
+        ContinousToFallowCropping
     }
 }

@@ -36,7 +36,7 @@ namespace H.Core.Enumerations
         BeefCalf,
 
         /// <summary>
-        /// This also means 'regular' cows (i.e. non-lactating)
+        ///     This also means 'regular' cows (i.e. non-lactating)
         /// </summary>
         [LocalizedDescription("EnumBeefCowLactating", typeof(Resources))]
         BeefCowLactating,
@@ -48,7 +48,7 @@ namespace H.Core.Enumerations
         BeefFinisher,
 
         /// <summary>
-        /// Also known as buffalo
+        ///     Also known as buffalo
         /// </summary>
         [LocalizedDescription("EnumBison", typeof(Resources))]
         Bison,
@@ -102,7 +102,7 @@ namespace H.Core.Enumerations
         Elk,
 
         /// <summary>
-        /// Assumption is all ewes are pregnant
+        ///     Assumption is all ewes are pregnant
         /// </summary>
         [LocalizedDescription("EnumEwes", typeof(Resources))]
         Ewes,
@@ -114,7 +114,7 @@ namespace H.Core.Enumerations
         Goats,
 
         /// <summary>
-        /// Also known as Hogs
+        ///     Also known as Hogs
         /// </summary>
         [LocalizedDescription("EnumGrower", typeof(Resources))]
         SwineGrower,
@@ -189,7 +189,7 @@ namespace H.Core.Enumerations
         YoungBulls,
 
         /// <summary>
-        /// Female pigs that have not farrowed a litter. Also known as maiden gilts.
+        ///     Female pigs that have not farrowed a litter. Also known as maiden gilts.
         /// </summary>
         [LocalizedDescription("EnumSwineGilts", typeof(Resources))]
         SwineGilts,
@@ -201,49 +201,49 @@ namespace H.Core.Enumerations
         SwinePiglets,
 
         /// <summary>
-        /// Juvenile female
+        ///     Juvenile female
         /// </summary>
         [LocalizedDescription("EnumChickenPullets", typeof(Resources))]
         ChickenPullets,
 
         /// <summary>
-        /// Juvenile male
+        ///     Juvenile male
         /// </summary>
         [LocalizedDescription("EnumChickenCockerel", typeof(Resources))]
         ChickenCockerels,
 
         /// <summary>
-        /// Adult male
+        ///     Adult male
         /// </summary>
         [LocalizedDescription("EnumChickenRooster", typeof(Resources))]
         ChickenRoosters,
 
         /// <summary>
-        /// Adult female
+        ///     Adult female
         /// </summary>
         [LocalizedDescription("EnumChickenHen", typeof(Resources))]
         ChickenHens,
 
         /// <summary>
-        /// Juvenile male turkey
+        ///     Juvenile male turkey
         /// </summary>
         [LocalizedDescription("EnumYoungTom", typeof(Resources))]
         YoungTom,
 
         /// <summary>
-        /// Adult male turkey
+        ///     Adult male turkey
         /// </summary>
         [LocalizedDescription("EnumTom", typeof(Resources))]
         Tom,
 
         /// <summary>
-        /// Young female turkey
+        ///     Young female turkey
         /// </summary>
         [LocalizedDescription("EnumYoungTurkeyHen", typeof(Resources))]
         YoungTurkeyHen,
 
         /// <summary>
-        /// Adult female turkey
+        ///     Adult female turkey
         /// </summary>
         [LocalizedDescription("EnumTurkeyHen", typeof(Resources))]
         TurkeyHen,
@@ -255,13 +255,13 @@ namespace H.Core.Enumerations
         TurkeyEggs,
 
         /// <summary>
-        /// Newly hatched chicken
+        ///     Newly hatched chicken
         /// </summary>
         [LocalizedDescription("EnumChicks", typeof(Resources))]
         Chicks,
 
         /// <summary>
-        /// Newly hatched turkey
+        ///     Newly hatched turkey
         /// </summary>
         [LocalizedDescription("EnumPoults", typeof(Resources))]
         Poults,
@@ -270,6 +270,6 @@ namespace H.Core.Enumerations
         Cattle,
 
         [LocalizedDescription("EnumLayers", typeof(Resources))]
-        Layers,
+        Layers
     }
 }

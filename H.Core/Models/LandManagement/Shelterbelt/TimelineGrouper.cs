@@ -25,14 +25,14 @@ namespace H.Core.Models.LandManagement.Shelterbelt
 
         public Guid ID
         {
-            get { return _id; }
-            set { this.SetProperty(ref _id, value); }
+            get => _id;
+            set => SetProperty(ref _id, value);
         }
 
         public string Display
         {
-            get { return _display; }
-            set { this.SetProperty(ref _display, value); }
+            get => _display;
+            set => SetProperty(ref _display, value);
         }
 
         #endregion
@@ -47,10 +47,7 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         public override bool Equals(object obj)
         {
             //RadTimeline Appears to use a combination of GetHashCode and .Equals to decide if these guys are equal
-            if (obj is TimelineGrouper grouper)
-            {
-                return _id == grouper._id;
-            }
+            if (obj is TimelineGrouper grouper) return _id == grouper._id;
 
             return base.Equals(obj);
         }
@@ -66,9 +63,7 @@ namespace H.Core.Models.LandManagement.Shelterbelt
                 foreach (var b in a)
                 {
                     if (i == 8) //guid must fit return type
-                    {
                         i = 0;
-                    }
 
                     number ^= Convert.ToUInt32(b) << (i * 8);
                 }
@@ -97,14 +92,6 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         {
             return a.ID != b.ID;
         }
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
-
-        #region Event Handlers
 
         #endregion
     }

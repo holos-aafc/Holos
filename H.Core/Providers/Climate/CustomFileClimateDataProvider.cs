@@ -1,24 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using H.Core.Models;
 using H.Core.Tools;
 using H.Infrastructure;
 
 namespace H.Core.Providers.Climate
 {
     /// <summary>
-    /// Reads a user-specified input file containing daily climate data
+    ///     Reads a user-specified input file containing daily climate data
     /// </summary>
     public class CustomFileClimateDataProvider : ICustomFileClimateDataProvider
     {
-        #region Fields
-
-        #endregion
-
         #region Constructors
 
         public CustomFileClimateDataProvider()
@@ -41,14 +35,15 @@ namespace H.Core.Providers.Climate
             }
             catch (Exception e)
             {
-                Trace.TraceError($"{nameof(CustomFileClimateDataProvider)}.{nameof(CustomFileClimateDataProvider.HasExpectedInputFormat)}. Error reading input file: {e.ToString()}");
+                Trace.TraceError(
+                    $"{nameof(CustomFileClimateDataProvider)}.{nameof(HasExpectedInputFormat)}. Error reading input file: {e}");
 
                 return false;
             }
 
             var fileHeaders =
                 from word in lines.First()
-                select word.ToLower().Replace(" ", String.Empty);
+                select word.ToLower().Replace(" ", string.Empty);
 
             var fileHeaderList = fileHeaders.ToList();
 
@@ -66,7 +61,8 @@ namespace H.Core.Providers.Climate
 
         public List<string> GetExpectedFileHeaderList()
         {
-            return new List<string> { "year", "julianday", "meandailyairtemperature", "meandailyprecipitation", "meandailypet" };
+            return new List<string>
+                { "year", "julianday", "meandailyairtemperature", "meandailyprecipitation", "meandailypet" };
         }
 
         public List<string> GetExtendedFileHeaderList()
@@ -95,18 +91,12 @@ namespace H.Core.Providers.Climate
             int idxPET = headerTokens.IndexOf("meandailypet");
 
             // Skip header row
-            for (int i = 1; i < lines.Count; i++)
+            for (var i = 1; i < lines.Count; i++)
             {
-                if (string.IsNullOrWhiteSpace(lines[i]))
-                {
-                    continue;
-                }
+                if (string.IsNullOrWhiteSpace(lines[i])) continue;
 
                 var tokens = lines[i].Split(',');
-                if (tokens.All(x => string.IsNullOrWhiteSpace(x)))
-                {
-                    continue;
-                }
+                if (tokens.All(x => string.IsNullOrWhiteSpace(x))) continue;
 
                 // helper to safely parse a token by index
                 double ParseDoubleAt(int idx)
@@ -159,7 +149,7 @@ namespace H.Core.Providers.Climate
 
                 var date = FromJulianDay(julianDay, year);
 
-                result.Add(new DailyClimateData()
+                result.Add(new DailyClimateData
                 {
                     Year = year,
                     Date = date,
@@ -168,7 +158,7 @@ namespace H.Core.Providers.Climate
                     MaximumAirTemperature = maxTemperature,
                     MinimumAirTemperature = minTemperature,
                     MeanDailyPrecipitation = precipitation,
-                    MeanDailyPET = evapotranspiration,
+                    MeanDailyPET = evapotranspiration
                 });
             }
 
@@ -179,11 +169,11 @@ namespace H.Core.Providers.Climate
         {
             var lines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList();
 
-            return this.ParseFileLines(lines);
+            return ParseFileLines(lines);
         }
 
         /// <summary>
-        /// Use by both the CLI, and GUI to load a file that contains custom climate data.
+        ///     Use by both the CLI, and GUI to load a file that contains custom climate data.
         /// </summary>
         public List<DailyClimateData> GetDailyClimateData(string filePath)
         {
@@ -201,7 +191,7 @@ namespace H.Core.Providers.Climate
                 return new List<DailyClimateData>();
             }
 
-            var dailyClimateData = this.ParseFileLines(lines);
+            var dailyClimateData = ParseFileLines(lines);
 
             return dailyClimateData;
         }

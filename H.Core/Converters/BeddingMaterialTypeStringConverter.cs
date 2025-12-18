@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using H.Core.Enumerations;
-using System.Diagnostics;
 
 namespace H.Core.Converters
 {
@@ -12,7 +7,7 @@ namespace H.Core.Converters
     {
         public BeddingMaterialType Convert(string input)
         {
-            switch(this.GetLettersAsLowerCase(input))
+            switch (GetLettersAsLowerCase(input))
             {
                 case "straw":
                     return BeddingMaterialType.Straw;
@@ -35,11 +30,10 @@ namespace H.Core.Converters
 
                 default:
                 {
-                    Trace.TraceError($"{nameof(BeddingMaterialTypeStringConverter)}.{nameof(BeddingMaterialTypeStringConverter.Convert)} cannot find the given bedding material {input}. Returning {BeddingMaterialType.None}");
+                    Trace.TraceError(
+                        $"{nameof(BeddingMaterialTypeStringConverter)}.{nameof(Convert)} cannot find the given bedding material {input}. Returning {BeddingMaterialType.None}");
                     return BeddingMaterialType.None;
-                 }
-
-
+                }
             }
         }
     }

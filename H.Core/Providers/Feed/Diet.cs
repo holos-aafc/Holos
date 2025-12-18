@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Reflection;
-using System.Transactions;
 using AutoMapper;
 using H.Core.Converters;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Core.Properties;
 using H.Infrastructure;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace H.Core.Providers.Feed
 {
     public class Diet : ModelBase
     {
-        #region Fields                
+        #region Fields
 
         private double _totalDigestibleNutrient;
         private double _crudeProtein;
@@ -62,16 +59,17 @@ namespace H.Core.Providers.Feed
 
         static Diet()
         {
-            _dietMapperConfiguration = new MapperConfiguration(x =>
-            {
-                x.CreateMap<Diet, Diet>().ForMember(property => property.Ingredients, options => options.Ignore());
-            });
+            _dietMapperConfiguration = new MapperConfiguration(
+                x =>
+                {
+                    x.CreateMap<Diet, Diet>().ForMember(property => property.Ingredients, options => options.Ignore());
+                }, new NullLoggerFactory());
 
             _ingredientMapperConfiguration = new MapperConfiguration(x =>
             {
                 x.CreateMap<FeedIngredient, FeedIngredient>()
                     .ForMember(property => property.Guid, options => options.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _dietMapper = _dietMapperConfiguration.CreateMapper();
 
@@ -80,311 +78,270 @@ namespace H.Core.Providers.Feed
 
         public Diet()
         {
-            this.VolatileSolidsAdjustmentFactorForDiet = 1;
-            this.NitrogenExcretionAdjustFactorForDiet = 1;
+            VolatileSolidsAdjustmentFactorForDiet = 1;
+            NitrogenExcretionAdjustFactorForDiet = 1;
 
-            this.Ingredients = new ObservableCollection<FeedIngredient>();
+            Ingredients = new ObservableCollection<FeedIngredient>();
 
-            this.Ingredients.CollectionChanged -= this.FeedIngredientsOnCollectionChanged;
-            this.Ingredients.CollectionChanged += this.FeedIngredientsOnCollectionChanged;
+            Ingredients.CollectionChanged -= FeedIngredientsOnCollectionChanged;
+            Ingredients.CollectionChanged += FeedIngredientsOnCollectionChanged;
 
-            this.PropertyChanged -= OnPropertyChanged;
-            this.PropertyChanged += OnPropertyChanged;
+            PropertyChanged -= OnPropertyChanged;
+            PropertyChanged += OnPropertyChanged;
         }
 
         #endregion
 
         #region Properties
 
-        public string SystemName
-        {
-            get
-            {
-                return this.Name + " - (" + this.AnimalTypeString + ")";
-            }
-        }
+        public string SystemName => Name + " - (" + AnimalTypeString + ")";
 
         public DietType DietType { get; set; }
 
         /// <summary>
-        /// The type of animal this diet is for. This could also be a catch-all since a cow diet is given to cows and calves
+        ///     The type of animal this diet is for. This could also be a catch-all since a cow diet is given to cows and calves
         /// </summary>
         public AnimalType AnimalType
         {
-            get { return _animalType; }
+            get => _animalType;
             set
             {
                 _animalType = value;
-                this.RaisePropertyChanged(nameof(this.AnimalTypeString));
+                RaisePropertyChanged(nameof(AnimalTypeString));
             }
         }
 
-        public string AnimalTypeString
-        {
-            get { return this.AnimalType.GetDescription(); }
-        }
+        public string AnimalTypeString => AnimalType.GetDescription();
 
         public ObservableCollection<FeedIngredient> Ingredients
         {
-            get { return _ingredients; }
-            set { SetProperty(ref _ingredients, value, this.UpdateTotals); }
+            get => _ingredients;
+            set => SetProperty(ref _ingredients, value, UpdateTotals);
         }
 
         public string Comments { get; set; }
 
         /// <summary>
-        /// TDN
-        ///
-        /// (%)
+        ///     TDN
+        ///     (%)
         /// </summary>
         public double TotalDigestibleNutrient
         {
-            get { return _totalDigestibleNutrient; }
-            set { this.SetProperty(ref _totalDigestibleNutrient, value); }
+            get => _totalDigestibleNutrient;
+            set => SetProperty(ref _totalDigestibleNutrient, value);
         }
 
         /// <summary>
-        /// Crude protein content
-        ///
-        /// CP
-        /// 
-        /// (% DM)
+        ///     Crude protein content
+        ///     CP
+        ///     (% DM)
         /// </summary>
         public double CrudeProtein
         {
-            get { return _crudeProtein; }
-            set { this.SetProperty(ref _crudeProtein, value); }
+            get => _crudeProtein;
+            set => SetProperty(ref _crudeProtein, value);
         }
 
         /// <summary>
-        /// Crude protein content
-        /// 
-        /// CP
-        /// 
-        /// (fraction [kg kg^-1])
+        ///     Crude protein content
+        ///     CP
+        ///     (fraction [kg kg^-1])
         /// </summary>
-        public double CrudeProteinContent
-        {
-            get { return this.CrudeProtein / 100; }
-        }
+        public double CrudeProteinContent => CrudeProtein / 100;
 
         /// <summary>
-        /// Methane conversion factor for diet 
-        /// 
-        /// Y_m
-        ///
-        /// (kg CH4 kg CH4^-1)
+        ///     Methane conversion factor for diet
+        ///     Y_m
+        ///     (kg CH4 kg CH4^-1)
         /// </summary>
         public double MethaneConversionFactor
         {
-            get { return _methaneConversionFactor; }
-            set { this.SetProperty(ref _methaneConversionFactor, value); }
+            get => _methaneConversionFactor;
+            set => SetProperty(ref _methaneConversionFactor, value);
         }
 
         /// <summary>
-        /// YM Adjustment (%)
+        ///     YM Adjustment (%)
         /// </summary>
         public double MethaneConversionFactorAdjustment
         {
-            get { return _methaneConversionFactorAdjustment; }
-            set { this.SetProperty(ref _methaneConversionFactorAdjustment, value); }
+            get => _methaneConversionFactorAdjustment;
+            set => SetProperty(ref _methaneConversionFactorAdjustment, value);
         }
 
         /// <summary>
-        /// (% DM)
+        ///     (% DM)
         /// </summary>
         public double Forage
         {
-            get { return _forage; }
-            set { this.SetProperty(ref _forage, value); }
+            get => _forage;
+            set => SetProperty(ref _forage, value);
         }
 
         /// <summary>
-        /// (% DM)
+        ///     (% DM)
         /// </summary>
         public double Starch
         {
-            get { return _starch; }
-            set { this.SetProperty(ref _starch, value); }
+            get => _starch;
+            set => SetProperty(ref _starch, value);
         }
 
         /// <summary>
-        /// (fraction)
+        ///     (fraction)
         /// </summary>
-        public double StarchContent
-        {
-            get { return this.Starch / 100.0; }
-        }
+        public double StarchContent => Starch / 100.0;
 
         /// <summary>
-        /// (% DM)
+        ///     (% DM)
         /// </summary>
         public double Fat
         {
-            get { return _fat; }
-            set { this.SetProperty(ref _fat, value); }
+            get => _fat;
+            set => SetProperty(ref _fat, value);
         }
 
         /// <summary>
-        /// Fat content
-        /// 
-        /// (fraction)
+        ///     Fat content
+        ///     (fraction)
         /// </summary>
-        public double FatContent
-        {
-            get
-            {
-                return this.Fat / 100.0;
-            }
-        }
+        public double FatContent => Fat / 100.0;
 
         /// <summary>
-        /// Neutral detergent fiber (NDF)
-        ///
-        /// (% DM)
+        ///     Neutral detergent fiber (NDF)
+        ///     (% DM)
         /// </summary>
         public double Ndf
         {
-            get { return _ndf; }
-            set { this.SetProperty(ref _ndf, value); }
+            get => _ndf;
+            set => SetProperty(ref _ndf, value);
         }
 
         /// <summary>
-        /// Neutral detergent fiber (NDF)
-        ///
-        /// (fraction)
+        ///     Neutral detergent fiber (NDF)
+        ///     (fraction)
         /// </summary>
-        public double NdfContent
-        {
-            get
-            {
-                return this.Ndf / 100.0;
-            }
-        }
+        public double NdfContent => Ndf / 100.0;
 
         /// <summary>
-        /// Acid detergent fiber
-        /// 
-        /// (% DM)
+        ///     Acid detergent fiber
+        ///     (% DM)
         /// </summary>
         public double Adf
         {
-            get { return _adf; }
-            set { SetProperty(ref _adf, value); }
+            get => _adf;
+            set => SetProperty(ref _adf, value);
         }
 
         /// <summary>
-        /// Acid detergent fiber
-        /// 
-        /// (fraction)
+        ///     Acid detergent fiber
+        ///     (fraction)
         /// </summary>
-        public double AdfContent
-        {
-            get
-            {
-                return this.Adf / 100;
-            }
-        }
+        public double AdfContent => Adf / 100;
 
         [Units(MetricUnitsOfMeasurement.MegaCaloriePerKilogram)]
         public double MetabolizableEnergy
         {
-            get { return _metabolizableEnergy; }
-            set { this.SetProperty(ref _metabolizableEnergy, value); }
+            get => _metabolizableEnergy;
+            set => SetProperty(ref _metabolizableEnergy, value);
         }
 
         /// <summary>
-        /// N Excr. Adj.
+        ///     N Excr. Adj.
         /// </summary>
         public double NitrogenExcretionAdjustFactorForDiet
         {
-            get { return _nitrogenExcretionAdjustFactorForDiet; }
-            set { this.SetProperty(ref _nitrogenExcretionAdjustFactorForDiet, value); }
+            get => _nitrogenExcretionAdjustFactorForDiet;
+            set => SetProperty(ref _nitrogenExcretionAdjustFactorForDiet, value);
         }
 
         /// <summary>
-        /// (kg kg^-1)
+        ///     (kg kg^-1)
         /// </summary>
         public double VolatileSolidsAdjustmentFactorForDiet
         {
-            get { return _volatileSolidsAdjustmentFactorForDiet; }
-            set { this.SetProperty(ref _volatileSolidsAdjustmentFactorForDiet, value); }
+            get => _volatileSolidsAdjustmentFactorForDiet;
+            set => SetProperty(ref _volatileSolidsAdjustmentFactorForDiet, value);
         }
 
         public bool IsDefaultDiet
         {
-            get { return _isDefaultDiet; }
-            set { this.SetProperty(ref _isDefaultDiet, value); }
+            get => _isDefaultDiet;
+            set => SetProperty(ref _isDefaultDiet, value);
         }
 
         /// <summary>
-        /// Some animal groups will not have a diet (poultry, other livestock, suckling pigs, etc.). In these cases, a non-null diet must still be set. This flag indicates if the diet is related to that situation.
+        ///     Some animal groups will not have a diet (poultry, other livestock, suckling pigs, etc.). In these cases, a non-null
+        ///     diet must still be set. This flag indicates if the diet is related to that situation.
         /// </summary>
         public bool IsCustomPlaceholderDiet
         {
-            get { return _isCustomPlaceholderDiet; }
-            set { this.SetProperty(ref _isCustomPlaceholderDiet, value); }
+            get => _isCustomPlaceholderDiet;
+            set => SetProperty(ref _isCustomPlaceholderDiet, value);
         }
 
         [Units(MetricUnitsOfMeasurement.KiloCaloriePerKilogram)]
         public double NetEnergy
         {
-            get { return _netEnergy; }
-            set { SetProperty(ref _netEnergy, value); }
+            get => _netEnergy;
+            set => SetProperty(ref _netEnergy, value);
         }
 
         /// <summary>
-        /// The fat content of a dairy diet.
-        ///
-        /// (% DM)
+        ///     The fat content of a dairy diet.
+        ///     (% DM)
         /// </summary>
         public double Ee
         {
-            get { return _ee; }
-            set { SetProperty(ref _ee, value); }
+            get => _ee;
+            set => SetProperty(ref _ee, value);
         }
 
         [Units(MetricUnitsOfMeasurement.MegaCaloriePerKilogram)]
         public double De1X
         {
-            get { return _de1x; }
-            set { SetProperty(ref _de1x, value); }
+            get => _de1x;
+            set => SetProperty(ref _de1x, value);
         }
 
         [Units(MetricUnitsOfMeasurement.MegaCaloriePerKilogram)]
         public double Nel3X
         {
-            get { return _nel3x; }
-            set { SetProperty(ref _nel3x, value); }
+            get => _nel3x;
+            set => SetProperty(ref _nel3x, value);
         }
+
         public double DryMatter
         {
-            get { return _dryMatter; }
-            set { SetProperty(ref _dryMatter, value); }
+            get => _dryMatter;
+            set => SetProperty(ref _dryMatter, value);
         }
+
         public double CrudeFiber
         {
-            get { return _crudeFiber; }
-            set { SetProperty(ref _crudeFiber, value); }
+            get => _crudeFiber;
+            set => SetProperty(ref _crudeFiber, value);
         }
+
         public double Aee
         {
-            get { return _aee; }
-            set { SetProperty(ref _aee, value); }
+            get => _aee;
+            set => SetProperty(ref _aee, value);
         }
 
         /// <summary>
-        /// (% DM)
+        ///     (% DM)
         /// </summary>
         public double Ash
         {
-            get { return _ash; }
-            set { SetProperty(ref _ash, value); }
+            get => _ash;
+            set => SetProperty(ref _ash, value);
         }
+
         public EntericMethanEmissionMethodologies SelectedMethaneEmissionMethodology
         {
-            get { return _selectedMethaneEmissionMethodology; }
-            set { SetProperty(ref _selectedMethaneEmissionMethodology, value); }
+            get => _selectedMethaneEmissionMethodology;
+            set => SetProperty(ref _selectedMethaneEmissionMethodology, value);
         }
 
         public double P
@@ -401,7 +358,7 @@ namespace H.Core.Providers.Feed
         }
 
         /// <summary>
-        /// (DMI, kg head^-1 day^-1)
+        ///     (DMI, kg head^-1 day^-1)
         /// </summary>
         public double DailyDryMatterFeedIntakeOfFeed
         {
@@ -410,11 +367,9 @@ namespace H.Core.Providers.Feed
         }
 
         /// <summary>
-        /// Used in the calculation of DMI for beef calves
-        ///
-        /// NE_mf
-        ///
-        /// (MJ (kg DM)^-1)
+        ///     Used in the calculation of DMI for beef calves
+        ///     NE_mf
+        ///     (MJ (kg DM)^-1)
         /// </summary>
         public double DietaryNetEnergyConcentration
         {
@@ -433,30 +388,27 @@ namespace H.Core.Providers.Feed
 
         public void UpdateTotals()
         {
-            this.TotalDigestibleNutrient = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.TotalDigestibleNutrient);
-            this.CrudeProtein = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.CrudeProtein);
-            this.Forage = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.Forage);
-            if (this.DietType == DietType.MediumEnergyAndProtein)
+            TotalDigestibleNutrient = Ingredients.Sum(x => x.PercentageInDiet / 100 * x.TotalDigestibleNutrient);
+            CrudeProtein = Ingredients.Sum(x => x.PercentageInDiet / 100 * x.CrudeProtein);
+            Forage = Ingredients.Sum(x => x.PercentageInDiet / 100 * x.Forage);
+            if (DietType == DietType.MediumEnergyAndProtein)
             {
-                var animal = this.AnimalType;
+                var animal = AnimalType;
             }
-            this.Starch = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.Starch);
-            this.Fat = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.Fat);
 
-            this.MetabolizableEnergy = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.ME);
-            this.Ndf = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.NDF);
-            this.Adf = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.ADF);
-            if (this.AnimalType.IsSwineType())
-            {
-                this.De1X = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.DeSwine);
-            }
+            Starch = Ingredients.Sum(x => x.PercentageInDiet / 100 * x.Starch);
+            Fat = Ingredients.Sum(x => x.PercentageInDiet / 100 * x.Fat);
+
+            MetabolizableEnergy = Ingredients.Sum(x => x.PercentageInDiet / 100 * x.ME);
+            Ndf = Ingredients.Sum(x => x.PercentageInDiet / 100 * x.NDF);
+            Adf = Ingredients.Sum(x => x.PercentageInDiet / 100 * x.ADF);
+            if (AnimalType.IsSwineType())
+                De1X = Ingredients.Sum(x => x.PercentageInDiet / 100 * x.DeSwine);
             else
-            {
-                this.De1X = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.DE);
-            }
-            this.NetEnergy = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.NE);
-            this.Nel3X = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.NEL_ThreeX);
-            this.Ee = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.EE);
+                De1X = Ingredients.Sum(x => x.PercentageInDiet / 100 * x.DE);
+            NetEnergy = Ingredients.Sum(x => x.PercentageInDiet / 100 * x.NE);
+            Nel3X = Ingredients.Sum(x => x.PercentageInDiet / 100 * x.NEL_ThreeX);
+            Ee = Ingredients.Sum(x => x.PercentageInDiet / 100 * x.EE);
 
             this.DryMatter = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.DryMatter);
             this.Aee = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.AcidEtherExtract);
@@ -465,35 +417,32 @@ namespace H.Core.Providers.Feed
             this.P = this.Ingredients.Sum(x => x.PercentageInDiet / 100 * x.P);
             this.DietaryNetEnergyConcentration = this.CalculateNemf();
 
-            this.CalculateMCF();
+            CalculateMCF();
         }
 
         public double GetTotalPercentageOfDietItems()
         {
-            return this.Ingredients.Sum(x => x.PercentageInDiet);
-        }      
+            return Ingredients.Sum(x => x.PercentageInDiet);
+        }
 
         /// <summary>
-        /// Copy a diet
+        ///     Copy a diet
         /// </summary>
         /// <param name="dietToCopy">the diet to copy</param>
         /// <returns>a copied diet</returns>
         public static Diet CopyDiet(Diet dietToCopy)
         {
-            if (dietToCopy == null)
-            {
-                return new Diet();
-            }
+            if (dietToCopy == null) return new Diet();
 
             var copiedDiet = new Diet();
-            
+
 
             // This needs to be new'd up here, for some reason setting this property to be ignored in the mapper configuration doesn't actually ignore it. Instead, auto mapper
             // will just use the same reference to the Ingredients property and the result will be that ingredients get duplicated back into the dietToCopy variable. This is not
             // what is wanted as we just want to copy ingredients to the copiedDiet property.
             copiedDiet.Ingredients = new ObservableCollection<FeedIngredient>();
 
-            _dietMapper.Map(dietToCopy, copiedDiet);            
+            _dietMapper.Map(dietToCopy, copiedDiet);
 
             // Copy ingredients
             var ingredientsToBeCopied = dietToCopy.Ingredients.ToList();
@@ -509,9 +458,9 @@ namespace H.Core.Providers.Feed
         }
 
         /// <summary>
-        /// Used in System -> Binding transfer: system to Gui unit conversion
-        ///
-        /// When we initialize a binding in the GUI we need to read in the the data saved on the system that is metric and return either metric or imperial
+        ///     Used in System -> Binding transfer: system to Gui unit conversion
+        ///     When we initialize a binding in the GUI we need to read in the the data saved on the system that is metric and
+        ///     return either metric or imperial
         /// </summary>
         /// <param name="dietToConvert">a diet</param>
         /// <returns></returns>
@@ -521,18 +470,14 @@ namespace H.Core.Providers.Feed
 
             if (convertedDiet.IsConverted) return convertedDiet;
 
-            foreach (var ingredient in convertedDiet.Ingredients)
-            {
-                ConvertToBindingIngredientFromSystem(ingredient);
-            }
+            foreach (var ingredient in convertedDiet.Ingredients) ConvertToBindingIngredientFromSystem(ingredient);
 
             return convertedDiet;
         }
-        
+
         /// <summary>
-        /// Used in Binding -> System transfer Gui to System unit conversion
-        ///
-        /// When the binding changes we call this method to create a metric version and set that to the system instance
+        ///     Used in Binding -> System transfer Gui to System unit conversion
+        ///     When the binding changes we call this method to create a metric version and set that to the system instance
         /// </summary>
         /// <param name="dietToConvert">a diet</param>
         /// <returns>a metric diet</returns>
@@ -542,17 +487,15 @@ namespace H.Core.Providers.Feed
 
             //change each ingredient to metric
             foreach (var feedIngredient in convertedDiet.Ingredients)
-            {
                 //the system is always metric
                 ConvertToSystemIngredientFromBinding(feedIngredient);
-            }
 
             return convertedDiet;
         }
 
 
         /// <summary>
-        /// converts feed ingredient to metric for the system
+        ///     converts feed ingredient to metric for the system
         /// </summary>
         private static void ConvertToSystemIngredientFromBinding(FeedIngredient feedIngredient)
         {
@@ -574,7 +517,7 @@ namespace H.Core.Providers.Feed
         }
 
         /// <summary>
-        /// converts feed ingredient to metric or imperial for the GUI bindings
+        ///     converts feed ingredient to metric or imperial for the GUI bindings
         /// </summary>
         private static void ConvertToBindingIngredientFromSystem(FeedIngredient feedIngredient)
         {
@@ -618,51 +561,30 @@ namespace H.Core.Providers.Feed
             if (animalType.IsDairyCattleType())
             {
                 if (totalDigestibleNutrient >= 65)
-                {
                     result = 0.063;
-                }
                 else if (55 <= totalDigestibleNutrient && totalDigestibleNutrient < 65)
-                {
                     result = 0.065;
-                }
                 else
-                {
                     result = 0.07;
-                }
             }
 
             if (animalType.IsBeefCattleType())
             {
                 if (totalDigestibleNutrient >= 65)
-                {
                     result = 0.065;
-                }
                 else if (totalDigestibleNutrient >= 55 && totalDigestibleNutrient < 65)
-                {
                     result = 0.07;
-                }
                 else
-                {
                     result = 0.08;
-                }
             }
 
             if (animalType == AnimalType.BeefFinisher)
-            {
-                if (string.IsNullOrWhiteSpace(this.Name) == false)
+                if (string.IsNullOrWhiteSpace(Name) == false)
                 {
-                    if (this.Name.Equals(Resources.LabelCornGrainBasedDiet))
-                    {
-                        result = 0.03;
-                    }
+                    if (Name.Equals(Resources.LabelCornGrainBasedDiet)) result = 0.03;
 
-                    if (this.Name.Equals(Resources.LabelBarleyGrainBasedDiet))
-                    {
-                        result = 0.04;
-
-                    }
+                    if (Name.Equals(Resources.LabelBarleyGrainBasedDiet)) result = 0.04;
                 }
-            }
 
 
             return result;
@@ -670,14 +592,8 @@ namespace H.Core.Providers.Feed
 
         public void CalculateMCF()
         {
-            this.MethaneConversionFactor = this.CalculateMCF(this.AnimalType, this.TotalDigestibleNutrient);
+            MethaneConversionFactor = CalculateMCF(AnimalType, TotalDigestibleNutrient);
         }
-
-        #endregion
-
-        #region Private Methods
-
-
 
         #endregion
 
@@ -695,26 +611,22 @@ namespace H.Core.Providers.Feed
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 if (e.NewItems[0] is FeedIngredient feedIngredient)
-                {
-                    feedIngredient.PropertyChanged += this.FeedIngredientOnPropertyChanged;
-                }
+                    feedIngredient.PropertyChanged += FeedIngredientOnPropertyChanged;
             }
             else if (e.Action == NotifyCollectionChangedAction.Remove)
             {
                 if (e.OldItems[0] is FeedIngredient feedIngredient)
-                {
-                    feedIngredient.PropertyChanged -= this.FeedIngredientOnPropertyChanged;
-                }
+                    feedIngredient.PropertyChanged -= FeedIngredientOnPropertyChanged;
             }
 
             // Need to update diet totals when an ingredient is removed/added
-            this.UpdateTotals();
+            UpdateTotals();
         }
 
         private void FeedIngredientOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             // Need to update diet totals when an ingredient is modified
-            this.UpdateTotals();
+            UpdateTotals();
         }
 
         #endregion

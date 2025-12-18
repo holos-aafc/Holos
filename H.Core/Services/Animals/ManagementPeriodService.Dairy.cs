@@ -1,23 +1,20 @@
-﻿using H.Core.Models.Animals;
-using H.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using H.Core.Enumerations;
-using H.Core.Services.Initialization;
+﻿using System;
 using System.ComponentModel;
+using H.Core.Enumerations;
+using H.Core.Models;
+using H.Core.Models.Animals;
+using H.Core.Properties;
 
 namespace H.Core.Services.Animals
 {
     public partial class ManagementPeriodService
     {
-        public void DairyCalvesGroupManagementPeriod(Farm farm, AnimalGroup animalGroup, ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
+        public void DairyCalvesGroupManagementPeriod(Farm farm, AnimalGroup animalGroup,
+            ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
-            var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
-            managementPeriod.Name = H.Core.Properties.Resources.LabelMilkFedManagementPeriod;
+            var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
+                animalGroupOnPropertyChanged);
+            managementPeriod.Name = Resources.LabelMilkFedManagementPeriod;
             managementPeriod.ManureDetails.StateType = ManureStateType.SolidStorage;
             managementPeriod.ProductionStage = ProductionStages.Weaning;
             managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 1, 1);
@@ -28,9 +25,11 @@ namespace H.Core.Services.Animals
             _initializationService.InitializeStartAndEndWeightsForCattle(managementPeriod);
         }
 
-        public void DairyReplacementHeifersManagementPeriod(Farm farm, AnimalGroup animalGroup, ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
+        public void DairyReplacementHeifersManagementPeriod(Farm farm, AnimalGroup animalGroup,
+            ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
-            var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
+            var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
+                animalGroupOnPropertyChanged);
             managementPeriod.ManureDetails.StateType = ManureStateType.SolidStorage;
             managementPeriod.GainCoefficient = 0.8;
 
@@ -38,10 +37,12 @@ namespace H.Core.Services.Animals
             _initializationService.InitializeStartAndEndWeightsForCattle(managementPeriod);
         }
 
-        public void DairyDryManagementPeriod(Farm farm, AnimalGroup animalGroup, ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
+        public void DairyDryManagementPeriod(Farm farm, AnimalGroup animalGroup,
+            ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
-            var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
-            managementPeriod.Name = H.Core.Properties.Resources.LabelDryPeriodName;
+            var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
+                animalGroupOnPropertyChanged);
+            managementPeriod.Name = Resources.LabelDryPeriodName;
             managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 11, 5);
             managementPeriod.NumberOfDays = 60;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
@@ -57,10 +58,12 @@ namespace H.Core.Services.Animals
             _initializationService.InitializeStartAndEndWeightsForCattle(managementPeriod);
         }
 
-        public void DairyLactatingManagementPeriod(Farm farm, AnimalGroup animalGroup, ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
+        public void DairyLactatingManagementPeriod(Farm farm, AnimalGroup animalGroup,
+            ManagementPeriod bindingManagementPeriod, PropertyChangedEventHandler animalGroupOnPropertyChanged)
         {
-            var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
-            managementPeriod.Name = H.Core.Properties.Resources.LabelEarlyLactationPeriodName;
+            var managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
+                animalGroupOnPropertyChanged);
+            managementPeriod.Name = Resources.LabelEarlyLactationPeriodName;
             managementPeriod.Start = new DateTime(DateTime.Now.Year - 1, 1, 1);
             managementPeriod.NumberOfDays = 150;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
@@ -75,14 +78,16 @@ namespace H.Core.Services.Animals
             // Set start and end weight after setting the start and end dates
             _initializationService.InitializeStartAndEndWeightsForCattle(managementPeriod);
 
-            managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
-            managementPeriod.Name = H.Core.Properties.Resources.LabelMidLactationPeriodName;
+            managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
+                animalGroupOnPropertyChanged);
+            managementPeriod.Name = Resources.LabelMidLactationPeriodName;
             managementPeriod.NumberOfDays = 60;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);
 
-            managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod, animalGroupOnPropertyChanged);
-            managementPeriod.Name = H.Core.Properties.Resources.LabelLateLactationPeriodName;
+            managementPeriod = AddManagementPeriodToAnimalGroup(farm, animalGroup, bindingManagementPeriod,
+                animalGroupOnPropertyChanged);
+            managementPeriod.Name = Resources.LabelLateLactationPeriodName;
             managementPeriod.NumberOfDays = 95;
             managementPeriod.End = managementPeriod.Start.AddDays(managementPeriod.NumberOfDays);
             managementPeriod.Duration = managementPeriod.End.Subtract(managementPeriod.Start);

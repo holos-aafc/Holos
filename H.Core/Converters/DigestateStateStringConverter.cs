@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using H.Core.Enumerations;
-using System.Diagnostics;
 
 namespace H.Core.Converters
 {
@@ -12,7 +7,7 @@ namespace H.Core.Converters
     {
         public DigestateState Convert(string input)
         {
-            switch (this.GetLettersAsLowerCase(input))
+            switch (GetLettersAsLowerCase(input))
             {
                 case "raw":
                 case "rawdigestate":
@@ -29,11 +24,11 @@ namespace H.Core.Converters
                     return DigestateState.SolidPhase;
 
                 default:
-                    {
-                        Trace.TraceError($"{nameof(DigestateStateStringConverter)}.{nameof(DigestateStateStringConverter.Convert)} " +
-                            $"unknown DigestateState type: {input}. Returning {DigestateState.Raw}.");
-                        return DigestateState.Raw;
-                    }
+                {
+                    Trace.TraceError($"{nameof(DigestateStateStringConverter)}.{nameof(Convert)} " +
+                                     $"unknown DigestateState type: {input}. Returning {DigestateState.Raw}.");
+                    return DigestateState.Raw;
+                }
             }
         }
     }

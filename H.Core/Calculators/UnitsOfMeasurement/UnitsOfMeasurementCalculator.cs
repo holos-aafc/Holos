@@ -1,23 +1,16 @@
-﻿#region Imports
-
-#endregion
-
+﻿using System;
 using H.Core.Enumerations;
 using H.Core.Properties;
 using H.Infrastructure;
 using Prism.Mvvm;
-using System;
-using System.Diagnostics;
-using System.Runtime.Remoting.Channels;
-using System.Windows.Navigation;
 
 namespace H.Core.Calculators.UnitsOfMeasurement
 {
     /// <summary>
-    /// Unit Constants are coming from: https://www.flexaust.com/wp-content/uploads/2012/08/chart-metric-imp-conv.pdf
-    /// Bushel Constants are coming from the following:
-    /// https://farmlead.com/wp-content/uploads/2017/08/Conversion-Chart.pdf
-    /// https://www.rayglen.com/crop-bushel-weights/
+    ///     Unit Constants are coming from: https://www.flexaust.com/wp-content/uploads/2012/08/chart-metric-imp-conv.pdf
+    ///     Bushel Constants are coming from the following:
+    ///     https://farmlead.com/wp-content/uploads/2017/08/Conversion-Chart.pdf
+    ///     https://www.rayglen.com/crop-bushel-weights/
     /// </summary>
     public class UnitsOfMeasurementCalculator : BindableBase, IUnitsOfMeasurementCalculator
     {
@@ -25,23 +18,21 @@ namespace H.Core.Calculators.UnitsOfMeasurement
 
         public UnitsOfMeasurementCalculator()
         {
-            _isMetric = Settings.Default.MeasurementSystem == MeasurementSystemType.Metric;
+            IsMetric = Settings.Default.MeasurementSystem == MeasurementSystemType.Metric;
 
-            this.SetUnits();
+            SetUnits();
         }
 
         #endregion
 
         #region Properties
 
-        public bool IsMetric
-        {
-            get { return _isMetric; }
-        }
+        public bool IsMetric { get; }
+
         public string KilogramsPerHectareString
         {
-            get { return _kilogramsPerHectareString; }
-            set { this.SetProperty(ref _kilogramsPerHectareString, value); }
+            get => _kilogramsPerHectareString;
+            set => SetProperty(ref _kilogramsPerHectareString, value);
         }
 
         #endregion
@@ -76,23 +67,29 @@ namespace H.Core.Calculators.UnitsOfMeasurement
         //Crop Constants
         private const double AlfalfaBushelToPoundsFactor = 60;
         private const double BarleyBushelToPoundsFactor = 48;
+
         private const double CanolaBushelToPoundsFactor = 50;
+
         //need chickpeas, grouped with lentiles and peas
         private const double ChickPeasBushelToPoundsFactor = 60;
 
         private const double CornBushelToPoundsFactor = 56;
         private const double DryPeasBushelToPoundsFactor = 60;
+
         private const double PeasBushelToPoundsFactor = 60;
         //no fallow - field? 
 
         private const double FlaxBushelToPoundsFactor = 56;
+
         //no fodder corn, use normal corn
         private const double FodderCornBushelToPoundsFactor = 56;
         //no forage
 
         private const double SorghumBushelToPoundsFactor = 56;
+
         //no hay grass - use brome grass which is used for hay, silage, pasture or stockpiling
         private const double HayGrassBushelToPoundsFactor = 14;
+
         //no grain corn use normal corn
         private const double GrainCornBushelToPoundsFactor = 56;
 
@@ -104,22 +101,28 @@ namespace H.Core.Calculators.UnitsOfMeasurement
 
         private const double LentilsBushelToPoundsFactor = 60;
         private const double MustardBushelToPoundsFactor = 50;
+
         private const double OatsBushelToPoundsFactor = 34;
         //no oil seeds
 
         //no pasture use brome grass which is used for hay, silage, pasture or stockpiling
         private const double PastureBushelToPoundsFactor = 14;
+
         //no pulse crops,  Dried beans, chickpeas, lentils and peas are the most commonly known and consumed types of pulses.
         private const double PulseCropsBushelToPoundsFactor = 60;
         //no small grain cereals, Small grain cereals—wheat, barley, oat, rye, and triticale
 
         private const double SoyBeansBushelToPoundsFactor = 60;
+
         //triticale - grouped with corn,flax,rye
         private const double TriticaleBushelToPoundsFactor = 56;
+
         //no undersown barley,use normal barley
         private const double UnderSownBarleyBushelToPoundsFactor = 48;
+
         //no wheat bolinder, use normal wheat
         private const double WheatBolinderBushelToPoundsFactor = 60;
+
         //no wheat gan, use normal wheat
         private const double WheatGanBushelToPoundsFactor = 60;
         private const double WheatBushelToPoundsFactor = 60;
@@ -160,49 +163,45 @@ namespace H.Core.Calculators.UnitsOfMeasurement
         #endregion
 
         #region Public Methods
+
         /// <summary>
-        /// Based on the measurement type, returns the proper units as a string
+        ///     Based on the measurement type, returns the proper units as a string
         /// </summary>
         public string GetUnitsOfMeasurementString(MeasurementSystemType measurementSystemType,
-                                                  MetricUnitsOfMeasurement unitsOfMeasurement)
+            MetricUnitsOfMeasurement unitsOfMeasurement)
         {
             switch (measurementSystemType)
             {
                 case MeasurementSystemType.Imperial:
-                    return this.WrapString(this.GetImperialUnitsOfMeasurementString(unitsOfMeasurement));
+                    return WrapString(GetImperialUnitsOfMeasurementString(unitsOfMeasurement));
 
                 default:
-                    return this.WrapString(unitsOfMeasurement.GetDescription());
+                    return WrapString(unitsOfMeasurement.GetDescription());
             }
         }
 
         /// <summary>
-        /// Calls GetUnitsOfMeasurementString() in most cases, provides a substitute string if metricUnitsOfMeasurement has encoding issues when exported in text files
+        ///     Calls GetUnitsOfMeasurementString() in most cases, provides a substitute string if metricUnitsOfMeasurement has
+        ///     encoding issues when exported in text files
         /// </summary>
-        public string GetPrintFriendlyString(MeasurementSystemType measurementSystem, MetricUnitsOfMeasurement metricUnitsOfMeasurement)
+        public string GetPrintFriendlyString(MeasurementSystemType measurementSystem,
+            MetricUnitsOfMeasurement metricUnitsOfMeasurement)
         {
-            if (measurementSystem == MeasurementSystemType.Metric && metricUnitsOfMeasurement == MetricUnitsOfMeasurement.KilogramsMethane)
-            {
-                return "(kg CH4)";
-            }
+            if (measurementSystem == MeasurementSystemType.Metric &&
+                metricUnitsOfMeasurement == MetricUnitsOfMeasurement.KilogramsMethane) return "(kg CH4)";
 
-            else if (measurementSystem == MeasurementSystemType.Metric && metricUnitsOfMeasurement == MetricUnitsOfMeasurement.KilogramsPerDay)
-            {
-                return "(kg day^-1)";
-            }
+            if (measurementSystem == MeasurementSystemType.Metric &&
+                metricUnitsOfMeasurement == MetricUnitsOfMeasurement.KilogramsPerDay) return "(kg day^-1)";
 
-            else
-            {
-                return this.GetUnitsOfMeasurementString(measurementSystem, metricUnitsOfMeasurement);
-            }
+            return GetUnitsOfMeasurementString(measurementSystem, metricUnitsOfMeasurement);
         }
 
         /// <summary>
-        /// Based on the measurement type, returns the proper value (metric or imperial) rounded to 4 decimal points
-        /// Takes in Metric Units
-        /// First argument corresponds to the user inputed measurement system (Metric or Imperial).
-        /// The second argument is set to MetricUnitsOfMeasurement, you can change it to Imperial if needed, but there is no need
-        /// 
+        ///     Based on the measurement type, returns the proper value (metric or imperial) rounded to 4 decimal points
+        ///     Takes in Metric Units
+        ///     First argument corresponds to the user inputed measurement system (Metric or Imperial).
+        ///     The second argument is set to MetricUnitsOfMeasurement, you can change it to Imperial if needed, but there is no
+        ///     need
         /// </summary>
         public double GetUnitsOfMeasurementValue(MeasurementSystemType measurementSystemType,
             MetricUnitsOfMeasurement unitsOfMeasurement, double value, bool exportedFromFarm)
@@ -210,28 +209,26 @@ namespace H.Core.Calculators.UnitsOfMeasurement
             switch (measurementSystemType)
             {
                 case MeasurementSystemType.Imperial when exportedFromFarm:
-                    {
-                        //the view model has already converted everything we just need a rounded value now
-                        return Math.Round(value, roundingDigits);
-                    }
+                {
+                    //the view model has already converted everything we just need a rounded value now
+                    return Math.Round(value, roundingDigits);
+                }
                 case MeasurementSystemType.Imperial:
-                    {
-                        //we are being called from the CLI and therefore nee to be converted appropriatedly
-                        return Math.Round(ConvertValueToImperialFromMetric(unitsOfMeasurement, value), roundingDigits);
-                    }
+                {
+                    //we are being called from the CLI and therefore nee to be converted appropriatedly
+                    return Math.Round(ConvertValueToImperialFromMetric(unitsOfMeasurement, value), roundingDigits);
+                }
                 default:
                     return Math.Round(value, roundingDigits);
             }
         }
 
         /// <summary>
-        /// Used to convert a GUI bound property into metric value 
-        ///
-        /// While in imperial mode Holos equations are always expecting metric regardless of what the GUI unit strings show.
-        /// The user might think that he/she is entering the imperial values but Holos assumes metric all of the time.
-        /// This method will convert from an imperial input into the metric equivalent so that we can hand that converted value
-        /// to the equations.
-        /// 
+        ///     Used to convert a GUI bound property into metric value
+        ///     While in imperial mode Holos equations are always expecting metric regardless of what the GUI unit strings show.
+        ///     The user might think that he/she is entering the imperial values but Holos assumes metric all of the time.
+        ///     This method will convert from an imperial input into the metric equivalent so that we can hand that converted value
+        ///     to the equations.
         /// </summary>
         /// <param name="measurementSystemType">the farms selected measurement system</param>
         /// <param name="unitsOfMeasurement">the metric units of the value</param>
@@ -243,7 +240,7 @@ namespace H.Core.Calculators.UnitsOfMeasurement
             switch (measurementSystemType)
             {
                 case MeasurementSystemType.Imperial:
-                    var imperialUnit = this.GetImperialUnitsOfMeasurement(unitsOfMeasurement);
+                    var imperialUnit = GetImperialUnitsOfMeasurement(unitsOfMeasurement);
                     return ConvertValueToMetricFromImperial(imperialUnit, value, unitsOfMeasurement);
                 case MeasurementSystemType.Metric:
                     return value;
@@ -253,8 +250,9 @@ namespace H.Core.Calculators.UnitsOfMeasurement
         }
 
         /// <summary>
-        /// This does the opposite of <see cref="GetMetricValueFromViewModels"/>. When the Holos equation inputs change (if at all) we want to make sure that
-        /// the GUI will also see those changes made. For use just with the VM's.
+        ///     This does the opposite of <see cref="GetMetricValueFromViewModels" />. When the Holos equation inputs change (if at
+        ///     all) we want to make sure that
+        ///     the GUI will also see those changes made. For use just with the VM's.
         /// </summary>
         /// <param name="measurementSystemType">the units of measurement that the farm is using</param>
         /// <param name="unitsOfMeasurement">metric units associated with the value</param>
@@ -266,7 +264,7 @@ namespace H.Core.Calculators.UnitsOfMeasurement
             switch (measurementSystemType)
             {
                 case MeasurementSystemType.Imperial:
-                    return this.ConvertValueToImperialFromMetric(unitsOfMeasurement, value);
+                    return ConvertValueToImperialFromMetric(unitsOfMeasurement, value);
                 case MeasurementSystemType.Metric:
                     return value;
                 default:
@@ -282,7 +280,6 @@ namespace H.Core.Calculators.UnitsOfMeasurement
                     return ConvertKilogramsPerHectareToImperialBushelPerAcresBasedOnCropType(crop, value);
                 default:
                     return Math.Round(value, roundingDigits);
-
             }
         }
 
@@ -336,6 +333,7 @@ namespace H.Core.Calculators.UnitsOfMeasurement
                     return 0;
             }
         }
+
         public double ConvertBushelsPerAcreToMetricKilogramsPerHectareBasedOnCropType(CropType crop, double value)
         {
             switch (crop)
@@ -419,7 +417,6 @@ namespace H.Core.Calculators.UnitsOfMeasurement
                 default:
                     return 0;
             }
-
         }
 
         public double ConvertValueToImperialFromMetric(MetricUnitsOfMeasurement metricUnit, double value)
@@ -448,7 +445,7 @@ namespace H.Core.Calculators.UnitsOfMeasurement
                     return value * MmToInchesFactor;
 
                 case MetricUnitsOfMeasurement.DegreesCelsius:
-                    return (value * 9.0 / 5.0) + 32.0;
+                    return value * 9.0 / 5.0 + 32.0;
 
                 case MetricUnitsOfMeasurement.MegaJoulesPerKilogram:
                     return value / KgToLbsFactor * JoulesPerMJ / JoulesPerBTU;
@@ -583,13 +580,13 @@ namespace H.Core.Calculators.UnitsOfMeasurement
                     // Returning value is BTUPerStandardCubicFoot. Conversion is done in two steps.
                     // Convert Megajules -> BTU
                     // Convert Normal Cubic Meter -> Standard Cubic Foot
-                    return (value * MegaJulesToBTUFactor) / NormalCubicMeterToStandardCubicFootFactor;
+                    return value * MegaJulesToBTUFactor / NormalCubicMeterToStandardCubicFootFactor;
 
                 case MetricUnitsOfMeasurement.KilogramVolatileSolidsPerCubicMeterPerDay:
                     // Returning value is PoundVolatileSolidsPerCubicYardPerDay
                     // Convert KG -> pounds
                     // Convert Cubic meter -> Cubic yard
-                    return (value * KgToLbsFactor) / CubicMetersToCubicYardsFactor;
+                    return value * KgToLbsFactor / CubicMetersToCubicYardsFactor;
 
                 case MetricUnitsOfMeasurement.MethanePerCubicMeterPerDay:
                     // Returning value is MethanePerCubicYardPerDay
@@ -615,13 +612,17 @@ namespace H.Core.Calculators.UnitsOfMeasurement
         }
 
         /// <summary>
-        /// Convert imperial values to metric
+        ///     Convert imperial values to metric
         /// </summary>
         /// <param name="imperialUnit">the unit of the value</param>
         /// <param name="value">the value</param>
-        /// <param name="originalUnit">the expected unit. Used for cases that like kcal/kg and Mcal/kg where they both use BTU/lb for imperial conversions</param>
+        /// <param name="originalUnit">
+        ///     the expected unit. Used for cases that like kcal/kg and Mcal/kg where they both use BTU/lb
+        ///     for imperial conversions
+        /// </param>
         /// <returns>metric value</returns>
-        public double ConvertValueToMetricFromImperial(ImperialUnitsOfMeasurement? imperialUnit, double value, MetricUnitsOfMeasurement originalUnit = MetricUnitsOfMeasurement.None)
+        public double ConvertValueToMetricFromImperial(ImperialUnitsOfMeasurement? imperialUnit, double value,
+            MetricUnitsOfMeasurement originalUnit = MetricUnitsOfMeasurement.None)
         {
             switch (imperialUnit)
             {
@@ -757,7 +758,7 @@ namespace H.Core.Calculators.UnitsOfMeasurement
 
                 case ImperialUnitsOfMeasurement.PoundsCarbonDioxidePerShelterbelt:
                     return value / KgToLbsFactor;
-                
+
                 case ImperialUnitsOfMeasurement.Ton:
                 case ImperialUnitsOfMeasurement.ShortTon:
                     // https://www.onlineconversion.com/faq_09.htm
@@ -767,10 +768,10 @@ namespace H.Core.Calculators.UnitsOfMeasurement
                     // Returning value is MegaJulesPerNormalCubicMeters. Conversion is done in two steps.
                     // Convert BTU -> MegaJules
                     // Convert Standard Cubic Foot -> Normal Cubic Meter
-                    return (value / MegaJulesToBTUFactor) * StandardCubicMeterToStandardCubicFootFactor;
+                    return value / MegaJulesToBTUFactor * StandardCubicMeterToStandardCubicFootFactor;
 
                 case ImperialUnitsOfMeasurement.PoundVolatileSolidsPerCubicYardPerDay:
-                    return (value / KgToLbsFactor) * CubicMetersToCubicYardsFactor;
+                    return value / KgToLbsFactor * CubicMetersToCubicYardsFactor;
 
                 case ImperialUnitsOfMeasurement.MethanePerCubicYardPerDay:
                     // Returning value is MethanePerCubicMetersPerDay
@@ -800,12 +801,12 @@ namespace H.Core.Calculators.UnitsOfMeasurement
 
         public string GetImperialUnitsOfMeasurementString(MetricUnitsOfMeasurement unitsOfMeasurement)
         {
-            return this.GetImperialUnitsOfMeasurement(unitsOfMeasurement).GetDescription();
+            return GetImperialUnitsOfMeasurement(unitsOfMeasurement).GetDescription();
         }
 
         public string GetMetricUnitsOfMeasurementString(ImperialUnitsOfMeasurement unitsOfMeasurement)
         {
-            return this.GetMetricUnitsOfMeasurement(unitsOfMeasurement).GetDescription();
+            return GetMetricUnitsOfMeasurement(unitsOfMeasurement).GetDescription();
         }
 
         public ImperialUnitsOfMeasurement GetImperialUnitsOfMeasurement(MetricUnitsOfMeasurement unitsOfMeasurement)
@@ -1210,32 +1211,24 @@ namespace H.Core.Calculators.UnitsOfMeasurement
                 default:
                     throw new Exception($"{unitsOfMeasurement} is an Invalid Unit Of Measurement");
             }
-
         }
+
         #endregion
 
         #region Private Methods
 
         private void SetUnits()
         {
-            if (_isMetric)
-            {
-                this.KilogramsPerHectareString = " kg ha⁻¹";
-            }
+            if (IsMetric)
+                KilogramsPerHectareString = " kg ha⁻¹";
             else
-            {
-                this.KilogramsPerHectareString = " bu ac⁻¹";
-            }
+                KilogramsPerHectareString = " bu ac⁻¹";
         }
 
         private string WrapString(string unitsOfMeasurement)
         {
             return " (" + unitsOfMeasurement + ")";
         }
-
-        #endregion
-
-        #region Event Handlers
 
         #endregion
     }

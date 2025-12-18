@@ -5,7 +5,6 @@ namespace H.Core.Enumerations
 {
     public enum DairyFeedClassType
     {
-       
         [LocalizedDescription("Forage", typeof(Resources))]
         Forage,
 
@@ -19,9 +18,6 @@ namespace H.Core.Enumerations
         Fat,
 
         [LocalizedDescription("FatG", typeof(Resources))]
-        FatG,
-
-
-
+        FatG
     }
 }

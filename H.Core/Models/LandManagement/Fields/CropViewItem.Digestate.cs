@@ -10,6 +10,16 @@ namespace H.Core.Models.LandManagement.Fields
 {
     public partial class CropViewItem
     {
+        #region Event Handlers
+
+        private void DigestateApplicationViewItemsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            HasDigestateApplications = DigestateApplicationViewItems.Count > 0;
+            RaisePropertyChanged(nameof(HasDigestateApplications));
+        }
+
+        #endregion
+
         #region Fields
 
         private ObservableCollection<DigestateApplicationViewItem> _digestateApplicationViewItems;
@@ -24,25 +34,23 @@ namespace H.Core.Models.LandManagement.Fields
         #region Properties
 
         /// <summary>
-        /// (kg C ha^-1)
-        ///
-        /// Total digestate C from all digestate applications, remaining digestate, etc.
+        ///     (kg C ha^-1)
+        ///     Total digestate C from all digestate applications, remaining digestate, etc.
         /// </summary>
         public double DigestateCarbonInputsPerHectare
         {
-            get { return _digestateCarbonInputsPerHectare;}
-            set { SetProperty(ref _digestateCarbonInputsPerHectare, value); }
+            get => _digestateCarbonInputsPerHectare;
+            set => SetProperty(ref _digestateCarbonInputsPerHectare, value);
         }
 
         /// <summary>
-        /// (kg C ha^-1)
-        ///
-        /// Total digestate C from all digestate applications. Does not inlcude remaining amounts
+        ///     (kg C ha^-1)
+        ///     Total digestate C from all digestate applications. Does not inlcude remaining amounts
         /// </summary>
         public double DigestateCarbonInputsPerHectareFromApplicationsOnly
         {
-            get { return _digestateCarbonInputsPerHectareFromApplicationsOnly; }
-            set { SetProperty(ref _digestateCarbonInputsPerHectareFromApplicationsOnly, value); }
+            get => _digestateCarbonInputsPerHectareFromApplicationsOnly;
+            set => SetProperty(ref _digestateCarbonInputsPerHectareFromApplicationsOnly, value);
         }
 
         public ObservableCollection<DigestateApplicationViewItem> DigestateApplicationViewItems
@@ -64,57 +72,51 @@ namespace H.Core.Models.LandManagement.Fields
         #region Public Methods
 
         /// <summary>
-        /// (kg C year^-1)
+        ///     (kg C year^-1)
         /// </summary>
         public double GetTotalCarbonFromAppliedDigestate(ManureLocationSourceType location)
         {
-            var digestateApplications = this.GetDigestateApplicationsInYear(location);
-            var result = this.CalculateTotalCarbonFromDigestateApplications(digestateApplications);
+            var digestateApplications = GetDigestateApplicationsInYear(location);
+            var result = CalculateTotalCarbonFromDigestateApplications(digestateApplications);
 
             return result;
         }
 
         /// <summary>
-        /// Equation 4.7.1-1
-        /// Equation 4.7.1-2
-        /// 
-        /// (kg C year^-1)
+        ///     Equation 4.7.1-1
+        ///     Equation 4.7.1-2
+        ///     (kg C year^-1)
         /// </summary>
-        public double CalculateTotalCarbonFromDigestateApplications(IEnumerable<DigestateApplicationViewItem> manureApplicationViewItems)
+        public double CalculateTotalCarbonFromDigestateApplications(
+            IEnumerable<DigestateApplicationViewItem> manureApplicationViewItems)
         {
             var result = 0d;
 
             foreach (var manureApplication in manureApplicationViewItems)
             {
                 var amountOfCarbonAppliedPerHectare = manureApplication.AmountOfCarbonAppliedPerHectare;
-                var area = this.Area;
+                var area = Area;
 
-                result += (amountOfCarbonAppliedPerHectare * area);
+                result += amountOfCarbonAppliedPerHectare * area;
             }
 
             return result;
         }
 
-        public IEnumerable<DigestateApplicationViewItem> GetDigestateApplicationsInYear(ManureLocationSourceType locationSourceType)
+        public IEnumerable<DigestateApplicationViewItem> GetDigestateApplicationsInYear(
+            ManureLocationSourceType locationSourceType)
         {
-            return this.DigestateApplicationViewItems.Where(digestateApplicationViewItem => digestateApplicationViewItem.ManureLocationSourceType == locationSourceType && digestateApplicationViewItem.DateCreated.Year == this.Year);
+            return DigestateApplicationViewItems.Where(digestateApplicationViewItem =>
+                digestateApplicationViewItem.ManureLocationSourceType == locationSourceType &&
+                digestateApplicationViewItem.DateCreated.Year == Year);
         }
 
         public IEnumerable<DigestateApplicationViewItem> GetDigestateApplicationViewItems(DateTime date,
             DigestateState state,
             ManureLocationSourceType source)
         {
-            return this.DigestateApplicationViewItems.Where(x => x.DateCreated.Date == date && x.DigestateState == state && x.ManureLocationSourceType == source);
-        }
-
-        #endregion
-
-        #region Event Handlers
-
-        private void DigestateApplicationViewItemsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            this.HasDigestateApplications = this.DigestateApplicationViewItems.Count > 0;
-            this.RaisePropertyChanged(nameof(this.HasDigestateApplications));
+            return DigestateApplicationViewItems.Where(x =>
+                x.DateCreated.Date == date && x.DigestateState == state && x.ManureLocationSourceType == source);
         }
 
         #endregion

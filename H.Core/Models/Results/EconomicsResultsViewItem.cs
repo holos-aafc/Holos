@@ -36,7 +36,7 @@ namespace H.Core.Models.Results
 
         private void ValueOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            base.RaisePropertyChanged(e.PropertyName);
+            RaisePropertyChanged(e.PropertyName);
         }
 
         public double Revenues
@@ -70,6 +70,7 @@ namespace H.Core.Models.Results
             get => _totalCost;
             set => SetProperty(ref _totalCost, value);
         }
+
         public double Profit
         {
             get => _profit;
@@ -82,6 +83,6 @@ namespace H.Core.Models.Results
             set => SetProperty(ref _farm, value);
         }
 
-        #endregion 
+        #endregion
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace H.Core.Enumerations
+﻿namespace H.Core.Enumerations
 {
     public static class ManureStateTypeExtensions
     {
@@ -18,7 +12,7 @@ namespace H.Core.Enumerations
         }
 
         /// <summary>
-        /// Indicates if the storage type being used houses liquid manure.
+        ///     Indicates if the storage type being used houses liquid manure.
         /// </summary>
         /// <param name="manureStateType">The manure storage type being used</param>
         /// <returns>True if the storage type is for liquid manure, false otherwise</returns>
@@ -38,7 +32,7 @@ namespace H.Core.Enumerations
         }
 
         /// <summary>
-        /// Indicates if the storage type being used houses solid manure.
+        ///     Indicates if the storage type being used houses solid manure.
         /// </summary>
         /// <param name="manureStateType">The manure storage type being used</param>
         /// <returns>True if the storage type is for solid manure, false otherwise</returns>
@@ -48,7 +42,7 @@ namespace H.Core.Enumerations
         }
 
         /// <summary>
-        /// Dairy manure systems can be covered with a lid/cap etc.
+        ///     Dairy manure systems can be covered with a lid/cap etc.
         /// </summary>
         public static bool IsCoveredSystem(this ManureStateType manureStateType)
         {

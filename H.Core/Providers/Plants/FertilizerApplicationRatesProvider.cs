@@ -1,38 +1,35 @@
 using System.Collections.Generic;
 using System.Linq;
 using H.Content;
-using H.Infrastructure;
 using H.Core.Converters;
+using H.Infrastructure;
 
 namespace H.Core.Providers.Plants
 {
     /// <summary>
-    /// 
     /// </summary>
     public class FertilizerApplicationRatesProvider
     {
-        #region Fields
-        private readonly ProvinceStringConverter _provinceStringConverter = new ProvinceStringConverter();
-        private readonly CropTypeStringConverter _cropTypeStringConverter = new CropTypeStringConverter();
-        private readonly SoilFunctionalCategoryStringConverter _soilFunctionalCategoryStringConverter = new SoilFunctionalCategoryStringConverter();
-        private readonly List<FertilizerApplicationRatesData> _cache;
-        #endregion
-
         #region Constructors
+
         public FertilizerApplicationRatesProvider()
         {
             _cache = BuildCache();
         }
+
         #endregion
 
         #region Public Methods
+
         public List<FertilizerApplicationRatesData> GetFertilizerApplicationRates()
         {
             return _cache;
         }
+
         #endregion
 
         #region Private Methos
+
         private List<FertilizerApplicationRatesData> BuildCache()
         {
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
@@ -57,6 +54,19 @@ namespace H.Core.Providers.Plants
 
             return result;
         }
+
+        #endregion
+
+        #region Fields
+
+        private readonly ProvinceStringConverter _provinceStringConverter = new ProvinceStringConverter();
+        private readonly CropTypeStringConverter _cropTypeStringConverter = new CropTypeStringConverter();
+
+        private readonly SoilFunctionalCategoryStringConverter _soilFunctionalCategoryStringConverter =
+            new SoilFunctionalCategoryStringConverter();
+
+        private readonly List<FertilizerApplicationRatesData> _cache;
+
         #endregion
     }
 }

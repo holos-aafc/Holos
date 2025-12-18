@@ -4,10 +4,10 @@ using H.Infrastructure;
 namespace H.Core.Enumerations
 {
     /// <summary>
-    /// Hardiness Zones are classified using a number followed by a letter
-    /// - this violates a naming requirement of C#.
-    /// Therefore it was necessary to place something in front of the intended enumeration value.
-    /// H was chosen as it can represent the first letter of "Hardiness"
+    ///     Hardiness Zones are classified using a number followed by a letter
+    ///     - this violates a naming requirement of C#.
+    ///     Therefore it was necessary to place something in front of the intended enumeration value.
+    ///     H was chosen as it can represent the first letter of "Hardiness"
     /// </summary>
     public enum HardinessZone
     {

@@ -39,7 +39,6 @@ namespace H.Core.Enumerations
         NH3,
 
         [LocalizedDescription("EnumNonFossilCH4", typeof(Resources))]
-        NonFossilCH4,
-
+        NonFossilCH4
     }
 }

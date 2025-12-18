@@ -1,12 +1,14 @@
-﻿namespace H.Core.Models.Animals.Sheep
+﻿using H.Core.Properties;
+
+namespace H.Core.Models.Animals.Sheep
 {
     public class SheepComponent : AnimalComponentBase
     {
         public SheepComponent()
         {
-            this.ComponentNameDisplayString = Properties.Resources.TitleSheepComponentDisplayString;
-            this.ComponentCategory = ComponentCategory.Sheep;
-            this.ComponentType = ComponentType.Sheep;
+            ComponentNameDisplayString = Resources.TitleSheepComponentDisplayString;
+            ComponentCategory = ComponentCategory.Sheep;
+            ComponentType = ComponentType.Sheep;
         }
     }
 }

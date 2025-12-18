@@ -30,6 +30,6 @@ namespace H.Core.Enumerations
         FivePercentFat,
 
         [LocalizedDescription("EnumIonophorePlusFivePercentFat", typeof(Resources))]
-        IonophorePlusFivePercentFat,
+        IonophorePlusFivePercentFat
     }
 }

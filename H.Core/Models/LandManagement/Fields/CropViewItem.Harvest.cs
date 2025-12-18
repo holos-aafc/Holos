@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using H.Core.Models.Results;
 
@@ -19,9 +18,8 @@ namespace H.Core.Models.LandManagement.Fields
         #region Properties
 
         /// <summary>
-        /// Equation 12.3.2-4
-        ///
-        /// (kg C)
+        ///     Equation 12.3.2-4
+        ///     (kg C)
         /// </summary>
         public double TotalCarbonLossFromBaleExports
         {
@@ -36,7 +34,7 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// (kg DM year^-1)
+        ///     (kg DM year^-1)
         /// </summary>
         public double TotalDryMatterLostFromBaleExports
         {
@@ -52,10 +50,8 @@ namespace H.Core.Models.LandManagement.Fields
         {
             var result = 0d;
 
-            foreach (var harvestViewItem in this.HarvestViewItems.Where(x => x.Start.Year.Equals(year)))
-            {
+            foreach (var harvestViewItem in HarvestViewItems.Where(x => x.Start.Year.Equals(year)))
                 result += harvestViewItem.TotalNumberOfBalesHarvested * harvestViewItem.BaleWeight;
-            }
 
             return result;
         }
@@ -64,10 +60,8 @@ namespace H.Core.Models.LandManagement.Fields
         {
             var result = 0d;
 
-            foreach (var harvestViewItem in this.HarvestViewItems)
-            {
+            foreach (var harvestViewItem in HarvestViewItems)
                 result += harvestViewItem.TotalNumberOfBalesHarvested * harvestViewItem.BaleWeight;
-            }
 
             return result;
         }
@@ -76,9 +70,10 @@ namespace H.Core.Models.LandManagement.Fields
         {
             var result = 0d;
 
-            foreach (var harvestViewItem in this.HarvestViewItems)
+            foreach (var harvestViewItem in HarvestViewItems)
             {
-                var amount = harvestViewItem.AboveGroundBiomass * (1 - (harvestViewItem.MoistureContentAsPercentage / 100.0));
+                var amount = harvestViewItem.AboveGroundBiomass *
+                             (1 - harvestViewItem.MoistureContentAsPercentage / 100.0);
 
                 result += amount;
             }
@@ -90,9 +85,10 @@ namespace H.Core.Models.LandManagement.Fields
         {
             var result = 0d;
 
-            foreach (var hayImportViewItem in this.HayImportViewItems)
+            foreach (var hayImportViewItem in HayImportViewItems)
             {
-                var amount = hayImportViewItem.AboveGroundBiomass * (1 - (hayImportViewItem.MoistureContentAsPercentage / 100.0));
+                var amount = hayImportViewItem.AboveGroundBiomass *
+                             (1 - hayImportViewItem.MoistureContentAsPercentage / 100.0);
 
                 result += amount;
             }
@@ -101,34 +97,34 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
-        /// Returns all <see cref="HarvestViewItems"/> by year
+        ///     Returns all <see cref="HarvestViewItems" /> by year
         /// </summary>
         public List<HarvestViewItem> GetHayHarvestsByYear(int year)
         {
-            return this.HarvestViewItems.Where(x => x.Start.Year.Equals(year)).ToList();
+            return HarvestViewItems.Where(x => x.Start.Year.Equals(year)).ToList();
         }
 
         /// <summary>
-        /// Returns all <see cref="HarvestViewItems"/> for the current year
+        ///     Returns all <see cref="HarvestViewItems" /> for the current year
         /// </summary>
         public List<HarvestViewItem> GetHayHarvests()
         {
-            return this.GetHayHarvestsByYear(this.Year);
+            return GetHayHarvestsByYear(Year);
         }
 
         /// <summary>
-        /// (%)
+        ///     (%)
         /// </summary>
         public double AverageMoistureContentOfHarvests()
         {
-            return this.GetHayHarvests().Average(x => x.MoistureContentAsPercentage);
+            return GetHayHarvests().Average(x => x.MoistureContentAsPercentage);
         }
 
         public bool IsHarvested()
         {
-            return this.GetHayHarvests().Any();
+            return GetHayHarvests().Any();
         }
-        
+
         #endregion
     }
 }

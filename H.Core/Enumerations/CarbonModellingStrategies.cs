@@ -1,10 +1,5 @@
 ﻿using H.Core.Properties;
 using H.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace H.Core.Enumerations
 {
@@ -14,6 +9,6 @@ namespace H.Core.Enumerations
         IPCCTier2,
 
         [LocalizedDescription("EnumICBM", typeof(Resources))]
-        ICBM,
+        ICBM
     }
 }

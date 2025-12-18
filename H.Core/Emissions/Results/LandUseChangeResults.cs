@@ -6,6 +6,16 @@ namespace H.Core.Emissions.Results
 {
     public class LandUseChangeResults : ModelBase
     {
+        public LandUseChangeResults()
+        {
+            CarbonDioxideFromTillageChange = new SoilCarbonEmissionResult();
+            CarbonDioxideFromFallowChange = new SoilCarbonEmissionResult();
+            CarbonDioxideFromPastPerennials = new SoilCarbonEmissionResult();
+            CarbonDioxideFromCurrentPerennials = new SoilCarbonEmissionResult();
+            CarbonDioxideFromSeedGrassland = new SoilCarbonEmissionResult();
+            CarbonDioxideFromBrokenGrassland = new SoilCarbonEmissionResult();
+        }
+
         #region Fields
 
         private SoilCarbonEmissionResult _carbonDioxideFromTillageChange;
@@ -17,36 +27,21 @@ namespace H.Core.Emissions.Results
 
         #endregion
 
-        public LandUseChangeResults()
-        {
-            this.CarbonDioxideFromTillageChange = new SoilCarbonEmissionResult();
-            this.CarbonDioxideFromFallowChange = new SoilCarbonEmissionResult();
-            this.CarbonDioxideFromPastPerennials = new SoilCarbonEmissionResult();
-            this.CarbonDioxideFromCurrentPerennials = new SoilCarbonEmissionResult();
-            this.CarbonDioxideFromSeedGrassland = new SoilCarbonEmissionResult();
-            this.CarbonDioxideFromBrokenGrassland = new SoilCarbonEmissionResult();
-        }
-
         #region Properties
 
         /// <summary>
-        /// Returns all land use change results for the field
+        ///     Returns all land use change results for the field
         /// </summary>
-        public List<SoilCarbonEmissionResult> GetAllLandUseChangeResultsForField
-        {
-            get
+        public List<SoilCarbonEmissionResult> GetAllLandUseChangeResultsForField =>
+            new List<SoilCarbonEmissionResult>
             {
-                return new List<SoilCarbonEmissionResult>()
-                {
-                    this.CarbonDioxideFromTillageChange,
-                    this.CarbonDioxideFromFallowChange,
-                    this.CarbonDioxideFromPastPerennials,
-                    this.CarbonDioxideFromCurrentPerennials,
-                    this.CarbonDioxideFromSeedGrassland,
-                    this.CarbonDioxideFromBrokenGrassland,
-                };
-            }
-        }
+                CarbonDioxideFromTillageChange,
+                CarbonDioxideFromFallowChange,
+                CarbonDioxideFromPastPerennials,
+                CarbonDioxideFromCurrentPerennials,
+                CarbonDioxideFromSeedGrassland,
+                CarbonDioxideFromBrokenGrassland
+            };
 
         public SoilCarbonEmissionResult CarbonDioxideFromTillageChange
         {

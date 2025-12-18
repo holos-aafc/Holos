@@ -13,13 +13,13 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         {
             _parentRowDataName = new TimelineGrouper();
             _circumferenceData = new CircumferenceData();
-            _circumferenceData.PropertyChanged += this.OnCircumferenceDataPropertyChanged;
+            _circumferenceData.PropertyChanged += OnCircumferenceDataPropertyChanged;
             //Assign Default values
             _cutDate = new DateTime(2050, 12, 31);
             //_plantDate = new DateTime(1, 1, 1); //Fake Plant Data will get changed the first time YearOfObservation is set.
             _plantedTreeCount = 1;
             _liveTreeCount = 1;
-            this.Name = "Tree Type";
+            Name = "Tree Type";
         }
 
         #endregion
@@ -28,7 +28,7 @@ namespace H.Core.Models.LandManagement.Shelterbelt
 
         private void OnCircumferenceDataPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            this.RaisePropertyChanged(nameof(this.CircumferenceData));
+            RaisePropertyChanged(nameof(CircumferenceData));
         }
 
         #endregion
@@ -47,7 +47,7 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         private double _plantedTreeSpacing;
         private double _liveTreeSpacing;
 
-        private bool _plantYearInitialized = false;
+        private bool _plantYearInitialized;
         private DateTime _plantDate;
         private DateTime _cutDate;
 
@@ -61,7 +61,8 @@ namespace H.Core.Models.LandManagement.Shelterbelt
         #region Properties
 
         //See comment in constructor for reason for override.
-        public override int YearOfObservation {
+        public override int YearOfObservation
+        {
             get => base.YearOfObservation;
             set
             {
@@ -70,122 +71,109 @@ namespace H.Core.Models.LandManagement.Shelterbelt
                     _plantYearInitialized = true;
                     PlantYear = value; //deals with lack of knowledge in constructor; can't rearrange code - last week
                 }
+
                 SetProperty(ref _yearOfObservation, value);
             }
         }
 
         public CircumferenceData CircumferenceData
         {
-            get { return _circumferenceData; }
-            set { this.SetProperty(ref _circumferenceData, value); }
+            get => _circumferenceData;
+            set => SetProperty(ref _circumferenceData, value);
         }
 
         //Basic Properties
 
         public double A
         {
-            get { return _a; }
-            set { this.SetProperty(ref _a, value); }
+            get => _a;
+            set => SetProperty(ref _a, value);
         }
 
         public double B
         {
-            get { return _b; }
-            set { this.SetProperty(ref _b, value); }
+            get => _b;
+            set => SetProperty(ref _b, value);
         }
 
         public TreeSpecies TreeSpecies
         {
-            get { return _treeSpecies; }
-            set { this.SetProperty(ref _treeSpecies, value); }
+            get => _treeSpecies;
+            set => SetProperty(ref _treeSpecies, value);
         }
 
         public double PlantedTreeCount
         {
-            get { return _plantedTreeCount; }
-            set { this.SetProperty(ref _plantedTreeCount, value); }
+            get => _plantedTreeCount;
+            set => SetProperty(ref _plantedTreeCount, value);
         }
 
         public double LiveTreeCount
         {
-            get { return _liveTreeCount; }
-            set { this.SetProperty(ref _liveTreeCount, value); }
+            get => _liveTreeCount;
+            set => SetProperty(ref _liveTreeCount, value);
         }
 
         public double PlantedTreeSpacing
         {
-            get { return _plantedTreeSpacing; }
-            set { this.SetProperty(ref _plantedTreeSpacing, value); }
+            get => _plantedTreeSpacing;
+            set => SetProperty(ref _plantedTreeSpacing, value);
         }
 
         public double LiveTreeSpacing
         {
-            get { return _liveTreeSpacing; }
-            set { this.SetProperty(ref _liveTreeSpacing, value); }
+            get => _liveTreeSpacing;
+            set => SetProperty(ref _liveTreeSpacing, value);
         }
 
         /// <summary>
-        /// The year the tree(s) were planted in the sheleterbelt. This may or may not be the same as the <see cref="YearOfObservation"/>.
+        ///     The year the tree(s) were planted in the sheleterbelt. This may or may not be the same as the
+        ///     <see cref="YearOfObservation" />.
         /// </summary>
         public int PlantYear
         {
-            get { return _plantDate.Year; }
+            get => _plantDate.Year;
             set
             {
-                var plantDate = this.GeneratePlantDateFromPlantYear(value);
-                this.SetProperty(ref _plantDate, plantDate);
+                var plantDate = GeneratePlantDateFromPlantYear(value);
+                SetProperty(ref _plantDate, plantDate);
             }
         }
 
         public int CutYear
         {
-            get { return _cutDate.Year; }
+            get => _cutDate.Year;
             set
             {
-                var cutDate = this.GenerateCutDateFromCutYear(value);
-                this.SetProperty(ref _cutDate, cutDate);
+                var cutDate = GenerateCutDateFromCutYear(value);
+                SetProperty(ref _cutDate, cutDate);
             }
         }
 
         //For display on RadTimeline on Timeline Screen
-        public DateTime PlantDate
-        {
-            get
-            {
-                return _plantDate;
-            }
-        }
+        public DateTime PlantDate => _plantDate;
 
-        public DateTime CutDate
-        {
-            get
-            {
-                return _cutDate;
-            }
-        }
+        public DateTime CutDate => _cutDate;
 
-        public TimeSpan Lifespan
-        {
-            get { return this.CutDate.Subtract(this.PlantDate.AddDays(1)); }
-        }
+        public TimeSpan Lifespan => CutDate.Subtract(PlantDate.AddDays(1));
 
         //Relationship Discovery
         public Guid ParentRowData
         {
-            get { return _parentRowData; }
-            set { this.SetProperty(ref _parentRowData, value); }
+            get => _parentRowData;
+            set => SetProperty(ref _parentRowData, value);
         }
 
         public Guid GrandParentShelterbeltComponent
         {
-            get { return _grandparentShelterbeltComponent; }
-            set { this.SetProperty(ref _grandparentShelterbeltComponent, value); }
+            get => _grandparentShelterbeltComponent;
+            set => SetProperty(ref _grandparentShelterbeltComponent, value);
         }
 
         public TimelineGrouper ParentRowDataName
         {
-            get { return _parentRowDataName; }
-            set { this.SetProperty(ref _parentRowDataName, value); }
+            get => _parentRowDataName;
+            set => SetProperty(ref _parentRowDataName, value);
         }
 
         #endregion
@@ -194,17 +182,14 @@ namespace H.Core.Models.LandManagement.Shelterbelt
 
         public string GenerateAutonym()
         {
-            return this.TreeSpecies.GetDescription();
+            return TreeSpecies.GetDescription();
         }
 
         public string GetCorrectName()
         {
-            if (this.NameIsFromUser)
-            {
-                return this.Name;
-            }
+            if (NameIsFromUser) return Name;
 
-            return this.GenerateAutonym();
+            return GenerateAutonym();
         }
 
         #endregion

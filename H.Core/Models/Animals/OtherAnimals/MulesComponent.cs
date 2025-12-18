@@ -1,4 +1,5 @@
-﻿using H.Infrastructure;
+﻿using H.Core.Properties;
+using H.Infrastructure;
 
 namespace H.Core.Models.Animals.OtherAnimals
 {
@@ -6,10 +7,10 @@ namespace H.Core.Models.Animals.OtherAnimals
     {
         public MulesComponent()
         {
-            this.ComponentNameDisplayString = ComponentType.Mules.GetDescription();
-            this.ComponentDescriptionString = Properties.Resources.ToolTipMulesComponent;
-            this.ComponentCategory = ComponentCategory.OtherLivestock;
-            this.ComponentType = ComponentType.Mules;
+            ComponentNameDisplayString = ComponentType.Mules.GetDescription();
+            ComponentDescriptionString = Resources.ToolTipMulesComponent;
+            ComponentCategory = ComponentCategory.OtherLivestock;
+            ComponentType = ComponentType.Mules;
         }
     }
 }

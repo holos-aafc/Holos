@@ -1,7 +1,7 @@
 ﻿namespace H.Core.Providers.Soil
 {
     /// <summary>
-    /// http://sis.agr.gc.ca/cansis/nsdb/slc/v3.2/cmp/index.html
+    ///     http://sis.agr.gc.ca/cansis/nsdb/slc/v3.2/cmp/index.html
     /// </summary>
     internal class ComponentTableData
     {
@@ -20,20 +20,17 @@
         public string TypeOfSoilProfile { get; set; }
 
         /// <summary>
-        /// Component table uses 'NF' to indicate Newfoundland but soil layer and soil name tables use 'NL'.
+        ///     Component table uses 'NF' to indicate Newfoundland but soil layer and soil name tables use 'NL'.
         /// </summary>
         public string SoilNameIdentifier
         {
             get
             {
-                if (this._soilNameIdentifier.StartsWith("NF"))
-                {                    
-                    return this._soilNameIdentifier.Replace("NF", "NL");
-                }
-                
+                if (_soilNameIdentifier.StartsWith("NF")) return _soilNameIdentifier.Replace("NF", "NL");
+
                 return _soilNameIdentifier;
             }
-            set { _soilNameIdentifier = value; }
+            set => _soilNameIdentifier = value;
         }
 
         public int PolygonComponentId { get; set; }

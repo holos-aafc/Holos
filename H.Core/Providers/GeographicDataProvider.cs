@@ -1,20 +1,10 @@
 ﻿#region Imports
 
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using H.Core.Calculators.Climate;
-using H.Core.Enumerations;
-using H.Core.Models;
-using H.Core.Providers.Climate;
-using H.Core.Providers.Evapotranspiration;
 using H.Core.Providers.Polygon;
-using H.Core.Providers.Precipitation;
 using H.Core.Providers.Soil;
-using H.Core.Providers.Temperature;
 using H.Core.Tools;
 
 #endregion
@@ -22,25 +12,26 @@ using H.Core.Tools;
 namespace H.Core.Providers
 {
     /// <summary>
-    /// Provides soil data for a given location within Canada
+    ///     Provides soil data for a given location within Canada
     /// </summary>
-    public class GeographicDataProvider : GeographicDataProviderBase, IGeographicDataProvider, IHolosMapPolygonIdListProvider
+    public class GeographicDataProvider : GeographicDataProviderBase, IGeographicDataProvider,
+        IHolosMapPolygonIdListProvider
     {
-        #region Fields
-
-        private List<int> _polygonIdsCache = new List<int>();
-        private readonly ISoilDataProvider _soilDataProvider;
-
-        #endregion
-
         #region Constructors
 
         public GeographicDataProvider()
         {
-            HTraceListener.AddTraceListener();            
+            HTraceListener.AddTraceListener();
 
             _soilDataProvider = new NationalSoilDataBaseProvider();
         }
+
+        #endregion
+
+        #region Fields
+
+        private readonly List<int> _polygonIdsCache = new List<int>();
+        private readonly ISoilDataProvider _soilDataProvider;
 
         #endregion
 
@@ -48,14 +39,11 @@ namespace H.Core.Providers
 
         public void Initialize()
         {
-            if (this.IsInitialized)
-            {
-                return;
-            }
+            if (IsInitialized) return;
 
             _soilDataProvider.Initialize();
 
-            this.IsInitialized = true;
+            IsInitialized = true;
 
             Trace.TraceInformation($"{nameof(GeographicDataProvider)} has been initialized.");
         }
@@ -72,12 +60,9 @@ namespace H.Core.Providers
 
         public List<int> GetPolygonIdList()
         {
-            if (_polygonIdsCache.Any())
-            {
-                return _polygonIdsCache;
-            }
+            if (_polygonIdsCache.Any()) return _polygonIdsCache;
 
-            var result =  _soilDataProvider.GetPolygonIdList();
+            var result = _soilDataProvider.GetPolygonIdList();
 
             _polygonIdsCache.AddRange(result);
 
@@ -104,23 +89,11 @@ namespace H.Core.Providers
             result = new GeographicData
             {
                 DefaultSoilData = predominantSoilDataByPolygonId,
-                SoilDataForAllComponentsWithinPolygon = allSoilData.ToList(),           
+                SoilDataForAllComponentsWithinPolygon = allSoilData.ToList()
             };
 
-            return result;            
-        }      
-
-        #endregion
-
-        #region Public Methods
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
-
-        #region Event Handlers
+            return result;
+        }
 
         #endregion
     }

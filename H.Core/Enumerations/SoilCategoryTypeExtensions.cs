@@ -3,9 +3,10 @@
     public static class SoilCategoryTypeExtensions
     {
         /// <summary>
-        /// Some lookups require a 'reduced' soil type and not specific soil type (i.e. Brown not DarkBrown)
+        ///     Some lookups require a 'reduced' soil type and not specific soil type (i.e. Brown not DarkBrown)
         /// </summary>
-        public static SoilFunctionalCategory GetSimplifiedSoilCategory(this SoilFunctionalCategory soilFunctionalCategory)
+        public static SoilFunctionalCategory GetSimplifiedSoilCategory(
+            this SoilFunctionalCategory soilFunctionalCategory)
         {
             switch (soilFunctionalCategory)
             {
@@ -26,7 +27,8 @@
         }
 
         /// <summary>
-        /// Economic soil regions for AB and SK need to distinguish between brown and darkbrown to return the correct crop type for economic results
+        ///     Economic soil regions for AB and SK need to distinguish between brown and darkbrown to return the correct crop type
+        ///     for economic results
         /// </summary>
         /// <param name="soilFunctionalCategory">soil category of the farm</param>
         /// <returns></returns>

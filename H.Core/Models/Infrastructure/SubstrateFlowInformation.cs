@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Models.Animals;
 using H.Core.Providers.Animals;
-using H.Core.Providers.Climate;
-using H.Infrastructure;
 
 namespace H.Core.Models.Infrastructure
 {
@@ -20,64 +13,64 @@ namespace H.Core.Models.Infrastructure
         public DefaultManureCompositionData ManureCompositionData { get; set; }
 
         /// <summary>
-        /// (kg day^-1)
+        ///     (kg day^-1)
         /// </summary>
         public double TotalMassFlowOfSubstrate { get; set; }
 
         /// <summary>
-        /// (kg day^-1)
+        ///     (kg day^-1)
         /// </summary>
         public double VolatileSolidsFlowOfSubstrate { get; set; }
 
         /// <summary>
-        /// (kg DM day^-1)
+        ///     (kg DM day^-1)
         /// </summary>
         public double TotalSolidsFlowOfSubstrate { get; set; }
 
         /// <summary>
-        /// (kg day^-1)
+        ///     (kg day^-1)
         /// </summary>
         public double NitrogenFlowOfSubstrate { get; set; }
 
         /// <summary>
-        /// (kg day^-1)
+        ///     (kg day^-1)
         /// </summary>
         public double CarbonFlowOfSubstrate { get; set; }
 
         public double OrganicNitrogenFlowOfSubstrate { get; set; }
 
         /// <summary>
-        /// This is the TAN in substrate only
+        ///     This is the TAN in substrate only
         /// </summary>
         public double ExcretedTanInSubstrate { get; set; }
 
         /// <summary>
-        /// (kg day^-1)
+        ///     (kg day^-1)
         /// </summary>
         public double BiodegradableSolidsFlow { get; set; }
 
         /// <summary>
-        /// (Nm^3 day^-1)
+        ///     (Nm^3 day^-1)
         /// </summary>
         public double MethaneProduction { get; set; }
 
         /// <summary>
-        /// (kg VS day^-1)
+        ///     (kg VS day^-1)
         /// </summary>
         public double DegradedVolatileSolids { get; set; }
 
         /// <summary>
-        /// (Nm^3 day^-1)
+        ///     (Nm^3 day^-1)
         /// </summary>
         public double BiogasProduction { get; set; }
 
         /// <summary>
-        /// (Nm^3 day^-1)
+        ///     (Nm^3 day^-1)
         /// </summary>
         public double CarbonDioxideProduction { get; set; }
 
         /// <summary>
-        /// The TAN from excretion plus the added nitrogen from degraded volatile solids
+        ///     The TAN from excretion plus the added nitrogen from degraded volatile solids
         /// </summary>
         public double TanFlowInDigestate { get; set; }
 
@@ -86,13 +79,12 @@ namespace H.Core.Models.Infrastructure
         public double CarbonFlowInDigestate { get; set; }
 
 
-
         #region Public Methods
 
         public bool IsLiquidManure()
         {
-            return this.ManagementPeriod != null && this.ManagementPeriod.ManureDetails != null &&
-                   this.ManagementPeriod.ManureDetails.StateType.IsLiquidManure();
+            return ManagementPeriod != null && ManagementPeriod.ManureDetails != null &&
+                   ManagementPeriod.ManureDetails.StateType.IsLiquidManure();
         }
 
         #endregion

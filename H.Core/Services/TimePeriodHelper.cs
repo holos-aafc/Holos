@@ -21,35 +21,23 @@ namespace H.Core.Services
         {
             public int Month { get; set; }
             public int Year { get; set; }
-        } 
-
-        #endregion
-
-        #region Fields
-
-        #endregion
-
-        #region Constructors
-
-        #endregion
-
-        #region Properties
+        }
 
         #endregion
 
         #region Public Methods
 
         public bool TimePeriodHasOpenings(IEnumerable<ITimePeriodItem> itemsInTimePeriod, DateTime minimumDate,
-                                          DateTime maximumDate)
+            DateTime maximumDate)
         {
-            return this.GetFirstTimePeriodOpening(itemsInTimePeriod, minimumDate, maximumDate) != null;
+            return GetFirstTimePeriodOpening(itemsInTimePeriod, minimumDate, maximumDate) != null;
         }
 
         public IEnumerable<MonthlyObject> GetMonthsBetweenDates(DateTime start, TimeSpan duration)
         {
             var end = start.Add(duration);
 
-            return this.GetMonthsBetweenDates(start, end);
+            return GetMonthsBetweenDates(start, end);
         }
 
         public IEnumerable<MonthlyObject> GetMonthsBetweenDates(DateTime start, DateTime end)
@@ -62,28 +50,22 @@ namespace H.Core.Services
                 var year = i.Year;
 
                 if (result.Any(x => x.Month == month && x.Year == year) == false)
-                {
-                    result.Add(new MonthlyObject {Month = month, Year = year});
-                }
+                    result.Add(new MonthlyObject { Month = month, Year = year });
             }
 
             return result.OrderBy(x => x.Year).ThenBy(x => x.Month);
         }
 
         /// <summary>
-        /// Returns the number of days a time period occupies, (e.g. April 15 - April 30 = 15)
+        ///     Returns the number of days a time period occupies, (e.g. April 15 - April 30 = 15)
         /// </summary>
         public int GetNumberOfDaysOccupyingMonth(DateTime start, TimeSpan duration, int month, int year)
         {
             var days = new List<int>();
 
             for (var i = start; i < start.Add(duration); i = i.AddDays(1))
-            {
                 if (i.Month == month && i.Year == year)
-                {
                     days.Add(i.Day);
-                }
-            }
 
             return days.Count;
         }
@@ -135,26 +117,24 @@ namespace H.Core.Services
 
         public string GetMonthString(Months month)
         {
-            return this.GetMonthString((int) month);
+            return GetMonthString((int)month);
         }
 
         public Tuple<DateTime, DateTime> GetFirstTimePeriodOpening(IEnumerable<ITimePeriodItem> itemsInTimePeriod,
-                                                                   DateTime minimumDate, DateTime maximumDate)
+            DateTime minimumDate, DateTime maximumDate)
         {
-            return this.GetTimePeriodOpenings(itemsInTimePeriod, minimumDate, maximumDate)
-                       .FirstOrDefault();
+            return GetTimePeriodOpenings(itemsInTimePeriod, minimumDate, maximumDate)
+                .FirstOrDefault();
         }
 
         public List<Tuple<DateTime, DateTime>> GetTimePeriodOpenings(IEnumerable<ITimePeriodItem> itemsInTimePeriod,
-                                                                     DateTime minimumDate, DateTime maximumDate)
+            DateTime minimumDate, DateTime maximumDate)
         {
             itemsInTimePeriod = itemsInTimePeriod.OrderBy(item => item.Start);
 
             // If there are no items in the time period, then the entire time period is open
             if (itemsInTimePeriod.Any() == false)
-            {
-                return new List<Tuple<DateTime, DateTime>> {new Tuple<DateTime, DateTime>(minimumDate, maximumDate)};
-            }
+                return new List<Tuple<DateTime, DateTime>> { new Tuple<DateTime, DateTime>(minimumDate, maximumDate) };
 
             var result = new List<Tuple<DateTime, DateTime>>();
 
@@ -163,28 +143,22 @@ namespace H.Core.Services
             {
                 // Check if there is an opening between the start of the time period and the start date of the single item
                 if (minimumDate < firstItemInTimePeriod.Start)
-                {
                     result.Add(new Tuple<DateTime, DateTime>(minimumDate,
-                                                             firstItemInTimePeriod.Start.Subtract(TimeSpan.FromDays(1))));
-                }
+                        firstItemInTimePeriod.Start.Subtract(TimeSpan.FromDays(1))));
 
                 // Check if there is an opening between the end date of the single item and the end of the time period
                 if (itemsInTimePeriod.First()
-                                     .End < maximumDate)
-                {
+                        .End < maximumDate)
                     result.Add(new Tuple<DateTime, DateTime>(firstItemInTimePeriod.End.Add(TimeSpan.FromDays(1)),
-                                                             maximumDate));
-                }
+                        maximumDate));
 
                 return result;
             }
 
             // Check if there is an opening between the start of the time period and the start date of the first item
             if (minimumDate < firstItemInTimePeriod.Start)
-            {
                 result.Add(new Tuple<DateTime, DateTime>(minimumDate,
-                                                         firstItemInTimePeriod.Start.Subtract(TimeSpan.FromDays(1))));
-            }
+                    firstItemInTimePeriod.Start.Subtract(TimeSpan.FromDays(1))));
 
             for (var i = 0; i < itemsInTimePeriod.Count() - 1; i++)
             {
@@ -192,21 +166,15 @@ namespace H.Core.Services
                 var itemInTimePeriodAtNextIndex = itemsInTimePeriod.ElementAt(i + 1);
 
                 if (itemInTimePeriodAtIndex.End < itemInTimePeriodAtNextIndex.Start)
-                {
                     if (Math.Abs(itemInTimePeriodAtIndex.End.Subtract(itemInTimePeriodAtNextIndex.Start)
-                                                        .TotalDays) > 1)
-                    {
+                            .TotalDays) > 1)
                         result.Add(new Tuple<DateTime, DateTime>(itemInTimePeriodAtIndex.End.AddDays(1),
-                                                                 itemInTimePeriodAtNextIndex.Start.Subtract(TimeSpan.FromDays(1))));
-                    }
-                }
+                            itemInTimePeriodAtNextIndex.Start.Subtract(TimeSpan.FromDays(1))));
             }
 
             var lastItem = itemsInTimePeriod.Last();
             if (lastItem.End < maximumDate)
-            {
                 result.Add(new Tuple<DateTime, DateTime>(lastItem.End.AddDays(1), maximumDate));
-            }
 
             return result;
         }

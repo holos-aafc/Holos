@@ -9,6 +9,6 @@ namespace H.Core.Enumerations
         IncreaseInPerennialCroppingArea,
 
         [LocalizedDescription("DecreaseInPerennialCroppingArea", typeof(Resources))]
-        DecreaseInPerennialCroppingArea,
+        DecreaseInPerennialCroppingArea
     }
 }

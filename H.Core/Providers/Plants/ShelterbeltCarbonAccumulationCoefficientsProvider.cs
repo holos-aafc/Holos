@@ -8,14 +8,18 @@ namespace H.Core.Providers.Plants
     public class ShelterbeltCarbonAccumulationCoefficientsProvider
     {
         #region Fields
+
         private readonly List<ShelterbeltCarbonAccumulationCoefficientsData> _cache;
+
         #endregion
 
         #region Constructors
+
         public ShelterbeltCarbonAccumulationCoefficientsProvider()
         {
             _cache = BuildCache();
         }
+
         #endregion
 
         public List<ShelterbeltCarbonAccumulationCoefficientsData> GetShelterbeltCarbonAccumulationCoefficients()

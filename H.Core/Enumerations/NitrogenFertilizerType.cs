@@ -15,6 +15,6 @@ namespace H.Core.Enumerations
         AnhydrousAmmonia,
 
         [LocalizedDescription("EnumOther", typeof(Resources))]
-        Other,
+        Other
     }
 }

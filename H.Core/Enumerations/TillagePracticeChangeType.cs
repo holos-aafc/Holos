@@ -21,6 +21,6 @@ namespace H.Core.Enumerations
         NoneToReduced,
 
         [LocalizedDescription("NoneToIntense", typeof(Resources))]
-        NoneToIntense,
+        NoneToIntense
     }
 }

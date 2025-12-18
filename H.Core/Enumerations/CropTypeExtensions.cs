@@ -1,11 +1,5 @@
-﻿#region Imports
-
-#endregion
-
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using H.Infrastructure;
 
 namespace H.Core.Enumerations
@@ -14,18 +8,6 @@ namespace H.Core.Enumerations
     /// </summary>
     public static class CropTypeExtensions
     {
-        #region Fields
-
-        #endregion
-
-        #region Constructors
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
         #region Public Methods
 
         public static bool IsPerennial(this CropType cropType)
@@ -49,10 +31,7 @@ namespace H.Core.Enumerations
 
         public static bool IsPasture(this CropType cropType)
         {
-            if (cropType.IsPerennial() || cropType.IsGrassland())
-            {
-                return true;
-            }
+            if (cropType.IsPerennial() || cropType.IsGrassland()) return true;
 
             return false;
         }
@@ -92,7 +71,7 @@ namespace H.Core.Enumerations
             }
         }
 
-        public static bool IsLeguminousCoverCrop (this CropType cropType)
+        public static bool IsLeguminousCoverCrop(this CropType cropType)
         {
             switch (cropType)
             {
@@ -112,7 +91,7 @@ namespace H.Core.Enumerations
             }
         }
 
-        public static bool IsNonLeguminousCoverCrop (this CropType cropType)
+        public static bool IsNonLeguminousCoverCrop(this CropType cropType)
         {
             switch (cropType)
             {
@@ -145,8 +124,6 @@ namespace H.Core.Enumerations
 
         public static bool IsGrassland(this CropType cropType)
         {
-
-
             return cropType == CropType.BrokenGrassland ||
                    cropType == CropType.GrasslandSeeded ||
                    cropType == CropType.RangelandNative;
@@ -165,10 +142,7 @@ namespace H.Core.Enumerations
 
         public static bool IsAnnual(this CropType cropType)
         {
-            if (cropType.IsSilageCrop() || cropType.IsRootCrop())
-            {
-                return true;
-            }
+            if (cropType.IsSilageCrop() || cropType.IsRootCrop()) return true;
 
             switch (cropType)
             {
@@ -232,7 +206,7 @@ namespace H.Core.Enumerations
         }
 
         /// <summary>
-        /// Check whether default yield data is available for a given silage crop.
+        ///     Check whether default yield data is available for a given silage crop.
         /// </summary>
         /// <param name="cropType">The silage crop which we need to check.</param>
         /// <returns>True if the silage crop does not have default data, false if the crop does have default data available.</returns>
@@ -254,8 +228,8 @@ namespace H.Core.Enumerations
         }
 
         /// <summary>
-        /// Returns the grain crop equivalent of a silage crop. For example, if silage crop is Barley Silage, then its grain
-        /// crop equivalent will be Barley.
+        ///     Returns the grain crop equivalent of a silage crop. For example, if silage crop is Barley Silage, then its grain
+        ///     crop equivalent will be Barley.
         /// </summary>
         /// <param name="cropType">The silage crop for which we need the equivalent grain crop.</param>
         /// <returns>Returns the equivalent grain crop.</returns>
@@ -366,9 +340,7 @@ namespace H.Core.Enumerations
         public static IEnumerable<CropType> GetValidCoverCropTypes()
         {
             // Concat two lists so first item is always CropType.None followed by a sorted list afterwards
-            return new List<CropType>()
-            {
-            }.Concat(new List<CropType>()
+            return new List<CropType>().Concat(new List<CropType>
             {
                 CropType.RedCloverTrifoliumPratenseL,
                 CropType.BerseemCloverTrifoliumAlexandriumL,
@@ -394,7 +366,7 @@ namespace H.Core.Enumerations
                 CropType.SorghumSorghumBicolour,
                 CropType.PigeonBean,
                 CropType.ShepherdsPurse,
-                CropType.WinterWheatTriticumAestivum,
+                CropType.WinterWheatTriticumAestivum
             }.OrderBy(x => x.GetDescription()));
         }
 
@@ -402,8 +374,9 @@ namespace H.Core.Enumerations
         {
             return GetEconomicCropTypes().Contains(cropType);
         }
+
         /// <summary>
-        /// the croptypes that appear in the economics file
+        ///     the croptypes that appear in the economics file
         /// </summary>
         /// <returns>ordered list of crops</returns>
         public static IOrderedEnumerable<CropType> GetEconomicCropTypes()
@@ -462,7 +435,7 @@ namespace H.Core.Enumerations
                 CropType.UndersownBarley,
                 CropType.Vegetables,
                 CropType.Wheat,
-                CropType.WheatSilage,
+                CropType.WheatSilage
             }.OrderBy(x => x.GetDescription());
         }
 
@@ -475,13 +448,13 @@ namespace H.Core.Enumerations
                 CropType.TameLegume,
                 CropType.TameMixed,
                 CropType.RangelandNative,
-                CropType.SeededGrassland,
+                CropType.SeededGrassland
             }.OrderBy(x => x.GetDescription());
         }
 
         public static IOrderedEnumerable<CropType> GetAlbertaEconomicCropTypes()
         {
-            return new List<CropType>()
+            return new List<CropType>
             {
                 CropType.AlfalfaHay,
                 CropType.ArgentineHTCanola,
@@ -501,13 +474,13 @@ namespace H.Core.Enumerations
                 CropType.SoftWheat,
                 CropType.SpringWheat,
                 CropType.SummerFallow,
-                CropType.YellowMustard,
+                CropType.YellowMustard
             }.OrderBy(x => x.GetDescription());
         }
 
         public static IOrderedEnumerable<CropType> GetSaskatchewanEconomicCropTypes()
         {
-            return new List<CropType>()
+            return new List<CropType>
             {
                 CropType.BlackBean,
                 CropType.BrownMustard,
@@ -539,13 +512,13 @@ namespace H.Core.Enumerations
                 CropType.SpringWheat,
                 CropType.SunflowerOilseedEMSS,
                 CropType.WinterWheat,
-                CropType.YellowMustard,
+                CropType.YellowMustard
             }.OrderBy(x => x.GetDescription());
         }
 
         public static IOrderedEnumerable<CropType> GetManitobaEconomicCropTypes()
         {
-            return new List<CropType>()
+            return new List<CropType>
             {
                 CropType.Barley,
                 CropType.BeansPinto,
@@ -563,13 +536,13 @@ namespace H.Core.Enumerations
                 CropType.WheatNorthernHardRed,
                 CropType.WheatOtherSpring,
                 CropType.WheatPrairieSpring,
-                CropType.WinterWheat,
+                CropType.WinterWheat
             }.OrderBy(x => x.GetDescription());
         }
 
         public static IOrderedEnumerable<CropType> GetOntarioEconomicCropTypes()
         {
-            return new List<CropType>()
+            return new List<CropType>
             {
                 CropType.AlfalfaHay,
                 CropType.ColouredBeans,
@@ -593,15 +566,16 @@ namespace H.Core.Enumerations
                 CropType.SwitchgrassUnderseeded,
                 CropType.SwitchgrassUnderseededNoTill,
                 CropType.WhiteBlackBeans,
-                CropType.WinterCanolaHybrid,
+                CropType.WinterCanolaHybrid
             }.OrderBy(x => x.GetDescription());
         }
+
         public static IOrderedEnumerable<CropType> GetGrasslandTypes()
         {
-            return new List<CropType>()
+            return new List<CropType>
             {
                 CropType.BrokenGrassland,
-                CropType.GrasslandSeeded,
+                CropType.GrasslandSeeded
             }.OrderBy(x => x.GetDescription());
         }
 
@@ -609,7 +583,6 @@ namespace H.Core.Enumerations
         {
             switch (cropType)
             {
-
                 case CropType.Barley:
                 case CropType.Buckwheat:
                 case CropType.Canola:
@@ -653,14 +626,6 @@ namespace H.Core.Enumerations
                     return false;
             }
         }
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
-
-        #region Event Handlers
 
         #endregion
     }
