@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualBasic.Logging;
 
 namespace H.Core.Tools
 {
@@ -13,7 +12,7 @@ namespace H.Core.Tools
     {
         private const string _logFilesPrefix = "holos-logs";
 
-        public FileLogTraceListener TraceListener { get; set; }
+        public TextWriterTraceListener TraceListener { get; set; }
 
         public FileTraceListener()
         {
@@ -22,15 +21,21 @@ namespace H.Core.Tools
 
         private void Initialize()
         {
-            TraceListener = new FileLogTraceListener
+            var logFile = Path.Combine(GetLogFolderPath(), $"{_logFilesPrefix}-{DateTime.Now:yyyy-MM-dd}.log");
+            
+            // Ensure log directory exists
+            var logDirectory = Path.GetDirectoryName(logFile);
+            if (!Directory.Exists(logDirectory))
+            {
+                Directory.CreateDirectory(logDirectory);
+            }
+
+            TraceListener = new TextWriterTraceListener(logFile)
             {
                 Name = "HolosLogTraceListener",
-                CustomLocation = GetLogFolderPath(), 
-                BaseFileName = _logFilesPrefix,
-                LogFileCreationSchedule = LogFileCreationScheduleOption.Daily, 
                 TraceOutputOptions = TraceOptions.DateTime,
-                AutoFlush = false,
             };
+            
             Trace.Listeners.Add(TraceListener);
         }
 

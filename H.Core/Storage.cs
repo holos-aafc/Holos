@@ -7,13 +7,11 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Resources;
-using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using System.Threading.Tasks;
 using H.Core.Models;
 using H.Core.Tools;
 using H.Infrastructure;
-using Microsoft.VisualBasic.Logging;
 using Newtonsoft.Json;
 using Prism.Mvvm;
 
