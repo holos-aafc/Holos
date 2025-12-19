@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <OutputType>Exe</OutputType>
     <SccProjectName>
     </SccProjectName>
@@ -54,7 +54,8 @@
   <ItemGroup>
     <None Include="H.CLI_TemporaryKey.pfx" />
   </ItemGroup>
-  <ItemGroup>
+  <!-- Temporarily removing COM references for .NET 8 compatibility -->
+  <!--<ItemGroup>
     <COMReference Include="VBIDE">
       <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>5</VersionMajor>
@@ -64,7 +65,7 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-  </ItemGroup>
+  </ItemGroup>-->
   <ItemGroup>
     <ProjectReference Include="..\H.Content\H.Content.csproj" />
     <ProjectReference Include="..\H.Core\H.Core.csproj" />

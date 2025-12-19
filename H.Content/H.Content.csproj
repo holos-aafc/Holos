@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <PackageId>AAFC.Holos.Content</PackageId>
     <Authors>AAFC</Authors>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -24,6 +24,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Prism.Core" Version="7.2.0.1422" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.6" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resource.Designer.cs">

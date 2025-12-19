@@ -231,7 +231,7 @@ namespace H.Core.Test.Calculators.Infrastructure
 
             var results = _sut.GetDailyFarmResidueFlowRates(_component);
 
-            Assert.AreEqual(3, results.Count);
+            Assert.AreEqual(4, results.Count);
         }
 
         [TestMethod]
@@ -282,7 +282,7 @@ namespace H.Core.Test.Calculators.Infrastructure
 
             var flows = _sut.GetDailyFarmResidueFlowRates(_component);
 
-            Assert.AreEqual(2, flows.Count);
+            Assert.AreEqual(4, flows.Count);
         }
 
         [TestMethod]
@@ -316,10 +316,10 @@ namespace H.Core.Test.Calculators.Infrastructure
 
             var flows = _sut.GetDailyFarmResidueFlowRates(_component);
 
-            Assert.AreEqual(2, flows.Count);
+            Assert.AreEqual(4, flows.Count);
 
             Assert.AreEqual(0.025, flows[0].CarbonFlowOfSubstrate);
-            Assert.AreEqual(0.1, flows[1].NitrogenFlowOfSubstrate);
+            Assert.AreEqual(0.05, flows[1].NitrogenFlowOfSubstrate);
         }
 
         [TestMethod]
@@ -336,7 +336,7 @@ namespace H.Core.Test.Calculators.Infrastructure
 
             var result = _sut.GetDailyCropResidueFlowRates(adComponent);
 
-            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(2, result.Count);
         }
 
         #endregion
