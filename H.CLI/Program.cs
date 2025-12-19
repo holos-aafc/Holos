@@ -1,6 +1,5 @@
 ﻿using H.CLI.Properties;
 using System;
-using System.Deployment;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -23,6 +22,7 @@ using H.Core.Calculators.Nitrogen;
 using H.Core.Providers.Climate;
 using H.Core.Services.Initialization;
 using H.Core.Services.LandManagement;
+using System.Reflection;
 
 namespace H.CLI
 {
@@ -256,13 +256,14 @@ namespace H.CLI
 
         public static string GetVersionString()
         {
-            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            try
             {
-                return System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+                var version = Assembly.GetExecutingAssembly().GetName().Version;
+                return version?.ToString() ?? "1.0.0.0";
             }
-            else
+            catch
             {
-                return "1.0";
+                return "1.0.0.0";
             }
         }
 
