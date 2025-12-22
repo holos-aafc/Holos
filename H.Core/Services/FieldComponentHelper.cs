@@ -10,7 +10,6 @@ using H.Core.Providers.Fertilizer;
 using H.Core.Providers.Soil;
 using H.Core.Services.Initialization.Crops;
 using Microsoft.Extensions.Logging.Abstractions;
-using static H.Core.Services.LandManagement.FieldResultsService;
 
 namespace H.Core.Services
 {

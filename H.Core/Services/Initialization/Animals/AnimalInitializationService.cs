@@ -1,6 +1,5 @@
 ﻿using H.Core.Providers.Animals;
 using H.Core.Providers.Climate;
-using System.Collections.Generic;
 using H.Core.Calculators.Nitrogen;
 using H.Core.Models;
 using AutoMapper;

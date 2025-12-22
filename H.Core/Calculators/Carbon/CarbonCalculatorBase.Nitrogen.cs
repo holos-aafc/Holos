@@ -1,13 +1,8 @@
 ﻿using H.Core.Calculators.Nitrogen;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
-using H.Core.Services.Animals;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using H.Core.Emissions.Results;
 using H.Core.Enumerations;
-using H.Core.Providers.Animals;
 using H.Core.Providers.Climate;
 
 namespace H.Core.Calculators.Carbon

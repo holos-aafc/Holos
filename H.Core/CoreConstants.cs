@@ -2,7 +2,6 @@
 
 using System;
 using H.Core.Properties;
-using H.Infrastructure;
 
 #endregion
 

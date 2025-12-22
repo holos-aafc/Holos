@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Diagnostics;
+﻿using System.ComponentModel;
 using AutoMapper;
 using H.Core.Converters;
 using H.Core.CustomAttributes;

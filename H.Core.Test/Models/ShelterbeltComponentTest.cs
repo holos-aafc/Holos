@@ -1,5 +1,4 @@
-﻿using H.Core.Models;
-using H.Core.Models.LandManagement.Shelterbelt;
+﻿using H.Core.Models.LandManagement.Shelterbelt;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace H.Core.Test.Models

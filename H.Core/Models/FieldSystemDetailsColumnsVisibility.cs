@@ -1,6 +1,4 @@
-﻿using Prism.Mvvm;
-
-namespace H.Core.Models
+﻿namespace H.Core.Models
 {
     /// <summary>
     /// The class used to store the visibility of the columns related to the FieldSystemsDetailView when the user has selected the ICBM carbon modelling approach

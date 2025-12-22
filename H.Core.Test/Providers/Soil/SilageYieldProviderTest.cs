@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using H.Core.Providers.Soil;
 using H.Core.Enumerations;
 

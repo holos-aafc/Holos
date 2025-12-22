@@ -7,12 +7,8 @@ using H.Core.Services.Animals;
 using H.Core.Enumerations;
 using H.Core.Models.Animals;
 using System;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using H.Core.Providers.AnaerobicDigestion;
 using H.Core.Services;
 using H.Core.Services.Initialization.Crops;
-using H.Core.Services.LandManagement;
 
 namespace H.Core.Calculators.Carbon
 {

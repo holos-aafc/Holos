@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Models;
-using H.Core.Models.Animals;
 
 namespace H.Core.Providers.Animals.Table_28
 {

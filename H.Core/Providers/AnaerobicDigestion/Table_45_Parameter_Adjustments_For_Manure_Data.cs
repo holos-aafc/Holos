@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace H.Core.Providers.AnaerobicDigestion
+﻿namespace H.Core.Providers.AnaerobicDigestion
 {
     public class Table_45_Parameter_Adjustments_For_Manure_Data
     {

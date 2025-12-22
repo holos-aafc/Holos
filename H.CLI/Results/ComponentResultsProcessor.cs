@@ -20,7 +20,6 @@ using H.Core;
 using H.Core.Calculators.Infrastructure;
 using H.Core.Calculators.Nitrogen;
 using H.Core.Converters;
-using H.Core.Providers.Climate;
 using H.Core.Services.Animals;
 
 

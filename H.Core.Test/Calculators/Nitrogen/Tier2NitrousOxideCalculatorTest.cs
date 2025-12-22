@@ -1,15 +1,6 @@
 ﻿using H.Core.Calculators.Nitrogen;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using H.Core.Calculators.Carbon;
-using H.Core.Models;
-using H.Core.Models.LandManagement.Fields;
-using H.Core.Providers.Climate;
-using H.Core.Services.LandManagement;
 
 namespace H.Core.Test.Calculators.Nitrogen
 {

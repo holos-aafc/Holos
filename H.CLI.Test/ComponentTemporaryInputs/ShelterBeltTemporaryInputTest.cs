@@ -1,10 +1,6 @@
-﻿using H.CLI.UserInput;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
 using H.CLI.TemporaryComponentStorage;
 
 namespace H.CLI.Test.ComponentTemporaryInputs

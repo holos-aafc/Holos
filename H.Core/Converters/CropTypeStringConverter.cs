@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using H.Core.Enumerations;
-using H.Core.Properties;
 
 namespace H.Core.Converters
 {

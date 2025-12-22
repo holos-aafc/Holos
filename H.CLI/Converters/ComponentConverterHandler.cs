@@ -1,19 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Reflection;
 using H.CLI.Factories;
 using H.CLI.Handlers;
 using H.CLI.Interfaces;
-using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
-using H.Core.Models.Animals.Beef;
-using H.Core.Models.Animals.Dairy;
-using H.Core.Models.Animals.OtherAnimals;
-using H.Core.Models.Animals.Poultry;
-using H.Core.Models.Animals.Sheep;
-using H.Core.Models.Animals.Swine;
 
 namespace H.CLI.Converters
 {

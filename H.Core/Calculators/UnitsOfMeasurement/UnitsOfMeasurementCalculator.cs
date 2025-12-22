@@ -7,8 +7,6 @@ using H.Core.Properties;
 using H.Infrastructure;
 using Prism.Mvvm;
 using System;
-using System.Diagnostics;
-using System.Windows.Navigation;
 
 namespace H.Core.Calculators.UnitsOfMeasurement
 {

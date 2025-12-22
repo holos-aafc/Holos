@@ -6,7 +6,6 @@ using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models.LandManagement.Rotation;
-using H.Core.Services.LandManagement;
 using H.Infrastructure;
 using Microsoft.Extensions.Logging.Abstractions;
 
