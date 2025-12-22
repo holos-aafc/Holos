@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using H.Core.Calculators.Nitrogen;
 using H.Core.Models;
 using AutoMapper;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace H.Core.Services.Initialization.Animals
 {
@@ -113,14 +114,14 @@ namespace H.Core.Services.Initialization.Animals
             var _manureCompositionDataMapperConfiguration = new MapperConfiguration(configure: configuration =>
             {
                 configuration.CreateMap<DefaultManureCompositionData, DefaultManureCompositionData>();
-            });
+            }, new NullLoggerFactory());
 
             _defaultManureCompositionDataMapper = _manureCompositionDataMapperConfiguration.CreateMapper();
 
             var _beddingMaterialCompositionMapperConfiguration = new MapperConfiguration(configure: configuration =>
             {
                 configuration.CreateMap<Table_30_Default_Bedding_Material_Composition_Data, Table_30_Default_Bedding_Material_Composition_Data>();
-            });
+            }, new NullLoggerFactory());
 
             _defaultBeddingCompositionDataMapper = _beddingMaterialCompositionMapperConfiguration.CreateMapper();
         }

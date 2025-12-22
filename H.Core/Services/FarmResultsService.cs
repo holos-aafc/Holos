@@ -32,6 +32,7 @@ using H.Core.Services.Animals;
 using H.Core.Services.Initialization;
 using H.Core.Services.LandManagement;
 using H.Infrastructure;
+using Microsoft.Extensions.Logging.Abstractions;
 using Prism.Events;
 
 namespace H.Core.Services
@@ -135,7 +136,16 @@ namespace H.Core.Services
                     .ForMember(y => y.StageStates, z => z.Ignore())
                     .ForMember(y => y.ClimateData, z => z.Ignore())
                     .ForMember(y => y.GeographicData, z => z.Ignore())
-                    .ForMember(y => y.Components, z => z.Ignore());
+                    .ForMember(y => y.Components, z => z.Ignore())
+                    .ForMember(y => y.AnimalComponents, z => z.Ignore())
+                    .ForMember(y => y.DairyComponents, z => z.Ignore())
+                    .ForMember(y => y.BeefCattleComponents, z => z.Ignore())
+                    .ForMember(y => y.SwineComponents, z => z.Ignore())
+                    .ForMember(y => y.SheepComponents, z => z.Ignore())
+                    .ForMember(y => y.PoultryComponents, z => z.Ignore())
+                    .ForMember(y => y.OtherLivestockComponents, z => z.Ignore())
+                    .ForMember(y => y.FieldSystemComponents, z => z.Ignore())
+                    .ForMember(y => y.AnaerobicDigestionComponents, z => z.Ignore());
 
                 x.CreateMap<Table_15_Default_Soil_N2O_Emission_BreakDown_Provider,
                     Table_15_Default_Soil_N2O_Emission_BreakDown_Provider>();
@@ -144,7 +154,7 @@ namespace H.Core.Services
                 x.CreateMap<DefaultManureCompositionData, DefaultManureCompositionData>();
 
                 x.CreateMap<Diet, Diet>();
-            });
+            }, new NullLoggerFactory());
 
             _farmMapper = farmMapperConfiguration.CreateMapper();
 
@@ -152,7 +162,7 @@ namespace H.Core.Services
 
             #region Defaults
 
-            var defaultMapperConfiguration = new MapperConfiguration(x => { x.CreateMap<Defaults, Defaults>(); });
+            var defaultMapperConfiguration = new MapperConfiguration(x => { x.CreateMap<Defaults, Defaults>(); }, new NullLoggerFactory());
 
             _defaultsMapper = defaultMapperConfiguration.CreateMapper();
 
@@ -163,7 +173,7 @@ namespace H.Core.Services
             var detailsScreenCropViewItemMapperConfiguration = new MapperConfiguration(x =>
                 {
                     x.CreateMap<CropViewItem, CropViewItem>();
-                });
+                }, new NullLoggerFactory());
 
             _detailsScreenCropViewItemMapper = detailsScreenCropViewItemMapperConfiguration.CreateMapper();
 
@@ -179,14 +189,14 @@ namespace H.Core.Services
                 x.CreateMap<ClimateData, ClimateData>()
                     .ForMember(y => y.DailyClimateData, z => z.Ignore())
                     .ForMember(y => y.Guid, z => z.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _climateDataMapper = climateDataMapper.CreateMapper();
 
             var dailyclimateDataMapper = new MapperConfiguration(x =>
             {
                 x.CreateMap<DailyClimateData, DailyClimateData>();
-            });
+            }, new NullLoggerFactory());
 
             _dailyClimateDataMapper = dailyclimateDataMapper.CreateMapper();
 
@@ -201,21 +211,21 @@ namespace H.Core.Services
                     .ForMember(y => y.DefaultSoilData, z => z.Ignore())
                     .ForMember(y => y.CustomYieldData, z => z.Ignore())
                     .ForMember(y => y.Guid, z => z.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _geographicDataMapper = geographicDataMapper.CreateMapper();
 
             var soilDataMapper = new MapperConfiguration(x =>
             {
                 x.CreateMap<SoilData, SoilData>();
-            });
+            }, new NullLoggerFactory());
 
             _soilDataMapper = soilDataMapper.CreateMapper();
 
             var customYieldMapper = new MapperConfiguration(x =>
             {
                 x.CreateMap<CustomUserYieldData, CustomUserYieldData>();
-            });
+            }, new NullLoggerFactory());
 
             _customYieldDataMapper = customYieldMapper.CreateMapper();
 

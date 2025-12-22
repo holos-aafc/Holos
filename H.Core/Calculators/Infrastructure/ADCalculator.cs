@@ -14,6 +14,7 @@ using AutoMapper;
 using H.Core.Providers.Climate;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Services.Animals;
+using Microsoft.Extensions.Logging.Abstractions;
 using SubstrateFlowInformation = H.Core.Models.Infrastructure.SubstrateFlowInformation;
 
 namespace H.Core.Calculators.Infrastructure
@@ -42,7 +43,7 @@ namespace H.Core.Calculators.Infrastructure
                 configuration.CreateMap<SubstrateFlowInformation, SubstrateFlowInformation>()
                     .ForMember(property => property.Name, options => options.Ignore())
                     .ForMember(property => property.Guid, options => options.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _substrateMapper = substrateFlowMapperConfiguration.CreateMapper();
         }

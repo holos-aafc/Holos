@@ -22,6 +22,7 @@ using H.Core.Services.LandManagement;
 using AutoMapper;
 using AutoMapper.Configuration.Annotations;
 using H.Core.Services.Animals;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace H.Core.Services.Initialization.Crops
 {
@@ -86,7 +87,7 @@ namespace H.Core.Services.Initialization.Crops
             var soilDataMapper = new MapperConfiguration(x =>
             {
                 x.CreateMap<SoilData, SoilData>();
-            });
+            }, new NullLoggerFactory());
 
             _soilDataMapper = soilDataMapper.CreateMapper();
         }

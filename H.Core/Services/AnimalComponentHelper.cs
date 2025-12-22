@@ -9,6 +9,7 @@ using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.Animals.Beef;
 using H.Core.Providers.Feed;
+using Microsoft.Extensions.Logging.Abstractions;
 
 #endregion
 
@@ -35,7 +36,7 @@ namespace H.Core.Services
                 x.CreateMap<AnimalGroup, AnimalGroup>()
                     .ForMember(y => y.Guid, z => z.Ignore())
                     .ForMember(y => y.ManagementPeriods, z => z.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _animalGroupMapper = animalGroupMapperConfiguration.CreateMapper();
 
@@ -45,7 +46,7 @@ namespace H.Core.Services
                     .ForMember(y => y.Guid, z => z.Ignore())
                     .ForMember(y => y.HousingDetails, z => z.Ignore())
                     .ForMember(y => y.ManureDetails, z => z.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _managementPeriodMapper = managementPeriodMapperConfiguration.CreateMapper();
         }
@@ -176,7 +177,7 @@ namespace H.Core.Services
                 x.CreateMap<ManureDetails, ManureDetails>()
                  .ForMember(y => y.Name, z => z.Ignore())
                  .ForMember(y => y.Guid, z => z.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             var mapper = configuration.CreateMapper();
 
@@ -192,7 +193,7 @@ namespace H.Core.Services
                 x.CreateMap<HousingDetails, HousingDetails>()
                  .ForMember(y => y.Name, z => z.Ignore())
                  .ForMember(y => y.Guid, z => z.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             var mapper = configuration.CreateMapper();
 

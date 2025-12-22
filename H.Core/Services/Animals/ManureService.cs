@@ -12,6 +12,7 @@ using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
 using H.Core.Services.LandManagement;
 using H.Infrastructure;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace H.Core.Services.Animals
 {
@@ -74,7 +75,7 @@ namespace H.Core.Services.Animals
             {
                 x.CreateMap<DefaultManureCompositionData, DefaultManureCompositionData>()
                     .ForMember(y => y.Guid, z => z.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _manureCompositionMapper = manureCompositionMapperConfiguration.CreateMapper();
         }

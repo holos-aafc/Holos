@@ -8,6 +8,7 @@ using H.Core.Models.LandManagement.Fields;
 using H.Core.Models.LandManagement.Rotation;
 using H.Core.Services.LandManagement;
 using H.Infrastructure;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace H.Core.Services
 {
@@ -33,7 +34,7 @@ namespace H.Core.Services
                 configuration.CreateMap<CropViewItem, CropViewItem>()
                     .ForMember(x => x.IsInitialized, options => options.Ignore())
                     .ForMember(x => x.Guid, options => options.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _cropViewItemMapper = cropViewItemMappingConfiguration.CreateMapper();
         }

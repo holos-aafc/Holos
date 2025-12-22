@@ -34,6 +34,7 @@ using H.Core.Services.Animals;
 using H.Core.Services.Initialization;
 using H.Core.Tools;
 using H.Infrastructure;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace H.Core.Services.LandManagement
 {
@@ -137,7 +138,7 @@ namespace H.Core.Services.LandManagement
                     .ForMember(property => property.ManureApplicationViewItems, options => options.Ignore())
                     .ForMember(property => property.MonthlyIpccTier2TemperatureFactors, options => options.Ignore())
                     .ForMember(property => property.MonthlyIpccTier2WaterFactors, options => options.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _detailViewItemMapper = componentSelectionViewItemToDetailViewItemMapperConfiguration.CreateMapper();
 
@@ -146,45 +147,46 @@ namespace H.Core.Services.LandManagement
                 configuration.CreateMap<ManureApplicationViewItem, ManureApplicationViewItem>()
                     .ForMember(property => property.Name, options => options.Ignore())
                     .ForMember(property => property.Guid, options => options.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             var hayImportViewItemMapperConfiguration = new MapperConfiguration(configure: configuration =>
             {
                 configuration.CreateMap<HayImportViewItem, HayImportViewItem>()
                     .ForMember(property => property.Name, options => options.Ignore())
                     .ForMember(property => property.Guid, options => options.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             var grazingViewItemMapperConfiguration = new MapperConfiguration(configure: configuration =>
             {
                 configuration.CreateMap<GrazingViewItem, GrazingViewItem>()
                     .ForMember(property => property.Name, options => options.Ignore())
                     .ForMember(property => property.Guid, options => options.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             var harvestViewItemMapperConfiguration = new MapperConfiguration(configure: configuration =>
             {
                 configuration.CreateMap<HarvestViewItem, HarvestViewItem>()
                     .ForMember(property => property.Name, options => options.Ignore())
                     .ForMember(property => property.Guid, options => options.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             var fertilizerViewItemMapperConfiguration = new MapperConfiguration(configure: configuration =>
             {
                 configuration.CreateMap<FertilizerApplicationViewItem, FertilizerApplicationViewItem>()
                     .ForMember(property => property.Name, options => options.Ignore())
                     .ForMember(property => property.Guid, options => options.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             var digestateViewItemMapperConfiguration = new MapperConfiguration(configure: configuration =>
             {
                 configuration.CreateMap<DigestateApplicationViewItem, DigestateApplicationViewItem>()
                     .ForMember(property => property.Name, options => options.Ignore())
                     .ForMember(property => property.Guid, options => options.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _manureApplicationViewItemMapper = manureApplicationViewItemConfiguration.CreateMapper();
             _hayImportViewItemMapper = hayImportViewItemMapperConfiguration.CreateMapper();
+            _grazingViewItemMapper = grazingViewItemMapperConfiguration.CreateMapper();
             _harvestViewItemMapper = harvestViewItemMapperConfiguration.CreateMapper();
             _fertilizerViewItemMapper = fertilizerViewItemMapperConfiguration.CreateMapper();
             _digestateViewItemMapper = digestateViewItemMapperConfiguration.CreateMapper();

@@ -7,6 +7,7 @@ using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 using H.Infrastructure;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace H.Core.Models.Animals
 {
@@ -51,7 +52,7 @@ namespace H.Core.Models.Animals
                 config.CreateMap<HousingDetails, HousingDetails>()
                     .ForMember(housingDetails => housingDetails.Guid, opt => opt.Ignore())
                     .ForMember(housingDetails => housingDetails.Name, opt => opt.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _housingDetailsMapper = housingDetailsConfiguration.CreateMapper();
         }

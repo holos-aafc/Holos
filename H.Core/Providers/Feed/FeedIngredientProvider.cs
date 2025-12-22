@@ -9,6 +9,7 @@ using H.Infrastructure;
 using System.Linq;
 using AutoMapper;
 using H.Core.Enumerations;
+using Microsoft.Extensions.Logging.Abstractions;
 
 #endregion
 
@@ -40,7 +41,7 @@ namespace H.Core.Providers.Feed
             var feedIngredientMapper = new MapperConfiguration(x =>
             {
                 x.CreateMap<FeedIngredient, FeedIngredient>();
-            });
+            }, new NullLoggerFactory());
 
             _feedIngredientMapper = feedIngredientMapper.CreateMapper();
         }
