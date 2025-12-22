@@ -22,11 +22,11 @@
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="2.0.7" />
     <PackageReference Include="CsvHelper" Version="33.1.0" />
-    <PackageReference Include="NuGet.Build.Tasks.Pack" Version="6.11.0">
+    <PackageReference Include="NuGet.Build.Tasks.Pack" Version="6.14.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Prism.Wpf" Version="7.2.0.1422" />
+    <PackageReference Include="Prism.Wpf" Version="9.0.537" />
     <PackageReference Include="SharpKml.Core" Version="6.1.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.1" />
   </ItemGroup>

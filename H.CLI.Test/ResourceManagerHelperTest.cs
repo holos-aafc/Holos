@@ -32,7 +32,7 @@ namespace H.CLI.Test
         [TestMethod]
         public void GetKeyGivenValueInResourceFiles_ExpectExceptionThrown_InvalidResourceValue()
         {
-            Assert.ThrowsException<Exception>(() => Properties.Resources.ResourceManager.GetResourceName("NOTAVALIDRESOURCEVALUE", CultureInfo.GetCultureInfo("en-CA")));
+            Assert.Throws<Exception>(() => Properties.Resources.ResourceManager.GetResourceName("NOTAVALIDRESOURCEVALUE", CultureInfo.GetCultureInfo("en-CA")));
             
         }
 

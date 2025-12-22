@@ -12,7 +12,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
         public void TestGetSubDirectoryFiles_ExpectDirectoryNotFound_InvalidDirectoryPath()
         {
              var testDirectory = new RetrieveFilesInDirectories();
-            Assert.ThrowsException<DirectoryNotFoundException>(() => testDirectory.GetSubDirectoryFiles("invalid path"));
+            Assert.Throws<DirectoryNotFoundException>(() => testDirectory.GetSubDirectoryFiles("invalid path"));
         }
 
         [TestMethod]

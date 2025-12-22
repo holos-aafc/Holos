@@ -25,7 +25,7 @@ namespace H.CLI.Test.UserInput
         public void TestSetCultureAndLanguageDefaults_InvalidUserCulture()
         {
             var userCulture = CultureInfo.GetCultureInfo("fr-EU");
-            Assert.ThrowsException<NotSupportedException>(() => CLILanguageConstants.SetCulture(userCulture));
+            Assert.Throws<NotSupportedException>(() => CLILanguageConstants.SetCulture(userCulture));
         }
 
     }

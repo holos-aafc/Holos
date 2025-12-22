@@ -37,7 +37,7 @@ namespace H.CLI.Test.ComponentTemporaryInputs
             CLILanguageConstants.culture = new CultureInfo("fr-CA");
             CLIUnitsOfMeasurementConstants.measurementSystem = MeasurementSystemType.Imperial;
             var shelterTempInput = new ShelterBeltTemporaryInput();
-            Assert.ThrowsException<FormatException>(() => shelterTempInput.ConvertToComponentProperties("RowLength", ImperialUnitsOfMeasurement.Yards, "-54,67", 1, 1, "fileName"));
+            Assert.Throws<FormatException>(() => shelterTempInput.ConvertToComponentProperties("RowLength", ImperialUnitsOfMeasurement.Yards, "-54,67", 1, 1, "fileName"));
         }
     }
 }

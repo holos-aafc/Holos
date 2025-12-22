@@ -46,7 +46,7 @@ namespace H.CLI.Test.ComponentTemporaryInputs
         {
             var shelterTempInput = new ShelterBeltTemporaryInput();
 
-            Assert.ThrowsException<FormatException>(() =>
+            Assert.Throws<FormatException>(() =>
                                   shelterTempInput.ConvertToComponentProperties("YearOfObservation", null, "NotAValidNumber", 1, 1, "fileName"));
         }
 
@@ -55,14 +55,14 @@ namespace H.CLI.Test.ComponentTemporaryInputs
         public void TestConvertToComponentProperties_NegativeInteger_ExpectYearOfObservationToBeSetTo1996()
         {
             var shelterTempInput = new ShelterBeltTemporaryInput();
-            Assert.ThrowsException<FormatException>(() => shelterTempInput.ConvertToComponentProperties("YearOfObservation", null, "-1996", 1, 1, "fileName"));
+            Assert.Throws<FormatException>(() => shelterTempInput.ConvertToComponentProperties("YearOfObservation", null, "-1996", 1, 1, "fileName"));
         }
 
         [TestMethod]
         public void TestConvertToComponentProperties_ExpectException_InvalidTreeSpecies_ExpectInvalidTreeSpecies()
         {
             var shelterTempInput = new ShelterBeltTemporaryInput();
-            Assert.ThrowsException<InvalidCastException>(() =>
+            Assert.Throws<InvalidCastException>(() =>
                                   shelterTempInput.ConvertToComponentProperties("Species", null, "NotAValidTree", 1, 1, "fileName"));
         }
 
@@ -70,7 +70,7 @@ namespace H.CLI.Test.ComponentTemporaryInputs
         public void TestConvertToComponentProperties_ExpectException_InvalidHardinessZone_ExpectFormatException()
         {
             var shelterTempInput = new ShelterBeltTemporaryInput();
-            Assert.ThrowsException<FormatException>(() =>
+            Assert.Throws<FormatException>(() =>
                                   shelterTempInput.ConvertToComponentProperties("HardinessZone", null, "NotAValidHardinessZone", 1, 1, "fileName"));
         }
 
@@ -80,7 +80,7 @@ namespace H.CLI.Test.ComponentTemporaryInputs
         {
             var shelterTempInput = new ShelterBeltTemporaryInput();
 
-            Assert.ThrowsException<InvalidPropertyNameException>(() =>
+            Assert.Throws<InvalidPropertyNameException>(() =>
                                   shelterTempInput.ConvertToComponentProperties("", null, "1996", 1, 1, "fileName"));
         }
 

@@ -58,7 +58,7 @@ namespace H.CLI.Test.Handlers
             listOfComponentsAndTheirPaths.Add("PathExample3", tempComponent3);
             listOfComponentsAndTheirPaths.Add("PathExample4", tempComponent4);
             var errorHandler = new ErrorHandler();
-            Assert.ThrowsException<FormatException>(() => errorHandler.CheckIfComponentsHaveTheSameName(listOfComponentsAndTheirPaths));
+            Assert.Throws<FormatException>(() => errorHandler.CheckIfComponentsHaveTheSameName(listOfComponentsAndTheirPaths));
 
         }
         [TestMethod]
@@ -120,7 +120,7 @@ namespace H.CLI.Test.Handlers
             };
 
             var fileToComponentPair = new KeyValuePair<string, List<IComponentTemporaryInput>>(file, parsedFile);
-            Assert.ThrowsException<Exception>(() => errorHandler.CheckIfEachGroupRefersToOneAnimalGroupType(fileToComponentPair));
+            Assert.Throws<Exception>(() => errorHandler.CheckIfEachGroupRefersToOneAnimalGroupType(fileToComponentPair));
 
         }
 

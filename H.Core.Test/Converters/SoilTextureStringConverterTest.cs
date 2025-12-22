@@ -44,10 +44,17 @@ namespace H.Core.Test.Converters
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
         public void ConvertReturnsException()
         {
-            converter.Convert("beer");
+            try
+            {
+                converter.Convert("beer");
+                Assert.Fail("Expected Exception was not thrown");
+            }
+            catch (Exception)
+            {
+                // Expected exception was thrown, test passes
+            }
         }
 
         #region Additional test attributes
