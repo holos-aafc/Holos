@@ -1,7 +1,6 @@
 ﻿using H.CLI.Results;
 using H.Core;
 using H.Core.Calculators.Carbon;
-using H.Core.Calculators.Climate;
 using H.Core.Calculators.Infrastructure;
 using H.Core.Calculators.Nitrogen;
 using H.Core.Enumerations;
@@ -10,7 +9,6 @@ using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers;
 using H.Core.Providers.Climate;
 using H.Core.Providers.Feed;
-using H.Core.Providers.Soil;
 using H.Core.Services;
 using H.Core.Services.Animals;
 using H.Core.Services.Initialization;
@@ -20,14 +18,10 @@ using H.Core.Services.Initialization.Crops;
 using H.Core.Services.Initialization.Geography;
 using H.Core.Services.LandManagement;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using Prism.Events;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using H.Infrastructure;
 
 namespace H.Integration
 {

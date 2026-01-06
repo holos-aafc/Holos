@@ -1,12 +1,9 @@
 ﻿using H.Core.Enumerations;
-using H.Core.Models.LandManagement.Fields;
 using H.Core.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using H.Core.Models.Infrastructure;
-using H.Content.Properties;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.Animals.Beef;

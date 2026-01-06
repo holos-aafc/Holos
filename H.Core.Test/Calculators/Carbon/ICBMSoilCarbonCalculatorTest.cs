@@ -11,8 +11,6 @@ using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Climate;
-using H.Core.Providers.Evapotranspiration;
-using H.Core.Providers.Precipitation;
 using H.Core.Providers.Soil;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

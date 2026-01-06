@@ -14,7 +14,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
         public void TestInitializeDirectoriesAndFiles_ADirectoryPathIsNotValid_ThrowsExceptions()
         {
             var directoryHandler = new DirectoryHandler();
-            Assert.ThrowsException<DirectoryNotFoundException>(() => directoryHandler.InitializeDirectoriesAndFilesForComponents("123123"));
+            Assert.Throws<DirectoryNotFoundException>(() => directoryHandler.InitializeDirectoriesAndFilesForComponents("123123"));
         }
 
         [TestMethod]

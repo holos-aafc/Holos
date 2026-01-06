@@ -1,5 +1,4 @@
 ﻿using H.Core.Tools;
-using System;
 
 namespace H.Core.Providers.Animals
 {

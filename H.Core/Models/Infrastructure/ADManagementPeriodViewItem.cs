@@ -1,5 +1,4 @@
 ﻿using H.Core.Models.Animals;
-using H.Infrastructure;
 
 namespace H.Core.Models.Infrastructure
 {

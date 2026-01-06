@@ -1,7 +1,5 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using H.Core.Enumerations;
-using H.Core.Properties;
 using H.Infrastructure;
 
 namespace H.Core.Converters

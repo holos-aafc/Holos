@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using H.Core.Enumerations;
 
 namespace H.Core.Providers.Animals

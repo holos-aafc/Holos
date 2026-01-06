@@ -2,10 +2,6 @@
 
 #endregion
 
-using System.Collections.Generic;
-using System.Linq;
-using H.Core.Enumerations;
-
 namespace H.Core.Models.Animals.Beef
 {
     /// <summary>

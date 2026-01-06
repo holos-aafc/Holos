@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Security.Permissions;
-using System.Security.Principal;
-using H.Core.Emissions;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;

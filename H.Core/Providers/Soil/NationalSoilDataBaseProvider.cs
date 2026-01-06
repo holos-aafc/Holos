@@ -4,13 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Windows.Shapes;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
 using H.Core.Tools;
 using H.Infrastructure;
-using Newtonsoft.Json.Linq;
 
 #endregion
 
