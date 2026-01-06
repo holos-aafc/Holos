@@ -345,6 +345,7 @@ namespace H.Core.Test.Calculators.Carbon
                 PercentageOfRootsReturnedToSoil = 100,
                 CarbonConcentration = 0.45,
                 PercentageOfProductYieldReturnedToSoil = 0,
+                PercentageOfExtraRootsReturnedToSoil = 100,
                 IrrigationType = IrrigationType.RainFed,
                 AmountOfIrrigation = 0,
                 MoistureContentOfCrop = 0.12,
@@ -353,6 +354,7 @@ namespace H.Core.Test.Calculators.Carbon
                 BiomassCoefficientRoots = 0.4,
                 BiomassCoefficientExtraroot = 0.3,
                 PlantCarbonInAgriculturalProduct = 396,
+
             };
 
             var farm = new Farm()
@@ -373,16 +375,16 @@ namespace H.Core.Test.Calculators.Carbon
             // Plant C in agricultural product: Cp = 391.5
 
             // Cbg = Cr + Ce
-            // = [Cp * (Rr/Rp) * (Sr/100) * 1/standLength] + [Cp * (Re/Rp)]
-            // = [396 * (0.4/0.5) * (100/100) * 1/5] + [396 * (0.3 / 0.5)]
+            // = [Cp * (Rr/Rp) * (Sr/100) * 1/standLength] + [Cp * (Re/Rp) * (Se/100)]
+            // = [396 * (0.4/0.5) * (100/100) * 1/5] + [396 * (0.3 / 0.5) * 1]
             // = [396 * 0.8 * 1 * 0.2] + [396 * (0.6)]
             // = 63.36 + 237.6
             // = 300.96
 
             // * NOTE: the stand length was removed from this calculation (not considered anymore). New calculation should be:
             // Cbg = Cr + Ce
-            // = [Cp * (Rr/Rp) * (Sr/100)] + [Cp * (Re/Rp)]
-            // = [396 * (0.3/0.5) * (100/100)] + [396 * (0.3 / 0.5)]
+            // = [Cp * (Rr/Rp) * (Sr/100)] + [Cp * (Re/Rp)  * (Se/100)]
+            // = [396 * (0.3/0.5) * (100/100)] + [396 * (0.3 / 0.5) * 1]
             // = [396 * 0.8 * 1] + [396 * (0.6)]
             // = [root input less than 450 so = 450] 
             // = 237.6 + 450
@@ -752,6 +754,7 @@ namespace H.Core.Test.Calculators.Carbon
             var currentYearViewItem = new CropViewItem()
             {
                 PlantCarbonInAgriculturalProduct = 100,
+                PercentageOfExtraRootsReturnedToSoil = 100,
                 BiomassCoefficientProduct = 0.15,
                 BiomassCoefficientExtraroot = 0.04,
             };
@@ -777,6 +780,7 @@ namespace H.Core.Test.Calculators.Carbon
             var currentYearViewItem = new CropViewItem()
             {
                 PlantCarbonInAgriculturalProduct = 100,
+                PercentageOfExtraRootsReturnedToSoil = 100,
                 BiomassCoefficientProduct = 0.15,
                 BiomassCoefficientExtraroot = 0.04,
             };
