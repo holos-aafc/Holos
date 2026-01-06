@@ -17,11 +17,11 @@ namespace H.Core.Services.Initialization.Crops
         }
 
         /// <summary>
-            /// Initialize default percentage return to soil values for a <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/>.
-            /// </summary>
-            /// <param name="farm">The farm containing the <see cref="Defaults"/> object used to initialize each <see cref="CropViewItem"/></param>
-            /// <param name="viewItem">The <see cref="CropViewItem"/> that will be initialized</param>
-            public void InitializePercentageReturns(Farm farm, CropViewItem viewItem)
+        /// Initialize default percentage return to soil values for a <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/>.
+        /// </summary>
+        /// <param name="farm">The farm containing the <see cref="Defaults"/> object used to initialize each <see cref="CropViewItem"/></param>
+        /// <param name="viewItem">The <see cref="CropViewItem"/> that will be initialized</param>
+        public void InitializePercentageReturns(Farm farm, CropViewItem viewItem)
         {
             if (farm != null && viewItem != null)
             {
@@ -80,9 +80,15 @@ namespace H.Core.Services.Initialization.Crops
                     viewItem.PercentageOfRootsReturnedToSoil = 100;
                 }
 
-                // Equation 2.1.2-29
-                viewItem.PercentageOfExtraRootsReturnedToSoil = 100;
+                this.InitializeExtrarootsReturned(farm, viewItem);
             }
+        }
+
+        public void InitializeExtrarootsReturned(Farm farm, CropViewItem viewItem)
+        {
+            // Equation 2.1.2-29
+            viewItem.PercentageOfExtraRootsReturnedToSoil = 100;
+            viewItem.PercentageOfExtrarootsReturnedToSoilIsInitialized = true;
         }
 
         #endregion

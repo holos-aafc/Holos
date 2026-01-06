@@ -75,6 +75,8 @@ namespace H.Core.Models.LandManagement.Fields
         private double _fuelEnergy;
         private double _herbicideEnergy;
 
+        private bool _percentageOfExtrarootsReturnedToSoilIsInitialized;
+
         /*
          * Main crop residues
          */
@@ -1234,6 +1236,15 @@ namespace H.Core.Models.LandManagement.Fields
         /// Indicates if this item is part of the run-in/spin-up period
         /// </summary>
         public bool IsRunInPeriodItem { get; set; }
+
+        /// <summary>
+        /// Indicates if the percentage of extraroots returned to soil has been initialized (this is needed to initialize the value on old farm files)
+        /// </summary>
+        public bool PercentageOfExtrarootsReturnedToSoilIsInitialized
+        {
+            get => _percentageOfExtrarootsReturnedToSoilIsInitialized;
+            set => SetProperty(ref _percentageOfExtrarootsReturnedToSoilIsInitialized, value);
+        }
 
         #endregion
 
