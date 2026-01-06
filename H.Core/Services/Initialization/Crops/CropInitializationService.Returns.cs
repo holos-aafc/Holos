@@ -79,6 +79,9 @@ namespace H.Core.Services.Initialization.Crops
                     viewItem.PercentageOfStrawReturnedToSoil = 0;
                     viewItem.PercentageOfRootsReturnedToSoil = 100;
                 }
+
+                // Equation 2.1.2-29
+                viewItem.PercentageOfExtraRootsReturnedToSoil = 100;
             }
         }
 
