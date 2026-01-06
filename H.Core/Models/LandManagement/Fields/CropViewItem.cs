@@ -63,7 +63,8 @@ namespace H.Core.Models.LandManagement.Fields
         private double _nitrogenFertilizerRateOnStubble;
         private double _nitrogenFertilizerRateOnFallow;
         private double _nitrogenDepositionAmount;
-        
+
+        private double _percentageOfExtraRootsReturnedToSoil;
         private double _percentageOfStrawReturnedToSoil;
         private double _percentageOfRootsReturnedToSoil;
         private double _percentageOfProductYieldReturnedToSoil;
@@ -545,6 +546,17 @@ namespace H.Core.Models.LandManagement.Fields
         {
             get { return _percentageOfStrawReturnedToSoil; }
             set { this.SetProperty(ref _percentageOfStrawReturnedToSoil, value); }
+        }
+
+        /// <summary>
+        /// S_e
+        /// 
+        /// (%)
+        /// </summary>
+        public double PercentageOfExtraRootsReturnedToSoil
+        {
+            get { return _percentageOfExtraRootsReturnedToSoil; }
+            set { this.SetProperty(ref _percentageOfExtraRootsReturnedToSoil, value); }
         }
 
         /// <summary>
