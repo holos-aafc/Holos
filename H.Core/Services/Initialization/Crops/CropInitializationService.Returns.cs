@@ -87,8 +87,13 @@ namespace H.Core.Services.Initialization.Crops
         public void InitializeExtrarootsReturned(Farm farm, CropViewItem viewItem)
         {
             // Equation 2.1.2-29
-            viewItem.PercentageOfExtraRootsReturnedToSoil = 100;
+            viewItem.PercentageOfExtraRootsReturnedToSoil = this.GetDefaultPercentageExtrarootReturnedToSoil();
             viewItem.PercentageOfExtrarootsReturnedToSoilIsInitialized = true;
+        }
+
+        public double GetDefaultPercentageExtrarootReturnedToSoil()
+        {
+            return 100.0;
         }
 
         #endregion

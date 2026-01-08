@@ -5,7 +5,10 @@ using H.CLI.Interfaces;
 using H.CLI.UserInput;
 using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.Enumerations;
+using H.Core.Models;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Nitrogen;
+using H.Core.Services.Initialization.Crops;
 
 namespace H.CLI.TemporaryComponentStorage
 {
@@ -17,6 +20,8 @@ namespace H.CLI.TemporaryComponentStorage
         private readonly UnitsOfMeasurementCalculator _unitsOfMeasurementCalculator = new UnitsOfMeasurementCalculator();
         private InputHelper _inputHelper = new InputHelper();
         private bool ThrowExceptionOnNegativeInput = false;
+
+        private ICropInitializationService _initializationService = new CropInitializationService();
 
         #endregion
 
@@ -420,7 +425,11 @@ namespace H.CLI.TemporaryComponentStorage
                 propertyInfo.SetValue(this, Convert.ChangeType(value, propertyInfo.PropertyType, CLILanguageConstants.culture), null);
         }
 
-        // Look for the missing headers and apply the default values for the associated property
+        /// <summary>
+        /// Applies default values for missing or optional properties after all input data has been processed.
+        /// This method sets default values for properties when these values were not provided in the input data but are required for calculations.
+        /// </summary>
+        /// <param name="componentKeys">The component keys configuration that indicates which headers were missing from the input data</param>
         public void FinalSettings(IComponentKeys componentKeys)
         {
             if (componentKeys.MissingHeaders.ContainsKey(Properties.Resources.Key_NitrogenFixation) && componentKeys.MissingHeaders[Properties.Resources.Key_NitrogenFixation])
@@ -428,10 +437,16 @@ namespace H.CLI.TemporaryComponentStorage
                 var nitrogenFixationProvider = new NitogenFixationProvider();
                 this.NitrogenFixation = nitrogenFixationProvider.GetNitrogenFixationResult(this.CropType).Fixation;
             }
+
             if (componentKeys.MissingHeaders.ContainsKey(Properties.Resources.Key_NitrogenDeposit) && componentKeys.MissingHeaders[Properties.Resources.Key_NitrogenDeposit])
             {
                 var defaultDeposit = 5;
                 this.NitrogenDeposit = defaultDeposit;
+            }
+
+            if (componentKeys.MissingHeaders.ContainsKey(Properties.Resources.Key_PercentageOfExtrarootsReturnedToSoil) && componentKeys.MissingHeaders[Properties.Resources.Key_PercentageOfExtrarootsReturnedToSoil])
+            {
+                this.PercentageOfExtrarootsReturnedToSoil = _initializationService.GetDefaultPercentageExtrarootReturnedToSoil();
             }
         }
         #endregion

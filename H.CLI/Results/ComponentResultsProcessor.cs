@@ -1,11 +1,18 @@
 ﻿using H.CLI.Converters;
 using H.CLI.UserInput;
+using H.Core;
+using H.Core.Calculators.Infrastructure;
+using H.Core.Calculators.Nitrogen;
 using H.Core.Calculators.UnitsOfMeasurement;
+using H.Core.Converters;
 using H.Core.Emissions;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
+using H.Core.Providers.Climate;
 using H.Core.Services;
+using H.Core.Services.Animals;
+using H.Core.Services.Initialization;
 using H.Core.Services.LandManagement;
 using H.Infrastructure;
 using Prism.Events;
@@ -16,12 +23,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using H.Core;
-using H.Core.Calculators.Infrastructure;
-using H.Core.Calculators.Nitrogen;
-using H.Core.Converters;
-using H.Core.Providers.Climate;
-using H.Core.Services.Animals;
 
 
 namespace H.CLI.Results
@@ -42,6 +43,7 @@ namespace H.CLI.Results
         private readonly IFieldResultsService _fieldResultsService;
         private readonly IFarmResultsService _farmResultsService;
         private readonly EmissionTypeConverter _emissionsConverter;
+        private readonly IInitializationService _initializationService;
 
         private List<FarmEmissionResults> _farmEmissionResults = new List<FarmEmissionResults>();
 
@@ -79,10 +81,13 @@ namespace H.CLI.Results
             _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService, new ADCalculator(), manureService, animalService, n2OEmissionFactorCalculator );
 
             _emissionsConverter = new EmissionTypeConverter();
+            _initializationService = new InitializationService();
         }
 
         #endregion
 
+        #region Public Methods
+        
         /// <summary>
         /// Takes in a Storage object and iterates through every Farm.
         /// 
@@ -136,15 +141,6 @@ namespace H.CLI.Results
             WriteFieldCarbonResultsToFile();
         }
 
-        private void WriteFieldCarbonResultsToFile()
-        {
-            var path = InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.TotalResultsForAllFarms + @"\" + Properties.Resources.TotalResultsAllFields + CLILanguageConstants.OutputLanguageAddOn;
-
-            //_fieldResultsService.ExportAllResultsToFile(path: path,
-            //    measurementSystemType: CLIUnitsOfMeasurementConstants.measurementSystem,
-            //    cultureInfo: CLILanguageConstants.culture, viewItems: TODO, farm: TODO);
-        }
-
         /// <summary>
         /// Writes both the GHG and CO2e yearly emission results for all farms and is written to a total results folder that we create (using the InfrastructureConstants.BaseOutputDirectoryPath)
         /// Builds up a single string rather than creating a bunch of immutable strings to improve efficiency, but as a result, is more fragile. However, treat each section 
@@ -159,8 +155,8 @@ namespace H.CLI.Results
                 stringBuilder.Clear();
 
                 // Build the path depending on which output file we are building
-                var path = outputType == EmissionDisplayUnits.KilogramsGhgs ? 
-                    InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.TotalResultsForAllFarms + @"\" + Properties.Resources.TotalResultsGHG + CLILanguageConstants.OutputLanguageAddOn : 
+                var path = outputType == EmissionDisplayUnits.KilogramsGhgs ?
+                    InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.TotalResultsForAllFarms + @"\" + Properties.Resources.TotalResultsGHG + CLILanguageConstants.OutputLanguageAddOn :
                     InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.TotalResultsForAllFarms + @"\" + Properties.Resources.TotalResultsCO2E + CLILanguageConstants.OutputLanguageAddOn;
 
                 // Build the headers
@@ -311,10 +307,10 @@ namespace H.CLI.Results
                             // Output subtotals for this component
                             if (outputType != EmissionDisplayUnits.KilogramsGhgs)
                             {
-                                var totalCO2eForComponent = _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsCH4, EmissionDisplayUnits.KilogramsC02e, totalEntericMethaneForComponent) + 
-                                                            _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsCH4, EmissionDisplayUnits.KilogramsC02e, totalManureMethaneForComponent) + 
-                                                            _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsN2O, EmissionDisplayUnits.KilogramsC02e, totalDirectN2OForComponent) + 
-                                                            _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsN2O, EmissionDisplayUnits.KilogramsC02e, totalIndirectN2OForComponent) + 
+                                var totalCO2eForComponent = _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsCH4, EmissionDisplayUnits.KilogramsC02e, totalEntericMethaneForComponent) +
+                                                            _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsCH4, EmissionDisplayUnits.KilogramsC02e, totalManureMethaneForComponent) +
+                                                            _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsN2O, EmissionDisplayUnits.KilogramsC02e, totalDirectN2OForComponent) +
+                                                            _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsN2O, EmissionDisplayUnits.KilogramsC02e, totalIndirectN2OForComponent) +
                                                             _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsC02, EmissionDisplayUnits.KilogramsC02e, totalEnergyCO2ForComponent);
 
                                 stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02e, outputType, totalCO2eForComponent), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
@@ -358,10 +354,10 @@ namespace H.CLI.Results
 
                     if (outputType != EmissionDisplayUnits.KilogramsGhgs)
                     {
-                        var totalCO2eForFarm = _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsCH4, EmissionDisplayUnits.KilogramsC02e, totalEntericMethaneForFarm) + 
-                                               _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsCH4, EmissionDisplayUnits.KilogramsC02e, totalManureMethaneForFarm) + 
-                                               _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsN2O, EmissionDisplayUnits.KilogramsC02e, totalDirectN2OForFarm) + 
-                                               _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsN2O, EmissionDisplayUnits.KilogramsC02e, totalIndirectN2OForFarm) + 
+                        var totalCO2eForFarm = _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsCH4, EmissionDisplayUnits.KilogramsC02e, totalEntericMethaneForFarm) +
+                                               _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsCH4, EmissionDisplayUnits.KilogramsC02e, totalManureMethaneForFarm) +
+                                               _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsN2O, EmissionDisplayUnits.KilogramsC02e, totalDirectN2OForFarm) +
+                                               _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsN2O, EmissionDisplayUnits.KilogramsC02e, totalIndirectN2OForFarm) +
                                                _emissionsConverter.Convert(EmissionDisplayUnits.KilogramsC02, EmissionDisplayUnits.KilogramsC02e, totalEnergyCO2ForFarm);
 
                         stringBuilder.Append(Math.Round(_emissionTypeConverter.Convert(EmissionDisplayUnits.KilogramsC02e, outputType, totalCO2eForFarm), roundingDigits).ToString(CLILanguageConstants.culture) + CLILanguageConstants.Delimiter);
@@ -702,7 +698,7 @@ namespace H.CLI.Results
                         File.WriteAllText(path, stringBuilder.ToString(), Encoding.UTF8);
                     }
 
-                    catch(Exception e)
+                    catch (Exception e)
                     {
 
                     }
@@ -1101,7 +1097,7 @@ namespace H.CLI.Results
                 }
                 #endregion
 
-            #region Outputs For A Farm
+                #region Outputs For A Farm
                 //Farm Name
                 stringBuilder.Append(CLILanguageConstants.Delimiter);
                 //Component Category
@@ -2118,7 +2114,7 @@ namespace H.CLI.Results
 
             foreach (var farmEmissionResult in _farmEmissionResults)
             {
-                
+
                 var farmName = farmEmissionResult.Farm.Name;
                 var settingsFileName = farmEmissionResult.Farm.SettingsFileName;
                 var path = InfrastructureConstants.BaseOutputDirectoryPath + @"\" + farmName + Properties.Resources.Results + @"\" + farmName + Properties.Resources.FarmResultsFE + settingsFileName + CLILanguageConstants.OutputLanguageAddOn;
@@ -2226,7 +2222,29 @@ namespace H.CLI.Results
             }
         }
 
+        #endregion
+
         #region Private Methods
+
+        private void ValidateFarms(IEnumerable<Farm> farms)
+        {
+            foreach (var farm in farms)
+            {
+                foreach (var farm1 in farms)
+                {
+                    // Check if temp field input file contains the column, if not set default for % return here.
+                }
+            }
+        }
+
+        private void WriteFieldCarbonResultsToFile()
+        {
+            var path = InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.TotalResultsForAllFarms + @"\" + Properties.Resources.TotalResultsAllFields + CLILanguageConstants.OutputLanguageAddOn;
+
+            //_fieldResultsService.ExportAllResultsToFile(path: path,
+            //    measurementSystemType: CLIUnitsOfMeasurementConstants.measurementSystem,
+            //    cultureInfo: CLILanguageConstants.culture, viewItems: TODO, farm: TODO);
+        }
 
         /// <summary>
         /// Gets the headers for monthly results

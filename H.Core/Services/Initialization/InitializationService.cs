@@ -494,6 +494,11 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeExtrarootsReturned(farm, viewItem);
         }
 
+        public double GetDefaultPercentageExtrarootReturnedToSoil()
+        {
+            return _cropInitializationService.GetDefaultPercentageExtrarootReturnedToSoil();
+        }
+
         public void InitializeDailyManureMethaneEmissionRate(Farm farm)
         {
             _animalInitializationService.InitializeDailyManureMethaneEmissionRate(farm);

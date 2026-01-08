@@ -119,7 +119,7 @@ namespace H.CLI.ComponentKeys
             else if (s == Properties.Resources.Key_FertilizerApplicationMethod) return true;
             else if (s == Properties.Resources.Key_PercentageOfExtrarootsReturnedToSoil)
             {
-                return false;
+                return true;
             }
             else return false;
         }
