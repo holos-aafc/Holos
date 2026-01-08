@@ -1,10 +1,7 @@
 ﻿#region Imports
 
-using System;
-using System.Linq;
 using H.CLI.Handlers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 
 #endregion
 

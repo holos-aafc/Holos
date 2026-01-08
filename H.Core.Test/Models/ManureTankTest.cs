@@ -1,6 +1,4 @@
 ﻿using System;
-using H.Core.Converters;
-using H.Core.Emissions.Results;
 using H.Core.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

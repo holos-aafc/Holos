@@ -4,8 +4,6 @@ using H.Core.Providers.Feed;
 using System;
 using System.Collections.ObjectModel;
 using H.Core.Services.Initialization;
-using AutoMapper;
-using System.Collections.Generic;
 
 namespace H.Core.Services
 {

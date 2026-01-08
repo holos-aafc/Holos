@@ -3,9 +3,6 @@ using H.Core.Enumerations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using H.CLI.Handlers;
 using H.CLI.Interfaces;
 
@@ -61,7 +58,7 @@ namespace H.CLI.Test.Handlers
             listOfComponentsAndTheirPaths.Add("PathExample3", tempComponent3);
             listOfComponentsAndTheirPaths.Add("PathExample4", tempComponent4);
             var errorHandler = new ErrorHandler();
-            Assert.ThrowsException<FormatException>(() => errorHandler.CheckIfComponentsHaveTheSameName(listOfComponentsAndTheirPaths));
+            Assert.Throws<FormatException>(() => errorHandler.CheckIfComponentsHaveTheSameName(listOfComponentsAndTheirPaths));
 
         }
         [TestMethod]
@@ -123,7 +120,7 @@ namespace H.CLI.Test.Handlers
             };
 
             var fileToComponentPair = new KeyValuePair<string, List<IComponentTemporaryInput>>(file, parsedFile);
-            Assert.ThrowsException<Exception>(() => errorHandler.CheckIfEachGroupRefersToOneAnimalGroupType(fileToComponentPair));
+            Assert.Throws<Exception>(() => errorHandler.CheckIfEachGroupRefersToOneAnimalGroupType(fileToComponentPair));
 
         }
 

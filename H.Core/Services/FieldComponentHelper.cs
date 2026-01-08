@@ -9,7 +9,7 @@ using H.Core.Providers.Economics;
 using H.Core.Providers.Fertilizer;
 using H.Core.Providers.Soil;
 using H.Core.Services.Initialization.Crops;
-using static H.Core.Services.LandManagement.FieldResultsService;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace H.Core.Services
 {
@@ -46,12 +46,12 @@ namespace H.Core.Services
                     .ForMember(y => y.ManureApplicationViewItems, z => z.Ignore())
                     .ForMember(y => y.CropEconomicData, z => z.Ignore())
                     .ForMember(y => y.FertilizerApplicationViewItems, z => z.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _cropViewItemMapper = cropViewItemMapperConfiguration.CreateMapper();
 
             var cropEconomicDataMapperConfiguration =
-                new MapperConfiguration(x => x.CreateMap<CropEconomicData, CropEconomicData>());
+                new MapperConfiguration(x => x.CreateMap<CropEconomicData, CropEconomicData>(), new NullLoggerFactory());
 
             _cropEconomicDataMapper = cropEconomicDataMapperConfiguration.CreateMapper();
 
@@ -59,7 +59,7 @@ namespace H.Core.Services
             {
                 x.CreateMap<HarvestViewItem, HarvestViewItem>()
                     .ForMember(y => y.Guid, z => z.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _harvestPeriodMapper = harvestPeriodMapperConfiguration.CreateMapper();
 
@@ -67,28 +67,28 @@ namespace H.Core.Services
             {
                 x.CreateMap<GrazingViewItem, GrazingViewItem>()
                     .ForMember(y => y.Guid, z => z.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _grazingPeriodMapper = grazingPeriodMapperConfiguration.CreateMapper();
 
             var manureApplicationViewItemMapper = new MapperConfiguration(x =>
             {
                 x.CreateMap<ManureApplicationViewItem, ManureApplicationViewItem>();
-            });
+            }, new NullLoggerFactory());
 
             _manureApplicationViewItemMapper = manureApplicationViewItemMapper.CreateMapper();
 
             var hayImportViewItemMapper = new MapperConfiguration(x =>
             {
                 x.CreateMap<HayImportViewItem, HayImportViewItem>();
-            });
+            }, new NullLoggerFactory());
 
             _hayImportViewItemMapper = hayImportViewItemMapper.CreateMapper();
 
             var digestateViewItemMapper = new MapperConfiguration(x =>
             {
                 x.CreateMap<DigestateApplicationViewItem, DigestateApplicationViewItem>();
-            });
+            }, new NullLoggerFactory());
 
             _digestateViewItemMapper = digestateViewItemMapper.CreateMapper();
 
@@ -97,14 +97,14 @@ namespace H.Core.Services
             {
                 x.CreateMap<Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data, Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data>();
                 x.CreateMap<FertilizerApplicationViewItem, FertilizerApplicationViewItem>();
-            });
+            }, new NullLoggerFactory());
             
             _fertilizerApplicationViewItemMapper = fertilizerApplicationViewItemMapper.CreateMapper();
 
             var soilDataMapper = new MapperConfiguration(x =>
             {
                 x.CreateMap<SoilData, SoilData>();
-            });
+            }, new NullLoggerFactory());
 
             _soilDataMapper = soilDataMapper.CreateMapper();
         }

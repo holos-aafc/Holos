@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace H.Core.Services
 {
@@ -36,7 +37,7 @@ namespace H.Core.Services
                     .ForMember(y => y.Guid, z => z.Ignore())
                     .ForMember(y => y.CurrentPeriodComponentGuid, z => z.Ignore())
                     .ForMember(y => y.AnaerobicDigestionViewItem, z => z.Ignore())
-                    .ForMember(y => y.ManagementPeriodViewItems, z => z.Ignore()));
+                    .ForMember(y => y.ManagementPeriodViewItems, z => z.Ignore()), new NullLoggerFactory());
             _anaerobicDigestionComponentMapper = anaerobicDigestionComponentMapperConfiguration.CreateMapper();
 
             var anaerobicDigestionViewItemMapperConfiguration = new MapperConfiguration(x =>
@@ -44,7 +45,7 @@ namespace H.Core.Services
                 .ForMember(y => y.Guid, z => z.Ignore())
                 .ForMember(y => y.CropResiduesSubstrateViewItems, z => z.Ignore())
                 .ForMember(y => y.FarmResiduesSubstrateViewItems, z => z.Ignore())
-                .ForMember(y => y.ManureSubstrateViewItems, z => z.Ignore()));
+                .ForMember(y => y.ManureSubstrateViewItems, z => z.Ignore()), new NullLoggerFactory());
             _anaerobicDigestionViewItemMapper = anaerobicDigestionViewItemMapperConfiguration.CreateMapper();
 
             var managementPeriodViewItemsMapperConfiguration = new MapperConfiguration(x =>
@@ -52,26 +53,26 @@ namespace H.Core.Services
                     .ForMember(y => y.Guid, z => z.Ignore())
                     .ForMember(y => y.AnimalComponent, z => z.Ignore())
                     .ForMember(y => y.AnimalGroup, z => z.Ignore())
-                    .ForMember(y => y.ManagementPeriod, z => z.Ignore()));
+                    .ForMember(y => y.ManagementPeriod, z => z.Ignore()), new NullLoggerFactory());
             _managementPeriodViewItemsMapper = managementPeriodViewItemsMapperConfiguration.CreateMapper();
 
             var animalGroupMapperConfiguration = new MapperConfiguration(x => x.CreateMap<AnimalGroup, AnimalGroup>()
-                .ForMember(y => y.ManagementPeriods, z => z.Ignore()));
+                .ForMember(y => y.ManagementPeriods, z => z.Ignore()), new NullLoggerFactory());
             _animalGroupMapper = animalGroupMapperConfiguration.CreateMapper();
 
             var cropResiduesSubstrateViewItemMapperConfiguration = new MapperConfiguration(x =>
                 x.CreateMap<CropResidueSubstrateViewItem, CropResidueSubstrateViewItem>()
-                    .ForMember(y => y.Guid, z => z.Ignore()));
+                    .ForMember(y => y.Guid, z => z.Ignore()), new NullLoggerFactory());
             _cropResiduesSubstrateViewItemMapper = cropResiduesSubstrateViewItemMapperConfiguration.CreateMapper();
 
             var farmResiduesSubstrateViewItemMapperConfiguration = new MapperConfiguration(x =>
                 x.CreateMap<FarmResiduesSubstrateViewItem, FarmResiduesSubstrateViewItem>()
-                    .ForMember(y => y.Guid, z => z.Ignore()));
+                    .ForMember(y => y.Guid, z => z.Ignore()), new NullLoggerFactory());
             _farmResiduesSubstrateViewItemMapper = farmResiduesSubstrateViewItemMapperConfiguration.CreateMapper();
 
             var manureSubstrateViewItemMapperConfiguration = new MapperConfiguration(x =>
                 x.CreateMap<ManureSubstrateViewItem, ManureSubstrateViewItem>()
-                    .ForMember(y => y.Guid, z => z.Ignore()));
+                    .ForMember(y => y.Guid, z => z.Ignore()), new NullLoggerFactory());
             _manureSubstrateViewItemMapper = manureSubstrateViewItemMapperConfiguration.CreateMapper();
         }
 

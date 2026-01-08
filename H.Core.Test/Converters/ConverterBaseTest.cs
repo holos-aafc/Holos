@@ -1,5 +1,4 @@
-﻿using System;
-using H.Core.Converters;
+﻿using H.Core.Converters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace H.Core.Test.Converters

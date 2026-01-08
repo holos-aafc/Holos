@@ -7,7 +7,6 @@ using H.Core.Models.LandManagement.Fields;
 using System.IO;
 using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Nitrogen;
-using H.Core.Providers.Climate;
 using H.Core.Services.LandManagement;
 using H.Core.Test;
 

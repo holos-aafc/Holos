@@ -1,5 +1,4 @@
-﻿using System;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;

@@ -1,7 +1,6 @@
 ﻿#region Imports
 
 using System.Collections.ObjectModel;
-using H.Core.Enumerations;
 using H.Core.Models.Animals;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Feed;

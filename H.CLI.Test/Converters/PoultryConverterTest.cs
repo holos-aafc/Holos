@@ -5,14 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using H.CLI.Converters;
 using H.CLI.FileAndDirectoryAccessors;
 using H.CLI.Interfaces;
 using H.CLI.UserInput;
 using H.Core.Models;
-using H.Core.Models.Animals.Poultry;
 using H.Core.Models.Animals.Poultry.Chicken;
 
 namespace H.CLI.Test.Converters

@@ -1,24 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B72F63D6-F041-4F49-92B8-B94AD3BD932E}</ProjectGuid>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>H.CLI.Test</RootNamespace>
-    <AssemblyName>H.CLI.Test</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
-    <IsCodedUITest>False</IsCodedUITest>
-    <TestProjectType>UnitTest</TestProjectType>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
     <SccProjectName>
     </SccProjectName>
     <SccLocalPath>
@@ -27,126 +10,23 @@
     </SccAuxPath>
     <SccProvider>
     </SccProvider>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
+    <PackageReference Include="CommonServiceLocator" Version="2.0.7" />
+    <PackageReference Include="CsvHelper" Version="33.1.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+    <PackageReference Include="Moq" Version="4.20.72" />
+    <PackageReference Include="MSTest.TestAdapter" Version="4.0.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="4.0.2" />
+    <PackageReference Include="Prism.Wpf" Version="9.0.537" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.2" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\BeefConverterTest.cs" />
-    <Compile Include="Converters\OtherLivestockConverterTest.cs" />
-    <Compile Include="Converters\PoultryConverterTest.cs" />
-    <Compile Include="Converters\SheepConverterTest.cs" />
-    <Compile Include="FilesAndDirectoryAccessors\DataInputHandlerTest.cs" />
-    <Compile Include="Handlers\ExportedFarmsHandlerTest.cs" />
-    <Compile Include="InfrastructureConstantsTest.cs" />
-    <Compile Include="Processors\FieldProcessorTest.cs" />
-    <Compile Include="ResourceManagerHelperTest.cs" />
-    <Compile Include="UserInput\CLIArgumentsTest.cs" />
-    <Compile Include="UserInput\CLILanguageConstantsTest.cs" />
-    <Compile Include="ComponentTemporaryInputs\ShelterbeltFrenchTemporaryInputTest.cs" />
-    <Compile Include="Converters\ComponentConverterHandlerTest.cs" />
-    <Compile Include="ComponentTemporaryInputs\FieldTemporaryInputTest.cs" />
-    <Compile Include="ComponentTemporaryInputs\ShelterBeltTemporaryInputTest.cs" />
-    <Compile Include="Converters\DairyConverterTest.cs" />
-    <Compile Include="Converters\FieldConverterTest.cs" />
-    <Compile Include="Converters\ShelterbeltConverterTest.cs" />
-    <Compile Include="Converters\SwineConverterTest.cs" />
-    <Compile Include="Factorys\ComponentConverterFactoryTest.cs" />
-    <Compile Include="Factorys\ComponentKeyFactoryTest.cs" />
-    <Compile Include="Factorys\ComponentProcessorFactoryTest.cs" />
-    <Compile Include="Factorys\ComponentTestInputFactoryTests.cs" />
-    <Compile Include="FilesAndDirectoryAccessors\DirectoryHandlerTest.cs" />
-    <Compile Include="FilesAndDirectoryAccessors\ExcelInitializerTest.cs" />
-    <Compile Include="FilesAndDirectoryAccessors\GlobalSettingsFileHandlerTest.cs" />
-    <Compile Include="FilesAndDirectoryAccessors\GlobalSettingsFileKeyTest.cs" />
-    <Compile Include="FilesAndDirectoryAccessors\ReadSettingsFileTest.cs" />
-    <Compile Include="FilesAndDirectoryAccessors\RetrieveFilesInDirectoriesTest.cs" />
-    <Compile Include="FilesAndDirectoryAccessors\TemplateFarmHandlerTest.cs" />
-    <Compile Include="FilesAndDirectoryAccessors\TemplateFileHandlerTest.cs" />
-    <Compile Include="Handlers\GuidComponentHandlerTest.cs" />
-    <Compile Include="Handlers\ErrorHandlerTest.cs" />
-    <Compile Include="KeyConverter\KeyConverterTest.cs" />
-    <Compile Include="Parsers\ParserHandlerTest.cs" />
-    <Compile Include="Parsers\ParserTest.cs" />
-    <Compile Include="Parsers\ParsingStrategyTest.cs" />
-    <Compile Include="Processors\ProccessorHandlerTest.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Results\ComponentResultsProcessorTest.cs" />
+    <ProjectReference Include="..\H.CLI\H.CLI.csproj" />
+    <ProjectReference Include="..\H.Content\H.Content.csproj" />
+    <ProjectReference Include="..\H.Core.Test\H.Core.Test.csproj" />
+    <ProjectReference Include="..\H.Core\H.Core.csproj" />
+    <ProjectReference Include="..\H.Infrastructure\H.Infrastructure.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\H.CLI\H.CLI.csproj">
-      <Project>{7a9469d6-b913-49db-b85f-319fd195c212}</Project>
-      <Name>H.CLI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\H.Content\H.Content.csproj">
-      <Project>{272EDE97-F58A-42A9-828D-8B3524E390EB}</Project>
-      <Name>H.Content</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\H.Core.Test\H.Core.Test.csproj">
-      <Project>{9A57BA60-4A1D-43FC-9638-E3640600164F}</Project>
-      <Name>H.Core.Test</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\H.Core\H.Core.csproj">
-      <Project>{08D833EF-D06E-42F1-B548-89E985DFC26B}</Project>
-      <Name>H.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\H.Infrastructure\H.Infrastructure.csproj">
-      <Project>{0C9D716E-6579-4EE6-AEA6-5B019563AD95}</Project>
-      <Name>H.Infrastructure</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="CommonServiceLocator">
-      <Version>2.0.7</Version>
-    </PackageReference>
-    <PackageReference Include="CsvHelper">
-      <Version>33.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="Moq">
-      <Version>4.20.71</Version>
-    </PackageReference>
-    <PackageReference Include="MSTest.TestAdapter">
-      <Version>3.5.2</Version>
-    </PackageReference>
-    <PackageReference Include="MSTest.TestFramework">
-      <Version>3.5.2</Version>
-    </PackageReference>
-    <PackageReference Include="Prism.Wpf">
-      <Version>7.2.0.1422</Version>
-    </PackageReference>
-    <PackageReference Include="System.Memory">
-      <Version>4.6.3</Version>
-    </PackageReference>
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
-      <Version>6.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Threading.Tasks.Extensions">
-      <Version>4.5.4</Version>
-    </PackageReference>
-  </ItemGroup>
-  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

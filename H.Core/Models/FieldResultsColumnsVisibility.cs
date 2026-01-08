@@ -1,7 +1,4 @@
-﻿using Prism.Mvvm;
-using System;
-
-namespace H.Core.Models
+﻿namespace H.Core.Models
 {
     public class FieldResultsColumnsVisibility : ColumnVisibilityBase
     {

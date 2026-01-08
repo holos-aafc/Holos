@@ -1,13 +1,10 @@
 ﻿#region Imports
 
-using AutoMapper;
-using H.Core.Converters;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Core.Providers.Feed;
 using H.Infrastructure;
 using System;
-using System.ComponentModel;
 
 #endregion
 
