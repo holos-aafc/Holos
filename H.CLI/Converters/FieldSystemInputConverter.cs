@@ -129,6 +129,7 @@ namespace H.CLI.Converters
                     viewItem.PercentageOfStrawReturnedToSoil = rowInput.PercentageOfStrawReturnedToSoil;
                     viewItem.PercentageOfProductYieldReturnedToSoil = rowInput.PercentageOfProductYieldReturnedToSoil;
                     viewItem.PercentageOfRootsReturnedToSoil = rowInput.PercentageOfRootsReturnedToSoil;
+                    viewItem.PercentageOfExtraRootsReturnedToSoil = rowInput.PercentageOfExtrarootsReturnedToSoil;
 
                     viewItem.TimePeriodCategoryString = rowInput.TimePeriodCategoryString;
                     viewItem.ClimateParameter = rowInput.ClimateParameter;

@@ -21,6 +21,7 @@ namespace H.CLI.TemporaryComponentStorage
         #endregion
 
         #region Public Methods
+
         /// <summary>
         /// Takes in the property we want to set, the value we want to set the property to, the row + 1  and column where the value
         /// is located and the path of the file we are currently processing. These are all determined by the Parser.
@@ -471,6 +472,7 @@ namespace H.CLI.TemporaryComponentStorage
         public double PhosphorousFertilizerRate { get; set; }
         public double PercentageOfStrawReturnedToSoil { get; set; }
         public double PercentageOfRootsReturnedToSoil { get; set; }
+        public double PercentageOfExtrarootsReturnedToSoil { get; set; }
         public double PercentageOfProductYieldReturnedToSoil { get; set; }
         public double BiomassCoefficientProduct { get; set; }
         public double BiomassCoefficientStraw { get; set; }

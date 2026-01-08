@@ -1789,6 +1789,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PercentageOfExtrarootsReturnedToSoil.
+        /// </summary>
+        public static string Key_PercentageOfExtrarootsReturnedToSoil {
+            get {
+                return ResourceManager.GetString("Key_PercentageOfExtrarootsReturnedToSoil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PercentageOfProductYieldReturnedToSoil.
         /// </summary>
         public static string Key_PercentageOfProductYieldReturnedToSoil {

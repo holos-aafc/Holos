@@ -178,6 +178,7 @@ namespace H.CLI.Processors
                 stringBuilder.Append(viewItem.PercentageOfStrawReturnedToSoil + columnSeparator);
                 stringBuilder.Append(viewItem.PercentageOfRootsReturnedToSoil + columnSeparator);
                 stringBuilder.Append(viewItem.PercentageOfProductYieldReturnedToSoil + columnSeparator);
+                stringBuilder.Append(viewItem.PercentageOfExtraRootsReturnedToSoil + columnSeparator);
                 stringBuilder.Append(viewItem.IsPesticideUsed + columnSeparator);
                 stringBuilder.Append(viewItem.NumberOfPesticidePasses + columnSeparator);
 

@@ -28,6 +28,7 @@ namespace H.CLI.ComponentKeys
         {
             this.MissingHeaders.Add(Properties.Resources.Key_NitrogenFixation, false);
         }
+
         public Dictionary<string, ImperialUnitsOfMeasurement?> Keys { get; set; } = new Dictionary<string, ImperialUnitsOfMeasurement?>()
         {
             // Note the casing must match in the resource files (i.e. it must be Phase Number in the resource file not Phase number). This is because reflection is
@@ -69,6 +70,7 @@ namespace H.CLI.ComponentKeys
             {Properties.Resources.Key_PercentageOfStrawReturnedToSoil,  ImperialUnitsOfMeasurement.Percentage },
             {Properties.Resources.Key_PercentageOfRootsReturnedToSoil,  ImperialUnitsOfMeasurement.Percentage },
             {Properties.Resources.Key_PercentageOfProductYieldReturnedToSoil,  ImperialUnitsOfMeasurement.Percentage },
+            {Properties.Resources.Key_PercentageOfExtrarootsReturnedToSoil,  ImperialUnitsOfMeasurement.Percentage },
             {Properties.Resources.Key_IsPesticideUsed, null },
             {Properties.Resources.Key_NumberOfPesticidePasses, null },
             {Properties.Resources.Key_ManureApplied, null },
@@ -109,16 +111,20 @@ namespace H.CLI.ComponentKeys
             {Properties.Resources.Key_FertilizerApplicationMethod, null },
         };
 
-        //  Currently only 2 optional headers in the field keys
         public bool IsHeaderOptional(string s)
         {
             if (s == Properties.Resources.Key_NitrogenFixation) return true;
             else if (s == Properties.Resources.Key_FertilizerBlend) return true;
             else if (s == Properties.Resources.Key_NitrogenDeposit) return true;
             else if (s == Properties.Resources.Key_FertilizerApplicationMethod) return true;
+            else if (s == Properties.Resources.Key_PercentageOfExtrarootsReturnedToSoil)
+            {
+                return false;
+            }
             else return false;
         }
-        // Populate with all the keys that exist currently and tell if it is missing or not
+
+        // Populate with all the keys that exist currently and notify if it is missing or not
         public Dictionary<string, bool> MissingHeaders { get; set; } = new Dictionary<string, bool>(){};
     }
 }
