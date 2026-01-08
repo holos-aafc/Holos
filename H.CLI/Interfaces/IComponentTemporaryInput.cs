@@ -23,6 +23,7 @@ namespace H.CLI.Interfaces
         /// </summary>
         /// <param name="componentKeys">The component keys for the ComponentTemporaryInput</param>
         void FinalSettings(IComponentKeys componentKeys);
+
         #endregion
 
     }

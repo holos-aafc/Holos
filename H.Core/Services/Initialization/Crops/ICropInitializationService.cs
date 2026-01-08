@@ -253,5 +253,6 @@ namespace H.Core.Services.Initialization.Crops
         void AssignPerennialViewItemsDescription(IEnumerable<CropViewItem> viewItems);
         void AssignTillageToFinalYearOfPerennialStands(IEnumerable<CropViewItem> viewItems);
         void InitializeExtrarootsReturned(Farm farm, CropViewItem viewItem);
+        double GetDefaultPercentageExtrarootReturnedToSoil();
     }
 }
