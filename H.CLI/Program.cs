@@ -47,6 +47,7 @@ namespace H.CLI
 
         static Program()
         {
+            ResetConsoleColor();
             ShowBanner();
 
             _storage = new Storage();
@@ -228,13 +229,15 @@ namespace H.CLI
 
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine(Properties.Resources.LabelProcessingComplete);
-                    Console.ForegroundColor = ConsoleColor.White;
+                    
+                    ResetConsoleColor();
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(Properties.Resources.NoFarmsToProcess);
-                    Console.ForegroundColor = ConsoleColor.White;
+                    
+                    ResetConsoleColor();
                 }
             }
             else
@@ -293,7 +296,14 @@ namespace H.CLI
             Console.WriteLine("Loading data please wait...");
             Console.WriteLine();
             Console.WriteLine();
-        } 
+        }
+
+        static void ResetConsoleColor()
+        {
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
         #endregion
     }
 }

@@ -93,7 +93,7 @@ namespace H.CLI.Parser
 
                             catch (IndexOutOfRangeException)
                             {
-                                //if you add a header make sure to update this function for the appropriate componentKey
+                                // When adding a new header, make sure to update this method for the appropriate componentKey
                                 bool optional = ComponentKey.IsHeaderOptional(keyValuePair.Key);
 
                                 //if the header isn't optional then throw

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1502,4 +1502,8 @@ Would you like to continue using this directory?</value>
   <data name="Key_FertilizerApplicationMethod" xml:space="preserve">
 	  <value>Fertilizer Application Method</value>
   </data>
+  <data name="Key_PercentageOfExtrarootsReturnedToSoil" xml:space="preserve">`
+      <value>PercentageOfExtrarootsReturnedToSoil</value>
+  </data>
 </root>
+
