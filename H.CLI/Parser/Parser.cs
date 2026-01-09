@@ -134,6 +134,7 @@ namespace H.CLI.Parser
                 else
                     continue;
             }
+
             //Checks all files and their list of temporary component objects
             _errorHandler.CheckIfComponentsHaveTheSameName(fileToComponentPairList);
 
@@ -142,6 +143,7 @@ namespace H.CLI.Parser
             return parsedComponentList;
 
         }
+
         #endregion
     }
 }

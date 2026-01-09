@@ -123,9 +123,10 @@ namespace H.CLI.TemporaryComponentStorage
                 propertyInfo.SetValue(this, Convert.ChangeType(value, propertyInfo.PropertyType, CLILanguageConstants.culture), null);
         }
 
-        public void FinalSettings(IComponentKeys componentKeys)
+        public override void FinalSettings(IComponentKeys componentKeys)
         {
         }
+
         #endregion
 
         //When adding a new property, follow the format: NewProperty. If you add a new property here, make sure to add the
@@ -152,8 +153,6 @@ namespace H.CLI.TemporaryComponentStorage
         public string GroupName { get; set; }
         public AnimalType GroupType { get; set; }
         #endregion
-
-
     }
 }
 

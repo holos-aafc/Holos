@@ -16,8 +16,11 @@ namespace H.CLI.Interfaces
         #endregion
 
         #region Methods
+
         void ConvertToComponentProperties(string key, ImperialUnitsOfMeasurement? units, string value, int row, int col, string filePath);
+
         void InputDataReflectionHandler(PropertyInfo propertyInfo, ImperialUnitsOfMeasurement? units, string prop, string value, string filePath, int col, int row);
+
         /// <summary>
         /// If the user uses an old CSV component file that is missing some headers then this function will input default values instead.
         /// </summary>
@@ -25,6 +28,5 @@ namespace H.CLI.Interfaces
         void FinalSettings(IComponentKeys componentKeys);
 
         #endregion
-
     }
 }
