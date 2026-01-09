@@ -75,7 +75,7 @@ namespace H.CLI.TemporaryComponentStorage
             }
         }
 
-        public void FinalSettings(IComponentKeys componentKeys)
+        public virtual void FinalSettings(IComponentKeys componentKeys)
         {
         }
 

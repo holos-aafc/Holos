@@ -430,7 +430,7 @@ namespace H.CLI.TemporaryComponentStorage
         /// This method sets default values for properties when these values were not provided in the input data but are required for calculations.
         /// </summary>
         /// <param name="componentKeys">The component keys configuration that indicates which headers were missing from the input data</param>
-        public void FinalSettings(IComponentKeys componentKeys)
+        public override void FinalSettings(IComponentKeys componentKeys)
         {
             if (componentKeys.MissingHeaders.ContainsKey(Properties.Resources.Key_NitrogenFixation) && componentKeys.MissingHeaders[Properties.Resources.Key_NitrogenFixation])
             {
@@ -449,6 +449,7 @@ namespace H.CLI.TemporaryComponentStorage
                 this.PercentageOfExtrarootsReturnedToSoil = _initializationService.GetDefaultPercentageExtrarootReturnedToSoil();
             }
         }
+
         #endregion
 
         /*
@@ -457,7 +458,6 @@ namespace H.CLI.TemporaryComponentStorage
          *
          * NOTE: Ensure property names match exactly with the keys in FieldKeys.cs
          */
-
 
         #region Properties
 

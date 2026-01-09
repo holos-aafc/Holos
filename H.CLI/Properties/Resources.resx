@@ -1505,5 +1505,7 @@ Would you like to continue using this directory?</value>
   <data name="Key_PercentageOfExtrarootsReturnedToSoil" xml:space="preserve">`
       <value>PercentageOfExtrarootsReturnedToSoil</value>
   </data>
-</root>
+  <data name="FarmsDirectoryName" xml:space="preserve">`r`n    <value>Farms</value>`r`n  </data>`r`n  <data name="FarmNameSeparator" xml:space="preserve">`r`n    <value>_</value>`r`n  </data>`r`n  <data name="VersionPrefix" xml:space="preserve">`r`n    <value> (</value>`r`n  </data>`r`n  <data name="VersionSuffix" xml:space="preserve">`r`n    <value>)</value>`r`n  </data>`r`n</root>
+
+
 
