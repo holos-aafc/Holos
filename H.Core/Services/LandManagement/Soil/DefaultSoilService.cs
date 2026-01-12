@@ -136,7 +136,7 @@ namespace H.Core.Services.LandManagement.Soil
             soilData.Province = farm.Province;
             soilData.IsDefaultSoilData = true;
 
-            var hasSoilData = geographicData.SoilDataForAllComponentsWithinPolygon.Count == 0;
+            var hasSoilData = geographicData.SoilDataForAllComponentsWithinPolygon.Count > 0;
             if (hasSoilData)
             {
                 var soil = geographicData.SoilDataForAllComponentsWithinPolygon.First();
