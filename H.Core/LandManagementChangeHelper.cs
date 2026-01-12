@@ -1,5 +1,4 @@
-﻿using System;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 
 namespace H.Core
 {

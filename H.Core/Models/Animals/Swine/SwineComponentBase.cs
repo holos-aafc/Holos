@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using H.Core.Enumerations;
-
-namespace H.Core.Models.Animals.Swine
+﻿namespace H.Core.Models.Animals.Swine
 {
     public abstract class SwineComponentBase : AnimalComponentBase
     {

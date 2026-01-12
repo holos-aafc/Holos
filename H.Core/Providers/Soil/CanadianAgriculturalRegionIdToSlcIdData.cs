@@ -1,6 +1,4 @@
-﻿using H.Core.Enumerations;
-
-namespace H.Core.Providers.Soil
+﻿namespace H.Core.Providers.Soil
 {
     public class CanadianAgriculturalRegionIdToSlcIdData
     {

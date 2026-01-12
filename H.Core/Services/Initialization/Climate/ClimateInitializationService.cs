@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Documents;
 using H.Core.Calculators.Climate;
 using H.Core.Models;
 using H.Core.Providers.Climate;

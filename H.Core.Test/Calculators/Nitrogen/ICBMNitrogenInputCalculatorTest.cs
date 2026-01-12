@@ -1,8 +1,5 @@
-﻿using H.Core.Calculators.Carbon;
-using H.Core.Calculators.Infrastructure;
-using H.Core.Calculators.Nitrogen;
+﻿using H.Core.Calculators.Nitrogen;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace H.Core.Test.Calculators.Nitrogen
 {

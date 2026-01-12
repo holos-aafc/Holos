@@ -1,7 +1,6 @@
 ﻿using H.Core.Enumerations;
 using H.Core.Models.Animals;
 using H.Core.Models;
-using H.Core.Providers.Animals;
 
 namespace H.Core.Services.Initialization.Animals
 {

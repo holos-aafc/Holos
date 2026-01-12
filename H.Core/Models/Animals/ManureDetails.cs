@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel;
-using System.Diagnostics;
 using AutoMapper;
 using H.Core.Converters;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Infrastructure;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace H.Core.Models.Animals
 {
@@ -54,7 +54,7 @@ namespace H.Core.Models.Animals
                 config.CreateMap<ManureDetails, ManureDetails>()
                     .ForMember(manureDetails => manureDetails.Guid, opt => opt.Ignore())
                     .ForMember(manureDetails => manureDetails.Name, opt => opt.Ignore());
-            });
+            }, new NullLoggerFactory());
             _manureDetailsMapper = manureDetailsMapperConfiguration.CreateMapper();
         }
 

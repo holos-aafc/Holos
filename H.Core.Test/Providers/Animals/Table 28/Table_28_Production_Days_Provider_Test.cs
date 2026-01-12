@@ -1,10 +1,6 @@
-﻿using H.Core.Providers.Animals.Table_69;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Linq;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using H.Core.Enumerations;
 using H.Core.Models;
-using H.Core.Models.Animals;
 using H.Core.Providers.Animals.Table_28;
 
 namespace H.Core.Test.Providers.Animals.Table_28

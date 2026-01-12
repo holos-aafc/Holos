@@ -1,5 +1,4 @@
-﻿using H.Infrastructure;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using H.Core.Enumerations;
 using H.Core.Providers;

@@ -9,7 +9,6 @@ using H.Content;
 using System.Text;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
-using H.Core.Providers;
 
 namespace H.Core.Test.Providers.Climate
 {

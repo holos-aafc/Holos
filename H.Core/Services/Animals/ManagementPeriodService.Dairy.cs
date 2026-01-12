@@ -1,13 +1,7 @@
 ﻿using H.Core.Models.Animals;
 using H.Core.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using H.Core.Enumerations;
-using H.Core.Services.Initialization;
 using System.ComponentModel;
 
 namespace H.Core.Services.Animals
