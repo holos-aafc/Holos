@@ -4,10 +4,8 @@
 
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using H.Core.Enumerations;
-using H.Core.Properties;
 
 
 namespace H.Core.Providers.Precipitation

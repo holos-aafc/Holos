@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using H.Core.Calculators.Nitrogen;
-using H.Core.Emissions;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
-using H.Core.Providers.Animals;
 
 namespace H.Core.Services.Animals
 {

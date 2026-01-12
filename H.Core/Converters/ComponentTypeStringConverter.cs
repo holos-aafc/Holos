@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Runtime.InteropServices;
-using H.Core.Enumerations;
 using H.Core.Models;
 
 namespace H.Core.Converters

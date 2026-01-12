@@ -1,6 +1,4 @@
-﻿using H.Core.Models.LandManagement.Fields;
-
-namespace H.Core.Services.Animals
+﻿namespace H.Core.Services.Animals
 {
     public class LandApplicationEmissionResult
     {

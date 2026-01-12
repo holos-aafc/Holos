@@ -1,20 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Resources;
-using System.Threading;
-using System.Xaml;
-using CsvHelper;
 using H.Core.Calculators.Climate;
 using H.Core.Enumerations;
 using H.Core.Models;
-using H.Core.Models.LandManagement.Shelterbelt;
-using H.Core.Providers.Precipitation;
-using H.Core.Providers.Soil;
 using H.Core.Tools;
 using H.Infrastructure;
 

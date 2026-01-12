@@ -1,17 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7A9469D6-B913-49DB-B85F-319FD195C212}</ProjectGuid>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <OutputType>Exe</OutputType>
-    <RootNamespace>H.CLI</RootNamespace>
-    <AssemblyName>H.CLI</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
     <SccProjectName>
     </SccProjectName>
     <SccLocalPath>
@@ -21,7 +11,6 @@
     <SccProvider>
     </SccProvider>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <TargetFrameworkProfile />
     <PublishUrl>C:\Users\Aaron\Documents\WORK\Projects\Holos\Software\ClickOnce output\CLI\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
@@ -46,144 +35,27 @@
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestCertificateThumbprint>A4EEBEF7C2437270663379358E7F2691E995BC9C</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>
-    </ManifestKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <ManifestCertificateThumbprint>6E5B3011E65A7D5525CEFD4DBE3E1B568BFCC22F</ManifestCertificateThumbprint>
+    <ManifestKeyFile />
     <GenerateManifests>true</GenerateManifests>
-  </PropertyGroup>
-  <PropertyGroup>
     <SignManifests>true</SignManifests>
-  </PropertyGroup>
-  <PropertyGroup>
     <ApplicationIcon>HolosIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="CommonServiceLocator" Version="2.0.7" />
+    <PackageReference Include="CsvHelper" Version="33.1.0" />
+    <PackageReference Include="Moq" Version="4.20.72" />
+    <PackageReference Include="Prism.Wpf" Version="9.0.537" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.2" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComponentKeys\AnimalKeyBase.cs" />
-    <Compile Include="ComponentKeys\BeefCattleKeys.cs" />
-    <Compile Include="ComponentKeys\DairyCattleKeys.cs" />
-    <Compile Include="ComponentKeys\OtherLivestockKeys.cs" />
-    <Compile Include="ComponentKeys\PoultryKeys.cs" />
-    <Compile Include="ComponentKeys\SheepKeys.cs" />
-    <Compile Include="ComponentKeys\SwineKeys.cs" />
-    <Compile Include="Converters\AnimalConverterBase.cs" />
-    <Compile Include="Converters\BeefConverter.cs" />
-    <Compile Include="Converters\DairyConverter.cs" />
-    <Compile Include="Converters\OtherLiveStockConverter.cs" />
-    <Compile Include="Converters\PoultryConverter.cs" />
-    <Compile Include="Converters\SheepConverter.cs" />
-    <Compile Include="Converters\SwineConverter.cs" />
-    <Compile Include="DriveInfoWrapper.cs" />
-    <Compile Include="Factories\ComponentProcessorFactory.cs" />
-    <Compile Include="FileAndDirectoryAccessors\ReadSettingsFile.cs" />
-    <Compile Include="FileAndDirectoryAccessors\TemplateFarmHandler.cs" />
-    <Compile Include="Handlers\ErrorHandler.cs" />
-    <Compile Include="Handlers\ExportedFarmsHandler.cs" />
-    <Compile Include="InfrastructureConstants.cs" />
-    <Compile Include="Interfaces\IDriveInfoWrapper.cs" />
-    <Compile Include="Interfaces\IProcessor.cs" />
-    <Compile Include="Processors\FieldProcessor.cs" />
-    <Compile Include="Processors\ProcessorHandler.cs" />
-    <Compile Include="Processors\ShelterbeltProcessor.cs" />
-    <Compile Include="ResourceManagerHelper.cs" />
-    <Compile Include="Results\ComponentResultsProcessor.cs" />
-    <Compile Include="Results\EstimatesOfProductionResults.cs" />
-    <Compile Include="Results\FeedEstimateResults.cs" />
-    <Compile Include="Results\GHGAndCO2Results.cs" />
-    <Compile Include="TemporaryComponentStorage\AnimalTemporaryInputBase.cs" />
-    <Compile Include="TemporaryComponentStorage\BeefCattleTemporaryInput.cs" />
-    <Compile Include="TemporaryComponentStorage\DairyTemporaryInput.cs" />
-    <Compile Include="TemporaryComponentStorage\InputHelper.cs" />
-    <Compile Include="TemporaryComponentStorage\OtherLiveStockTemporaryInput.cs" />
-    <Compile Include="TemporaryComponentStorage\PoultryTemporaryInput.cs" />
-    <Compile Include="TemporaryComponentStorage\SheepTemporaryInput.cs" />
-    <Compile Include="TemporaryComponentStorage\SwineTemporaryInput.cs" />
-    <Compile Include="TemporaryComponentStorage\TemporaryInputBase.cs" />
-    <Compile Include="UserInput\CLIArguments.cs" />
-    <Compile Include="UserInput\CLILanguageConstants.cs" />
-    <Compile Include="ComponentKeys\FieldKeys.cs" />
-    <Compile Include="Converters\ComponentConverterHandler.cs" />
-    <Compile Include="Converters\ConvertingComponentStrategy.cs" />
-    <Compile Include="Converters\FieldSystemInputConverter.cs" />
-    <Compile Include="Factories\ComponentConverterFactory.cs" />
-    <Compile Include="FileAndDirectoryAccessors\DirectoryHandler.cs" />
-    <Compile Include="FileAndDirectoryAccessors\DirectoryKeys.cs" />
-    <Compile Include="FileAndDirectoryAccessors\BuildSettingsFileString.cs" />
-    <Compile Include="FileAndDirectoryAccessors\TemplateFileHandler.cs" />
-    <Compile Include="FileAndDirectoryAccessors\SettingsHandler.cs" />
-    <Compile Include="Handlers\GuidComponentHandler.cs" />
-    <Compile Include="Interfaces\IConverter.cs" />
-    <Compile Include="UserInput\CLIUnitsOfMeasurementConstants.cs" />
-    <Compile Include="KeyConverter\KeyConverter.cs" />
-    <Compile Include="Converters\ShelterbeltConverter.cs" />
-    <Compile Include="Parser\ParserHandler.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Resources.fr-CA.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.fr-CA.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Factories\ComponentKeyFactory.cs" />
-    <Compile Include="Factories\ComponentTemporaryInputFactory.cs" />
-    <Compile Include="FileAndDirectoryAccessors\ExcelInitializer.cs" />
-    <Compile Include="Interfaces\IComponentKeys.cs" />
-    <Compile Include="Interfaces\IComponentTemporaryInput.cs" />
-    <Compile Include="Parser\Parser.cs" />
-    <Compile Include="Parser\ParsingStrategy.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FileAndDirectoryAccessors\DataInputHandler.cs" />
-    <Compile Include="FileAndDirectoryAccessors\RetrieveFilesInDirectories.cs" />
-    <Compile Include="ComponentKeys\ShelterBeltKeys.cs" />
-    <Compile Include="TemporaryComponentStorage\FieldTemporaryInput.cs" />
-    <Compile Include="TemporaryComponentStorage\InvalidPropertyNameException.cs" />
-    <Compile Include="TemporaryComponentStorage\ShelterBeltTemporaryInput.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
     <None Include="H.CLI_TemporaryKey.pfx" />
   </ItemGroup>
-  <ItemGroup>
+  <!-- Temporarily removing COM references for .NET 8 compatibility -->
+  <!--<ItemGroup>
     <COMReference Include="VBIDE">
       <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>5</VersionMajor>
@@ -193,20 +65,11 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-  </ItemGroup>
+  </ItemGroup>-->
   <ItemGroup>
-    <ProjectReference Include="..\H.Content\H.Content.csproj">
-      <Project>{272ede97-f58a-42a9-828d-8b3524e390eb}</Project>
-      <Name>H.Content</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\H.Core\H.Core.csproj">
-      <Project>{08d833ef-d06e-42f1-b548-89e985dfc26b}</Project>
-      <Name>H.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\H.Infrastructure\H.Infrastructure.csproj">
-      <Project>{0C9D716E-6579-4EE6-AEA6-5B019563AD95}</Project>
-      <Name>H.Infrastructure</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\H.Content\H.Content.csproj" />
+    <ProjectReference Include="..\H.Core\H.Core.csproj" />
+    <ProjectReference Include="..\H.Infrastructure\H.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
@@ -221,42 +84,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.fr-CA.resx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.fr-CA.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="HolosIcon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="CommonServiceLocator">
-      <Version>2.0.7</Version>
-    </PackageReference>
-    <PackageReference Include="CsvHelper">
-      <Version>33.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="Moq">
-      <Version>4.20.71</Version>
-    </PackageReference>
-    <PackageReference Include="Prism.Wpf">
-      <Version>7.2.0.1422</Version>
-    </PackageReference>
-    <PackageReference Include="System.Memory">
-      <Version>4.6.3</Version>
-    </PackageReference>
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
-      <Version>6.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Threading.Tasks.Extensions">
-      <Version>4.5.4</Version>
-    </PackageReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

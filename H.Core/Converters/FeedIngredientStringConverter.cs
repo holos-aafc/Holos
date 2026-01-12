@@ -1,7 +1,6 @@
 ﻿#region Imports
 
 using System;
-using System.Windows.Input;
 using H.Core.Enumerations;
 using H.Core.Properties;
 

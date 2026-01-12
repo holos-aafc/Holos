@@ -6,7 +6,6 @@ using System.Text;
 using H.CLI.TemporaryComponentStorage;
 using H.CLI.UserInput;
 using H.Core.Models;
-using H.Core.Providers;
 
 namespace H.CLI.FileAndDirectoryAccessors
 {

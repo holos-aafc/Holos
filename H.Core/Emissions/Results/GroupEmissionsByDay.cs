@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Configuration;
-using H.Core.Providers.Animals;
 using H.Infrastructure;
 
 namespace H.Core.Emissions.Results

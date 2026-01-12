@@ -1,9 +1,7 @@
 ﻿using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
-using H.Core.Services.LandManagement;
 using H.Core.Enumerations;
 using H.Core.Providers.Carbon;
-using System.Linq;
 
 namespace H.Core.Services.Initialization.Crops
 {

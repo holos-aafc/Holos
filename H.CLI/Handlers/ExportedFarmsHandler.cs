@@ -5,8 +5,6 @@ using H.CLI.Processors;
 using H.CLI.TemporaryComponentStorage;
 using H.CLI.UserInput;
 using H.Core;
-using H.Core.Calculators.Carbon;
-using H.Core.Calculators.Nitrogen;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
@@ -18,8 +16,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using H.Core.Services;
-using H.Core.Services.Initialization;
 
 namespace H.CLI.Handlers
 {
