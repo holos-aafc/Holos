@@ -21,6 +21,7 @@ namespace H.CLI.FileAndDirectoryAccessors
         private readonly IGeographicDataProvider _geographicDataProvider = new GeographicDataProvider();
         private readonly ISoilService _soilService;
 
+        private readonly IIndoorTemperatureProvider _indoorTemperatureProvider = new Table_63_Indoor_Temperature_Provider();
         private readonly IClimateProvider _climateProvider;
 
         public List<int> PolygonIDList { get; set; } = new List<int>();
@@ -160,8 +161,10 @@ namespace H.CLI.FileAndDirectoryAccessors
                 farm.Latitude = double.Parse(userSettings[Properties.Resources.Settings_Latitude]);
             }
 
-            this.ApplyClimateData(userSettings, farm);
             this.ApplyGeographicData(userSettings, farm);
+
+            // Apply climate data after province has been set since barn temperature depends on province
+            this.ApplyClimateData(userSettings, farm);
 
             if (userSettings.ContainsKey(Properties.Resources.Settings_UseCustomStartingSOCValue))
             {
@@ -259,6 +262,8 @@ namespace H.CLI.FileAndDirectoryAccessors
             {
                 farm.ClimateAcquisition = farm.ClimateAcquisitionStringToEnum(userSettings[Properties.Resources.Settings_ClimateDataAcquisition]);
             }
+
+            farm.ClimateData.BarnTemperatureData = _indoorTemperatureProvider.GetIndoorTemperature(farm.Province); 
 
             switch (farm.ClimateAcquisition)
             {

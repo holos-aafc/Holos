@@ -91,6 +91,7 @@ namespace H.CLI.TemporaryComponentStorage
         public ManureStateType ManureStateType { get; set; }
         public double AmmoniaEmissionFactorForManureStorage { get; set; }
         public double IndoorBarnTemperature { get; set; }
+        public bool  UseCustomIndoorHousingTemperature { get; set; }
 
         #endregion
 

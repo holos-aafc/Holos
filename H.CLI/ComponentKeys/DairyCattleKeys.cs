@@ -66,6 +66,12 @@ namespace H.CLI.ComponentKeys
             base.Keys.Add(Properties.Resources.FractionLeaching, null);
             base.Keys.Add(Properties.Resources.AshContent, ImperialUnitsOfMeasurement.Percentage);
             base.Keys.Add(Properties.Resources.MethaneProducingCapacityOfManure, null);
+            base.Keys.Add(Properties.Resources.FractionOfOrganicNitrogenImmobilized, null);
+            base.Keys.Add(Properties.Resources.FractionOfOrganicNitrogenNitrified, null);
+            base.Keys.Add(Properties.Resources.FractionOfOrganicNitrogenMineralized, null);
+            base.Keys.Add(Properties.Resources.Key_ManureStateType, null);
+            base.Keys.Add(Properties.Resources.AmmoniaEmissionFactorForManureStorage, null);
+            base.Keys.Add(Properties.Resources.UseCustomIndoorHousingTemperature, null);
         }
 
         #endregion

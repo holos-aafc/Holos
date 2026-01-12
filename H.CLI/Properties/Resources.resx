@@ -1505,7 +1505,22 @@ Would you like to continue using this directory?</value>
   <data name="Key_PercentageOfExtrarootsReturnedToSoil" xml:space="preserve">`
       <value>PercentageOfExtrarootsReturnedToSoil</value>
   </data>
-  <data name="FarmsDirectoryName" xml:space="preserve">`r`n    <value>Farms</value>`r`n  </data>`r`n  <data name="FarmNameSeparator" xml:space="preserve">`r`n    <value>_</value>`r`n  </data>`r`n  <data name="VersionPrefix" xml:space="preserve">`r`n    <value> (</value>`r`n  </data>`r`n  <data name="VersionSuffix" xml:space="preserve">`r`n    <value>)</value>`r`n  </data>`r`n</root>
+  <data name="FarmsDirectoryName" xml:space="preserve">
+	  <value>Farms</value>
+  </data>
+	<data name="FarmNameSeparator" xml:space="preserve">
+		<value>_</value>
+	</data>
+	<data name="VersionPrefix" xml:space="preserve">
+		<value> (</value>
+	</data>
+	<data name="VersionSuffix" xml:space="preserve">
+		<value>)</value>
+	</data>
+  <data name="UseCustomIndoorHousingTemperature" xml:space="preserve">
+	  <value>Use Custom Indoor Housing Temperature</value>
+  </data>
+</root>
 
 
 
