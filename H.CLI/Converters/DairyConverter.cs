@@ -95,6 +95,12 @@ namespace H.CLI.Converters
             row.Add(managementPeriod.ManureDetails.LeachingFraction.ToString(DoubleFormat));
             row.Add(managementPeriod.ManureDetails.AshContentOfManure.ToString(DoubleFormat));
             row.Add(managementPeriod.ManureDetails.MethaneProducingCapacityOfManure.ToString(DoubleFormat));
+            row.Add(managementPeriod.ManureDetails.FractionOfOrganicNitrogenImmobilized.ToString(DoubleFormat));
+            row.Add(managementPeriod.ManureDetails.FractionOfOrganicNitrogenNitrified.ToString(DoubleFormat));
+            row.Add(managementPeriod.ManureDetails.FractionOfOrganicNitrogenMineralized.ToString(DoubleFormat));
+            row.Add(managementPeriod.ManureDetails.StateType.ToString());
+            row.Add(managementPeriod.ManureDetails.AmmoniaEmissionFactorForManureStorage.ToString(DoubleFormat));
+            row.Add(managementPeriod.HousingDetails.UseCustomIndoorHousingTemperature.ToString());
         }
 
         public override AnimalKeyBase GetHeaders()

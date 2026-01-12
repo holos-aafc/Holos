@@ -700,6 +700,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _.
+        /// </summary>
+        public static string FarmNameSeparator {
+            get {
+                return ResourceManager.GetString("FarmNameSeparator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _CO2EEmissions_.
         /// </summary>
         public static string FarmResultsCO2E {
@@ -732,6 +741,15 @@ namespace H.CLI.Properties {
         public static string FarmResultsGHG {
             get {
                 return ResourceManager.GetString("FarmResultsGHG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Farms.
+        /// </summary>
+        public static string FarmsDirectoryName {
+            get {
+                return ResourceManager.GetString("FarmsDirectoryName", resourceCulture);
             }
         }
         
@@ -3995,6 +4013,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use Custom Indoor Housing Temperature.
+        /// </summary>
+        public static string UseCustomIndoorHousingTemperature {
+            get {
+                return ResourceManager.GetString("UseCustomIndoorHousingTemperature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User Defined Bedding Rate.
         /// </summary>
         public static string UserDefinedBeddingRate {
@@ -4009,6 +4036,24 @@ namespace H.CLI.Properties {
         public static string Variance {
             get {
                 return ResourceManager.GetString("Variance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  (.
+        /// </summary>
+        public static string VersionPrefix {
+            get {
+                return ResourceManager.GetString("VersionPrefix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ).
+        /// </summary>
+        public static string VersionSuffix {
+            get {
+                return ResourceManager.GetString("VersionSuffix", resourceCulture);
             }
         }
         
