@@ -408,8 +408,10 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.1.2-28
             var carbonInputFromRoots = carbonInput * (currentYearViewItem.PercentageOfRootsReturnedToSoil / 100.0);
-            if (currentYearViewItem.YearInPerennialStand == 1)
+            if (currentYearViewItem.YearInPerennialStand == 1 || currentYearViewItem.IsFinalYearInPerennialStand())
             {
+                // If we are in the final year of the perennial stand, or the first year, we do not consider the previous year's root inputs and do not apply any increase (e.g. Equation 2.1.2-30)
+
                 return carbonInputFromRoots;
             }
 
