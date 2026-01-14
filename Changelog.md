@@ -1,5 +1,6 @@
 | Date | Commit ID | Summary of changes | GUI version |
 | -------- | ------- | ------- | ------- |
+| January 14, 2026 | [de722](https://github.com/holos-aafc/Holos/commit/e0a368896d9df188eff788d0a1cc695a416de722) | Use unreduced amount of carbon input from roots in final year of perennial stand (i.e. 100%) | 4.0.1.104
 | January 6, 2026 | [7abdb](https://github.com/holos-aafc/Holos/commit/fa4f50d275dc6671e8db0409780d53d45bf7abdb), [de21f](https://github.com/holos-aafc/Holos/commit/49e9c527e4605d89139e47b6d122e222420de21f), [c6db2](https://github.com/holos-aafc/Holos/commit/70a04c37932ba6fba42f72769c97ba7c0bbc6db2) | Update to perennial calculations to account for amount of extraroots returned to soil [See Crop FAQ #15](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/FAQ/FAQ.md#15-in-the-holos-interface-how-can-i-represent-multiple-cuts-of-hay-or-silage-on-a-field-in-a-single-year)| 4.0.1.102
 | May 26, 2025 | [See Issue #323](https://github.com/holos-aafc/Holos/issues/323) | Update to perennial yield calculations under specific scenarios | 4.0.1.63 
 | May 8, 2025 | [See Issue #332](https://github.com/holos-aafc/Holos/issues/332) | Update to perennial yield calculations under specific scenarios. Subtract supplemental feeding amounts from grazing animal scenarios | 4.0.1.59 
