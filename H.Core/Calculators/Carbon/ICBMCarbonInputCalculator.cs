@@ -188,15 +188,23 @@ namespace H.Core.Calculators.Carbon
             return result;
         }
 
-        public double CalculateProductivity(double annualPrecipitation,
+        public double CalculateProductivity(
+            double annualPrecipitation,
             double annualPotentialEvapotranspiration,
             double proportionOfPrecipitationMayThroughSeptember,
             double carbonConcentration)
         {
+            // The moisture content fraction should be 80% by default and will represent the moisture content of fresh standing biomass (see algorithm document).
+            var moistureContentFreshBiomass = 0.8;
+            var moistureContentAirDriedHay = 0.13;
+
+            // See issue https://github.com/holos-aafc/Holos/issues/405
+            var moistureCorrection = (1.0 - moistureContentAirDriedHay) / (1.0 - moistureContentFreshBiomass);
+
             var production = (2.973 + (0.00453 * annualPrecipitation) + (-0.00259 * annualPotentialEvapotranspiration) + (6.187 * proportionOfPrecipitationMayThroughSeptember));
             var dryMatter = Math.Pow(Math.E, production);
 
-            var result = dryMatter * carbonConcentration;
+            var result = dryMatter * moistureCorrection * carbonConcentration;
 
             return result;
         }
