@@ -237,7 +237,6 @@ namespace H.Core.Services.Initialization.Crops
             }
         }
 
-
         public void InitializeYield(CropViewItem viewItem, Farm farm)
         {
             if (viewItem.CropType.IsSilageCropWithoutDefaults())

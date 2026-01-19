@@ -335,7 +335,11 @@ namespace H.Core.Test.Calculators.Carbon
                 nextYearViewItem: nextYearViewItem,
                 farm: farm, animalResults: new List<AnimalComponentEmissionsResults>());
 
-            Assert.AreEqual(10.293, currentYearViewItem.AboveGroundCarbonInput, 3);
+            // See issue https://github.com/holos-aafc/Holos/issues/405
+            var moistureCorrection = (1.0 - 0.13) / (1.0 - 0.8);
+            var expected = 10.293 * (moistureCorrection);
+
+            Assert.AreEqual(expected, currentYearViewItem.AboveGroundCarbonInput, 3);
         }
 
         [TestMethod]
@@ -635,7 +639,11 @@ namespace H.Core.Test.Calculators.Carbon
                 proportionOfPrecipitationMayThroughSeptember: proportionOfPrecipitationMayToSeptember,
                 carbonConcentration: carbonConcentration);
 
-            Assert.AreEqual(87.578217100325958, result, 2);
+            // See issue https://github.com/holos-aafc/Holos/issues/405
+            var moistureCorrection = (1.0 - 0.13) / (1.0 - 0.8);
+            var expected = 87.578217100325958 * moistureCorrection;
+
+            Assert.AreEqual(expected, result, 2);
         }
 
         /// <summary>
