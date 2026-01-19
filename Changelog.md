@@ -1,6 +1,6 @@
 | Date | Commit ID | Summary of changes | GUI version |
 | -------- | ------- | ------- | ------- |
-| January 16, 2026 | []() | Update equations 2.1.2-22 and 2.1.2-26 with moisture correction | 4.0.1.106
+| January 19, 2026 | [83a4e](https://github.com/holos-aafc/Holos/commit/201f98580ab12fdbe3b3b930d5426701a8f83a4e) | Update equations 2.1.2-22 and 2.1.2-26 with moisture correction | 4.0.1.106
 | January 14, 2026 | [de722](https://github.com/holos-aafc/Holos/commit/e0a368896d9df188eff788d0a1cc695a416de722) | Use unreduced amount of carbon input from roots in final year of perennial stand (i.e. 100%) | 4.0.1.104
 | January 6, 2026 | [7abdb](https://github.com/holos-aafc/Holos/commit/fa4f50d275dc6671e8db0409780d53d45bf7abdb), [de21f](https://github.com/holos-aafc/Holos/commit/49e9c527e4605d89139e47b6d122e222420de21f), [c6db2](https://github.com/holos-aafc/Holos/commit/70a04c37932ba6fba42f72769c97ba7c0bbc6db2) | Update to perennial calculations to account for amount of extraroots returned to soil [See Crop FAQ #15](https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/FAQ/FAQ.md#15-in-the-holos-interface-how-can-i-represent-multiple-cuts-of-hay-or-silage-on-a-field-in-a-single-year)| 4.0.1.102
 | May 26, 2025 | [See Issue #323](https://github.com/holos-aafc/Holos/issues/323) | Update to perennial yield calculations under specific scenarios | 4.0.1.63 
