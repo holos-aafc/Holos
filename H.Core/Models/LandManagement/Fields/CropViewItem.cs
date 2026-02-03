@@ -45,6 +45,7 @@ namespace H.Core.Models.LandManagement.Fields
         private bool _hasGrazingViewItems;
         private bool _hasManureApplicationViewItems;
         private bool _isSecondaryCrop;
+        private bool _overrideResidueReturnedToSoilDefaults;
 
         private double _area;
         private double _pastFallowArea;
@@ -1120,6 +1121,16 @@ namespace H.Core.Models.LandManagement.Fields
         {
             get => _isSecondaryCrop;
             set => SetProperty(ref _isSecondaryCrop, value);
+        }
+
+        /// <summary>
+        /// Indicates if the user wants to show and edit the residue returned to soil fields
+        /// (product, straw, roots, and extraroots returned to soil percentages)
+        /// </summary>
+        public bool OverrideResidueReturnedToSoilDefaults
+        {
+            get => _overrideResidueReturnedToSoilDefaults;
+            set => SetProperty(ref _overrideResidueReturnedToSoilDefaults, value);
         }
 
         /// <summary>
