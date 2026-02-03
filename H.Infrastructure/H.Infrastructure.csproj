@@ -63,6 +63,7 @@
     <None Include="..\LICENSE" Pack="true" PackagePath="" />
     <Compile Include="Controls\TreeHelper.cs" />
     <Compile Include="Controls\ValueConverters\BooleanToHeightConverter.cs" />
+    <Compile Include="Controls\ValueConverters\BooleanToOpacityConverter.cs" />
     <Compile Include="Controls\ValueConverters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Controls\ValueConverters\BoolRadioConverter.cs" />
     <Compile Include="Controls\ValueConverters\DebugDataBindingConverter.cs" />

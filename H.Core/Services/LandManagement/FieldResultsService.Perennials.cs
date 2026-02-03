@@ -34,7 +34,7 @@ namespace H.Core.Services.LandManagement
                 var nextYear = cropViewItem.Year + 1;
                 var hasCropInNextYear = viewItemsForField.SingleOrDefault(x => x.Year == nextYear && x.IsSecondaryCrop == false) != null;
 
-                if (cropViewItem.CropType.IsPerennial() && cropViewItem.IsFinalYearInPerennialStand() && hasCropInNextYear == false)
+                if (cropViewItem.CropType.IsPerennial() && cropViewItem.IsFinalYearInPerennialStand() && hasCropInNextYear == false && cropViewItem.OverrideResidueReturnedToSoilDefaults == false)
                 {
                     cropViewItem.PercentageOfRootsReturnedToSoil = 30;
                 }

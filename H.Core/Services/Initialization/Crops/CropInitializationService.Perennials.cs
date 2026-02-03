@@ -1,4 +1,4 @@
-﻿using H.Core.Enumerations;
+using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using System;
@@ -43,6 +43,15 @@ namespace H.Core.Services.Initialization.Crops
                 for (var index = 0; index < currentPerennialStand.OrderBy(x => x.Year).Count(); index++)
                 {
                     var cropViewItem = currentPerennialStand.ElementAt(index);
+
+                    // If the user has manually overridden the residue return values, skip this crop and preserve their custom values.
+                    // This allows users to specify their own percentages for product, straw, roots, and extraroots returned to soil
+                    // instead of using the default calculations. The user can set this override via the "Override residue return values"
+                    // radio button on the Residue tab in the UI.
+                    if (cropViewItem.OverrideResidueReturnedToSoilDefaults == true)
+                    {
+                        continue;
+                    }
 
                     if (cropViewItem.YearInPerennialStand == cropViewItem.PerennialStandLength)
                     {
