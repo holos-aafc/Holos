@@ -1,9 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using H.Core;
-using H.Core.Emissions.Results;
 using H.Core.Enumerations;
-using H.Core.Models;
 
 namespace H.Core.Test
 {

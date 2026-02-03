@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace H.Core.Providers.AnaerobicDigestion
+﻿namespace H.Core.Providers.AnaerobicDigestion
 {
     // Provider that calculates the Biodegraded fraction during storage.
     public class BiodegradedFractionDuringStorageData

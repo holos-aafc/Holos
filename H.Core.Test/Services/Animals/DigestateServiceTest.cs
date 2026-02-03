@@ -3,15 +3,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using H.Core.Enumerations;
 using H.Core.Models;
-using H.Core.Models.Animals;
-using H.Core.Models.Animals.Sheep;
 using H.Core.Emissions.Results;
 using System.Collections.Generic;
 using System.Linq;
 using H.Core.Calculators.Infrastructure;
 using H.Core.Models.Infrastructure;
 using H.Core.Models.LandManagement.Fields;
-using H.Core.Providers.Climate;
 using Moq;
 
 namespace H.Core.Test.Services.Animals

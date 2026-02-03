@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Transactions;
 using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Nitrogen.NitrogenService;
 using H.Core.Emissions.Results;

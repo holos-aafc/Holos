@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using H.Core.Providers.AnaerobicDigestion;
 using H.Core.Enumerations;
 

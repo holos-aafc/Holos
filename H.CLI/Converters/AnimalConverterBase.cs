@@ -6,7 +6,6 @@ using H.CLI.UserInput;
 using System.Text;
 using H.CLI.Interfaces;
 using H.CLI.TemporaryComponentStorage;
-using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.CLI.ComponentKeys;

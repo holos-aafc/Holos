@@ -1,13 +1,8 @@
 ﻿#region Imports
 
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using H.Core.Enumerations;
-using H.Core.Providers.Climate;
-using H.Core.Providers.Evapotranspiration;
-using H.Core.Providers.Precipitation;
 using H.Core.Providers.Soil;
-using H.Core.Providers.Temperature;
 using H.Infrastructure;
 
 #endregion

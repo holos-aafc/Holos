@@ -1,12 +1,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Windows.Markup;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
-using H.Core.Providers.Climate;
-using H.Core.Providers.Plants;
 using H.Infrastructure;
 
 namespace H.Core.Providers.Animals

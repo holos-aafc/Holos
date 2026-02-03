@@ -1,9 +1,5 @@
 ﻿using H.Core.Enumerations;
-using H.Core.Models.Animals.Dairy;
 using H.Core.Models;
-using System.Collections.Generic;
-using System;
-using System.Linq;
 using H.Core.Models.Animals;
 using H.Core.Providers.Soil;
 

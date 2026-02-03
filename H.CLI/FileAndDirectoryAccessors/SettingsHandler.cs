@@ -9,7 +9,6 @@ using H.Core.Models;
 using H.Core.Providers;
 using H.Core.Providers.Climate;
 using H.Core.Services.LandManagement.Soil;
-using SharpKml.Dom;
 
 namespace H.CLI.FileAndDirectoryAccessors
 {
