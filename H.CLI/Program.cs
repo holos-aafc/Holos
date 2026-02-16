@@ -146,7 +146,7 @@ namespace H.CLI
                         _globalSettingsHandler.GetUserSettingsMenuChoice(farmDirectoryPath, _geographicDataProvider);
 
                         // This will be the default name for the farm settings file. The user can change the name of the settings file in the Farm folder if they want to.
-                        var defaultFarmSettingsFilePath = farmDirectoryPath + @"\" + Properties.Resources.NameOfSettingsFile + ".settings";
+                        var defaultFarmSettingsFilePath = Path.Combine(farmDirectoryPath, Properties.Resources.NameOfSettingsFile + ".settings");
 
                         // We add it to our list of settings files so we can continue processing with the new settings file
                         settingsFilePathsInFarmDirectory.Add(defaultFarmSettingsFilePath);
@@ -215,7 +215,7 @@ namespace H.CLI
                     var componentResults = new ComponentResultsProcessor(_storage, new TimePeriodHelper(), _fieldResultsService, _n2OEmissionFactorCalculator);
 
                     // Get base directory of user entered path to create Total Results For All Farms folder
-                    Directory.CreateDirectory(InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.TotalResultsForAllFarms);
+                    Directory.CreateDirectory(Path.Combine(InfrastructureConstants.BaseOutputDirectoryPath, Properties.Resources.TotalResultsForAllFarms));
 
                     // Output Individual Results For Each Farm's Land Management Components (list of components is filtered inside method)
                     // Slowest section because we initialize view models for every component
