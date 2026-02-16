@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0-windows</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <SccProjectName>
     </SccProjectName>
@@ -34,8 +34,6 @@
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <UseWindowsForms>true</UseWindowsForms>
-    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <ManifestCertificateThumbprint>6E5B3011E65A7D5525CEFD4DBE3E1B568BFCC22F</ManifestCertificateThumbprint>
     <ManifestKeyFile />
     <GenerateManifests>true</GenerateManifests>
@@ -46,7 +44,7 @@
     <PackageReference Include="CommonServiceLocator" Version="2.0.7" />
     <PackageReference Include="CsvHelper" Version="33.1.0" />
     <PackageReference Include="Moq" Version="4.20.72" />
-    <PackageReference Include="Prism.Wpf" Version="9.0.537" />
+    <PackageReference Include="Prism.Events" Version="9.0.537" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.2" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.1" />
   </ItemGroup>
