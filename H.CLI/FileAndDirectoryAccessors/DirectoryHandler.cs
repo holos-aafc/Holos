@@ -195,6 +195,15 @@ namespace H.CLI.FileAndDirectoryAccessors
             // work from wherever the user ran the command.
             var resolvedFarmsPath = args.Any() ? Path.GetFullPath(args[0]) : null;
 
+            // If a path was provided via command-line argument, use it directly
+            // without creating the FarmsPathFile persistence directory (which
+            // requires write access to the application directory).
+            if (resolvedFarmsPath != null)
+            {
+                Directory.SetCurrentDirectory(resolvedFarmsPath);
+                return;
+            }
+
             // Needs to be reset after each complete scenario run
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
 
@@ -209,12 +218,6 @@ namespace H.CLI.FileAndDirectoryAccessors
 
             //Read the data file which stores the users previous directory.
             var previousFarmsFolderPath = ReadUserFarmsPath(Path.Combine("FarmsPathFile", "UserFarmsPath.txt"));
-
-            //If they have entered a command line argument when running the CLI
-            if (resolvedFarmsPath != null)
-            {
-                Directory.SetCurrentDirectory(resolvedFarmsPath);
-            }
 
             //If there is no command line argument and there is no previous directory (first time running), 
             //prompt the user for the location of their Farms directory 
