@@ -5,7 +5,6 @@
 
 
 # Chapter - 1 Introduction
-
 To install Holos navigate [here](https://agriculture.canada.ca/en/agricultural-production/holos-software-program) on the web.  Click on the specified zip file to download it. Once downloaded, navigate to your downloads folder, and double click the installer named **setup**.  You will be asked if you would like to install the application, click **install**.
 
 <p align="center">
@@ -700,14 +699,14 @@ The default data for this screen is based on information found in the algorithm 
       <em>
 	  	Figure 4.7: Reset Defaults
 	  	<br>
-		A: Step 1. Select a if you would like to reset to default values for 'All Farms' or 'Selected Frams'.
+		A: Step 1. Select if you would like to reset to default values for 'All Farms' or 'Selected Farms'.
 		<br>
 		B:Step 2. Select 'Toggle All On' if you want to reset all values in the list or 'Toggle All Off' if you want to undo all changes.
   	  </em>
   </p>
   <br>
 
-  3. Select all values that you would like to have reverted to defaults and click **Apply** to apply the cahnges to the farm(s) and **Cancel** will undo any changes made to the tab.  
+  3. Select all values that you would like to have reverted to defaults and click **Apply** to apply the changes to the farm(s) and **Cancel** will undo any changes made to the tab.  
 
 # Chapter 5 - Tools
 
@@ -1021,9 +1020,9 @@ The digestate tab allows the user to apply digestate that is produced by the ana
 
 Click here to see how an [Anaerobic Digestor Component](#anaerobic-digestion-component) can be added to the farm.
 
-A field can have one or many applications of digestate. To add a digestate application to the selected field, click the **Add Digestate Application** button. Once an application has been added to the field, the user can adjust the details of the fied application.
+A field can have one or many applications of digestate. To add a digestate application to the selected field, click the **Add Digestate Application** button. Once an application has been added to the field, the user can adjust the details of the field application.
 
-- **Amount of digestate**: The amount of digestate must be specified by the user. This amount must consider the area of the field so that the total amount of digestate in all field applications does not exceed the total digestate produced by the digestor. The gauge labelled **Amount of digestate available** will indicate the remaining amount of digestate after all field applications have been considered. If an attempt is made to apply more digestate that is avaialable, a warning message will be shown to indicate this situation.
+- **Amount of digestate**: The amount of digestate must be specified by the user. This amount must consider the area of the field so that the total amount of digestate in all field applications does not exceed the total digestate produced by the digestor. The gauge labelled **Amount of digestate available** will indicate the remaining amount of digestate after all field applications have been considered. If an attempt is made to apply more digestate that is available, a warning message will be shown to indicate this situation.
 
 - **Liquid-solid separation**: When the anaerobic digestor has been configured to produce separated liquid and solid fractions, the option to select the digestate type will be available. If there is no liquid-solid separation, the only option available will raw digestate (not separated).
 
@@ -1596,7 +1595,7 @@ The manure tab allows editing the following information:
  <img src="../../Images/UserGuide/en/chapter6/figure6-29.png" alt="Figure6-29" width="750"/>
     <br>
     <em>
-		Figure 6.29 - Swine component - Diet tab.
+		Figure 6.29 - Swine component - Manure tab.
 	</em>
 </p>
 <br>
@@ -2138,19 +2137,19 @@ There are four steps that must be followed to configure the anaerobic digestor c
 
 2. In the second step, the user can configure the amounts of manure that are input as feedstock into the system. In order to add manure, there must be at least one animal component added to the farm. Once there is at least one animal component added to the farm, the user must then select which management periods will be used as the basis for manure feedstock into the system. By default, no management periods are selected. To select a management period, the user can click the checkbox under the **Add** column. Once a management period has been selected, 100% of the daily manure produced during that time period will be used as feedstock entering the digestor. The user can then modify this daily amount by adjusting the value under the **Daily proportion of manure added (%)** column.
 
-3. An optional co-feedstock may be added in step three. This co-feedstock can be a crop residue, food waste, or sewage sludge. To add a co-feedstock, press the **Add Farm Residue Substrate Type** button. The user can then select the type of farm residue that will be used, the flow rate, and the start and end dates that indicate when substrate will beging being added to the digestor and when the substrate will stop being added to the digestor.
+3. An optional co-feedstock may be added in step three. This co-feedstock can be a crop residue, food waste, or sewage sludge. To add a co-feedstock, press the **Add Farm Residue Substrate Type** button. The user can then select the type of farm residue that will be used, the flow rate, and the start and end dates that indicate when substrate will begin being added to the digestor and when the substrate will stop being added to the digestor.
 
 4. In step four, the user must select the target output of the digestor. The current options available are **electricity production**, **heat production**, or **methane injection to the gas grid**.
 
 The user may choose to view additional information and adjust optional setting for the anaerobic digestor by clicking the **Yes** button beside the **Show Additional Information** option in the upper right corner of the screen.
 
-At the top of the additional information section, Holos will display the amount of digestate remaining after all field applications have been considered. The amounts will be displayed in a gauge/dial to indicate that the digestate is being stored in a "tanks" that are used internally by Holos. The amounts shown in the gauges will show the total amount of digestate produced by the system minus any amounts applied to a field. If the user has selected to apply liquid and solid separation to the digestate then there will be two gauges displayed. If the user has chosen not to apply liquid solid separation, then only one gauge will be show. If the user has not made any field applications, no gauges will be shown here.
+At the top of the additional information section, Holos will display the amount of digestate remaining after all field applications have been considered. The amounts will be displayed in a gauge/dial to indicate that the digestate is being stored in a "tanks" that are used internally by Holos. The amounts shown in the gauges will show the total amount of digestate produced by the system minus any amounts applied to a field. If the user has selected to apply liquid and solid separation to the digestate then there will be two gauges displayed. If the user has chosen not to apply liquid solid separation, then only one gauge will be shown. If the user has not made any field applications, no gauges will be shown here.
 
 Click here to see [how to create a digestate field application](#digestate).
 
 The section below the gauge display area is the total amounts of digestate produced by the system. These amounts do not consider any field applications of digestate.
 
-The final section in the under the additional information are allows the user to adjust the number of reactors used by the anaerobic digestor and the hydraulic retention time. By default, Holos will use one reactor and a corresponding hydraulic retention time of 25 days. If the number of reactors is changed to 2 (maximum number of reactors allowed is 2), then Holos will change the hydraulic retention time to 60 days. The hydraulic retention time will be used to calculate the flow rate of degraded volatile solids during digestion.
+The final section in the additional information area allows the user to adjust the number of reactors used by the anaerobic digestor and the hydraulic retention time. By default, Holos will use one reactor and a corresponding hydraulic retention time of 25 days. If the number of reactors is changed to 2 (maximum number of reactors allowed is 2), then Holos will change the hydraulic retention time to 60 days. The hydraulic retention time will be used to calculate the flow rate of degraded volatile solids during digestion.
 
 <br>
 <br>
@@ -2583,8 +2582,19 @@ Displayed only when a shelterbelt is added to a farm. Displays how much each ani
 -	The Holos Command Line Interface (CLI) allows you to efficiently process large amounts of data corresponding to the various operations on your Farm.
 -	The interface requires the user to **create data input Excel files** for multiple farms and their respective components (i.e. fields, cow-calf, swine, etc.).
 -	Excel files for data input should be saved using CSV format. **Microsoft Excel is recommended** since other third-party software (such as OpenOffice) is known to cause input errors.
--	Input files cannot be open in another program while the CLI is running. 
+-	Input files cannot be open in another program while the CLI is running.
 -	In this section, we will go through instructions on how to **set up the CLI**, how to **modify settings files**, how to **create data files for each Component and how to use the CLI.**
+
+### Supported Languages
+
+-	The CLI automatically detects your system's language/locale setting and adjusts its behavior accordingly. The following locales are supported: **English (Canada)**, **French (Canada)**, and **English (United States)**.
+-	When using a **French (Canada)** locale, the CSV delimiter used in data input files is a **semicolon (;)** and the decimal separator is a **comma (,)**. For **English** locales, the CSV delimiter is a **comma (,)** and the decimal separator is a **period (.)**.
+-	If your system locale is not one of the supported options listed above, the CLI will display an error message and will not proceed. In that case, please change your computer's language/region settings to one of the supported locales before running the CLI.
+-	When the CLI starts, it will display a message indicating your current detected language. If the language shown is incorrect, change your computer's language settings accordingly.
+
+### Yes/No Prompts
+
+-	Throughout the CLI, you will encounter prompts that ask for a yes or no response. The CLI accepts the following inputs: **"Y"** or **"Yes"** for yes, and **"N"** or **"No"** for no. For French-language users, **"O"** (for "Oui") is also accepted as a yes response. These inputs are not case sensitive.
 
 <br>
 <br>
@@ -2603,7 +2613,7 @@ In this section, we will go through the steps to properly set up the CLI regardi
 
 #### Creating a New Farms Folder
 
-1. When you start Holos CLI, you will be prompted to enter the location of your "Farms" folder. This "Farms" folder can be located anywhere on your PC. After you specify your general Farms folder, Holos will create a default farm folder inside this general folder called called “HolosExampleFarm”.
+1. When you start Holos CLI, you will be prompted to enter the location of your "Farms" folder. This "Farms" folder can be located anywhere on your PC. After you specify your general Farms folder, Holos will create a default farm folder inside this general folder called “HolosExampleFarm”.
 
 	This default folder will contain multiple other folders for each of Holo's Components as well as a '**Farm.Settings**' file containing all settings related to this specific farm.
 
@@ -2773,7 +2783,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
     <em>
 		Figure 10-8 - Shelterbelt Data Input Excel Files.
 		<br>
-		A: Selterbelt Data.
+		A: Shelterbelt Data.
 		<br>
 		B: Shelterbelt Row Data.
 		<br>
@@ -3458,7 +3468,7 @@ Below is an example of a sheep component data file broken into sections
 	Refer to [Creating a New Farms Folder](#creating-a-new-farms-folder) for help creating an initial farms folder and learning about subsequent prompts.
 
 3. You will be asked if you have farms that you would like to import from the Holos GUI (yes/no).
-If you select "yes", you will be prompted to enter the full directory path of your exported farm(s). 
+If you select "yes", you will then be asked if your exported farm files (.json) are located in the current farms directory (yes/no). If you answer "yes", the CLI will search your current farms directory for .json files. If you answer "no", you will be prompted to enter the full directory path where your exported farm files are located.
 
 	It is advised that you save/move the .json file of the farm you have exported from the GUI to the same location of your "Farms" folder. This is because the imported .json will be converted to a folder containing .csv files corresponding to farm components for the Command Line Interface to process.
 
@@ -3466,9 +3476,13 @@ If you select "yes", you will be prompted to enter the full directory path of yo
 
 5. The Command Line Interface will now process each of the farms that you have created and their corresponding component data input files.
 
-	When the processing and parsing is finished, you will see a "Conversion Finished" message in the CLI.
-	
-6. The results for your farm(s) will be exported to the base directory of your “Farms” directory in an “Outputs” folder to be in Step 1. 
+	When the processing is finished, you will see a "Processing complete, press enter to exit the application." message in the CLI.
+
+6. The results for your farm(s) will be exported to the base directory of your "Farms" directory in an "Outputs" folder as described in Step 1.
+
+	**Note:** If an "Outputs" folder already exists from a previous run, the CLI will create a new output folder with a timestamp appended to the name (e.g., "Outputs_2025_03_15_10_30_45") so that previous results are not overwritten.
+
+7. After processing is complete, you will be asked: **"Would you like to run another scenario? (Y/N)"**. If you select "Y", the CLI will clear the screen and start a new run, allowing you to process additional farms or use different settings without restarting the application. If you select "N", the application will exit.
 
 <br>
 <p align="center">
@@ -3485,19 +3499,21 @@ If you select "yes", you will be prompted to enter the full directory path of yo
 
 ## Command Line Arguments and Input Flags
 
-There are a number of useful command line arguments available for the the Holos CLI. 
+There are a number of useful command line arguments available for the Holos CLI. 
 
 __The first argument must be the full directory path to your farms folder.__
 
 Following this directory path, and in any order, the following command flags can be used:
 - -i : your input .json file. This is case sensitive and requires the file extension.
-- -f : a folder of .json files for importing multiple farms. This is case sensitive. 
+- -f : a folder of .json files for importing multiple farms. This is case sensitive. The folder must be located inside the given farms folder.
 - -s : a configured .settings file within the farms folder. This input flag is only available if the -i and/or -f flag is also used. This is also case sensitive and requires the file extension.
-- -u : your chosen unit of measurement, "metric" or "imperial". This is not case sensitive.
-- -p : SLC polygon ID to process the given input farm with climate and geographical data derived from a polygon ID. This will not alter the .json file.
-- -o : output directory path for outputs.
+- -u : your chosen unit of measurement. Accepted values are "metric" or "m" for metric, and "imperial" or "i" for imperial. This is not case sensitive. If an invalid value is provided, you will be prompted to select a unit of measurement interactively.
+- -p : SLC polygon ID to process the given input farm with climate and geographical data derived from a polygon ID. This will not alter the .json file. If the polygon ID is not valid, the CLI will display an error and stop processing.
+- -o : output directory path for outputs. **Note:** The output path cannot be a network drive. If a network drive path is provided, the CLI will display an error and will default to using the farms folder as the output location.
 
 Input .json files, input folders, and .SETTINGS files must be in the given farms folder.
+
+When using the -i or -f flags, the CLI will bypass the interactive prompts for importing farms from the GUI and will directly process the specified input file(s) or folder.
 
 If you have built the solution from source code, the CLI executable will be found with the ..\H\H.CLI\bin\Debug folder of your local repository. 
 
@@ -3508,9 +3524,13 @@ If you have [installed the CLI](https://github.com/holos-aafc/Holos#download), t
 -	The Command Line Interface will output the **results for each farm** you have created and their respective components as well as the **total results for all the farms combined.**
 -	The results will be displayed in an Excel file and correspond to the following categories: **Carbon Dioxide Equivalence Emissions, Green House Gas Emissions, Estimates of Production and Feed Estimates.**
 -	**Carbon Dioxide Equivalence Emissions** are in units of **Megagrams (Mg)** and **Green House Gas Emissions** are in units of **kilograms (kg).**
--	**If you have multiple settings files for a farm**, there will be results files for each settings file in that farm.
--	You can find these results in the “**Outputs**” folder of the Holos Command Line Interface base directory.
+-	**If you have multiple settings files for a farm**, the CLI will process the farm once for each settings file. This allows you to test different climate, soil, or other settings for the same farm. Each settings file will produce its own set of results.
+-	You can find these results in the "**Outputs**" folder of the Holos Command Line Interface base directory. If an Outputs folder already exists from a prior run, a new folder is created with a timestamp suffix (e.g., "Outputs_2025_03_15_10_30_45") to prevent overwriting previous results.
 -	**If you are looking for more specific results for each farm, please go to the appropriate farm output folder.**
+
+### Component Processing Order
+
+-	The CLI processes components in a specific order. **Shelterbelts** and **Fields** are always processed first because other components (such as Swine) may reference field components. If you have a Swine component that references a field (e.g., when the housing type is set to "Pasture"), the referenced field must be processed before the Swine component can use it.
 
 <br>
 
@@ -3698,9 +3718,13 @@ The user must ensure that the references to other components are valid and the c
 
 ### CLI Generated Component Directory Names are not Changed
 
-The user must ensure that they do not change the names of the component directories in each farm.
+The user must ensure that they do not change the names of the component directories in each farm. The valid component directory names are: **Shelterbelts**, **Fields**, **Beef**, **Sheep**, **Dairy**, **Poultry**, **Swine**, and **OtherLivestock**.
 
-If the names of the component’s are not valid, the data will not be processed. You will be shown a message that will tell you which component directory is invalid.
+If the names of the component directories are not valid, the data in those directories will not be processed. You will be shown a message listing which component directory names are invalid along with a list of all valid directory names.
+
+### Farms With No Component Data
+
+If a farm folder exists but none of its component directories contain data input files with valid data, the CLI will display a warning message: "The Farm: [FarmName] does not contain any data for the Components. Therefore, there is no data to process!" The CLI will continue processing other farms if available. If no farms contain processable data, the CLI will display: "There are no Farms that can be processed" and prompt you to press enter to exit.
 
 <br>
 <br>
@@ -4091,7 +4115,7 @@ Holos uses the IPCC Tier 2 carbon model as default but allows the user to switch
 
 Please follow these steps for Windows 11 based systems. In this example we will work with the **HOLOS_4** folder mentioned in the [how to find the holos data files section.](#how-to-find-the-holos-program-data-files)
 
-1.	Using your mouse, while holding down the left mouse button, select all the files you want to add to your achieve(.zip) file. In this example, this will be all the files inside HOLOS_4 folder.
+1.	Using your mouse, while holding down the left mouse button, select all the files you want to add to your archive (.zip) file. In this example, this will be all the files inside HOLOS_4 folder.
 
 <br>
 <p align="center">
@@ -4131,7 +4155,7 @@ Please follow these steps for Windows 11 based systems. In this example we will 
 
 Please follow these steps for Windows 10 based systems. In this example we will work with the HOLOS_4 folder mentioned in the [how to find the holos data files section](#how-to-find-the-holos-program-data-files)
 
-1.	Using your mouse, while holding down the left mouse button, select all the files you want to add to your achieve(.zip) file.  In this example, this will be all the files inside HOLOS_4 folder.
+1.	Using your mouse, while holding down the left mouse button, select all the files you want to add to your archive (.zip) file.  In this example, this will be all the files inside HOLOS_4 folder.
 
 <br>
 <p align="center">
@@ -4359,7 +4383,7 @@ If you have downloaded and installed the CLI link provided in the README, an app
 </p>
 <br>
 
-This icon is not itself an executable, and therefore cannot accept command line arguments. To find the exectuable associated with this icon: 
+This icon is not itself an executable, and therefore cannot accept command line arguments. To find the executable associated with this icon: 
 1. Run the Holos CLI by double-clicking on the application reference icon.
 2. Open your Windows Task Manager.
 3. Right-click the H.CLI app.
