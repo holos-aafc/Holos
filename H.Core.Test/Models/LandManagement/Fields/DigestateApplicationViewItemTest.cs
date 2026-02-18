@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using H.Core.Calculators.Carbon;
-using H.Core.Models.LandManagement.Fields;
+﻿using H.Core.Models.LandManagement.Fields;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace H.Core.Test.Models.LandManagement.Fields

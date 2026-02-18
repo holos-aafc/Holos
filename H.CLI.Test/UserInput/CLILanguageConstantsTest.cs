@@ -1,12 +1,7 @@
 ﻿using H.CLI.UserInput;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace H.CLI.Test.UserInput
 {
@@ -30,7 +25,7 @@ namespace H.CLI.Test.UserInput
         public void TestSetCultureAndLanguageDefaults_InvalidUserCulture()
         {
             var userCulture = CultureInfo.GetCultureInfo("fr-EU");
-            Assert.ThrowsException<NotSupportedException>(() => CLILanguageConstants.SetCulture(userCulture));
+            Assert.Throws<NotSupportedException>(() => CLILanguageConstants.SetCulture(userCulture));
         }
 
     }

@@ -1,8 +1,6 @@
-﻿using System.Security.Permissions;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Models.Infrastructure;
 using H.Core.Models.LandManagement.Fields;
-using H.Core.Services.Animals;
 
 namespace H.Core.Models
 {

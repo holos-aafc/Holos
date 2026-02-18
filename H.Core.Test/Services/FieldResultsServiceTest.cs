@@ -11,7 +11,6 @@ using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers;
 using H.Core.Providers.Climate;
 using H.Core.Providers.Evapotranspiration;
-using H.Core.Providers.Fertilizer;
 using H.Core.Providers.Precipitation;
 using H.Core.Providers.Soil;
 using H.Core.Services.Animals;
@@ -22,7 +21,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using H.Core.Providers.Feed;
 using H.Core.Services;
 using GroupEmissionsByDay = H.Core.Emissions.Results.GroupEmissionsByDay;
 

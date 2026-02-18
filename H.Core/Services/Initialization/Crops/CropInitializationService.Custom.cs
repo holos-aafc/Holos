@@ -2,6 +2,7 @@
 using AutoMapper;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace H.Core.Services.Initialization.Crops
 {
@@ -34,7 +35,7 @@ namespace H.Core.Services.Initialization.Crops
                     .ForMember(x => x.Year, options => options.Ignore())
                     .ForMember(x => x.Name, options => options.Ignore())
                     .ForMember(x => x.Area, options => options.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             var mapper = customCropDefaultsMapperConfiguration.CreateMapper();
 

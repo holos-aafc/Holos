@@ -23,6 +23,11 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using H.Core;
+using H.Core.Calculators.Infrastructure;
+using H.Core.Calculators.Nitrogen;
+using H.Core.Converters;
+using H.Core.Services.Animals;
 
 
 namespace H.CLI.Results

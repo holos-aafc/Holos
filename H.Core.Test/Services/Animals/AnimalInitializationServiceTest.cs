@@ -1,13 +1,5 @@
-﻿using H.Core.Calculators.Infrastructure;
-using H.Core.Enumerations;
-using H.Core.Models.Infrastructure;
-using H.Core.Models.LandManagement.Fields;
-using H.Core.Models;
-using H.Core.Services.Animals;
+﻿using H.Core.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
-using System.Collections.Generic;
 using H.Core.Services.Initialization.Animals;
 
 namespace H.Core.Test.Services.Animals
