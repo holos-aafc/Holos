@@ -301,6 +301,7 @@
     <Content Include="Scripts\copyright.txt" />
     <None Include="app.config" />
     <None Include="Documentation\Beef Training Guide\Holos_4_Training_Guide_Beef.md" />
+    <None Include="Documentation\CLI Input File Example\CLI_Input_File_Example.md" />
     <None Include="Documentation\CLI Training Guide\Holos_4_Training_Guide_CLI.md" />
     <None Include="Documentation\Dairy Training Guide\Holos_4_Dairy_Training_Guide.md" />
     <None Include="Documentation\Dairy Training Guide\Holos_4_Dairy_Training_Guide_French.md" />
