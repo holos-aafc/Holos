@@ -5,7 +5,6 @@
 
 
 # Chapter - 1 Introduction
-
 To install Holos navigate [here](https://agriculture.canada.ca/en/agricultural-production/holos-software-program) on the web.  Click on the specified zip file to download it. Once downloaded, navigate to your downloads folder, and double click the installer named **setup**.  You will be asked if you would like to install the application, click **install**.
 
 <p align="center">
@@ -700,14 +699,14 @@ The default data for this screen is based on information found in the algorithm 
       <em>
 	  	Figure 4.7: Reset Defaults
 	  	<br>
-		A: Step 1. Select a if you would like to reset to default values for 'All Farms' or 'Selected Frams'.
+		A: Step 1. Select if you would like to reset to default values for 'All Farms' or 'Selected Farms'.
 		<br>
 		B:Step 2. Select 'Toggle All On' if you want to reset all values in the list or 'Toggle All Off' if you want to undo all changes.
   	  </em>
   </p>
   <br>
 
-  3. Select all values that you would like to have reverted to defaults and click **Apply** to apply the cahnges to the farm(s) and **Cancel** will undo any changes made to the tab.  
+  3. Select all values that you would like to have reverted to defaults and click **Apply** to apply the changes to the farm(s) and **Cancel** will undo any changes made to the tab.  
 
 # Chapter 5 - Tools
 
@@ -1021,9 +1020,9 @@ The digestate tab allows the user to apply digestate that is produced by the ana
 
 Click here to see how an [Anaerobic Digestor Component](#anaerobic-digestion-component) can be added to the farm.
 
-A field can have one or many applications of digestate. To add a digestate application to the selected field, click the **Add Digestate Application** button. Once an application has been added to the field, the user can adjust the details of the fied application.
+A field can have one or many applications of digestate. To add a digestate application to the selected field, click the **Add Digestate Application** button. Once an application has been added to the field, the user can adjust the details of the field application.
 
-- **Amount of digestate**: The amount of digestate must be specified by the user. This amount must consider the area of the field so that the total amount of digestate in all field applications does not exceed the total digestate produced by the digestor. The gauge labelled **Amount of digestate available** will indicate the remaining amount of digestate after all field applications have been considered. If an attempt is made to apply more digestate that is avaialable, a warning message will be shown to indicate this situation.
+- **Amount of digestate**: The amount of digestate must be specified by the user. This amount must consider the area of the field so that the total amount of digestate in all field applications does not exceed the total digestate produced by the digestor. The gauge labelled **Amount of digestate available** will indicate the remaining amount of digestate after all field applications have been considered. If an attempt is made to apply more digestate that is available, a warning message will be shown to indicate this situation.
 
 - **Liquid-solid separation**: When the anaerobic digestor has been configured to produce separated liquid and solid fractions, the option to select the digestate type will be available. If there is no liquid-solid separation, the only option available will raw digestate (not separated).
 
@@ -1596,7 +1595,7 @@ The manure tab allows editing the following information:
  <img src="../../Images/UserGuide/en/chapter6/figure6-29.png" alt="Figure6-29" width="750"/>
     <br>
     <em>
-		Figure 6.29 - Swine component - Diet tab.
+		Figure 6.29 - Swine component - Manure tab.
 	</em>
 </p>
 <br>
@@ -2138,19 +2137,19 @@ There are four steps that must be followed to configure the anaerobic digestor c
 
 2. In the second step, the user can configure the amounts of manure that are input as feedstock into the system. In order to add manure, there must be at least one animal component added to the farm. Once there is at least one animal component added to the farm, the user must then select which management periods will be used as the basis for manure feedstock into the system. By default, no management periods are selected. To select a management period, the user can click the checkbox under the **Add** column. Once a management period has been selected, 100% of the daily manure produced during that time period will be used as feedstock entering the digestor. The user can then modify this daily amount by adjusting the value under the **Daily proportion of manure added (%)** column.
 
-3. An optional co-feedstock may be added in step three. This co-feedstock can be a crop residue, food waste, or sewage sludge. To add a co-feedstock, press the **Add Farm Residue Substrate Type** button. The user can then select the type of farm residue that will be used, the flow rate, and the start and end dates that indicate when substrate will beging being added to the digestor and when the substrate will stop being added to the digestor.
+3. An optional co-feedstock may be added in step three. This co-feedstock can be a crop residue, food waste, or sewage sludge. To add a co-feedstock, press the **Add Farm Residue Substrate Type** button. The user can then select the type of farm residue that will be used, the flow rate, and the start and end dates that indicate when substrate will begin being added to the digestor and when the substrate will stop being added to the digestor.
 
 4. In step four, the user must select the target output of the digestor. The current options available are **electricity production**, **heat production**, or **methane injection to the gas grid**.
 
 The user may choose to view additional information and adjust optional setting for the anaerobic digestor by clicking the **Yes** button beside the **Show Additional Information** option in the upper right corner of the screen.
 
-At the top of the additional information section, Holos will display the amount of digestate remaining after all field applications have been considered. The amounts will be displayed in a gauge/dial to indicate that the digestate is being stored in a "tanks" that are used internally by Holos. The amounts shown in the gauges will show the total amount of digestate produced by the system minus any amounts applied to a field. If the user has selected to apply liquid and solid separation to the digestate then there will be two gauges displayed. If the user has chosen not to apply liquid solid separation, then only one gauge will be show. If the user has not made any field applications, no gauges will be shown here.
+At the top of the additional information section, Holos will display the amount of digestate remaining after all field applications have been considered. The amounts will be displayed in a gauge/dial to indicate that the digestate is being stored in a "tanks" that are used internally by Holos. The amounts shown in the gauges will show the total amount of digestate produced by the system minus any amounts applied to a field. If the user has selected to apply liquid and solid separation to the digestate then there will be two gauges displayed. If the user has chosen not to apply liquid solid separation, then only one gauge will be shown. If the user has not made any field applications, no gauges will be shown here.
 
 Click here to see [how to create a digestate field application](#digestate).
 
 The section below the gauge display area is the total amounts of digestate produced by the system. These amounts do not consider any field applications of digestate.
 
-The final section in the under the additional information are allows the user to adjust the number of reactors used by the anaerobic digestor and the hydraulic retention time. By default, Holos will use one reactor and a corresponding hydraulic retention time of 25 days. If the number of reactors is changed to 2 (maximum number of reactors allowed is 2), then Holos will change the hydraulic retention time to 60 days. The hydraulic retention time will be used to calculate the flow rate of degraded volatile solids during digestion.
+The final section in the additional information area allows the user to adjust the number of reactors used by the anaerobic digestor and the hydraulic retention time. By default, Holos will use one reactor and a corresponding hydraulic retention time of 25 days. If the number of reactors is changed to 2 (maximum number of reactors allowed is 2), then Holos will change the hydraulic retention time to 60 days. The hydraulic retention time will be used to calculate the flow rate of degraded volatile solids during digestion.
 
 <br>
 <br>
@@ -2603,7 +2602,7 @@ In this section, we will go through the steps to properly set up the CLI regardi
 
 #### Creating a New Farms Folder
 
-1. When you start Holos CLI, you will be prompted to enter the location of your "Farms" folder. This "Farms" folder can be located anywhere on your PC. After you specify your general Farms folder, Holos will create a default farm folder inside this general folder called called “HolosExampleFarm”.
+1. When you start Holos CLI, you will be prompted to enter the location of your "Farms" folder. This "Farms" folder can be located anywhere on your PC. After you specify your general Farms folder, Holos will create a default farm folder inside this general folder called “HolosExampleFarm”.
 
 	This default folder will contain multiple other folders for each of Holo's Components as well as a '**Farm.Settings**' file containing all settings related to this specific farm.
 
@@ -2773,7 +2772,7 @@ There are two methods to add a new farm to an existing farms folder. [The common
     <em>
 		Figure 10-8 - Shelterbelt Data Input Excel Files.
 		<br>
-		A: Selterbelt Data.
+		A: Shelterbelt Data.
 		<br>
 		B: Shelterbelt Row Data.
 		<br>
@@ -3468,7 +3467,7 @@ If you select "yes", you will be prompted to enter the full directory path of yo
 
 	When the processing and parsing is finished, you will see a "Conversion Finished" message in the CLI.
 	
-6. The results for your farm(s) will be exported to the base directory of your “Farms” directory in an “Outputs” folder to be in Step 1. 
+6. The results for your farm(s) will be exported to the base directory of your “Farms” directory in an “Outputs” folder as described in Step 1. 
 
 <br>
 <p align="center">
@@ -3485,7 +3484,7 @@ If you select "yes", you will be prompted to enter the full directory path of yo
 
 ## Command Line Arguments and Input Flags
 
-There are a number of useful command line arguments available for the the Holos CLI. 
+There are a number of useful command line arguments available for the Holos CLI. 
 
 __The first argument must be the full directory path to your farms folder.__
 
@@ -4091,7 +4090,7 @@ Holos uses the IPCC Tier 2 carbon model as default but allows the user to switch
 
 Please follow these steps for Windows 11 based systems. In this example we will work with the **HOLOS_4** folder mentioned in the [how to find the holos data files section.](#how-to-find-the-holos-program-data-files)
 
-1.	Using your mouse, while holding down the left mouse button, select all the files you want to add to your achieve(.zip) file. In this example, this will be all the files inside HOLOS_4 folder.
+1.	Using your mouse, while holding down the left mouse button, select all the files you want to add to your archive (.zip) file. In this example, this will be all the files inside HOLOS_4 folder.
 
 <br>
 <p align="center">
@@ -4131,7 +4130,7 @@ Please follow these steps for Windows 11 based systems. In this example we will 
 
 Please follow these steps for Windows 10 based systems. In this example we will work with the HOLOS_4 folder mentioned in the [how to find the holos data files section](#how-to-find-the-holos-program-data-files)
 
-1.	Using your mouse, while holding down the left mouse button, select all the files you want to add to your achieve(.zip) file.  In this example, this will be all the files inside HOLOS_4 folder.
+1.	Using your mouse, while holding down the left mouse button, select all the files you want to add to your archive (.zip) file.  In this example, this will be all the files inside HOLOS_4 folder.
 
 <br>
 <p align="center">
@@ -4359,7 +4358,7 @@ If you have downloaded and installed the CLI link provided in the README, an app
 </p>
 <br>
 
-This icon is not itself an executable, and therefore cannot accept command line arguments. To find the exectuable associated with this icon: 
+This icon is not itself an executable, and therefore cannot accept command line arguments. To find the executable associated with this icon: 
 1. Run the Holos CLI by double-clicking on the application reference icon.
 2. Open your Windows Task Manager.
 3. Right-click the H.CLI app.
