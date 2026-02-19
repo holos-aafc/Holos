@@ -121,6 +121,7 @@ namespace H.CLI.Converters
                 MoistureContentOfBeddingMaterial = inputRow.MoistureContentOfBeddingMaterial,
                 TotalNitrogenKilogramsDryMatterForBedding = inputRow.TotalNitrogenKilogramsDryMatterForBedding,
                 IndoorHousingTemperature = inputRow.IndoorBarnTemperature,
+                UseCustomIndoorHousingTemperature = inputRow.UseCustomIndoorHousingTemperature,
             };
 
             var pastureLocation = new FieldSystemComponent();
