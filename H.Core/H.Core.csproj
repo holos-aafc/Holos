@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0-windows</TargetFramework>
+    <TargetFrameworks>net10.0;net10.0-windows</TargetFrameworks>
     <PackageId>AAFC.Holos.Core</PackageId>
     <Authors>AAFC</Authors>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -16,8 +16,8 @@
     </SccAuxPath>
     <SccProvider>
     </SccProvider>
-    <UseWPF>true</UseWPF>
-    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <UseWPF Condition="'$(TargetFramework)' == 'net10.0-windows'">true</UseWPF>
+    <ImportWindowsDesktopTargets Condition="'$(TargetFramework)' == 'net10.0-windows'">true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="16.0.0" />
@@ -28,7 +28,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Prism.Wpf" Version="9.0.537" />
+    <PackageReference Include="Prism.Core" Version="9.0.537" />
+    <PackageReference Include="Prism.Wpf" Version="9.0.537" Condition="'$(TargetFramework)' == 'net10.0-windows'" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.1" />
     <PackageReference Include="System.Runtime.Caching" Version="10.0.1" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.2" />

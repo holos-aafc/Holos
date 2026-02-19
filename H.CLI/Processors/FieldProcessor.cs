@@ -57,7 +57,7 @@ namespace H.CLI.Processors
 
             var farmName = farm.Name + Properties.Resources.Results;
 
-            string filePath = InfrastructureConstants.BaseOutputDirectoryPath + @"\" + farmName + @"\" + Properties.Resources.DefaultFieldsInputFolder + @"\";
+            string filePath = Path.Combine(InfrastructureConstants.BaseOutputDirectoryPath, farmName, Properties.Resources.DefaultFieldsInputFolder) + Path.DirectorySeparatorChar;
 
             // Write field system data to file
             _fieldResultsService.ExportResultsToFile(
@@ -123,7 +123,7 @@ namespace H.CLI.Processors
         {
             string columnSeparator = CLILanguageConstants.Delimiter;
             var fileName = FileSystemHelper.SanitizeFileName(fieldSystemComponent.Name);
-            var filePath = path + @"\" + fileName + CLILanguageConstants.DefaultInputFileExtension;
+            var filePath = Path.Combine(path, fileName + CLILanguageConstants.DefaultInputFileExtension);
             var stringBuilder = new StringBuilder();
             foreach (var keyValuePair in componentKeys)
             {

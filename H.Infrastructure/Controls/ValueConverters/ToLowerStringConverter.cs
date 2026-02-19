@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if WINDOWS
+using System;
 using System.Globalization;
 using System.Windows.Data;
 
@@ -22,3 +23,4 @@ namespace H.Infrastructure.Controls.ValueConverters
         }
     }
 }
+#endif

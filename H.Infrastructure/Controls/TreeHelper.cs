@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if WINDOWS
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 
@@ -154,3 +155,4 @@ namespace H.Infrastructure.Controls
 
     }
 }
+#endif

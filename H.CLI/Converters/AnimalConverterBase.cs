@@ -47,7 +47,7 @@ namespace H.CLI.Converters
             var animalGroups = this.BuildStringManagementRow((AnimalComponentBase)component);
 
             var columnSeparator = CLILanguageConstants.Delimiter;
-            var filePath = path + @"\" + component.Name + CLILanguageConstants.DefaultInputFileExtension;
+            var filePath = Path.Combine(path, component.Name + CLILanguageConstants.DefaultInputFileExtension);
             var stringBuilder = new StringBuilder();
             foreach (var keyValuePair in this.GetHeaders().Keys)
             {

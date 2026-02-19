@@ -22,10 +22,17 @@ namespace H.CLI.UserInput
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             culture = userCulture;
-            switch (culture.Name)
+            // In containers with invariant globalization, default to en-CA
+            var cultureName = culture.Name;
+            if (string.IsNullOrEmpty(cultureName))
+            {
+                cultureName = "en-CA";
+            }
+
+            switch (cultureName)
             {
                 case "fr-CA":
-                    {      
+                    {
                         Console.WriteLine(String.Format("Your current language is {0}. If the language is not correct, please change " +
                                                         "the language settings on your computer to English(Canada)", culture.DisplayName));
                         Console.WriteLine();
@@ -61,7 +68,7 @@ namespace H.CLI.UserInput
                     Console.ResetColor();
                     Console.BackgroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine(String.Format(Properties.Resources.LanguageNotSupported, culture.DisplayName));
-                    throw new NotSupportedException(String.Format(Properties.Resources.LanguageNotSupported, culture.DisplayName)); 
+                    throw new NotSupportedException(String.Format(Properties.Resources.LanguageNotSupported, culture.DisplayName));
 
             }
             Console.ResetColor();
