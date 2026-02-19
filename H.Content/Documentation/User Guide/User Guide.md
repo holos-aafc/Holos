@@ -1414,6 +1414,7 @@ Each animal group has the following sections that can be further edited and conf
 
 -	The housing section contains details pertaining to the housing situation for your selected animal group in the selected management period.
 -	You can select default housing types such as: confined no barn, confined, enclosed pasture, etc.
+-	For **dairy cattle** with indoor housing, Holos uses **province-based monthly barn temperatures** by default to calculate ammonia emissions from housing. If you prefer to specify your own temperature, you can enable the **Use Custom Indoor Housing Temperature** option and provide an **Indoor Housing Temperature** value (in degrees Celsius). When this option is enabled, your custom value will be used instead of the provincial defaults.
 
 <br>
 <p align="center">
@@ -1424,7 +1425,7 @@ Each animal group has the following sections that can be further edited and conf
 	</em>
 </p>
 
-- If you select “**Enclosed Pasture**”, you will see an additional data field for the “**Pasture Location.**"
+- If you select "**Enclosed Pasture**", you will see an additional data field for the "**Pasture Location.**"
 
 <br>
 
@@ -3262,11 +3263,13 @@ Below is an example of a beef component data file broken into sections
 ##### Dairy Special Data Input Values
 
 -	A dairy component can refer to the following dairy animal groups:
-- Group Type: 
+- Group Type:
 	- Dairy Lactating Cow
    	- Dairy Calves
    	- Dairy Heifers
    	- Dairy Dry Cow
+
+- **Indoor Housing Temperature:** Dairy components support a **UseCustomIndoorHousingTemperature** column in the data input file. By default, this value is set to **False** and Holos will use province-based monthly barn temperatures when calculating ammonia emissions from indoor housing. If you set this value to **True**, Holos will use the value provided in the **IndoorBarnTemperature** column (in degrees Celsius) instead of the provincial defaults. Both columns must be present in the data input file for the custom temperature to take effect.
 
 <br>
 
