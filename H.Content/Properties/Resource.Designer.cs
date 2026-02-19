@@ -612,10 +612,10 @@ namespace H.Content.Properties {
             }
         }
         
-#if WINDOWS
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+#if WINDOWS
         public static System.Drawing.Bitmap icons8_settings_50 {
             get {
                 object obj = ResourceManager.GetObject("icons8_settings_50", resourceCulture);
@@ -947,10 +947,10 @@ namespace H.Content.Properties {
             }
         }
         
-#if WINDOWS
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+#if WINDOWS
         public static System.Drawing.Bitmap Settings_50_px {
             get {
                 object obj = ResourceManager.GetObject("Settings_50_px", resourceCulture);

@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net10.0;net10.0-windows</TargetFrameworks>
+    <DefineConstants Condition="'$(TargetFramework)' == 'net10.0-windows'">$(DefineConstants);WINDOWS</DefineConstants>
     <PackageId>AAFC.Holos.Content</PackageId>
     <Authors>AAFC</Authors>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
