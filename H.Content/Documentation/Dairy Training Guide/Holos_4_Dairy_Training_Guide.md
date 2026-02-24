@@ -12,7 +12,7 @@ Please note that Holos 4 can be installed on a Microsoft Windows PC only. Mac OS
 
 Launch Holos by double-clicking on the Holos desktop icon. Holos will ask the user to open an existing farm, create a new farm, or import a saved farm file (Figure 1). If there is already a saved farm in the system, the user can click **Open**. If there are no saved farms in the system, Holos will ask the user if they want to create a **New** farm or **Import** a saved farm file (i.e., a .json file). If the user creates a new farm, they are asked for the farm name and an optional comment (Figure 2).  
 
-Enter **"Holos 2024"** as the Name and **"Training Version"** in the Comments.  Click **OK** to proceed to the next screen.
+Enter **"Holos 2026"** as the Name and **"Training Version"** in the Comments.  Click **OK** to proceed to the next screen.
 
 Ensure **"Metric"** is selected as the unit of measurement type and then click the **Next** button at the bottom of the screen (Figure 3). 
 
@@ -151,7 +151,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 1. Rename the field to **"Wheat & Hairy Vetch"** in the **Step 1** section of the screen. Change the area of the field to **18 ha**.
    
-2. Leave the start year as 1985 and change the end year to 2023.
+2. Leave the start year as 1985 and change the end year to 2026.
 
 3. Select **"Wheat"** as the main crop and **"Hairy Vetch"** as the cover crop in **Step 2**.
 
@@ -197,7 +197,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 ### Native Grassland 
 
 1. Drag a new **Field** component to your list of components. Enter **"Native Grassland"** as the field name.
-2. Leave the start year as 1985 and change the end year to 2023.
+2. Leave the start year as 1985 and change the end year to 2026.
 3. Enter **"100"** ha as the total area of the field.
 4. Select **"Rangeland (Native)"** from the drop-down crop list in the **Crop** column under **Step 2**. Please note that Holos auto-populates the **Winter/Cover/Undersown Crop** field when a perennial crop is selected.
 5. Enter **"0" mm ha<sup>-1</sup>** as the amount of irrigation and **"0"** as the number of pesticide passes.
@@ -225,7 +225,7 @@ Adding animal components follows the same approach used for the land management 
 <br>
 
 <p align="center">
-    <img src="../../Images/DairyGuide/en/Figure14.gif" alt="Figure 14" width="950"/>
+    <img src="../../Images/DairyGuide/en/Figure13.gif" alt="Figure 14" width="950"/>
     <br>
     <em>Figure 13: The Dairy Cattle Component.</em>
 </p> 
@@ -240,7 +240,7 @@ Holos provides the user with the option to have more than one lactating cows gro
 
 1. Under **Step 1**, make sure that the **"Dairy lactating"** row is selected in order to enter the associated management information for that group of animals.
 
-2. Click the management period named **"Early lactation"** in **Step 2** to activate that management period. Ensure **"January 1, 2023"** is set as the start date and **"May 31, 2023"** as the end date (151 days). Note that the **Number of days** being shown is inclusive of the start and end dates.
+2. Click the management period named **"Early lactation"** in **Step 2** to activate that management period. Ensure **"January 1, 2025"** is set as the start date and **"May 31, 2025"** as the end date (150 days). Note that the **Number of days** being shown is inclusive of the start and end dates.
 
 3. Next, we can enter data related to the number of animals, housing type, manure system, and diet for our group of lactating cows under **Step 3**. 
 
@@ -265,7 +265,7 @@ Holos provides the user with the option to have more than one lactating cows gro
 <br>
 
 <p align="center">
-    <img src="../../Images/DairyGuide/en/Figure15.png" alt="Figure 15" width="850"/>
+    <img src="../../Images/DairyGuide/en/Figure14.png" alt="Figure 15" width="850"/>
     <br>
     <em>Figure 14: Custom diet creator for the Dairy Lactating animal group.</em>
 </p> 
@@ -288,13 +288,13 @@ Holos provides the user with the option to have more than one lactating cows gro
 
  12. Click on the **Manure** tab and select **"Liquid/Slurry with no natural crust"** from the list.
  
- 13. Click the management period named **"Mid lactation"** in **Step 2**. Ensure **"June 01, 2023"** is set as the start date and **"July 31, 2023"** as the end date (61 days). 
+ 13. Click the management period named **"Mid lactation"** in **Step 2**. Ensure **"June 01, 2025"** is set as the start date and **"July 31, 2025"** as the end date (60 days). 
  
  14. We can enter data related to the number of animals, housing type, manure system, and diet for our group of lactating cows under **Step 3** just as before.
  
  15. On the **General** tab enter **"65"** animals, on the **Diet** tab choose **"Custom Dairy Diet"**, on the **Housing** tab choose **"Tie stall (slurry)"**, and on the **Manure** tab choose **"Liquid/Slurry with no natural crust"**.
  
- 16. Click the management period named **"Late lactation"** in **Step 2**. Ensure **"August 01, 2023"** is set as the start date and **"November 04, 2023"** as the end date (96 days). 
+ 16. Click the management period named **"Late lactation"** in **Step 2**. Ensure **"August 01, 2025"** is set as the start date and **"November 04, 2025"** as the end date (95 days). 
  
  17. Repeat Step 16 above. Enter in the same information in **Step 3** for this management period.
 
@@ -306,11 +306,13 @@ Calves that are not used for replacement will enter into the veal system and are
 
 1. Under **Step 1**, make sure that the **"Calves"** row is selected in order to enter the associated management information for this group. 
 
-2. Under **Step 2**, the first management period will be from **"January 1, 2023"** to **"March 31, 2023"** (90 days).
+2. Under **Step 2**, the first management period will be from **"January 1, 2025"** to **"March 31, 2025"** (90 days).  
+  
+> *Note: A bug currently exists that if the date range of this management period is edited after a second management period is added, the number of days shown will be displayed incorrectly. A fix is being looked in to.*
 
 3. Under **Step 3**, click on the **General** tab and enter **"45"** as the number of animals. Click on the **Housing** tab and select **"Free stall barn (slurry scraping)"** as the housing type and click on the **Manure** tab to select **"Liquid/Slurry with no natural crust"**.
 
-4. Returning to **Step 2**, click on the **Add Management Period** button. This will add a second management period for our group of calves. Ensure the start date is **"April 01, 2023"** and the end date is "**June 30, 2023**" (90 days). Since we assumed a mortality rate of 4.4% at four months of age, we will adjust the number of animals in the second management period to **"43"**. The housing and manure management options are the same as for the first dairy calves management period.
+4. Returning to **Step 2**, click on the **Add Management Period** button. This will add a second management period for our group of calves. Ensure the start date is **"April 01, 2025"** and the end date is "**June 30, 2025**" (90 days). Since we assumed a mortality rate of 4.4% at four months of age, we will adjust the number of animals in the second management period to **"43"**. The housing and manure management options are the same as for the first dairy calves management period.
 
 <br>
 
@@ -324,7 +326,7 @@ Out of the 30 female calves produced, the farm selected 15 as replacement heifer
 
 1. Under **Step 1**, make sure that the **"Dairy heifers"** row is selected in order to enter the associated management information for that group.
 
-2. For **"Management period #1"**, enter **"January 01, 2023"** as the start date and **"December 31, 2023"** as the end date (365 days).
+2. For **"Management period #1"**, enter **"January 01, 2026"** as the start date and **"December 31, 2026"** as the end date (365 days).
 
 3. Click on the **General** tab and enter **"15"** as the number of animals.
 
@@ -342,7 +344,7 @@ In this dairy animal group there are 20 cows that are not milked, allowing for r
 
 1. Under **Step 1**, make sure that the **"Dairy dry"** row is selected in order to enter the associated management information for that group.
 
-2. Under **Step 2** in the **"Dry period"** management period, enter **"November 05, 2023"** as the start date and **"January 4, 2024"** as the end date (61 days).
+2. Under **Step 2** in the **"Dry period"** management period, enter **"November 05, 2025"** as the start date and **"January 4, 2026"** as the end date (61 days).
 
 3. Click on the **General** tab and enter **"20"** as the number of animals.
 
@@ -361,20 +363,23 @@ In Holos, the user can apply livestock manure to a field using either manure pro
 1. Select the **Wheat & hairy vetch** field from the list of components added to our farm.
 
 2. Click on the **Manure tab** and then click the **Add Manure Application** button.
-    * Select **"April 30, 2024"** as the date.
+    * Select **"April 30, 2026"** as the date.
     * Select **"Livestock"** as the origin of manure.
     * Select **"Dairy"** as the manure type.
     * Select **"Liquid/Slurry with no natural crust"** as the manure handling system.
     * Select **"Shallow injection"** as the application method.
     * Enter **"14,000 kg ha<sup>-1</sup>"** as the amount of manure applied to this field.
-4. Note that both chemical fertilizer and manure applications can be made on the same field.
+
+> Only dates in 2026 are valid as the chosen date must be in the same year which the currently selected crop is being grown.
+
+3. Note that both chemical fertilizer and manure applications can be made on the same field.
 
 > Holos provides an interactive gauge on the left of the manure tab to show the **Amount of Stored Manure N Remaining (Dairy cattle) (kg N)**, which adjusts to reflect the user's application choices and quantify the amount of stored manure (N) remaining for application.
 
 <br>
 
 <p align="center">
-    <img src="../../Images/DairyGuide/en/Figure15_Revised.png" alt="Figure 15" width="950"/>
+    <img src="../../Images/DairyGuide/en/Figure15.png" alt="Figure 15" width="950"/>
     <br>
     <em>Figure 15: Adding a manure application to a field.</em>
 </p>
@@ -449,7 +454,7 @@ We will adjust this grid so that we can view the above-ground and below-ground C
 
 2. On the far left of this screen, click the **Enable Columns** sidebar (located near the “Field name” column).
 
-3. Place a check beside **"Above-ground carbon input"** to show the column and remove the check beside the **'Notes'** column to hide it.
+3. Place a check beside **"Above-ground carbon input"** to show the column.
 
 4. Click the **'Enable Columns'** sidebar again to collapse it.
 
