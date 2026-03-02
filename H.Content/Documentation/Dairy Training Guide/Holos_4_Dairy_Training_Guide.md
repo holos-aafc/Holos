@@ -307,8 +307,6 @@ Calves that are not used for replacement will enter into the veal system and are
 1. Under **Step 1**, make sure that the **"Calves"** row is selected in order to enter the associated management information for this group. 
 
 2. Under **Step 2**, the first management period will be from **"January 1, 2025"** to **"March 31, 2025"** (90 days).  
-  
-> *Note: A bug currently exists that if the date range of this management period is edited after a second management period is added, the number of days shown will be displayed incorrectly. A fix is being looked in to.*
 
 3. Under **Step 3**, click on the **General** tab and enter **"45"** as the number of animals. Click on the **Housing** tab and select **"Free stall barn (slurry scraping)"** as the housing type and click on the **Manure** tab to select **"Liquid/Slurry with no natural crust"**.
 
