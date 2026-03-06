@@ -199,9 +199,20 @@ namespace H.Core.Test.Services.Animals
 
             _sut.Initialize(_farm, new List<AnimalComponentEmissionsResults>() { base.GetNonEmptyTestBeefCattleAnimalComponentEmissionsResults() });
 
+            // After Initialize(), RecalculateDigestateApplicationAmounts will have updated the stored
+            // N/ha and C/ha values to be consistent with the tank state. For this Raw application on
+            // Apr 1 with AmountAppliedPerHectare=50, Area=1, TotalRawDigestateProduced=100:
+            //   fractionUsed = (50 * 1) / 100 = 0.5
+            //   C/ha = (0.5 * 10) / 1 = 5   (daily raw C on Apr 1 = 10)
+            //   N/ha = (0.5 * 20) / 1 = 10   (daily raw N on Apr 1 = 20)
+            //
+            // Tank state at Apr 3 (end of year):
+            //   Day 1: CarbonFromRawDigestate = 10 - 5 = 5
+            //   Day 2: 5 + 30 - 0 = 35
+            //   Day 3: 35 + 80 - 0 = 115
             var result = _sut.GetTotalCarbonRemainingAtEndOfYear(year, _farm, _adComponent);
 
-            Assert.AreEqual(120, result);
+            Assert.AreEqual(115, result);
         }
 
         [TestMethod]
@@ -522,6 +533,218 @@ namespace H.Core.Test.Services.Animals
             var result = _sut.GetTotalManureNitrogenRemainingForFarmAndYear(DateTime.Now.Year, _farm, _dailyResults, DigestateState.LiquidPhase);
 
             Assert.AreEqual(145, result, 1);
+        }
+
+        #endregion
+
+        #region RecalculateDigestateApplicationAmounts Tests (Fix 1 & Fix 2)
+
+        /// <summary>
+        /// Verifies that RecalculateDigestateApplicationAmounts correctly updates the N/ha value
+        /// for a raw digestate application based on the tank state at the application date.
+        ///
+        /// For a Raw application on Apr 1 with:
+        ///   AmountAppliedPerHectare = 50, Area = 1
+        ///   TotalRawDigestateProduced on Apr 1 = 100 (FlowRateOfAllSubstratesInDigestate)
+        ///   NitrogenFromRawDigestateNotConsideringFieldApplicationAmounts on Apr 1 = 20
+        ///
+        /// Expected: fractionUsed = (50 * 1) / 100 = 0.5
+        ///           N/ha = (0.5 * 20) / 1 = 10
+        /// </summary>
+        [TestMethod]
+        public void RecalculateDigestateApplicationAmountsUpdatesNitrogenPerHectareForRawApplication()
+        {
+            _adComponent.IsLiquidSolidSeparated = false;
+            _livestockDigestateApplication.DigestateState = DigestateState.Raw;
+
+            // Set an intentionally stale/incorrect value to verify the recalculation updates it
+            _livestockDigestateApplication.AmountOfNitrogenAppliedPerHectare = 999;
+
+            _sut.Initialize(_farm, new List<AnimalComponentEmissionsResults>() { base.GetNonEmptyTestBeefCattleAnimalComponentEmissionsResults() });
+
+            // After Initialize() -> RecalculateDigestateApplicationAmounts(), the N/ha should be
+            // recalculated from the actual tank state, not left at the stale value of 999
+            Assert.AreEqual(10, _livestockDigestateApplication.AmountOfNitrogenAppliedPerHectare, 0.001,
+                "RecalculateDigestateApplicationAmounts should update N/ha to the correct value derived from tank state");
+        }
+
+        /// <summary>
+        /// Verifies that RecalculateDigestateApplicationAmounts correctly updates the C/ha value
+        /// for a raw digestate application based on the tank state at the application date.
+        ///
+        /// For a Raw application on Apr 1 with:
+        ///   AmountAppliedPerHectare = 50, Area = 1
+        ///   TotalRawDigestateProduced on Apr 1 = 100
+        ///   CarbonFromRawDigestateNotConsideringFieldApplicationAmounts on Apr 1 = 10
+        ///
+        /// Expected: fractionUsed = (50 * 1) / 100 = 0.5
+        ///           C/ha = (0.5 * 10) / 1 = 5
+        /// </summary>
+        [TestMethod]
+        public void RecalculateDigestateApplicationAmountsUpdatesCarbonPerHectareForRawApplication()
+        {
+            _adComponent.IsLiquidSolidSeparated = false;
+            _livestockDigestateApplication.DigestateState = DigestateState.Raw;
+
+            // Set an intentionally stale/incorrect value to verify the recalculation updates it
+            _livestockDigestateApplication.AmountOfCarbonAppliedPerHectare = 999;
+
+            _sut.Initialize(_farm, new List<AnimalComponentEmissionsResults>() { base.GetNonEmptyTestBeefCattleAnimalComponentEmissionsResults() });
+
+            Assert.AreEqual(5, _livestockDigestateApplication.AmountOfCarbonAppliedPerHectare, 0.001,
+                "RecalculateDigestateApplicationAmounts should update C/ha to the correct value derived from tank state");
+        }
+
+        /// <summary>
+        /// Verifies that RecalculateDigestateApplicationAmounts correctly updates N/ha and C/ha values
+        /// for a liquid-phase digestate application when liquid-solid separation is enabled.
+        ///
+        /// For a LiquidPhase application on Apr 1 with:
+        ///   AmountAppliedPerHectare = 50, Area = 1
+        ///   TotalLiquidDigestateProduced on Apr 1 = 2222 (FlowRateLiquidFraction)
+        ///   NitrogenFromLiquidDigestateNotConsideringFieldApplicationAmounts on Apr 1 = 113
+        ///   CarbonFromLiquidDigestateNotConsideringFieldApplicationAmounts on Apr 1 = 66
+        ///
+        /// Expected: fractionUsed = (50 * 1) / 2222 = 0.02250...
+        ///           N/ha = (0.02250... * 113) / 1 = 2.5427...
+        ///           C/ha = (0.02250... * 66) / 1 = 1.4851...
+        /// </summary>
+        [TestMethod]
+        public void RecalculateDigestateApplicationAmountsUpdatesValuesForLiquidPhaseApplication()
+        {
+            _adComponent.IsLiquidSolidSeparated = true;
+            _livestockDigestateApplication.DigestateState = DigestateState.LiquidPhase;
+            _livestockDigestateApplication.AmountOfNitrogenAppliedPerHectare = 999;
+            _livestockDigestateApplication.AmountOfCarbonAppliedPerHectare = 999;
+
+            _sut.Initialize(_farm, new List<AnimalComponentEmissionsResults>() { base.GetNonEmptyTestBeefCattleAnimalComponentEmissionsResults() });
+
+            var expectedFraction = (50.0 * 1.0) / 2222.0;
+            var expectedNPerHa = (expectedFraction * 113.0) / 1.0;
+            var expectedCPerHa = (expectedFraction * 66.0) / 1.0;
+
+            Assert.AreEqual(expectedNPerHa, _livestockDigestateApplication.AmountOfNitrogenAppliedPerHectare, 0.001,
+                "N/ha should be recalculated for liquid-phase application when separation is enabled");
+            Assert.AreEqual(expectedCPerHa, _livestockDigestateApplication.AmountOfCarbonAppliedPerHectare, 0.001,
+                "C/ha should be recalculated for liquid-phase application when separation is enabled");
+        }
+
+        /// <summary>
+        /// Verifies that RecalculateDigestateApplicationAmounts handles the case where there are no
+        /// digestate applications on any field (no-op scenario). Should not throw any exceptions.
+        /// </summary>
+        [TestMethod]
+        public void RecalculateDigestateApplicationAmountsHandlesNoApplicationsGracefully()
+        {
+            _adComponent.IsLiquidSolidSeparated = false;
+
+            // Remove all digestate applications from the crop view item
+            _cropViewItem.DigestateApplicationViewItems.Clear();
+
+            _sut.Initialize(_farm, new List<AnimalComponentEmissionsResults>() { base.GetNonEmptyTestBeefCattleAnimalComponentEmissionsResults() });
+
+            // Should not throw - just a no-op
+            var totalCarbon = _sut.GetTotalCarbonRemainingAtEndOfYear(DateTime.Now.Year, _farm, _adComponent);
+
+            // With no field applications, carbon remaining = sum of all daily raw C = 10 + 30 + 80 = 120
+            Assert.AreEqual(120, totalCarbon);
+        }
+
+        /// <summary>
+        /// Verifies that RecalculateDigestateApplicationAmounts handles the case where the farm
+        /// has no AD component. Should not throw any exceptions.
+        /// </summary>
+        [TestMethod]
+        public void RecalculateDigestateApplicationAmountsHandlesNoADComponentGracefully()
+        {
+            // Remove the AD component from the farm
+            _farm.Components.Remove(_adComponent);
+
+            // Calling RecalculateDigestateApplicationAmounts directly (not through Initialize,
+            // since Initialize would also fail without AD). This verifies the guard clause.
+            _sut.RecalculateDigestateApplicationAmounts(_farm);
+
+            // Should not throw - the N/ha should remain unchanged at the original test default of 50
+            Assert.AreEqual(50, _livestockDigestateApplication.AmountOfNitrogenAppliedPerHectare,
+                "N/ha should remain unchanged when there is no AD component");
+        }
+
+        /// <summary>
+        /// Verifies that when a digestate application has a DigestateState that does not match the
+        /// component's separation setting (e.g. LiquidPhase application but IsLiquidSolidSeparated = false),
+        /// the recalculation correctly sets N/ha and C/ha to 0 since no digestate of that phase is produced.
+        /// This simulates the scenario where a user has a misconfigured application state.
+        /// </summary>
+        [TestMethod]
+        public void RecalculateDigestateApplicationAmountsSetsZeroWhenPhaseDoesNotMatchSeparationSetting()
+        {
+            // Component does NOT use liquid-solid separation, but application says LiquidPhase
+            _adComponent.IsLiquidSolidSeparated = false;
+            _livestockDigestateApplication.DigestateState = DigestateState.LiquidPhase;
+            _livestockDigestateApplication.AmountOfNitrogenAppliedPerHectare = 999;
+            _livestockDigestateApplication.AmountOfCarbonAppliedPerHectare = 999;
+
+            _sut.Initialize(_farm, new List<AnimalComponentEmissionsResults>() { base.GetNonEmptyTestBeefCattleAnimalComponentEmissionsResults() });
+
+            // Since IsLiquidSolidSeparated = false, the tank's liquid values (TotalLiquidDigestateProduced,
+            // NitrogenFromLiquidDigestateNotConsideringFieldApplicationAmounts, etc.) will be 0.
+            // GetFractionUsed will return 0 (guard: totalAmountCreated <= 0), so N/ha and C/ha = 0.
+            Assert.AreEqual(0, _livestockDigestateApplication.AmountOfNitrogenAppliedPerHectare, 0.001,
+                "N/ha should be 0 when application phase doesn't match component separation setting");
+            Assert.AreEqual(0, _livestockDigestateApplication.AmountOfCarbonAppliedPerHectare, 0.001,
+                "C/ha should be 0 when application phase doesn't match component separation setting");
+        }
+
+        /// <summary>
+        /// Simulates the cross-ViewModel scenario: after Initialize() recalculates values, calling
+        /// RecalculateDigestateApplicationAmounts again with the same data should produce the same
+        /// results (idempotency). This verifies that the recalculation is stable and the "not
+        /// considering field applications" values are truly independent of stored N/ha and C/ha.
+        /// </summary>
+        [TestMethod]
+        public void RecalculateDigestateApplicationAmountsIsIdempotent()
+        {
+            _adComponent.IsLiquidSolidSeparated = false;
+            _livestockDigestateApplication.DigestateState = DigestateState.Raw;
+
+            _sut.Initialize(_farm, new List<AnimalComponentEmissionsResults>() { base.GetNonEmptyTestBeefCattleAnimalComponentEmissionsResults() });
+
+            var nPerHaAfterFirstRecalc = _livestockDigestateApplication.AmountOfNitrogenAppliedPerHectare;
+            var cPerHaAfterFirstRecalc = _livestockDigestateApplication.AmountOfCarbonAppliedPerHectare;
+
+            // Call recalculate a second time (simulates what happens when the event fires)
+            _sut.RecalculateDigestateApplicationAmounts(_farm);
+
+            Assert.AreEqual(nPerHaAfterFirstRecalc, _livestockDigestateApplication.AmountOfNitrogenAppliedPerHectare, 0.001,
+                "N/ha should be the same after a second recalculation (idempotent)");
+            Assert.AreEqual(cPerHaAfterFirstRecalc, _livestockDigestateApplication.AmountOfCarbonAppliedPerHectare, 0.001,
+                "C/ha should be the same after a second recalculation (idempotent)");
+        }
+
+        /// <summary>
+        /// Verifies that the recalculation correctly reflects the proportional relationship between
+        /// application rate and N/ha. Doubling the AmountAppliedPerHectare should double the N/ha
+        /// (as long as the total application doesn't exceed total digestate produced).
+        /// </summary>
+        [TestMethod]
+        public void RecalculateDigestateApplicationAmountsScalesLinearlyWithApplicationRate()
+        {
+            _adComponent.IsLiquidSolidSeparated = false;
+            _livestockDigestateApplication.DigestateState = DigestateState.Raw;
+            _livestockDigestateApplication.AmountAppliedPerHectare = 25; // Half the default
+
+            _sut.Initialize(_farm, new List<AnimalComponentEmissionsResults>() { base.GetNonEmptyTestBeefCattleAnimalComponentEmissionsResults() });
+
+            var nPerHaAtHalfRate = _livestockDigestateApplication.AmountOfNitrogenAppliedPerHectare;
+
+            // Now double the application rate and recalculate
+            _livestockDigestateApplication.AmountAppliedPerHectare = 50;
+            _sut.RecalculateDigestateApplicationAmounts(_farm);
+
+            var nPerHaAtFullRate = _livestockDigestateApplication.AmountOfNitrogenAppliedPerHectare;
+
+            Assert.AreEqual(nPerHaAtHalfRate * 2, nPerHaAtFullRate, 0.001,
+                "N/ha should scale linearly with application rate");
         }
 
         #endregion
