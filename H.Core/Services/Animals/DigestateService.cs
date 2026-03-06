@@ -53,6 +53,13 @@ namespace H.Core.Services.Animals
             _dailyResults.Clear();
             _dailyResults = ADCalculator.CalculateResults(farm, _animalComponentEmissionsResults);
 
+            // Fix 1: Recalculate N/ha and C/ha for all existing digestate field applications so that
+            // stored values reflect the current AD substrate composition. This corrects the stale-value
+            // bug where N/ha and C/ha were only computed when the user interacted with the application
+            // item in the UI, and were never refreshed when AD substrates (e.g. food waste) were added
+            // or removed after the field applications were created.
+            this.RecalculateDigestateApplicationAmounts(farm);
+
             return _dailyResults;
         }
 
@@ -773,6 +780,92 @@ namespace H.Core.Services.Animals
                 tank.NitrogenFromSolidDigestateNotConsideringFieldApplicationAmounts = totalNitrogenFromSolidDigestateAvailable;
                 tank.CarbonFromSolidDigestate = totalCarbonFromSolidDigestateAvailable - totalCarbonUsed;
                 tank.CarbonFromSolidDigestateNotConsideringFieldApplicationAmounts = totalCarbonFromSolidDigestateAvailable;
+            }
+        }
+
+        /// <summary>
+        /// Recalculates the AmountOfNitrogenAppliedPerHectare and AmountOfCarbonAppliedPerHectare for all digestate
+        /// applications on all fields of the given farm. This uses the "NotConsideringFieldApplicationRemovals" tank
+        /// values (which are independent of stored N/ha and C/ha) to avoid circular dependencies.
+        ///
+        /// The calculation mirrors the logic in FieldSystemViewModel.UpdateAmountOfNitrogenAppliedPerHectare() and
+        /// UpdateAmountOfCarbonAppliedPerHectare(), but is performed at the service layer so it can be called from
+        /// Initialize() to fix stale values in existing farm files.
+        ///
+        /// N/ha = (fractionUsed * totalNitrogenCreatedBySystem) / fieldArea
+        /// C/ha = (fractionUsed * totalCarbonCreatedBySystem) / fieldArea
+        ///
+        /// where fractionUsed = (AmountAppliedPerHectare * fieldArea) / totalDigestateCreated
+        ///
+        /// This overload uses the cached _dailyResults from the last Initialize() call. Use the overload
+        /// that accepts dailyResults directly when you need to ensure fresh AD results are used (e.g. when
+        /// navigating back to a field after modifying AD substrates).
+        /// </summary>
+        public void RecalculateDigestateApplicationAmounts(Farm farm)
+        {
+            if (_dailyResults == null || _dailyResults.Any() == false)
+            {
+                return;
+            }
+
+            this.RecalculateDigestateApplicationAmounts(farm, _dailyResults);
+        }
+
+        /// <summary>
+        /// Recalculates the AmountOfNitrogenAppliedPerHectare and AmountOfCarbonAppliedPerHectare for all digestate
+        /// applications on all fields of the given farm, using the provided daily AD results.
+        ///
+        /// Use this overload when freshly-computed daily results are available (e.g. from the FieldSystemViewModel
+        /// on navigation) to ensure the recalculation reflects the latest AD substrate configuration, rather than
+        /// relying on the cached _dailyResults which may be stale if substrates were modified on the AD view.
+        /// </summary>
+        public void RecalculateDigestateApplicationAmounts(Farm farm, List<DigestorDailyOutput> dailyResults)
+        {
+            var component = farm.GetAnaerobicDigestionComponent();
+            if (component == null)
+            {
+                return;
+            }
+
+            if (dailyResults == null || dailyResults.Any() == false)
+            {
+                return;
+            }
+
+            foreach (var fieldSystemComponent in farm.FieldSystemComponents)
+            {
+                foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+                {
+                    foreach (var digestateApplicationViewItem in cropViewItem.DigestateApplicationViewItems)
+                    {
+                        // Get the tank state for the date of this application. The tank's
+                        // "NotConsideringFieldApplicationAmounts" properties are derived purely from
+                        // cumulative daily AD outputs and are not affected by stored N/ha or C/ha values,
+                        // so there is no circular dependency.
+                        var tank = this.GetTank(farm, digestateApplicationViewItem.DateCreated, dailyResults);
+
+                        // Compute the fraction of total digestate that this application represents
+                        var fractionUsed = tank.GetFractionUsed(digestateApplicationViewItem, component, cropViewItem);
+
+                        // Recalculate nitrogen per hectare from the "not considering field applications" total
+                        var totalNitrogenCreatedBySystem = tank.GetTotalNitrogenCreatedBySystemNotIncludingFieldApplicationRemovals(digestateApplicationViewItem.DigestateState);
+
+                        if (cropViewItem.Area > 0)
+                        {
+                            digestateApplicationViewItem.AmountOfNitrogenAppliedPerHectare =
+                                (fractionUsed * totalNitrogenCreatedBySystem) / cropViewItem.Area;
+                        }
+
+                        // Recalculate carbon per hectare from the "not considering field applications" total
+                        var totalCarbonCreatedBySystem = tank.GetTotalCarbonCreatedBySystemNotIncludingFieldApplicationRemovals(digestateApplicationViewItem.DigestateState);
+
+                        if (cropViewItem.Area > 0)
+                        {
+                            digestateApplicationViewItem.AmountOfCarbonAppliedPerHectare =
+                                (fractionUsed * totalCarbonCreatedBySystem) / cropViewItem.Area;
+                        }
+                    }
+                }
             }
         }
 

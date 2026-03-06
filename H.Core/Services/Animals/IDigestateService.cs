@@ -63,5 +63,23 @@ namespace H.Core.Services.Animals
         double GetTotalCarbonCreatedNotIncludingFieldApplicationRemovals(int year, Farm farm);
         double GetTotalDigestateCarbonInputsForField(Farm farm, int year, CropViewItem viewItem);
         List<DigestorDailyOutput> Initialize(Farm farm, List<AnimalComponentEmissionsResults> results);
+
+        /// <summary>
+        /// Recalculates the AmountOfNitrogenAppliedPerHectare and AmountOfCarbonAppliedPerHectare for all digestate
+        /// applications on all fields of the given farm. This ensures that stored N/ha and C/ha values are consistent
+        /// with the current AD substrate composition (e.g. after food waste or other substrates are added/removed).
+        ///
+        /// This method fixes the stale-value bug where digestate application N/ha and C/ha were only computed when
+        /// the user interacted with the specific application item in the UI, and were never refreshed when AD
+        /// substrates changed. Calling this from <see cref="Initialize"/> ensures existing farm files are corrected
+        /// on the next model run.
+        /// </summary>
+        void RecalculateDigestateApplicationAmounts(Farm farm);
+
+        /// <summary>
+        /// Overload that accepts freshly-computed daily AD results. Use this when the cached _dailyResults
+        /// in the service may be stale (e.g. when navigating back to a field after modifying AD substrates).
+        /// </summary>
+        void RecalculateDigestateApplicationAmounts(Farm farm, List<DigestorDailyOutput> dailyResults);
     }
 }
