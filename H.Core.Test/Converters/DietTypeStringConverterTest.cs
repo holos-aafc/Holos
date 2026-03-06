@@ -26,10 +26,17 @@ namespace H.Core.Test.Converters
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
         public void ConvertReturnsException()
         {
-            converter.Convert("m7");
+            try
+            {
+                converter.Convert("m7");
+                Assert.Fail("Expected Exception was not thrown");
+            }
+            catch (Exception)
+            {
+                // Expected exception was thrown, test passes
+            }
         }
 
         [TestMethod]

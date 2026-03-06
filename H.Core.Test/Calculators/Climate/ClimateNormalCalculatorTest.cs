@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using H.Core.Calculators.Climate;
 using H.Core.Enumerations;
-using H.Core.Providers;
 using H.Core.Providers.Climate;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

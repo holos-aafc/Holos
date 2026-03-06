@@ -405,3 +405,4 @@ H.CLI/sync.ffs_db
 
 # JetBrains Rider files
 *.idea
+/.claude/settings.local.json

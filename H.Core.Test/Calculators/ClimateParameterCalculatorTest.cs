@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Runtime.InteropServices;
 using H.Content;
 using H.Core.Calculators.Climate;
 using H.Core.Enumerations;
-using H.Core.Providers.Temperature;
 using H.Infrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

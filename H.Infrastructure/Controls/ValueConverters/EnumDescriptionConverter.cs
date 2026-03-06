@@ -1,4 +1,5 @@
-﻿#region Imports
+﻿#if WINDOWS
+#region Imports
 
 using System;
 using System.ComponentModel;
@@ -76,3 +77,4 @@ namespace H.Infrastructure.Controls.ValueConverters
         #endregion
     }
 }
+#endif

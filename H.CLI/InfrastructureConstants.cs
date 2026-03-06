@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using H.CLI.Interfaces;
-using H.CLI.Properties; 
 
 namespace H.CLI
 {

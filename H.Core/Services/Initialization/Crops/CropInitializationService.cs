@@ -3,15 +3,8 @@ using H.Core.Models;
 using H.Core.Providers.Carbon;
 using H.Core.Providers.Plants;
 using H.Core.Providers.Soil;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using H.Core.Calculators.Carbon;
-using H.Core.Enumerations;
 using H.Core.Calculators.Economics;
 using H.Core.Providers.Economics;
 using H.Core.Calculators.Nitrogen;
@@ -20,8 +13,8 @@ using H.Core.Providers.Nitrogen;
 using H.Core.Providers.Energy;
 using H.Core.Services.LandManagement;
 using AutoMapper;
-using AutoMapper.Configuration.Annotations;
 using H.Core.Services.Animals;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace H.Core.Services.Initialization.Crops
 {
@@ -86,7 +79,7 @@ namespace H.Core.Services.Initialization.Crops
             var soilDataMapper = new MapperConfiguration(x =>
             {
                 x.CreateMap<SoilData, SoilData>();
-            });
+            }, new NullLoggerFactory());
 
             _soilDataMapper = soilDataMapper.CreateMapper();
         }

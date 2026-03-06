@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using AutoMapper;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
-using H.Core.Models.Animals;
 using H.Core.Models.Infrastructure;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
-using H.Core.Services.LandManagement;
 using H.Infrastructure;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace H.Core.Services.Animals
 {
@@ -74,7 +72,7 @@ namespace H.Core.Services.Animals
             {
                 x.CreateMap<DefaultManureCompositionData, DefaultManureCompositionData>()
                     .ForMember(y => y.Guid, z => z.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _manureCompositionMapper = manureCompositionMapperConfiguration.CreateMapper();
         }

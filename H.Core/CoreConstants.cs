@@ -1,10 +1,7 @@
 ﻿#region Imports
 
 using System;
-using System.Security.RightsManagement;
-using System.Transactions;
 using H.Core.Properties;
-using H.Infrastructure;
 
 #endregion
 

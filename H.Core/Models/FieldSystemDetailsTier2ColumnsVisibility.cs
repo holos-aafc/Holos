@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace H.Core.Models
+﻿namespace H.Core.Models
 {
     public class FieldSystemDetailsTier2ColumnsVisibility : ColumnVisibilityBase
     {

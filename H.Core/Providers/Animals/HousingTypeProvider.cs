@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Navigation;
 using H.Core.Enumerations;
 
 namespace H.Core.Providers.Animals

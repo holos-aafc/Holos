@@ -2,10 +2,7 @@
 
 using H.Core.Calculators.Nitrogen;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using H.Core.Calculators.Carbon;
-using H.Core.Providers.Climate;
-using H.Core.Services.LandManagement;
 
 #endregion
 
