@@ -1,6 +1,4 @@
-﻿using H.Infrastructure;
-
-namespace H.Core.Models.Animals.Swine
+﻿namespace H.Core.Models.Animals.Swine
 {
     /// <summary>
     /// Represents a "Grower-to-finish" swine production system

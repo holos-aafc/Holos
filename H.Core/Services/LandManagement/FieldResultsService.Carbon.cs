@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics.Eventing.Reader;
 using System.Linq;
-using AutoMapper.Configuration.Annotations;
-using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
-using H.Core.Models.Animals;
 using H.Core.Models.LandManagement.Fields;
 
 namespace H.Core.Services.LandManagement

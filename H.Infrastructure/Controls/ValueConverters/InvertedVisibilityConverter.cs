@@ -1,10 +1,11 @@
-﻿using System;
+﻿#if WINDOWS
+using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
 namespace H.Infrastructure.Controls.ValueConverters
-{    
+{
     public class InvertedVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -31,3 +32,4 @@ namespace H.Infrastructure.Controls.ValueConverters
         }
     }
 }
+#endif

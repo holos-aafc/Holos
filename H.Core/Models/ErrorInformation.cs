@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using H.Infrastructure;
+﻿using H.Infrastructure;
 
 namespace H.Core.Models
 {

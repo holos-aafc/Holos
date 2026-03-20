@@ -1,18 +1,13 @@
-﻿using H.CLI.Properties;
-using System;
-using System.Deployment;
-using System.Collections.ObjectModel;
+﻿using System;
 using System.IO;
 using System.Linq;
 using H.CLI.FileAndDirectoryAccessors;
 using H.CLI.UserInput;
 using H.CLI.Processors;
 using H.Core.Providers;
-using H.Core.Providers.Soil;
 using H.CLI.Results;
 using System.Globalization;
 using H.CLI.Handlers;
-using H.CLI.Interfaces;
 using H.Core;
 using H.Core.Models;
 using H.Core.Services;
@@ -23,6 +18,7 @@ using H.Core.Calculators.Nitrogen;
 using H.Core.Providers.Climate;
 using H.Core.Services.Initialization;
 using H.Core.Services.LandManagement;
+using System.Reflection;
 
 namespace H.CLI
 {
@@ -150,7 +146,7 @@ namespace H.CLI
                         _globalSettingsHandler.GetUserSettingsMenuChoice(farmDirectoryPath, _geographicDataProvider);
 
                         // This will be the default name for the farm settings file. The user can change the name of the settings file in the Farm folder if they want to.
-                        var defaultFarmSettingsFilePath = farmDirectoryPath + @"\" + Properties.Resources.NameOfSettingsFile + ".settings";
+                        var defaultFarmSettingsFilePath = Path.Combine(farmDirectoryPath, Properties.Resources.NameOfSettingsFile + ".settings");
 
                         // We add it to our list of settings files so we can continue processing with the new settings file
                         settingsFilePathsInFarmDirectory.Add(defaultFarmSettingsFilePath);
@@ -219,7 +215,7 @@ namespace H.CLI
                     var componentResults = new ComponentResultsProcessor(_storage, new TimePeriodHelper(), _fieldResultsService, _n2OEmissionFactorCalculator);
 
                     // Get base directory of user entered path to create Total Results For All Farms folder
-                    Directory.CreateDirectory(InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.TotalResultsForAllFarms);
+                    Directory.CreateDirectory(Path.Combine(InfrastructureConstants.BaseOutputDirectoryPath, Properties.Resources.TotalResultsForAllFarms));
 
                     // Output Individual Results For Each Farm's Land Management Components (list of components is filtered inside method)
                     // Slowest section because we initialize view models for every component
@@ -259,13 +255,14 @@ namespace H.CLI
 
         public static string GetVersionString()
         {
-            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            try
             {
-                return System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+                var version = Assembly.GetExecutingAssembly().GetName().Version;
+                return version?.ToString() ?? "1.0.0.0";
             }
-            else
+            catch
             {
-                return "1.0";
+                return "1.0.0.0";
             }
         }
 

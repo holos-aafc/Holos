@@ -1,6 +1,4 @@
 ﻿using H.Core.Enumerations;
-using H.Core.Properties;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 

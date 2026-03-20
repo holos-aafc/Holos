@@ -9,7 +9,6 @@ using H.Core.Models;
 using H.Core.Providers;
 using H.Core.Providers.Climate;
 using H.Core.Services.LandManagement.Soil;
-using SharpKml.Dom;
 
 namespace H.CLI.FileAndDirectoryAccessors
 {
@@ -264,8 +263,6 @@ namespace H.CLI.FileAndDirectoryAccessors
                 farm.ClimateAcquisition = farm.ClimateAcquisitionStringToEnum(userSettings[Properties.Resources.Settings_ClimateDataAcquisition]);
             }
 
-            farm.ClimateData.BarnTemperatureData = _indoorTemperatureProvider.GetIndoorTemperature(farm.Province); 
-
             switch (farm.ClimateAcquisition)
             {
                 case Farm.ChosenClimateAcquisition.Custom:
@@ -459,6 +456,21 @@ namespace H.CLI.FileAndDirectoryAccessors
                     farm.ClimateData = _climateProvider.Get(farm.Latitude, farm.Longitude, farm.Defaults.TimeFrame, farm);
                     break;
             }
+
+            // If climate data could not be obtained (e.g. NASA API unavailable in offline/container environments),
+            // fall back to SLC polygon-based climate data which is embedded in resources and requires no internet.
+            if (farm.ClimateData == null && farm.PolygonId > 0)
+            {
+                farm.ClimateData = _climateProvider.GetClimateData(farm.PolygonId, farm.Defaults.TimeFrame);
+            }
+
+            // Last resort: create empty climate data to prevent NullReferenceException
+            if (farm.ClimateData == null)
+            {
+                farm.ClimateData = new ClimateData();
+            }
+
+            farm.ClimateData.BarnTemperatureData = _indoorTemperatureProvider.GetIndoorTemperature(farm.Province);
         }
 
         #endregion

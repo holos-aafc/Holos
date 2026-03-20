@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using H.Core.Enumerations;
-using H.Core.Providers;
 using H.Core.Providers.Climate;
 using H.Core.Providers.Evapotranspiration;
 using H.Core.Providers.Precipitation;

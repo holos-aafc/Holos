@@ -155,7 +155,7 @@ namespace H.Core.Test.Calculators
 
         //50 kg CH4/kg CH4 * 2.205 lbs CH4 = 110.25 lbs CH4/lbs CH4
         [TestMethod]
-        public void ConverterValueToImperialFromMetric_KilogramsMethanePerKilogramsMethaneToPoundsMethanePerPoundsMethane()
+        public void ConverterValueToImperialFromMetric_KilogramsMethanePerKilogramMethaneToPoundsMethanePerPoundsMethane()
         {
             var convertedValue = _calculator.ConvertValueToImperialFromMetric(MetricUnitsOfMeasurement.KilogramsMethanePerKilogramMethane, 50.0);
             Assert.AreEqual(110.25, Math.Round(convertedValue, 4));
@@ -306,17 +306,23 @@ namespace H.Core.Test.Calculators
             Assert.AreEqual(0.0278, Math.Round(convertedValue, 4));
         }
 
-        [ExpectedException(typeof(ArgumentException))]
         [TestMethod]
         public void ConvertValueToMetricFromImperial_ThrowException()
         {
-            var convertedValue = _calculator.ConvertValueToMetricFromImperial(
-                ImperialUnitsOfMeasurement.BritishThermalUnitPerPound, 50);
+            try
+            {
+                _calculator.ConvertValueToMetricFromImperial(ImperialUnitsOfMeasurement.BritishThermalUnitPerPound, 50);
+                Assert.Fail("Expected ArgumentException was not thrown");
+            }
+            catch (ArgumentException)
+            {
+                // Expected exception was thrown, test passes
+            }
         }
 
         //(50 grains/lbs / (15.432 grains)/1000/1 mg) * (2.205lbs/kg) = 7144.2457 mg/kg
         [TestMethod]
-        public void ConverterValueToImperialFromMetric_GrainsPerPoundToMilligramsPerKilogram()
+        public void ConverterValueToMetricFromImperial_GrainsPerPoundToMilligramsPerKilogram()
         {
             var convertedValue = _calculator.ConvertValueToMetricFromImperial(ImperialUnitsOfMeasurement.GrainsPerPound, 50.0);
             Assert.AreEqual(7144.2457, Math.Round(convertedValue, 4));

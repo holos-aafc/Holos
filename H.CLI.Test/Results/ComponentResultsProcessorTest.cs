@@ -6,23 +6,16 @@ using H.Core.Providers;
 using H.Core.Providers.Feed;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using H.Core;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.Animals.Beef;
 using H.Core.Models.Animals.Swine;
 using H.Core.Services;
-using H.Core.Calculators.Carbon;
-using H.Core.Calculators.Nitrogen;
-using H.Core.Providers.Climate;
-using H.Core.Services.LandManagement;
 using H.Core.Test;
 
 namespace H.CLI.Test.Results

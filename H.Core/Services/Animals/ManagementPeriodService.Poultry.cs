@@ -1,6 +1,5 @@
 ﻿using H.Core.Models;
 using H.Core.Models.Animals;
-using H.Core.Services.Initialization;
 using System;
 using System.ComponentModel;
 
