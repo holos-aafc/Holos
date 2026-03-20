@@ -405,5 +405,4 @@ H.CLI/sync.ffs_db
 
 # JetBrains Rider files
 *.idea
-build_instructions.js
-Hamiota baseline M19_patched.json
+/.claude/settings.local.json

@@ -1,6 +1,4 @@
-﻿using H.Infrastructure;
-
-namespace H.Core.Models.Results
+﻿namespace H.Core.Models.Results
 {
     public class EstimatesOfProductionResultsViewItem : ResultsViewItemBase
     {

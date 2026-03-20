@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
 using H.Infrastructure;
-using H.Core.Providers.Fertilizer;
 
 namespace H.Core.Providers.Energy
 {

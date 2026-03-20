@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Permissions;
-using System.Windows;
 using H.Core.Calculators.Nitrogen;
-using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
-using H.Core.Providers.Animals;
 using H.Core.Providers.Climate;
 using H.Core.Providers.Plants;
 using H.Core.Providers.Soil;

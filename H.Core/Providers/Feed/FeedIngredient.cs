@@ -6,6 +6,7 @@ using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Infrastructure;
+using Microsoft.Extensions.Logging.Abstractions;
 
 #endregion
 
@@ -212,7 +213,7 @@ namespace H.Core.Providers.Feed
             var mapperConfig = new MapperConfiguration(x =>
             {
                 x.CreateMap<FeedIngredient, FeedIngredient>().ForMember(prop => prop.Guid, opt => opt.Ignore());
-            });
+            }, new NullLoggerFactory());
             _ingredientMapper = mapperConfig.CreateMapper();
 
         }

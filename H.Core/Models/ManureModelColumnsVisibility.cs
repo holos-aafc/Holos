@@ -1,6 +1,4 @@
-﻿using Prism.Mvvm;
-
-namespace H.Core.Models
+﻿namespace H.Core.Models
 {
     /// <summary>
     /// Class to specify the default visiblity of the ManureModelResultsView
