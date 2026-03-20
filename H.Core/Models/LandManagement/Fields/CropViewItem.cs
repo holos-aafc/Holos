@@ -159,7 +159,6 @@ namespace H.Core.Models.LandManagement.Fields
             this.PastPerennialArea = this.Area;             // Assume past areas are the same as current areas when starting out
 
             this.Yield = 2500;                              // Start all crops with this yield, assign a CAR yield when user adds crop to field
-            this.IsIrrigated = Response.No;
             this.IrrigationType = IrrigationType.RainFed;
 
             this.TillageType = TillageType.Reduced;

@@ -25,8 +25,6 @@ namespace H.Core.Models.LandManagement.Fields
         {
             base.ForageActivity = ForageActivities.Grazed;
             base.ForageGrowthStage = ForageGrowthStages.StageTwo;
-
-            this.Utilization = 60;
         }
 
         #endregion
