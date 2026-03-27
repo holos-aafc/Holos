@@ -5,21 +5,14 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using H.CLI.UserInput;
-using H.Core.Calculators.Infrastructure;
 using H.Core.Enumerations;
 using H.Core.Models;
-using H.Core.Models.Animals.Sheep;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models.LandManagement.Rotation;
 using H.Core.Providers;
 using H.Core.Providers.Climate;
 using H.Core.Services;
-using H.Core.Services.Animals;
 using H.Core.Services.LandManagement;
-using Prism.Events;
-using Prism.Interactivity.DefaultPopupWindows;
-using H.Core.Calculators.Carbon;
-using H.Core.Calculators.Nitrogen;
 
 namespace H.Core.Test.Integration
 {

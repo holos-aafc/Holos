@@ -1,8 +1,6 @@
-﻿using H.Core.Calculators.Carbon;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
-using H.Core.Services.Initialization;
 using H.Core.Services.Initialization.Crops;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;

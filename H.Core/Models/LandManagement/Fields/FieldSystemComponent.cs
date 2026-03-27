@@ -5,13 +5,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using H.Core.Enumerations;
-using H.Infrastructure;
-using H.Core;
 using H.Core.Models.Animals;
-using H.Core.Models.LandManagement.Rotation;
 using H.Core.Providers.Soil;
 
 #endregion

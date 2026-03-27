@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿#if WINDOWS
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
-using System;
 
 namespace H.Infrastructure.Controls
 {
@@ -155,3 +155,4 @@ namespace H.Infrastructure.Controls
 
     }
 }
+#endif

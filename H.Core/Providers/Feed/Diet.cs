@@ -4,14 +4,13 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Reflection;
-using System.Transactions;
 using AutoMapper;
 using H.Core.Converters;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Core.Properties;
 using H.Infrastructure;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace H.Core.Providers.Feed
 {
@@ -65,13 +64,13 @@ namespace H.Core.Providers.Feed
             _dietMapperConfiguration = new MapperConfiguration(x =>
             {
                 x.CreateMap<Diet, Diet>().ForMember(property => property.Ingredients, options => options.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _ingredientMapperConfiguration = new MapperConfiguration(x =>
             {
                 x.CreateMap<FeedIngredient, FeedIngredient>()
                     .ForMember(property => property.Guid, options => options.Ignore());
-            });
+            }, new NullLoggerFactory());
 
             _dietMapper = _dietMapperConfiguration.CreateMapper();
 

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using H.Core.Providers.Climate;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 
 #endregion
 

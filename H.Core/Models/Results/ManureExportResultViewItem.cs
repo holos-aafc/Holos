@@ -1,5 +1,4 @@
-﻿using System;
-using H.Core.CustomAttributes;
+﻿using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 
 namespace H.Core.Models.Results

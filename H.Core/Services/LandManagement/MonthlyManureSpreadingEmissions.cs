@@ -1,6 +1,4 @@
-﻿using H.Core.Models.Results;
-
-namespace H.Core.Services.LandManagement
+﻿namespace H.Core.Services.LandManagement
 {
     public class MonthlyManureSpreadingEmissions : MonthlyManureSpreadingData
     {

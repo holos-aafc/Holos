@@ -1,21 +1,15 @@
-﻿using H.Core.Properties;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Feed;
 using H.Core.Services.Initialization;
-using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
-using H.Core.Models.Animals.Beef;
 using H.Core.Models.LandManagement.Fields;
-using System.Collections.Specialized;
 
 namespace H.Core.Services.Animals
 {
