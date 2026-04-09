@@ -1,6 +1,4 @@
-﻿using H.Core.Enumerations;
-
-namespace H.Core.Providers.Animals
+﻿namespace H.Core.Providers.Animals
 {
     public class Table_34_Livestock_Daily_Volatile_Excretion_Factors_Data
     {

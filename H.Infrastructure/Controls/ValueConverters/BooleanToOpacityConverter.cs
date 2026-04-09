@@ -1,3 +1,4 @@
+#if WINDOWS
 #region Imports
 
 using System;
@@ -40,3 +41,4 @@ namespace H.Infrastructure.Controls.ValueConverters
         }
     }
 }
+#endif

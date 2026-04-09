@@ -6,7 +6,6 @@ using System.Text;
 using H.CLI.TemporaryComponentStorage;
 using H.CLI.UserInput;
 using H.Core.Models;
-using H.Core.Providers;
 
 namespace H.CLI.FileAndDirectoryAccessors
 {
@@ -94,7 +93,7 @@ namespace H.CLI.FileAndDirectoryAccessors
         {
             foreach (var key in _directoryKeys.directoryWeights.Keys)
             {
-                var componentDirectoryPath = Path.GetFullPath(String.Format(@"{0}\{1}", root, key));
+                var componentDirectoryPath = Path.GetFullPath(Path.Combine(root, key));
                 if (!Directory.Exists(componentDirectoryPath))
                 {
                     Directory.CreateDirectory(componentDirectoryPath);
@@ -107,10 +106,10 @@ namespace H.CLI.FileAndDirectoryAccessors
         public void ValidateAndCreateLandManagementDirectories(string baseOutputDirectory, string farmName)
         {
             var listOfLandManagements = _directoryKeys.directoryWeights.Keys.Where(x => x == Properties.Resources.DefaultShelterbeltInputFolder || x == Properties.Resources.DefaultFieldsInputFolder);
-            var pathToFarmDirectory = baseOutputDirectory + @"\" + farmName + Properties.Resources.Results;
+            var pathToFarmDirectory = Path.Combine(baseOutputDirectory, farmName + Properties.Resources.Results);
             foreach (var key in listOfLandManagements)
             {
-                var landManagementComponentPath = Path.GetFullPath(String.Format(@"{0}\{1}", pathToFarmDirectory, key));
+                var landManagementComponentPath = Path.GetFullPath(Path.Combine(pathToFarmDirectory, key));
                 if (!Directory.Exists(landManagementComponentPath))
                 {
                     Directory.CreateDirectory(landManagementComponentPath);
@@ -127,7 +126,7 @@ namespace H.CLI.FileAndDirectoryAccessors
         {
             BuildSettingsFileString settingsFileString = new BuildSettingsFileString(farm);
 
-            var farmSettingsFilePath = farmDirectoryPath + @"\" + Properties.Resources.LabelFarm + ".settings";
+            var farmSettingsFilePath = Path.Combine(farmDirectoryPath, Properties.Resources.LabelFarm + ".settings");
 
             var stringBuilder = new StringBuilder();
             foreach (var key in settingsFileString.keys)
@@ -149,7 +148,7 @@ namespace H.CLI.FileAndDirectoryAccessors
         }
 
         /// <summary>
-        /// Read the txt file located in @"FarmsPathFile" + @"\" + "UserFarmsPath.txt" which stores
+        /// Read the txt file located in Path.Combine("FarmsPathFile", "UserFarmsPath.txt") which stores
         ///the users previously entered Farms Directory Path
         /// </summary>
         public string ReadUserFarmsPath(string usersFarmsPath)
@@ -183,7 +182,7 @@ namespace H.CLI.FileAndDirectoryAccessors
                 Console.WriteLine(Properties.Resources.PromptForFarmsFolderLocation);
                 farmsFolderPath = Console.ReadLine();
             } while (!Directory.Exists(farmsFolderPath));
-            File.WriteAllText(@"FarmsPathFile" + @"\" + "UserFarmsPath.txt", farmsFolderPath);
+            File.WriteAllText(Path.Combine("FarmsPathFile", "UserFarmsPath.txt"), farmsFolderPath);
             return farmsFolderPath;
         }
 
@@ -192,6 +191,19 @@ namespace H.CLI.FileAndDirectoryAccessors
         /// </summary>
         public void GetUsersFarmsPath(string[] args)
         {
+            // Resolve the user's data path before changing CWD, so relative paths
+            // work from wherever the user ran the command.
+            var resolvedFarmsPath = args.Any() ? Path.GetFullPath(args[0]) : null;
+
+            // If a path was provided via command-line argument, use it directly
+            // without creating the FarmsPathFile persistence directory (which
+            // requires write access to the application directory).
+            if (resolvedFarmsPath != null)
+            {
+                Directory.SetCurrentDirectory(resolvedFarmsPath);
+                return;
+            }
+
             // Needs to be reset after each complete scenario run
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
 
@@ -201,17 +213,11 @@ namespace H.CLI.FileAndDirectoryAccessors
             //Check if our data file directory contains our file to store the users results. If not, create the file
             if (!Directory.GetFiles("FarmsPathFile").Any())
             {
-                File.Create(@"FarmsPathFile" + @"\" + "UserFarmsPath.txt").Close();
+                File.Create(Path.Combine("FarmsPathFile", "UserFarmsPath.txt")).Close();
             }
 
             //Read the data file which stores the users previous directory.
-            var previousFarmsFolderPath = ReadUserFarmsPath(@"FarmsPathFile" + @"\" + "UserFarmsPath.txt");
-
-            //If they have entered a command line argument when running the CLI
-            if (args.Any())
-            {
-                Directory.SetCurrentDirectory(args[0]);
-            }
+            var previousFarmsFolderPath = ReadUserFarmsPath(Path.Combine("FarmsPathFile", "UserFarmsPath.txt"));
 
             //If there is no command line argument and there is no previous directory (first time running), 
             //prompt the user for the location of their Farms directory 

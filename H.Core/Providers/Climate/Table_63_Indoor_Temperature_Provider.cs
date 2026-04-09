@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing.Text;
 using System.Linq;
-using System.Windows.Documents;
-using System.Xaml;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;

@@ -1,8 +1,5 @@
 ﻿using H.Core.Calculators.Climate;
-using H.Core.Providers.Climate;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 
 namespace H.Core.Test.Calculators.Climate
 {

@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using AutoMapper.Configuration.Conventions;
 using H.Core.Enumerations;
 using H.Core.Tools;
 using H.Infrastructure;

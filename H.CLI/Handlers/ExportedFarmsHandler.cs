@@ -5,8 +5,6 @@ using H.CLI.Processors;
 using H.CLI.TemporaryComponentStorage;
 using H.CLI.UserInput;
 using H.Core;
-using H.Core.Calculators.Carbon;
-using H.Core.Calculators.Nitrogen;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
@@ -18,8 +16,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using H.Core.Services;
-using H.Core.Services.Initialization;
 
 namespace H.CLI.Handlers
 {
@@ -144,7 +140,7 @@ namespace H.CLI.Handlers
                         }
 
                         _ = this.CreateInputFilesForFarm(farmsFolderPath, farm, argValues);
-                        generatedFarmFolders.Add(farmsFolderPath + @"\" + farm.Name);
+                        generatedFarmFolders.Add(Path.Combine(farmsFolderPath, farm.Name));
                     }
                 }
                 else
@@ -247,7 +243,7 @@ namespace H.CLI.Handlers
             {
                 Console.WriteLine(Properties.Resources.LabelCreatingFieldInputFiles);
 
-                var pathToFieldComponents = farmDirectoryPath + @"\" + Properties.Resources.DefaultFieldsInputFolder;
+                var pathToFieldComponents = Path.Combine(farmDirectoryPath, Properties.Resources.DefaultFieldsInputFolder);
                 var fieldKeys = new FieldKeys();
                 foreach (var fieldSystemComponent in farm.FieldSystemComponents)
                 {
@@ -297,7 +293,7 @@ namespace H.CLI.Handlers
             {
                 Console.WriteLine(Properties.Resources.LabelCreatingBeefCattleInputFiles);
 
-                var pathToBeefCattleComponents = farmDirectoryPath + @"\" + Properties.Resources.DefaultBeefInputFolder;
+                var pathToBeefCattleComponents = Path.Combine(farmDirectoryPath, Properties.Resources.DefaultBeefInputFolder);
                 foreach (var beefCattleComponent in farm.BeefCattleComponents)
                 {
                     var createdInputFile = _beefConverter.SetTemplateCSVFileBasedOnExportedFarm(
@@ -319,7 +315,7 @@ namespace H.CLI.Handlers
             {
                 Console.WriteLine(Properties.Resources.LabelCreatingDairyCattleInputFiles);
 
-                var pathToDairyCattleComponents = farmDirectoryPath + @"\" + Properties.Resources.DefaultDairyInputFolder;
+                var pathToDairyCattleComponents = Path.Combine(farmDirectoryPath, Properties.Resources.DefaultDairyInputFolder);
                 foreach (var dairyComponent in farm.DairyComponents)
                 {
                     var createdInputFile = _dairyConverter.SetTemplateCSVFileBasedOnExportedFarm(
@@ -341,7 +337,7 @@ namespace H.CLI.Handlers
             {
                 Console.WriteLine(Properties.Resources.LabelCreatingSwineInputFiles);
 
-                var pathToSwineComponents = farmDirectoryPath + @"\" + Properties.Resources.DefaultSwineInputFolder;
+                var pathToSwineComponents = Path.Combine(farmDirectoryPath, Properties.Resources.DefaultSwineInputFolder);
                 foreach (var swineComponent in farm.SwineComponents)
                 {
                     var createdInputFile = _swineConverter.SetTemplateCSVFileBasedOnExportedFarm(
@@ -363,7 +359,7 @@ namespace H.CLI.Handlers
             {
                 Console.WriteLine(Properties.Resources.LabelCreatingSheepInputFiles);
 
-                var pathToSheepComponents = farmDirectoryPath + @"\" + Properties.Resources.DefaultSheepInputFolder;
+                var pathToSheepComponents = Path.Combine(farmDirectoryPath, Properties.Resources.DefaultSheepInputFolder);
                 foreach (var sheepComponent in farm.SheepComponents)
                 {
                     var createdInputFile = _sheepConverter.SetTemplateCSVFileBasedOnExportedFarm(
@@ -385,7 +381,7 @@ namespace H.CLI.Handlers
             {
                 Console.WriteLine(Properties.Resources.LabelCreatingPoultryInputFiles);
 
-                var pathToPoultryComponents = farmDirectoryPath + @"\" + Properties.Resources.DefaultPoultryInputFolder;
+                var pathToPoultryComponents = Path.Combine(farmDirectoryPath, Properties.Resources.DefaultPoultryInputFolder);
                 foreach (var poultryComponent in farm.PoultryComponents)
                 {
                     var createdInputFile = _poultryConverter.SetTemplateCSVFileBasedOnExportedFarm(
@@ -407,7 +403,7 @@ namespace H.CLI.Handlers
             {
                 Console.WriteLine(Properties.Resources.LabelCreatingOtherAnimalsInputFiles);
 
-                var pathToOtherAnimalComponents = farmDirectoryPath + @"\" + Properties.Resources.DefaultOtherLivestockInputFolder;
+                var pathToOtherAnimalComponents = Path.Combine(farmDirectoryPath, Properties.Resources.DefaultOtherLivestockInputFolder);
                 foreach (var otherLivestockComponent in farm.OtherLivestockComponents)
                 {
                     var createdInputFile = _otherLiveStockConverter.SetTemplateCSVFileBasedOnExportedFarm(
@@ -524,7 +520,7 @@ namespace H.CLI.Handlers
             // Remove illegal characters from farm name since it will be used to create a folder.
             var cleanedFarmName = r.Replace(farm.Name, "");
 
-            var farmDirectoryPath = pathToFarmsDirectory + @"\" + cleanedFarmName;
+            var farmDirectoryPath = Path.Combine(pathToFarmsDirectory, cleanedFarmName);
             if (Directory.Exists(farmDirectoryPath))
             {
                 // Directory already exists, append timestamp to folder to differentiate between existing folder and new folder

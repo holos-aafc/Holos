@@ -1,12 +1,8 @@
 ﻿using H.Content;
 using H.Core.Converters;
 using H.Infrastructure;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using H.Core.Enumerations;
 using H.Core.Tools;
 
