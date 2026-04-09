@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -4626,7 +4626,7 @@
     <value>fraction des matières solides volatiles</value>
   </data>
   <data name="TitleAnaerobicDigestionComponent" xml:space="preserve">
-    <value>Anaerobic Digestion</value>
+    <value>digestion anaérobie</value>
   </data>
   <data name="KilogramVolatileSolidsPerCubicMeterPerDay" xml:space="preserve">
     <value>Kg VS m^-3 d^-1</value>
@@ -4881,19 +4881,19 @@
     <value>Utiliser une valeur de production laitière personnalisée pour les brebis</value>
   </data>
   <data name="EnumRangelandNative" xml:space="preserve">
-    <value>parcours (indigène)</value>
+    <value>Pâturages indigènes</value>
   </data>
   <data name="EnumSeededGrassland" xml:space="preserve">
-    <value>prairie ensemencée</value>
+    <value>Prairie ensemencée</value>
   </data>
   <data name="EnumTameGrass" xml:space="preserve">
-    <value>graminées cultivées</value>
+    <value>Prairies de graminées</value>
   </data>
   <data name="EnumTameLegume" xml:space="preserve">
-    <value>légumineuses cultivées</value>
+    <value>Prairies de légumineuses</value>
   </data>
   <data name="EnumTameMixed" xml:space="preserve">
-    <value>mélange (graminées/légumineuses) cultivé</value>
+    <value>Prairies mixtes (graminées/légumineuses)</value>
   </data>
   <data name="BarleySilageBasedDiet" xml:space="preserve">
     <value>Ration à base d’orge ensilée</value>
@@ -5169,7 +5169,7 @@
     <value>Entreposage sous forme solide (avec ou sans litière)</value>
   </data>
   <data name="TitleDigestate" xml:space="preserve">
-    <value>Digestate</value>
+    <value>digestat</value>
   </data>
   <data name="LabelAmountOfDigestate" xml:space="preserve">
     <value>Amount of digestate</value>
@@ -6187,5 +6187,36 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="KilogramsN2ONPerHeadPerDay" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
+  </data>
+
+  <data name="LabelDryMatter" xml:space="preserve">
+    <value>matière sèche</value>
+  </data>
+  <data name="LabelEarlyLactationPeriodName" xml:space="preserve">
+    <value>début de lactation</value>
+  </data>
+  <data name="LabelFertilizerEfficiency" xml:space="preserve">
+    <value>efficacité de l’engrais</value>
+  </data>
+  <data name="LabelNitrogenFractionOfManure" xml:space="preserve">
+    <value>fraction d’azote du fumier</value>
+  </data>
+  <data name="LabelPerennialEstablishmentGrowth" xml:space="preserve">
+    <value>croissance à l’établissement des vivaces</value>
+  </data>
+  <data name="LabelUseCustomPotassiumConversionFactor" xml:space="preserve">
+    <value>utiliser un facteur de conversion du potassium personnalisé</value>
+  </data>
+  <data name="LabelWeightOfWeanedPiglets" xml:space="preserve">
+    <value>poids des porcelets sevrés</value>
+  </data>
+  <data name="LabelCpAid" xml:space="preserve">
+    <value>digestibilité iléale apparente des protéines brutes</value>
+  </data>
+  <data name="LabelCB2ID" xml:space="preserve">
+    <value>CB2ID</value>
+  </data>
+  <data name="EnumHay" xml:space="preserve">
+    <value>foin</value>
   </data>
 </root>

@@ -127,7 +127,13 @@ namespace H.Core.Calculators.Carbon
                 else
                 {
                     // Default method (fallback)
-                    if (canCalculateInputsUsingIpccTier2)
+                    // If the carbon modelling strategy is ICBM, we must use ICBM input calculator
+                    // to populate CarbonInputFromProduct/Straw/Roots/Extraroots (needed for N calculations)
+                    if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.ICBM)
+                    {
+                        _icbmCarbonInputCalculator.AssignInputs(previousYear, viewItem, nextYear, farm, animalResults);
+                    }
+                    else if (canCalculateInputsUsingIpccTier2)
                     {
                         _ipccTier2CarbonInputCalculator.AssignInputs(viewItem, farm, animalResults);
                     }
@@ -139,8 +145,17 @@ namespace H.Core.Calculators.Carbon
             }
             else
             {
+                var carbonModellingStrategy = farm.Defaults.CarbonModellingStrategy;
+
                 // GUI mode
-                if (canCalculateInputsUsingIpccTier2)
+
+                /*
+                 * The carbon input assignment method must be considered in this branching. If the user selects ICBM as the modelling strategy, we must use the ICBM input calculator since it will assign C inputs to the carbon input from product, carbon input from straw, etc. This carbon
+                 * properties must be set for the correct calculation of N from residues when calling NitrogenService.CalculateAboveGroundResidueNitrogen which expects non-zero values for these C properties. If the strategy is not considered, the greedy case of always using IPCC Tier 2 will result
+                 * in the AboveGroundCarbonInput (and BelowGroundCarbonInput) properties being assigned non-zero values but the carbon input from product, straw, etc. will be zero resulting in no N from crop residues being calculated at NitrogenService.CalculateAboveGroundResidueNitrogen when
+                 * the user has selected ICBM as the carbon modelling strategy.
+                 */
+                if (carbonModellingStrategy == CarbonModellingStrategies.IPCCTier2 && canCalculateInputsUsingIpccTier2)
                 {
                     _ipccTier2CarbonInputCalculator.AssignInputs(viewItem, farm, animalResults);
                 }
