@@ -24,8 +24,10 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
 
-    - name: Setup VSTest
-      uses: darenm/Setup-VSTest@v1
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
 
     - name: Restore nuget packages
       run: msbuild ${{ inputs.solution }} /t:Restore /m
@@ -38,7 +40,7 @@ jobs:
         Configuration: ${{ inputs.configuration }}
 
     - name: Run Tests
-      run: vstest.console.exe ./**/H.Core.Test/bin/${{ inputs.configuration }}/H.Core.Test.dll ./**/H.Infrastructure.Test/bin/${{ inputs.configuration }}/H.Infrastructure.Test.dll ./**/H.CLI.Test/bin/${{ inputs.configuration }}/H.CLI.Test.dll /Parallel
+      run: dotnet test ${{ inputs.solution }} --configuration ${{ inputs.configuration }} --no-build --no-restore
 
     - name: Upload build artifacts
       if: ${{ inputs.configuration == 'Release' }}
