@@ -2237,7 +2237,7 @@ The shelterbelt timeline works similarly to the farm crop timeline. The timeline
 	-	 The tray allows you to show or hide different columns in the grid.  Your choice of what columns to hide will persist across sessions and farms (i.e. data columns hidden in one farm will also be hidden in other new and existing farms). 
 	-	 The data is available in other views using the exact same functionality across each instance.
 -	If you have come to this screen and then gone back to change something about your fields then you may have to reload the data to keep it up to date with your changes.  To accomplish the reload click “**Reload Data From Previous Screen**” in the upper left corner of the view.   
--	You can change how the screen reports the yields of your fields with the drop-down menu beside “**Yield Assignment Method**” **(default is “Average Yield”).**
+-	You can change how the screen reports the yields of your fields with the drop-down menu beside “**Yield Assignment Method**” **(default is “Small area data”).**
 -	Like other grids in Holos you can sort and filter each column shown.  Anything to the right of the Yield column can be edited by hand.
 
 <br>
@@ -2258,6 +2258,17 @@ The shelterbelt timeline works similarly to the farm crop timeline. The timeline
 		E: Data that can be edited by the user
 	</em>
 </p>
+<br>
+
+## Yield Assignment Method
+
+The **Yield Assignment Method** drop-down menu controls where Holos gets the yield values shown in the details grid. Four options are available:
+
+-	**Small area data** — *(default)* Uses Small Area Data (SAD) yields published by Statistics Canada at [open.canada.ca](https://open.canada.ca/data/en/dataset/65f1cde1-95e0-4a1d-9a1a-c45b2f83a351). SAD yields are available for most crop types and locations in Canada and are a good starting point if you do not have measured yields for your own farm. For silage crops that do not have SAD data available, Holos falls back to default silage yields.
+-	**Average Yield** — Takes the average of the yields across all years of the selected field's rotation and assigns that same average value to every year. Pick this option if you want a single uniform yield across the rotation.
+-	**Input file** — Reads yield values from a CSV file that you provide. Pick this option if you already have measured yields stored in a spreadsheet. See the **Load an Input File** section below for the required file format.
+-	**Custom Yield** — Lets you enter your own yield value for each year directly in the details grid — Holos will not overwrite the values you type in. Pick this option if you have measured yields from your own farm records and want to enter them by hand.
+
 <br>
 
 ## Load an Input File
@@ -2744,6 +2755,23 @@ There are two methods to add a new farm to an existing farms folder. [The common
 2. In the selected farm folder, will be a file called “farm.settings”, open this file.
 3. In the settings file, you can modify the default values for settings that are relevant to the operations in your farm such as:  Global Settings, Precipitation, Temperature, Evapotranspiration and Soil Defaults.
 4. This settings file can be opened using any text editor e.g. Notepad.
+
+-	One of the settings you can change is **`Yield Assignment Method`**, which controls how Holos assigns yields to each year in your fields. The entry in the settings file has the form:
+
+    ```
+    Yield Assignment Method = <value>
+    ```
+
+    The value must be one of the following (case-insensitive). See the **Yield Assignment Method** section in Chapter 8 for a full description of what each option does.
+
+    | Value to enter in the settings file | Equivalent GUI option |
+    |---|---|
+    | `SmallAreaData` *(default)* | Small area data |
+    | `Average` | Average Yield |
+    | `InputFile` | Input file |
+    | `Custom` | Custom Yield |
+
+    If you choose `InputFile`, you also need to set the path to your custom yield CSV file via the matching setting in the same file.
 
 <br>
 <p align="center">

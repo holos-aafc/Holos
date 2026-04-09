@@ -263,7 +263,7 @@ namespace H.Core.Calculators.Carbon
             double belowGroundResiduePoolNitrogenAtCurrentInterval)
         {
             var result = (aboveGroundResiduePoolNitrogenAtPreviousInterval - aboveGroundResiduePoolNitrogenAtCurrentInterval - grainAndStrawN) + 
-                         (belowGroundResiduePoolNitrogenAtPreviousInterval - belowGroundResiduePoolNitrogenAtCurrentInterval + rootAndExudateN);
+                         (belowGroundResiduePoolNitrogenAtPreviousInterval - belowGroundResiduePoolNitrogenAtCurrentInterval - rootAndExudateN);
             if (result < 0)
             {
                 result = 0;
