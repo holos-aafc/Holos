@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
-using H.Core.Providers.AnaerobicDigestion;
 using H.Infrastructure;
 
 namespace H.Core.Providers.Soil

@@ -1,6 +1,6 @@
-﻿using System;
+﻿#if WINDOWS
+using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
 
 namespace H.Infrastructure.Controls.ValueConverters
@@ -39,3 +39,4 @@ namespace H.Infrastructure.Controls.ValueConverters
         #endregion
     }
 }
+#endif

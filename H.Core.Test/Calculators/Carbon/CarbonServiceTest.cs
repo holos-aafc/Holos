@@ -3,8 +3,6 @@ using H.Core.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using H.Core.Calculators.Carbon;
-using H.Core.Enumerations;
-using System.Collections.Generic;
 
 namespace H.Core.Test.Calculators.Carbon
 {

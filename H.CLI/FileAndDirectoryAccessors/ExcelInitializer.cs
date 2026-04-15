@@ -45,7 +45,7 @@ namespace H.CLI.FileAndDirectoryAccessors
         public void SetTemplateFile(string componentDirectoryPath, string componentType, Dictionary<string, ImperialUnitsOfMeasurement?> componentKeys)
         {
             string fileName = componentType + "_Example";
-            string filePath = componentDirectoryPath + @"\" + fileName + CLILanguageConstants.OutputLanguageAddOn;
+            string filePath = Path.Combine(componentDirectoryPath, fileName + CLILanguageConstants.OutputLanguageAddOn);
             var stringBuilder = new StringBuilder();
             foreach (var key in componentKeys)
             {

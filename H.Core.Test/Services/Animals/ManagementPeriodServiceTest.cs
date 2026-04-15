@@ -1,6 +1,4 @@
-﻿using H.Core.Calculators.Infrastructure;
-using H.Core.Emissions.Results;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.Animals.Dairy;
@@ -9,12 +7,9 @@ using H.Core.Services.Animals;
 using H.Core.Services.Initialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using H.Core.Models.Animals.Beef;
 using H.Core.Models.Animals.OtherAnimals;
 using H.Core.Models.Animals.Poultry.Chicken;
@@ -23,8 +18,6 @@ using H.Core.Models.Animals.Sheep;
 using H.Core.Models.Animals.Swine;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Feed;
-using H.Core.Test.Providers.Climate;
-using Microsoft.VisualStudio.TestPlatform.CoreUtilities.Extensions;
 
 namespace H.Core.Test.Services.Animals
 {

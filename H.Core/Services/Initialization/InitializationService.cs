@@ -1,31 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
-using AutoMapper;
-using H.Core.Calculators.Carbon;
-using H.Core.Calculators.Economics;
-using H.Core.Calculators.Nitrogen;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
-using H.Core.Models.Animals.Dairy;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Carbon;
-using H.Core.Providers.Climate;
-using H.Core.Providers.Economics;
-using H.Core.Providers.Energy;
-using H.Core.Providers.Fertilizer;
-using H.Core.Providers.Irrigation;
-using H.Core.Providers.Nitrogen;
-using H.Core.Providers.Plants;
 using H.Core.Providers.Soil;
 using H.Core.Services.Initialization.Animals;
 using H.Core.Services.Initialization.Crops;
-using H.Core.Services.LandManagement;
-using H.Infrastructure;
 
 namespace H.Core.Services.Initialization
 {

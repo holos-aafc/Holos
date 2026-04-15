@@ -1,6 +1,5 @@
 ﻿#region Imports
 
-using System.Configuration;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Infrastructure;

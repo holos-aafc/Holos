@@ -1,13 +1,8 @@
 ﻿using H.Core.Enumerations;
 using H.Infrastructure;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
 using H.Core.CustomAttributes;
 using H.Core.Providers.Animals;
 

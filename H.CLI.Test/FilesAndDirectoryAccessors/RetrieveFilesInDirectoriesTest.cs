@@ -1,8 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using H.CLI.ComponentKeys;
 using H.CLI.FileAndDirectoryAccessors;
 
@@ -15,7 +12,7 @@ namespace H.CLI.Test.FilesAndDirectoryAccessors
         public void TestGetSubDirectoryFiles_ExpectDirectoryNotFound_InvalidDirectoryPath()
         {
              var testDirectory = new RetrieveFilesInDirectories();
-            Assert.ThrowsException<DirectoryNotFoundException>(() => testDirectory.GetSubDirectoryFiles("invalid path"));
+            Assert.Throws<DirectoryNotFoundException>(() => testDirectory.GetSubDirectoryFiles("invalid path"));
         }
 
         [TestMethod]

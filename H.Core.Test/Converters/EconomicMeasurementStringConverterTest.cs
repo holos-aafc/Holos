@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using H.Core.Converters;
 using H.Core.Enumerations;
 

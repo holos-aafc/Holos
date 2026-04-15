@@ -1,7 +1,6 @@
 ﻿using H.Core.Calculators.Climate;
 using H.Core.Tools;
 using Newtonsoft.Json.Linq;
-using SharpKml.Dom;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
