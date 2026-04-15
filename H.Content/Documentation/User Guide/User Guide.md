@@ -3552,159 +3552,191 @@ If you have [installed the CLI](https://github.com/holos-aafc/Holos#download), t
 
 ## Command Line Interface Results
 
--	The Command Line Interface will output the **results for each farm** you have created and their respective components as well as the **total results for all the farms combined.**
--	The results will be displayed in an Excel file and correspond to the following categories: **Carbon Dioxide Equivalence Emissions, Green House Gas Emissions, Estimates of Production and Feed Estimates.**
--	**Carbon Dioxide Equivalence Emissions** are in units of **Megagrams (Mg)** and **Green House Gas Emissions** are in units of **kilograms (kg).**
--	**If you have multiple settings files for a farm**, the CLI will process the farm once for each settings file. This allows you to test different climate, soil, or other settings for the same farm. Each settings file will produce its own set of results.
--	You can find these results in the "**Outputs**" folder of the Holos Command Line Interface base directory. If an Outputs folder already exists from a prior run, a new folder is created with a timestamp suffix (e.g., "Outputs_2025_03_15_10_30_45") to prevent overwriting previous results.
--	**If you are looking for more specific results for each farm, please go to the appropriate farm output folder.**
+When the CLI finishes processing, it writes all its output to an **`Outputs`** folder located in the base directory of your `Farms` folder. This section explains where the files are, what's in each one, and how to find what you need.
 
-### Component Processing Order
+### File format and language
 
--	The CLI processes components in a specific order. **Shelterbelts** and **Fields** are always processed first because other components (such as Swine) may reference field components. If you have a Swine component that references a field (e.g., when the housing type is set to "Pasture"), the referenced field must be processed before the Swine component can use it.
+-	**All result files are CSV** (comma-separated values). You can open them in Excel, LibreOffice Calc, Google Sheets, or any text editor.
+-	Every file name ends with a **language suffix** — `-en-CA.csv` for English or `-fr-CA.csv` for French — so English and French runs don't overwrite each other.
+-	If an `Outputs` folder from a previous run already exists, the CLI creates a new folder with a timestamp suffix (e.g. `Outputs_2025_03_15_10_30_45`) so previous results are preserved.
+
+### Where to find your results
+
+Inside the `Outputs` folder the CLI creates two kinds of subfolders:
+
+```
+Outputs/
+├── TotalResultsForAllFarms/          ← yearly totals, all farms combined
+│   ├── totalresults_GHGEmissions-en-CA.csv
+│   ├── totalresults_CO2EEmissions-en-CA.csv
+│   ├── totalresults_EstimatesOfProduction-en-CA.csv
+│   └── totalresults_FeedEstimates-en-CA.csv
+│
+├── Farm1_Results/                    ← monthly detail for Farm 1
+│   ├── Farm1_GHGEmissions_farm.settings-en-CA.csv
+│   ├── Farm1_CO2EEmissions_farm.settings-en-CA.csv
+│   ├── Farm1_EstimatesOfProduction_farm.settings-en-CA.csv
+│   └── Farm1_FeedEstimates_farm.settings-en-CA.csv
+│
+└── Farm2_Results/                    ← monthly detail for Farm 2
+    └── ...
+```
+
+-	**`TotalResultsForAllFarms/`** contains the **yearly totals** for every farm processed in the run, with a totals row combining all farms.
+-	**`<FarmName>_Results/`** contains the **monthly breakdown** for a single farm. One of these folders is created per farm.
+
+| If you want... | Open... |
+|---|---|
+| Annual emissions for every farm with a grand total | `TotalResultsForAllFarms/totalresults_*.csv` |
+| Month-by-month breakdown for one farm | `<FarmName>_Results/<FarmName>_*.csv` |
+| To compare the same farm under different assumptions | See **Multiple settings files** below |
+
+### Multiple settings files for the same farm
+
+If a farm folder contains more than one `.settings` file, the CLI processes the farm **once per settings file** and embeds the settings file name in every output file name. This lets you test different climate, soil, or crop defaults for the same farm without having to re-run it manually.
+
+For example, a farm called `Farm1` with two settings files `base.settings` and `dry.settings` produces:
+
+```
+Farm1_Results/
+├── Farm1_GHGEmissions_base.settings-en-CA.csv
+├── Farm1_GHGEmissions_dry.settings-en-CA.csv
+├── Farm1_CO2EEmissions_base.settings-en-CA.csv
+├── Farm1_CO2EEmissions_dry.settings-en-CA.csv
+└── ... (and likewise for EstimatesOfProduction and FeedEstimates)
+```
 
 <br>
 
-### Total Results (Yearly Basis)
+### Yearly totals (TotalResultsForAllFarms folder)
 
--	The **Total Results (All Farms)** will calculate the appropriate estimates for every farm and their respective components and animal groups and will display them in an Excel file. You will be able to see the totals for each farm and the totals for all the farms combined on a **yearly basis.** 
--	**Each component** in a farm **is categorized** in the following: **Beef Production, Dairy, Other livestock, Poultry, Sheep, and Swine.**
--	**If the data is not applicable**, the data field will show “N/A”
--	**Each component category** consists of **components**, where each component consists of **animal groups.** 
--	The results for each of these component categories and their respective components will be calculated and displayed for each farm.
--	These results will be in the “**Outputs**” folder located in the base directory of your “**Farms**” folder in the “**TotalResultsForAllFarms**” folder
+The files in this folder show **one row per animal group or land-management component per farm**, with columns for each emission or production value. A grand-totals row at the bottom sums across every farm processed in the run.
 
-<br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter10/figure10-34.png" alt="Figure10-34" width="950"/>
     <br>
     <em>
-		Figure 10-34 - Total Results For A Farm – Yearly Basis
+		Figure 10-34 – Yearly totals file (TotalResultsForAllFarms)
 		<br>
-		A: Data corresponding to a farm and settings file
+		A: Rows corresponding to a farm and settings file
 		<br>
-		B: Data corresponding to a component category
+		B: Rows grouped by component category (Beef, Dairy, Swine, etc.)
 		<br>
-		C: Data corresponding to a component
+		C: Rows for an individual component
 		<br>
-		D: Data corresponding to Grower Totals
+		D: Rows for an animal group within a component
 		<br>
-		E: Data corresponding to an animal group
-		<br>
-		F: Totals for all farm
+		E: Grand-totals row combining all farms
 	</em>
 </p>
 <br>
 
+### Monthly results for a single farm (`<FarmName>_Results` folder)
 
-### Results For A Farm (Monthly Basis)
+The files in this folder have the same structure as the yearly totals, but include a **Month** column, so each animal group appears 12 times (once per month). Farm totals appear at the bottom of each file.
 
--	The **results for each farm** will calculate the appropriate estimates for each farm and their respective components and animal groups and will display them in an Excel file. You will be able to see the totals for the farm, and each component and animal group **monthly**. These results will be in the “**Outputs**” folder and in the appropriate farm’s results directory folder in the format: **YourFarmName_Results.**
--	**If the data is not applicable**, the data field will show “N/A”
--	**Each component** in a farm is **categorized** in the following: **Beef Production, Dairy, Other livestock, Poultry, Sheep, and Swine.**
--	Each component category consists of components, and each one of those component consists of animal groups. 
--	**Each** animal group is split up into **months**.
--	The results for each of these component categories and their respective components will be calculated and displayed for each farm. The **farm totals** will be displayed at the very bottom
-
-<br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter10/figure10-35.png" alt="Figure10-35" width="950"/>
     <br>
     <em>
-		Figure 10-35 - Total Results For A Farm – Monthly Basis
+		Figure 10-35 – Monthly results for a single farm
 		<br>
-		A: Results for a component category
+		A: Rows grouped by component category
 		<br>
-		B: Results for a component
+		B: Rows for an individual component
 		<br>
-		C: Monthly results for an animal group
+		C: Monthly rows for an animal group
 	</em>
 </p>
 <br>
 
-### Carbon Dioxide Equivalence Emissions
+### The four result file categories
 
--	Holos will calculate the carbon dioxide equivalence emissions for each Farm and their respective components.
--	The results will include the following calculated emission values: **Enteric CH4, Manure Ch4, Direct Nitrous Oxide, Indirect Nitrous Oxide, Energy Carbon Dioxide and Carbon Dioxide emissions.**
--	**Energy carbon dioxide** is calculated for **each animal group** (i.e. backgrounder steers), **therefore**, you will see “**N/A**” for the data fields that are not applicable.
+Both folders above contain the same four categories of files. Only the time granularity differs — **yearly** in the `TotalResultsForAllFarms` folder, **monthly** in each `<FarmName>_Results` folder.
 
-<br>
+#### 1. GHG Emissions — `*GHGEmissions*.csv`
 
-### Green House Gas Emissions
+Raw greenhouse gas emissions, **not** yet converted to carbon dioxide equivalents.
 
--	Holos will calculate the green house gas emissions for each farm and their respective components.
--	The results will include the following calculated emission values: **Enteric CH4, Manure CH4, Direct Nitrous Oxide, Indirect Nitrous Oxide, Energy Carbon Dioxide and Carbon Dioxide emissions.** 
--	**Energy carbon dioxide** is calculated for **each animal group** (i.e. backgrounder steers), **therefore**, you will see “N/A” for the data fields that are not applicable.
--	**However, these are not converted to carbon dioxide equivalence values**
+-	**Units:** all emission values are in **kg GHGs**
+-	**Columns:** Farm Name, Component Category, Component Name, Group Name, *Month* (monthly file only), Year, Enteric CH4, Manure CH4, Direct N2O, Indirect N2O, Energy CO2, CO2
 
-<br>
+#### 2. CO2 Equivalent Emissions — `*CO2EEmissions*.csv`
 
-### Estimates of Production
+The same values as the GHG file, but converted to **carbon dioxide equivalents** using standard global warming potentials so they can be compared directly.
 
--	Holos will calculate the estimates of production for each farm and their respective components.
--	The results will include the following calculated estimates of production values: **Harvest, Area, Manure Available for Land Application, Beef Produced, Lamb Produced, Milk Produced and Fat Protein Corrected Milk Production.**
+-	**Units:** all emission values are in **Mg CO2e** (megagrams of CO2 equivalent)
+-	**Columns:** same as the GHG file, plus a **SubTotal** column giving the per-row CO2-equivalent total.
 
-<br>
+#### 3. Estimates of Production — `*EstimatesOfProduction*.csv`
 
-### Feed Estimates
+Physical production output from every component on the farm.
 
--	Holos will calculate the estimates of production for each farm and their respective components.
--	The results will include the following calculated feed estimate value: **Dry Matter Intake.**
+-	**Columns (units in parentheses):** Farm Name, Component Category, Component Name, Group Name, *Month* (monthly file only), Harvest (kg), Area (ha), Land Applied Manure (kg N), Beef Produced (kg), Lamb Produced (kg), Milk Produced (kg), Fat Protein Corrected Milk (kg)
 
-<br>
+#### 4. Feed Estimates — `*FeedEstimates*.csv`
 
-### Specific Component Results for a Farm
+Animal feed intake estimates.
 
--	In each farm output folder, there will be directories corresponding to each available land management component category in Holos. 
--	For each land management component, there will be a specific output results file for each land management component data file you have made. **These results are specific to the component you are interested in** and we will go over each in this section.
+-	**Columns (units in parentheses):** Farm Name, Component Category, Component Name, Group Name, *Month* (monthly file only), Dry Matter Intake (kg head⁻¹ day⁻¹)
 
 <br>
 
-#### Shelterbelt Component Results
--	The shelterbelt results will provide carbon emission details for every row and their corresponding species ranging from the **start year** until the **cut year.**
+### How the rows are organized
+
+Every result file uses the same hierarchical row structure. Reading from the Farm Name column outwards:
+
+```
+Farm Name
+└── Component Category         ← Beef Production, Dairy, Other Livestock,
+    └── Component              ← Poultry, Sheep, Swine, or Land Management
+        └── Animal Group       ← e.g. "Backgrounder Steers"
+```
+
+-	**Component categories** are: Beef Production, Dairy, Other Livestock, Poultry, Sheep, Swine, and Land Management (which holds Shelterbelt and Field components).
+-	**Animal group rows** are the smallest unit — each row represents one animal group's contribution (or, in the monthly files, one month of that group).
+-	**If a column does not apply** to a particular row (for example, *Milk Produced* on a beef farm row, or *Energy CO2* on a shelterbelt row), the value is shown as **`N/A`**.
+-	**Grand totals** appear at the bottom of every file: a row that sums across all farms in the yearly files, and a row that sums across all components in each per-farm monthly file.
 
 <br>
 
-#### Field Component Results
--	The field results will display results based on the **Introductory Carbon Balance Model (ICBM)** which will show all the carbon and nitrogen emission information related to your crops from 1985 to present day.
+### Component processing order
+
+The CLI processes components in a fixed order so that cross-references work correctly:
+
+1.	**Shelterbelts** and **Fields** are processed first.
+2.	**Animal components** are processed after, because some of them reference a field (for example, a Swine component with `Housing Type = Pasture` must point to an existing field).
+
+You don't need to configure this — it happens automatically — but it explains why Field and Shelterbelt rows always appear near the top of the result files.
 
 <br>
 
-### Navigating Through Holos CLI Results Directories
+### Folder layout in practice
 
-Below are example directories and their corresponding results
+The two screenshots below show the folder structure that is created after a run.
 
-#### Total Results Example Directory
-
-<br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter10/figure10-36.png" alt="Figure10-36" width="650"/>
     <br>
     <em>
-		Figure 10-36 - Total Farm results directory
+		Figure 10-36 – `TotalResultsForAllFarms` folder
 		<br>
-		A: Path to total results for all farms directory. The results folder is created inside the user created general Farms directory
+		A: Path to the `TotalResultsForAllFarms` directory, created inside the user's `Farms` folder
 		<br>
-		B: Output files for each calculated result category (yearly basis)
+		B: The four yearly total CSV files (GHG, CO2e, Estimates of Production, Feed Estimates)
 	</em>
 </p>
 <br>
 
-
-#### Results for a Farm Example Directory
-
-<br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter10/figure10-37.png" alt="Figure10-37" width="650"/>
     <br>
     <em>
-		Figure 10-37 - Results for each calculated category
+		Figure 10-37 – `<FarmName>_Results` folder
 		<br>
-		A: Path to the directory
+		A: Path to the farm's output directory
 		<br>
-		B: Specific output results for each land management component in a farm
-		<br>
-		C: Output files for each calculated result category (monthly basis) for the farm and for each settings file
+		B: The four monthly result CSV files for that farm, one set per settings file
 	</em>
 </p>
 <br>
