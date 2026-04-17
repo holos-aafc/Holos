@@ -1662,7 +1662,7 @@ Example value: 7.1
 
 Type value: Double (Decimal/Numeric)
 
-Does user have to provide value: Yes
+Does user have to provide value: No
 
 Holos has a default value: 
 
@@ -1670,7 +1670,7 @@ Valid range of values: (0 ≤ x ≤ 100)
 
 Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
 
-note: Starch content of diet
+note: Starch content of diet. This column is read from the file but is not currently used in any calculation — its value has no effect on model outputs.
 
 ***
 ## Fat(%DM)
@@ -1696,7 +1696,7 @@ Example value: 2
 
 Type value: Double (Decimal/Numeric)
 
-Does user have to provide value: Yes
+Does user have to provide value: No
 
 Holos has a default value:
 
@@ -1704,7 +1704,7 @@ Valid range of values: (x ≥ 0)
 
 Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
 
-note: Metabolizable energy of diet
+note: Metabolizable energy of diet. This column is read from the file but is not currently used in any calculation — its value has no effect on model outputs.
 
 ***
 ## NDF(%DM)
@@ -2532,13 +2532,13 @@ Example value: 25.825
 
 Type value: Double (Decimal/Numeric)  
 
-Does user have to provide value: Yes
+Does user have to provide value: No
 
 Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-note: Starch content of diet 
+note: Starch content of diet. This column is read from the file but is not currently used in any calculation — its value has no effect on model outputs. 
 
 Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
 
@@ -2566,13 +2566,13 @@ Example value: 2.48
 
 Type value: Double (Decimal/Numeric)   
 
-Does user have to provide value: Yes 
+Does user have to provide value: No 
 
 Holos has a default value:
 
 Valid range of values: (x ≥ 0)
 
-note: Metabolizable energy of diet 
+note: Metabolizable energy of diet. This column is read from the file but is not currently used in any calculation — its value has no effect on model outputs.
 
 Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv 
 
@@ -3401,7 +3401,7 @@ Example value: 7.1
 
 Type value: Double (Decimal/Numeric) 
 
-Does user have to provide value: Yes
+Does user have to provide value: No
 
 Holos has a default value: 
 
@@ -3409,7 +3409,7 @@ Valid range of values: (0 ≤ x ≤ 100)
 
 Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
 
-note: Starch content of diet
+note: Starch content of diet. This column is read from the file but is not currently used in any calculation — its value has no effect on model outputs.
 
 ***
 ## Fat(%DM)
@@ -3435,7 +3435,7 @@ Example value: 2
 
 Type value: Double (Decimal/Numeric) 
 
-Does user have to provide value: Yes
+Does user have to provide value: No
 
 Holos has a default value: 
 
@@ -3443,7 +3443,7 @@ Valid range of values: (x ≥ 0)
 
 Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/feeds.csv
 
-note: Metabolizable energy of diet
+note: Metabolizable energy of diet. This column is read from the file but is not currently used in any calculation — its value has no effect on model outputs.
 
 ***
 ## NDF(%DM)

@@ -407,3 +407,5 @@ H.CLI/sync.ffs_db
 *.idea
 build_instructions.js
 Hamiota baseline M19_patched.json
+build_residue_n_calculator.py
+H.Content/Documentation/Crop_Residue_Nitrogen_Calculator.xlsx
