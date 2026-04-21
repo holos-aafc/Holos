@@ -1949,15 +1949,23 @@ Example value: 0.26
 
 Type value: Double (Decimal/Numeric)
 
-Does user have to provide value:
+Does user have to provide value: Yes, when ManureStateType is `LiquidWithNaturalCrust`, `LiquidNoCrust`, or `LiquidWithSolidCover`. The user must supply a non-zero MCF for these liquid manure handling systems (see note below).
 
-Holos has a default value:
+Holos has a default value: Only for non-liquid manure states (e.g., `SolidStorage`, `CompostIntensive`, `CompostPassive`, `DeepBedding`, `DeepPit`, `DailySpread`, `AnaerobicDigester`, `Pasture`/`Paddock`/`Range`). For the three liquid states listed above, the generated template CSV will contain a placeholder value of 0 — Holos has no default MCF for liquid storage and will use whatever the user writes in this column.
 
 Valid range of values: (x ≥ 0)
 
 Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Services/Initialization/Animals/AnimalInitializationService.Methane.cs 
 
-note: Methane conversion factor of manure, not to be confused with Methane conversion factor of diet (Ym). See line 89 for defaults 
+note: Methane conversion factor of manure, not to be confused with Methane conversion factor of diet (Ym). See line 89 for defaults.
+
+**Important — liquid manure systems (Dairy and Swine):** Holos does not have a built-in default MCF for the `LiquidWithNaturalCrust`, `LiquidNoCrust`, or `LiquidWithSolidCover` manure state types. For these configurations the reference tables (`Table_36_Livestock_Emission_Conversion_Factors_Provider` and `Table_37_MCF_By_Climate_Livestock_MansureSystem_Provider`) return 0, and the generated template will contain 0 in this column. **If you leave this value as 0, Holos will calculate zero methane emissions from manure storage for that management period**, because MCF enters the manure CH4 calculation multiplicatively — see **Section 4.1.2 (Methane emissions from manure handling)** of the Holos Algorithm Document (Pogue et al. 2025, *Holos V4.0 Algorithm Document*), specifically **Equation 4.1.2‑4**:
+
+> `Manure CH4 emission rate (kg CH4 head⁻¹ day⁻¹) = VolatileSolids × MethaneProducingCapacity (B₀) × MethaneConversionFactor (MCF) × 0.67`
+
+When your management period uses any liquid manure handling system on a Dairy or Swine component, you must overwrite this column with a non-zero, climate-appropriate MCF (e.g., from IPCC 2019 Refinement Vol. 4, Ch. 10, Table 10.17, which tabulates temperature-dependent MCFs for liquid storage systems). The value you supply here is preserved end-to-end by the CLI — no initialization step after CSV parsing will overwrite it.
+
+Algorithm Document: https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx (see Section 4.1.2, Equation 4.1.2‑4)
 
 ***
 ## N2ODirectEmissionFactor(kgN2O-N(kgN)^-1)
