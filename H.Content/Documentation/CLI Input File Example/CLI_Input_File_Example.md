@@ -1943,6 +1943,39 @@ Source (source code file, table, algorithm document, etc.): https://github.com/h
 note: See HousingDetails.cs line 219
 
 ***
+## ManureStateType
+
+Example value: LiquidWithNaturalCrust
+
+Type value: Enum (Text)
+
+Does user have to provide value: Yes
+
+Holos has a default value:
+
+Valid values: DailySpread, SolidStorage, CompostIntensive, CompostPassive, DeepBedding, LiquidWithNaturalCrust, LiquidNoCrust, LiquidWithSolidCover, DeepPit, AnaerobicDigester, Pasture, Paddock, Range
+
+note: Required. See the GUI for the valid types available to a particular animal type. This value drives the downstream lookups for the manure emission-factor columns that follow (MCF, N₂O direct, volatilization, leaching, etc.).
+
+**Important — Pasture / Paddock / Range (zeros in many manure columns are expected):** When `ManureStateType` is set to `Pasture`, `Paddock`, or `Range`, Holos routes the manure through its *land-application* code path (`GetLandApplicationFactors` in `Table_36_Livestock_Emission_Conversion_Factors_Provider.cs`) rather than the storage-system factor set used for confined-housing manure states such as `SolidStorage`, `DeepBedding`, `CompostIntensive`, or the liquid systems. On that land-application path, Holos only populates a handful of factors:
+
+- `MethaneConversionFactor` = 0.0047
+- `N2ODirectEmissionFactor` = a climate/region/soil-texture value (e.g., 0.00043 for Western Canada)
+- `VolatilizationFraction` = animal/province/year-specific (for Dairy this is looked up from the Dairy manure volatilization provider; otherwise defaults to 0.21)
+- `EmissionFactorVolatilization` = climate-dependent
+- `EmissionFactorLeach` = the farm's default leaching-and-runoff factor
+
+Every other storage-related column in the Dairy CSV (volatile-solids-based storage parameters, storage-system bedding factors, liquid-system leaching fractions, etc.) will read 0 in the generated template. **These zeros are not a bug and not a "please fill in" placeholder** — they correctly represent the fact that storage concepts do not apply to manure that is deposited directly on pasture, paddock, or range land.
+
+The N emissions associated with pasture-deposited manure are instead accounted for in the **Field component**, as direct organic-nitrogen inputs to the soil (see the Field section's `ManureApplied`, `ManureAmount`, `ManureApplicationType`, `ManureAnimalSourceType`, and `ManureStateType` columns at the top of this document). In other words, a management period using `Pasture`/`Paddock`/`Range` intentionally "hands off" its manure-N to the Field component — so you should expect the animal row to look sparse in the CSV.
+
+See **Section 4.1.2 (Methane emissions from manure handling)** and **Section 4.6 (N₂O emissions from manure deposited on pasture, range and paddock)** of the Holos Algorithm Document for the background methodology.
+
+Algorithm Document: https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
+
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ManureStateType.cs
+
+***
 ## MethaneConversionFactorOfManure(kgCH4(kgCH4)^-1)
 
 Example value: 0.26 
@@ -2954,7 +2987,23 @@ Holos has a default value:
 
 Valid values: DeepBedding, SolidStorage, Pasture, CompostPassive, CompostIntensive
 
-note: Required. See GUI for valid types for particular animal type 
+note: Required. See GUI for valid types for particular animal type.
+
+**Important — Pasture / Paddock / Range (zeros in many manure columns are expected):** When `ManureStateType` is set to `Pasture`, `Paddock`, or `Range`, Holos routes the manure through its *land-application* code path (`GetLandApplicationFactors` in `Table_36_Livestock_Emission_Conversion_Factors_Provider.cs`) rather than the storage-system factor set that applies to confined-housing manure states such as `SolidStorage`, `DeepBedding`, or `CompostIntensive`. On that land-application path, Holos only populates a handful of factors:
+
+- `MethaneConversionFactor` = 0.0047
+- `N2ODirectEmissionFactor` = a climate/region/soil-texture value (e.g., 0.00043 for Western Canada)
+- `VolatilizationFraction` = animal/province/year-specific (or 0.21 default)
+- `EmissionFactorVolatilization` = climate-dependent
+- `EmissionFactorLeach` = the farm's default leaching-and-runoff factor
+
+Every other storage-related column in the animal CSV (volatile-solids-based storage parameters, storage-system bedding factors, liquid-system leaching fractions, etc.) will read 0 in the generated template. **These zeros are not a bug and not a "please fill in" placeholder** — they correctly represent the fact that storage concepts do not apply to manure that is deposited directly on pasture, paddock, or range land.
+
+The N emissions associated with pasture-deposited manure are instead accounted for in the **Field component**, as direct organic-nitrogen inputs to the soil (see the Field section's `ManureApplied`, `ManureAmount`, `ManureApplicationType`, `ManureAnimalSourceType`, and `ManureStateType` columns at the top of this document). In other words, a management period using `Pasture`/`Paddock`/`Range` intentionally "hands off" its manure-N to the Field component — so you should expect the animal row to look sparse in the CSV.
+
+See **Section 4.1.2 (Methane emissions from manure handling)** and **Section 4.6 (N₂O emissions from manure deposited on pasture, range and paddock)** of the Holos Algorithm Document for the background methodology.
+
+Algorithm Document: https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
 
 Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ManureStateType.cs 
 
@@ -3605,6 +3654,39 @@ Valid range of values: (x ≥ 0)
 Source (source code file, table, algorithm document, etc.): 
 
 note: 
+
+***
+## ManureStateType
+
+Example value: SolidStorage
+
+Type value: Enum (Text)
+
+Does user have to provide value: Yes
+
+Holos has a default value:
+
+Valid values: SolidStorage, Pasture, Paddock, Range
+
+note: Required. See the GUI for the valid types available to Sheep components. Sheep in Holos only supports `SolidStorage` as a confined-housing manure state type; all other values other than `Pasture`/`Paddock`/`Range` will fall through to the default-value branch in `Table_36_Livestock_Emission_Conversion_Factors_Provider.cs` and produce zero emission factors. This value drives the downstream lookups for the manure emission-factor columns that follow (MCF, N₂O direct, volatilization, leaching, etc.).
+
+**Important — Pasture / Paddock / Range (zeros in many manure columns are expected):** When `ManureStateType` is set to `Pasture`, `Paddock`, or `Range`, Holos routes the manure through its *land-application* code path (`GetLandApplicationFactors` in `Table_36_Livestock_Emission_Conversion_Factors_Provider.cs`) rather than the storage-system factor set used for confined-housing manure states such as `SolidStorage`. On that land-application path, Holos only populates a handful of factors:
+
+- `MethaneConversionFactor` = 0.0047
+- `N2ODirectEmissionFactor` = a climate/region/soil-texture value (e.g., 0.00043 for Western Canada)
+- `VolatilizationFraction` = 0.21 (sheep use the default land-application value)
+- `EmissionFactorVolatilization` = climate-dependent
+- `EmissionFactorLeach` = the farm's default leaching-and-runoff factor
+
+Every other storage-related column in the Sheep CSV (volatile-solids-based storage parameters, storage-system bedding factors, etc.) will read 0 in the generated template. **These zeros are not a bug and not a "please fill in" placeholder** — they correctly represent the fact that storage concepts do not apply to manure that is deposited directly on pasture, paddock, or range land.
+
+The N emissions associated with pasture-deposited manure are instead accounted for in the **Field component**, as direct organic-nitrogen inputs to the soil (see the Field section's `ManureApplied`, `ManureAmount`, `ManureApplicationType`, `ManureAnimalSourceType`, and `ManureStateType` columns at the top of this document). In other words, a management period using `Pasture`/`Paddock`/`Range` intentionally "hands off" its manure-N to the Field component — so you should expect the animal row to look sparse in the CSV. Given that sheep are commonly managed on pasture, this sparse-CSV pattern is the normal case for many sheep management periods.
+
+See **Section 4.1.2 (Methane emissions from manure handling)** and **Section 4.6 (N₂O emissions from manure deposited on pasture, range and paddock)** of the Holos Algorithm Document for the background methodology.
+
+Algorithm Document: https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document.docx
+
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Enumerations/ManureStateType.cs
 
 ***
 ## MethaneConversionFactorOfManure(kgCH4(kgCH4)^-1)
