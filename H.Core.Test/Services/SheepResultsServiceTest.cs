@@ -254,6 +254,40 @@ namespace H.Core.Test.Services
             Assert.AreEqual(-5.5603957063008123, result);
         }
 
+        /// <summary>
+        /// Regression test for the sheep forage bug fix (Equation 3.4.2-1 / Equation 4.1.2-1).
+        ///
+        /// With Forage = 0 (the old bug), grain-in-diet = 100 which triggers the low urinary energy
+        /// coefficient (urinaryEnergy = 0.02). With the corrected forage values (85, 97, 100%)
+        /// grain-in-diet is always below 85, so urinaryEnergy = 0.04 is used correctly.
+        ///
+        /// All three fixed forage levels produce the same volatile solids result for identical GEI/TDN/Ash
+        /// inputs because they all fall on the same side of the grain threshold.
+        /// </summary>
+        [TestMethod]
+        public void CalculateVolatileSolids_SheepForageDiets_UseCorrectUrinaryEnergyCoefficient()
+        {
+            // Inputs representative of a typical sheep forage diet
+            var grossEnergyIntake = 100.0;
+            var percentTdn = 55.0;
+            var ash = 8.0;
+
+            // All three sheep forage diets: grain-in-diet < 85 → urinaryEnergy = 0.04
+            var resultHighForage    = _resultsService.CalculateVolatileSolids(grossEnergyIntake, percentTdn, ash, 85);
+            var resultMediumForage  = _resultsService.CalculateVolatileSolids(grossEnergyIntake, percentTdn, ash, 97);
+            var resultLowEnergyForage = _resultsService.CalculateVolatileSolids(grossEnergyIntake, percentTdn, ash, 100);
+
+            // Regression: Forage = 0 (old bug) → grain-in-diet = 100 → urinaryEnergy = 0.02 (wrong)
+            var resultBugZeroForage = _resultsService.CalculateVolatileSolids(grossEnergyIntake, percentTdn, ash, 0);
+
+            // Fixed forage levels all yield the same result (same urinary energy branch)
+            Assert.AreEqual(resultHighForage, resultMediumForage,    1e-10, "Forage 85 and 97 should produce identical volatile solids");
+            Assert.AreEqual(resultHighForage, resultLowEnergyForage, 1e-10, "Forage 85 and 100 should produce identical volatile solids");
+
+            // The bugged zero-forage result must differ from the correct fixed results
+            Assert.AreNotEqual(resultHighForage, resultBugZeroForage, "Forage=0 (bug) must produce a different volatile solid value due to the incorrect urinary energy coefficient (0.02 vs 0.04)");
+        }
+
 
         /// <summary>
         /// Equation 3.4.2-2
