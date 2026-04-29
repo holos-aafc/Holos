@@ -394,41 +394,94 @@ namespace H.Core.Calculators.Nitrogen
             }
             else
             {
+                // Broilers, layers and turkeys — Eq. 4.6.2 (Sheppard et al. 2009b, Table 6)
+                // NH3-N = EF(tillage, month) [× rain modifier if it rained the day after application] × TAN
                 var tanUsed = _manureService.GetAmountOfTanUsedDuringLandApplication(viewItem, manureApplicationViewItem);
-                var temperature = this.ClimateProvider.GetMeanTemperatureForDay(farm, manureApplicationViewItem.DateOfApplication);
-                var fractionVolatilized = this.GetFractionOfPoultryManureVolatilized(temperature);
+                var applicationDate = manureApplicationViewItem.DateOfApplication;
 
-                result = fractionVolatilized * tanUsed;
+                var baseEf = this.GetPoultryLandApplicationEmissionFactor(viewItem.TillageType, applicationDate.Month);
+
+                // If precipitation occurs within 1 day of application, multiply EF by the
+                // temperature-dependent rain modification factor (Sheppard et al. 2009b, Table 5;
+                // original source: Brentrup et al. 2000, Table 5).
+                // T is the mean daily temperature on the day rain occurs (i.e., the day after application).
+                var dayAfterApplication = applicationDate.AddDays(1);
+                var precipitationDayAfter = this.ClimateProvider.GetMeanPrecipitationForDay(farm, dayAfterApplication);
+                if (precipitationDayAfter > 0)
+                {
+                    var temperatureDayAfter = this.ClimateProvider.GetMeanTemperatureForDay(farm, dayAfterApplication);
+                    baseEf *= this.GetRainModificationFactorForPoultryManure(temperatureDayAfter);
+                }
+
+                result = baseEf * tanUsed;
             }
 
             return result;
         }
 
-        public double GetFractionOfPoultryManureVolatilized(double temperature)
+        /// <summary>
+        /// Returns the fraction of TAN emitted as NH3-N during land application of solid poultry manure
+        /// (broilers, layers, turkeys), based on tillage type and month of application.
+        /// Source: Sheppard et al. (2009b), Table 6; based on Misselbrook et al. (2005).
+        /// </summary>
+        /// <param name="tillageType">Tillage practice on the receiving field.</param>
+        /// <param name="month">Month of manure application (1 = January … 12 = December).</param>
+        /// <returns>Emission factor (kg NH3-N per kg TAN applied).</returns>
+        public double GetPoultryLandApplicationEmissionFactor(TillageType tillageType, int month)
         {
-            var result = 0d;
+            // November–March: no emissions regardless of tillage
+            if (month >= 11 || month <= 3)
+            {
+                return 0.00;
+            }
 
-            var emissionFraction = 0d;
-            if (temperature >= 15)
+            var isUntilled = tillageType == TillageType.NoTill;
+
+            if (isUntilled)
             {
-                emissionFraction = 0.85;
-            }
-            else if (temperature >= 10 && temperature < 15)
-            {
-                emissionFraction = 0.73;
-            }
-            else if (temperature >= 5 && temperature < 10)
-            {
-                emissionFraction = 0.35;
+                // Untilled (no-till): 0.69 Apr–Oct
+                return 0.69;
             }
             else
             {
-                emissionFraction = 0.25;
+                // Tilled (reduced + intensive): 0.47 Apr/Sep/Oct; 0.42 May–Aug
+                if (month == 4 || month == 9 || month == 10)
+                {
+                    return 0.47;
+                }
+                else
+                {
+                    // May–August
+                    return 0.42;
+                }
             }
+        }
 
-            result =  emissionFraction;
-
-            return result;
+        /// <summary>
+        /// Returns the temperature-dependent modification factor applied to the poultry land application
+        /// EF when rain occurs within 1 day of manure application.
+        /// Source: Sheppard et al. (2009b), Table 5; original source: Brentrup et al. (2000), Table 5.
+        /// </summary>
+        /// <param name="temperature">Mean daily air temperature (°C) on the day of rain (day after application).</param>
+        /// <returns>Dimensionless multiplier to apply to the base EF.</returns>
+        public double GetRainModificationFactorForPoultryManure(double temperature)
+        {
+            if (temperature >= 15)
+            {
+                return 0.85;
+            }
+            else if (temperature >= 10)
+            {
+                return 0.73;
+            }
+            else if (temperature >= 5)
+            {
+                return 0.35;
+            }
+            else
+            {
+                return 0.25;
+            }
         }
 
         /// <summary>
@@ -512,8 +565,7 @@ namespace H.Core.Calculators.Nitrogen
                     manureApplication = new ManureApplicationViewItem() { DateOfApplication = new DateTime(year, 10, 1) };
                 }
 
-                var averageDailyTemperature = farm.ClimateData.GetMeanTemperatureForDay(manureApplication.DateOfApplication);
-                var fractionOfPoultryManureVolatilized = this.GetFractionOfPoultryManureVolatilized(averageDailyTemperature);
+                var fractionOfPoultryManureVolatilized = this.GetPoultryLandApplicationEmissionFactor(cropViewItem.TillageType, manureApplication.DateOfApplication.Month);
                 fieldAreasAndEmissionFactors.Add(new WeightedAverageInput()
                 {
                     Value = fractionOfPoultryManureVolatilized,

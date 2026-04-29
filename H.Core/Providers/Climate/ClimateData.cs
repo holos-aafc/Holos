@@ -428,6 +428,19 @@ namespace H.Core.Providers.Climate
             }
         }
 
+        public double GetMeanPrecipitationForDay(DateTime dateTime)
+        {
+            var key = new Tuple<int, int, int>(dateTime.Year, dateTime.Date.Month, dateTime.Date.Day);
+            if (_dataByDate.ContainsKey(key))
+            {
+                return _dataByDate[key].MeanDailyPrecipitation;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         public List<double> GetTemperatureByDateRange(DateTime start, DateTime end)
         {
             var result = new List<double>();

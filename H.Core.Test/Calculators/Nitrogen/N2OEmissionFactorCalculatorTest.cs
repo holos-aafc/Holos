@@ -350,6 +350,69 @@ namespace H.Core.Test.Calculators.Nitrogen
             Assert.IsTrue(result > 0);
         }
 
+        #region Poultry land application EF (Sheppard et al. 2009b, Table 6 + Table 5)
+
+        /// <summary>
+        /// Nov–Mar: zero emissions regardless of tillage.
+        /// </summary>
+        [TestMethod]
+        [DataRow(11)] [DataRow(12)] [DataRow(1)] [DataRow(2)] [DataRow(3)]
+        public void GetPoultryLandApplicationEmissionFactor_WinterMonths_ReturnsZero(int month)
+        {
+            Assert.AreEqual(0.00, _sut.GetPoultryLandApplicationEmissionFactor(TillageType.Reduced, month));
+            Assert.AreEqual(0.00, _sut.GetPoultryLandApplicationEmissionFactor(TillageType.NoTill,  month));
+        }
+
+        /// <summary>
+        /// Tilled (reduced + intensive): Apr/Sep/Oct → 0.47
+        /// </summary>
+        [TestMethod]
+        [DataRow(4)] [DataRow(9)] [DataRow(10)]
+        public void GetPoultryLandApplicationEmissionFactor_TilledAprilSepOct_Returns047(int month)
+        {
+            Assert.AreEqual(0.47, _sut.GetPoultryLandApplicationEmissionFactor(TillageType.Reduced,   month));
+            Assert.AreEqual(0.47, _sut.GetPoultryLandApplicationEmissionFactor(TillageType.Intensive, month));
+        }
+
+        /// <summary>
+        /// Tilled (reduced + intensive): May–Aug → 0.42
+        /// </summary>
+        [TestMethod]
+        [DataRow(5)] [DataRow(6)] [DataRow(7)] [DataRow(8)]
+        public void GetPoultryLandApplicationEmissionFactor_TilledMayToAug_Returns042(int month)
+        {
+            Assert.AreEqual(0.42, _sut.GetPoultryLandApplicationEmissionFactor(TillageType.Reduced,   month));
+            Assert.AreEqual(0.42, _sut.GetPoultryLandApplicationEmissionFactor(TillageType.Intensive, month));
+        }
+
+        /// <summary>
+        /// Untilled (no-till): Apr–Oct → 0.69
+        /// </summary>
+        [TestMethod]
+        [DataRow(4)] [DataRow(5)] [DataRow(6)] [DataRow(7)] [DataRow(8)] [DataRow(9)] [DataRow(10)]
+        public void GetPoultryLandApplicationEmissionFactor_NoTillGrowingSeason_Returns069(int month)
+        {
+            Assert.AreEqual(0.69, _sut.GetPoultryLandApplicationEmissionFactor(TillageType.NoTill, month));
+        }
+
+        /// <summary>
+        /// Rain modification factor: Sheppard et al. 2009b, Table 5 / Brentrup et al. 2000, Table 5.
+        /// </summary>
+        [TestMethod]
+        public void GetRainModificationFactorForPoultryManure_ReturnsCorrectFactorForEachTemperatureBand()
+        {
+            Assert.AreEqual(0.85, _sut.GetRainModificationFactorForPoultryManure(15.0));
+            Assert.AreEqual(0.85, _sut.GetRainModificationFactorForPoultryManure(20.0));
+            Assert.AreEqual(0.73, _sut.GetRainModificationFactorForPoultryManure(10.0));
+            Assert.AreEqual(0.73, _sut.GetRainModificationFactorForPoultryManure(12.5));
+            Assert.AreEqual(0.35, _sut.GetRainModificationFactorForPoultryManure(5.0));
+            Assert.AreEqual(0.35, _sut.GetRainModificationFactorForPoultryManure(7.0));
+            Assert.AreEqual(0.25, _sut.GetRainModificationFactorForPoultryManure(4.9));
+            Assert.AreEqual(0.25, _sut.GetRainModificationFactorForPoultryManure(-10.0));
+        }
+
+        #endregion
+
         #endregion
 
         [TestMethod]
