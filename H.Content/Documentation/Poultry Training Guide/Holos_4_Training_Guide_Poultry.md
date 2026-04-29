@@ -234,7 +234,7 @@ The poultry meat production farm is **divided into three management (production)
 
 2. Click the management period “**Brooding stage**” in **Step 2** to activate that management period.
 
-3. Ensure “**January 1, 2025**” appears as the start date and “**January 15, 2025**” as the end date. These dates are set as the defaults.
+3. Ensure “**January 1, 2026**” appears as the start date and “**January 15, 2026**” as the end date. These dates are set as the defaults.
    
 4. Keep the default start and end dates for the two "**Rearing stage**" management periods. Thus, all three management periods will be 14 days in length. 
 
