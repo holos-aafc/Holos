@@ -252,7 +252,7 @@ The poultry meat production farm is **divided into three management (production)
 
 ## Entering 'Chicken Egg Production' Information
 
-Click on the "**Hens**" row in the animal group section in **Step 1**. As egg-laying occurs year round, there is only a single 358-day management period for hens that starts on **"January 1, 2025"** and ends on **"December 25, 2025"**.
+Click on the "**Hens**" row in the animal group section in **Step 1**. As egg-laying occurs year round, there is only a single 358-day management period for hens that starts on **"January 1, 2026"** and ends on **"December 25, 2026"**.
 
 * **General tab:**
 
@@ -274,7 +274,7 @@ We can enter data related to the number of animals, manure system, and housing t
 
 2. Click the management period **"Brooding stage"** in **Step 2** to activate that management period.
 
-3. Ensure **"January 1, 2025"** appears as the start date and **"January 15, 2025"** as the end date. These dates are set as the defaults.
+3. Ensure **"January 1, 2026"** appears as the start date and **"January 15, 2026"** as the end date. These dates are set as the defaults.
 
 * **General tab:**:
     * Enter **"150,000"** as the number of animals. 
@@ -285,7 +285,7 @@ We can enter data related to the number of animals, manure system, and housing t
 * **Manure tab**:
     * Leave **"Solid storage (with or without litter)"** as the default manure handling system.
 
-Highlight the **"Rearing stage"** management period and set the start date to **"January 16, 2025"** and the end date to **"May 15, 2025"**; enter the same animal number, housing and manure management information as for the **"Brooding stage"**.
+Highlight the **"Rearing stage"** management period and set the start date to **"January 16, 2026"** and the end date to **"May 15, 2026"**; enter the same animal number, housing and manure management information as for the **"Brooding stage"**.
 
 
 ### Adding a Manure Application to the Wheat Field
