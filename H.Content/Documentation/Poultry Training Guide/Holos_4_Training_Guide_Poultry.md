@@ -295,7 +295,7 @@ In Holos, the user can apply livestock manure to a field using either manure pro
 1. Select the **Wheat & Hairy Vetch** field from the list of components added to our farm.
 
 2. Click on the **Manure** tab and then click the **Add Manure Application** button.
-    * Select **"April 30, 2025"** as the date.
+    * Select **"April 30, 2026"** as the date.
     * Select **"Livestock"** as the origin of manure.
     * Select **"Poultry"** as the manure type.
     * Select **"Solid storage (with or without litter)"** as the manure handling system.
