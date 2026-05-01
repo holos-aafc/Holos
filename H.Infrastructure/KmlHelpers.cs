@@ -1,16 +1,15 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using SharpKml.Base;
+﻿using SharpKml.Base;
 using SharpKml.Dom;
 using SharpKml.Engine;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace H.Infrastructure
 {
     public class KmlHelpers
     {
-        private List<string> FileNames = new List<string>()
+        private readonly List<string> FileNames = new List<string>()
         {
             "ON_No_Styles.kml",
             "SK_No_Styles.kml",
@@ -24,15 +23,58 @@ namespace H.Infrastructure
             "BC_No_Styles.kml"
         };
 
-        public bool IsPointInPolygon(Polygon polygon, Vector point)
+        private readonly List<PolygonData> _polygons;
+
+        public KmlHelpers()
+        {
+            _polygons = FileNames
+                .AsParallel()
+                .SelectMany(filename =>
+                {
+                    var assembly = typeof(KmlHelpers).Assembly;
+                    var resourceName = $@"{assembly.GetName().Name}.Resources.{filename}";
+                    using (var stream = assembly.GetManifestResourceStream(resourceName))
+                    {
+                        if (stream != null)
+                        {
+                            using (var reader = new StreamReader(stream))
+                            {
+                                var parser = new Parser();
+                                parser.ParseString(reader.ReadToEnd(), false);
+                                Kml root = (Kml)parser.Root;
+
+                                return root
+                                    .Flatten()
+                                    .OfType<Placemark>()
+                                    .Where(p => p.Geometry is Polygon)
+                                    .Select(p =>
+                                        new PolygonData(
+                                            int.Parse(p.Name),
+                                            ((Polygon)p.Geometry).OuterBoundary.LinearRing.Coordinates.ToArray()));
+                            }
+                        }
+
+                    }
+                    return new List<PolygonData>();
+                })
+                .ToList();
+        }
+
+        public int GetPolygonFromCoordinate(double latitude, double longitude)
+        {
+            var match = _polygons
+                .AsParallel()
+                .FirstOrDefault(p => IsPointInPolygon(p.Coordinates, new Vector(latitude, longitude)));
+
+            return match != null ? match.Id : 0;
+        }
+
+        private static bool IsPointInPolygon(Vector[] coordinates, Vector point)
         {
             bool inside = false;
-            // Get the outer boundary of the polygon
-            OuterBoundary outerBoundary = polygon.OuterBoundary;
-            List<Vector> coordinates = outerBoundary.LinearRing.Coordinates.ToList();
 
-            int j = coordinates.Count - 1;
-            for (int i = 0; i < coordinates.Count; i++)
+            int j = coordinates.Length - 1;
+            for (int i = 0; i < coordinates.Length; i++)
             {
                 if (coordinates[i].Longitude < point.Longitude &&
                     coordinates[j].Longitude >= point.Longitude ||
@@ -51,43 +93,6 @@ namespace H.Infrastructure
             }
 
             return inside;
-        }
-        public int GetPolygonFromCoordinate(double latitude, double longitude)
-        {
-            var point = new Vector(latitude, longitude);
-            foreach (string name in FileNames)
-            {
-                var fileName = $@"{Assembly.GetExecutingAssembly().GetName().Name}.Resources.{name}";
-                using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(fileName))
-                {
-                    if (stream == null) return 0;
-
-                    using (var reader = new StreamReader(stream))
-                    {
-                        var parser = new Parser();
-                        parser.ParseString(reader.ReadToEnd(), false);
-                        Kml root = (Kml)parser.Root;
-
-                        bool inside = false;
-
-                        foreach (var placemark in root.Flatten().OfType<Placemark>())
-                        {
-                            if (placemark.Geometry is Polygon polygon)
-                            {
-                                inside = IsPointInPolygon(polygon, point);
-                            }
-
-                            if (inside)
-                            {
-                                return int.Parse(placemark.Name);
-                            }
-                        }
-                    }
-                }
-
-            }
-
-            return 0;
         }
     }
 }
