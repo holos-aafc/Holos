@@ -213,11 +213,11 @@ In this component file, we can see that we have columns that represent what woul
 <em>Heifer group row, Figure1-11</em>
 </p>
 
-Next we will locate the column that represents the number of animals for each group.
+Next we will locate the column that represents the number of animals for each group. This is column **I** ("Number of animals") in the beef input file.
 
-This is where we will make our edit to change the number of animals from 50 heifers to 100. 
+This is where we will make our edit to change the number of animals from 50 heifers to 100.
 
-1. Edit the number of animals.
+1. In column **I**, find the row for the heifers group and change the value from 50 to 100.
 
 Once we make the change, we save and then close the CLI file. It is important to make sure all input files are closed before running the CLI.
 
