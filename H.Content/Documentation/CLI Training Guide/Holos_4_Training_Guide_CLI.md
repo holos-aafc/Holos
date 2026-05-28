@@ -105,7 +105,18 @@ Once the CLI has completed the calculations it will ask "**Would you like to run
 
 ## Output Files
 
-For our field component results, the CLI will create an Excel output file in the “**Outputs/Farm_Name_Results/Fields**” folder. If we look at this file, we can see that it is the exact same output file that we get if we export our field results from the GUI. We have columns for SOC, N2O emissions, etc.
+For our field component results, the CLI will create an Excel output file in the “**Outputs/Farm_Name_Results/Fields**” folder. If we look at this file, we can see that it is the exact same output file that we get if we export our field results from the GUI. The file contains many columns; the ones most commonly referenced during the training are listed below. (Note: the file's first row is a "sep =," hint for Excel, the second row contains the column headers, and the data starts on the third row — but the Excel column letters below are fixed regardless of row numbering.)
+
+| Excel column | Heading | Units |
+| --- | --- | --- |
+| G | Yield | kg ha⁻¹ (wet wt) |
+| Y | Plant carbon in product (C_p) | kg C ha⁻¹ |
+| AE | **Soil carbon (SOC)** | kg C ha⁻¹ |
+| AK | Change in soil carbon | kg C ha⁻¹ |
+| AL | Above-ground carbon input | kg C ha⁻¹ |
+| AP | Total carbon input | kg C ha⁻¹ |
+| DP | **Total direct N2O** | kg N2O ha⁻¹ |
+| DW | **Total indirect N2O** | kg N2O ha⁻¹ |
 
 <p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-5.png" alt="Figure 1-5" width="750"/>
