@@ -92,7 +92,11 @@ namespace H.Core.Calculators.Carbon
                 // Amount lost during feeding
                 var loss = farm.Defaults.DefaultSupplementalFeedingLossPercentage / 100;
 
-                var localResult = (totalCarbon / loss) * (1 - loss);
+                // Eaten portion of the supplemental hay (the part the animals consumed). This is the
+                // simplified form of Eq. 11.3.2-2 (b) after substituting the definition of C_supphay
+                // from Eq. 2.1.2-34: C_supphay = bale_dry x loss x C_conc, so
+                //   C_supphay / loss x (1 - loss) = bale_dry x C_conc x (1 - loss) = totalCarbon x (1 - loss).
+                var localResult = totalCarbon * (1 - loss);
 
                 result += localResult;
             }

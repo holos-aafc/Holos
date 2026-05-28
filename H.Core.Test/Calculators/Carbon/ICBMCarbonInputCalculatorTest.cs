@@ -521,6 +521,51 @@ namespace H.Core.Test.Calculators.Carbon
             Assert.AreEqual(396, result);
         }
 
+        [TestMethod]
+        public void GetSupplementalLossesReturnsEatenPortionOfBales()
+        {
+            // Equation 11.3.2-2 (b): the subtraction term that removes the "eaten" portion of
+            // supplemental hay from total grazing carbon losses. Pins the regression that previously
+            // over-subtracted this value by a factor of 1/Loss_feeding (~5x at the 20% default),
+            // which under-counted grazing carbon losses for any field configured with both grazing
+            // animals and supplemental hay. Complementary to the test above, which pins the
+            // "wasted" portion that returns to soil (396 kg C); the two together cover the full
+            // bale carbon (1980 kg C at these inputs).
+            var farm = new Farm()
+            {
+                Defaults = new Defaults()
+                {
+                    DefaultSupplementalFeedingLossPercentage = 20,
+                },
+            };
+
+            var currentYearViewItem = new CropViewItem()
+            {
+                CarbonConcentration = 0.45,
+
+                HayImportViewItems = new ObservableCollection<HayImportViewItem>()
+                {
+                    new HayImportViewItem()
+                    {
+                        NumberOfBales = 10,
+                        BaleWeight = 500,
+                        MoistureContentAsPercentage = 12,
+                    }
+                }
+            };
+
+            var result = _sut.GetSupplementalLosses(
+                previousYearViewItem: null,
+                currentYearViewItem: currentYearViewItem,
+                nextYearViewItems: null,
+                farm: farm);
+
+            // bale_dry      = 10 * 500 * (1 - 12/100) = 4400 kg
+            // total_bale_C  = 4400 * 0.45             = 1980 kg C
+            // eaten portion = total_bale_C * (1 - 20/100) = 1980 * 0.8 = 1584 kg C
+            Assert.AreEqual(1584, result);
+        }
+
         /// <summary>
         /// Equation 2.2.5-3
         /// </summary>

@@ -32,7 +32,7 @@ namespace H.Core.Test.Providers.Animals
         [TestMethod]
         public void GetByLandApplicationType()
         {
-            var result = _provider.GetAmmoniaEmissionFactorForSolidAppliedManure(TillageType.Intensive);
+            var result = _provider.GetAmmoniaEmissionFactorForLandAppliedManure(ManureApplicationTypes.TilledLandSolidSpread);
             Assert.AreEqual(0.69, result);
         }
     }

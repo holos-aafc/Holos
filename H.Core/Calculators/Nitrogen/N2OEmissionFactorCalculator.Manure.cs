@@ -1631,12 +1631,9 @@ return            this.LivestockEmissionConversionFactorsProvider.GetVolatilizat
             CropViewItem cropViewItem,
             ManureApplicationViewItem manureApplicationViewItem)
         {
-            var tillageType = cropViewItem.TillageType;
-            var manureStateType = manureApplicationViewItem.ManureStateType;
             var manureApplicationMethod = manureApplicationViewItem.ManureApplicationMethod;
 
-            
-            return !manureStateType.IsLiquidManure() ? this.AnimalAmmoniaEmissionFactorProvider.GetAmmoniaEmissionFactorForSolidAppliedManure(tillageType) : this.AnimalAmmoniaEmissionFactorProvider.GetAmmoniaEmissionFactorForLiquidAppliedManure(manureApplicationMethod);
+            return this.AnimalAmmoniaEmissionFactorProvider.GetAmmoniaEmissionFactorForLandAppliedManure(manureApplicationMethod);
         }
 
         private IEmissionData GetLandApplicationFactors(

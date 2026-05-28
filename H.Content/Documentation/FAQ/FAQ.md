@@ -201,15 +201,24 @@ When the model user 'places' grazing animals on a perennial field (i.e., rangela
 >*Please note: if the user chooses to override the Holos-estimated default yield values for grazed pastures by specifying a custom yield value on the Details screen, this custom yield should represent the total aboveground biomass produced.*
 
 
-### 3. How can I graze animals on harvested annual croplands (stubble grazing) in Holos?
+### 3. If I'm feeding supplemental hay (bales) to animals that are also grazing the same field, does the Utilization rate apply to the bales?
+No. The Utilization rate and the supplemental hay loss percentage are two independent settings that govern two separate carbon pathways, and Holos reconciles them automatically — there is no double-counting and the Utilization rate does not need to be adjusted to compensate for the bales.
+
+- **The standing forage being grazed** is governed by the **Utilization rate** on the field's Grazing tab. This determines how much of the growing forage the animals consume; the rest is trampled, soiled, or left behind on the field.
+- **The supplemental hay (bales)** is governed by a separate setting called the **Supplemental feeding loss** percentage (default 20%). This accounts for the portion of bales that is dropped or wasted on the field during feeding; the remainder is the amount the animals actually eat from the bales. The default can be changed under **Settings > User settings**, in the **Supplemental feeding loss** field — the value you enter applies to all supplemental hay configured on the farm.
+
+For the common scenario where animals are housed on a pasture and are both grazing the field and being fed supplemental hay harvested from the same field, configure the field's Grazing tab and the supplemental hay entry as in real life. Holos will track the two contributions independently: the field's plant carbon in product (Cp) reflects only the carbon the animals actually grazed from the standing forage, with the bales' contribution accounted for separately.
+
+
+### 4. How can I graze animals on harvested annual croplands (stubble grazing) in Holos?
 To graze animals on crop stubble, you should create the field as normal, specifying the field history and management practices under Steps 1-3 on the Component Selection screen, making sure to select 'Cash crop' as the Harvest method under Step 3. Grazing animals should be 'placed' on this field in the appropriate livestock components. Note: typically for annual croplands, the 'Straw returned to soil' value on the Residue tab is set to 100%, but when stubble grazing takes place, this value needs to be adjusted to reflect the proportion of this straw/residue that is removed by grazing animals, e.g., if the animals consume 60% of the stubble, then the 'Straw returned to soil' should be set to 40%. Holos accounts for manure C and N deposited on the field by the animals during the grazing period. Note: as these fields are harvested in a conventional manner using the 'Cash crop' Harvest method, the Yield (kg product/grain per ha) is estimated based on either user input or default Small Area Data yields, rather than based on animal forage intake (as is the case with grazed perennial or stubble/swath grazed fields, where livestock feed on the total aboveground biomass (i.e., product/grain + straw).
 
 
-### 4. How can I swath graze a field or graze animals on standing vegetation in an annual cropfield in Holos?
+### 5. How can I swath graze a field or graze animals on standing vegetation in an annual cropfield in Holos?
 To graze animals on swathed or standing vegetation, you should create the field as normal, specifying the field history and management practices under Steps 1-3 on the Component Selection screen, making sure to select 'Swathing' as the Harvest method under Step 3 (even if the vegetation is not actually swathed, it still remains in the field). Note: when you select 'Swathing' as the Harvest method, the Yield value should represent the total aboveground biomass (i.e., product + straw/residue).  'Product returned to soil' and 'Straw returned to soil' values on the Residue tab should be altered as needed, to reflect the amount of aboveground biomass that remains in the field after the animals have finished grazing, i.e., if the model user estimates that the grazing animals would consume 60% of the swathed forage, then the 'Product returned to soil' and 'Straw returned to soil' values can be set to 40% - the C in this biomass will be added to the soil C pool. Swath grazing animals should be 'placed' on this field in the appropriate livestock components. Holos accounts for manure C and N deposited on the field by the animals during the grazing period.
 
 
-### 5. I want to compare livestock management options, how can I do that in Holos?
+### 6. I want to compare livestock management options, how can I do that in Holos?
 There are three options to do this:
 - Set up two different farms
 - Set up two livestock components within a single farm
@@ -218,12 +227,12 @@ Each of these allows the model user to compare model outputs for the different m
 >*Please note: if the model user sets up two (or more) different farms, they can compare the model outputs for these farms by selecting ‘Yes’ for ‘Compare Multiple Farms’ on the Results screen and selecting the farms they wish to compare from the list available.*
 
 
-### 6. I want to know what the carbon footprint of my livestock system is, what do I need to do?
+### 7. I want to know what the carbon footprint of my livestock system is, what do I need to do?
 The Holos model is set up to calculate a farm’s greenhouse gas (GHG) budget, meaning it accounts for all farm-based sources of GHG that we can estimate based on available information and data . To calculate the carbon footprint of a product, we need to account for all emissions generated as a result of the production of this product. For a livestock system, that means accounting for the feed production, whether that feed is grown on the actual farm or not. Before adding feed-producing fields to the simulated farm, the user must first calculate the area of each pasture or crop field required to sustain the animals on the farm – Holos will generate a warning message if not enough feed is being “grown” to satisfy animal requirements, as an internal check. Emissions generated as a result of inputs to the feed production system (e.g., fertilizer and pesticide production) are also accounted for. In Holos, upstream emissions for these farm inputs are also reported, i.e., CO2 generated from the upstream production of synthetic For the livestock system itself, emissions related to the breeding stock must be included in the calculations, as well as those relating to their progeny. Holos then outputs all of the emissions for this system up until the farm gate – any emissions related to transport, processing, etc. will need to be estimated by the user outside of Holos and added to the Holos outputs, if so desired.
 >*Please note: it is up to the user to allocate the emissions according to the product, e.g., in a beef production system the outputs could easily be broken down to CO2eq per animal carcass, but for a CO2eq per kg meat it needs to be decided whether all emissions are assigned to the meat part of the carcass, or whether a portion of the emissions are allocated to the different parts of the carcass (Consulting an LCA expert is advised.)*
 
 
-### 7. I want to add an ingredient to my custom diet that is not in the ingredient list, how can I do this?
+### 8. I want to add an ingredient to my custom diet that is not in the ingredient list, how can I do this?
 Using the Custom Diet Creator, the model user can create new feed ingredients, that can then be added to a custom diet. Open the Custom Diet Creator on the Diet tab and under Step 2, click on ‘Create Custom Ingredient’. A new row should appear at the top of the ingredient list – you can click on the ingredient name to change it. To define this ingredient, you will need to enter the relevant data in the rest of the row. 
 >*Please note: not all data columns in this table are necessary for the Holos calculations and the data required vary depending on the animal group under consideration.* 
 
@@ -234,20 +243,20 @@ At a minimum, the following data are required for different animal groups :
 Once you are finished, click ‘OK’ and your changes will be saved automatically.
 
 
-### 8. Where can I see the full details of the default diets built into Holos?
+### 9. Where can I see the full details of the default diets built into Holos?
 Some of the data for the selected diet is visible when you select ‘Show Additional Information’ on the Diet tab, however you can see the full details for this diet if you open the Custom Diet Creator. Once open, select ‘Yes’ for ‘Show Default Diets’ under Step 1 – you will now see data related to the nutritional content of each default diet available for the relevant livestock type in this section, as well as data related to the percentage of the total dietary DM that is composed of the different diet ingredients (under Step 3). 
 
 
-### 9. How can I modify one of the default diets in Holos or create a new diet based on a default diet?
+### 10. How can I modify one of the default diets in Holos or create a new diet based on a default diet?
 To modify one of the default diets in Holos for a specific animal group and management period, make a copy of the default diet and then alter the data inputs for the copy. To make a copy of a default diet, open the Custom Diet Creator and under Step 1, click ‘Yes’ for ‘Show Default Diets’. In the list of default diets below, right-click on the diet of interest and click ‘Create a Copy’. You can change the name of the copy diet, if needed. Under Step 3, you can alter the % of the different ingredients in the diet or delete specific ingredients, and under Step 2 you can add ingredients. Once you have finished modifying the diet, click ‘OK’ to return to the main Diet tab and select the copied diet from the drop-down Diet menu. 
 >*Please note: if the user selects the same diet (either the original default diet or a copy) for more than one management period, any changes made to the diet in one management period will automatically be replicated for any other management periods using the same diet. Therefore, if the user needs to make different modifications to an existing diet for multiple animal groups/management periods, it is recommended that a copy be created for each management period, and then modified accordingly. Alternatively, the user can create an entirely new diet for each management period using the Custom Diet Creator.*
 
 
-### 10. How can I model dairy cattle that spend part of the day on pasture and the rest of the day in the barn?
+### 11. How can I model dairy cattle that spend part of the day on pasture and the rest of the day in the barn?
 To model dairy cattle that divide their day between different housing systems, the model user can split the number of cattle in the relevant dairy cattle group(s) to create different groups that are housed in different housing systems, with the number of animals in each group representative of the proportion of time spend in each housing type. For example, if a group of 120 lactating dairy cows spends 8 hours on pasture and 16 hours in the barn in a typical day, this group could be split into two separate groups of 40 cows that spend all of their time on pasture (with the relevant diet, housing type and manure management system) and 80 cows that spend all of their time in the barn (with the relevant diet, housing type and manure management system). The model user can adjust the number of animals, diet, housing and manure management settings, etc., as appropriate to reflect where and for how long the cows spend their time, eat, urinate/defecate, etc.
 
 
-### 11. How are the manure management options in the Holos interface defined?
+### 12. How are the manure management options in the Holos interface defined?
 On the 'Manure' tab for a livestock component or animal type, the 'Manure handling system' options are defined as follows:
 
 - Pasture/range/paddock: the manure from pasture and range grazing animals is allowed to lie as deposited, and is not managed.

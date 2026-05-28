@@ -98,20 +98,18 @@ namespace H.Core.Providers.Animals
             }
         }
 
-        public double GetEmissionFactorForLandAppliedManure(ManureApplicationViewItem manureApplicationViewItem, CropViewItem viewItem)
+        public double GetEmissionFactorForLandAppliedManure(ManureApplicationViewItem manureApplicationViewItem)
         {
-            if (manureApplicationViewItem.ManureStateType.IsLiquidManure())
-            {
-                return this.GetAmmoniaEmissionFactorForLiquidAppliedManure(manureApplicationViewItem.ManureApplicationMethod);
-            }
-            else
-            {
-                return this.GetAmmoniaEmissionFactorForSolidAppliedManure(viewItem.TillageType);
-            }
+            return this.GetAmmoniaEmissionFactorForLandAppliedManure(manureApplicationViewItem.ManureApplicationMethod);
         }
 
-        public double GetAmmoniaEmissionFactorForLiquidAppliedManure(ManureApplicationTypes manureApplicationType)
+        public double GetAmmoniaEmissionFactorForLandAppliedManure(ManureApplicationTypes manureApplicationType)
         {
+            // For solid manure, the tillage signal comes from the user's tillage-qualified choice on the
+            // manure application tab (TilledLandSolidSpread vs UntilledLandSolidSpread) - NOT from the
+            // field's General-tab tillage type. Do not reintroduce a lookup keyed on the field's tillage
+            // here; that bug silently overrode the user's explicit application-tab selection.
+            //
             // Footnote 2: Read for data reference information.
             switch (manureApplicationType)
             {
@@ -129,26 +127,8 @@ namespace H.Core.Providers.Animals
                     return 0.02;
 
                 default:
-                    Trace.TraceError($"{nameof(Table_43_Beef_Dairy_Default_Emission_Factors_Provider)}.{nameof(Table_43_Beef_Dairy_Default_Emission_Factors_Provider.GetAmmoniaEmissionFactorForLiquidAppliedManure)}" +
+                    Trace.TraceError($"{nameof(Table_43_Beef_Dairy_Default_Emission_Factors_Provider)}.{nameof(Table_43_Beef_Dairy_Default_Emission_Factors_Provider.GetAmmoniaEmissionFactorForLandAppliedManure)}" +
                                      $" unable to get data for spreading method: {manureApplicationType.GetDescription()}.");
-                    return 0;
-            }
-        }
-
-        public double GetAmmoniaEmissionFactorForSolidAppliedManure(TillageType tillageType)
-        {
-            switch (tillageType)
-            {
-                case TillageType.Intensive:
-                case TillageType.Reduced:
-                    return 0.69;
-               
-                case TillageType.NoTill:
-                    return 0.79;
-
-                default:
-                    Trace.TraceError($"{nameof(Table_43_Beef_Dairy_Default_Emission_Factors_Provider)}.{nameof(Table_43_Beef_Dairy_Default_Emission_Factors_Provider.GetAmmoniaEmissionFactorForSolidAppliedManure)}" +
-                        $" unable to get data for land application type: {tillageType}.");
                     return 0;
             }
         }

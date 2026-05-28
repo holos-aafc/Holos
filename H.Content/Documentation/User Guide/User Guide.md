@@ -623,8 +623,10 @@ In the farm details section, the farm details categories are:
 
 The default data for this screen is based on information found in the algorithm document which can be read here.
 1.	Click on the “User Settings” icon
-2.	Here, you will be able to set certain user default settings such as: Carbon concentration (kg kg^-1), Emergence day or Soil Top Thickness (mm). 
+2.	Here, you will be able to set certain user default settings such as: Carbon concentration (kg kg^-1), Emergence day, Soil Top Thickness (mm), or Supplemental feeding loss (%).
 3.	Click “OK” to save the changes to your User Settings
+
+> *Note: the **Supplemental feeding loss (%)** setting (default 20%) controls the portion of supplemental hay (bales) fed to grazing animals on pasture that is treated as wasted and returned to soil as residue. This single value applies farm-wide to all supplemental hay configured on the farm.*
 
 <br>
 <p align="center">

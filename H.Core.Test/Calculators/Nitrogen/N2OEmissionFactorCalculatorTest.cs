@@ -91,8 +91,7 @@ namespace H.Core.Test.Calculators.Nitrogen
             _mockEmissionDataProvider.Setup(x => x.GetVolatilizationFractionForLandApplication(It.IsAny<AnimalType>(), It.IsAny<Province>(), It.IsAny<int>())).Returns(0.1);
             _mockEmissionDataProvider.Setup(x => x.GetEmissionFactorForVolatilizationBasedOnClimate(It.IsAny<double>(), It.IsAny<double>())).Returns(0.2);
 
-            _mockAnimalAmmoniaEmissionFactorProvider.Setup(x => x.GetAmmoniaEmissionFactorForSolidAppliedManure(It.IsAny<TillageType>())).Returns(1);
-            _mockAnimalAmmoniaEmissionFactorProvider.Setup(x => x.GetAmmoniaEmissionFactorForLiquidAppliedManure(It.IsAny<ManureApplicationTypes>())).Returns(1);
+            _mockAnimalAmmoniaEmissionFactorProvider.Setup(x => x.GetAmmoniaEmissionFactorForLandAppliedManure(It.IsAny<ManureApplicationTypes>())).Returns(1);
 
             _viewItem = base.GetTestCropViewItem();
             _viewItem.CropType = CropType.Wheat;
