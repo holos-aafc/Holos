@@ -99,9 +99,9 @@ Finally, the CLI will ask which units of measurement will be used.
 
 After all the necessary information required has been collected from the user, the CLI will begin the simulation. The CLI will first read all necessary tables needed to calculate results, so the first few seconds will be dedicated to reading these data and initializing the climate data for the farm.
 
-Once the CLI has completed the calculations it will inform the user that they can press the "**Enter**" key to close the CLI.
+Once the CLI has completed the calculations it will ask "**Would you like to run another scenario? (Y/N)**". This lets you run a new scenario without having to close and reopen the CLI.
 
-5. Press "**Enter**" to close the CLI.
+5. For this single-farm demonstration, type "**N**" (or just press "**Enter**") to close the CLI. If you wanted to start another scenario right away, you would type "**Y**" and the CLI would clear the screen and prompt you for the input folder of the next scenario.
 
 ## Output Files
 
@@ -211,7 +211,9 @@ Once we make the change, we save and then close the CLI file. It is important to
 
 Now that we have created our second farm and changed our settings, we will run the CLI again. Before starting the CLI, ensure all input files are closed.
 
-1. Start the CLI for our second scenario by double-clicking the CLI desktop icon.
+1. Start the CLI for our second scenario. There are two ways to do this:
+    * If you closed the CLI after the first scenario, double-click the CLI desktop icon to launch it again.
+    * If you kept the CLI open from the first scenario, type "**Y**" at the "Would you like to run another scenario? (Y/N)" prompt — the CLI will clear the screen and ask for the input folder of this next scenario.
 2. Enter the information asked for by the CLI and ensure that we use the **new** folder directory we created for the second scenario.
 
 *Note that we are entering the path of the directory containing our two farm folders - we don't enter the directory of the individual farm folders but the directory containing these two folders. We also indicate that we do not want to import farms from the GUI for this second scenario since we already have our two farm folders with the component input files.*
