@@ -6,7 +6,7 @@ An alternative to the Holos Graphical User Interface (GUI), is the Command Line 
 
 The CLI was meant to make it easier to run multiple farming scenarios in a single batch without the need to build each individual farm in the GUI. Building many farms in the GUI can be time consuming when many scenarios must be considered.
 
-The features and functionality available in the CLI is similar but not exactly the same to what is available in the GUI. Generally speaking, the GUI has more flexibility when modelling complicated farming scenarios. This is one of the tradeoffs when using the CLI, the speed of setting up multiple farms in the CLI is at the cost of losing some features and functionality that are only found in the GUI.
+The features and functionality available in the CLI are similar to what is available in the GUI, but not exactly the same. Generally speaking, the GUI has more flexibility when modelling complicated farming scenarios. This is one of the tradeoffs when using the CLI: the speed of setting up multiple farms in the CLI comes at the cost of losing some features and functionality that are only found in the GUI.
 
 For example, it is currently not possible to add an Anaerobic Digestion component to your farm when using the CLI. The Anaerobic Digestion component is only available when using the GUI.
 
@@ -14,7 +14,7 @@ For example, it is currently not possible to add an Anaerobic Digestion componen
 
 The first step in using the Holos CLI is to download the installation package.
 
-The CLI can be downloaded from the <a href="https://github.com/holos-aafc/Holos" target="_blank">Holos GitHub page</a> under the "**Download**" section. Alternatively you can use this  <a href="https://agriculture.canada.ca/holos/cli/setup.exe" target="_blank">direct download link for the Holos CLI</a>
+The CLI can be downloaded from the <a href="https://github.com/holos-aafc/Holos" target="_blank">Holos GitHub page</a> under the "**Download**" section. Alternatively you can use this <a href="https://agriculture.canada.ca/holos/cli/setup.exe" target="_blank">direct download link for the Holos CLI</a>.
 
 The installation package will install the CLI on your computer. As with the GUI, the CLI is only supported on Microsoft Windows PCs. Similar to the GUI, the CLI will automatically update itself when there are new features or bug fixes.
 
@@ -24,7 +24,7 @@ The core algorithms used in the Holos CLI are the same as those used in the GUI 
 
 Basic requirements such as the farm’s location, number of animals, fertilizer application rates are a few examples of the types of input that will need to be entered when running the CLI.
 
-The fundamental difference between the GUI and CLI is that the user **must create a collection of Excel Comma Separated Files (CSVs) where each file will represents the required input data**. Each one of these files will represent a single component that would normally be added to the farm using the drag & drop interface in the GUI.
+The fundamental difference between the GUI and CLI is that the user **must create a collection of Excel Comma Separated Files (CSVs) where each file will represent the required input data**. Each one of these files will represent a single component that would normally be added to the farm using the drag & drop interface in the GUI.
 
 When adding component data into the CLI, all field and animal management inputs must be specified by the user through the use of these CSV files. As mentioned in the <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/User%20Guide/User%20Guide.md#chapter-10---command-line-interface" target="_blank">Holos CLI user guide</a>, the files must have the expected headings and a certain layout of columns and rows. More information on how to format these files can be found in the user guide.
 
@@ -51,7 +51,7 @@ We begin by opening up the Holos GUI and creating a new farm.
 
 6. Next we will navigate to the results screen so that Holos can generate the export file (in .JSON format) we will need in the next steps. It is important to always navigate to the final results screen when exporting farm files. The farm files will be empty unless the user has navigated to the final results screen before exporting their data.
 
-7. Finally, we will export our farm file to a location on our computer. Go to the "**File->Export Farm(s)**" to select and then export your farm. Note the name of the file and the location you have saved the file. On my machine. To find the full path to a file, you can right-click on the file and get the location. For this demonstration we will use the location of "**C:\CLI\Scenario 1**".
+7. Finally, we will export our farm file to a location on our computer. Go to the "**File->Export Farm(s)**" to select and then export your farm. Note the name of the file and the location you have saved the file. To find the full path to a file, you can right-click on the file and get the location. For this demonstration we will use the location of "**C:\CLI\Scenario 1**".
 
 <p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-1.png" alt="Figure 1-1"/>
@@ -59,16 +59,17 @@ We begin by opening up the Holos GUI and creating a new farm.
 <em>Scenario 1 folder location, Figure 1-1</em>
 </p>
 
-### Running a Single Farm Though the CLI
+### Running a Single Farm Through the CLI
 
 One of the first steps in running the CLI is to tell Holos where your farm files are located on your computer. The full path to these files is required when starting the CLI. This directory will also be where Holos outputs your final result files.
 
 1. Start by double clicking the HOLOS CLI desktop icon to begin the application.
 
-<p align="Center">
+<p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-2.png" alt="Figure 1-2"/>
 <br>
 <em>Open the Holos CLI, Figure1-2</em>
+</p>
 
 The first question the CLI will ask is for the location of the CLI input files. The user must enter the full path to the directory/folder including the drive letter. You can copy the path to your input folder/directory displayed in Windows Explorer and paste it into the CLI window.
 
@@ -78,7 +79,7 @@ The first question the CLI will ask is for the location of the CLI input files. 
 
 The CLI will then ask if you would like to import farm files from the GUI. This allows for the user to export any farms from the GUI and then import them as a CLI input files. The user can then use a GUI farm file as a starting point instead of having to manually create the component input files. 
 
-3. Type **"Yes"** and then the press the "**Enter**" key so that the CLI will use our exported farm file as an input. The next question will be if your exported farm files are in the same directory, type "**Yes**" then press "**Enter**"
+3. Type **"Yes"** and then press the "**Enter**" key so that the CLI will use our exported farm file as an input. The next question will be if your exported farm files are in the same directory, type "**Yes**" then press "**Enter**"
 
 <p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-3.png" alt="Figure 1-3"/>
@@ -96,7 +97,7 @@ Finally, the CLI will ask which units of measurement will be used.
 <em>Entering units of measurement, Figure1-4</em>
 </p>
 
-After all the necessary information required has been collected from the user, the CLI will begin the simulation. The CLI will first read all necessary tables needed to calculate results so the first few seconds will be dedicated to the reading of these data and also downloading the NASA climate data.
+After all the necessary information required has been collected from the user, the CLI will begin the simulation. The CLI will first read all necessary tables needed to calculate results, so the first few seconds will be dedicated to reading these data and initializing the climate data for the farm.
 
 Once the CLI has completed the calculations it will inform the user that they can press the "**Enter**" key to close the CLI.
 
@@ -112,7 +113,7 @@ For our field component results, the CLI will create an Excel output file in the
 <em>Open field results file, Figure1-5</em>
 </p>
 
-For our animal results, there will be an output file placed in the “**Outputs/FarmName_Results**”. There will be a file named “**Farm_Name_CO2EEmissions_Farm-en-CA**” which is equivalent to the “Detailed Emissions Report” available in the GUI. By default, the results will be shown in Mg CO2e which is different from the GUI report which defaults to reporting emissions in kg CO2e.
+For our animal results, there will be an output file placed in the “**Outputs/FarmName_Results**”. There will be a file named “**Farm_Name_CO2EEmissions_Farm-en-CA**” which is equivalent to the “Detailed Emissions Report” available in the GUI. The CO2EEmissions file shows results in Mg CO2e by default; a parallel GHGEmissions file with the same data in kg is also produced. This is different from the GUI report, which defaults to reporting emissions in kg CO2e.
 <p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-6.png" alt="Figure 1-6" width="750"/>
 <br>
@@ -123,7 +124,7 @@ For our animal results, there will be an output file placed in the “**Outputs/
 
 Before continuing, it is important to understand what has been done for us when we told the CLI that we had farm files to import from the GUI. When creating input files for the Holos CLI, the user can take two different approaches. The first approach is the one we have taken in this scenario. Previously, we exported a farm file from the Holos GUI (a file which has the .JSON file extension) and we then informed the Holos CLI to use that file as the basis for running the scenario. The other approach is to not use the GUI at all and instead create a set of input files. Either approach can be used.
 
-Lets first look at the set of input files the CLI has created for us based on the exported farm file we used previously.
+Let's first look at the set of input files the CLI has created for us based on the exported farm file we used previously.
 
 
 1. Locate the folder (e.g. "**My CLI template for export**") where we originally saved our exported farm file.
@@ -132,7 +133,7 @@ Lets first look at the set of input files the CLI has created for us based on th
 4. View the animal component file "**Beef Stockers & Backgrounders**" which was generated by the CLI. This file will be in the "**Beef**" folder. Verify that we have two rows - one for each animal management period. Verify that the start weight is "**250 kg**" for our group of steers. Close the file.
 5. Note that these are the input files and folders we would have had to make ourselves (by using Excel) if we had not exported a farm from the GUI.
 
-# Running 2 or More Farms
+## Running 2 or More Farms
 
 Now that we have demonstrated a single farm scenario and understand how to create CLI input files for our farm components, we can look at how to run 2 or more farms.
 
@@ -156,7 +157,7 @@ In this second demonstration, we will keep most settings between the two farms t
 <em>Second scenario folder location with copied farm folder, Figure1-7b</em>
 </p>
 
-2. To create our second farm, right click on "**My CLI template for export**" folder to select copy and then paste the content in the same location so that we two folders. Rename the second farm folder to "**Farm 2**".
+2. To create our second farm, right click on "**My CLI template for export**" folder to select copy and then paste the content in the same location so that we have two folders. Rename the second farm folder to "**Farm 2**".
 
 <p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-7c.png" alt="Figure 1-7c"/>
@@ -164,7 +165,7 @@ In this second demonstration, we will keep most settings between the two farms t
 <em>Second scenario folder location with two farm folders, Figure1-7c</em>
 </p>
 
-Now we have created a carbon copy of our first farm we can modify the second farm’s settings so that it has a different location. To change the farm’s location, we need to modify the settings file found in the second farm folder. This settings file will have the name "**Farm**" and a file extension of .SETTINGS. You can use any text file editor when editing this .SETTINGS file (i.e. Notepad)
+Now that we have created a carbon copy of our first farm, we can modify the second farm’s settings so that it has a different location. To change the farm’s location, we need to modify the settings file found in the second farm folder. This settings file will have the name "**Farm**" and a file extension of .SETTINGS. You can use any text file editor when editing this .SETTINGS file (i.e. Notepad).
 
 <p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-8.png" alt="Figure 1-8" width="750"/>
@@ -192,7 +193,7 @@ Our next change will be to edit the number of animals in our beef stockers and b
 
 Once we have the beef cattle file opened, we can see all the columns and rows that represent our management periods for our animal groups.
 
-In this component file, we can see that we have columns that represent what would normally be displayed and modified in the GUI. For example, we can see one row that represents a group of beef backgrounding heifers
+In this component file, we can see that we have columns that represent what would normally be displayed and modified in the GUI. For example, we can see one row that represents a group of beef backgrounding heifers.
 
 <p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-11.png" alt="Figure 1-11" width="750"/>
@@ -211,13 +212,13 @@ Once we make the change, we save and then close the CLI file. It is important to
 Now that we have created our second farm and changed our settings, we will run the CLI again. Before starting the CLI, ensure all input files are closed.
 
 1. Start the CLI for our second scenario by double-clicking the CLI desktop icon.
-2. Enter the information asked for by the CLI ensure that we use the **new** folder directory we created for the second scenario.
+2. Enter the information asked for by the CLI and ensure that we use the **new** folder directory we created for the second scenario.
 
 *Note that we are entering the path of the directory containing our two farm folders - we don't enter the directory of the individual farm folders but the directory containing these two folders. We also indicate that we do not want to import farms from the GUI for this second scenario since we already have our two farm folders with the component input files.*
 
 Now we are finished with our second run.
 
-When you have two or more farms that you run through the CLI, there will be a combined output file that summarizes the results from all the animal emissions from all farms in the scenario. This combined file will be created in a folder called TotalResultsForAllFarms.
+When you have two or more farms that you run through the CLI, there will be several combined output files that summarize the GHG emissions (in both Mg and kg), production estimates, feed estimates, and per-field ICBM carbon results across all farms in the scenario. These combined files will be created in a folder called TotalResultsForAllFarms.
 
 <p align="center">
 <img src="../../Images/CliTrainingGuide/figure1-12.png" alt="Figure 1-12" width="750"/>
@@ -227,7 +228,7 @@ When you have two or more farms that you run through the CLI, there will be a co
 
 **End of Training**
 
-# Questions and Answers
+## Questions and Answers
 
 **What scenarios should I use the CLI for?**
 
@@ -241,11 +242,11 @@ For example, one variable that could be easily iterated over would be the TDN va
 
 **What scenarios should I use the GUI for?**
 
-If you are only interested in simulating a small number of farms, the GUI should be used. This is because the learning curve to use the GUI is much smaller than the CLI. Also, there are components that are only available in the GUI (i.e. Anaerobic Digestion)
+If you are only interested in simulating a small number of farms, the GUI should be used. This is because the learning curve to use the GUI is much smaller than the CLI. Also, there are components that are only available in the GUI (i.e. Anaerobic Digestion).
 
 **What are the Limitations of Using the CLI?**
 
-Although the CLI can run scenarios a lot faster than the GUI, the user still needs to create the input files representing the farm components. If there are many farms with many different components, the process of creating these input files can be time consuming as well. One approach to help build these input files is to simply copy and paste entire farm folders essentially making a carbon copy of one farm which can then be adjusted to differ from the original farm in some way. There is also an option to automate the creation of the CLI input files using a scripting languages such as Python.
+Although the CLI can run scenarios a lot faster than the GUI, the user still needs to create the input files representing the farm components. If there are many farms with many different components, the process of creating these input files can be time consuming as well. One approach to help build these input files is to simply copy and paste entire farm folders essentially making a carbon copy of one farm which can then be adjusted to differ from the original farm in some way. There is also an option to automate the creation of the CLI input files using a scripting language such as Python.
 
 To help understand how to use the CLI, there is a general CLI user guide on GitHub. We also have a list of CLI parameters which can be used as a reference guide when creating the CLI input files.
 
