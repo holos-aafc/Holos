@@ -219,7 +219,7 @@ This is where we will make our edit to change the number of animals from 50 heif
 
 1. In column **I**, find the row for the heifers group and change the value from 50 to 100.
 
-Once we make the change, we save and then close the CLI file. It is important to make sure all input files are closed before running the CLI.
+Once we make the change, we save and then close the CLI file. **It is important to make sure all input files are closed before running the CLI** — if a file is left open in Excel or another application, the CLI cannot read it and will fail with a file-access error.
 
 Now that we have created our second farm and changed our settings, we will run the CLI again. Before starting the CLI, ensure all input files are closed.
 
