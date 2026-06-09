@@ -341,7 +341,7 @@ namespace H.Core.Services.Animals
             double fertilityRateOfSows,
             double liveWeightChangeOfSowsDuringGestation)
         {
-            return (0.025 * fertilityRateOfSows * liveWeightChangeOfSowsDuringGestation) / 350.0;
+            return (0.025 * 6.25 * fertilityRateOfSows * liveWeightChangeOfSowsDuringGestation) / 350.0;
         }
 
         /// <summary>
@@ -358,7 +358,7 @@ namespace H.Core.Services.Animals
             double liveWeightOfPigletAtBirth,
             double liveWeightOfPigletAtWeaningAge)
         {
-            return (0.025 * litterSize * fertilityRateOfSows * ((liveWeightOfPigletAtWeaningAge - liveWeightOfPigletAtBirth) / 0.98)) / 350.0;
+            return (0.025 * 6.25 * litterSize * fertilityRateOfSows * ((liveWeightOfPigletAtWeaningAge - liveWeightOfPigletAtBirth) / 0.98)) / 350.0;
         }
 
         /// <summary>
