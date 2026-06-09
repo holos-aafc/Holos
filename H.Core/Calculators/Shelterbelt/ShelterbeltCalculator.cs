@@ -12,6 +12,13 @@ namespace H.Core.Calculators.Shelterbelt
     {
         #region Fields
 
+        /// <summary>
+        /// The tree age (years) used as the shelterbelt planting/baseline year. At this age living biomass is zero
+        /// and the dead organic matter lookup represents the site's pre-existing soil carbon, which is used as the
+        /// baseline that is subtracted so reported DOM reflects the shelterbelt's contribution.
+        /// </summary>
+        private const int ShelterbeltPlantingAge = 1;
+
         private readonly ShelterbeltAgTRatioProvider _shelterbeltAgTRatioProvider = new ShelterbeltAgTRatioProvider();
 
         #endregion
@@ -329,15 +336,22 @@ namespace H.Core.Calculators.Shelterbelt
             // Equation 2.3.3-6
             var livingBiomassFraction = livingBiomass * trannumData.RealGrowthRatio;
 
-            // DOM is not adjusted by the real growth ratio — RealGrowthRatio is derived
-            // from living biomass only and should not scale dead organic matter pools.
-            // See GitHub issue #429.
-            var deadOrganicMatterFraction = deadOrganicMatter;
+            // The DOM value looked up from the carbon tables is an absolute soil-carbon *stock*. At planting
+            // (age = ShelterbeltPlantingAge) living biomass is still zero, so that stock is entirely pre-existing
+            // field soil. Using the stock directly credits the shelterbelt with soil carbon it never created and
+            // makes the reported Total Ecosystem Carbon vary by tree species and behave incorrectly with mortality.
+            //
+            // Instead, report the shelterbelt's DOM *contribution* = stock(age) - stock(planting). The planting-year
+            // contribution is therefore zero, and later years reflect only the soil-carbon change the shelterbelt
+            // actually causes. DOM is not scaled by RealGrowthRatio (see GitHub issue #429); the contribution is
+            // left unscaled here.
+            var deadOrganicMatterAtPlanting = this.GetDeadOrganicMatterWithSpeciesAveraging(trannumData, ShelterbeltPlantingAge);
+            var deadOrganicMatterFraction = deadOrganicMatter - deadOrganicMatterAtPlanting;
 
             // Calculate the estimated biomass carbon based on the real growth ratio
             trannumData.EstimatedTotalLivingBiomassCarbonBasedOnRealGrowth = livingBiomassFraction;
 
-            // Calculate the estimated dead organic matter (unscaled lookup value)
+            // Calculate the estimated dead organic matter as the shelterbelt's contribution relative to planting
             trannumData.EstimatedDeadOrganicMatterBasedOnRealGrowth = deadOrganicMatterFraction;
         }
 
@@ -760,8 +774,11 @@ namespace H.Core.Calculators.Shelterbelt
         /// Equation 2.1.6-26
         /// </summary>
         /// <returns>The total dead organic matter carbon  (kg C km^-1)</returns>
-        private double GetIdealDeadOrganicMatter(TrannumData trannumData)
+        private double GetIdealDeadOrganicMatter(TrannumData trannumData, int? ageOverride = null)
         {
+            // Allow looking up DOM at an age other than the trannum's own age (e.g. the planting-year baseline).
+            var age = ageOverride ?? trannumData.Age;
+
             var deadOrganicMatterMegagrams = 0d;
             if (trannumData.CanLookupByEcodistrict)
             {
@@ -772,7 +789,7 @@ namespace H.Core.Calculators.Shelterbelt
                     percentMortality: trannumData.PercentMortality,
                     mortalityLow: (int)trannumData.PercentMortalityLow,
                     mortalityHigh: (int)trannumData.PercentMortalityHigh,
-                    age: trannumData.Age,
+                    age: age,
                     column: ShelterbeltCarbonDataProviderColumns.Dom_Mg_C_km);
             }
             else
@@ -784,13 +801,48 @@ namespace H.Core.Calculators.Shelterbelt
                     percentMortality: trannumData.PercentMortality,
                     mortalityLow: trannumData.PercentMortalityLow,
                     mortalityHigh: trannumData.PercentMortalityHigh,
-                    age: trannumData.Age,
+                    age: age,
                     column: ShelterbeltCarbonDataProviderColumns.Dom_Mg_C_km);
             }
 
             var deadOrganicMatterKilograms = deadOrganicMatterMegagrams * 1000;
 
             return deadOrganicMatterKilograms;
+        }
+
+        /// <summary>
+        /// Returns dead organic matter (kg C km^-1) for the given <paramref name="age"/>, applying the same
+        /// conifer/deciduous species averaging used when calculating growth. This is used to look up the
+        /// planting-year (age <see cref="ShelterbeltPlantingAge"/>) soil-carbon baseline so reported DOM can be
+        /// expressed as the shelterbelt's contribution rather than the absolute (pre-existing) soil stock.
+        /// </summary>
+        private double GetDeadOrganicMatterWithSpeciesAveraging(TrannumData trannumData, int age)
+        {
+            if (trannumData.TreeSpecies == TreeSpecies.AverageConifer)
+            {
+                trannumData.TreeSpecies = TreeSpecies.WhiteSpruce;
+                var whiteSpruce = this.GetIdealDeadOrganicMatter(trannumData, age);
+
+                trannumData.TreeSpecies = TreeSpecies.ScotsPine;
+                var scotsPine = this.GetIdealDeadOrganicMatter(trannumData, age);
+
+                trannumData.TreeSpecies = TreeSpecies.AverageConifer;
+                return this.AverageTwo(whiteSpruce, scotsPine);
+            }
+
+            if (trannumData.TreeSpecies == TreeSpecies.AverageDeciduous)
+            {
+                trannumData.TreeSpecies = TreeSpecies.ManitobaMaple;
+                var manitobaMaple = this.GetIdealDeadOrganicMatter(trannumData, age);
+
+                trannumData.TreeSpecies = TreeSpecies.GreenAsh;
+                var greenAsh = this.GetIdealDeadOrganicMatter(trannumData, age);
+
+                trannumData.TreeSpecies = TreeSpecies.AverageDeciduous;
+                return this.AverageTwo(greenAsh, manitobaMaple);
+            }
+
+            return this.GetIdealDeadOrganicMatter(trannumData, age);
         }
 
         /// <summary>

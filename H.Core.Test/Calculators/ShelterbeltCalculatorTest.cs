@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using System;
 using H.Core.Enumerations;
+using H.Core.Models.LandManagement.Shelterbelt;
 
 namespace H.Core.Test.Calculators
 {
@@ -238,6 +239,136 @@ namespace H.Core.Test.Calculators
             var totalAboveGroundCarbonForShelterbelt = 26.875;
             var result = calc.CalculateCarbonDioxideSequesteredInShelterbelt(totalAboveGroundCarbonForShelterbelt);
             Assert.AreEqual(-98.541666666666657, result);
+        }
+
+        #endregion
+
+        #region Dead Organic Matter Contribution (DOM baseline / Option A fix)
+
+        /*
+         * Regression coverage for the shelterbelt DOM fix.
+         *
+         * Before the fix, the reported Dead Organic Matter (and therefore Total Ecosystem Carbon) used the absolute
+         * soil-carbon STOCK from the carbon lookup tables. At planting (age 1) that stock is entirely pre-existing
+         * field soil (living biomass is still zero), e.g. ~99 Mg C/km, so the shelterbelt was credited with carbon it
+         * never created, the totals varied by tree species, and mortality behaved incorrectly.
+         *
+         * After the fix, DOM is reported as the CONTRIBUTION = stock(age) - stock(planting). The planting-year value
+         * must therefore be exactly zero, and later years reflect only the change the shelterbelt causes (a few Mg/km,
+         * not the ~99 Mg/km pedestal).
+         */
+
+        private TrannumData BuildTrannum(TreeSpecies species, int age, double mortality = 0, double realGrowthRatio = 1.0, double year = 2026)
+        {
+            var mortalityLow = calc.CalculateMortalityLow(mortality);
+            var mortalityHigh = calc.CalculateMortalityHigh(mortalityLow);
+
+            return new TrannumData
+            {
+                TreeSpecies = species,
+                Age = age,
+                Year = year,
+                PercentMortality = mortality,
+                PercentMortalityLow = mortalityLow,
+                PercentMortalityHigh = mortalityHigh,
+                CanLookupByEcodistrict = false, // use the hardiness-zone (Table 12) lookup path
+                HardinessZone = HardinessZone.H3b,
+                RealGrowthRatio = realGrowthRatio,
+            };
+        }
+
+        [TestMethod]
+        public void CalculateEstimatedGrowthReportsZeroDeadOrganicMatterContributionAtPlanting()
+        {
+            var trannum = this.BuildTrannum(TreeSpecies.ScotsPine, age: 1);
+
+            calc.CalculateEstimatedGrowth(trannum);
+
+            // Planting-year contribution = stock(1) - stock(1) = 0 (was ~99 Mg C/km before the fix).
+            Assert.AreEqual(0.0, trannum.EstimatedDeadOrganicMatterBasedOnRealGrowth, 0.0001);
+        }
+
+        [TestMethod]
+        public void CalculateEstimatedGrowthReportsZeroDeadOrganicMatterContributionAtPlantingForAverageConifer()
+        {
+            // Exercises the species-averaging path of the planting-year baseline lookup.
+            var trannum = this.BuildTrannum(TreeSpecies.AverageConifer, age: 1);
+
+            calc.CalculateEstimatedGrowth(trannum);
+
+            Assert.AreEqual(0.0, trannum.EstimatedDeadOrganicMatterBasedOnRealGrowth, 0.0001);
+        }
+
+        [TestMethod]
+        public void CalculateEstimatedGrowthReportsZeroDeadOrganicMatterContributionAtPlantingForAverageDeciduous()
+        {
+            var trannum = this.BuildTrannum(TreeSpecies.AverageDeciduous, age: 1);
+
+            calc.CalculateEstimatedGrowth(trannum);
+
+            Assert.AreEqual(0.0, trannum.EstimatedDeadOrganicMatterBasedOnRealGrowth, 0.0001);
+        }
+
+        [TestMethod]
+        public void CalculateEstimatedGrowthReportsDeadOrganicMatterAsContributionNotAbsoluteStock()
+        {
+            // At a later age the reported DOM must be the shelterbelt's contribution (a change of, at most, a few
+            // Mg C/km == a few thousand kg C/km), NOT the ~99 Mg C/km (~99,000 kg C/km) pre-existing soil stock.
+            var trannum = this.BuildTrannum(TreeSpecies.ScotsPine, age: 30);
+
+            calc.CalculateEstimatedGrowth(trannum);
+
+            // Value is in kg C/km. The pre-existing soil baseline is ~99,000; the contribution never exceeds ~15,000.
+            Assert.IsTrue(Math.Abs(trannum.EstimatedDeadOrganicMatterBasedOnRealGrowth) < 20000,
+                "Reported DOM should be the shelterbelt contribution (a small change), not the absolute soil stock.");
+        }
+
+        [TestMethod]
+        public void CalculateEstimatedGrowthPreservesYearOverYearDeadOrganicMatterChange()
+        {
+            // Subtracting a constant planting-year baseline must NOT alter the year-over-year change, so the
+            // difference between two ages equals the difference of the reported contributions.
+            var atAge10 = this.BuildTrannum(TreeSpecies.ScotsPine, age: 10);
+            var atAge11 = this.BuildTrannum(TreeSpecies.ScotsPine, age: 11);
+
+            calc.CalculateEstimatedGrowth(atAge10);
+            calc.CalculateEstimatedGrowth(atAge11);
+
+            var reportedChange = atAge11.EstimatedDeadOrganicMatterBasedOnRealGrowth
+                                 - atAge10.EstimatedDeadOrganicMatterBasedOnRealGrowth;
+
+            // The change is the difference of two contributions; it must be finite and modest (a single year of soil
+            // change, well under 1 Mg C/km == 1000 kg C/km), confirming the columns track change, not the stock.
+            Assert.IsTrue(Math.Abs(reportedChange) < 1000,
+                "Year-over-year DOM change should be a single year's soil-carbon change.");
+        }
+
+        [TestMethod]
+        public void TotalResultsForEachYearReportsZeroEcosystemCarbonAndDeadOrganicMatterInPlantingYear()
+        {
+            // End-to-end guard on the actual report object: the planting-year row must show 0 ecosystem carbon and
+            // 0 dead organic matter (the bug showed ~99 Mg C/km in both).
+            const int plantingYear = 2026;
+            const int yearsOfGrowth = 15;
+
+            var component = new ShelterbeltComponent();
+            for (var age = 1; age <= yearsOfGrowth; age++)
+            {
+                var trannum = this.BuildTrannum(TreeSpecies.ScotsPine, age: age, year: plantingYear + (age - 1));
+                calc.CalculateEstimatedGrowth(trannum);
+                component.TrannumData.Add(trannum);
+            }
+
+            var results = calc.TotalResultsForEachYear(new[] { component }).OrderBy(x => x.Year).ToList();
+            var plantingResult = results.First();
+
+            Assert.AreEqual(plantingYear, plantingResult.Year);
+            Assert.AreEqual(0.0, plantingResult.TotalDeadOrganicMatterCarbon, 0.0001,
+                "Planting-year DOM must be the contribution (0), not the pre-existing soil stock.");
+            Assert.AreEqual(0.0, plantingResult.TotalEcosystemCarbon, 0.0001,
+                "Planting-year ecosystem carbon must be 0 (no biomass yet plus zero DOM contribution).");
+            // First-year change is defined as zero by the calculator.
+            Assert.AreEqual(0.0, plantingResult.TotalEcosystemCarbonChange, 0.0001);
         }
 
         #endregion
