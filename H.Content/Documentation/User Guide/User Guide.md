@@ -2575,7 +2575,7 @@ Click on the "Grid" or "Graph" toggle to view the results in the corresponding f
 
 ### Shelterbelt Results
 
-Displayed only when a shelterbelt is added to a farm. Displays how much each animal component group consumed on average per day (can be displayed monthly or yearly). 
+This tab is displayed only when a shelterbelt component has been added to a farm. It reports the carbon accumulated by each shelterbelt over time, from the year it was planted to the farm's year of observation. All values are expressed per kilometre of shelterbelt (Mg C km^-1). 
 
 <br>
 <p align="center">
@@ -2586,6 +2586,43 @@ Displayed only when a shelterbelt is added to a farm. Displays how much each ani
 	</em>
 </p>
 <br>
+
+<br>
+
+#### Reading the report
+
+Each shelterbelt is listed with one row per year, from its planting year to the farm's year of observation. The columns are:
+
+-	**Estimated Shelterbelt Ecosystem Carbon Contribution** *(Mg C km^-1)* — the total carbon the shelterbelt has added since it was planted. It combines the carbon held in the living trees with the change in the soil's dead organic matter carbon. The planting year is **0** and the value increases as the trees grow.
+-	**Estimated Total Ecosystem Carbon Change** *(Mg C km^-1 year^-1)* — how much the value above changed from the previous year.
+-	**Estimated Living Biomass** *(Mg C km^-1)* — the carbon stored in the living trees, above and below ground.
+-	**Estimated Living Biomass Change** *(Mg C km^-1 year^-1)* — the year-over-year change in living biomass carbon.
+-	**Estimated Shelterbelt Dead Organic Matter Contribution** *(Mg C km^-1)* — the shelterbelt's effect on the soil (dead organic matter) carbon since it was planted. Like the other contribution columns, the planting year is **0**.
+-	**Estimated Dead Organic Matter Change** *(Mg C km^-1 year^-1)* — the year-over-year change in dead organic matter carbon.
+
+> **The "Contribution" columns start at zero.** The ecosystem carbon and dead organic matter columns report what the shelterbelt *adds* relative to its planting year — not the total carbon already present at the site. In the planting year the trees have not yet grown, and the soil carbon already in the field is not credited to the shelterbelt, so these columns read 0.
+
+<br>
+
+#### The Shelterbelt Growth chart
+
+The chart plots three series over time:
+
+-	**Total ecosystem carbon** — the shelterbelt's overall carbon contribution,
+-	**Total living biomass** — the carbon in the trees, and
+-	**Total dead organic matter** — the soil carbon contribution.
+
+Total ecosystem carbon and living biomass are read on the **left axis**. Dead organic matter is read on a **separate right-hand axis**, because its values are much smaller than the biomass and would otherwise appear flat.
+
+<br>
+
+#### Interpreting the dead organic matter curve
+
+The dead organic matter contribution often dips slightly below zero in the early years and then recovers. This is expected. While the trees are young they add little leaf litter and root material to the soil, and the soil's existing organic matter continues to decompose, so the soil carbon contribution is briefly negative. As the trees mature, their litter and root inputs outpace decomposition and the contribution rises back toward, and eventually above, zero.
+
+<br>
+
+Use the **Export to Excel** button to save the full table for further analysis.
 
 <br>
 
