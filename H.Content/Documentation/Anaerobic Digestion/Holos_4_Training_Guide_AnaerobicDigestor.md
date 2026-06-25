@@ -245,7 +245,7 @@ Following a typical beef finishing feeding cycle, the beef farm we are working w
 
 2. Click the management period named **'Winter Feeding'** in **Step 2** to activate that management period.
 
-3. Ensure **"January 19, 2025"** is set as the **Start date** and that **"July 07, 2025"** is set as the **End date**. The 'Number of days' shown will be 169.
+3. Ensure **"January 19, 2026"** is set as the **Start date** and that **"July 07, 2026"** is set as the **End date**. The 'Number of days' shown will be 169.
 
 Next, we can enter data related to the number of animals, diet, manure system, and housing type.
 
@@ -303,7 +303,7 @@ Next, we can enter data related to the number of animals, diet, manure system, a
 
 #### Heifers - Summer Grazing
 
-1. Click on the management period named **'Summer Grazing'**. Ensure **"July 08, 2025"** is set as the **Start date** and that **"September 15, 2025"** is set as the **End date**. The 'Number of days' shown will be 70.
+1. Click on the management period named **'Summer Grazing'**. Ensure **"July 08, 2026"** is set as the **Start date** and that **"September 15, 2026"** is set as the **End date**. The 'Number of days' shown will be 70.
 
 
 2. Under the **General Tab:**
@@ -355,7 +355,7 @@ In Holos, the user can apply livestock manure to a field using either manure pro
 1. Select the **Wheat & hairy vetch** field from the list of components added to our farm.
 
 2. Click on the **Manure tab** and then click the **Add Manure Application** button. 
-    * Add **'October 01, 2025'** as the application date.
+    * Add **'October 01, 2026'** as the application date.
     * Select **'Livestock'** as the Origin of manure.
     * Select **'Beef cattle'** as the Manure type.
     * Select **'Deep Bedding'** as the Manure handling system.
