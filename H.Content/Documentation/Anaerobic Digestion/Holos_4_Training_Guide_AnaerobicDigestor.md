@@ -435,10 +435,10 @@ All manure produced by animals on the farm can be added to the anaerobic digesto
 4. Under **Step 3** we can add both/either 'Crop Residue Substrate' and 'Farm Residue Substrate' to the digestor by selecting each button and filling in the respective information.
    - Click the 'Add Crop Residue Substrate Type' button and under the **Crop** column choose **"Wheat"**.
    - Add a **Flow rate** of **"100"** (kg wet weight day<sup>-1</sup>)
-   - Enter the 'Start date' as **"January 01, 2025"** and the 'End Date' as **"December 31, 2025"**.
+   - Enter the 'Start date' as **"January 01, 2026"** and the 'End Date' as **"December 31, 2026"**.
    - Click the 'Add Farm Residue Substrate Type' button and under the **Farm Residue** column choose **"Vegetable Oil"**.
    - Add a **Flow rate** of **"10"** (kg wet weight day<sup>-1</sup>)
-   - Enter the 'Start date' as **"March 01, 2025"** and the 'End Date' as **"October 31, 2025"**.
+   - Enter the 'Start date' as **"March 01, 2026"** and the 'End Date' as **"October 31, 2026"**.
    
 5. Under **Step 4** finally select the type of energy to be the 'Target digestor output'. Here we can chose **'Methane injection to gas grid'** as the option.
 
