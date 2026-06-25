@@ -384,7 +384,7 @@ We can also add additional hay/forage for animals that are grazing on a particul
 
 2. From the **Grazing tab.**
     - Click the **Add Supplemental Hay** button to add additional forage for the animals on this field.
-    - Enter **"July 15, 2025"** as the date.
+    - Enter **"July 15, 2026"** as the date.
     - Enter **"Off-farm"** as the **Sources of bales**.
     - Choose **"Native Pasture"** as the field.
     - Change the **Number of bales** to **"10"**.
