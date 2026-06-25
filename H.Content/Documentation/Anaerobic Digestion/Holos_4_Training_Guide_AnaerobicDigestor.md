@@ -390,7 +390,7 @@ We can also add additional hay/forage for animals that are grazing on a particul
     - Change the **Number of bales** to **"10"**.
     - Enter **"500"** as the wet bale weight.
     - Keep the moisture content as the default value.
-3. On the field receiving the supplemental forage, there is a chart showing how much forage is still available on the right of the screen for reference.
+3. On the field receiving the supplemental forage, there is a chart showing how much forage is still available on the right of the screen for reference. This chart will not be shown if the user has chosen to import hay bales.
   
 > *Note: It is not recommended to mix different species of grasses together. Here, we are only demonstrating the ability of Holos to add supplemental hay to a field that has grazing animals.*
 
