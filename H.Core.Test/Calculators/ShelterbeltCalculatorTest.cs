@@ -372,5 +372,166 @@ namespace H.Core.Test.Calculators
         }
 
         #endregion
+
+        #region Mortality Scenarios
+
+        /*
+         * Worked examples that drive the production path (ShelterbeltComponent -> CalculateInitialResults ->
+         * TotalResultsForEachYear) and assert the reported numbers. Each scenario is a shelterbelt at age 51, 100
+         * planted trees over a 200 m row, identical tree size; the only difference is mortality (100 vs 50 live trees).
+         */
+
+        /// <summary>
+        /// Builds and runs one shelterbelt through the production path and returns every year's reported result
+        /// (ordered by year), plus the RealGrowthRatio at observation. Mortality is expressed as the live fraction:
+        /// 1.0 == 0% mortality (100 of 100 live), 0.5 == 50% mortality (50 of 100 live).
+        /// </summary>
+        private List<TrannumResultViewItem> RunShelterbelt(TreeSpecies species, HardinessZone zone, double liveFraction, out double realGrowthRatio)
+        {
+            var component = new ShelterbeltComponent
+            {
+                HardinessZone = zone,
+                EcoDistrictId = 0,          // not Saskatchewan => hardiness-zone (Table 12) lookup path
+                YearOfObservation = 2050,
+            };
+
+            var row = component.NewRowData();
+            row.Length = 200; // metres
+
+            var treeGroup = row.NewTreeGroupData();
+            treeGroup.TreeSpecies = species;
+            treeGroup.PlantYear = 2000;
+            treeGroup.CutYear = 2050;       // age 51 at observation
+            treeGroup.PlantedTreeCount = 100;
+            treeGroup.LiveTreeCount = 100 * liveFraction; // 100 => 0% mortality, 50 => 50% mortality
+            treeGroup.CircumferenceData.UserCircumference = 282.0; // identical tree size in both runs
+
+            calc.CalculateInitialResults(component);
+            realGrowthRatio = component.TrannumData.OrderBy(x => x.Year).Last().RealGrowthRatio;
+
+            return calc.TotalResultsForEachYear(new[] { component }).OrderBy(x => x.Year).ToList();
+        }
+
+        [DataTestMethod]
+        [DataRow(TreeSpecies.ScotsPine)]
+        [DataRow(TreeSpecies.WhiteSpruce)]
+        [DataRow(TreeSpecies.GreenAsh)]
+        [DataRow(TreeSpecies.HybridPoplar)]
+        public void LivingBiomassHalvesAtFiftyPercentMortality(TreeSpecies species)
+        {
+            // The correct, intuitive response: kill half the trees, get half the living biomass carbon.
+            var noMortality = this.RunShelterbelt(species, HardinessZone.H3b, liveFraction: 1.0, out _).Last();
+            var halfMortality = this.RunShelterbelt(species, HardinessZone.H3b, liveFraction: 0.5, out _).Last();
+
+            var ratio = halfMortality.TotalLivingBiomassCarbon / noMortality.TotalLivingBiomassCarbon;
+
+            Assert.AreEqual(0.50, ratio, 0.03,
+                $"Living biomass at 50% mortality should be half of the 0% case (species {species}).");
+        }
+
+        [TestMethod]
+        public void DeadOrganicMatterContributionIsNearlyInsensitiveToMortality()
+        {
+            // DOM is NOT scaled by mortality/RealGrowthRatio (issue #429): it comes straight from the carbon tables,
+            // so halving the trees does NOT halve the DOM contribution. It moves only a little.
+            var noMortality = this.RunShelterbelt(TreeSpecies.ScotsPine, HardinessZone.H3b, 1.0, out _).Last();
+            var halfMortality = this.RunShelterbelt(TreeSpecies.ScotsPine, HardinessZone.H3b, 0.5, out _).Last();
+
+            var dom0 = noMortality.TotalDeadOrganicMatterCarbon;
+            var dom50 = halfMortality.TotalDeadOrganicMatterCarbon;
+
+            // Were DOM scaled by mortality it would be ~half (~0.5 * dom0). Instead it stays the same order of
+            // magnitude — far from a 50% reduction — which is exactly the #429 behaviour.
+            Assert.IsTrue(dom50 > 0.75 * dom0 && dom50 < 1.75 * dom0,
+                $"DOM contribution should be roughly mortality-insensitive, but moved from {dom0:F2} to {dom50:F2} Mg C/km.");
+        }
+
+        [TestMethod]
+        public void DeadOrganicMatterChangeWithMortalityHasNoConsistentSign()
+        {
+            // A common assumption is "more dead trees => more dead organic matter." The tables don't bear this out:
+            // the DOM contribution rises with mortality for some species and falls for others. So no single-direction
+            // claim about DOM-vs-mortality is correct.
+            var pine0 = this.RunShelterbelt(TreeSpecies.ScotsPine, HardinessZone.H3b, 1.0, out _).Last().TotalDeadOrganicMatterCarbon;
+            var pine50 = this.RunShelterbelt(TreeSpecies.ScotsPine, HardinessZone.H3b, 0.5, out _).Last().TotalDeadOrganicMatterCarbon;
+            var ash0 = this.RunShelterbelt(TreeSpecies.GreenAsh, HardinessZone.H3b, 1.0, out _).Last().TotalDeadOrganicMatterCarbon;
+            var ash50 = this.RunShelterbelt(TreeSpecies.GreenAsh, HardinessZone.H3b, 0.5, out _).Last().TotalDeadOrganicMatterCarbon;
+
+            Assert.IsTrue(pine50 > pine0, $"Scots pine DOM contribution rises with mortality ({pine0:F2} -> {pine50:F2}).");
+            Assert.IsTrue(ash50 < ash0, $"Green ash DOM contribution falls with mortality ({ash0:F2} -> {ash50:F2}).");
+        }
+
+        [TestMethod]
+        public void TotalEcosystemCarbonDropsWithMortalityButByLessThanLivingBiomass()
+        {
+            // Living biomass halves but the DOM term barely moves, so the total falls by less than a full half: the
+            // unscaled DOM dampens the total's response to mortality.
+            var noMortality = this.RunShelterbelt(TreeSpecies.ScotsPine, HardinessZone.H3b, 1.0, out _).Last();
+            var halfMortality = this.RunShelterbelt(TreeSpecies.ScotsPine, HardinessZone.H3b, 0.5, out _).Last();
+
+            var biomassRatio = halfMortality.TotalLivingBiomassCarbon / noMortality.TotalLivingBiomassCarbon;
+            var ecosystemRatio = halfMortality.TotalEcosystemCarbon / noMortality.TotalEcosystemCarbon;
+
+            Assert.AreEqual(0.50, biomassRatio, 0.03, "Living biomass halves...");
+            Assert.IsTrue(ecosystemRatio > biomassRatio + 0.05,
+                $"...but total ecosystem carbon is diluted by the unscaled DOM (ratio {ecosystemRatio:F2} vs biomass {biomassRatio:F2}).");
+            Assert.IsTrue(ecosystemRatio < 0.90,
+                $"The total still responds to mortality (ratio {ecosystemRatio:F2}); it is not nearly identical to the 0% case.");
+        }
+
+        [TestMethod]
+        public void TotalEcosystemCarbonMutingIsLargerForSmallerBelts()
+        {
+            // The dilution depends on how big the living biomass is relative to the (fixed) DOM term. White spruce
+            // builds far more living biomass than Manitoba maple, so its total tracks mortality more closely.
+            var spruce0 = this.RunShelterbelt(TreeSpecies.WhiteSpruce, HardinessZone.H3b, 1.0, out _).Last();
+            var spruce50 = this.RunShelterbelt(TreeSpecies.WhiteSpruce, HardinessZone.H3b, 0.5, out _).Last();
+            var maple0 = this.RunShelterbelt(TreeSpecies.ManitobaMaple, HardinessZone.H3b, 1.0, out _).Last();
+            var maple50 = this.RunShelterbelt(TreeSpecies.ManitobaMaple, HardinessZone.H3b, 0.5, out _).Last();
+
+            var spruceRatio = spruce50.TotalEcosystemCarbon / spruce0.TotalEcosystemCarbon; // ~0.53 (large biomass)
+            var mapleRatio = maple50.TotalEcosystemCarbon / maple0.TotalEcosystemCarbon;    // ~0.70 (small biomass)
+
+            Assert.IsTrue(spruceRatio < mapleRatio,
+                $"A larger belt's total responds more strongly to mortality (spruce {spruceRatio:F2} < maple {mapleRatio:F2}).");
+        }
+
+        [TestMethod]
+        public void BothMortalityLevelsStartFromZeroInThePlantingYear()
+        {
+            // DOM is reported as a contribution from planting, so both mortality levels start at zero in the planting
+            // year; the 0% vs 50% comparison is not offset by a shared soil-carbon pedestal.
+            var noMortality = this.RunShelterbelt(TreeSpecies.ScotsPine, HardinessZone.H3b, 1.0, out _).First();
+            var halfMortality = this.RunShelterbelt(TreeSpecies.ScotsPine, HardinessZone.H3b, 0.5, out _).First();
+
+            Assert.AreEqual(0.0, noMortality.TotalDeadOrganicMatterCarbon, 0.0001, "0% mortality starts at zero DOM contribution.");
+            Assert.AreEqual(0.0, halfMortality.TotalDeadOrganicMatterCarbon, 0.0001, "50% mortality starts at zero DOM contribution.");
+            Assert.AreEqual(0.0, noMortality.TotalEcosystemCarbon, 0.0001);
+            Assert.AreEqual(0.0, halfMortality.TotalEcosystemCarbon, 0.0001);
+        }
+
+        [TestMethod]
+        public void ScalingDeadOrganicMatterByGrowthRatioWouldMakeTheTotalTrackMortality()
+        {
+            // The production total leaves DOM unscaled (#429). This test recomputes the total as it would be if DOM
+            // were instead scaled by RealGrowthRatio (biomass + DOM * RGR): under that alternative the total drops by
+            // ~half with mortality. It documents the trade-off between the two DOM-scaling choices.
+            var noMortality = this.RunShelterbelt(TreeSpecies.ScotsPine, HardinessZone.H3b, 1.0, out var rgr0).Last();
+            var halfMortality = this.RunShelterbelt(TreeSpecies.ScotsPine, HardinessZone.H3b, 0.5, out var rgr50).Last();
+
+            var scaledTotal0 = noMortality.TotalLivingBiomassCarbon + noMortality.TotalDeadOrganicMatterCarbon * rgr0;
+            var scaledTotal50 = halfMortality.TotalLivingBiomassCarbon + halfMortality.TotalDeadOrganicMatterCarbon * rgr50;
+            var scaledRatio = scaledTotal50 / scaledTotal0;
+
+            // Compare against the AS-CODED total, which is diluted (well above 0.5).
+            var asCodedRatio = halfMortality.TotalEcosystemCarbon / noMortality.TotalEcosystemCarbon;
+
+            Assert.AreEqual(0.50, scaledRatio, 0.08,
+                $"With DOM scaled by RealGrowthRatio the total would drop by ~half (ratio {scaledRatio:F2}).");
+            Assert.IsTrue(asCodedRatio > scaledRatio + 0.05,
+                $"As coded (DOM unscaled, #429) the total is less responsive ({asCodedRatio:F2}) than the scaled alternative ({scaledRatio:F2}).");
+        }
+
+        #endregion
     }
 }
