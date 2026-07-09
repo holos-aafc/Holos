@@ -209,6 +209,52 @@ namespace H.Core.Services.Animals
             return total;
         }
 
+        /// <summary>
+        /// Returns the total volume of manure removed from storage on a given day for a given animal type. Manure is
+        /// removed from storage when manure produced on this farm is applied to a field or exported off-farm. Imported
+        /// manure applications are excluded because that manure was never held in this farm's storage. The volume
+        /// diverted to an anaerobic digester is added separately by the caller (it is computed from the digester flows).
+        ///
+        /// (kg)
+        /// </summary>
+        public double GetTotalVolumeOfManureRemovedFromStorageOnDay(DateTime dateTime, Farm farm, AnimalType animalType)
+        {
+            var result = 0d;
+
+            // Manure produced on this farm and applied to a field.
+            foreach (var fieldSystemComponent in farm.FieldSystemComponents)
+            {
+                foreach (var cropViewItem in fieldSystemComponent.CropViewItems)
+                {
+                    foreach (var manureApplicationViewItem in cropViewItem.ManureApplicationViewItems)
+                    {
+                        if (manureApplicationViewItem.IsImportedManure())
+                        {
+                            continue;
+                        }
+
+                        if (manureApplicationViewItem.DateOfApplication.Date == dateTime.Date &&
+                            manureApplicationViewItem.AnimalType.GetCategory() == animalType.GetCategory())
+                        {
+                            result += manureApplicationViewItem.AmountOfManureAppliedPerHectare * cropViewItem.Area;
+                        }
+                    }
+                }
+            }
+
+            // Manure exported off-farm.
+            foreach (var manureExportViewItem in farm.ManureExportViewItems)
+            {
+                if (manureExportViewItem.DateOfExport.Date == dateTime.Date &&
+                    manureExportViewItem.AnimalType.GetCategory() == animalType.GetCategory())
+                {
+                    result += manureExportViewItem.Amount;
+                }
+            }
+
+            return result;
+        }
+
         public List<ManureApplicationTypes> GetValidManureApplicationTypes()
         {
             return _validManureApplicationTypes;

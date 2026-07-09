@@ -32,6 +32,7 @@ namespace H.Core.Services.Animals
         protected readonly Table_49_Electricity_Conversion_Defaults_Provider _energyConversionDefaultsProvider = new Table_49_Electricity_Conversion_Defaults_Provider();
         protected readonly Table_43_Beef_Dairy_Default_Emission_Factors_Provider _defaultEmissionFactorsProvider = new Table_43_Beef_Dairy_Default_Emission_Factors_Provider();
         protected IAdditiveReductionFactorsProvider AdditiveReductionFactorsProvider = new Table_19_Additive_Reduction_Factors_Provider();
+        protected readonly IManureService _manureService = new ManureService();
         protected IAnimalComponentHelper AnimalComponentHelper = new AnimalComponentHelper();
 
         protected ComponentCategory _animalComponentCategory;
@@ -736,11 +737,15 @@ namespace H.Core.Services.Animals
             dailyEmissions.VolatileSolidsLoaded = this.CalculateVolatileSolidsLoaded(
                 volatileSolidsProduced: dailyEmissions.VolatileSolidsProduced);
 
-            // (On days that the liquid manure is emptied, there is no carryover so VolatileSolidsAvailable = VolatileSolidsLoaded)
+            // Equation 4.1.3-6: on a day following a removal, the carried-over volatile solids are reduced by the
+            // fraction of manure that left storage on the previous day (net of removals made earlier in the year).
+            var fractionOfManureRemovedOnPreviousDay = this.GetFractionOfManureRemovedFromStorage(previousDaysEmissions);
+
             dailyEmissions.VolatileSolidsAvailable = this.CalculateVolatileSolidsAvailable(
                 volatileSolidsLoaded: dailyEmissions.VolatileSolidsLoaded,
                 volatileSolidsAvailableFromPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.VolatileSolidsAvailable,
-                volatileSolidsConsumedFromPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.VolatileSolidsConsumed);
+                volatileSolidsConsumedFromPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.VolatileSolidsConsumed,
+                fractionOfManureRemovedFromStorageOnPreviousDay: fractionOfManureRemovedOnPreviousDay);
 
             dailyEmissions.VolatileSolidsConsumed = this.CalculateVolatileSolidsConsumed(
                 climateFactor: dailyEmissions.ClimateFactor,
@@ -855,18 +860,164 @@ namespace H.Core.Services.Animals
 
         /// <summary>
         /// Equation 4.1.3-5
+        /// Equation 4.1.3-6
         /// </summary>
         /// <param name="volatileSolidsLoaded">Volatile solids loaded into system (kg day^-1)</param>
         /// <param name="volatileSolidsAvailableFromPreviousDay">Volatile solids available from the previous day (kg day^-1)</param>
         /// <param name="volatileSolidsConsumedFromPreviousDay">Volatile solids consumed from the previous day (kg day^-1)</param>
+        /// <param name="fractionOfManureRemovedFromStorageOnPreviousDay">Fraction of the stored manure removed from storage on the previous day through land application, export, or diversion to anaerobic digestion (unitless, 0 to 1)</param>
         /// <returns>Volatile solids available for conversion to CH4 (kg day^-1)</returns>
         public double CalculateVolatileSolidsAvailable(
             double volatileSolidsLoaded,
             double volatileSolidsAvailableFromPreviousDay,
-            double volatileSolidsConsumedFromPreviousDay)
+            double volatileSolidsConsumedFromPreviousDay,
+            double fractionOfManureRemovedFromStorageOnPreviousDay = 0)
         {
-            return volatileSolidsLoaded +
-                   (volatileSolidsAvailableFromPreviousDay - volatileSolidsConsumedFromPreviousDay);
+            // The fraction removed cannot be negative and cannot exceed the maximum that can be emptied from storage (95%).
+            var boundedFractionRemoved = this.BoundRemovalFraction(fractionOfManureRemovedFromStorageOnPreviousDay);
+
+            // Equation 4.1.3-5: volatile solids carried over from the previous day (available minus consumed).
+            var volatileSolidsCarriedOver = volatileSolidsAvailableFromPreviousDay - volatileSolidsConsumedFromPreviousDay;
+
+            // Equation 4.1.3-6: the carried-over volatile solids are reduced by the fraction of manure removed from
+            // storage on the previous day; the volatile solids loaded on the current day are always retained in full.
+            // This is the shared net-of-removals carryover, with volatile solids as the constituent.
+            return this.CalculateAmountInStorageNetOfRemovals(
+                netAmountInStorageOnPreviousDay: volatileSolidsCarriedOver,
+                amountFlowingIntoStorage: volatileSolidsLoaded,
+                fractionOfManureRemovedFromStorageOnPreviousDay: boundedFractionRemoved);
+        }
+
+        /// <summary>
+        /// Returns the fraction (0 to 0.95) of the manure in storage that was removed on the given day, using the
+        /// net volume remaining in storage as the denominator. This is the fraction applied in Equation 4.1.3-6.
+        /// </summary>
+        /// <param name="emissionsForDay">The daily emissions whose removed volume and net storage volume are used; may be null (returns 0)</param>
+        /// <returns>Fraction of stored manure removed on that day (unitless, 0 to 0.95)</returns>
+        protected double GetFractionOfManureRemovedFromStorage(GroupEmissionsByDay emissionsForDay)
+        {
+            if (emissionsForDay == null || emissionsForDay.AccumulatedVolumeNetOfRemovals <= 0)
+            {
+                return 0;
+            }
+
+            var fraction = emissionsForDay.VolumeOfManureRemovedFromStorageOnDay / emissionsForDay.AccumulatedVolumeNetOfRemovals;
+
+            return this.BoundRemovalFraction(fraction);
+        }
+
+        /// <summary>
+        /// Bounds a removal fraction to the physically valid range: never negative, and never above the maximum amount
+        /// that can be emptied from storage in a single day (95%). This is the single definition of that bound, shared by
+        /// every place that applies a removal fraction (the fraction calculation and each constituent's carryover).
+        /// </summary>
+        /// <param name="fraction">Unbounded removal fraction</param>
+        /// <returns>Fraction clamped to the range 0 to 0.95</returns>
+        protected double BoundRemovalFraction(double fraction)
+        {
+            const double maximumFractionRemoved = 0.95;
+
+            if (fraction < 0)
+            {
+                return 0;
+            }
+
+            if (fraction > maximumFractionRemoved)
+            {
+                return maximumFractionRemoved;
+            }
+
+            return fraction;
+        }
+
+        /// <summary>
+        /// Net-of-removals carryover for a stored manure constituent (volatile solids today; carbon and nitrogen are
+        /// intended to follow the same pattern): the current day's inflow plus the carried-over amount reduced by the
+        /// fraction of manure removed from storage on the previous day. Each constituent keeps its gross stored amount
+        /// separately (the gross amount feeds the field/soil mass balance); this net amount reflects what is physically
+        /// left in storage and is used by absolute-amount storage calculations. The fraction must already be bounded to
+        /// 0 to 0.95 (see <see cref="BoundRemovalFraction"/>).
+        /// </summary>
+        /// <param name="netAmountInStorageOnPreviousDay">Net amount of the constituent in storage on the previous day</param>
+        /// <param name="amountFlowingIntoStorage">Amount of the constituent flowing into storage on the current day</param>
+        /// <param name="fractionOfManureRemovedFromStorageOnPreviousDay">Fraction removed on the previous day (0 to 0.95)</param>
+        /// <returns>Net amount of the constituent in storage on the current day</returns>
+        protected double CalculateAmountInStorageNetOfRemovals(
+            double netAmountInStorageOnPreviousDay,
+            double amountFlowingIntoStorage,
+            double fractionOfManureRemovedFromStorageOnPreviousDay)
+        {
+            return amountFlowingIntoStorage +
+                   (netAmountInStorageOnPreviousDay * (1 - fractionOfManureRemovedFromStorageOnPreviousDay));
+        }
+
+        /// <summary>
+        /// Advances the manure-in-storage state by one day for every species and manure system. The state separates the
+        /// two quantities the model tracks independently (see <see cref="ManureStorageState"/>): the cumulative amount
+        /// produced (gross, never reduced by removals; retained for the digester and reporting) and the amount remaining
+        /// in storage (net of removals; the denominator for the on-removal reductions in Equation 4.1.3-6). It also
+        /// records the volume removed on the current day, read by the following day to form the removal fraction.
+        ///
+        /// This is the single entry point for the daily storage advance. Today it carries volume only; a further
+        /// constituent (volatile solids, carbon, TAN, organic nitrogen) is added by giving it a field on each bundle in
+        /// <see cref="StoredManureConstituents"/> and one line below, plus the matching read/write mapping.
+        /// </summary>
+        protected void AdvanceManureStorageByOneDay(
+            GroupEmissionsByDay dailyEmissions,
+            GroupEmissionsByDay previousDaysEmissions,
+            ManagementPeriod managementPeriod,
+            Farm farm)
+        {
+            var previousState = ReadManureStorageState(previousDaysEmissions);
+            var fractionRemovedOnPreviousDay = this.GetFractionOfManureRemovedFromStorage(previousDaysEmissions);
+
+            var todaysState = new ManureStorageState();
+
+            // "Cumulative produced" (gross): today's inflow added to the running total; never reduced by removals.
+            // (Kept in the reporting volume unit, as it was before this refactor.)
+            todaysState.CumulativeProduced.Volume =
+                previousState.CumulativeProduced.Volume + dailyEmissions.TotalVolumeOfManureAvailableForLandApplication;
+
+            // "Currently in storage" (net): yesterday's remaining volume reduced by yesterday's removal fraction, plus
+            // today's inflow (in kg) - the denominator used by Equation 4.1.3-6. Shares the net-carryover primitive.
+            todaysState.RemainingInStorage.Volume = this.CalculateAmountInStorageNetOfRemovals(
+                netAmountInStorageOnPreviousDay: previousState.RemainingInStorage.Volume,
+                amountFlowingIntoStorage: dailyEmissions.TotalVolumeOfManureAvailableForLandApplicationInKilograms,
+                fractionOfManureRemovedFromStorageOnPreviousDay: fractionRemovedOnPreviousDay);
+
+            // Volume of manure removed from storage on the current day (read by the following day to form the fraction).
+            todaysState.VolumeRemovedOnDay = _manureService.GetTotalVolumeOfManureRemovedFromStorageOnDay(
+                dailyEmissions.DateTime, farm, managementPeriod.AnimalType);
+
+            WriteManureStorageState(dailyEmissions, todaysState);
+        }
+
+        /// <summary>
+        /// Reads the manure-in-storage state carried on a day's emissions into a <see cref="ManureStorageState"/>.
+        /// Returns an empty (all-zero) state for the first day, when there is no previous day.
+        /// </summary>
+        private static ManureStorageState ReadManureStorageState(GroupEmissionsByDay emissions)
+        {
+            var state = new ManureStorageState();
+            if (emissions == null)
+            {
+                return state;
+            }
+
+            state.CumulativeProduced.Volume = emissions.AccumulatedVolume;
+            state.RemainingInStorage.Volume = emissions.AccumulatedVolumeNetOfRemovals;
+            state.VolumeRemovedOnDay = emissions.VolumeOfManureRemovedFromStorageOnDay;
+            return state;
+        }
+
+        /// <summary>
+        /// Writes a <see cref="ManureStorageState"/> back to the fields carried on a day's emissions.
+        /// </summary>
+        private static void WriteManureStorageState(GroupEmissionsByDay emissions, ManureStorageState state)
+        {
+            emissions.AccumulatedVolume = state.CumulativeProduced.Volume;
+            emissions.AccumulatedVolumeNetOfRemovals = state.RemainingInStorage.Volume;
+            emissions.VolumeOfManureRemovedFromStorageOnDay = state.VolumeRemovedOnDay;
         }
 
         /// <summary>
@@ -2521,5 +2672,40 @@ namespace H.Core.Services.Animals
                 return false;
             }
         }
+    }
+
+    /// <summary>
+    /// The constituents of manure held in storage on a single day, as one bundle. A constituent is added here once and
+    /// is then available to both the "cumulative produced" and the "currently in storage" bundles of
+    /// <see cref="ManureStorageState"/>. Today only volume is tracked; carbon, TAN, organic nitrogen and volatile solids
+    /// follow the same pattern as the family is brought through the daily storage advance.
+    /// </summary>
+    internal class StoredManureConstituents
+    {
+        /// <summary>
+        /// Volume of manure (kg for the "currently in storage" bundle; the reporting volume unit for the
+        /// "cumulative produced" bundle, preserved from the prior calculation).
+        /// </summary>
+        public double Volume { get; set; }
+    }
+
+    /// <summary>
+    /// A one-day snapshot of manure in storage, separating the two quantities the model tracks independently: the
+    /// cumulative amount PRODUCED (gross - never reduced by removals; feeds the field/soil mass balance, the digester
+    /// and reporting) and the amount REMAINING in storage (net of removals; feeds the storage emissions). The daily
+    /// advance is expressed once over this state in
+    /// <see cref="AnimalResultsServiceBase.AdvanceManureStorageByOneDay"/>. This is a transient working type - the
+    /// canonical per-day values are still carried on <see cref="GroupEmissionsByDay"/>.
+    /// </summary>
+    internal class ManureStorageState
+    {
+        /// <summary>"Cumulative produced": gross, never reduced by removals.</summary>
+        public StoredManureConstituents CumulativeProduced { get; } = new StoredManureConstituents();
+
+        /// <summary>"Currently in storage": net of removals.</summary>
+        public StoredManureConstituents RemainingInStorage { get; } = new StoredManureConstituents();
+
+        /// <summary>Volume of manure removed from storage on this day; debits the next day's remaining amount. (kg)</summary>
+        public double VolumeRemovedOnDay { get; set; }
     }
 }

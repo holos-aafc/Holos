@@ -166,8 +166,7 @@ namespace H.Core.Services.Animals
                 totalNitrogenAvailableForLandApplication: dailyEmissions.NonAccumulatedNitrogenEnteringPoolAvailableInStorage,
                 nitrogenContentOfManure: managementPeriod.ManureDetails.FractionOfNitrogenInManure);
 
-            dailyEmissions.AccumulatedVolume = dailyEmissions.TotalVolumeOfManureAvailableForLandApplication +
-                                               (previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedVolume);
+            base.AdvanceManureStorageByOneDay(dailyEmissions, previousDaysEmissions, managementPeriod, farm);
 
             dailyEmissions.AmmoniaEmissionsFromLandAppliedManure = 0;
 

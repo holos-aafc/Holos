@@ -1815,6 +1815,19 @@ namespace H.Core.Emissions.Results
         public double AccumulatedVolume { get; set; }
 
         /// <summary>
+        /// Volume of manure removed from storage on this day through land application and export (kg). Used to debit
+        /// the running net volume in storage so that subsequent removal fractions reflect what is actually left in storage.
+        /// </summary>
+        public double VolumeOfManureRemovedFromStorageOnDay { get; set; }
+
+        /// <summary>
+        /// Running volume of manure in storage on this day, prior to this day's removal, net of all prior removals (kg).
+        /// Unlike <see cref="AccumulatedVolume"/> (which accumulates gross and is never reduced), this carryover is
+        /// reduced each day by the volume removed, giving the actual amount remaining in storage used as the denominator in Equation 4.1.3-6.
+        /// </summary>
+        public double AccumulatedVolumeNetOfRemovals { get; set; }
+
+        /// <summary>
         /// Equation 4.5.2-15
         /// </summary>
         public double NonAccumulatedNitrogenEnteringPoolAvailableInStorage
