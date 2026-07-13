@@ -27,12 +27,12 @@ namespace H.Core.Services.LandManagement
         /// <returns>A duplicated <see cref="H.Core.Models.LandManagement.Fields.CropViewItem"/></returns>
         public CropViewItem MapDetailsScreenViewItemFromComponentScreenViewItem(CropViewItem viewItem, int year)
         {
-            var result = _detailViewItemMapper.Map<CropViewItem, CropViewItem>(viewItem);
+            var result = _detailViewItemMapper.Map(viewItem);
 
             // Copy all manure applications to the detail view item
             foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
             {
-                var copiedManureApplicationViewItem = _manureApplicationViewItemMapper.Map<ManureApplicationViewItem, ManureApplicationViewItem>(manureApplicationViewItem);
+                var copiedManureApplicationViewItem = _manureApplicationViewItemMapper.Map(manureApplicationViewItem);
 
                 // We need to update the year so that the current years' manure applications are copied back in time
                 copiedManureApplicationViewItem.DateOfApplication = new DateTime(year, manureApplicationViewItem.DateOfApplication.Month, manureApplicationViewItem.DateOfApplication.Day);
@@ -42,7 +42,7 @@ namespace H.Core.Services.LandManagement
 
             foreach (var harvestViewItem in viewItem.HarvestViewItems)
             {
-                var copiedHarvestViewItem = _harvestViewItemMapper.Map<HarvestViewItem, HarvestViewItem>(harvestViewItem);
+                var copiedHarvestViewItem = _harvestViewItemMapper.Map(harvestViewItem);
 
                 // We need to update the year so that the current years' harvest items are copied back in time
                 copiedHarvestViewItem.DateCreated = new DateTime(year, harvestViewItem.DateCreated.Month, harvestViewItem.DateCreated.Day);
@@ -52,7 +52,7 @@ namespace H.Core.Services.LandManagement
 
             foreach (var grazingViewItem in viewItem.GrazingViewItems)
             {
-                var copiedGrazingViewItem = _harvestViewItemMapper.Map<GrazingViewItem, GrazingViewItem>(grazingViewItem);
+                var copiedGrazingViewItem = _grazingViewItemMapper.Map(grazingViewItem);
 
                 // We need to update the year so that the current years' harvest items are copied back in time
                 copiedGrazingViewItem.DateCreated = new DateTime(year, grazingViewItem.DateCreated.Month, grazingViewItem.DateCreated.Day);
@@ -62,7 +62,7 @@ namespace H.Core.Services.LandManagement
 
             foreach (var hayImportViewItem in viewItem.HayImportViewItems)
             {
-                var copiedHayImportViewItem = _hayImportViewItemMapper.Map<HayImportViewItem, HayImportViewItem>(hayImportViewItem);
+                var copiedHayImportViewItem = _hayImportViewItemMapper.Map(hayImportViewItem);
 
                 // We need to update the year so that the current years' hay import items are copied back in time
                 copiedHayImportViewItem.Date = new DateTime(year, copiedHayImportViewItem.DateCreated.Month, copiedHayImportViewItem.DateCreated.Day);
@@ -72,7 +72,7 @@ namespace H.Core.Services.LandManagement
 
             foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems)
             {
-                var copiedFertilizerViewItem = _fertilizerViewItemMapper.Map<FertilizerApplicationViewItem, FertilizerApplicationViewItem>(fertilizerApplicationViewItem);
+                var copiedFertilizerViewItem = _fertilizerViewItemMapper.Map(fertilizerApplicationViewItem);
 
                 // We need to update the year so that the current years' fertilizer applications are copied back in time
                 copiedFertilizerViewItem.DateCreated = new DateTime(year, fertilizerApplicationViewItem.DateCreated.Month, fertilizerApplicationViewItem.DateCreated.Day);
@@ -82,7 +82,7 @@ namespace H.Core.Services.LandManagement
 
             foreach (var digestateApplicationViewItem in viewItem.DigestateApplicationViewItems)
             {
-                var copiedDigestateViewItem = _digestateViewItemMapper.Map<DigestateApplicationViewItem, DigestateApplicationViewItem>(digestateApplicationViewItem);
+                var copiedDigestateViewItem = _digestateViewItemMapper.Map(digestateApplicationViewItem);
 
                 // We need to update the year so that the current years' digestate applications are copied back in time
                 copiedDigestateViewItem.DateCreated = new DateTime(year, digestateApplicationViewItem.DateCreated.Month, digestateApplicationViewItem.DateCreated.Day);

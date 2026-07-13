@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using AutoMapper;
 using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Economics;
 using H.Core.Calculators.Nitrogen;

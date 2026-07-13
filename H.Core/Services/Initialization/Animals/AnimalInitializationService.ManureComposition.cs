@@ -71,7 +71,7 @@ namespace H.Core.Services.Initialization.Animals
 
             foreach (var item in source)
             {
-                var copiedInstance = _defaultManureCompositionDataMapper.Map<DefaultManureCompositionData, DefaultManureCompositionData>(item);
+                var copiedInstance = _defaultManureCompositionDataMapper.Map(item);
                 manureCompositionData.Add(copiedInstance);
             }
             return manureCompositionData;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using AutoMapper;
+using H.Core.Mappers;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
@@ -18,7 +18,7 @@ namespace H.Core.Providers.Fertilizer
 
         private readonly FertilizerBlendConverter _converter = new FertilizerBlendConverter();
         private readonly List<Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data> _cache = new List<Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data>();
-        private readonly IMapper _blendMapper;
+        private readonly ModelMapper<Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data> _blendMapper;
 
         #endregion
 
@@ -26,13 +26,8 @@ namespace H.Core.Providers.Fertilizer
 
         public Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider()
         {
-            var configuration = new MapperConfiguration(expression =>
-            {
-                expression.CreateMap<Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data, Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data>()
-                    .ForMember(property => property.Guid, options => options.Ignore());
-            });
-
-            _blendMapper = configuration.CreateMapper();
+            _blendMapper = new ModelMapper<Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data>(
+                nameof(Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data.Guid));
 
             _cache.AddRange(this.BuildCache());
         }
@@ -62,7 +57,7 @@ namespace H.Core.Providers.Fertilizer
             var cachedItem = _cache.SingleOrDefault(item => item.FertilizerBlend == blend);
             if (cachedItem != null)
             {
-                return _blendMapper.Map<Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data>(cachedItem);
+                return _blendMapper.Map(cachedItem);
             }
             else
             {

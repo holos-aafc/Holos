@@ -185,6 +185,7 @@
     </Compile>
     <Compile Include="ResultConversionClassTests.cs" />
     <Compile Include="Services\Animals\DigestateServiceTest.cs" />
+    <Compile Include="Mappers\AutoMapperCharacterizationTest.cs" />
     <Compile Include="Services\Animals\ManureRemovalVolatileSolidsTest.cs" />
     <Compile Include="Services\Animals\ScaleUpServiceTest.cs" />
     <Compile Include="Services\Animals\AnimalInitializationServiceTest.cs" />

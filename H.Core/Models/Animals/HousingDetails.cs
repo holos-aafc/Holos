@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using AutoMapper;
+using H.Core.Mappers;
 using H.Core.Converters;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
@@ -36,7 +36,8 @@ namespace H.Core.Models.Animals
 
         private string _nameOfPastureLocation;
 
-        private static readonly IMapper _housingDetailsMapper;
+        private static readonly ModelMapper<HousingDetails> _housingDetailsMapper =
+            new ModelMapper<HousingDetails>(nameof(HousingDetails.Guid), nameof(HousingDetails.Name));
 
         private bool _useCustomIndoorHousingTemperature;
 
@@ -44,17 +45,6 @@ namespace H.Core.Models.Animals
 
         #region Constructors
 
-        static HousingDetails()
-        {
-            var housingDetailsConfiguration = new MapperConfiguration(config =>
-            {
-                config.CreateMap<HousingDetails, HousingDetails>()
-                    .ForMember(housingDetails => housingDetails.Guid, opt => opt.Ignore())
-                    .ForMember(housingDetails => housingDetails.Name, opt => opt.Ignore());
-            });
-
-            _housingDetailsMapper = housingDetailsConfiguration.CreateMapper();
-        }
         public HousingDetails()
         {
             this.GrazingSystemType = null; // No grazing by default
@@ -243,7 +233,7 @@ namespace H.Core.Models.Animals
 
         public static HousingDetails CopyHousingDetails(HousingDetails sourceHousingDetails)
         {
-            var copyHousingDetails = _housingDetailsMapper.Map<HousingDetails>(sourceHousingDetails);
+            var copyHousingDetails = _housingDetailsMapper.Map(sourceHousingDetails);
 
             return copyHousingDetails;
         }

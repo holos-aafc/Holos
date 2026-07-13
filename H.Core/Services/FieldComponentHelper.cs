@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoMapper;
+using H.Core.Mappers;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
@@ -17,15 +17,15 @@ namespace H.Core.Services
     {
         #region Fields
 
-        private readonly IMapper _cropViewItemMapper;
-        private readonly IMapper _cropEconomicDataMapper;
-        private readonly IMapper _grazingPeriodMapper;
-        private readonly IMapper _harvestPeriodMapper;
-        private readonly IMapper _manureApplicationViewItemMapper;
-        private readonly IMapper _fertilizerApplicationViewItemMapper;
-        private readonly IMapper _hayImportViewItemMapper;
-        private readonly IMapper _digestateViewItemMapper;
-        private readonly IMapper _soilDataMapper;
+        private readonly ModelMapper<CropViewItem> _cropViewItemMapper;
+        private readonly ModelMapper<CropEconomicData> _cropEconomicDataMapper;
+        private readonly ModelMapper<GrazingViewItem> _grazingPeriodMapper;
+        private readonly ModelMapper<HarvestViewItem> _harvestPeriodMapper;
+        private readonly ModelMapper<ManureApplicationViewItem> _manureApplicationViewItemMapper;
+        private readonly ModelMapper<FertilizerApplicationViewItem> _fertilizerApplicationViewItemMapper;
+        private readonly ModelMapper<HayImportViewItem> _hayImportViewItemMapper;
+        private readonly ModelMapper<DigestateApplicationViewItem> _digestateViewItemMapper;
+        private readonly ModelMapper<SoilData> _soilDataMapper;
 
         ICropInitializationService _cropInitializationService;
 
@@ -37,76 +37,31 @@ namespace H.Core.Services
         {
             _cropInitializationService = new CropInitializationService();
 
-            var cropViewItemMapperConfiguration = new MapperConfiguration(x =>
-            {
-                x.CreateMap<CropViewItem, CropViewItem>()
-                    .ForMember(y => y.Guid, z => z.Ignore())
-                    .ForMember(y => y.HarvestViewItems, z => z.Ignore())
-                    .ForMember(y => y.GrazingViewItems, z => z.Ignore())
-                    .ForMember(y => y.ManureApplicationViewItems, z => z.Ignore())
-                    .ForMember(y => y.CropEconomicData, z => z.Ignore())
-                    .ForMember(y => y.FertilizerApplicationViewItems, z => z.Ignore());
-            });
+            _cropViewItemMapper = new ModelMapper<CropViewItem>(
+                nameof(CropViewItem.Guid),
+                nameof(CropViewItem.HarvestViewItems),
+                nameof(CropViewItem.GrazingViewItems),
+                nameof(CropViewItem.ManureApplicationViewItems),
+                nameof(CropViewItem.CropEconomicData),
+                nameof(CropViewItem.FertilizerApplicationViewItems));
 
-            _cropViewItemMapper = cropViewItemMapperConfiguration.CreateMapper();
+            _cropEconomicDataMapper = new ModelMapper<CropEconomicData>();
 
-            var cropEconomicDataMapperConfiguration =
-                new MapperConfiguration(x => x.CreateMap<CropEconomicData, CropEconomicData>());
+            _harvestPeriodMapper = new ModelMapper<HarvestViewItem>(nameof(HarvestViewItem.Guid));
 
-            _cropEconomicDataMapper = cropEconomicDataMapperConfiguration.CreateMapper();
+            _grazingPeriodMapper = new ModelMapper<GrazingViewItem>(nameof(GrazingViewItem.Guid));
 
-            var harvestPeriodMapperConfiguration = new MapperConfiguration(x =>
-            {
-                x.CreateMap<HarvestViewItem, HarvestViewItem>()
-                    .ForMember(y => y.Guid, z => z.Ignore());
-            });
+            _manureApplicationViewItemMapper = new ModelMapper<ManureApplicationViewItem>();
 
-            _harvestPeriodMapper = harvestPeriodMapperConfiguration.CreateMapper();
+            _hayImportViewItemMapper = new ModelMapper<HayImportViewItem>();
 
-            var grazingPeriodMapperConfiguration = new MapperConfiguration(x =>
-            {
-                x.CreateMap<GrazingViewItem, GrazingViewItem>()
-                    .ForMember(y => y.Guid, z => z.Ignore());
-            });
+            _digestateViewItemMapper = new ModelMapper<DigestateApplicationViewItem>();
 
-            _grazingPeriodMapper = grazingPeriodMapperConfiguration.CreateMapper();
+            // The fertilizer item map was bundled with Table_48 so FertilizerBlendData was deep-copied; Replicate()
+            // now reproduces that with an explicit clone (the shallow mapper alone would share the blend reference).
+            _fertilizerApplicationViewItemMapper = new ModelMapper<FertilizerApplicationViewItem>();
 
-            var manureApplicationViewItemMapper = new MapperConfiguration(x =>
-            {
-                x.CreateMap<ManureApplicationViewItem, ManureApplicationViewItem>();
-            });
-
-            _manureApplicationViewItemMapper = manureApplicationViewItemMapper.CreateMapper();
-
-            var hayImportViewItemMapper = new MapperConfiguration(x =>
-            {
-                x.CreateMap<HayImportViewItem, HayImportViewItem>();
-            });
-
-            _hayImportViewItemMapper = hayImportViewItemMapper.CreateMapper();
-
-            var digestateViewItemMapper = new MapperConfiguration(x =>
-            {
-                x.CreateMap<DigestateApplicationViewItem, DigestateApplicationViewItem>();
-            });
-
-            _digestateViewItemMapper = digestateViewItemMapper.CreateMapper();
-
-
-            var fertilizerApplicationViewItemMapper = new MapperConfiguration(x =>
-            {
-                x.CreateMap<Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data, Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data>();
-                x.CreateMap<FertilizerApplicationViewItem, FertilizerApplicationViewItem>();
-            });
-            
-            _fertilizerApplicationViewItemMapper = fertilizerApplicationViewItemMapper.CreateMapper();
-
-            var soilDataMapper = new MapperConfiguration(x =>
-            {
-                x.CreateMap<SoilData, SoilData>();
-            });
-
-            _soilDataMapper = soilDataMapper.CreateMapper();
+            _soilDataMapper = new ModelMapper<SoilData>();
         }
 
         #endregion
@@ -218,6 +173,11 @@ namespace H.Core.Services
                     var copiedFertilizerApplicationViewItem = new FertilizerApplicationViewItem();
 
                     _fertilizerApplicationViewItemMapper.Map(fertilizerApplicationViewItem, copiedFertilizerApplicationViewItem);
+
+                    // Reproduce the deep-copy the previous bundled mapper performed for the blend data.
+                    copiedFertilizerApplicationViewItem.FertilizerBlendData =
+                        PropertyMapper.Clone(fertilizerApplicationViewItem.FertilizerBlendData);
+
                     copiedViewItem.FertilizerApplicationViewItems.Add(copiedFertilizerApplicationViewItem);
                 }
             }

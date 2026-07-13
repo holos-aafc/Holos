@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoMapper;
+using H.Core.Mappers;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
@@ -20,8 +20,8 @@ namespace H.Core.Services
     {
         #region Fields
 
-        private readonly IMapper _animalGroupMapper;
-        private readonly IMapper _managementPeriodMapper;
+        private readonly ModelMapper<AnimalGroup> _animalGroupMapper;
+        private readonly ModelMapper<ManagementPeriod> _managementPeriodMapper;
         private readonly ITimePeriodHelper _timePeriodHelper = new TimePeriodHelper(); 
 
         #endregion
@@ -30,24 +30,14 @@ namespace H.Core.Services
 
         public AnimalComponentHelper()
         {
-            var animalGroupMapperConfiguration = new MapperConfiguration(x =>
-            {
-                x.CreateMap<AnimalGroup, AnimalGroup>()
-                    .ForMember(y => y.Guid, z => z.Ignore())
-                    .ForMember(y => y.ManagementPeriods, z => z.Ignore());
-            });
+            _animalGroupMapper = new ModelMapper<AnimalGroup>(
+                nameof(AnimalGroup.Guid),
+                nameof(AnimalGroup.ManagementPeriods));
 
-            _animalGroupMapper = animalGroupMapperConfiguration.CreateMapper();
-
-            var managementPeriodMapperConfiguration = new MapperConfiguration(x =>
-            {
-                x.CreateMap<ManagementPeriod, ManagementPeriod>()
-                    .ForMember(y => y.Guid, z => z.Ignore())
-                    .ForMember(y => y.HousingDetails, z => z.Ignore())
-                    .ForMember(y => y.ManureDetails, z => z.Ignore());
-            });
-
-            _managementPeriodMapper = managementPeriodMapperConfiguration.CreateMapper();
+            _managementPeriodMapper = new ModelMapper<ManagementPeriod>(
+                nameof(ManagementPeriod.Guid),
+                nameof(ManagementPeriod.HousingDetails),
+                nameof(ManagementPeriod.ManureDetails));
         }
 
         #endregion
@@ -171,14 +161,7 @@ namespace H.Core.Services
 
         public void ReplicateManureDetails(ManagementPeriod from, ManagementPeriod to)
         {
-            var configuration = new MapperConfiguration(x =>
-            {
-                x.CreateMap<ManureDetails, ManureDetails>()
-                 .ForMember(y => y.Name, z => z.Ignore())
-                 .ForMember(y => y.Guid, z => z.Ignore());
-            });
-
-            var mapper = configuration.CreateMapper();
+            var mapper = new ModelMapper<ManureDetails>(nameof(ManureDetails.Name), nameof(ManureDetails.Guid));
 
             var manureDetails = new ManureDetails();
             mapper.Map(from.ManureDetails, manureDetails);
@@ -187,14 +170,7 @@ namespace H.Core.Services
 
         public void ReplicateHousingDetails(ManagementPeriod from, ManagementPeriod to)
         {
-            var configuration = new MapperConfiguration(x =>
-            {
-                x.CreateMap<HousingDetails, HousingDetails>()
-                 .ForMember(y => y.Name, z => z.Ignore())
-                 .ForMember(y => y.Guid, z => z.Ignore());
-            });
-
-            var mapper = configuration.CreateMapper();
+            var mapper = new ModelMapper<HousingDetails>(nameof(HousingDetails.Name), nameof(HousingDetails.Guid));
 
             var housingDetails = new HousingDetails();
             mapper.Map(from.HousingDetails, housingDetails);

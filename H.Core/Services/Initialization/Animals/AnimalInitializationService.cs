@@ -3,7 +3,7 @@ using H.Core.Providers.Climate;
 using System.Collections.Generic;
 using H.Core.Calculators.Nitrogen;
 using H.Core.Models;
-using AutoMapper;
+using H.Core.Mappers;
 
 namespace H.Core.Services.Initialization.Animals
 {
@@ -34,8 +34,8 @@ namespace H.Core.Services.Initialization.Animals
         private readonly Table_42_Poultry_OtherLivestock_Default_NExcretionRates_Provider _poultryOtherLivestockDefaultNExcretionRatesProvider;
 
         private static readonly Table_22_Livestock_Coefficients_Sheep_Provider _sheepProvider;
-        private IMapper _defaultManureCompositionDataMapper;
-        private IMapper _defaultBeddingCompositionDataMapper;
+        private ModelMapper<DefaultManureCompositionData> _defaultManureCompositionDataMapper;
+        private ModelMapper<Table_30_Default_Bedding_Material_Composition_Data> _defaultBeddingCompositionDataMapper;
 
         #endregion
 
@@ -110,19 +110,8 @@ namespace H.Core.Services.Initialization.Animals
 
         private void InitializeMappers()
         {
-            var _manureCompositionDataMapperConfiguration = new MapperConfiguration(configure: configuration =>
-            {
-                configuration.CreateMap<DefaultManureCompositionData, DefaultManureCompositionData>();
-            });
-
-            _defaultManureCompositionDataMapper = _manureCompositionDataMapperConfiguration.CreateMapper();
-
-            var _beddingMaterialCompositionMapperConfiguration = new MapperConfiguration(configure: configuration =>
-            {
-                configuration.CreateMap<Table_30_Default_Bedding_Material_Composition_Data, Table_30_Default_Bedding_Material_Composition_Data>();
-            });
-
-            _defaultBeddingCompositionDataMapper = _beddingMaterialCompositionMapperConfiguration.CreateMapper();
+            _defaultManureCompositionDataMapper = new ModelMapper<DefaultManureCompositionData>();
+            _defaultBeddingCompositionDataMapper = new ModelMapper<Table_30_Default_Bedding_Material_Composition_Data>();
         }
 
         #endregion

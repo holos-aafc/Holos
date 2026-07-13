@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Transactions;
-using AutoMapper;
+using H.Core.Mappers;
 using H.Core.Converters;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
@@ -51,32 +51,14 @@ namespace H.Core.Providers.Feed
         private EntericMethanEmissionMethodologies _selectedMethaneEmissionMethodology;
 
         private ObservableCollection<FeedIngredient> _ingredients;
-        private static MapperConfiguration _dietMapperConfiguration;
-        private static MapperConfiguration _ingredientMapperConfiguration;
-        private static IMapper _dietMapper;
-        private static IMapper _ingredientMapper;
+        private static readonly ModelMapper<Diet> _dietMapper =
+            new ModelMapper<Diet>(nameof(Diet.Ingredients));
+        private static readonly ModelMapper<FeedIngredient> _ingredientMapper =
+            new ModelMapper<FeedIngredient>(nameof(FeedIngredient.Guid));
 
         #endregion
 
         #region Constructors
-
-        static Diet()
-        {
-            _dietMapperConfiguration = new MapperConfiguration(x =>
-            {
-                x.CreateMap<Diet, Diet>().ForMember(property => property.Ingredients, options => options.Ignore());
-            });
-
-            _ingredientMapperConfiguration = new MapperConfiguration(x =>
-            {
-                x.CreateMap<FeedIngredient, FeedIngredient>()
-                    .ForMember(property => property.Guid, options => options.Ignore());
-            });
-
-            _dietMapper = _dietMapperConfiguration.CreateMapper();
-
-            _ingredientMapper = _ingredientMapperConfiguration.CreateMapper();
-        }
 
         public Diet()
         {
@@ -500,7 +482,7 @@ namespace H.Core.Providers.Feed
 
             foreach (var feedIngredient in ingredientsToBeCopied)
             {
-                var copiedIngredient = _ingredientMapper.Map<FeedIngredient>(feedIngredient);
+                var copiedIngredient = _ingredientMapper.Map(feedIngredient);
 
                 copiedDiet.Ingredients.Add(copiedIngredient);
             }

@@ -117,7 +117,7 @@ namespace H.Core.Services.Initialization.Animals
 
             foreach (var item in source)
             {
-                var copiedInstance = _defaultBeddingCompositionDataMapper.Map<Table_30_Default_Bedding_Material_Composition_Data, Table_30_Default_Bedding_Material_Composition_Data>(item);
+                var copiedInstance = _defaultBeddingCompositionDataMapper.Map(item);
                 beddingMaterialCompositionData.Add(copiedInstance);
             }
             return beddingMaterialCompositionData;

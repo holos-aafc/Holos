@@ -19,8 +19,7 @@ using H.Core.Providers.Fertilizer;
 using H.Core.Providers.Nitrogen;
 using H.Core.Providers.Energy;
 using H.Core.Services.LandManagement;
-using AutoMapper;
-using AutoMapper.Configuration.Annotations;
+using H.Core.Mappers;
 using H.Core.Services.Animals;
 
 namespace H.Core.Services.Initialization.Crops
@@ -50,7 +49,7 @@ namespace H.Core.Services.Initialization.Crops
         private static readonly Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider _carbonFootprintForFertilizerBlendsProvider;
         private static readonly Table_50_Fuel_Energy_Estimates_Provider _fuelEnergyEstimatesProvider;
 
-        private readonly IMapper _soilDataMapper;
+        private readonly ModelMapper<SoilData> _soilDataMapper;
 
         #endregion
 
@@ -83,12 +82,7 @@ namespace H.Core.Services.Initialization.Crops
             _utilizationRatesForLivestockGrazingProvider = new Table_60_Utilization_Rates_For_Livestock_Grazing_Provider();
             _manureService = new ManureService();
 
-            var soilDataMapper = new MapperConfiguration(x =>
-            {
-                x.CreateMap<SoilData, SoilData>();
-            });
-
-            _soilDataMapper = soilDataMapper.CreateMapper();
+            _soilDataMapper = new ModelMapper<SoilData>();
         }
 
         #endregion
