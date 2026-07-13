@@ -7,7 +7,7 @@ using H.Content;
 using H.Core.Converters;
 using H.Infrastructure;
 using System.Linq;
-using AutoMapper;
+using H.Core.Mappers;
 using H.Core.Enumerations;
 
 #endregion
@@ -25,7 +25,7 @@ namespace H.Core.Providers.Feed
         private readonly IList<FeedIngredient> _dairyIngredients;
         private readonly IList<FeedIngredient> _swineFeedIngredients;
         
-        private readonly IMapper _feedIngredientMapper;
+        private readonly ModelMapper<FeedIngredient> _feedIngredientMapper;
 
         #endregion
 
@@ -37,12 +37,7 @@ namespace H.Core.Providers.Feed
             _dairyIngredients = this.ReadDairyFile().ToList();
             _swineFeedIngredients = this.ReadSwineFile().ToList();
 
-            var feedIngredientMapper = new MapperConfiguration(x =>
-            {
-                x.CreateMap<FeedIngredient, FeedIngredient>();
-            });
-
-            _feedIngredientMapper = feedIngredientMapper.CreateMapper();
+            _feedIngredientMapper = new ModelMapper<FeedIngredient>();
         }
 
         #endregion

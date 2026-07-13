@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿using H.Core.Mappers;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
@@ -17,13 +17,13 @@ namespace H.Core.Services
     {
         #region Fields
 
-        private readonly IMapper _anaerobicDigestionComponentMapper;
-        private readonly IMapper _anaerobicDigestionViewItemMapper;
-        private readonly IMapper _animalGroupMapper;
-        private readonly IMapper _cropResiduesSubstrateViewItemMapper;
-        private readonly IMapper _farmResiduesSubstrateViewItemMapper;
-        private readonly IMapper _manureSubstrateViewItemMapper;
-        private readonly IMapper _managementPeriodViewItemsMapper;
+        private readonly ModelMapper<AnaerobicDigestionComponent> _anaerobicDigestionComponentMapper;
+        private readonly ModelMapper<AnaerobicDigestionViewItem> _anaerobicDigestionViewItemMapper;
+        private readonly ModelMapper<AnimalGroup> _animalGroupMapper;
+        private readonly ModelMapper<CropResidueSubstrateViewItem> _cropResiduesSubstrateViewItemMapper;
+        private readonly ModelMapper<FarmResiduesSubstrateViewItem> _farmResiduesSubstrateViewItemMapper;
+        private readonly ModelMapper<ManureSubstrateViewItem> _manureSubstrateViewItemMapper;
+        private readonly ModelMapper<ADManagementPeriodViewItem> _managementPeriodViewItemsMapper;
 
         #endregion
 
@@ -31,48 +31,35 @@ namespace H.Core.Services
 
         public AnaerobicDigestionComponentHelper()
         {
-            var anaerobicDigestionComponentMapperConfiguration = new MapperConfiguration(x =>
-                x.CreateMap<AnaerobicDigestionComponent, AnaerobicDigestionComponent>()
-                    .ForMember(y => y.Guid, z => z.Ignore())
-                    .ForMember(y => y.CurrentPeriodComponentGuid, z => z.Ignore())
-                    .ForMember(y => y.AnaerobicDigestionViewItem, z => z.Ignore())
-                    .ForMember(y => y.ManagementPeriodViewItems, z => z.Ignore()));
-            _anaerobicDigestionComponentMapper = anaerobicDigestionComponentMapperConfiguration.CreateMapper();
+            _anaerobicDigestionComponentMapper = new ModelMapper<AnaerobicDigestionComponent>(
+                nameof(AnaerobicDigestionComponent.Guid),
+                nameof(AnaerobicDigestionComponent.CurrentPeriodComponentGuid),
+                nameof(AnaerobicDigestionComponent.AnaerobicDigestionViewItem),
+                nameof(AnaerobicDigestionComponent.ManagementPeriodViewItems));
 
-            var anaerobicDigestionViewItemMapperConfiguration = new MapperConfiguration(x =>
-                    x.CreateMap<AnaerobicDigestionViewItem, AnaerobicDigestionViewItem>()
-                .ForMember(y => y.Guid, z => z.Ignore())
-                .ForMember(y => y.CropResiduesSubstrateViewItems, z => z.Ignore())
-                .ForMember(y => y.FarmResiduesSubstrateViewItems, z => z.Ignore())
-                .ForMember(y => y.ManureSubstrateViewItems, z => z.Ignore()));
-            _anaerobicDigestionViewItemMapper = anaerobicDigestionViewItemMapperConfiguration.CreateMapper();
+            _anaerobicDigestionViewItemMapper = new ModelMapper<AnaerobicDigestionViewItem>(
+                nameof(AnaerobicDigestionViewItem.Guid),
+                nameof(AnaerobicDigestionViewItem.CropResiduesSubstrateViewItems),
+                nameof(AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems),
+                nameof(AnaerobicDigestionViewItem.ManureSubstrateViewItems));
 
-            var managementPeriodViewItemsMapperConfiguration = new MapperConfiguration(x =>
-                x.CreateMap<ADManagementPeriodViewItem, ADManagementPeriodViewItem>()
-                    .ForMember(y => y.Guid, z => z.Ignore())
-                    .ForMember(y => y.AnimalComponent, z => z.Ignore())
-                    .ForMember(y => y.AnimalGroup, z => z.Ignore())
-                    .ForMember(y => y.ManagementPeriod, z => z.Ignore()));
-            _managementPeriodViewItemsMapper = managementPeriodViewItemsMapperConfiguration.CreateMapper();
+            _managementPeriodViewItemsMapper = new ModelMapper<ADManagementPeriodViewItem>(
+                nameof(ADManagementPeriodViewItem.Guid),
+                nameof(ADManagementPeriodViewItem.AnimalComponent),
+                nameof(ADManagementPeriodViewItem.AnimalGroup),
+                nameof(ADManagementPeriodViewItem.ManagementPeriod));
 
-            var animalGroupMapperConfiguration = new MapperConfiguration(x => x.CreateMap<AnimalGroup, AnimalGroup>()
-                .ForMember(y => y.ManagementPeriods, z => z.Ignore()));
-            _animalGroupMapper = animalGroupMapperConfiguration.CreateMapper();
+            _animalGroupMapper = new ModelMapper<AnimalGroup>(
+                nameof(AnimalGroup.ManagementPeriods));
 
-            var cropResiduesSubstrateViewItemMapperConfiguration = new MapperConfiguration(x =>
-                x.CreateMap<CropResidueSubstrateViewItem, CropResidueSubstrateViewItem>()
-                    .ForMember(y => y.Guid, z => z.Ignore()));
-            _cropResiduesSubstrateViewItemMapper = cropResiduesSubstrateViewItemMapperConfiguration.CreateMapper();
+            _cropResiduesSubstrateViewItemMapper = new ModelMapper<CropResidueSubstrateViewItem>(
+                nameof(CropResidueSubstrateViewItem.Guid));
 
-            var farmResiduesSubstrateViewItemMapperConfiguration = new MapperConfiguration(x =>
-                x.CreateMap<FarmResiduesSubstrateViewItem, FarmResiduesSubstrateViewItem>()
-                    .ForMember(y => y.Guid, z => z.Ignore()));
-            _farmResiduesSubstrateViewItemMapper = farmResiduesSubstrateViewItemMapperConfiguration.CreateMapper();
+            _farmResiduesSubstrateViewItemMapper = new ModelMapper<FarmResiduesSubstrateViewItem>(
+                nameof(FarmResiduesSubstrateViewItem.Guid));
 
-            var manureSubstrateViewItemMapperConfiguration = new MapperConfiguration(x =>
-                x.CreateMap<ManureSubstrateViewItem, ManureSubstrateViewItem>()
-                    .ForMember(y => y.Guid, z => z.Ignore()));
-            _manureSubstrateViewItemMapper = manureSubstrateViewItemMapperConfiguration.CreateMapper();
+            _manureSubstrateViewItemMapper = new ModelMapper<ManureSubstrateViewItem>(
+                nameof(ManureSubstrateViewItem.Guid));
         }
 
         #endregion

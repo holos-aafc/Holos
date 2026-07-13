@@ -1,4 +1,3 @@
-﻿using AutoMapper;
 using H.Core.Properties;
 using H.Infrastructure;
 

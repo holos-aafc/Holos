@@ -6,8 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Navigation;
-using AutoMapper;
-using AutoMapper.Execution;
+using H.Core.Mappers;
 using H.Core.Calculators.Economics;
 using H.Core.Calculators.Infrastructure;
 using H.Core.Calculators.Nitrogen;
@@ -50,14 +49,14 @@ namespace H.Core.Services
         private readonly IAnimalService _animalResultsService;
         private readonly IADCalculator _adCalculator;
 
-        private readonly IMapper _farmMapper;
-        private readonly IMapper _defaultsMapper;
-        private readonly IMapper _detailsScreenCropViewItemMapper;
-        private readonly IMapper _dailyClimateDataMapper;
-        private readonly IMapper _soilDataMapper;
-        private readonly IMapper _customYieldDataMapper;
-        private readonly IMapper _climateDataMapper;
-        private readonly IMapper _geographicDataMapper;
+        private readonly ModelMapper<Farm> _farmMapper;
+        private readonly ModelMapper<Defaults> _defaultsMapper;
+        private readonly ModelMapper<CropViewItem> _detailsScreenCropViewItemMapper;
+        private readonly ModelMapper<DailyClimateData> _dailyClimateDataMapper;
+        private readonly ModelMapper<SoilData> _soilDataMapper;
+        private readonly ModelMapper<CustomUserYieldData> _customYieldDataMapper;
+        private readonly ModelMapper<ClimateData> _climateDataMapper;
+        private readonly ModelMapper<GeographicData> _geographicDataMapper;
 
         private readonly IEventAggregator _eventAggregator;
 
@@ -124,100 +123,35 @@ namespace H.Core.Services
                 throw new ArgumentNullException(nameof(eventAggregator));
             }
 
-            #region Farm Mapping
+            #region Mappers
 
-            var farmMapperConfiguration = new MapperConfiguration(x =>
-            {
-                x.CreateMap<Farm, Farm>()
-                    .ForMember(y => y.Name, z => z.Ignore())
-                    .ForMember(y => y.Guid, z => z.Ignore())
-                    .ForMember(y => y.Defaults, z => z.Ignore())
-                    .ForMember(y => y.StageStates, z => z.Ignore())
-                    .ForMember(y => y.ClimateData, z => z.Ignore())
-                    .ForMember(y => y.GeographicData, z => z.Ignore())
-                    .ForMember(y => y.Components, z => z.Ignore());
+            // Farm's Diets / DefaultManureCompositionData / DefaultsCompositionOfBeddingMaterials were deep-copied by the
+            // old bundled config (it registered Diet/DefaultManureCompositionData/Table_30 alongside Farm). ReplicateFarm
+            // now reproduces those deep copies with explicit clone loops, so this mapper only needs the Farm map itself.
+            _farmMapper = new ModelMapper<Farm>(
+                nameof(Farm.Name), nameof(Farm.Guid), nameof(Farm.Defaults), nameof(Farm.StageStates),
+                nameof(Farm.ClimateData), nameof(Farm.GeographicData), nameof(Farm.Components));
 
-                x.CreateMap<Table_15_Default_Soil_N2O_Emission_BreakDown_Provider,
-                    Table_15_Default_Soil_N2O_Emission_BreakDown_Provider>();
-                x.CreateMap<Table_30_Default_Bedding_Material_Composition_Data,
-                    Table_30_Default_Bedding_Material_Composition_Data>();
-                x.CreateMap<DefaultManureCompositionData, DefaultManureCompositionData>();
+            _defaultsMapper = new ModelMapper<Defaults>();
 
-                x.CreateMap<Diet, Diet>();
-            });
+            _detailsScreenCropViewItemMapper = new ModelMapper<CropViewItem>();
 
-            _farmMapper = farmMapperConfiguration.CreateMapper();
+            // ClimateData's Precipitation/Temperature/Evapotranspiration/BarnTemperature were deep-copied by the old
+            // bundled config; ReplicateFarm reproduces those with explicit clones after this map runs.
+            _climateDataMapper = new ModelMapper<ClimateData>(
+                nameof(ClimateData.DailyClimateData), nameof(ClimateData.Guid));
 
-            #endregion
+            _dailyClimateDataMapper = new ModelMapper<DailyClimateData>();
 
-            #region Defaults
+            _geographicDataMapper = new ModelMapper<GeographicData>(
+                nameof(GeographicData.SoilDataForAllComponentsWithinPolygon),
+                nameof(GeographicData.DefaultSoilData),
+                nameof(GeographicData.CustomYieldData),
+                nameof(GeographicData.Guid));
 
-            var defaultMapperConfiguration = new MapperConfiguration(x => { x.CreateMap<Defaults, Defaults>(); });
+            _soilDataMapper = new ModelMapper<SoilData>();
 
-            _defaultsMapper = defaultMapperConfiguration.CreateMapper();
-
-            #endregion
-
-            #region Details Screen
-
-            var detailsScreenCropViewItemMapperConfiguration = new MapperConfiguration(x =>
-                {
-                    x.CreateMap<CropViewItem, CropViewItem>();
-                });
-
-            _detailsScreenCropViewItemMapper = detailsScreenCropViewItemMapperConfiguration.CreateMapper();
-
-            #endregion
-
-            #region Climate Mappers
-
-            var climateDataMapper = new MapperConfiguration(x =>
-            {
-                x.CreateMap<PrecipitationData, PrecipitationData>();
-                x.CreateMap<TemperatureData, TemperatureData>();
-                x.CreateMap<EvapotranspirationData, EvapotranspirationData>();
-                x.CreateMap<ClimateData, ClimateData>()
-                    .ForMember(y => y.DailyClimateData, z => z.Ignore())
-                    .ForMember(y => y.Guid, z => z.Ignore());
-            });
-
-            _climateDataMapper = climateDataMapper.CreateMapper();
-
-            var dailyclimateDataMapper = new MapperConfiguration(x =>
-            {
-                x.CreateMap<DailyClimateData, DailyClimateData>();
-            });
-
-            _dailyClimateDataMapper = dailyclimateDataMapper.CreateMapper();
-
-            #endregion
-
-            #region GeographicData Mappers
-
-            var geographicDataMapper = new MapperConfiguration(x =>
-            {
-                x.CreateMap<GeographicData, GeographicData>()
-                    .ForMember(y => y.SoilDataForAllComponentsWithinPolygon, z => z.Ignore())
-                    .ForMember(y => y.DefaultSoilData, z => z.Ignore())
-                    .ForMember(y => y.CustomYieldData, z => z.Ignore())
-                    .ForMember(y => y.Guid, z => z.Ignore());
-            });
-
-            _geographicDataMapper = geographicDataMapper.CreateMapper();
-
-            var soilDataMapper = new MapperConfiguration(x =>
-            {
-                x.CreateMap<SoilData, SoilData>();
-            });
-
-            _soilDataMapper = soilDataMapper.CreateMapper();
-
-            var customYieldMapper = new MapperConfiguration(x =>
-            {
-                x.CreateMap<CustomUserYieldData, CustomUserYieldData>();
-            });
-
-            _customYieldDataMapper = customYieldMapper.CreateMapper();
+            _customYieldDataMapper = new ModelMapper<CustomUserYieldData>();
 
             #endregion
         }
@@ -366,6 +300,32 @@ namespace H.Core.Services
             _geographicDataMapper.Map(farm.GeographicData, replicatedFarm.GeographicData);
 
             replicatedFarm.Name = farm.Name;
+
+            // Reproduce the deep copies the previous bundled AutoMapper configurations performed. The Farm and
+            // ClimateData maps above are shallow, so without these explicit clones the replicated farm would share these
+            // references (and their list elements) with the original farm.
+            replicatedFarm.ClimateData.PrecipitationData = PropertyMapper.Clone(farm.ClimateData.PrecipitationData);
+            replicatedFarm.ClimateData.TemperatureData = PropertyMapper.Clone(farm.ClimateData.TemperatureData);
+            replicatedFarm.ClimateData.EvapotranspirationData = PropertyMapper.Clone(farm.ClimateData.EvapotranspirationData);
+            replicatedFarm.ClimateData.BarnTemperatureData = PropertyMapper.Clone(farm.ClimateData.BarnTemperatureData);
+
+            replicatedFarm.Diets.Clear();
+            foreach (var diet in farm.Diets)
+            {
+                replicatedFarm.Diets.Add(PropertyMapper.Clone(diet));
+            }
+
+            replicatedFarm.DefaultManureCompositionData.Clear();
+            foreach (var defaultManureCompositionData in farm.DefaultManureCompositionData)
+            {
+                replicatedFarm.DefaultManureCompositionData.Add(PropertyMapper.Clone(defaultManureCompositionData));
+            }
+
+            replicatedFarm.DefaultsCompositionOfBeddingMaterials.Clear();
+            foreach (var beddingMaterialComposition in farm.DefaultsCompositionOfBeddingMaterials)
+            {
+                replicatedFarm.DefaultsCompositionOfBeddingMaterials.Add(PropertyMapper.Clone(beddingMaterialComposition));
+            }
 
             #region Animal Components
 

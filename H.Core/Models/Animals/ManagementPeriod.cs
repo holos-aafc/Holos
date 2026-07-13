@@ -1,6 +1,5 @@
 ﻿#region Imports
 
-using AutoMapper;
 using H.Core.Converters;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;

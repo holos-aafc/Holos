@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using AutoMapper;
+using H.Core.Mappers;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
 
@@ -26,17 +26,12 @@ namespace H.Core.Services.Initialization.Crops
                 return;
             }
 
-            var customCropDefaultsMapperConfiguration = new MapperConfiguration(configuration =>
-            {
-                // Don't copy the GUID, and do not overwrite the year, name, or area, on the crop
-                configuration.CreateMap<CropViewItem, CropViewItem>()
-                    .ForMember(x => x.Guid, options => options.Ignore())
-                    .ForMember(x => x.Year, options => options.Ignore())
-                    .ForMember(x => x.Name, options => options.Ignore())
-                    .ForMember(x => x.Area, options => options.Ignore());
-            });
-
-            var mapper = customCropDefaultsMapperConfiguration.CreateMapper();
+            // Don't copy the GUID, and do not overwrite the year, name, or area, on the crop
+            var mapper = new ModelMapper<CropViewItem>(
+                nameof(CropViewItem.Guid),
+                nameof(CropViewItem.Year),
+                nameof(CropViewItem.Name),
+                nameof(CropViewItem.Area));
 
             mapper.Map(cropDefaults, viewItem);
         }

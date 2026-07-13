@@ -1,7 +1,7 @@
 ﻿#region Imports
 
 using System;
-using AutoMapper;
+using H.Core.Mappers;
 using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
@@ -201,21 +201,13 @@ namespace H.Core.Providers.Feed
         private double _pufa;
         private double _iv;
         private double _ivp;
-        private static IMapper _ingredientMapper;
+        private static readonly ModelMapper<FeedIngredient> _ingredientMapper =
+            new ModelMapper<FeedIngredient>(nameof(FeedIngredient.Guid));
 
         #endregion
 
         #region Constructors
 
-        static FeedIngredient()
-        {
-            var mapperConfig = new MapperConfiguration(x =>
-            {
-                x.CreateMap<FeedIngredient, FeedIngredient>().ForMember(prop => prop.Guid, opt => opt.Ignore());
-            });
-            _ingredientMapper = mapperConfig.CreateMapper();
-
-        }
         #endregion
 
         #region Properties
@@ -1329,7 +1321,7 @@ namespace H.Core.Providers.Feed
 
         public static FeedIngredient CopyFeedIngredient(FeedIngredient ingredient)
         {
-            return _ingredientMapper.Map<FeedIngredient>(ingredient);
+            return _ingredientMapper.Map(ingredient);
         }
 
         public static FeedIngredient ConvertFeedIngredientToImperial(FeedIngredient ingredient)

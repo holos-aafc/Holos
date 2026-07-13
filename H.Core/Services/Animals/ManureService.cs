@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using AutoMapper;
+using H.Core.Mappers;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -59,7 +59,7 @@ namespace H.Core.Services.Animals
             ManureLocationSourceType.Imported,
         };
 
-        private readonly IMapper _manureCompositionMapper;
+        private readonly ModelMapper<DefaultManureCompositionData> _manureCompositionMapper;
         private List<AnimalComponentEmissionsResults> _animalComponentEmissionsResults;
 
         #endregion
@@ -70,13 +70,8 @@ namespace H.Core.Services.Animals
         {
             _manureTanks = new List<ManureTank>();
 
-            var manureCompositionMapperConfiguration = new MapperConfiguration(x =>
-            {
-                x.CreateMap<DefaultManureCompositionData, DefaultManureCompositionData>()
-                    .ForMember(y => y.Guid, z => z.Ignore());
-            });
-
-            _manureCompositionMapper = manureCompositionMapperConfiguration.CreateMapper();
+            _manureCompositionMapper = new ModelMapper<DefaultManureCompositionData>(
+                nameof(DefaultManureCompositionData.Guid));
         }
 
         #endregion
@@ -894,7 +889,7 @@ namespace H.Core.Services.Animals
                     animalType: animalType);
 
                 // Make a copy
-                var mappedItem = _manureCompositionMapper.Map<DefaultManureCompositionData>(manureComposition);
+                var mappedItem = _manureCompositionMapper.Map(manureComposition);
 
                 return mappedItem;
             }

@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using H.Core.Models.Animals;
 using H.Core.Providers.AnaerobicDigestion;
 using System.ComponentModel;
-using AutoMapper;
 using H.Core.Providers.Climate;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Services.Animals;
@@ -23,8 +22,6 @@ namespace H.Core.Calculators.Infrastructure
         #region Fields
 
         
-        private readonly IMapper _substrateMapper;
-
         protected readonly Table_47_Solid_Liquid_Separation_Coefficients_Provider
             _solidLiquidSeparationCoefficientsProvider = new Table_47_Solid_Liquid_Separation_Coefficients_Provider();
 
@@ -37,14 +34,6 @@ namespace H.Core.Calculators.Infrastructure
 
         public ADCalculator()
         {
-            var substrateFlowMapperConfiguration = new MapperConfiguration(configure: configuration =>
-            {
-                configuration.CreateMap<SubstrateFlowInformation, SubstrateFlowInformation>()
-                    .ForMember(property => property.Name, options => options.Ignore())
-                    .ForMember(property => property.Guid, options => options.Ignore());
-            });
-
-            _substrateMapper = substrateFlowMapperConfiguration.CreateMapper();
         }
 
         #endregion

@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using AutoMapper;
 using H.Core.Enumerations;
 using H.Core.Properties;
 using H.Core.Providers.Animals;

@@ -8,7 +8,7 @@ using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
 using H.Infrastructure;
-using AutoMapper;
+using H.Core.Mappers;
 
 namespace H.Core.Providers.Economics
 {
@@ -78,8 +78,7 @@ namespace H.Core.Providers.Economics
         public CropEconomicData Get(CropType cropType, SoilFunctionalCategory soilFunctionalCategory, Province province)
         {
             //we need a deep copy of the econ data
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<CropEconomicData, CropEconomicData>());
-            var mapper = config.CreateMapper();
+            var mapper = new ModelMapper<CropEconomicData>();
 
             var soilCategory = soilFunctionalCategory.GetBaseSoilFunctionalCategory();
 
@@ -196,7 +195,7 @@ namespace H.Core.Providers.Economics
         /// <param name="mapper">the mapper</param>
         /// <returns>CropEconomicData matching the search but from another province</returns>
         private CropEconomicData GetMatchInNeighbouringProvince(Province province, CropType originalCropType,
-            SoilFunctionalCategory soilCategory, IMapper mapper)
+            SoilFunctionalCategory soilCategory, ModelMapper<CropEconomicData> mapper)
         {
             const int searchLimit = 2;
 
@@ -234,7 +233,7 @@ namespace H.Core.Providers.Economics
                 }
             }
 
-            var result = mapper.Map<CropEconomicData>(econData);
+            var result = mapper.Map(econData);
             return result;
         }
 
@@ -242,7 +241,7 @@ namespace H.Core.Providers.Economics
         /// Cycle through all of the soil zones in the province and try and find economic data for the croptype
         /// </summary>
         private CropEconomicData GetMatchAcrossTheProvince(Province province, CropType econCropType,
-            SoilFunctionalCategory soilFunctionalCategory, IMapper mapper)
+            SoilFunctionalCategory soilFunctionalCategory, ModelMapper<CropEconomicData> mapper)
         {
             if (soilFunctionalCategory == SoilFunctionalCategory.NotApplicable) return new CropEconomicData();
             CropEconomicData econData = null;
@@ -260,7 +259,7 @@ namespace H.Core.Providers.Economics
                 soilNeighbour = soilNeighbour.GetNeighbouringCategory();
             }
 
-            var result = mapper.Map<CropEconomicData>(econData);
+            var result = mapper.Map(econData);
             return result;
 
         }
@@ -269,7 +268,7 @@ namespace H.Core.Providers.Economics
         /// Get economic data that matches directly to province, soil zone, and croptype
         /// </summary>
         private CropEconomicData GetDirectMatch(CropType cropType, Province province,
-            SoilFunctionalCategory soilCategory, CropType econCropType, IMapper mapper)
+            SoilFunctionalCategory soilCategory, CropType econCropType, ModelMapper<CropEconomicData> mapper)
         {
             CropEconomicData result;
             if (soilCategory == SoilFunctionalCategory.Brown && province == Province.Alberta &&
@@ -280,7 +279,7 @@ namespace H.Core.Providers.Economics
                     entry.CropType == CropType.SummerFallow &&
                     entry.SoilFunctionalCategory == soilCategory &&
                     entry.Province == province);
-                result = mapper.Map<CropEconomicData>(econData);
+                result = mapper.Map(econData);
             }
             else if (cropType == CropType.Fallow || cropType == CropType.SummerFallow)
             {
@@ -289,7 +288,7 @@ namespace H.Core.Providers.Economics
                     entry.CropType == econCropType &&
                     entry.SoilFunctionalCategory == SoilFunctionalCategory.NotApplicable &&
                     entry.Province == province);
-                result = mapper.Map<CropEconomicData>(econData);
+                result = mapper.Map(econData);
             }
             else
             {
@@ -298,7 +297,7 @@ namespace H.Core.Providers.Economics
                     entry.CropType == econCropType &&
                     entry.SoilFunctionalCategory == soilCategory &&
                     entry.Province == province);
-                result = mapper.Map<CropEconomicData>(econData);
+                result = mapper.Map(econData);
             }
 
             return result;
