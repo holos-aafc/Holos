@@ -15,6 +15,10 @@ jobs:
 
   nuget:
     needs: build
+    permissions:
+      id-token: write   # allow the reusable workflow to mint the OIDC token for Trusted Publishing
+      contents: read
+      packages: write
     uses: ./.github/workflows/_dotnet-nuget-template.yml
     secrets: inherit
     with:

@@ -9,8 +9,10 @@ on:
 jobs:
   reusable_workflow_job:
     runs-on:  windows-latest
-    env:
-        NUGET_AUTH_TOKEN: ${{ secrets.HOLOS_NUGET_KEY }}
+    permissions:
+      id-token: write   # request the OIDC token for nuget.org Trusted Publishing
+      contents: read
+      packages: write   # push to GitHub Packages (uses GITHUB_TOKEN)
     steps:
     
     - name: Get date/time
@@ -42,8 +44,14 @@ jobs:
     - name: Add registry
       run: dotnet nuget add source --username ${{ github.repository_owner }} --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
     
+    - name: NuGet login (Trusted Publishing - exchange OIDC token for a short-lived key)
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: holos-aafc
+
     - name: Publish packages to nuget.org
-      run: dotnet nuget push "*/**/aafc*.nupkg" -k $env:NUGET_AUTH_TOKEN -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push "*/**/aafc*.nupkg" --api-key ${{ steps.login.outputs.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
 
     - name: Publish packages to github
       run: dotnet nuget push "*/**/aafc*.nupkg"  --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"
