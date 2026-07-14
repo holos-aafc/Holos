@@ -12,11 +12,11 @@ jobs:
     steps:
 
     - name: "Download build"
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v7
       with:
         name: ${{ inputs.filename }}
 
-    - uses: vimtor/action-zip@v1.2
+    - uses: vimtor/action-zip@v1.3
       with:
         files: H.Core/
         dest: ${{ inputs.filename }}.zip

@@ -17,15 +17,27 @@ jobs:
       Solution_Name: Holos.sln
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
-        fetch-depth: 0        
+        fetch-depth: 0
 
     - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v2
+      uses: microsoft/setup-msbuild@v3
 
+    # darenm/Setup-VSTest is unmaintained and still runs on Node 20. The runner's
+    # Visual Studio install already ships vstest.console.exe, so locate it with
+    # vswhere and put it on PATH instead.
     - name: Setup VSTest
-      uses: darenm/Setup-VSTest@v1
+      shell: pwsh
+      run: |
+        $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+        $vstest = & $vswhere -latest -products * -find "**\TestPlatform\vstest.console.exe" | Select-Object -First 1
+        if (-not $vstest) {
+          $vstest = & $vswhere -latest -products * -find "**\vstest.console.exe" | Select-Object -First 1
+        }
+        if (-not $vstest) { throw "vstest.console.exe not found on the runner" }
+        Write-Host "Using vstest.console.exe: $vstest"
+        Split-Path -Parent $vstest | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
 
     - name: Restore nuget packages
       run: msbuild ${{ inputs.solution }} /t:Restore /m
@@ -42,7 +54,7 @@ jobs:
 
     - name: Upload build artifacts
       if: ${{ inputs.configuration == 'Release' }}
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         name: ${{ inputs.filename }}
         path: '**/H.Core/bin/*'
