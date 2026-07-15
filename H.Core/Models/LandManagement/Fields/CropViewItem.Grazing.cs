@@ -58,6 +58,15 @@ namespace H.Core.Models.LandManagement.Fields
             }
         }
 
+        /// <summary>
+        /// Returns true if any <see cref="GrazingViewItem"/> in the collection has a start date that falls within the same year as this <see cref="CropViewItem"/>.
+        /// </summary>
+        /// <returns>True if at least one grazing item exists for the current year, false otherwise.</returns>
+        public bool HasGrazingItemsForTheCurrentYear()
+        {
+            return this.GrazingViewItems.Any(x => x.Start.Year == this.Year);
+        }
+
         #endregion
     }
 }
