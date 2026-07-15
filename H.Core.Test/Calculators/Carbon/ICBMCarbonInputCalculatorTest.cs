@@ -618,6 +618,8 @@ namespace H.Core.Test.Calculators.Carbon
         [TestMethod]
         public void CalculatePlantCarbonInAgriculturalProductGrazedFieldAndCustomYieldAssignmentMethod()
         {
+            var date = new DateTime(DateTime.Now.Year, 1, 1);
+
             var currentYearViewItem = new CropViewItem()
             {
                 Yield = 1000,
@@ -625,9 +627,10 @@ namespace H.Core.Test.Calculators.Carbon
                 PercentageOfProductYieldReturnedToSoil = 10,
                 CropType = CropType.Barley,
                 MoistureContentOfCrop = 0.12,
+                Year = date.Year,
             };
 
-            currentYearViewItem.GrazingViewItems.Add(new GrazingViewItem());
+            currentYearViewItem.GrazingViewItems.Add(new GrazingViewItem() {Start = date});
             var farm = new Farm();
             farm.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
 
