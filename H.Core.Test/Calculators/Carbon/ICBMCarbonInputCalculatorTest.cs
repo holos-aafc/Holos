@@ -618,7 +618,7 @@ namespace H.Core.Test.Calculators.Carbon
         [TestMethod]
         public void CalculatePlantCarbonInAgriculturalProductGrazedFieldAndCustomYieldAssignmentMethod()
         {
-            var date = DateTime.Now;
+            var date = new DateTime(DateTime.Now.Year, 1, 1);
 
             var currentYearViewItem = new CropViewItem()
             {
