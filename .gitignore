@@ -409,4 +409,7 @@ build_instructions.js
 Hamiota baseline M19_patched.json
 build_residue_n_calculator.py
 H.Content/Documentation/Crop_Residue_Nitrogen_Calculator.xlsx
-/lib/RCWPF/2018.1.220.45
+# Licensed Telerik/SharpDX binaries. These live in the private GUI repo
+# (holos-aafc/Holos-4-GUI) and are junctioned in locally; they must never
+# be committed here. Broad pattern so a Telerik version bump stays covered.
+/lib/
