@@ -184,23 +184,31 @@ namespace H.Core.Providers.Soil
 
         /// <summary>
         /// Table 16: Lookup function for N2O Reduction factor values = RF_AM
+        ///
+        /// <remarks>
+        /// See "Meta-analysis: effect of improved nitrogen management practices on nitrous oxide emissions in Canadian studies"
+        /// </remarks>
         /// </summary>
         public double GetReductionFactorBasedOnApplicationMethod(SoilReductionFactors soilReductionFactors)
         {
             var defaultValue = 1d;
             switch (soilReductionFactors)
             {
+                // Values are the remaining fraction (1 - reduction) since this factor is used as a
+                // multiplier on the N2O emission factor. Per-type N2O changes from the meta-analysis:
+                // slow/controlled-release -6.41%, nitrification inhibitor -22.9%, urease inhibitor +9.6%,
+                // dual (nitrification + urease) inhibitor -15.1%.
                 case SoilReductionFactors.ControlledRelease:
-                    return 0.86;
+                    return 0.9359;
 
                 case SoilReductionFactors.NitrificationInhibitor:
-                    return 0.72;
+                    return 0.771;
 
                 case SoilReductionFactors.UreaseInhibitor:
-                    return 1.04;
+                    return 1.096;
 
                 case SoilReductionFactors.NitrificationAndUreaseInhibitor:
-                    return 0.69;
+                    return 0.849;
 
                 case SoilReductionFactors.None:
                     return defaultValue;
