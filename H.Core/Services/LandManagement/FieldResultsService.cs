@@ -61,8 +61,6 @@ namespace H.Core.Services.LandManagement
 
         private readonly Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider _carbonFootprintForFertilizerBlendsProvider = new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider();
 
-        private readonly SmallAreaYieldProvider _smallAreaYieldProvider = new SmallAreaYieldProvider();
-        
         private readonly ICustomFileYieldProvider _customFileYieldProvider = new CustomFileYieldProvider();
         private readonly IInitializationService _initializationService;
         private readonly IICBMNitrogenInputCalculator _icbmNitrogenInputCalculator;
@@ -155,8 +153,6 @@ namespace H.Core.Services.LandManagement
 
             _digestateViewItemMapper = new ModelMapper<DigestateApplicationViewItem>(
                 nameof(DigestateApplicationViewItem.Name), nameof(DigestateApplicationViewItem.Guid));
-
-            _smallAreaYieldProvider.Initialize();
 
             this.AnimalResults = new List<AnimalComponentEmissionsResults>();
 
