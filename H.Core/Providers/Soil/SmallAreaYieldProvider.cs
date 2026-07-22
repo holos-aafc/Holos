@@ -18,10 +18,27 @@ namespace H.Core.Providers.Soil
         private readonly ProvinceStringConverter _provinceStringConverter = new ProvinceStringConverter();
         private readonly CropTypeStringConverter _cropStringConverter = new CropTypeStringConverter();
 
-        // Use a dictionary since there are > 1M records in the file
-        private readonly Dictionary<(int year, int polygon, CropType cropType, Province province), SmallAreaYieldData> _cache = new Dictionary<(int year, int polygon, CropType cropType, Province province), SmallAreaYieldData>();
+        // Use a dictionary since there are > 1M records in the file.
+        //
+        // These are static, and the reads below are guarded, because the yield file is ~31 MB and
+        // parsing it produces millions of entries. The data is immutable once parsed (the provider
+        // exposes no mutators), so it is loaded once per process and shared by every instance.
+        // Previously each instance re-read the whole file - and FieldResultsService creates a
+        // provider per instance in its constructor, so the parse was repeated on every construction.
+        // Only the yield is stored. Every other field of SmallAreaYieldData is already in the key
+        // (year/polygon/cropType/province) or is the CSV line number, so storing the object cost
+        // ~98 bytes per entry across ~4.85M entries (~453 MB). Storing the int and rebuilding the
+        // (small, short-lived) object on lookup keeps the public API identical for ~1/3 the memory.
+        private static readonly Dictionary<(int year, int polygon, CropType cropType, Province province), int> _cache = new Dictionary<(int year, int polygon, CropType cropType, Province province), int>();
 
-        private readonly Dictionary<(int year, int polygon, CropType cropType, Province province), SmallAreaYieldData> _updatedYields = new Dictionary<(int year, int polygon, CropType cropType, Province province), SmallAreaYieldData>();
+        private static readonly Dictionary<(int year, int polygon, CropType cropType, Province province), int> _updatedYields = new Dictionary<(int year, int polygon, CropType cropType, Province province), int>();
+
+        private static readonly object _loadLock = new object();
+
+        // Tracked separately: Initialize() loads only the main file, InitializeAsync() also loads
+        // the updated yields, so a single flag would let one path suppress the other's load.
+        private static bool _cacheLoaded;
+        private static bool _updatedYieldsLoaded;
 
 
         #endregion
@@ -56,7 +73,7 @@ namespace H.Core.Providers.Soil
 
         public IEnumerable<SmallAreaYieldData> GetData()
         {
-            return _cache.Values.ToList();
+            return _cache.Select(kvp => Build(kvp.Key, kvp.Value)).ToList();
         }
 
         public SmallAreaYieldData GetData(int year, int polygon, CropType cropType, Province province)
@@ -84,9 +101,10 @@ namespace H.Core.Providers.Soil
                 lookupCropType = CropType.DryPeas;
             }
 
-            if (_cache.ContainsKey((year: year, polygon: polygon, cropType: lookupCropType, province: province)))
+            var key = (year: year, polygon: polygon, cropType: lookupCropType, province: province);
+            if (_cache.TryGetValue(key, out var yield))
             {
-                return _cache[(year: year, polygon: polygon, cropType: lookupCropType, province: province)];
+                return Build(key, yield);
             }
             else
             {
@@ -96,14 +114,31 @@ namespace H.Core.Providers.Soil
 
         public SmallAreaYieldData GetUpdatedData(int year, int polygon, CropType cropType, Province province)
         {
-            if (_updatedYields.ContainsKey((year: year, polygon: polygon, cropType: cropType, province: province)))
+            var key = (year: year, polygon: polygon, cropType: cropType, province: province);
+            if (_updatedYields.TryGetValue(key, out var yield))
             {
-                return _updatedYields[(year: year, polygon: polygon, cropType: cropType, province: province)];
+                return Build(key, yield);
             }
             else
             {
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Rebuilds the data object from the key plus the stored yield. Note <see cref="SmallAreaYieldData.Id"/>
+        /// (the CSV line number) is not retained - it was never read by any consumer.
+        /// </summary>
+        private static SmallAreaYieldData Build((int year, int polygon, CropType cropType, Province province) key, int yield)
+        {
+            return new SmallAreaYieldData()
+            {
+                Year = key.year,
+                Polygon = key.polygon,
+                CropType = key.cropType,
+                Province = key.province,
+                Yield = yield,
+            };
         }
 
         #endregion
@@ -112,308 +147,92 @@ namespace H.Core.Providers.Soil
 
         private void ReadFile()
         {
+            if (!_cacheLoaded)
+            {
+                lock (_loadLock)
+                {
+                    if (!_cacheLoaded)
+                    {
+                        this.ReadFileCore();
+                        _cacheLoaded = true;
+                    }
+                }
+            }
+
+            // Raised on every call (not just the first) so subscribers still get notified even when
+            // the data was already loaded by an earlier instance.
+            this.FinishedReadingFile?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void ReadFileCore()
+        {
             var cultureInfo = InfrastructureConstants.EnglishCultureInfo;
             var fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.SmallAreaYields);
 
             foreach (var line in fileLines.Skip(1))
             {
-                var id = int.Parse(line[0]);
                 var year = int.Parse(line[1]);
                 var province = _provinceStringConverter.Convert(line[2]);
                 var polygon = int.Parse(line[3]);
 
-                _cache.Add((year, polygon, CropType.Barley, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.Barley,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[5]) ? 0 : int.Parse(line[5]),
-                });
+                _cache.Add((year, polygon, CropType.Barley, province), string.IsNullOrWhiteSpace(line[5]) ? 0 : int.Parse(line[5]));
 
-                _cache.Add((year, polygon, CropType.Canola, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.Canola,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[6]) ? 0 : int.Parse(line[6]),
-                });
+                _cache.Add((year, polygon, CropType.Canola, province), string.IsNullOrWhiteSpace(line[6]) ? 0 : int.Parse(line[6]));
 
-                _cache.Add((year, polygon, CropType.GrainCorn, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.GrainCorn,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[7]) ? 0 : int.Parse(line[7]),
-                });
+                _cache.Add((year, polygon, CropType.GrainCorn, province), string.IsNullOrWhiteSpace(line[7]) ? 0 : int.Parse(line[7]));
 
-                _cache.Add((year, polygon, CropType.FlaxSeed, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.FlaxSeed,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[8]) ? 0 : int.Parse(line[8]),
-                });
+                _cache.Add((year, polygon, CropType.FlaxSeed, province), string.IsNullOrWhiteSpace(line[8]) ? 0 : int.Parse(line[8]));
 
-                _cache.Add((year, polygon, CropType.Oats, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.Oats,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[9]) ? 0 : int.Parse(line[9]),
-                });
+                _cache.Add((year, polygon, CropType.Oats, province), string.IsNullOrWhiteSpace(line[9]) ? 0 : int.Parse(line[9]));
 
-                _cache.Add((year, polygon, CropType.Soybeans, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.Soybeans,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[10]) ? 0 : int.Parse(line[10]),
-                });
+                _cache.Add((year, polygon, CropType.Soybeans, province), string.IsNullOrWhiteSpace(line[10]) ? 0 : int.Parse(line[10]));
 
-                _cache.Add((year, polygon, CropType.Durum, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.Durum,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[11]) ? 0 : int.Parse(line[11]),
-                });
+                _cache.Add((year, polygon, CropType.Durum, province), string.IsNullOrWhiteSpace(line[11]) ? 0 : int.Parse(line[11]));
 
-                _cache.Add((year, polygon, CropType.SpringWheat, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.SpringWheat,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[12]) ? 0 : int.Parse(line[12]),
-                });
+                _cache.Add((year, polygon, CropType.SpringWheat, province), string.IsNullOrWhiteSpace(line[12]) ? 0 : int.Parse(line[12]));
 
-                _cache.Add((year, polygon, CropType.WinterWheat, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.WinterWheat,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[13]) ? 0 : int.Parse(line[13]),
-                });
+                _cache.Add((year, polygon, CropType.WinterWheat, province), string.IsNullOrWhiteSpace(line[13]) ? 0 : int.Parse(line[13]));
 
-                _cache.Add((year, polygon, CropType.Buckwheat, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.Buckwheat,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[16]) ? 0 : int.Parse(line[16]),
-                });
+                _cache.Add((year, polygon, CropType.Buckwheat, province), string.IsNullOrWhiteSpace(line[16]) ? 0 : int.Parse(line[16]));
 
-                _cache.Add((year, polygon, CropType.CanarySeed, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.CanarySeed,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[17]) ? 0 : int.Parse(line[17]),
-                });
+                _cache.Add((year, polygon, CropType.CanarySeed, province), string.IsNullOrWhiteSpace(line[17]) ? 0 : int.Parse(line[17]));
 
-                _cache.Add((year, polygon, CropType.Caraway, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.Caraway,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[18]) ? 0 : int.Parse(line[18]),
-                });
+                _cache.Add((year, polygon, CropType.Caraway, province), string.IsNullOrWhiteSpace(line[18]) ? 0 : int.Parse(line[18]));
 
-                _cache.Add((year, polygon, CropType.SilageCorn, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.SilageCorn,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[21]) ? 0 : int.Parse(line[21]),
-                });
+                _cache.Add((year, polygon, CropType.SilageCorn, province), string.IsNullOrWhiteSpace(line[21]) ? 0 : int.Parse(line[21]));
 
-                _cache.Add((year, polygon, CropType.FabaBeans, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.FabaBeans,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[22]) ? 0 : int.Parse(line[22]),
-                });
+                _cache.Add((year, polygon, CropType.FabaBeans, province), string.IsNullOrWhiteSpace(line[22]) ? 0 : int.Parse(line[22]));
 
-                _cache.Add((year, polygon, CropType.Lentils, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.Lentils,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[23]) ? 0 : int.Parse(line[23]),
-                });
+                _cache.Add((year, polygon, CropType.Lentils, province), string.IsNullOrWhiteSpace(line[23]) ? 0 : int.Parse(line[23]));
 
-                _cache.Add((year, polygon, CropType.MixedGrains, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.MixedGrains,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[24]) ? 0 : int.Parse(line[24]),
-                });
+                _cache.Add((year, polygon, CropType.MixedGrains, province), string.IsNullOrWhiteSpace(line[24]) ? 0 : int.Parse(line[24]));
 
-                _cache.Add((year, polygon, CropType.Mustard, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.Mustard,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[25]) ? 0 : int.Parse(line[25]),
-                });
+                _cache.Add((year, polygon, CropType.Mustard, province), string.IsNullOrWhiteSpace(line[25]) ? 0 : int.Parse(line[25]));
 
-                _cache.Add((year, polygon, CropType.DryPeas, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.DryPeas,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[26]) ? 0 : int.Parse(line[26]),
-                });
+                _cache.Add((year, polygon, CropType.DryPeas, province), string.IsNullOrWhiteSpace(line[26]) ? 0 : int.Parse(line[26]));
 
-                _cache.Add((year, polygon, CropType.Rye, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.Rye,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[27]) ? 0 : int.Parse(line[27]),
-                });
+                _cache.Add((year, polygon, CropType.Rye, province), string.IsNullOrWhiteSpace(line[27]) ? 0 : int.Parse(line[27]));
 
-                _cache.Add((year, polygon, CropType.FallRye, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.FallRye,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[28]) ? 0 : int.Parse(line[28]),
-                });
+                _cache.Add((year, polygon, CropType.FallRye, province), string.IsNullOrWhiteSpace(line[28]) ? 0 : int.Parse(line[28]));
 
-                _cache.Add((year, polygon, CropType.SpringRye, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.SpringRye,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[29]) ? 0 : int.Parse(line[29]),
-                });
+                _cache.Add((year, polygon, CropType.SpringRye, province), string.IsNullOrWhiteSpace(line[29]) ? 0 : int.Parse(line[29]));
 
-                _cache.Add((year, polygon, CropType.Safflower, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.Safflower,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[30]) ? 0 : int.Parse(line[30]),
-                });
+                _cache.Add((year, polygon, CropType.Safflower, province), string.IsNullOrWhiteSpace(line[30]) ? 0 : int.Parse(line[30]));
 
-                _cache.Add((year, polygon, CropType.SugarBeets, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.SugarBeets,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[31]) ? 0 : int.Parse(line[31]),
-                });
+                _cache.Add((year, polygon, CropType.SugarBeets, province), string.IsNullOrWhiteSpace(line[31]) ? 0 : int.Parse(line[31]));
 
-                _cache.Add((year, polygon, CropType.Sunflower, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.Sunflower,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[32]) ? 0 : int.Parse(line[32]),
-                });
+                _cache.Add((year, polygon, CropType.Sunflower, province), string.IsNullOrWhiteSpace(line[32]) ? 0 : int.Parse(line[32]));
 
-                _cache.Add((year, polygon, CropType.TamePasture, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.TamePasture,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[33]) ? 0 : int.Parse(line[33]),
-                });
+                _cache.Add((year, polygon, CropType.TamePasture, province), string.IsNullOrWhiteSpace(line[33]) ? 0 : int.Parse(line[33]));
 
-                _cache.Add((year, polygon, CropType.Triticale, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.Triticale,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[34]) ? 0 : int.Parse(line[34]),
-                });
+                _cache.Add((year, polygon, CropType.Triticale, province), string.IsNullOrWhiteSpace(line[34]) ? 0 : int.Parse(line[34]));
 
-                _cache.Add((year, polygon, CropType.Wheat, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.Wheat,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[35]) ? 0 : int.Parse(line[35]),
-                });
+                _cache.Add((year, polygon, CropType.Wheat, province), string.IsNullOrWhiteSpace(line[35]) ? 0 : int.Parse(line[35]));
 
-                _cache.Add((year, polygon, CropType.Potatoes, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.Potatoes,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[36]) ? 0 : int.Parse(line[36]),
-                });
+                _cache.Add((year, polygon, CropType.Potatoes, province), string.IsNullOrWhiteSpace(line[36]) ? 0 : int.Parse(line[36]));
 
-                _cache.Add((year, polygon, CropType.BeansDryField, province), new SmallAreaYieldData()
-                {
-                    Id = id,
-                    Polygon = polygon,
-                    Province = province,
-                    CropType = CropType.BeansDryField,
-                    Year = year,
-                    Yield = string.IsNullOrWhiteSpace(line[39]) ? 0 : int.Parse(line[39]),
-                });
+                _cache.Add((year, polygon, CropType.BeansDryField, province), string.IsNullOrWhiteSpace(line[39]) ? 0 : int.Parse(line[39]));
             }
-
-            this.FinishedReadingFile?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -421,13 +240,31 @@ namespace H.Core.Providers.Soil
         /// </summary>
         private void ReadUpdatedYields()
         {
+            if (_updatedYieldsLoaded)
+            {
+                return;
+            }
+
+            lock (_loadLock)
+            {
+                if (_updatedYieldsLoaded)
+                {
+                    return;
+                }
+
+                this.ReadUpdatedYieldsCore();
+                _updatedYieldsLoaded = true;
+            }
+        }
+
+        private void ReadUpdatedYieldsCore()
+        {
             var fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.UpdatedSmallAreaYields).ToList();
 
             var crops = fileLines.ElementAt(0).Skip(5).ToList();
 
             foreach (string[] line in fileLines.Skip(1))
             {
-                var id = int.Parse(line[0]);
                 var year = int.Parse(line[1]);
                 Province province = _provinceStringConverter.Convert(line[2]);
                 var polygon = int.Parse(line[3]);
@@ -440,15 +277,7 @@ namespace H.Core.Providers.Soil
                         ? 0
                         : int.Parse(line[yieldLocationInFile]);
 
-                    _updatedYields.Add((year, polygon, cropType, province), new SmallAreaYieldData()
-                    {
-                        Id = id,
-                        Polygon = polygon,
-                        Province = province,
-                        CropType = cropType,
-                        Year = year,
-                        Yield = yield,
-                    });
+                    _updatedYields.Add((year, polygon, cropType, province), yield);
                     yieldLocationInFile++;
                 }
             }
