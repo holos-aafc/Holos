@@ -431,7 +431,6 @@ Step 2
 
 |Parameter      | Unit    | Importance         | Description                      |
 |---------------|---------|--------------------|----------------------------------|
-|Field Name |    |Recommended |				
 |<p style = "color:red">*Crops grown in this field:* |
 |Forage for seed |    |Required |Impact on carbon change
 |Rangeland (native) |   |Required |Impact on carbon change
@@ -876,7 +875,7 @@ Housing management
 |Shavings |    |Optional |direct and indirect N<sub>2</sub>O emissions / carbon change
 |Sawdust |    |Optional |direct and indirect N<sub>2</sub>O emissions / carbon change			
 |Bedding application rate |kg head<sup>-1</sup>day<sup>-1</sup> |Optional |direct and indirect N<sub>2</sub>O emissions / carbon change
-|Activity coefficient of feeding situation |Operational |    |    |	
+|Activity coefficient of feeding situation |    |Operational |    |	
 |Maintenance coefficient |MJ day<sup>-1</sup> kg<sup>-1</sup> |Operational |    |	
 </p> 
 <br>
@@ -979,7 +978,6 @@ General management
 |Weaning |    |Required |manure CH<sub>4</sub> emissions
 |Gestating |    |Required |manure CH<sub>4</sub> emissions
 |Lactating |    |Required |manure CH<sub>4</sub> emissions
-|Growing/finishing |    |Required |manure CH<sub>4</sub> emissions
 |Breeding stock |    |Required |manure CH<sub>4</sub> emissions
 |Open (Not lactating or pregnant) |    |Required |manure CH<sub>4</sub> emissions
 |        |   
@@ -1032,7 +1030,7 @@ Manure management
 
 |Parameter      | Unit      | Importance         | Description                    |
 |---------------|-----------|--------------------|--------------------------------|
-|<p style = "color:red">*Manure handing system:* 
+|<p style = "color:red">*Manure handling system:* 
 |Solid storage 
 |Liquid with natural crust
 |Liquid no crust     
@@ -1190,7 +1188,7 @@ Manure management
 
 |Parameter      | Unit      | Importance         | Description                    |
 |---------------|-----------|--------------------|--------------------------------|
-|<p style = "color:red">*Manure handing system:* 
+|<p style = "color:red">*Manure handling system:* 
 |Pasture |    |Required |manure CH<sub>4</sub> / direct and indirect N<sub>2</sub>O emissions
 |Solid storage |    |Required |manure CH<sub>4</sub> / direct and indirect N<sub>2</sub>O emissions 
 |Compost passive |    |Required |manure CH<sub>4</sub> / direct and indirect N<sub>2</sub>O emissions
@@ -1301,7 +1299,7 @@ Manure management
 
 |Parameter      | Unit      | Importance         | Description                    |
 |---------------|-----------|--------------------|--------------------------------|
-|<p style = "color:red">*Manure handing system:* 
+|<p style = "color:red">*Manure handling system:* 
 |Solid storage |    |Required |manure CH<sub>4</sub> / direct and indirect N<sub>2</sub>O emissions 
 |Anaerobic digester |    |Required |manure CH<sub>4</sub> / direct and indirect N<sub>2</sub>O emissions 
 |    |
@@ -1375,7 +1373,7 @@ Manure management
 
 |Parameter      | Unit      | Importance         | Description                    |
 |---------------|-----------|--------------------|--------------------------------|
-|<p style = "color:red">*Manure handing system:* 
+|<p style = "color:red">*Manure handling system:* 
 |Pasture |    |Required |manure CH<sub>4</sub> / direct and indirect N<sub>2</sub>O emissions
 |Solid storage |    |Required |manure CH<sub>4</sub> / direct and indirect N<sub>2</sub>O emissions 
 |    |
