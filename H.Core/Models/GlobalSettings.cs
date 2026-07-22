@@ -1,5 +1,6 @@
 ﻿#region Imports
 
+using System;
 using System.Collections.ObjectModel;
 using H.Core.Enumerations;
 using H.Core.Models.Animals;
@@ -18,6 +19,7 @@ namespace H.Core.Models
         #region Fields
 
         private Farm _activeFarm;
+        private Guid _activeFarmGuid;
         private ObservableCollection<Farm> _farmsForComparison;
         private bool _enableMultiFarmComparison;
         private Defaults _multiFarmComparisonDefaults;
@@ -56,6 +58,56 @@ namespace H.Core.Models
         {
             get { return _activeFarm; }
             set { this.SetProperty(ref _activeFarm, value); }
+        }
+
+        /// <summary>
+        /// The active farm is one of the farms in <see cref="ApplicationData.Farms"/>, so writing it here stored a
+        /// second complete copy of that farm. Persist its <see cref="ModelBase.Guid"/> instead;
+        /// <see cref="ApplicationData"/> re-points <see cref="ActiveFarm"/> at the matching instance after loading.
+        /// </summary>
+        public Guid ActiveFarmGuid
+        {
+            get { return _activeFarm != null ? _activeFarm.Guid : _activeFarmGuid; }
+            set { _activeFarmGuid = value; }
+        }
+
+        /// <summary>
+        /// Suppresses writing the farm while still allowing it to be read, so files written before
+        /// <see cref="ActiveFarmGuid"/> existed continue to identify their active farm.
+        /// </summary>
+        public bool ShouldSerializeActiveFarm()
+        {
+            return false;
+        }
+
+        /// <summary>
+        /// The guid to restore <see cref="ActiveFarm"/> from after loading. Prefers the persisted
+        /// <see cref="ActiveFarmGuid"/>; falls back to the guid of the farm embedded in older files. The
+        /// <see cref="ActiveFarmGuid"/> getter cannot be used for this because the constructor always assigns an empty
+        /// <see cref="Farm"/>, which would mask the value read from file.
+        /// </summary>
+        /// <summary>
+        /// Re-points <see cref="ActiveFarm"/> at <paramref name="farm"/> after loading. This assigns the field directly
+        /// because <see cref="ModelBase.Equals(object)"/> compares by <see cref="ModelBase.Guid"/>, so the duplicate
+        /// read from file compares equal to the farm in the collection and SetProperty would skip the assignment -
+        /// leaving the two as separate objects.
+        /// </summary>
+        internal void RestoreActiveFarm(Farm farm)
+        {
+            _activeFarm = farm;
+            _activeFarmGuid = farm != null ? farm.Guid : Guid.Empty;
+
+            this.RaisePropertyChanged(nameof(this.ActiveFarm));
+        }
+
+        internal Guid GetPersistedActiveFarmGuid()
+        {
+            if (_activeFarmGuid != Guid.Empty)
+            {
+                return _activeFarmGuid;
+            }
+
+            return _activeFarm != null ? _activeFarm.Guid : Guid.Empty;
         }
 
         public bool EnableMultiFarmComparison

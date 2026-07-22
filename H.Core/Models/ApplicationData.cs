@@ -2,6 +2,8 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Runtime.Serialization;
 using Prism.Mvvm;
 
 #endregion
@@ -54,6 +56,31 @@ namespace H.Core.Models
         #endregion
 
         #region Public Methods
+
+        /// <summary>
+        /// <see cref="GlobalSettings.ActiveFarm"/> is not written to file - only its guid is - so after loading it must
+        /// be re-pointed at the corresponding farm in <see cref="Farms"/>. Without this the active farm would be a
+        /// separate object from the one the user edits.
+        /// </summary>
+        [OnDeserialized]
+        internal void OnDeserialized(StreamingContext context)
+        {
+            if (this.GlobalSettings == null || this.Farms == null || this.Farms.Any() == false)
+            {
+                return;
+            }
+
+            // Files written before ActiveFarmGuid existed still carry the farm itself, so fall back to its guid.
+            var guid = this.GlobalSettings.GetPersistedActiveFarmGuid();
+
+            var farm = this.Farms.FirstOrDefault(x => x.Guid == guid);
+            if (farm == null)
+            {
+                farm = this.Farms.First();
+            }
+
+            this.GlobalSettings.RestoreActiveFarm(farm);
+        }
 
         #endregion
 
