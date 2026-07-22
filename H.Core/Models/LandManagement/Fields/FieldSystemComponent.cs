@@ -13,6 +13,7 @@ using H.Core;
 using H.Core.Models.Animals;
 using H.Core.Models.LandManagement.Rotation;
 using H.Core.Providers.Soil;
+using Newtonsoft.Json;
 
 #endregion
 
@@ -161,6 +162,11 @@ namespace H.Core.Models.LandManagement.Fields
         /// <summary>
         /// Used by the fields view in the rotation component
         /// </summary>
+        /// <remarks>
+        /// Derived from <see cref="CropViewItems"/> and rebuilt on every access, so it must not be serialized - doing so
+        /// wrote a second copy of up to three crop view items for every field.
+        /// </remarks>
+        [JsonIgnore]
         public ObservableCollection<CropViewItem> CropViewItemsMaxThree
         {
             get

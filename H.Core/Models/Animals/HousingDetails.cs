@@ -15,6 +15,14 @@ namespace H.Core.Models.Animals
         #region Fields
 
         private FieldSystemComponent _pastureLocation;
+        private Guid _pastureLocationGuid;
+
+        /// <summary>
+        /// Defaults to true so the field is written unless the farm has confirmed the reference can be resolved from
+        /// its own components. Anything the farm cannot resolve - notably a pasture belonging to a different farm,
+        /// which happens when a farm is copied - would otherwise be lost on save.
+        /// </summary>
+        private bool _writePastureLocationInline = true;
 
         private HousingType _housingType;
         private BeddingMaterialType _beddingMaterialType;
@@ -129,6 +137,64 @@ namespace H.Core.Models.Animals
         {
             get { return _pastureLocation; }
             set { this.SetProperty(ref _pastureLocation, value); }
+        }
+
+        /// <summary>
+        /// The <see cref="ModelBase.Guid"/> of <see cref="PastureLocation"/>. The pasture is a field already held in
+        /// the farm's components, so persisting the field itself stored a complete extra copy of it - including all of
+        /// its crop view items - in every management period that referenced it.
+        /// </summary>
+        public Guid PastureLocationGuid
+        {
+            get { return _pastureLocation != null ? _pastureLocation.Guid : _pastureLocationGuid; }
+            set { _pastureLocationGuid = value; }
+        }
+
+        /// <summary>
+        /// Writes the field only when the owning farm could not resolve it from its own components. Reading is always
+        /// allowed, so files written before <see cref="PastureLocationGuid"/> existed keep resolving their pasture.
+        /// </summary>
+        public bool ShouldSerializePastureLocation()
+        {
+            return _writePastureLocationInline;
+        }
+
+        /// <summary>
+        /// Called by the owning farm before serializing. When the pasture is one of that farm's own fields only the
+        /// guid needs to be written; otherwise the field is written inline so the reference is not lost.
+        /// </summary>
+        internal void SetPastureLocationIsResolvable(bool isResolvable)
+        {
+            _writePastureLocationInline = isResolvable == false;
+        }
+
+        /// <summary>
+        /// The guid used to restore <see cref="PastureLocation"/> after loading. The
+        /// <see cref="PastureLocationGuid"/> getter cannot be used because it prefers the in-memory field, which is
+        /// null until the reference is restored.
+        /// </summary>
+        internal Guid GetPersistedPastureLocationGuid()
+        {
+            if (_pastureLocationGuid != Guid.Empty)
+            {
+                return _pastureLocationGuid;
+            }
+
+            return _pastureLocation != null ? _pastureLocation.Guid : Guid.Empty;
+        }
+
+        /// <summary>
+        /// Re-points <see cref="PastureLocation"/> at the field held in the farm's components. Assigns the field
+        /// directly because <see cref="ModelBase.Equals(object)"/> compares by <see cref="ModelBase.Guid"/>, so a copy
+        /// read from an older file compares equal to the real field and SetProperty would skip the assignment.
+        /// </summary>
+        internal void RestorePastureLocation(FieldSystemComponent pastureLocation)
+        {
+            _pastureLocation = pastureLocation;
+            _pastureLocationGuid = pastureLocation != null ? pastureLocation.Guid : Guid.Empty;
+
+            this.RaisePropertyChanged(nameof(this.PastureLocation));
+            this.RaisePropertyChanged(nameof(this.NameOfPastureLocation));
         }
 
         /// <summary>

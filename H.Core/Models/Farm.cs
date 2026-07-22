@@ -18,6 +18,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Security.Permissions;
 using System.Windows.Controls.Primitives;
 using System.Windows.Navigation;
@@ -1134,6 +1135,138 @@ namespace H.Core.Models
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// <see cref="HousingDetails.PastureLocation"/> is not written to file - only its guid is - so after loading the
+        /// reference must be re-pointed at the field held in <see cref="Components"/>. Runs on the farm rather than on
+        /// <see cref="ApplicationData"/> so exported farm files get the same treatment.
+        /// </summary>
+        [OnDeserialized]
+        internal void OnDeserialized(StreamingContext context)
+        {
+            this.RestorePastureLocations();
+        }
+
+        /// <summary>
+        /// Marks which pasture references this farm can resolve from its own fields. Those are written as a guid; any
+        /// the farm cannot resolve - a pasture belonging to another farm, which happens when a farm is copied without
+        /// remapping the reference - are still written in full so nothing is lost.
+        /// </summary>
+        [OnSerializing]
+        internal void OnSerializing(StreamingContext context)
+        {
+            if (this.Components == null)
+            {
+                return;
+            }
+
+            var fieldGuids = new HashSet<Guid>();
+            foreach (var component in this.GetComponentsIncludingTimePeriods())
+            {
+                var field = component as FieldSystemComponent;
+                if (field != null)
+                {
+                    fieldGuids.Add(field.Guid);
+                }
+            }
+
+            foreach (var component in this.GetComponentsIncludingTimePeriods())
+            {
+                var animalComponent = component as AnimalComponentBase;
+                if (animalComponent == null)
+                {
+                    continue;
+                }
+
+                foreach (var animalGroup in animalComponent.Groups)
+                {
+                    foreach (var managementPeriod in animalGroup.ManagementPeriods)
+                    {
+                        var housingDetails = managementPeriod.HousingDetails;
+                        if (housingDetails == null)
+                        {
+                            continue;
+                        }
+
+                        var pastureLocation = housingDetails.PastureLocation;
+
+                        housingDetails.SetPastureLocationIsResolvable(
+                            pastureLocation != null && fieldGuids.Contains(pastureLocation.Guid));
+                    }
+                }
+            }
+        }
+
+        private void RestorePastureLocations()
+        {
+            if (this.Components == null || this.Components.Any() == false)
+            {
+                return;
+            }
+
+            var fields = new Dictionary<Guid, FieldSystemComponent>();
+            foreach (var component in this.GetComponentsIncludingTimePeriods())
+            {
+                var field = component as FieldSystemComponent;
+                if (field != null && fields.ContainsKey(field.Guid) == false)
+                {
+                    fields.Add(field.Guid, field);
+                }
+            }
+
+            foreach (var component in this.GetComponentsIncludingTimePeriods())
+            {
+                var animalComponent = component as AnimalComponentBase;
+                if (animalComponent == null)
+                {
+                    continue;
+                }
+
+                foreach (var animalGroup in animalComponent.Groups)
+                {
+                    foreach (var managementPeriod in animalGroup.ManagementPeriods)
+                    {
+                        var housingDetails = managementPeriod.HousingDetails;
+                        if (housingDetails == null)
+                        {
+                            continue;
+                        }
+
+                        var guid = housingDetails.GetPersistedPastureLocationGuid();
+                        if (guid == Guid.Empty)
+                        {
+                            continue;
+                        }
+
+                        FieldSystemComponent pasture;
+                        if (fields.TryGetValue(guid, out pasture))
+                        {
+                            housingDetails.RestorePastureLocation(pasture);
+                        }
+
+                        // If the field is gone, leave whatever was loaded in place rather than dropping the reference.
+                    }
+                }
+            }
+        }
+
+        private IEnumerable<ComponentBase> GetComponentsIncludingTimePeriods()
+        {
+            foreach (var component in this.Components)
+            {
+                yield return component;
+
+                foreach (var historicalComponent in component.HistoricalComponents)
+                {
+                    yield return historicalComponent;
+                }
+
+                foreach (var projectedComponent in component.ProjectedComponents)
+                {
+                    yield return projectedComponent;
+                }
+            }
         }
 
         public List<ManagementPeriod> GetAllManagementPeriods()
