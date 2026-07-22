@@ -23,6 +23,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Navigation;
 using H.Core.Models.Animals;
 using H.Core.Converters;
+using Newtonsoft.Json;
 using H.Core.Emissions.Results;
 
 #endregion
@@ -369,6 +370,12 @@ namespace H.Core.Models
         {
             get => _shelterbeltFromHardinessZoneConverter.Convert(GeographicData.HardinessZone);
         }
+
+        /// <remarks>
+        /// Derived view over <see cref="Components"/>. Must not be serialized - the serializer enumerates the query and
+        /// writes a complete second copy of every matching component (see also the other component views below).
+        /// </remarks>
+        [JsonIgnore]
         public IEnumerable<AnimalComponentBase> AnimalComponents
         {
             get
@@ -392,21 +399,25 @@ namespace H.Core.Models
             }
         }
 
+        [JsonIgnore]
         public IEnumerable<ComponentBase> DairyComponents
         {
             get { return this.Components.Where(x => x.ComponentCategory == ComponentCategory.Dairy); }
         }
 
+        [JsonIgnore]
         public IEnumerable<FieldSystemComponent> FieldSystemComponents
         {
             get { return this.Components.Where(x => x.GetType() == typeof(FieldSystemComponent)).Cast<FieldSystemComponent>(); }
         }
 
+        [JsonIgnore]
         public IEnumerable<AnaerobicDigestionComponent> AnaerobicDigestionComponents
         {
             get => this.Components.Where(x => x.GetType() == typeof(AnaerobicDigestionComponent)).Cast<AnaerobicDigestionComponent>();
         }
 
+        [JsonIgnore]
         public IEnumerable<ComponentBase> BeefCattleComponents
         {
             get
@@ -415,6 +426,7 @@ namespace H.Core.Models
             }
         }
 
+        [JsonIgnore]
         public IEnumerable<ComponentBase> SwineComponents
         {
             get
@@ -423,6 +435,7 @@ namespace H.Core.Models
             }
         }
 
+        [JsonIgnore]
         public IEnumerable<ComponentBase> SheepComponents
         {
             get
@@ -431,6 +444,7 @@ namespace H.Core.Models
             }
         }
 
+        [JsonIgnore]
         public IEnumerable<ComponentBase> PoultryComponents
         {
             get
@@ -439,6 +453,7 @@ namespace H.Core.Models
             }
         }
 
+        [JsonIgnore]
         public IEnumerable<ComponentBase> OtherLivestockComponents
         {
             get
