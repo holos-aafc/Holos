@@ -2,6 +2,8 @@
 
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Collections.Generic;
 using H.Core.Enumerations;
 using H.Core.Models.Animals;
 using H.Core.Models.LandManagement.Fields;
@@ -21,6 +23,7 @@ namespace H.Core.Models
         private Farm _activeFarm;
         private Guid _activeFarmGuid;
         private ObservableCollection<Farm> _farmsForComparison;
+        private List<Guid> _farmsForComparisonGuids = new List<Guid>();
         private bool _enableMultiFarmComparison;
         private Defaults _multiFarmComparisonDefaults;
         private ManagementPeriod _multiFarmManagementPeriod;
@@ -81,12 +84,6 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        /// The guid to restore <see cref="ActiveFarm"/> from after loading. Prefers the persisted
-        /// <see cref="ActiveFarmGuid"/>; falls back to the guid of the farm embedded in older files. The
-        /// <see cref="ActiveFarmGuid"/> getter cannot be used for this because the constructor always assigns an empty
-        /// <see cref="Farm"/>, which would mask the value read from file.
-        /// </summary>
-        /// <summary>
         /// Re-points <see cref="ActiveFarm"/> at <paramref name="farm"/> after loading. This assigns the field directly
         /// because <see cref="ModelBase.Equals(object)"/> compares by <see cref="ModelBase.Guid"/>, so the duplicate
         /// read from file compares equal to the farm in the collection and SetProperty would skip the assignment -
@@ -100,6 +97,12 @@ namespace H.Core.Models
             this.RaisePropertyChanged(nameof(this.ActiveFarm));
         }
 
+        /// <summary>
+        /// The guid to restore <see cref="ActiveFarm"/> from after loading. Prefers the persisted
+        /// <see cref="ActiveFarmGuid"/>; falls back to the guid of the farm embedded in older files. The
+        /// <see cref="ActiveFarmGuid"/> getter cannot be used for this because the constructor always assigns an empty
+        /// <see cref="Farm"/>, which would mask the value read from file.
+        /// </summary>
         internal Guid GetPersistedActiveFarmGuid()
         {
             if (_activeFarmGuid != Guid.Empty)
@@ -120,6 +123,75 @@ namespace H.Core.Models
         {
             get { return _farmsForComparison; }
             set { SetProperty(ref _farmsForComparison, value); }
+        }
+
+        /// <summary>
+        /// The farms selected for comparison are farms already held in <see cref="ApplicationData.Farms"/>, so writing
+        /// them here stored a complete extra copy of each one. Persist their guids instead;
+        /// <see cref="ApplicationData"/> restores the references after loading.
+        /// </summary>
+        public List<Guid> FarmsForComparisonGuids
+        {
+            get
+            {
+                if (_farmsForComparison != null && _farmsForComparison.Any())
+                {
+                    return _farmsForComparison.Select(x => x.Guid).ToList();
+                }
+
+                return _farmsForComparisonGuids;
+            }
+            set { _farmsForComparisonGuids = value ?? new List<Guid>(); }
+        }
+
+        /// <summary>
+        /// Suppresses writing the farms while still allowing them to be read, so files written before
+        /// <see cref="FarmsForComparisonGuids"/> existed keep their selection.
+        /// </summary>
+        public bool ShouldSerializeFarmsForComparison()
+        {
+            return false;
+        }
+
+        /// <summary>
+        /// The guids to restore <see cref="FarmsForComparison"/> from after loading. Prefers the persisted guids and
+        /// falls back to the farms embedded in older files.
+        /// </summary>
+        internal IEnumerable<Guid> GetPersistedFarmsForComparisonGuids()
+        {
+            if (_farmsForComparisonGuids != null && _farmsForComparisonGuids.Any())
+            {
+                return _farmsForComparisonGuids;
+            }
+
+            if (_farmsForComparison != null)
+            {
+                return _farmsForComparison.Select(x => x.Guid).ToList();
+            }
+
+            return new List<Guid>();
+        }
+
+        /// <summary>
+        /// Replaces the contents of <see cref="FarmsForComparison"/> with the given farms. A farm that no longer exists
+        /// is dropped - it cannot be compared, and the selection is rebuilt by the comparison view in any case.
+        /// </summary>
+        internal void RestoreFarmsForComparison(IEnumerable<Farm> farms)
+        {
+            if (_farmsForComparison == null)
+            {
+                _farmsForComparison = new ObservableCollection<Farm>();
+            }
+
+            _farmsForComparison.Clear();
+            foreach (var farm in farms)
+            {
+                _farmsForComparison.Add(farm);
+            }
+
+            _farmsForComparisonGuids = _farmsForComparison.Select(x => x.Guid).ToList();
+
+            this.RaisePropertyChanged(nameof(this.FarmsForComparison));
         }
 
         /// <summary>

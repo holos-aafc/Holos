@@ -80,6 +80,15 @@ namespace H.Core.Models
             }
 
             this.GlobalSettings.RestoreActiveFarm(farm);
+
+            // The comparison selection is stored the same way - as guids into Farms.
+            var comparisonGuids = this.GlobalSettings.GetPersistedFarmsForComparisonGuids();
+            var farmsForComparison = comparisonGuids
+                .Select(x => this.Farms.FirstOrDefault(y => y.Guid == x))
+                .Where(x => x != null)
+                .ToList();
+
+            this.GlobalSettings.RestoreFarmsForComparison(farmsForComparison);
         }
 
         #endregion
