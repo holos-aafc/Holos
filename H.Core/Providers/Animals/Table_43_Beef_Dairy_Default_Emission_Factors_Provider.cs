@@ -126,6 +126,15 @@ namespace H.Core.Providers.Animals
                 case ManureApplicationTypes.DeepInjection:
                     return 0.02;
 
+                case ManureApplicationTypes.NotSelected:
+                    // Not an error. Callers legitimately ask for a factor when there is no manure application
+                    // on a field - e.g. CalculateWeightedLandApplicationEmissionFactor creates a placeholder
+                    // application for fields that have none, purely to carry a date. No manure is spread in
+                    // that case, so the emission factor is zero. This used to fall through to the default
+                    // branch below and log an error once per field per year (~10k lines per calculation),
+                    // which both cost real time (string building + trace listeners) and buried genuine errors.
+                    return 0;
+
                 default:
                     Trace.TraceError($"{nameof(Table_43_Beef_Dairy_Default_Emission_Factors_Provider)}.{nameof(Table_43_Beef_Dairy_Default_Emission_Factors_Provider.GetAmmoniaEmissionFactorForLandAppliedManure)}" +
                                      $" unable to get data for spreading method: {manureApplicationType.GetDescription()}.");
