@@ -1243,12 +1243,53 @@ namespace H.Core.Models
                         if (fields.TryGetValue(guid, out pasture))
                         {
                             housingDetails.RestorePastureLocation(pasture);
+                            continue;
                         }
 
-                        // If the field is gone, leave whatever was loaded in place rather than dropping the reference.
+                        this.RepairPastureLocationByName(housingDetails, managementPeriod);
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Repairs a pasture reference that points at a field this farm does not own. Farms copied before the
+        /// replication fix kept referencing the original farm's field, which both bloats the file and means editing one
+        /// farm's pasture changes the other's grazing inputs.
+        ///
+        /// The copy carries its own field with the same name, so the reference is re-pointed when exactly one of this
+        /// farm's fields matches by name. Anything ambiguous - no match, or several fields sharing a name - is left
+        /// alone rather than guessed at, and keeps working as before.
+        /// </summary>
+        private void RepairPastureLocationByName(HousingDetails housingDetails, ManagementPeriod managementPeriod)
+        {
+            var strayPasture = housingDetails.PastureLocation;
+            if (strayPasture == null || string.IsNullOrWhiteSpace(strayPasture.Name))
+            {
+                return;
+            }
+
+            var matches = this.GetComponentsIncludingTimePeriods()
+                .OfType<FieldSystemComponent>()
+                .Where(x => string.Equals(x.Name, strayPasture.Name, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            if (matches.Count != 1)
+            {
+                Trace.TraceWarning(
+                    $"{nameof(Farm)}.{nameof(RepairPastureLocationByName)}: management period '{managementPeriod.Name}' " +
+                    $"on farm '{this.Name}' uses pasture '{strayPasture.Name}' which is not a field on this farm, and " +
+                    $"{matches.Count} of its fields share that name. Leaving the reference as it was.");
+
+                return;
+            }
+
+            Trace.TraceInformation(
+                $"{nameof(Farm)}.{nameof(RepairPastureLocationByName)}: management period '{managementPeriod.Name}' " +
+                $"on farm '{this.Name}' referenced pasture '{strayPasture.Name}' belonging to another farm. " +
+                $"Re-pointing it at this farm's field of the same name.");
+
+            housingDetails.RestorePastureLocation(matches[0]);
         }
 
         private IEnumerable<ComponentBase> GetComponentsIncludingTimePeriods()
