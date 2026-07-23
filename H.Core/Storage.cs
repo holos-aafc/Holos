@@ -412,7 +412,12 @@ namespace H.Core
         /// </summary>
         /// <param name="isBackupFolder">An optional parameter regarding whether the required folder path is for the data backup folder.</param>
         /// <returns>Returns the path to the user's data folder or their backup folder if the optional parameter is set to true.</returns>
-        private string GetUserFolderPath(bool isBackupFolder = false)
+        /// <remarks>
+        /// Overridable so tests can exercise the real save and load paths against a temporary folder. They must not run
+        /// against the real one: <see cref="Save"/> overwrites the user's data file and <see cref="Load"/> deletes it
+        /// when a file cannot be read.
+        /// </remarks>
+        protected virtual string GetUserFolderPath(bool isBackupFolder = false)
         {
             var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             var folderPath = isBackupFolder ? Path.Combine(localAppData, "HOLOS_4\\backups") : Path.Combine(localAppData, "HOLOS_4");
