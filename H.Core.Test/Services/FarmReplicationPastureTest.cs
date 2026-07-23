@@ -79,6 +79,38 @@ namespace H.Core.Test.Services
         }
 
         [TestMethod]
+        public void ReplicateFarmPointsStageStateItemsAtTheCopiedField()
+        {
+            var farm = CreateFarmWithPasture(out var originalPasture, out _);
+
+            var stageState = new FieldSystemDetailsStageState();
+            stageState.DetailsScreenViewCropViewItems.Add(new CropViewItem
+            {
+                CropType = CropType.TameGrass,
+                Year = 2024,
+                FieldSystemComponentGuid = originalPasture.Guid,
+            });
+
+            farm.StageStates.Add(stageState);
+
+            var copy = _sut.ReplicateFarm(farm);
+
+            var copiedField = copy.Components.OfType<FieldSystemComponent>().Single();
+            var copiedStageState = copy.StageStates.OfType<FieldSystemDetailsStageState>().Single();
+
+            Assert.AreEqual(1, copiedStageState.DetailsScreenViewCropViewItems.Count,
+                "the copy should carry the same detail items");
+            Assert.AreEqual(copiedField.Guid, copiedStageState.DetailsScreenViewCropViewItems.Single().FieldSystemComponentGuid,
+                "detail items must reference the copy's own field");
+
+            // The practical consequence: looking the items up by field must still work on the copy.
+            CollectionAssert.AreEquivalent(
+                copiedStageState.DetailsScreenViewCropViewItems.ToList(),
+                copiedStageState.GetMainCropsByField(copiedField).ToList(),
+                "the copy's field should still find its detail items");
+        }
+
+        [TestMethod]
         public void ReplicateFarmDoesNotModifyTheFarmBeingCopied()
         {
             var farm = CreateFarmWithPasture(out var originalPasture, out var originalManagementPeriod);

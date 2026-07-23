@@ -340,9 +340,15 @@ namespace H.Core.Services
 
             #region FieldSystemComponents
 
+            // Replicated fields are given new guids, so anything referring to a field by guid has to be re-pointed at
+            // the copy. Collected here and used by the stage states below.
+            var replicatedFieldGuids = new Dictionary<Guid, Guid>();
+
             foreach (var fieldSystemComponent in farm.FieldSystemComponents)
             {
                 var replicatedFieldSystemComponent = _fieldComponentHelper.Replicate(fieldSystemComponent);
+
+                replicatedFieldGuids[fieldSystemComponent.Guid] = replicatedFieldSystemComponent.Guid;
 
                 // Animal components are replicated above, so the copies still point their pasture at the original
                 // farm's field. Re-point them at the copy of that field.
@@ -393,6 +399,15 @@ namespace H.Core.Services
                     var viewItem = new CropViewItem();
 
                     _detailsScreenCropViewItemMapper.Map(detailsScreenViewCropViewItem, viewItem);
+
+                    // The map copies FieldSystemComponentGuid, which still identifies the field on the farm being
+                    // copied. Without this the copy's items belong to no field on the copy, and
+                    // FieldSystemDetailsStageState.GetMainCropsByField returns nothing for every one of its fields.
+                    Guid replicatedFieldGuid;
+                    if (replicatedFieldGuids.TryGetValue(viewItem.FieldSystemComponentGuid, out replicatedFieldGuid))
+                    {
+                        viewItem.FieldSystemComponentGuid = replicatedFieldGuid;
+                    }
 
                     stageState.DetailsScreenViewCropViewItems.Add(viewItem);
                 }
