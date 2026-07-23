@@ -23,26 +23,32 @@ namespace H.Core.Models.LandManagement.Fields
         public double TotalN2ONFromManureAndDigestateLeaching;
         public double TotalN2ONFromManureAndDigestateLeachingExcludingRemainingAmounts;
         
+        /*
+         * These three are written to the results file, so they must survive a copy. The mappers copy properties, not
+         * fields, so declaring them as fields left them at zero on every copied view item - and the results grid
+         * exports a copy. Keep them as properties.
+         */
+
         /// <summary>
         /// Equation 2.5.4-1
         ///
         /// k = SN = Synthetic Nitrogen
         /// </summary>
-        public double EF_SN;
+        public double EF_SN { get; set; }
 
         /// <summary>
         /// Equation 2.5.4-1
         ///
         /// k = CRN = Crop Residue Nitrogen
         /// </summary>
-        public double EF_CRN;
+        public double EF_CRN { get; set; }
 
         /// <summary>
         /// Equation 2.5.4-1
         ///
         /// k = ON = Organic Nitrogen
         /// </summary>
-        public double EF_ON;
+        public double EF_ON { get; set; }
 
         /// <summary>
         /// (kg C ha^-1)

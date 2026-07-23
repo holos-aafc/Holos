@@ -191,6 +191,7 @@
     <Compile Include="Services\Animals\DigestateServiceTest.cs" />
     <Compile Include="Services\FarmReplicationPastureTest.cs" />
     <Compile Include="Mappers\AutoMapperCharacterizationTest.cs" />
+    <Compile Include="Mappers\CropViewItemResultsCopyTest.cs" />
     <Compile Include="Services\Animals\ManureRemovalVolatileSolidsTest.cs" />
     <Compile Include="Services\Animals\ScaleUpServiceTest.cs" />
     <Compile Include="Services\Animals\AnimalInitializationServiceTest.cs" />
