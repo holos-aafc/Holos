@@ -155,7 +155,9 @@ At this time, Holos does not offer an option to input cover crop mixes. The futu
 
 
 ### 11. How do I add a field with inter-cropping?
-At this time, Holos does not offer an option to input inter-cropping systems. The future development and addition of such functionality is planned. At this time, separate field components for each crop can be used.
+At this time, Holos does not offer an option to input inter-cropping systems. The future development and addition of such functionality is planned. At this time, to represent such cropping systems, you could:
+- Add separate field components for each crop, where the area of each ‘field’ can be determined based on the total area of the intercropped field and the proportion of this area that is composed of each individual crop; or
+- Create a single field to represent the total area of the intercropped field and create a single average ‘custom’ crop to represent the overall cropping system. You could define the yield, residue coefficients, N contents, etc. of this ‘custom’ crop, perhaps using weighted averages of these values for the individual crops, to represent the average C and N inputs per hectare for the field. This second option would be the closest approximation of allowing more than one main crop, but it would require you to do some simple calculations outside of Holos to determine the characteristics of this custom crop.
 
 
 ### 12. How can I explore the effects of 4R nutrient management in Holos?
