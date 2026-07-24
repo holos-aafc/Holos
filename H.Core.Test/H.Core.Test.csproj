@@ -109,6 +109,7 @@
     <Compile Include="Models\TrannumDataTest.cs" />
     <Compile Include="Models\FarmTest.cs" />
     <Compile Include="Models\ApplicationDataFarmReferenceTest.cs" />
+    <Compile Include="Models\SetActiveFarmTest.cs" />
     <Compile Include="Models\PastureLocationRepairTest.cs" />
     <Compile Include="Models\FarmSerializationDuplicationTest.cs" />
     <Compile Include="StorageRoundTripTest.cs" />
