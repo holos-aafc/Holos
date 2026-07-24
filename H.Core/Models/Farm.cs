@@ -18,11 +18,13 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Security.Permissions;
 using System.Windows.Controls.Primitives;
 using System.Windows.Navigation;
 using H.Core.Models.Animals;
 using H.Core.Converters;
+using Newtonsoft.Json;
 using H.Core.Emissions.Results;
 
 #endregion
@@ -369,6 +371,12 @@ namespace H.Core.Models
         {
             get => _shelterbeltFromHardinessZoneConverter.Convert(GeographicData.HardinessZone);
         }
+
+        /// <remarks>
+        /// Derived view over <see cref="Components"/>. Must not be serialized - the serializer enumerates the query and
+        /// writes a complete second copy of every matching component (see also the other component views below).
+        /// </remarks>
+        [JsonIgnore]
         public IEnumerable<AnimalComponentBase> AnimalComponents
         {
             get
@@ -392,21 +400,25 @@ namespace H.Core.Models
             }
         }
 
+        [JsonIgnore]
         public IEnumerable<ComponentBase> DairyComponents
         {
             get { return this.Components.Where(x => x.ComponentCategory == ComponentCategory.Dairy); }
         }
 
+        [JsonIgnore]
         public IEnumerable<FieldSystemComponent> FieldSystemComponents
         {
             get { return this.Components.Where(x => x.GetType() == typeof(FieldSystemComponent)).Cast<FieldSystemComponent>(); }
         }
 
+        [JsonIgnore]
         public IEnumerable<AnaerobicDigestionComponent> AnaerobicDigestionComponents
         {
             get => this.Components.Where(x => x.GetType() == typeof(AnaerobicDigestionComponent)).Cast<AnaerobicDigestionComponent>();
         }
 
+        [JsonIgnore]
         public IEnumerable<ComponentBase> BeefCattleComponents
         {
             get
@@ -415,6 +427,7 @@ namespace H.Core.Models
             }
         }
 
+        [JsonIgnore]
         public IEnumerable<ComponentBase> SwineComponents
         {
             get
@@ -423,6 +436,7 @@ namespace H.Core.Models
             }
         }
 
+        [JsonIgnore]
         public IEnumerable<ComponentBase> SheepComponents
         {
             get
@@ -431,6 +445,7 @@ namespace H.Core.Models
             }
         }
 
+        [JsonIgnore]
         public IEnumerable<ComponentBase> PoultryComponents
         {
             get
@@ -439,6 +454,7 @@ namespace H.Core.Models
             }
         }
 
+        [JsonIgnore]
         public IEnumerable<ComponentBase> OtherLivestockComponents
         {
             get
@@ -1119,6 +1135,179 @@ namespace H.Core.Models
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// <see cref="HousingDetails.PastureLocation"/> is not written to file - only its guid is - so after loading the
+        /// reference must be re-pointed at the field held in <see cref="Components"/>. Runs on the farm rather than on
+        /// <see cref="ApplicationData"/> so exported farm files get the same treatment.
+        /// </summary>
+        [OnDeserialized]
+        internal void OnDeserialized(StreamingContext context)
+        {
+            this.RestorePastureLocations();
+        }
+
+        /// <summary>
+        /// Marks which pasture references this farm can resolve from its own fields. Those are written as a guid; any
+        /// the farm cannot resolve - a pasture belonging to another farm, which happens when a farm is copied without
+        /// remapping the reference - are still written in full so nothing is lost.
+        /// </summary>
+        [OnSerializing]
+        internal void OnSerializing(StreamingContext context)
+        {
+            if (this.Components == null)
+            {
+                return;
+            }
+
+            var fieldGuids = new HashSet<Guid>();
+            foreach (var component in this.GetComponentsIncludingTimePeriods())
+            {
+                var field = component as FieldSystemComponent;
+                if (field != null)
+                {
+                    fieldGuids.Add(field.Guid);
+                }
+            }
+
+            foreach (var component in this.GetComponentsIncludingTimePeriods())
+            {
+                var animalComponent = component as AnimalComponentBase;
+                if (animalComponent == null)
+                {
+                    continue;
+                }
+
+                foreach (var animalGroup in animalComponent.Groups)
+                {
+                    foreach (var managementPeriod in animalGroup.ManagementPeriods)
+                    {
+                        var housingDetails = managementPeriod.HousingDetails;
+                        if (housingDetails == null)
+                        {
+                            continue;
+                        }
+
+                        var pastureLocation = housingDetails.PastureLocation;
+
+                        housingDetails.SetPastureLocationIsResolvable(
+                            pastureLocation != null && fieldGuids.Contains(pastureLocation.Guid));
+                    }
+                }
+            }
+        }
+
+        private void RestorePastureLocations()
+        {
+            if (this.Components == null || this.Components.Any() == false)
+            {
+                return;
+            }
+
+            var fields = new Dictionary<Guid, FieldSystemComponent>();
+            foreach (var component in this.GetComponentsIncludingTimePeriods())
+            {
+                var field = component as FieldSystemComponent;
+                if (field != null && fields.ContainsKey(field.Guid) == false)
+                {
+                    fields.Add(field.Guid, field);
+                }
+            }
+
+            foreach (var component in this.GetComponentsIncludingTimePeriods())
+            {
+                var animalComponent = component as AnimalComponentBase;
+                if (animalComponent == null)
+                {
+                    continue;
+                }
+
+                foreach (var animalGroup in animalComponent.Groups)
+                {
+                    foreach (var managementPeriod in animalGroup.ManagementPeriods)
+                    {
+                        var housingDetails = managementPeriod.HousingDetails;
+                        if (housingDetails == null)
+                        {
+                            continue;
+                        }
+
+                        var guid = housingDetails.GetPersistedPastureLocationGuid();
+                        if (guid == Guid.Empty)
+                        {
+                            continue;
+                        }
+
+                        FieldSystemComponent pasture;
+                        if (fields.TryGetValue(guid, out pasture))
+                        {
+                            housingDetails.RestorePastureLocation(pasture);
+                            continue;
+                        }
+
+                        this.RepairPastureLocationByName(housingDetails, managementPeriod);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Repairs a pasture reference that points at a field this farm does not own. Farms copied before the
+        /// replication fix kept referencing the original farm's field, which both bloats the file and means editing one
+        /// farm's pasture changes the other's grazing inputs.
+        ///
+        /// The copy carries its own field with the same name, so the reference is re-pointed when exactly one of this
+        /// farm's fields matches by name. Anything ambiguous - no match, or several fields sharing a name - is left
+        /// alone rather than guessed at, and keeps working as before.
+        /// </summary>
+        private void RepairPastureLocationByName(HousingDetails housingDetails, ManagementPeriod managementPeriod)
+        {
+            var strayPasture = housingDetails.PastureLocation;
+            if (strayPasture == null || string.IsNullOrWhiteSpace(strayPasture.Name))
+            {
+                return;
+            }
+
+            var matches = this.GetComponentsIncludingTimePeriods()
+                .OfType<FieldSystemComponent>()
+                .Where(x => string.Equals(x.Name, strayPasture.Name, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            if (matches.Count != 1)
+            {
+                Trace.TraceWarning(
+                    $"{nameof(Farm)}.{nameof(RepairPastureLocationByName)}: management period '{managementPeriod.Name}' " +
+                    $"on farm '{this.Name}' uses pasture '{strayPasture.Name}' which is not a field on this farm, and " +
+                    $"{matches.Count} of its fields share that name. Leaving the reference as it was.");
+
+                return;
+            }
+
+            Trace.TraceInformation(
+                $"{nameof(Farm)}.{nameof(RepairPastureLocationByName)}: management period '{managementPeriod.Name}' " +
+                $"on farm '{this.Name}' referenced pasture '{strayPasture.Name}' belonging to another farm. " +
+                $"Re-pointing it at this farm's field of the same name.");
+
+            housingDetails.RestorePastureLocation(matches[0]);
+        }
+
+        private IEnumerable<ComponentBase> GetComponentsIncludingTimePeriods()
+        {
+            foreach (var component in this.Components)
+            {
+                yield return component;
+
+                foreach (var historicalComponent in component.HistoricalComponents)
+                {
+                    yield return historicalComponent;
+                }
+
+                foreach (var projectedComponent in component.ProjectedComponents)
+                {
+                    yield return projectedComponent;
+                }
+            }
         }
 
         public List<ManagementPeriod> GetAllManagementPeriods()

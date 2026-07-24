@@ -16,8 +16,12 @@ namespace H.Core.Test.Mappers
     ///
     ///   1. Precise engine-contract tests on a small synthetic type (scalar copy, shared complex reference, new
     ///      collection container with the same elements, per-call ignore set including Guid).
-    ///   2. Parity tests that clone the real hot domain types through BOTH AutoMapper 9 and <see cref="PropertyMapper"/>
-    ///      and assert they agree member-by-member. These are the ~14 type-level locks.
+    ///   2. The same contract asserted over the real hot domain types - the ~14 type-level locks.
+    ///
+    /// These assert <see cref="PropertyMapper"/> against the documented contract, not against AutoMapper: AutoMapper is
+    /// no longer a dependency of this project, so nothing here executes it. The contract was established from
+    /// AutoMapper 9's behaviour when the dependency was removed - a new container holding the same element references,
+    /// complex members shared, guid copied unless ignored - and these tests are what keep it from drifting.
     /// </summary>
     [TestClass]
     public class AutoMapperCharacterizationTest
@@ -139,7 +143,7 @@ namespace H.Core.Test.Mappers
 
         #endregion
 
-        #region Layer 2 - parity with AutoMapper over the real hot types
+        #region Layer 2 - the clone contract over the real hot types
 
         // The same-type clone maps with un-ignored collection/complex members (from the removal inventory).
         private static readonly string[] HotTypes =
@@ -155,9 +159,8 @@ namespace H.Core.Test.Mappers
         [TestMethod]
         public void PropertyMapper_CloneContract_OnHotTypes()
         {
-            // The clone contract PropertyMapper must uphold on the real domain types (originally established by parity
-            // against AutoMapper, which has since been removed): complex reference members are SHARED; collection members
-            // become a NEW container holding the SAME elements.
+            // The clone contract PropertyMapper must uphold on the real domain types: complex reference members are
+            // SHARED; collection members become a NEW container holding the SAME elements.
             var typesByName = CoreAssembly.GetTypes().GroupBy(t => t.Name).ToDictionary(g => g.Key, g => g.First());
             var failures = new List<string>();
             var checkedTypes = 0;
@@ -221,8 +224,8 @@ namespace H.Core.Test.Mappers
         }
 
         // The bundle deep-copy behaviour that FarmResultsService (Farm, ClimateData) and FieldComponentHelper (fertilizer)
-        // relied on was characterized against AutoMapper and is documented in the removal notes; those services now
-        // reproduce it with explicit clone loops, guarded by the real ReplicateFarm/Replicate integration tests.
+        // relied on is documented in the removal notes; those services now reproduce it with explicit clone loops,
+        // guarded by the real ReplicateFarm/Replicate integration tests.
 
         #endregion
 

@@ -108,6 +108,10 @@
     <Compile Include="Models\CircumferenceDataTest.cs" />
     <Compile Include="Models\TrannumDataTest.cs" />
     <Compile Include="Models\FarmTest.cs" />
+    <Compile Include="Models\ApplicationDataFarmReferenceTest.cs" />
+    <Compile Include="Models\PastureLocationRepairTest.cs" />
+    <Compile Include="Models\FarmSerializationDuplicationTest.cs" />
+    <Compile Include="StorageRoundTripTest.cs" />
     <Compile Include="Models\MonthsAndDaysDataTest.cs" />
     <Compile Include="Models\ColumnsVisibilityTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -185,7 +189,9 @@
     </Compile>
     <Compile Include="ResultConversionClassTests.cs" />
     <Compile Include="Services\Animals\DigestateServiceTest.cs" />
+    <Compile Include="Services\FarmReplicationPastureTest.cs" />
     <Compile Include="Mappers\AutoMapperCharacterizationTest.cs" />
+    <Compile Include="Mappers\CropViewItemResultsCopyTest.cs" />
     <Compile Include="Services\Animals\ManureRemovalVolatileSolidsTest.cs" />
     <Compile Include="Services\Animals\ScaleUpServiceTest.cs" />
     <Compile Include="Services\Animals\AnimalInitializationServiceTest.cs" />

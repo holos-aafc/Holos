@@ -340,16 +340,39 @@ namespace H.Core.Services
 
             #region FieldSystemComponents
 
+            // Replicated fields are given new guids, so anything referring to a field by guid has to be re-pointed at
+            // the copy. Collected here and used by the stage states below.
+            var replicatedFieldGuids = new Dictionary<Guid, Guid>();
+
+            // The animal components are all replicated above and the loop below only adds fields, so the set of
+            // management periods does not change while it runs. Collect them once rather than per field.
+            var replicatedManagementPeriods = replicatedFarm.GetAllManagementPeriods();
+
             foreach (var fieldSystemComponent in farm.FieldSystemComponents)
             {
-                // Need to restore the field GUID for grazing periods
                 var replicatedFieldSystemComponent = _fieldComponentHelper.Replicate(fieldSystemComponent);
 
+                replicatedFieldGuids[fieldSystemComponent.Guid] = replicatedFieldSystemComponent.Guid;
+
+                // Animal components are replicated above, so the copies still point their pasture at the original
+                // farm's field. Re-point them at the copy of that field.
+                //
+                // This must walk the REPLICATED farm - walking the original left the copy referencing another farm's
+                // field, and assigning to PastureLocation.Guid rewrote the identity of the original field, breaking
+                // every FieldSystemComponentGuid that referred to it.
                 var originalFieldGuid = fieldSystemComponent.Guid;
-                var replicatedFieldGuid = replicatedFieldSystemComponent.Guid;
-                foreach (var managementPeriod in farm.GetAllManagementPeriods().Where(x => x.HousingDetails.PastureLocation != null && x.HousingDetails.PastureLocation.Guid.Equals(originalFieldGuid)))
+                foreach (var managementPeriod in replicatedManagementPeriods)
                 {
-                    managementPeriod.HousingDetails.PastureLocation.Guid = replicatedFieldGuid;
+                    var housingDetails = managementPeriod.HousingDetails;
+                    if (housingDetails == null || housingDetails.PastureLocation == null)
+                    {
+                        continue;
+                    }
+
+                    if (housingDetails.PastureLocation.Guid.Equals(originalFieldGuid))
+                    {
+                        housingDetails.RestorePastureLocation(replicatedFieldSystemComponent);
+                    }
                 }
 
                 replicatedFarm.Components.Add(replicatedFieldSystemComponent);
@@ -380,6 +403,15 @@ namespace H.Core.Services
                     var viewItem = new CropViewItem();
 
                     _detailsScreenCropViewItemMapper.Map(detailsScreenViewCropViewItem, viewItem);
+
+                    // The map copies FieldSystemComponentGuid, which still identifies the field on the farm being
+                    // copied. Without this the copy's items belong to no field on the copy, and
+                    // FieldSystemDetailsStageState.GetMainCropsByField returns nothing for every one of its fields.
+                    Guid replicatedFieldGuid;
+                    if (replicatedFieldGuids.TryGetValue(viewItem.FieldSystemComponentGuid, out replicatedFieldGuid))
+                    {
+                        viewItem.FieldSystemComponentGuid = replicatedFieldGuid;
+                    }
 
                     stageState.DetailsScreenViewCropViewItems.Add(viewItem);
                 }
