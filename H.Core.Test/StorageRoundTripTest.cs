@@ -29,6 +29,14 @@ namespace H.Core.Test
         {
             private readonly string _folder;
 
+            /// <summary>
+            /// Each instance backs up to its own folder. Storage names its backup after the time it was constructed,
+            /// to the second, so two instances loading in the same second would pick the same backup name and the
+            /// second File.Copy would throw. Load catches that and falls back to a backup, which hides whatever the
+            /// test was actually checking.
+            /// </summary>
+            private readonly string _backupFolder = "backups-" + Guid.NewGuid().ToString("N");
+
             public RedirectedStorage(string folder)
             {
                 _folder = folder;
@@ -36,7 +44,7 @@ namespace H.Core.Test
 
             protected override string GetUserFolderPath(bool isBackupFolder = false)
             {
-                return isBackupFolder ? Path.Combine(_folder, "backups") : _folder;
+                return isBackupFolder ? Path.Combine(_folder, _backupFolder) : _folder;
             }
         }
 
@@ -169,14 +177,20 @@ namespace H.Core.Test
             storage.Save();
             var first = new FileInfo(storage.GetFullPathToStorageFile()).Length;
 
-            // Load and save again, as opening and saving the file in the application would.
+            // Load and save again, as opening and saving the file in the application would. Check the load actually
+            // succeeded each time - Load falls back to a backup or to empty data when it cannot read the file, and
+            // sizes taken after a fallback would compare equal without testing anything.
             var reopened = new RedirectedStorage(_folder);
             reopened.Load();
+            Assert.IsTrue(reopened.IsDataLoaded, "the second load fell back instead of reading the file");
+            Assert.AreEqual(2, reopened.ApplicationData.Farms.Count, "the second load did not return the farms");
             reopened.Save();
             var second = new FileInfo(reopened.GetFullPathToStorageFile()).Length;
 
             var thirdStorage = new RedirectedStorage(_folder);
             thirdStorage.Load();
+            Assert.IsTrue(thirdStorage.IsDataLoaded, "the third load fell back instead of reading the file");
+            Assert.AreEqual(2, thirdStorage.ApplicationData.Farms.Count, "the third load did not return the farms");
             thirdStorage.Save();
             var third = new FileInfo(thirdStorage.GetFullPathToStorageFile()).Length;
 
