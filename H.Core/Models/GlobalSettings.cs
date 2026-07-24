@@ -8,6 +8,7 @@ using H.Core.Enumerations;
 using H.Core.Models.Animals;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Feed;
+using Newtonsoft.Json;
 using Prism.Mvvm;
 
 #endregion
@@ -130,11 +131,21 @@ namespace H.Core.Models
         /// them here stored a complete extra copy of each one. Persist their guids instead;
         /// <see cref="ApplicationData"/> restores the references after loading.
         /// </summary>
+        /// <remarks>
+        /// Replace rather than populate on read. The getter returns a new list, so Json.NET's default handling for a
+        /// collection property - add to whatever the getter returns - would fill a discarded list and never call the
+        /// setter, leaving the selection unrestored.
+        /// </remarks>
+        [JsonProperty(ObjectCreationHandling = ObjectCreationHandling.Replace)]
         public List<Guid> FarmsForComparisonGuids
         {
             get
             {
-                if (_farmsForComparison != null && _farmsForComparison.Any())
+                // The live selection wins whenever the collection exists, including when it is empty. Falling back to
+                // the stored guids on an empty collection meant a selection the user cleared was written to file and
+                // restored on the next load. The stored guids are only needed between reading a file and restoring the
+                // references from it, and the constructor always creates the collection.
+                if (_farmsForComparison != null)
                 {
                     return _farmsForComparison.Select(x => x.Guid).ToList();
                 }

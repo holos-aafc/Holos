@@ -344,6 +344,10 @@ namespace H.Core.Services
             // the copy. Collected here and used by the stage states below.
             var replicatedFieldGuids = new Dictionary<Guid, Guid>();
 
+            // The animal components are all replicated above and the loop below only adds fields, so the set of
+            // management periods does not change while it runs. Collect them once rather than per field.
+            var replicatedManagementPeriods = replicatedFarm.GetAllManagementPeriods();
+
             foreach (var fieldSystemComponent in farm.FieldSystemComponents)
             {
                 var replicatedFieldSystemComponent = _fieldComponentHelper.Replicate(fieldSystemComponent);
@@ -357,7 +361,7 @@ namespace H.Core.Services
                 // field, and assigning to PastureLocation.Guid rewrote the identity of the original field, breaking
                 // every FieldSystemComponentGuid that referred to it.
                 var originalFieldGuid = fieldSystemComponent.Guid;
-                foreach (var managementPeriod in replicatedFarm.GetAllManagementPeriods())
+                foreach (var managementPeriod in replicatedManagementPeriods)
                 {
                     var housingDetails = managementPeriod.HousingDetails;
                     if (housingDetails == null || housingDetails.PastureLocation == null)

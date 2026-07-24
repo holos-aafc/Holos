@@ -136,7 +136,14 @@ namespace H.Core.Models.Animals
         public FieldSystemComponent PastureLocation
         {
             get { return _pastureLocation; }
-            set { this.SetProperty(ref _pastureLocation, value); }
+            set
+            {
+                this.SetProperty(ref _pastureLocation, value);
+
+                // Keep the stored guid in step. Without this, clearing the pasture left the guid from the last load
+                // behind, so the cleared field was written to file and restored on the next load.
+                _pastureLocationGuid = value != null ? value.Guid : Guid.Empty;
+            }
         }
 
         /// <summary>

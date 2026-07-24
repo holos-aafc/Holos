@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -120,6 +120,41 @@ namespace H.Core.Test.Models
 
             Assert.IsNotNull(pasture, "the reference must not be dropped");
             Assert.AreEqual(stray.Guid, pasture.Guid, "an ambiguous match must not be guessed at");
+        }
+
+        [TestMethod]
+        public void ClearingThePastureKeepsItClearedAfterAReload()
+        {
+            var farm = new Farm { Name = "Farm" };
+
+            var field = new FieldSystemComponent { Name = "Timothy pasture" };
+            field.CropViewItems.Add(new CropViewItem { CropType = CropType.TameGrass, Year = 2024 });
+            farm.Components.Add(field);
+
+            var managementPeriod = new ManagementPeriod { Name = "Summer pasture" };
+            managementPeriod.HousingDetails.HousingType = HousingType.Pasture;
+            managementPeriod.HousingDetails.PastureLocation = field;
+
+            var group = new AnimalGroup { Name = "Cows" };
+            group.ManagementPeriods.Add(managementPeriod);
+
+            var animalComponent = new CowCalfComponent();
+            animalComponent.Groups.Add(group);
+            farm.Components.Add(animalComponent);
+
+            // Load the farm first - that is what populates the stored guid.
+            var loaded = RoundTrip(farm);
+            var loadedManagementPeriod = SingleManagementPeriod(loaded);
+            Assert.IsNotNull(loadedManagementPeriod.HousingDetails.PastureLocation, "the pasture should load");
+
+            // The user then moves the animals off pasture, which clears the field, and saves again.
+            loadedManagementPeriod.HousingDetails.HousingType = HousingType.ConfinedNoBarn;
+            loadedManagementPeriod.HousingDetails.PastureLocation = null;
+
+            var reloaded = RoundTrip(loaded);
+
+            Assert.IsNull(SingleManagementPeriod(reloaded).HousingDetails.PastureLocation,
+                "a pasture the user cleared must not come back after reloading");
         }
 
         [TestMethod]

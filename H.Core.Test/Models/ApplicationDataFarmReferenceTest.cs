@@ -85,6 +85,22 @@ namespace H.Core.Test.Models
         }
 
         [TestMethod]
+        public void ClearingTheComparisonSelectionKeepsItClearedAfterAReload()
+        {
+            // Load first - that is what populates the stored guids.
+            var loaded = Read(Write(CreateApplicationData()));
+            Assert.AreEqual(2, loaded.GlobalSettings.FarmsForComparison.Count, "the selection should load");
+
+            // The comparison views clear this selection whenever the farm or its components change.
+            loaded.GlobalSettings.FarmsForComparison.Clear();
+
+            var reloaded = Read(Write(loaded));
+
+            Assert.AreEqual(0, reloaded.GlobalSettings.FarmsForComparison.Count,
+                "a comparison selection the user cleared must not come back after reloading");
+        }
+
+        [TestMethod]
         public void FarmsAreNotWrittenMoreThanOnce()
         {
             var json = Write(CreateApplicationData());
