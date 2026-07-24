@@ -92,6 +92,17 @@ namespace H.Core.Models
         /// </summary>
         internal void RestoreActiveFarm(Farm farm)
         {
+            this.SetActiveFarm(farm);
+        }
+
+        /// <summary>
+        /// Makes <paramref name="farm"/> the active farm. Use this rather than assigning <see cref="ActiveFarm"/> when
+        /// the farm may already be represented by another instance: <see cref="ModelBase.Equals(object)"/> compares by
+        /// <see cref="ModelBase.Guid"/>, so SetProperty treats a swap between two instances sharing a guid as no change
+        /// and leaves the old one in place.
+        /// </summary>
+        public void SetActiveFarm(Farm farm)
+        {
             _activeFarm = farm;
             _activeFarmGuid = farm != null ? farm.Guid : Guid.Empty;
 
