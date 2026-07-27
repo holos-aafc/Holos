@@ -124,5 +124,23 @@ namespace H.Core.Test.Services.LandManagement
             var result = _sut.GetMonthFromJulianDay(julianDay, year);
             Assert.AreEqual(expectedMonth, result);
         }
+
+        [DataTestMethod]
+        [DataRow(0, 2021)]
+        [DataRow(-1, 2021)]
+        [DataRow(366, 2021)] // 2021 is not a leap year, so day 366 does not exist
+        [DataRow(367, 2024)] // beyond even a leap year
+        public void GetMonthFromJulianDayThrowsForDaysOutsideTheYear(int julianDay, int year)
+        {
+            Assert.ThrowsException<Exception>(() => _sut.GetMonthFromJulianDay(julianDay, year));
+        }
+
+        [TestMethod]
+        public void GetMonthFromJulianDayAcceptsTheFirstAndLastDayOfTheYear()
+        {
+            Assert.AreEqual(Months.January, _sut.GetMonthFromJulianDay(1, 2021), "day 1 must be valid");
+            Assert.AreEqual(Months.December, _sut.GetMonthFromJulianDay(365, 2021), "the last day of a common year must be valid");
+            Assert.AreEqual(Months.December, _sut.GetMonthFromJulianDay(366, 2024), "the last day of a leap year must be valid");
+        }
     }
 }
