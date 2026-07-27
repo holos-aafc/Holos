@@ -18934,5 +18934,86 @@ namespace H.Core.Properties {
                 return ResourceManager.GetString("Yukon", resourceCulture);
             }
         }
-    }
+            
+        /// <summary>
+        ///   Looks up a localized string similar to Date of Application.
+        /// </summary>
+        public static string LabelDateOfApplication {
+            get {
+                return ResourceManager.GetString("LabelDateOfApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imported.
+        /// </summary>
+        public static string Imported {
+            get {
+                return ResourceManager.GetString("Imported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manure Source.
+        /// </summary>
+        public static string LabelManureSource {
+            get {
+                return ResourceManager.GetString("LabelManureSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nitrogen Applied (kg N ha-1).
+        /// </summary>
+        public static string LabelAmountOfNitrogenApplied {
+            get {
+                return ResourceManager.GetString("LabelAmountOfNitrogenApplied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Emission Factor Basis.
+        /// </summary>
+        public static string LabelEmissionFactorBasis {
+            get {
+                return ResourceManager.GetString("LabelEmissionFactorBasis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Final NH3-N Emission Factor for Land Application.
+        /// </summary>
+        public static string LabelFinalAmmoniaEmissionFactorForLandApplication {
+            get {
+                return ResourceManager.GetString("LabelFinalAmmoniaEmissionFactorForLandApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to per kg TAN.
+        /// </summary>
+        public static string LabelPerKilogramTan {
+            get {
+                return ResourceManager.GetString("LabelPerKilogramTan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to per kg N.
+        /// </summary>
+        public static string LabelPerKilogramNitrogen {
+            get {
+                return ResourceManager.GetString("LabelPerKilogramNitrogen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Livestock.
+        /// </summary>
+        public static string LabelLivestock {
+            get {
+                return ResourceManager.GetString("LabelLivestock", resourceCulture);
+            }
+        }
+}
 }
