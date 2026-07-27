@@ -5,6 +5,7 @@ using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Core.Providers.Animals;
 using H.Infrastructure;
+using Newtonsoft.Json;
 
 namespace H.Core.Models.LandManagement.Fields
 {
@@ -82,6 +83,12 @@ namespace H.Core.Models.LandManagement.Fields
         /// <summary>
         /// Each view item must have its own collection of valid state types so the table rows presented to the user will have their own distinct collection
         /// </summary>
+        /// <remarks>
+        /// Replace rather than populate on read. The constructor seeds this with NotSelected, and Json.NET's default
+        /// handling for a collection property adds the values from file to whatever is already there, so the seeded
+        /// entry accumulated and the collection grew by one on every load and save.
+        /// </remarks>
+        [JsonProperty(ObjectCreationHandling = ObjectCreationHandling.Replace)]
         public ObservableCollection<ManureStateType> ValidManureStateTypesForSelectedTypeOfAnimalManure
         {
             get => _validManureStateTypesForSelectedTypeOfAnimalManure;

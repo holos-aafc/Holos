@@ -102,6 +102,7 @@
     <Compile Include="Models\LandManagement\Fields\ManureApplicationViewItemTest.cs" />
     <Compile Include="Models\LandManagement\Fields\HarvestViewItemTest.cs" />
     <Compile Include="Models\ManureTankTest.cs" />
+    <Compile Include="Models\ManureStateTypesCollectionTest.cs" />
     <Compile Include="Models\TreeGroupDataTest.cs" />
     <Compile Include="Models\RowDataTest.cs" />
     <Compile Include="Models\ShelterbeltComponentTest.cs" />
