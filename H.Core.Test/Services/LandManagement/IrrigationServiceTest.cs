@@ -132,7 +132,7 @@ namespace H.Core.Test.Services.LandManagement
         [DataRow(367, 2024)] // beyond even a leap year
         public void GetMonthFromJulianDayThrowsForDaysOutsideTheYear(int julianDay, int year)
         {
-            Assert.ThrowsException<Exception>(() => _sut.GetMonthFromJulianDay(julianDay, year));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => _sut.GetMonthFromJulianDay(julianDay, year));
         }
 
         [TestMethod]
