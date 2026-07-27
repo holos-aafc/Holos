@@ -202,6 +202,7 @@
     <Compile Include="Services\DairyCattleResultsServiceTest.cs" />
     <Compile Include="Services\FarmResultsServiceTest.cs" />
     <Compile Include="Services\FieldResultsServiceTest.cs" />
+    <Compile Include="Services\FieldResultsServiceTest.ManureNH3Report.cs" />
     <Compile Include="Providers\Climate\BuildNewSLCClimateNorms.cs" />
     <Compile Include="Services\AnimalComponentHelperTest.cs" />
     <Compile Include="Services\Initialization\CropInitializationServiceTest.cs" />

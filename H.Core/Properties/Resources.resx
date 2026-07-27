@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -6438,5 +6438,32 @@ Please note: emissions related to the deposition or application of livestock man
   </data>
   <data name="KilogramsN2ONPerHeadPerDay" xml:space="preserve">
     <value>kg N2O-N head^-1 day^-1</value>
+  </data>
+  <data name="LabelDateOfApplication" xml:space="preserve">
+    <value>Date of Application</value>
+  </data>
+  <data name="Imported" xml:space="preserve">
+    <value>Imported</value>
+  </data>
+  <data name="LabelManureSource" xml:space="preserve">
+    <value>Manure Source</value>
+  </data>
+  <data name="LabelAmountOfNitrogenApplied" xml:space="preserve">
+    <value>Nitrogen Applied (kg N ha-1)</value>
+  </data>
+  <data name="LabelEmissionFactorBasis" xml:space="preserve">
+    <value>Emission Factor Basis</value>
+  </data>
+  <data name="LabelFinalAmmoniaEmissionFactorForLandApplication" xml:space="preserve">
+    <value>Final NH3-N Emission Factor for Land Application</value>
+  </data>
+  <data name="LabelPerKilogramTan" xml:space="preserve">
+    <value>per kg TAN</value>
+  </data>
+  <data name="LabelPerKilogramNitrogen" xml:space="preserve">
+    <value>per kg N</value>
+  </data>
+  <data name="LabelLivestock" xml:space="preserve">
+    <value>Livestock</value>
   </data>
 </root>
