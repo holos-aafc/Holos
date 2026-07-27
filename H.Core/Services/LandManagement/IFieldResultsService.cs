@@ -25,6 +25,15 @@ namespace H.Core.Services.LandManagement
                                             string languageAddOn,
                                             bool exportedFromGui,
                                             Farm farm);
+
+        /// <summary>
+        /// Writes the per-application manure NH3-N emission factor report to <paramref name="path"/>. Returns true on
+        /// success. See <see cref="FieldResultsService.BuildManureLandApplicationEmissionFactorReport"/> for the report.
+        /// </summary>
+        bool ExportManureLandApplicationEmissionFactorReportToFile(IEnumerable<CropViewItem> viewItems,
+                                            Farm farm,
+                                            string path,
+                                            CultureInfo culture);
         double CalculateHarvest(CropViewItem viewItem);
 
         FieldSystemDetailsStageState GetStageState(Farm farm);
