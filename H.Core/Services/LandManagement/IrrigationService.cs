@@ -151,9 +151,13 @@ namespace H.Core.Services.LandManagement
 
         public Months GetMonthFromJulianDay(int julianDay, int year)
         {
-            if (julianDay > (DateTime.IsLeapYear(year) ? 366 : 365))
+            var daysInYear = DateTime.IsLeapYear(year) ? 366 : 365;
+            if (julianDay < 1 || julianDay > daysInYear)
             {
-                throw new Exception($"Julian day out of range: {julianDay}");
+                throw new ArgumentOutOfRangeException(
+                    nameof(julianDay),
+                    julianDay,
+                    $"Julian day must be between 1 and {daysInYear} for year {year}.");
             }
 
             return (Months)new DateTime(year, 1, 1)
