@@ -901,6 +901,9 @@ namespace H.Core.Services.Animals
                 return 0;
             }
 
+            // The removed volume is scoped to the management system (liquid or solid) by
+            // GetTotalVolumeOfManureRemovedFromStorageOnDay, so solid manure applications do not reduce the volatile
+            // solids held in a separate liquid tank (Eq. 4.1.3-6, issue #434).
             var fraction = emissionsForDay.VolumeOfManureRemovedFromStorageOnDay / emissionsForDay.AccumulatedVolumeNetOfRemovals;
 
             return this.BoundRemovalFraction(fraction);
@@ -986,8 +989,10 @@ namespace H.Core.Services.Animals
                 fractionOfManureRemovedFromStorageOnPreviousDay: fractionRemovedOnPreviousDay);
 
             // Volume of manure removed from storage on the current day (read by the following day to form the fraction).
+            // Only removals from the same management system (liquid or solid) as this management period are counted, so a
+            // solid manure application does not reduce the volatile solids held in a separate liquid storage tank.
             todaysState.VolumeRemovedOnDay = _manureService.GetTotalVolumeOfManureRemovedFromStorageOnDay(
-                dailyEmissions.DateTime, farm, managementPeriod.AnimalType);
+                dailyEmissions.DateTime, farm, managementPeriod.AnimalType, managementPeriod.ManureDetails.StateType);
 
             WriteManureStorageState(dailyEmissions, todaysState);
         }

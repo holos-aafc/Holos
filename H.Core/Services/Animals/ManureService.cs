@@ -205,16 +205,22 @@ namespace H.Core.Services.Animals
         }
 
         /// <summary>
-        /// Returns the total volume of manure removed from storage on a given day for a given animal type. Manure is
-        /// removed from storage when manure produced on this farm is applied to a field or exported off-farm. Imported
-        /// manure applications are excluded because that manure was never held in this farm's storage. The volume
-        /// diverted to an anaerobic digester is added separately by the caller (it is computed from the digester flows).
+        /// Returns the total volume of manure removed from storage on a given day for a given animal type and manure
+        /// management system (Eq. 4.1.3-6, Volume_manureremoved). Manure is removed from storage when manure produced on
+        /// this farm is applied to a field or exported off-farm. Imported manure applications are excluded because that
+        /// manure was never held in this farm's storage. The volume diverted to an anaerobic digester is added separately
+        /// by the caller (it is computed from the digester flows).
+        ///
+        /// Only removals belonging to the same management system (liquid or solid) as <paramref name="manureStateType"/>
+        /// are counted, because liquid and solid manure are held in separate storage. For example, a solid manure field
+        /// application must not draw down the volume held in a liquid storage tank.
         ///
         /// (kg)
         /// </summary>
-        public double GetTotalVolumeOfManureRemovedFromStorageOnDay(DateTime dateTime, Farm farm, AnimalType animalType)
+        public double GetTotalVolumeOfManureRemovedFromStorageOnDay(DateTime dateTime, Farm farm, AnimalType animalType, ManureStateType manureStateType)
         {
             var result = 0d;
+            var isLiquidSystem = manureStateType.IsLiquidManure();
 
             // Manure produced on this farm and applied to a field.
             foreach (var fieldSystemComponent in farm.FieldSystemComponents)
@@ -229,7 +235,8 @@ namespace H.Core.Services.Animals
                         }
 
                         if (manureApplicationViewItem.DateOfApplication.Date == dateTime.Date &&
-                            manureApplicationViewItem.AnimalType.GetCategory() == animalType.GetCategory())
+                            manureApplicationViewItem.AnimalType.GetCategory() == animalType.GetCategory() &&
+                            manureApplicationViewItem.ManureStateType.IsLiquidManure() == isLiquidSystem)
                         {
                             result += manureApplicationViewItem.AmountOfManureAppliedPerHectare * cropViewItem.Area;
                         }
@@ -241,7 +248,8 @@ namespace H.Core.Services.Animals
             foreach (var manureExportViewItem in farm.ManureExportViewItems)
             {
                 if (manureExportViewItem.DateOfExport.Date == dateTime.Date &&
-                    manureExportViewItem.AnimalType.GetCategory() == animalType.GetCategory())
+                    manureExportViewItem.AnimalType.GetCategory() == animalType.GetCategory() &&
+                    manureExportViewItem.ManureStateType.IsLiquidManure() == isLiquidSystem)
                 {
                     result += manureExportViewItem.Amount;
                 }

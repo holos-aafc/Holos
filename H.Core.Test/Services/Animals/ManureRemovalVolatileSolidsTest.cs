@@ -140,8 +140,8 @@ namespace H.Core.Test.Services.Animals
 
         // Builds a farm with exactly one land application (5 kg/ha over a 10 ha field = 50 kg) and one 30 kg export,
         // both for the given animal type on the given day. The application's source (on-farm vs imported) is varied
-        // by the tests.
-        private Farm BuildFarmWithRemoval(DateTime day, AnimalType animalType, ManureLocationSourceType applicationSource)
+        // by the tests. Both removals use the given manure state type (defaults to a liquid system).
+        private Farm BuildFarmWithRemoval(DateTime day, AnimalType animalType, ManureLocationSourceType applicationSource, ManureStateType manureStateType = ManureStateType.LiquidNoCrust)
         {
             var farm = base.GetTestFarm();
             farm.Components.Clear();            // start from a known-empty farm so only our records count
@@ -154,6 +154,7 @@ namespace H.Core.Test.Services.Animals
                 AmountOfManureAppliedPerHectare = 5, // kg ha^-1 -> x 10 ha = 50 kg
                 AnimalType = animalType,
                 ManureLocationSourceType = applicationSource,
+                ManureStateType = manureStateType,
             });
 
             var field = new FieldSystemComponent();
@@ -165,6 +166,7 @@ namespace H.Core.Test.Services.Animals
                 DateOfExport = day,
                 Amount = 30,
                 AnimalType = animalType,
+                ManureStateType = manureStateType,
             });
 
             return farm;
@@ -181,7 +183,7 @@ namespace H.Core.Test.Services.Animals
             var farm = BuildFarmWithRemoval(day, AnimalType.DairyLactatingCow, ManureLocationSourceType.Livestock);
 
             // Act: total manure that left storage that day for dairy.
-            var result = _manureService.GetTotalVolumeOfManureRemovedFromStorageOnDay(day, farm, AnimalType.DairyLactatingCow);
+            var result = _manureService.GetTotalVolumeOfManureRemovedFromStorageOnDay(day, farm, AnimalType.DairyLactatingCow, ManureStateType.LiquidNoCrust);
 
             // Assert: both removal streams are summed.
             Assert.AreEqual(80, result, 1e-9); // 5 * 10 (applied) + 30 (exported)
@@ -199,7 +201,7 @@ namespace H.Core.Test.Services.Animals
             var farm = BuildFarmWithRemoval(day, AnimalType.DairyLactatingCow, ManureLocationSourceType.Imported);
 
             // Act
-            var result = _manureService.GetTotalVolumeOfManureRemovedFromStorageOnDay(day, farm, AnimalType.DairyLactatingCow);
+            var result = _manureService.GetTotalVolumeOfManureRemovedFromStorageOnDay(day, farm, AnimalType.DairyLactatingCow, ManureStateType.LiquidNoCrust);
 
             // Assert: the imported application is skipped; only the 30 kg export counts.
             Assert.AreEqual(30, result, 1e-9);
@@ -216,10 +218,76 @@ namespace H.Core.Test.Services.Animals
             var farm = BuildFarmWithRemoval(day, AnimalType.DairyLactatingCow, ManureLocationSourceType.Livestock);
 
             // Act: ...but we query the following day, which has none.
-            var result = _manureService.GetTotalVolumeOfManureRemovedFromStorageOnDay(day.AddDays(1), farm, AnimalType.DairyLactatingCow);
+            var result = _manureService.GetTotalVolumeOfManureRemovedFromStorageOnDay(day.AddDays(1), farm, AnimalType.DairyLactatingCow, ManureStateType.LiquidNoCrust);
 
             // Assert
             Assert.AreEqual(0, result, 1e-9);
+        }
+
+        /// <summary>
+        /// When querying a liquid system, solid manure removals are excluded because liquid and solid manure are held
+        /// in separate storage (Eq. 4.1.3-6, issue #434). A solid application must not draw down the liquid tank.
+        /// </summary>
+        [TestMethod]
+        public void GetTotalVolumeOfManureRemovedFromStorageOnDay_ExcludesSolidRemovalsWhenQueryingLiquidSystem()
+        {
+            // Arrange: all removals on this day are solid manure.
+            var day = new DateTime(2025, 6, 1);
+            var farm = BuildFarmWithRemoval(day, AnimalType.DairyLactatingCow, ManureLocationSourceType.Livestock, ManureStateType.Solid);
+
+            // Act: query the liquid system for that day.
+            var result = _manureService.GetTotalVolumeOfManureRemovedFromStorageOnDay(day, farm, AnimalType.DairyLactatingCow, ManureStateType.LiquidNoCrust);
+
+            // Assert: no liquid removals occurred, so nothing is drawn down from the liquid tank.
+            Assert.AreEqual(0, result, 1e-9);
+        }
+
+        /// <summary>
+        /// When querying a solid system, liquid manure removals are excluded for the same separate-storage reason.
+        /// </summary>
+        [TestMethod]
+        public void GetTotalVolumeOfManureRemovedFromStorageOnDay_ExcludesLiquidRemovalsWhenQueryingSolidSystem()
+        {
+            // Arrange: all removals on this day are liquid manure.
+            var day = new DateTime(2025, 6, 1);
+            var farm = BuildFarmWithRemoval(day, AnimalType.DairyLactatingCow, ManureLocationSourceType.Livestock, ManureStateType.LiquidNoCrust);
+
+            // Act: query the solid system for that day.
+            var result = _manureService.GetTotalVolumeOfManureRemovedFromStorageOnDay(day, farm, AnimalType.DairyLactatingCow, ManureStateType.Solid);
+
+            // Assert: no solid removals occurred.
+            Assert.AreEqual(0, result, 1e-9);
+        }
+
+        /// <summary>
+        /// Querying a liquid system counts only the liquid removals when both liquid and solid removals occur on the
+        /// same day for the same animal type.
+        /// </summary>
+        [TestMethod]
+        public void GetTotalVolumeOfManureRemovedFromStorageOnDay_CountsOnlyMatchingSystemWhenBothPresent()
+        {
+            // Arrange: a liquid application/export (80 kg) plus an additional solid application (20 kg) on the same day.
+            var day = new DateTime(2025, 6, 1);
+            var farm = BuildFarmWithRemoval(day, AnimalType.DairyLactatingCow, ManureLocationSourceType.Livestock, ManureStateType.LiquidNoCrust);
+
+            var solidCrop = new CropViewItem { Area = 10 };
+            solidCrop.ManureApplicationViewItems.Add(new ManureApplicationViewItem
+            {
+                DateOfApplication = day,
+                AmountOfManureAppliedPerHectare = 2, // 2 kg ha^-1 x 10 ha = 20 kg solid
+                AnimalType = AnimalType.DairyLactatingCow,
+                ManureLocationSourceType = ManureLocationSourceType.Livestock,
+                ManureStateType = ManureStateType.Solid,
+            });
+            var solidField = new FieldSystemComponent();
+            solidField.CropViewItems.Add(solidCrop);
+            farm.Components.Add(solidField);
+
+            // Act: query the liquid system.
+            var result = _manureService.GetTotalVolumeOfManureRemovedFromStorageOnDay(day, farm, AnimalType.DairyLactatingCow, ManureStateType.LiquidNoCrust);
+
+            // Assert: only the 80 kg of liquid removals count; the 20 kg solid application is excluded.
+            Assert.AreEqual(80, result, 1e-9);
         }
 
         #endregion
