@@ -989,8 +989,15 @@ namespace H.Core.Services.Animals
                 fractionOfManureRemovedFromStorageOnPreviousDay: fractionRemovedOnPreviousDay);
 
             // Volume of manure removed from storage on the current day (read by the following day to form the fraction).
-            // Only removals from the same management system (liquid or solid) as this management period are counted, so a
-            // solid manure application does not reduce the volatile solids held in a separate liquid storage tank.
+            // Only removals whose ManureStateType exactly matches this management period's state type are counted,
+            // since each state type represents a distinct physical storage tank (issue #434).
+            //
+            // KNOWN LIMITATION (see follow-on issue): the denominator (AccumulatedVolumeNetOfRemovals) is accumulated
+            // per management period, but the physical model has one shared tank per year/animal-category/state-type.
+            // If multiple management periods feed the same tank (e.g. lactating cows + heifers both using
+            // LiquidNoCrust), the denominator understates the true tank volume, causing the removal fraction to be
+            // overstated for each period. This should be corrected by tracking the accumulated volume at the tank
+            // level rather than the management-period level.
             todaysState.VolumeRemovedOnDay = _manureService.GetTotalVolumeOfManureRemovedFromStorageOnDay(
                 dailyEmissions.DateTime, farm, managementPeriod.AnimalType, managementPeriod.ManureDetails.StateType);
 
