@@ -34,9 +34,10 @@ namespace H.Core.Services.Animals
 
         /// <summary>
         /// Returns the total volume of manure removed from storage on a given day for a given animal type and manure
-        /// management system, through on-farm land application and off-farm export. Only removals belonging to the same
-        /// management system (liquid or solid) as <paramref name="manureStateType"/> are counted, since liquid and solid
-        /// manure are held in separate storage. Imported manure applications are excluded.
+        /// management system, through on-farm land application and off-farm export. Only removals whose
+        /// <see cref="ManureItemBase.ManureStateType"/> exactly matches <paramref name="manureStateType"/> are counted,
+        /// since each state type represents a distinct storage tank (consistent with how tanks are keyed in
+        /// <see cref="IManureService.GetTank"/>). Imported manure applications are excluded.
         ///
         /// (kg)
         /// </summary>
