@@ -992,7 +992,7 @@ namespace H.Core.Services.Animals
             // Only removals whose ManureStateType exactly matches this management period's state type are counted,
             // since each state type represents a distinct physical storage tank (issue #434).
             //
-            // KNOWN LIMITATION (see follow-on issue): the denominator (AccumulatedVolumeNetOfRemovals) is accumulated
+            // KNOWN LIMITATION (see issue #451): the denominator (AccumulatedVolumeNetOfRemovals) is accumulated
             // per management period, but the physical model has one shared tank per year/animal-category/state-type.
             // If multiple management periods feed the same tank (e.g. lactating cows + heifers both using
             // LiquidNoCrust), the denominator understates the true tank volume, causing the removal fraction to be
