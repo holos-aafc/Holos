@@ -195,6 +195,9 @@
     <Compile Include="Mappers\AutoMapperCharacterizationTest.cs" />
     <Compile Include="Mappers\CropViewItemResultsCopyTest.cs" />
     <Compile Include="Services\Animals\ManureRemovalVolatileSolidsTest.cs" />
+    <Compile Include="Services\Animals\ManureStorageBaselineTest.cs" />
+    <None Include="Services\Animals\Baselines\Farm1.json" />
+    <None Include="Services\Animals\Baselines\Farm1.dairy-animal-results.baseline.txt" />
     <Compile Include="Services\Animals\ScaleUpServiceTest.cs" />
     <Compile Include="Services\Animals\AnimalInitializationServiceTest.cs" />
     <Compile Include="Services\Animals\ManagementPeriodServiceTest.cs" />
