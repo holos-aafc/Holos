@@ -779,47 +779,125 @@ namespace H.Core.Services.Animals
             IEnumerable<AnimalComponentEmissionsResults> componentResults,
             Farm farm)
         {
+            // Pass 1: for each shared tank, sum the daily inflow across every management period feeding it, then run the
+            // net-of-removals + removal-fraction recurrence once at the tank level (issue #451). A tank is keyed by year
+            // and manure state type; the animal category is fixed because CalculateResultsForAnimalComponents is called
+            // per species.
+            var tankInflowByDate = new Dictionary<(int Year, ManureStateType State), SortedDictionary<DateTime, double>>();
+            var tankAnimalType = new Dictionary<(int Year, ManureStateType State), AnimalType>();
+
             foreach (var componentResult in componentResults)
+            foreach (var groupResult in componentResult.EmissionResultsForAllAnimalGroupsInComponent)
+            foreach (var groupEmissionsByMonth in groupResult.GroupEmissionsByMonths)
             {
-                foreach (var groupResult in componentResult.EmissionResultsForAllAnimalGroupsInComponent)
+                var managementPeriod = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod;
+                if (managementPeriod == null || managementPeriod.ManureDetails.StateType.IsLiquidManure() == false)
                 {
-                    GroupEmissionsByDay previousDaysEmissions = null;
+                    continue;
+                }
 
-                    foreach (var groupEmissionsByMonth in groupResult.GroupEmissionsByMonths)
+                foreach (var dailyEmissions in groupEmissionsByMonth.DailyEmissions)
+                {
+                    var key = (dailyEmissions.DateTime.Year, managementPeriod.ManureDetails.StateType);
+                    if (tankInflowByDate.TryGetValue(key, out var inflowByDate) == false)
                     {
-                        var managementPeriod = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod;
-                        var isLiquidSystem = managementPeriod != null &&
-                                             managementPeriod.ManureDetails.StateType.IsLiquidManure();
+                        inflowByDate = new SortedDictionary<DateTime, double>();
+                        tankInflowByDate[key] = inflowByDate;
+                        tankAnimalType[key] = managementPeriod.AnimalType;
+                    }
 
-                        foreach (var dailyEmissions in groupEmissionsByMonth.DailyEmissions)
+                    var date = dailyEmissions.DateTime.Date;
+                    inflowByDate[date] = (inflowByDate.TryGetValue(date, out var existing) ? existing : 0) +
+                                         dailyEmissions.TotalVolumeOfManureAvailableForLandApplicationInKilograms;
+                }
+            }
+
+            var tankNetByDate = new Dictionary<(int Year, ManureStateType State), Dictionary<DateTime, double>>();
+            var tankFractionByDate = new Dictionary<(int Year, ManureStateType State), Dictionary<DateTime, double>>();
+
+            foreach (var tank in tankInflowByDate)
+            {
+                var animalType = tankAnimalType[tank.Key];
+                var netByDate = new Dictionary<DateTime, double>();
+                var fractionByDate = new Dictionary<DateTime, double>();
+
+                var previousNet = 0d;
+                var previousFraction = 0d;
+                foreach (var day in tank.Value) // SortedDictionary enumerates in ascending date order
+                {
+                    var net = this.CalculateAmountInStorageNetOfRemovals(
+                        netAmountInStorageOnPreviousDay: previousNet,
+                        amountFlowingIntoStorage: day.Value,
+                        fractionOfManureRemovedFromStorageOnPreviousDay: previousFraction);
+
+                    var removed = _manureService.GetTotalVolumeOfManureRemovedFromStorageOnDay(
+                        day.Key, farm, animalType, tank.Key.State);
+                    var fraction = this.BoundRemovalFraction(net > 0 ? removed / net : 0);
+
+                    netByDate[day.Key] = net;
+                    fractionByDate[day.Key] = fraction;
+                    previousNet = net;
+                    previousFraction = fraction;
+                }
+
+                tankNetByDate[tank.Key] = netByDate;
+                tankFractionByDate[tank.Key] = fractionByDate;
+            }
+
+            // Pass 2: complete each liquid day's fraction-dependent values using the SHARED tank fraction and writing the
+            // SHARED tank net volume. The volatile-solids and carbon pools stay per management group, threaded across its
+            // management periods and reset each year, exactly as the daily pass chains them.
+            foreach (var componentResult in componentResults)
+            foreach (var groupResult in componentResult.EmissionResultsForAllAnimalGroupsInComponent)
+            {
+                GroupEmissionsByDay previousDaysEmissions = null;
+
+                foreach (var groupEmissionsByMonth in groupResult.GroupEmissionsByMonths)
+                {
+                    var managementPeriod = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod;
+                    var isLiquidSystem = managementPeriod != null &&
+                                         managementPeriod.ManureDetails.StateType.IsLiquidManure();
+
+                    foreach (var dailyEmissions in groupEmissionsByMonth.DailyEmissions)
+                    {
+                        // Reset the carryover chain on the first day of a year, matching GetResultsForGroup.
+                        if (dailyEmissions.DateTime.DayOfYear == 1)
                         {
-                            // Reset the carryover chain on the first day of a year, matching GetResultsForGroup.
-                            if (dailyEmissions.DateTime.DayOfYear == 1)
-                            {
-                                previousDaysEmissions = null;
-                            }
-
-                            if (isLiquidSystem)
-                            {
-                                // Same order as the daily pass: volatile solids/methane, then carbon-in-storage, then the
-                                // C:N ratio, then the net-of-removals volume advance.
-                                var fractionOfManureRemovedOnPreviousDay =
-                                    this.GetFractionOfManureRemovedFromStorage(previousDaysEmissions);
-
-                                this.ApplyLiquidManureVolatileSolidsForDay(
-                                    dailyEmissions, previousDaysEmissions, managementPeriod, fractionOfManureRemovedOnPreviousDay);
-
-                                this.CalculateCarbonInStorageInternal(dailyEmissions, previousDaysEmissions, managementPeriod);
-
-                                dailyEmissions.ManureCarbonNitrogenRatio = this.CalculateManureCarbonToNitrogenRatio(
-                                    carbonFromStorage: dailyEmissions.AccumulatedAmountOfCarbonInStoredManureOnDay,
-                                    nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
-
-                                this.AdvanceManureStorageByOneDayInternal(dailyEmissions, previousDaysEmissions, managementPeriod, farm);
-                            }
-
-                            previousDaysEmissions = dailyEmissions;
+                            previousDaysEmissions = null;
                         }
+
+                        if (isLiquidSystem)
+                        {
+                            var key = (dailyEmissions.DateTime.Year, managementPeriod.ManureDetails.StateType);
+
+                            // The removal fraction applied to the previous day's carryover is the shared tank fraction on
+                            // that previous day, not this period's own fraction.
+                            var fractionOnPreviousDay = 0d;
+                            if (previousDaysEmissions != null &&
+                                tankFractionByDate.TryGetValue(key, out var fractionByDate) &&
+                                fractionByDate.TryGetValue(previousDaysEmissions.DateTime.Date, out var sharedFraction))
+                            {
+                                fractionOnPreviousDay = sharedFraction;
+                            }
+
+                            // Same order as the daily pass: volatile solids/methane, carbon-in-storage, C:N ratio, volume.
+                            this.ApplyLiquidManureVolatileSolidsForDay(
+                                dailyEmissions, previousDaysEmissions, managementPeriod, fractionOnPreviousDay);
+
+                            this.CalculateCarbonInStorageInternal(dailyEmissions, previousDaysEmissions, managementPeriod);
+
+                            dailyEmissions.ManureCarbonNitrogenRatio = this.CalculateManureCarbonToNitrogenRatio(
+                                carbonFromStorage: dailyEmissions.AccumulatedAmountOfCarbonInStoredManureOnDay,
+                                nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
+
+                            // Gross volume and the daily removed volume come from the per-period advance; the
+                            // net-of-removals volume is replaced by the shared tank total (the corrected denominator).
+                            this.AdvanceManureStorageByOneDayInternal(dailyEmissions, previousDaysEmissions, managementPeriod, farm);
+                            dailyEmissions.AccumulatedVolumeNetOfRemovals =
+                                tankNetByDate[key][dailyEmissions.DateTime.Date];
+                        }
+
+                        previousDaysEmissions = dailyEmissions;
                     }
                 }
             }
