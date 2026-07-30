@@ -361,7 +361,7 @@ namespace H.Core.Services.LandManagement
             }
 
             // Add in additional years for the run-in period. The additional years should not be displayed to the user as they are just for internal calculations                
-            var runInPeriod = farm.Defaults.DefaultRunInPeriod;
+            var runInPeriod = farm.Defaults.DefaultRunInPeriod == 0 ? 1 : farm.Defaults.DefaultRunInPeriod;
             var runInPeriodStartYear = startYearOfField - runInPeriod;
 
             int rotationSize = 0;
