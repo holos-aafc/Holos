@@ -73,6 +73,14 @@ namespace H.Core.Services.Animals
                 animalComponentEmissionResults.Add(result);
             }
 
+            // For dairy/swine liquid systems, complete the fraction-dependent storage cascade now that every management
+            // period has produced its fraction-independent inputs, using the removal fraction taken over the whole
+            // shared tank (all components passed here are of a single animal category = the tank's category) (issue #451).
+            if (this.DefersLiquidManureStorageToStoragePhase)
+            {
+                this.CompleteLiquidManureStorageForTanks(animalComponentEmissionResults, farm);
+            }
+
             return animalComponentEmissionResults;
         }
 
@@ -737,10 +745,97 @@ namespace H.Core.Services.Animals
             dailyEmissions.VolatileSolidsLoaded = this.CalculateVolatileSolidsLoaded(
                 volatileSolidsProduced: dailyEmissions.VolatileSolidsProduced);
 
-            // Equation 4.1.3-6: on a day following a removal, the carried-over volatile solids are reduced by the
-            // fraction of manure that left storage on the previous day (net of removals made earlier in the year).
-            var fractionOfManureRemovedOnPreviousDay = this.GetFractionOfManureRemovedFromStorage(previousDaysEmissions);
+            // The volatile-solids carryover, its consumption and the resulting methane (Eq. 4.1.3-6) - and everything
+            // downstream of that methane (carbon-in-storage, the C:N ratio and the net-of-removals volume) - depend on
+            // the removal fraction, whose denominator is the whole shared tank (one tank per year / animal category /
+            // manure state type), not this single management period (issue #451). For liquid systems those values are
+            // therefore deferred to CompleteLiquidManureStorageForTanks, which runs once after every management period
+            // feeding a tank has produced its fraction-independent inputs (volatile solids loaded, the nitrogen chain,
+            // fecal/bedding carbon). Only the fraction-independent volatile solids loaded is computed here.
+        }
 
+        /// <summary>
+        /// Gate for the liquid-manure storage phase. Species whose liquid systems compute volatile-solids-based methane
+        /// (dairy and swine, via <see cref="CalculateManureMethaneFromLiquidSystems"/>) override this to return true, so
+        /// their fraction-dependent liquid-storage values are completed in <see cref="CompleteLiquidManureStorageForTanks"/>
+        /// after all management periods are advanced (issue #451). Every other species is unaffected.
+        /// </summary>
+        protected virtual bool DefersLiquidManureStorageToStoragePhase => false;
+
+        /// <summary>
+        /// Completes the fraction-dependent liquid-manure storage cascade (Eq. 4.1.3-6 and everything downstream of the
+        /// resulting methane) for every liquid management period once all periods have been advanced: the carried-over
+        /// volatile solids, volatile solids consumed, manure methane, carbon-in-storage, the C:N ratio, and the
+        /// net-of-removals volume. This is the single place these liquid values are computed.
+        ///
+        /// The removal fraction is shared across all management periods feeding the same physical tank (year / animal
+        /// category / manure state type), so a tank drawn down by an application is reduced by the same fraction for
+        /// each contributing period rather than by a per-period fraction (issue #451). This method reproduces the
+        /// per-group daily carryover chain of <see cref="GetResultsForGroup"/> exactly (the recurrences are per management
+        /// group, threaded across its management periods and reset at each year boundary); solid-system days are left as
+        /// the daily pass computed them.
+        /// </summary>
+        protected void CompleteLiquidManureStorageForTanks(
+            IEnumerable<AnimalComponentEmissionsResults> componentResults,
+            Farm farm)
+        {
+            foreach (var componentResult in componentResults)
+            {
+                foreach (var groupResult in componentResult.EmissionResultsForAllAnimalGroupsInComponent)
+                {
+                    GroupEmissionsByDay previousDaysEmissions = null;
+
+                    foreach (var groupEmissionsByMonth in groupResult.GroupEmissionsByMonths)
+                    {
+                        var managementPeriod = groupEmissionsByMonth.MonthsAndDaysData.ManagementPeriod;
+                        var isLiquidSystem = managementPeriod != null &&
+                                             managementPeriod.ManureDetails.StateType.IsLiquidManure();
+
+                        foreach (var dailyEmissions in groupEmissionsByMonth.DailyEmissions)
+                        {
+                            // Reset the carryover chain on the first day of a year, matching GetResultsForGroup.
+                            if (dailyEmissions.DateTime.DayOfYear == 1)
+                            {
+                                previousDaysEmissions = null;
+                            }
+
+                            if (isLiquidSystem)
+                            {
+                                // Same order as the daily pass: volatile solids/methane, then carbon-in-storage, then the
+                                // C:N ratio, then the net-of-removals volume advance.
+                                var fractionOfManureRemovedOnPreviousDay =
+                                    this.GetFractionOfManureRemovedFromStorage(previousDaysEmissions);
+
+                                this.ApplyLiquidManureVolatileSolidsForDay(
+                                    dailyEmissions, previousDaysEmissions, managementPeriod, fractionOfManureRemovedOnPreviousDay);
+
+                                this.CalculateCarbonInStorageInternal(dailyEmissions, previousDaysEmissions, managementPeriod);
+
+                                dailyEmissions.ManureCarbonNitrogenRatio = this.CalculateManureCarbonToNitrogenRatio(
+                                    carbonFromStorage: dailyEmissions.AccumulatedAmountOfCarbonInStoredManureOnDay,
+                                    nitrogenFromManure: dailyEmissions.AccumulatedNitrogenAvailableForLandApplicationOnDay);
+
+                                this.AdvanceManureStorageByOneDayInternal(dailyEmissions, previousDaysEmissions, managementPeriod, farm);
+                            }
+
+                            previousDaysEmissions = dailyEmissions;
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Applies the fraction-dependent liquid volatile-solids values for a single day (Eq. 4.1.3-6): the carried-over
+        /// volatile solids reduced by <paramref name="fractionOfManureRemovedOnPreviousDay"/>, the volatile solids
+        /// consumed, and the resulting manure methane (with the covered-system reduction where applicable).
+        /// </summary>
+        private void ApplyLiquidManureVolatileSolidsForDay(
+            GroupEmissionsByDay dailyEmissions,
+            GroupEmissionsByDay previousDaysEmissions,
+            ManagementPeriod managementPeriod,
+            double fractionOfManureRemovedOnPreviousDay)
+        {
             dailyEmissions.VolatileSolidsAvailable = this.CalculateVolatileSolidsAvailable(
                 volatileSolidsLoaded: dailyEmissions.VolatileSolidsLoaded,
                 volatileSolidsAvailableFromPreviousDay: previousDaysEmissions == null ? 0 : previousDaysEmissions.VolatileSolidsAvailable,
@@ -757,15 +852,9 @@ namespace H.Core.Services.Animals
 
             if (managementPeriod.ManureDetails.StateType.IsCoveredSystem())
             {
-                var reductionFactor = 0d;
-                if (managementPeriod.ManureDetails.StateType == ManureStateType.LiquidWithNaturalCrust)
-                {
-                    reductionFactor = 0.4;
-                }
-                else
-                {
-                    reductionFactor = 0.25;
-                }
+                var reductionFactor = managementPeriod.ManureDetails.StateType == ManureStateType.LiquidWithNaturalCrust
+                    ? 0.4
+                    : 0.25;
 
                 dailyEmissions.ManureMethaneEmission = this.CalculateLiquidManureMethaneForCoveredSystem(
                     manureMethane: dailyEmissions.ManureMethaneEmission,
@@ -971,6 +1060,22 @@ namespace H.Core.Services.Animals
             ManagementPeriod managementPeriod,
             Farm farm)
         {
+            // Liquid systems defer their fraction-dependent net-of-removals volume to the tank-level storage phase
+            // (issue #451); solid systems, and species that do not defer, advance inline here.
+            if (this.DefersLiquidManureStorageToStoragePhase && managementPeriod.ManureDetails.StateType.IsLiquidManure())
+            {
+                return;
+            }
+
+            this.AdvanceManureStorageByOneDayInternal(dailyEmissions, previousDaysEmissions, managementPeriod, farm);
+        }
+
+        private void AdvanceManureStorageByOneDayInternal(
+            GroupEmissionsByDay dailyEmissions,
+            GroupEmissionsByDay previousDaysEmissions,
+            ManagementPeriod managementPeriod,
+            Farm farm)
+        {
             var previousState = ReadManureStorageState(previousDaysEmissions);
             var fractionRemovedOnPreviousDay = this.GetFractionOfManureRemovedFromStorage(previousDaysEmissions);
 
@@ -1076,6 +1181,21 @@ namespace H.Core.Services.Animals
         }
 
         public void CalculateCarbonInStorage(
+            GroupEmissionsByDay dailyEmissions,
+            GroupEmissionsByDay previousDaysEmissions,
+            ManagementPeriod managementPeriod)
+        {
+            // For liquid systems the stored carbon depends on the (deferred) liquid methane, so it is completed in the
+            // tank-level storage phase (issue #451); solid systems, and species that do not defer, compute inline here.
+            if (this.DefersLiquidManureStorageToStoragePhase && managementPeriod.ManureDetails.StateType.IsLiquidManure())
+            {
+                return;
+            }
+
+            this.CalculateCarbonInStorageInternal(dailyEmissions, previousDaysEmissions, managementPeriod);
+        }
+
+        private void CalculateCarbonInStorageInternal(
             GroupEmissionsByDay dailyEmissions,
             GroupEmissionsByDay previousDaysEmissions,
             ManagementPeriod managementPeriod)

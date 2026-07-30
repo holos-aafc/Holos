@@ -35,6 +35,10 @@ namespace H.Core.Services.Animals
 
         #endregion
 
+        // Swine liquid systems compute volatile-solids-based methane, so their fraction-dependent liquid-storage cascade
+        // is completed in the tank-level storage phase after all management periods are advanced (issue #451).
+        protected override bool DefersLiquidManureStorageToStoragePhase => true;
+
         #region Properties
 
         #endregion
