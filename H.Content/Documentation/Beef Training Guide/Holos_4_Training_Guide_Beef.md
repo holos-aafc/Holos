@@ -12,7 +12,7 @@ Please note that Holos 4 can be installed on a Microsoft Windows PC only. Mac OS
 
 Launch Holos by double-clicking on the Holos desktop icon. Holos will ask the user to open an existing farm, create a new farm, or import a saved farm file (Figure 1). If there is already a saved farm in the system, the user can click **Open**. If there are no saved farms in the system, Holos will ask the user if they want to create a **New** farm or **Import** a saved farm file (i.e., a .json file). If the user creates a new farm, they are asked for the farm name and an optional comment (Figure 2).  
 
-Enter **"Holos 2025"** as the Name and **"Training Version"** in the Comments.  Click **OK** to proceed to the next screen.
+Enter **"Holos 2026"** as the Name and **"Training Version"** in the Comments.  Click **OK** to proceed to the next screen.
 
 Ensure **"Metric"** is selected as the unit of measurement type and then click the **Next** button at the bottom of the screen (Figure 3). 
 
@@ -398,7 +398,7 @@ Click on the **"Bulls"** row in the animal group section under **Step 1**. Infor
 
 Calves on our farm are born on March 1 and weaned on September 30 at the age of seven months. Using a final weaning rate of 85%, we will have 110 calves from March to September. Following the cows, calves will be in confinement for the months of March and April and will be grazing on pasture from May to September. This will result in two separate management periods.
 
-Click on the **"Calves"** row in the animal group section under **Step 1** to activate the calf group. The first management period will span from **"March 1, 2023"** to **"April 30, 2023"** and the second management period will span from **"May 1, 2023"** to **"September 30, 2022**.
+Click on the **"Calves"** row in the animal group section under **Step 1** to activate the calf group. The first management period will span from **"March 1, 2023"** to **"April 30, 2023"** and the second management period will span from **"May 1, 2023"** to **"September 30, 2023**.
 
 
 **Management Period #1:**
