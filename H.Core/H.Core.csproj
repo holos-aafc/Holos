@@ -339,6 +339,7 @@
     <Compile Include="Models\Results\ExportResultViewItemBase.cs" />
     <Compile Include="Models\Results\ManureExportResultViewItem.cs" />
     <Compile Include="Models\ManureStorageMath.cs" />
+    <Compile Include="Models\ManureTankStore.cs" />
     <Compile Include="Models\StorageTankBase.cs" />
     <Compile Include="Providers\AnaerobicDigestion\Table_46_Biogas_Methane_Production_CropResidue_Data.cs" />
     <Compile Include="Providers\Animals\IAnimalAmmoniaEmissionFactorProvider.cs" />

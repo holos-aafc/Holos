@@ -23,7 +23,7 @@ namespace H.Core.Services.Animals
         #region Fields
 
         private readonly ManureHandlingSystemProvider _manureHandlingSystemProvider = new ManureHandlingSystemProvider();
-        private readonly List<ManureTank> _manureTanks;
+        private readonly ManureTankStore _tankStore;
         private readonly List<AnimalType> _validManureTypes = new List<AnimalType>()
         {
             AnimalType.NotSelected,
@@ -66,9 +66,17 @@ namespace H.Core.Services.Animals
 
         #region Constructors
 
-        public ManureService()
+        public ManureService() : this(new ManureTankStore())
         {
-            _manureTanks = new List<ManureTank>();
+        }
+
+        /// <summary>
+        /// Shares a per-run <see cref="ManureTankStore"/> so several consumers can read/write one set of tanks (issue
+        /// #451 follow-up). The parameterless constructor keeps the previous behaviour of owning a private store.
+        /// </summary>
+        public ManureService(ManureTankStore tankStore)
+        {
+            _tankStore = tankStore;
 
             _manureCompositionMapper = new ModelMapper<DefaultManureCompositionData>(
                 nameof(DefaultManureCompositionData.Guid));
@@ -419,7 +427,7 @@ namespace H.Core.Services.Animals
         {
             var amount = 0d;
 
-            var tank = _manureTanks.Where(x => x.Year == year);
+            var tank = _tankStore.Tanks.Where(x => x.Year == year);
             foreach (var manureTank in tank)
             {
                 amount += manureTank.VolumeRemainingInTank;
@@ -432,7 +440,7 @@ namespace H.Core.Services.Animals
         {
             var amount = 0d;
 
-            var tank = _manureTanks.Where(x => x.Year == year && x.AnimalType.GetCategory() == animalType.GetCategory());
+            var tank = _tankStore.Tanks.Where(x => x.Year == year && x.AnimalType.GetCategory() == animalType.GetCategory());
             foreach (var manureTank in tank)
             {
                 amount += manureTank.VolumeOfManureAvailableForLandApplication;
@@ -445,7 +453,7 @@ namespace H.Core.Services.Animals
         {
             var amount = 0d;
 
-            var tank = _manureTanks.Where(x => x.Year == year);
+            var tank = _tankStore.Tanks.Where(x => x.Year == year);
             foreach (var manureTank in tank)
             {
                 amount += manureTank.TotalTanAvailableForLandApplication;
@@ -458,7 +466,7 @@ namespace H.Core.Services.Animals
         {
             var amount = 0d;
 
-            var tank = _manureTanks.Where(x => x.Year == year && x.AnimalType.GetCategory() == animalType.GetCategory());
+            var tank = _tankStore.Tanks.Where(x => x.Year == year && x.AnimalType.GetCategory() == animalType.GetCategory());
             foreach (var manureTank in tank)
             {
                 amount += manureTank.TotalTanAvailableForLandApplication;
@@ -471,7 +479,7 @@ namespace H.Core.Services.Animals
         {
             var amount = 0d;
 
-            var tank = _manureTanks.Where(x => x.Year == year);
+            var tank = _tankStore.Tanks.Where(x => x.Year == year);
             foreach (var manureTank in tank)
             {
                 amount += manureTank.TotalNitrogenAvailableForLandApplication;
@@ -484,7 +492,7 @@ namespace H.Core.Services.Animals
         {
             var amount = 0d;
 
-            var tank = _manureTanks.Where(x => x.Year == year);
+            var tank = _tankStore.Tanks.Where(x => x.Year == year);
             foreach (var manureTank in tank)
             {
                 amount += manureTank.TotalAmountOfCarbonInStoredManure;
@@ -616,7 +624,7 @@ namespace H.Core.Services.Animals
         {
             var amount = 0d;
 
-            var tank = _manureTanks.Where(x => x.Year == year && x.AnimalType.GetCategory() == animalType.GetCategory());
+            var tank = _tankStore.Tanks.Where(x => x.Year == year && x.AnimalType.GetCategory() == animalType.GetCategory());
             foreach (var manureTank in tank)
             {
                 amount += manureTank.TotalNitrogenAvailableForLandApplication;
@@ -629,7 +637,7 @@ namespace H.Core.Services.Animals
         {
             var amount = 0d;
 
-            var tank = _manureTanks.Where(x => x.Year == year);
+            var tank = _tankStore.Tanks.Where(x => x.Year == year);
             foreach (var manureTank in tank)
             {
                 amount += manureTank.VolumeOfManureAvailableForLandApplication;
@@ -642,7 +650,7 @@ namespace H.Core.Services.Animals
         {
             var amount = 0d;
 
-            var tank = _manureTanks.Where(x => x.Year == year);
+            var tank = _tankStore.Tanks.Where(x => x.Year == year);
             foreach (var manureTank in tank)
             {
                 amount += manureTank.NitrogenSumOfAllManureApplicationsMade;
@@ -655,7 +663,7 @@ namespace H.Core.Services.Animals
         {
             var amount = 0d;
 
-            var tank = _manureTanks.Where(x => x.Year == year && x.AnimalType.GetCategory() == animalType.GetCategory());
+            var tank = _tankStore.Tanks.Where(x => x.Year == year && x.AnimalType.GetCategory() == animalType.GetCategory());
             foreach (var manureTank in tank)
             {
                 amount += manureTank.NitrogenSumOfAllManureApplicationsMade;
@@ -873,7 +881,7 @@ namespace H.Core.Services.Animals
         public int GetYearHighestVolumeRemaining(AnimalType animalType)
         {
             var category = animalType.GetCategory();
-            var tanksOrderedByAvailableManure = _manureTanks.Where(y => y.AnimalType.GetCategory() == category).OrderByDescending(x => x.VolumeRemainingInTank).ToList();
+            var tanksOrderedByAvailableManure = _tankStore.Tanks.Where(y => y.AnimalType.GetCategory() == category).OrderByDescending(x => x.VolumeRemainingInTank).ToList();
 
             if (tanksOrderedByAvailableManure.Any())
             {
@@ -912,7 +920,7 @@ namespace H.Core.Services.Animals
             var amount = 0d;
 
             // Amounts on pasture can't be exported
-            var tanks = _manureTanks.Where(x => x.AnimalType == animalType && x.Year == year && x.ManureStateType != ManureStateType.Pasture);
+            var tanks = _tankStore.Tanks.Where(x => x.AnimalType == animalType && x.Year == year && x.ManureStateType != ManureStateType.Pasture);
             foreach (var manureTank in tanks)
             {
                 amount += manureTank.VolumeRemainingInTank;
@@ -924,7 +932,7 @@ namespace H.Core.Services.Animals
         public void Initialize(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissions)
         {
             // Clear tanks since animal management may have changed
-            _manureTanks.Clear();
+            _tankStore.Clear();
 
             _animalComponentEmissionsResults = animalComponentEmissions;
 
@@ -1115,16 +1123,7 @@ namespace H.Core.Services.Animals
         /// <returns>The manure tank associated with animal type and the year</returns>
         private ManureTank GetManureTankInternal(AnimalType animalType, int year, ManureStateType manureStateType)
         {
-            var tank = _manureTanks.SingleOrDefault(x => x.AnimalType.GetCategory() == animalType.GetCategory() && x.Year == year && x.ManureStateType == manureStateType);
-            if (tank == null)
-            {
-                // If no tank exists for this year, create one now
-                tank = new ManureTank() { AnimalType = animalType, Year = year, ManureStateType = manureStateType };
-
-                _manureTanks.Add(tank);
-            }
-
-            return tank;
+            return _tankStore.GetOrCreate(animalType, year, manureStateType);
         }
 
         /// <summary>
