@@ -1,0 +1,21 @@
+# ManureService tank-total golden baseline (issue #451 unification) - Farm1.json
+# One line per non-zero tank-derived query. Regenerate with HOLOS_UPDATE_BASELINES=1.
+cat=Beef | GetYearHighestVolumeRemaining = 2026.0000
+cat=Dairy | GetYearHighestVolumeRemaining = 2026.0000
+cat=OtherLivestock | GetYearHighestVolumeRemaining = 2026.0000
+cat=Poultry | GetYearHighestVolumeRemaining = 2026.0000
+cat=Sheep | GetYearHighestVolumeRemaining = 2026.0000
+cat=Swine | GetYearHighestVolumeRemaining = 2026.0000
+year=2026 cat=Dairy | GetTotalNitrogenAppliedToAllFields = 1500.0000
+year=2026 cat=Dairy | GetTotalNitrogenCreated = 4351.4643
+year=2026 cat=Dairy | GetTotalTANCreated = 2345.8927
+year=2026 cat=Dairy | GetTotalVolumeCreated = 2082040.3321
+year=2026 cat=Dairy | GetVolumeAvailableForExport = 1364336.9828
+year=2026 | GetTotalCarbonCreated = 41962.0798
+year=2026 | GetTotalManureNitrogenRemainingForFarmAndYear = 2851.4643
+year=2026 | GetTotalNitrogenAppliedToAllFields = 1500.0000
+year=2026 | GetTotalNitrogenCreated = 4351.4643
+year=2026 | GetTotalTANCreated = 2345.8927
+year=2026 | GetTotalVolumeCreated = 2082040.3321
+year=2026 | GetTotalVolumeRemainingForFarmAndYear = 1364336.9828
+year=2026 | GetVolumeAvailableForExport = 1364336.9828

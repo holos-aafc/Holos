@@ -1,0 +1,37 @@
+# ManureService tank-total golden baseline (issue #451 unification) - Farm2.json
+# One line per non-zero tank-derived query. Regenerate with HOLOS_UPDATE_BASELINES=1.
+cat=Beef | GetYearHighestVolumeRemaining = 2025.0000
+cat=Dairy | GetYearHighestVolumeRemaining = 2025.0000
+cat=OtherLivestock | GetYearHighestVolumeRemaining = 2026.0000
+cat=Poultry | GetYearHighestVolumeRemaining = 2026.0000
+cat=Sheep | GetYearHighestVolumeRemaining = 2026.0000
+cat=Swine | GetYearHighestVolumeRemaining = 2026.0000
+year=2025 cat=Beef | GetTotalNitrogenAppliedToAllFields = 14300.0000
+year=2025 cat=Beef | GetTotalNitrogenCreated = 39247.3021
+year=2025 cat=Beef | GetTotalTANCreated = 17438.4907
+year=2025 cat=Beef | GetTotalVolumeCreated = 5489133.1587
+year=2025 cat=Beef | GetVolumeAvailableForExport = 3489133.1587
+year=2025 cat=Dairy | GetTotalNitrogenAppliedToAllFields = 3135.0000
+year=2025 cat=Dairy | GetTotalNitrogenCreated = 53287.6823
+year=2025 cat=Dairy | GetTotalTANCreated = 27353.0537
+year=2025 cat=Dairy | GetTotalVolumeCreated = 25496498.6944
+year=2025 cat=Dairy | GetVolumeAvailableForExport = 23996498.6944
+year=2025 | GetTotalCarbonCreated = 1506087.0473
+year=2025 | GetTotalManureNitrogenRemainingForFarmAndYear = 75079.0844
+year=2025 | GetTotalNitrogenAppliedToAllFields = 17435.0000
+year=2025 | GetTotalNitrogenCreated = 92534.9844
+year=2025 | GetTotalTANCreated = 44791.5445
+year=2025 | GetTotalVolumeCreated = 30985631.8532
+year=2025 | GetTotalVolumeRemainingForFarmAndYear = 27475631.8532
+year=2025 | GetVolumeAvailableForExport = 27485631.8532
+year=2026 cat=Dairy | GetTotalNitrogenCreated = 11345.9044
+year=2026 cat=Dairy | GetTotalTANCreated = 6748.7153
+year=2026 cat=Dairy | GetTotalVolumeCreated = 5428662.3808
+year=2026 cat=Dairy | GetVolumeAvailableForExport = 5428662.3808
+year=2026 | GetTotalCarbonCreated = 87823.9816
+year=2026 | GetTotalManureNitrogenRemainingForFarmAndYear = 11345.9044
+year=2026 | GetTotalNitrogenCreated = 11345.9044
+year=2026 | GetTotalTANCreated = 6748.7153
+year=2026 | GetTotalVolumeCreated = 5428662.3808
+year=2026 | GetTotalVolumeRemainingForFarmAndYear = 5428662.3808
+year=2026 | GetVolumeAvailableForExport = 5428662.3808
