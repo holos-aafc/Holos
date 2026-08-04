@@ -41,16 +41,12 @@ namespace H.Core.Test.Models
         }
 
         /// <summary>
-        /// Characterizes the CURRENT behaviour of <see cref="StorageTankBase.ResetTank"/>, including a known ordering
-        /// quirk we are pinning before the tank-accounting refactor: because ResetTank sets
-        /// VolumeSumOfAllManureApplicationsMade to 0 (which recomputes VolumeRemainingInTank from the not-yet-zeroed
-        /// VolumeOfManureAvailableForLandApplication) BEFORE it zeroes VolumeOfManureAvailableForLandApplication (a plain
-        /// setter that does not re-trigger the recompute), VolumeRemainingInTank is left at the pre-reset volume rather
-        /// than 0. The nitrogen side has the opposite (correct) order and does reach 0. If the refactor changes this,
-        /// this test flags it so the change is a conscious decision.
+        /// <see cref="StorageTankBase.ResetTank"/> fully zeroes every value property, including VolumeRemainingInTank.
+        /// (This previously left VolumeRemainingInTank at the pre-reset volume because the volume-sum setter recomputed
+        /// it before the available volume was zeroed; the reset order was corrected during the tank-accounting refactor.)
         /// </summary>
         [TestMethod]
-        public void ResetTank_ZeroesMostProperties_ButLeavesVolumeRemainingAtPreResetVolume()
+        public void ResetTank_ZeroesAllValueProperties()
         {
             var tank = new ManureTank
             {
@@ -63,16 +59,13 @@ namespace H.Core.Test.Models
 
             tank.ResetTank();
 
-            // Fully reset:
             Assert.AreEqual(0, tank.VolumeOfManureAvailableForLandApplication, 1e-9);
+            Assert.AreEqual(0, tank.VolumeRemainingInTank, 1e-9);
             Assert.AreEqual(0, tank.VolumeSumOfAllManureApplicationsMade, 1e-9);
             Assert.AreEqual(0, tank.NitrogenSumOfAllManureApplicationsMade, 1e-9);
             Assert.AreEqual(0, tank.TotalNitrogenAvailableForLandApplication, 1e-9);
             Assert.AreEqual(0, tank.TotalNitrogenAvailableAfterAllLandApplications, 1e-9);
             Assert.AreEqual(0, tank.TotalAmountOfCarbonInStoredManure, 1e-9);
-
-            // Known quirk (pinned): NOT reset to 0 — left at the pre-reset VolumeOfManureAvailableForLandApplication.
-            Assert.AreEqual(100, tank.VolumeRemainingInTank, 1e-9);
         }
     }
 }
