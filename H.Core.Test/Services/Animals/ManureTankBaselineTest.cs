@@ -44,6 +44,34 @@ namespace H.Core.Test.Services.Animals
             RunBaseline("Farm2.json", "Farm2.manure-tank-totals.baseline.txt");
         }
 
+        /// <summary>
+        /// Demonstrates the unification (issue #451): after the shared-store run, a single ManureTank carries BOTH the
+        /// daily storage series produced by the animal results AND the whole-year totals added by ManureService - one
+        /// source of truth, rather than two disconnected tank worlds.
+        /// </summary>
+        [TestMethod]
+        public void SharedStore_DairyLiquidTank_CarriesBothDailyStorageAndTotals()
+        {
+            var farm = new Storage().GetFarmsFromExportFile(GetFixtureFilePath("Farm2.json")).Single();
+            base._initializationService.ReInitializeFarms(new[] { farm });
+
+            var store = new ManureTankStore();
+            var animalResults = new AnimalResultsService().GetAnimalResults(farm, store);
+            new ManureService().Initialize(farm, animalResults, store);
+
+            var dairyLiquidTank = store.Tanks.Single(t =>
+                t.AnimalType.GetCategory() == AnimalType.Dairy &&
+                t.Year == 2025 &&
+                t.ManureStateType == ManureStateType.LiquidWithNaturalCrust);
+
+            // Daily storage from the animal phase:
+            Assert.IsTrue(dairyLiquidTank.NetOfRemovalsByDate.Count > 0, "tank should carry the animal-phase daily net-of-removals series");
+            Assert.IsTrue(dairyLiquidTank.RemovalFractionByDate.Count > 0, "tank should carry the animal-phase removal fraction series");
+
+            // Whole-year totals from ManureService, on the SAME tank object:
+            Assert.IsTrue(dairyLiquidTank.VolumeOfManureAvailableForLandApplication > 0, "tank should carry the ManureService totals");
+        }
+
         private void RunBaseline(string fixtureFileName, string baselineFileName)
         {
             var snapshot = BuildSnapshot(fixtureFileName);
@@ -90,10 +118,14 @@ namespace H.Core.Test.Services.Animals
             var farm = new Storage().GetFarmsFromExportFile(GetFixtureFilePath(fixtureFileName)).Single();
             base._initializationService.ReInitializeFarms(new[] { farm });
 
-            var animalResults = new AnimalResultsService().GetAnimalResults(farm);
+            // Exercise the unified shared-store path (issue #451): the animal results populate the tanks' daily storage
+            // into the shared store, then ManureService adds the totals onto the same tanks. The committed baseline was
+            // generated via the old private-store path, so a byte-identical match proves the unification changed no totals.
+            var manureTankStore = new ManureTankStore();
+            var animalResults = new AnimalResultsService().GetAnimalResults(farm, manureTankStore);
 
             var manureService = new ManureService();
-            manureService.Initialize(farm, animalResults);
+            manureService.Initialize(farm, animalResults, manureTankStore);
 
             var years = farm.GetYearsWithAnimals().OrderBy(y => y).ToList();
             var rows = new List<string>();

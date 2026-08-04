@@ -35,6 +35,22 @@ namespace H.Core.Services.Animals
 
         #region Public Methods
 
+        /// <summary>
+        /// Runs the animal results with a shared per-run <see cref="ManureTankStore"/>, so the liquid storage phase
+        /// builds its tanks into that store and the rest of the pipeline reads the same tanks (issue #451 follow-up).
+        /// </summary>
+        public List<AnimalComponentEmissionsResults> GetAnimalResults(Farm farm, ManureTankStore sharedTankStore)
+        {
+            _otherLivestockResultsService.SharedManureTankStore = sharedTankStore;
+            _swineResultsService.SharedManureTankStore = sharedTankStore;
+            _poultryResultsService.SharedManureTankStore = sharedTankStore;
+            _sheepResultsService.SharedManureTankStore = sharedTankStore;
+            _dairyCattleResultsService.SharedManureTankStore = sharedTankStore;
+            _beefCattleResultsService.SharedManureTankStore = sharedTankStore;
+
+            return this.GetAnimalResults(farm);
+        }
+
         public List<AnimalComponentEmissionsResults> GetAnimalResults(Farm farm)
         {
             var results = new List<AnimalComponentEmissionsResults>();

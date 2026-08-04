@@ -23,7 +23,7 @@ namespace H.Core.Services.Animals
         #region Fields
 
         private readonly ManureHandlingSystemProvider _manureHandlingSystemProvider = new ManureHandlingSystemProvider();
-        private readonly ManureTankStore _tankStore;
+        private ManureTankStore _tankStore;
         private readonly List<AnimalType> _validManureTypes = new List<AnimalType>()
         {
             AnimalType.NotSelected,
@@ -931,9 +931,27 @@ namespace H.Core.Services.Animals
 
         public void Initialize(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissions)
         {
-            // Clear tanks since animal management may have changed
+            // Owns its store, so clear it first since animal management may have changed between recalculations.
             _tankStore.Clear();
 
+            this.BuildTankTotals(farm, animalComponentEmissions);
+        }
+
+        /// <summary>
+        /// Builds the tank totals onto a shared per-run <see cref="ManureTankStore"/> that the animal results have
+        /// already populated with each tank's daily storage (issue #451 follow-up). The store is NOT cleared - that
+        /// would discard the daily storage - which is safe because the shared store is created fresh per farm run, and
+        /// each tank's totals are reset before being re-accumulated.
+        /// </summary>
+        public void Initialize(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissions, ManureTankStore sharedTankStore)
+        {
+            _tankStore = sharedTankStore;
+
+            this.BuildTankTotals(farm, animalComponentEmissions);
+        }
+
+        private void BuildTankTotals(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissions)
+        {
             _animalComponentEmissionsResults = animalComponentEmissions;
 
             var animalTypes = this.GetManureCategoriesProducedOnFarm(farm);

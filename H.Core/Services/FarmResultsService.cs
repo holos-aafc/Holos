@@ -190,7 +190,10 @@ namespace H.Core.Services
             // Field results will use animal results to calculate indirect emissions from land applied manure. We will need to reset the animal component calculation state here.
             farm.ResetAnimalResults();
 
-            var animalResults = _animalResultsService.GetAnimalResults(farm);
+            // One manure-tank store per farm run: the animal results populate each tank's daily storage, then
+            // ManureService adds the whole-year totals to the same tanks - a single source of truth (issue #451).
+            var manureTankStore = new ManureTankStore();
+            var animalResults = _animalResultsService.GetAnimalResults(farm, manureTankStore);
 
             farmResults.AnimalComponentEmissionsResults.AddRange(animalResults);
             _fieldResultsService.AnimalResults = animalResults;
@@ -201,8 +204,9 @@ namespace H.Core.Services
 
             farmResults.FinalFieldResultViewItems.AddRange(this.CalculateFieldResults(farm));
 
-            // Manure calculations - must be calculated after both field and animal results have been calculated.
-            _manureService.Initialize(farm, animalResults);
+            // Manure calculations - must be calculated after both field and animal results have been calculated. Uses
+            // the shared store the animal results already populated with each tank's daily storage.
+            _manureService.Initialize(farm, animalResults, manureTankStore);
 
             farmResults.ManureExportResultsViewItems.AddRange(this.CalculateManureExportEmissions(farm));
 

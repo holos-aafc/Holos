@@ -33,6 +33,13 @@ namespace H.Core.Services.Animals
         protected readonly Table_43_Beef_Dairy_Default_Emission_Factors_Provider _defaultEmissionFactorsProvider = new Table_43_Beef_Dairy_Default_Emission_Factors_Provider();
         protected IAdditiveReductionFactorsProvider AdditiveReductionFactorsProvider = new Table_19_Additive_Reduction_Factors_Provider();
         protected readonly IManureService _manureService = new ManureService();
+
+        /// <summary>
+        /// When set (per farm run), the liquid storage phase builds its manure tanks into this shared store instead of
+        /// transient instances, so ManureService and the rest of the pipeline read the same tanks (issue #451 follow-up).
+        /// Null keeps the previous behaviour of building throwaway tanks.
+        /// </summary>
+        public ManureTankStore SharedManureTankStore { get; set; }
         protected IAnimalComponentHelper AnimalComponentHelper = new AnimalComponentHelper();
 
         protected ComponentCategory _animalComponentCategory;
@@ -819,14 +826,13 @@ namespace H.Core.Services.Animals
                     var key = (Year: dailyEmissions.DateTime.Year, State: managementPeriod.ManureDetails.StateType);
                     if (tanks.TryGetValue(key, out var tank) == false)
                     {
-                        // Removals are matched by animal category, which every period feeding this tank shares, so any
-                        // feeding period supplies a usable animal type.
-                        tank = new ManureTank
-                        {
-                            Year = key.Year,
-                            ManureStateType = key.State,
-                            AnimalType = managementPeriod.AnimalType,
-                        };
+                        // Tanks are identified by animal category (the category is shared by every period feeding the
+                        // tank), matching how ManureService keys tanks. Build into the shared per-run store when present
+                        // so those tanks - and their daily storage - flow to ManureService and the rest of the pipeline.
+                        var animalCategory = managementPeriod.AnimalType.GetCategory();
+                        tank = this.SharedManureTankStore != null
+                            ? this.SharedManureTankStore.GetOrCreate(animalCategory, key.Year, key.State)
+                            : new ManureTank { Year = key.Year, ManureStateType = key.State, AnimalType = animalCategory };
                         tanks[key] = tank;
                     }
 
