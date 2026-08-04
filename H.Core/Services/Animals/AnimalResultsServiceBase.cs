@@ -1184,19 +1184,7 @@ namespace H.Core.Services.Animals
         /// <returns>Fraction clamped to the range 0 to 0.95</returns>
         protected double BoundRemovalFraction(double fraction)
         {
-            const double maximumFractionRemoved = 0.95;
-
-            if (fraction < 0)
-            {
-                return 0;
-            }
-
-            if (fraction > maximumFractionRemoved)
-            {
-                return maximumFractionRemoved;
-            }
-
-            return fraction;
+            return ManureStorageMath.BoundRemovalFraction(fraction);
         }
 
         /// <summary>
@@ -1216,8 +1204,8 @@ namespace H.Core.Services.Animals
             double amountFlowingIntoStorage,
             double fractionOfManureRemovedFromStorageOnPreviousDay)
         {
-            return amountFlowingIntoStorage +
-                   (netAmountInStorageOnPreviousDay * (1 - fractionOfManureRemovedFromStorageOnPreviousDay));
+            return ManureStorageMath.NetAmountInStorage(
+                netAmountInStorageOnPreviousDay, amountFlowingIntoStorage, fractionOfManureRemovedFromStorageOnPreviousDay);
         }
 
         /// <summary>

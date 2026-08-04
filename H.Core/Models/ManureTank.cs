@@ -14,7 +14,13 @@ namespace H.Core.Models
     {
         #region Fields
 
-        private Dictionary<int, List<GroupEmissionsByDay>> _dailyResults;
+        // Daily manure volume (kg) flowing into this tank, summed across every management period that feeds it.
+        private readonly SortedDictionary<DateTime, double> _inflowKilogramsByDate = new SortedDictionary<DateTime, double>();
+
+        // Day-by-day storage state, produced by ComputeDailyStorage: the net-of-removals volume (the Eq. 4.1.3-6
+        // denominator) and the shared removal fraction on each day.
+        private readonly Dictionary<DateTime, double> _netOfRemovalsByDate = new Dictionary<DateTime, double>();
+        private readonly Dictionary<DateTime, double> _removalFractionByDate = new Dictionary<DateTime, double>();
 
         private ManureStateType _manureStateType;
         private AnimalType _animalType;
@@ -25,7 +31,6 @@ namespace H.Core.Models
 
         public ManureTank()
         {
-            _dailyResults = new Dictionary<int, List<GroupEmissionsByDay>>();
         }
 
         #endregion
@@ -44,6 +49,17 @@ namespace H.Core.Models
             set => SetProperty(ref _manureStateType, value);
         }
 
+        /// <summary>
+        /// The net-of-removals volume (kg) in this tank on each day - the corrected Equation 4.1.3-6 denominator, shared
+        /// by every management period feeding the tank. Populated by <see cref="ComputeDailyStorage"/>.
+        /// </summary>
+        public IReadOnlyDictionary<DateTime, double> NetOfRemovalsByDate => _netOfRemovalsByDate;
+
+        /// <summary>
+        /// The fraction of this tank removed on each day (0 to the daily cap). Populated by <see cref="ComputeDailyStorage"/>.
+        /// </summary>
+        public IReadOnlyDictionary<DateTime, double> RemovalFractionByDate => _removalFractionByDate;
+
         #endregion
 
         #region Public Methods
@@ -53,33 +69,43 @@ namespace H.Core.Models
             return $"{base.ToString()}, {nameof(AnimalType)}: {AnimalType}";
         }
 
-        public void AddDailyResultToTank(GroupEmissionsByDay groupEmissionsByDay)
+        /// <summary>
+        /// Adds a day's manure volume (kg) flowing into this tank. Called once per contributing management period per
+        /// day; volumes on the same date are summed, so the accumulated inflow is the whole tank's, not one period's.
+        /// </summary>
+        public void AddDailyInflow(DateTime date, double kilograms)
         {
-            var dayOfYear = groupEmissionsByDay.DateTime.DayOfYear;
-
-            if (_dailyResults.ContainsKey(dayOfYear))
-            {
-                var resultsForDay = _dailyResults[dayOfYear];
-                resultsForDay.Add(groupEmissionsByDay);
-            }
-            else
-            {
-                _dailyResults[dayOfYear] = new List<GroupEmissionsByDay>() {groupEmissionsByDay};
-            }
+            var day = date.Date;
+            var existing = _inflowKilogramsByDate.TryGetValue(day, out var value) ? value : 0;
+            _inflowKilogramsByDate[day] = existing + kilograms;
         }
 
-        public double GetVolumeCreatedOnDate(DateTime dateTime)
+        /// <summary>
+        /// Rolls the tank's storage forward one day at a time over its accumulated inflow: each day's net-of-removals
+        /// volume is yesterday's remaining volume (reduced by yesterday's removal fraction) plus today's inflow, and
+        /// each day's removal fraction is that day's removed volume over the net volume, capped at the daily maximum.
+        /// The removed volume is supplied by <paramref name="removedVolumeOnDate"/> so the tank stays independent of how
+        /// removals are sourced.
+        /// </summary>
+        public void ComputeDailyStorage(Func<DateTime, double> removedVolumeOnDate)
         {
-            var result = 0d;
+            _netOfRemovalsByDate.Clear();
+            _removalFractionByDate.Clear();
 
-            var dayOfYear = dateTime.DayOfYear;
-            if (_dailyResults.ContainsKey(dayOfYear))
+            var previousNet = 0d;
+            var previousFraction = 0d;
+            foreach (var day in _inflowKilogramsByDate) // SortedDictionary enumerates in ascending date order
             {
-                var allDailyResults = _dailyResults[dayOfYear];
-                return allDailyResults.Sum(x => x.TotalVolumeOfManureAvailableForLandApplicationInKilograms);
-            }
+                var net = ManureStorageMath.NetAmountInStorage(previousNet, day.Value, previousFraction);
+                var removed = removedVolumeOnDate(day.Key);
+                var fraction = ManureStorageMath.BoundRemovalFraction(net > 0 ? removed / net : 0);
 
-            return result;
+                _netOfRemovalsByDate[day.Key] = net;
+                _removalFractionByDate[day.Key] = fraction;
+
+                previousNet = net;
+                previousFraction = fraction;
+            }
         }
 
         #endregion
