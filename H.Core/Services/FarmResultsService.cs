@@ -200,7 +200,7 @@ namespace H.Core.Services
 
             //var a = farmResults.GetDailyPrint();
 
-            farmResults.AnaerobicDigestorResults.AddRange(this.CalculateAdResults(farm, animalResults.ToList()));
+            farmResults.AnaerobicDigestorResults.AddRange(this.CalculateAdResults(farm, animalResults.ToList(), manureTankStore));
 
             farmResults.FinalFieldResultViewItems.AddRange(this.CalculateFieldResults(farm));
 
@@ -262,6 +262,11 @@ namespace H.Core.Services
         public List<DigestorDailyOutput> CalculateAdResults(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
         {
             return _adCalculator.CalculateResults(farm, animalComponentEmissionsResults);
+        }
+
+        public List<DigestorDailyOutput> CalculateAdResults(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults, ManureTankStore manureTankStore)
+        {
+            return _adCalculator.CalculateResults(farm, animalComponentEmissionsResults, manureTankStore);
         }
 
         /// <summary>
