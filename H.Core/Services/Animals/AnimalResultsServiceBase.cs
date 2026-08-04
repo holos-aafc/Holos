@@ -779,66 +779,28 @@ namespace H.Core.Services.Animals
         /// The manure volume flowing into one shared tank on each day, plus the animal type used to look up that tank's
         /// removals. Built in pass 1 of the liquid storage phase (issue #451).
         /// </summary>
-        private sealed class LiquidTankInflow
-        {
-            public AnimalType AnimalType { get; set; }
-
-            // Kilograms of manure entering the tank on each date, summed across every management period feeding it.
-            public SortedDictionary<DateTime, double> InflowKilogramsByDate { get; } = new SortedDictionary<DateTime, double>();
-        }
-
-        /// <summary>
-        /// One shared tank's day-by-day storage state: the net-of-removals volume (the corrected Eq. 4.1.3-6 denominator)
-        /// and the removal fraction on each day. Computed once in pass 1 and read by every period feeding the tank in
-        /// pass 2 (issue #451).
-        /// </summary>
-        private sealed class LiquidTankStorage
-        {
-            public Dictionary<DateTime, double> NetOfRemovalsByDate { get; } = new Dictionary<DateTime, double>();
-
-            public Dictionary<DateTime, double> RemovalFractionByDate { get; } = new Dictionary<DateTime, double>();
-        }
-
         protected void CompleteLiquidManureStorageForTanks(
             IEnumerable<AnimalComponentEmissionsResults> componentResults,
             Farm farm)
         {
             // The fraction-dependent liquid-storage cascade is completed in two passes over the already-computed daily
-            // emissions. Pass 1 works out, once per shared tank, how much manure remains in that tank each day and what
-            // fraction of it leaves; pass 2 writes those shared values into every management period feeding the tank.
-            var sharedTankStorage = this.CalculateSharedTankStorage(componentResults, farm);
-            this.ApplySharedTankStorageToLiquidDays(componentResults, farm, sharedTankStorage);
+            // emissions. Pass 1 builds a ManureTank per shared tank and works out how much manure remains in it each day
+            // and what fraction of it leaves; pass 2 writes those shared values into every management period feeding it.
+            var tanks = this.BuildLiquidManureTanks(componentResults, farm);
+            this.ApplySharedTankStorageToLiquidDays(componentResults, farm, tanks);
         }
 
         /// <summary>
-        /// Pass 1: works out each shared tank's net-of-removals volume and removal fraction on every day. A tank is
-        /// identified by (year, manure state type); the animal category is fixed because CalculateResultsForAnimalComponents
-        /// is called once per species (issue #451).
+        /// Pass 1: builds one <see cref="ManureTank"/> per shared tank (keyed by year and manure state type; the animal
+        /// category is fixed because CalculateResultsForAnimalComponents is called once per species), accumulates every
+        /// liquid management period's daily inflow into it, and rolls its net-of-removals volume and removal fraction
+        /// forward (issue #451).
         /// </summary>
-        private Dictionary<(int Year, ManureStateType State), LiquidTankStorage> CalculateSharedTankStorage(
+        private Dictionary<(int Year, ManureStateType State), ManureTank> BuildLiquidManureTanks(
             IEnumerable<AnimalComponentEmissionsResults> componentResults,
             Farm farm)
         {
-            var inflowByTank = this.SumLiquidTankInflowByDate(componentResults);
-
-            var storageByTank = new Dictionary<(int Year, ManureStateType State), LiquidTankStorage>();
-            foreach (var tank in inflowByTank)
-            {
-                storageByTank[tank.Key] = this.RunTankStorageRecurrence(tank.Value, tank.Key.State, farm);
-            }
-
-            return storageByTank;
-        }
-
-        /// <summary>
-        /// Adds up, per shared tank and per day, the manure volume flowing into storage from every liquid management
-        /// period. Two periods feeding the same tank on the same day are summed - that summed volume is the corrected
-        /// denominator that a single period's volume used to understate (issue #451).
-        /// </summary>
-        private Dictionary<(int Year, ManureStateType State), LiquidTankInflow> SumLiquidTankInflowByDate(
-            IEnumerable<AnimalComponentEmissionsResults> componentResults)
-        {
-            var inflowByTank = new Dictionary<(int Year, ManureStateType State), LiquidTankInflow>();
+            var tanks = new Dictionary<(int Year, ManureStateType State), ManureTank>();
 
             foreach (var componentResult in componentResults)
             foreach (var groupResult in componentResult.EmissionResultsForAllAnimalGroupsInComponent)
@@ -854,64 +816,34 @@ namespace H.Core.Services.Animals
 
                 foreach (var dailyEmissions in groupEmissionsByMonth.DailyEmissions)
                 {
-                    var key = (dailyEmissions.DateTime.Year, managementPeriod.ManureDetails.StateType);
-                    if (inflowByTank.TryGetValue(key, out var tankInflow) == false)
+                    var key = (Year: dailyEmissions.DateTime.Year, State: managementPeriod.ManureDetails.StateType);
+                    if (tanks.TryGetValue(key, out var tank) == false)
                     {
-                        // Removals are matched by animal category, which every period in this tank shares, so any
+                        // Removals are matched by animal category, which every period feeding this tank shares, so any
                         // feeding period supplies a usable animal type.
-                        tankInflow = new LiquidTankInflow { AnimalType = managementPeriod.AnimalType };
-                        inflowByTank[key] = tankInflow;
+                        tank = new ManureTank
+                        {
+                            Year = key.Year,
+                            ManureStateType = key.State,
+                            AnimalType = managementPeriod.AnimalType,
+                        };
+                        tanks[key] = tank;
                     }
 
-                    var date = dailyEmissions.DateTime.Date;
-                    var existing = tankInflow.InflowKilogramsByDate.TryGetValue(date, out var value) ? value : 0;
-                    tankInflow.InflowKilogramsByDate[date] =
-                        existing + dailyEmissions.TotalVolumeOfManureAvailableForLandApplicationInKilograms;
+                    tank.AddDailyInflow(
+                        dailyEmissions.DateTime, dailyEmissions.TotalVolumeOfManureAvailableForLandApplicationInKilograms);
                 }
             }
 
-            return inflowByTank;
-        }
-
-        /// <summary>
-        /// Rolls one tank's days forward in order. Each day's net volume is yesterday's remaining volume (debited by
-        /// yesterday's removal fraction) plus today's inflow; each day's removal fraction is that day's removed volume
-        /// over that net volume, capped at the physical maximum. The tank is keyed per year, so the chain restarts each
-        /// year on its own.
-        /// </summary>
-        private LiquidTankStorage RunTankStorageRecurrence(
-            LiquidTankInflow tankInflow,
-            ManureStateType manureStateType,
-            Farm farm)
-        {
-            var storage = new LiquidTankStorage();
-
-            var previousNet = 0d;
-            var previousFraction = 0d;
-            foreach (var day in tankInflow.InflowKilogramsByDate) // SortedDictionary enumerates in ascending date order
+            foreach (var tank in tanks.Values)
             {
-                var date = day.Key;
-
-                // Yesterday's remaining volume reduced by yesterday's removal, plus today's inflow.
-                var net = this.CalculateAmountInStorageNetOfRemovals(
-                    netAmountInStorageOnPreviousDay: previousNet,
-                    amountFlowingIntoStorage: day.Value,
-                    fractionOfManureRemovedFromStorageOnPreviousDay: previousFraction);
-
-                // The volume removed from the whole tank this day (land applications + exports), then the shared
+                // The volume removed from the whole tank each day (land applications + exports) feeds the shared
                 // Eq. 4.1.3-6 fraction: removed over the tank-wide net volume.
-                var removed = _manureService.GetTotalVolumeOfManureRemovedFromStorageOnDay(
-                    date, farm, tankInflow.AnimalType, manureStateType);
-                var fraction = this.BoundRemovalFraction(net > 0 ? removed / net : 0);
-
-                storage.NetOfRemovalsByDate[date] = net;
-                storage.RemovalFractionByDate[date] = fraction;
-
-                previousNet = net;
-                previousFraction = fraction;
+                tank.ComputeDailyStorage(date => _manureService.GetTotalVolumeOfManureRemovedFromStorageOnDay(
+                    date, farm, tank.AnimalType, tank.ManureStateType));
             }
 
-            return storage;
+            return tanks;
         }
 
         /// <summary>
@@ -923,7 +855,7 @@ namespace H.Core.Services.Animals
         private void ApplySharedTankStorageToLiquidDays(
             IEnumerable<AnimalComponentEmissionsResults> componentResults,
             Farm farm,
-            Dictionary<(int Year, ManureStateType State), LiquidTankStorage> sharedTankStorage)
+            Dictionary<(int Year, ManureStateType State), ManureTank> tanks)
         {
             foreach (var componentResult in componentResults)
             foreach (var groupResult in componentResult.EmissionResultsForAllAnimalGroupsInComponent)
@@ -947,11 +879,11 @@ namespace H.Core.Services.Animals
 
                         if (isLiquidSystem)
                         {
-                            var tankStorage = sharedTankStorage[
+                            var tank = tanks[
                                 (dailyEmissions.DateTime.Year, managementPeriod.ManureDetails.StateType)];
 
                             this.CompleteLiquidDayFromSharedTank(
-                                dailyEmissions, previousDaysEmissions, managementPeriod, farm, tankStorage);
+                                dailyEmissions, previousDaysEmissions, managementPeriod, farm, tank);
                         }
 
                         previousDaysEmissions = dailyEmissions;
@@ -970,13 +902,13 @@ namespace H.Core.Services.Animals
             GroupEmissionsByDay previousDaysEmissions,
             ManagementPeriod managementPeriod,
             Farm farm,
-            LiquidTankStorage tankStorage)
+            ManureTank tank)
         {
             // The previous day's carryover is reduced by the shared tank fraction on that previous day (0 at the start
             // of the chain, or if the previous day was not part of this tank).
             var fractionRemovedOnPreviousDay = 0d;
             if (previousDaysEmissions != null &&
-                tankStorage.RemovalFractionByDate.TryGetValue(previousDaysEmissions.DateTime.Date, out var sharedFraction))
+                tank.RemovalFractionByDate.TryGetValue(previousDaysEmissions.DateTime.Date, out var sharedFraction))
             {
                 fractionRemovedOnPreviousDay = sharedFraction;
             }
@@ -994,7 +926,7 @@ namespace H.Core.Services.Animals
             // The per-period advance still fills in the gross volume and the day's removed volume; only the
             // net-of-removals volume is overwritten with the shared tank total (the corrected Eq. 4.1.3-6 denominator).
             this.AdvanceManureStorageByOneDayInternal(dailyEmissions, previousDaysEmissions, managementPeriod, farm);
-            dailyEmissions.AccumulatedVolumeNetOfRemovals = tankStorage.NetOfRemovalsByDate[dailyEmissions.DateTime.Date];
+            dailyEmissions.AccumulatedVolumeNetOfRemovals = tank.NetOfRemovalsByDate[dailyEmissions.DateTime.Date];
         }
 
         /// <summary>
