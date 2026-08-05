@@ -209,6 +209,7 @@ namespace H.Core.Services
             // shared calculator instance never carries one farm run's tanks into another.
             _manureService.Initialize(farm, animalResults, manureTankStore);
             _n2OEmissionFactorCalculator.SharedManureTankStore = manureTankStore;
+            _fieldResultsService.SharedManureTankStore = manureTankStore;
             try
             {
                 farmResults.FinalFieldResultViewItems.AddRange(this.CalculateFieldResults(farm));
@@ -216,6 +217,7 @@ namespace H.Core.Services
             finally
             {
                 _n2OEmissionFactorCalculator.SharedManureTankStore = null;
+                _fieldResultsService.SharedManureTankStore = null;
             }
 
             farmResults.ManureExportResultsViewItems.AddRange(this.CalculateManureExportEmissions(farm));

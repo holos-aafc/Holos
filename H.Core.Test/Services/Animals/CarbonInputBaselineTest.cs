@@ -53,6 +53,23 @@ namespace H.Core.Test.Services.Animals
             RunBaseline("Farm3.json", "Farm3.carbon-inputs.baseline.txt");
         }
 
+        /// <summary>
+        /// Proves the issue #451 carbon rewire is behaviour-preserving: the field/soil-carbon output is identical whether
+        /// each carbon-input calculator rebuilds its own manure tanks (private store, the fallback path) or reads the
+        /// shared per-run store threaded in by FarmResultsService. Uses Farm3 because it exercises the most branches
+        /// (multi-field allocation, livestock+imported, grazing, native grassland). The committed baselines are generated
+        /// on the private path, so this closes the loop by pinning the shared path to it.
+        /// </summary>
+        [TestMethod]
+        public void Farm3_SharedStoreCarbonPath_MatchesPrivatePath()
+        {
+            var privatePath = BuildSnapshot("Farm3.json", useSharedStore: false);
+            var sharedPath = BuildSnapshot("Farm3.json", useSharedStore: true);
+
+            Assert.AreEqual(privatePath, sharedPath,
+                "Carbon output must be identical whether the calculators rebuild private manure tanks or read the shared per-run store.");
+        }
+
         private void RunBaseline(string fixtureFileName, string baselineFileName)
         {
             var snapshot = BuildSnapshot(fixtureFileName);
@@ -96,21 +113,40 @@ namespace H.Core.Test.Services.Animals
 
         private string BuildSnapshot(string fixtureFileName)
         {
+            // The committed baselines are generated on the PRIVATE-store path (each carbon calc rebuilds its own tanks);
+            // Farm3_SharedStoreCarbonPath_MatchesPrivatePath proves the shared-store path reproduces them exactly.
+            return BuildSnapshot(fixtureFileName, useSharedStore: false);
+        }
+
+        private string BuildSnapshot(string fixtureFileName, bool useSharedStore)
+        {
             var farm = new Storage().GetFarmsFromExportFile(GetFixtureFilePath(fixtureFileName)).Single();
             base._initializationService.ReInitializeFarms(new[] { farm });
 
             // Mirror the production sequence (FarmResultsService.CalculateFarmEmissionResults): the animal results feed the
-            // field carbon model's manure-carbon inputs. The carbon calculators build their own manure tanks from these
-            // today; the committed baseline is generated on that path, so after the unification a byte-identical match
-            // proves the carbon numbers are unchanged.
+            // field carbon model's manure-carbon inputs. With a shared store set, the animal results populate it and
+            // ManureService builds the totals into it before field results - exactly as FarmResultsService does - and the
+            // carbon calculators then read those shared tanks instead of rebuilding private ones (issue #451 follow-up).
             farm.ResetAnimalResults();
-            var animalResults = new AnimalResultsService().GetAnimalResults(farm);
+
+            var sharedStore = useSharedStore ? new ManureTankStore() : null;
+            var animalResults = sharedStore != null
+                ? new AnimalResultsService().GetAnimalResults(farm, sharedStore)
+                : new AnimalResultsService().GetAnimalResults(farm);
+            if (sharedStore != null)
+            {
+                new ManureService().Initialize(farm, animalResults, sharedStore);
+            }
 
             var fieldResultsService = new FieldResultsService(
                 base._iCbmSoilCarbonCalculator, base._ipcc, base._n2OEmissionFactorCalculator, base._initializationService)
             {
                 AnimalResults = animalResults,
             };
+            if (sharedStore != null)
+            {
+                fieldResultsService.SharedManureTankStore = sharedStore;
+            }
 
             // The GUI-saved fixture already carries its detail view items in the stage state, so we do NOT rebuild them
             // (CreateDetailViewItems double-processes an already-populated farm). CalculateFinalResults re-runs the carbon

@@ -41,5 +41,11 @@ namespace H.Core.Services.LandManagement
         void InitializeStageState(Farm farm);
         List<CropViewItem> CalculateFinalResults(Farm farm);
         List<AnimalComponentEmissionsResults> AnimalResults { get; set; }
+
+        /// <summary>
+        /// When set (per farm run), the carbon calculators build their manure tanks into this shared per-run store
+        /// instead of private ones (issue #451 follow-up). Forwarded to the carbon service. Byte-identical.
+        /// </summary>
+        ManureTankStore SharedManureTankStore { get; set; }
     }
 }
