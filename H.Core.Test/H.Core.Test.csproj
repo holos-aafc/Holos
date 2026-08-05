@@ -206,6 +206,8 @@
     <None Include="Services\Animals\Baselines\Farm2.manure-tank-totals.baseline.txt" />
     <None Include="Services\Animals\Baselines\Farm1.carbon-inputs.baseline.txt" />
     <None Include="Services\Animals\Baselines\Farm2.carbon-inputs.baseline.txt" />
+    <None Include="Services\Animals\Baselines\Farm3.json" />
+    <None Include="Services\Animals\Baselines\Farm3.carbon-inputs.baseline.txt" />
     <Compile Include="Services\Animals\ScaleUpServiceTest.cs" />
     <Compile Include="Services\Animals\AnimalInitializationServiceTest.cs" />
     <Compile Include="Services\Animals\ManagementPeriodServiceTest.cs" />

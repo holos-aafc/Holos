@@ -40,6 +40,19 @@ namespace H.Core.Test.Services.Animals
             RunBaseline("Farm2.json", "Farm2.carbon-inputs.baseline.txt");
         }
 
+        /// <summary>
+        /// Farm3 is the defense-in-depth fixture built to exercise the carbon-manure branches the single-field Farm1/Farm2
+        /// leave dark: 5 fields of different areas (per-field area allocation), livestock manure across multiple years,
+        /// imported manure (separate branch + the created==0/imported>0 short-circuit), same-year export+application, a
+        /// grazed tame-grass field (the pasture manure-carbon add-on), and a native-grassland field (the early return 0).
+        /// IPCC Tier 2. See [[holos-451-status]] for the build spec.
+        /// </summary>
+        [TestMethod]
+        public void Baseline_Farm3_FieldManureCarbonInputs_MatchesGolden()
+        {
+            RunBaseline("Farm3.json", "Farm3.carbon-inputs.baseline.txt");
+        }
+
         private void RunBaseline(string fixtureFileName, string baselineFileName)
         {
             var snapshot = BuildSnapshot(fixtureFileName);
