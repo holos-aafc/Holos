@@ -196,6 +196,7 @@
     <Compile Include="Mappers\AutoMapperCharacterizationTest.cs" />
     <Compile Include="Mappers\CropViewItemResultsCopyTest.cs" />
     <Compile Include="Services\Animals\ManureRemovalVolatileSolidsTest.cs" />
+    <Compile Include="Services\Animals\CarbonInputBaselineTest.cs" />
     <Compile Include="Services\Animals\ManureStorageBaselineTest.cs" />
     <Compile Include="Services\Animals\ManureTankBaselineTest.cs" />
     <None Include="Services\Animals\Baselines\Farm1.json" />
@@ -203,6 +204,8 @@
     <None Include="Services\Animals\Baselines\Farm2.json" />
     <None Include="Services\Animals\Baselines\Farm1.manure-tank-totals.baseline.txt" />
     <None Include="Services\Animals\Baselines\Farm2.manure-tank-totals.baseline.txt" />
+    <None Include="Services\Animals\Baselines\Farm1.carbon-inputs.baseline.txt" />
+    <None Include="Services\Animals\Baselines\Farm2.carbon-inputs.baseline.txt" />
     <Compile Include="Services\Animals\ScaleUpServiceTest.cs" />
     <Compile Include="Services\Animals\AnimalInitializationServiceTest.cs" />
     <Compile Include="Services\Animals\ManagementPeriodServiceTest.cs" />
