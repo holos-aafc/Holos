@@ -202,11 +202,21 @@ namespace H.Core.Services
 
             farmResults.AnaerobicDigestorResults.AddRange(this.CalculateAdResults(farm, animalResults.ToList(), manureTankStore));
 
-            farmResults.FinalFieldResultViewItems.AddRange(this.CalculateFieldResults(farm));
-
-            // Manure calculations - must be calculated after both field and animal results have been calculated. Uses
-            // the shared store the animal results already populated with each tank's daily storage.
+            // Build the shared tanks' whole-year totals now - BEFORE field results - so the field / indirect-N2O path
+            // reads the same tanks rather than rebuilding its own. This is byte-identical: Initialize's output is a pure
+            // function of the animal results and the farm's (static) manure applications, neither of which the field
+            // results mutate. The N2O calculator's store is set only for the field calc and cleared afterwards, so the
+            // shared calculator instance never carries one farm run's tanks into another.
             _manureService.Initialize(farm, animalResults, manureTankStore);
+            _n2OEmissionFactorCalculator.SharedManureTankStore = manureTankStore;
+            try
+            {
+                farmResults.FinalFieldResultViewItems.AddRange(this.CalculateFieldResults(farm));
+            }
+            finally
+            {
+                _n2OEmissionFactorCalculator.SharedManureTankStore = null;
+            }
 
             farmResults.ManureExportResultsViewItems.AddRange(this.CalculateManureExportEmissions(farm));
 

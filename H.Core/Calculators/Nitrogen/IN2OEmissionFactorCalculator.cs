@@ -7,6 +7,8 @@ namespace H.Core.Calculators.Nitrogen
 {
     public interface IN2OEmissionFactorCalculator
     {
+        ManureTankStore SharedManureTankStore { get; set; }
+
         void Initialize(Farm farm);
         void Initialize(Farm farm, List<AnimalComponentEmissionsResults> animalResults);
 

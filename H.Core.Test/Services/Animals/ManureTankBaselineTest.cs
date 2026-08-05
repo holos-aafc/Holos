@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using H.Core;
+using H.Core.Calculators.Nitrogen;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Services.Animals;
@@ -70,6 +71,26 @@ namespace H.Core.Test.Services.Animals
 
             // Whole-year totals from ManureService, on the SAME tank object:
             Assert.IsTrue(dairyLiquidTank.VolumeOfManureAvailableForLandApplication > 0, "tank should carry the ManureService totals");
+        }
+
+        /// <summary>
+        /// Confirms the field/indirect-N2O path uses the shared store when it is set (issue #451): the N2O calculator
+        /// builds its manure tanks into the shared store rather than a private one.
+        /// </summary>
+        [TestMethod]
+        public void N2OCalculator_WithSharedStore_PopulatesThatStoreInsteadOfRebuilding()
+        {
+            var farm = new Storage().GetFarmsFromExportFile(GetFixtureFilePath("Farm2.json")).Single();
+            base._initializationService.ReInitializeFarms(new[] { farm });
+
+            var store = new ManureTankStore();
+            var animalResults = new AnimalResultsService().GetAnimalResults(farm, store);
+
+            var n2oCalculator = new N2OEmissionFactorCalculator(base._climateProvider) { SharedManureTankStore = store };
+            n2oCalculator.Initialize(farm, animalResults);
+
+            Assert.IsTrue(store.Tanks.Any(t => t.VolumeOfManureAvailableForLandApplication > 0),
+                "the N2O calculator should build its manure tanks into the shared store when it is set");
         }
 
         private void RunBaseline(string fixtureFileName, string baselineFileName)
