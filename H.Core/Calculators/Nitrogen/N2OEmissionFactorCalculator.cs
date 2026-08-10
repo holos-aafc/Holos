@@ -91,6 +91,23 @@ namespace H.Core.Calculators.Nitrogen
             _digestateService.Initialize(farm, animalResults);
         }
 
+        /// <summary>
+        /// Resets the per-run memoization caches. They memoize WITHIN a single farm calculation (many field-years share an
+        /// ecodistrict / topography key), but they MUST be reset between farm runs: the ecodistrict-factor value also
+        /// depends on the farm's growing-season precipitation/evapotranspiration, which are NOT part of the cache key, and
+        /// that same path sets per-view-item reporting fields only on a cache MISS. A calculator instance is reused across
+        /// farms (both the GUI and CLI build one and run every farm through it), so without this reset one farm's cached
+        /// factors leak into the next and the reporting-field assignments are skipped on every run after the first.
+        /// Clearing per run keeps the within-run caching (byte-identical single-run results) while making runs independent.
+        /// (Found by the whole-farm lifetime baseline; issue #451 follow-up.)
+        /// </summary>
+        public void ClearPerRunCaches()
+        {
+            _baseEmissionFactorCalculationCache.Clear();
+            _baseEcodistrictFactorCache.Clear();
+            _topographyCalculationCache.Clear();
+        }
+
         private void InitializeManureService(Farm farm, List<AnimalComponentEmissionsResults> animalResults)
         {
             if (this.SharedManureTankStore != null)

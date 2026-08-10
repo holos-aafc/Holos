@@ -190,6 +190,11 @@ namespace H.Core.Services
             // Field results will use animal results to calculate indirect emissions from land applied manure. We will need to reset the animal component calculation state here.
             farm.ResetAnimalResults();
 
+            // The N2O calculator memoizes ecodistrict/topography factors within a run; reset those caches per run so a
+            // reused calculator instance does not carry one farm's factors (or skip reporting-field assignments) into the
+            // next. Byte-identical for a single run; makes multi-farm/reused-pipeline runs independent.
+            _n2OEmissionFactorCalculator.ClearPerRunCaches();
+
             // One manure-tank store per farm run: the animal results populate each tank's daily storage, then
             // ManureService adds the whole-year totals to the same tanks - a single source of truth (issue #451).
             var manureTankStore = new ManureTankStore();
