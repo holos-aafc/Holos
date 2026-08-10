@@ -742,6 +742,8 @@
     <Compile Include="Services\LandManagement\FieldResultsService.ManureNH3Report.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.UnderSownCrops.cs" />
     <Compile Include="Services\LandManagement\IFieldResultsService.cs" />
+    <Compile Include="Services\LandManagement\IFieldResultsServiceFactory.cs" />
+    <Compile Include="Services\LandManagement\FieldResultsServiceFactory.cs" />
     <Compile Include="Services\LandManagement\Shelterbelts\IShelterbeltComponentHelper.cs" />
     <Compile Include="Services\ITimePeriodHelper.cs" />
     <Compile Include="Services\LandManagement\IrrigationService.cs" />

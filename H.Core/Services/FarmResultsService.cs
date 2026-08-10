@@ -45,7 +45,10 @@ namespace H.Core.Services
         private readonly IAnimalComponentHelper _animalComponentHelper = new AnimalComponentHelper();
         private readonly IAnaerobicDigestionComponentHelper _anaerobicDigestionComponentHelper = new AnaerobicDigestionComponentHelper();
 
-        private readonly IFieldResultsService _fieldResultsService;
+        // Rebuilt fresh per farm run from the factory (they carry per-run state - soil-carbon N pools, N2O caches - that
+        // must not leak between farms). See RebuildFieldCalculationGraph.
+        private readonly IFieldResultsServiceFactory _fieldResultsServiceFactory;
+        private IFieldResultsService _fieldResultsService;
         private readonly IAnimalService _animalResultsService;
         private readonly IADCalculator _adCalculator;
 
@@ -60,23 +63,14 @@ namespace H.Core.Services
 
         private readonly IEventAggregator _eventAggregator;
 
-        private readonly EconomicsCalculator _economicsCalculator;
+        private EconomicsCalculator _economicsCalculator;
         private IN2OEmissionFactorCalculator _n2OEmissionFactorCalculator;
 
         #endregion
 
         #region Constructors
-        public FarmResultsService(IEventAggregator eventAggregator, IFieldResultsService fieldResultsService, IADCalculator adCalculator, IManureService manureService, IAnimalService animalService, IN2OEmissionFactorCalculator n2OEmissionFactorCalculator)
+        public FarmResultsService(IEventAggregator eventAggregator, IFieldResultsServiceFactory fieldResultsServiceFactory, IADCalculator adCalculator, IManureService manureService, IAnimalService animalService)
         {
-            if (n2OEmissionFactorCalculator != null)
-            {
-                _n2OEmissionFactorCalculator = n2OEmissionFactorCalculator; 
-            }
-            else
-            {
-                throw new ArgumentNullException(nameof(n2OEmissionFactorCalculator));
-            }
-
             if (animalService != null)
             {
                 _animalResultsService = animalService;
@@ -104,14 +98,16 @@ namespace H.Core.Services
                 throw new ArgumentNullException(nameof(adCalculator));
             }
 
-            if (fieldResultsService != null)
+            if (fieldResultsServiceFactory != null)
             {
-                _fieldResultsService = fieldResultsService;
-                _economicsCalculator = new EconomicsCalculator(_fieldResultsService);
+                _fieldResultsServiceFactory = fieldResultsServiceFactory;
+
+                // Populate the field-graph fields so the service is usable before the first run; every run rebuilds them.
+                this.RebuildFieldCalculationGraph();
             }
             else
             {
-                throw new ArgumentNullException(nameof(fieldResultsService));
+                throw new ArgumentNullException(nameof(fieldResultsServiceFactory));
             }
 
             if (eventAggregator != null)
@@ -164,6 +160,23 @@ namespace H.Core.Services
 
         #endregion
 
+        #region Private Methods
+
+        /// <summary>
+        /// Builds a fresh field-results calculation graph (field service + its shared N2O calculator + a matching
+        /// economics calculator) from the factory. Called once per run so no per-run state carries between farms.
+        /// </summary>
+        private void RebuildFieldCalculationGraph()
+        {
+            var graph = _fieldResultsServiceFactory.Create();
+
+            _fieldResultsService = graph.FieldResultsService;
+            _n2OEmissionFactorCalculator = graph.N2OEmissionFactorCalculator;
+            _economicsCalculator = new EconomicsCalculator(_fieldResultsService);
+        }
+
+        #endregion
+
         #region Public Methods
 
         /// <summary>
@@ -190,9 +203,14 @@ namespace H.Core.Services
             // Field results will use animal results to calculate indirect emissions from land applied manure. We will need to reset the animal component calculation state here.
             farm.ResetAnimalResults();
 
-            // The N2O calculator memoizes ecodistrict/topography factors within a run; reset those caches per run so a
-            // reused calculator instance does not carry one farm's factors (or skip reporting-field assignments) into the
-            // next. Byte-identical for a single run; makes multi-farm/reused-pipeline runs independent.
+            // Build a FRESH field-results calculation graph for this run (Option 2 / scoped composition). The soil-carbon
+            // calculators accumulate N-pool state and the N2O calculator memoizes, so a graph reused across farms leaks
+            // state between runs; a fresh graph per run eliminates that whole class by construction. Byte-identical for a
+            // single run.
+            this.RebuildFieldCalculationGraph();
+
+            // Belt-and-suspenders on the freshly built (empty) N2O caches - a no-op here now, but keeps the guarantee if
+            // the graph is ever reused.
             _n2OEmissionFactorCalculator.ClearPerRunCaches();
 
             // One manure-tank store per farm run: the animal results populate each tank's daily storage, then

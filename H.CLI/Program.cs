@@ -216,7 +216,8 @@ namespace H.CLI
                     Console.WriteLine(Properties.Resources.StartingProcessing);
 
                     // Overall Results For All the Farms
-                    var componentResults = new ComponentResultsProcessor(_storage, new TimePeriodHelper(), _fieldResultsService, _n2OEmissionFactorCalculator);
+                    var fieldResultsServiceFactory = new FieldResultsServiceFactory(_climateProvider, _initializationService);
+                    var componentResults = new ComponentResultsProcessor(_storage, new TimePeriodHelper(), _fieldResultsService, fieldResultsServiceFactory);
 
                     // Get base directory of user entered path to create Total Results For All Farms folder
                     Directory.CreateDirectory(InfrastructureConstants.BaseOutputDirectoryPath + @"\" + Properties.Resources.TotalResultsForAllFarms);

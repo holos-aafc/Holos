@@ -69,9 +69,6 @@ namespace H.Core.Test.Services.Animals
         // ----------------------------------------------------------------------------------------------------------------
 
         [TestMethod]
-        [Ignore("Pending Option 2 (per-run scoped composition). The N2O cache fix already removed the bulk of the inter-run " +
-                "bleed; a systemic leak remains in CarbonCalculatorBase's accumulating N pools (first-year DenitrificationForArea). " +
-                "Scoped composition fixes the whole class by construction - enable this then; it must turn green.")]
         public void Lifetime_SameFarmTwiceOnOnePipeline_IsIdentical()
         {
             var pipeline = BuildFarmResultsService();
@@ -84,8 +81,6 @@ namespace H.Core.Test.Services.Animals
         }
 
         [TestMethod]
-        [Ignore("Pending Option 2 (per-run scoped composition) - same systemic carbon-pool leak as the sibling lifetime test. " +
-                "Enable when Option 2 lands; it must turn green (fresh per-run calculators cannot carry state across farms).")]
         public void Lifetime_DifferentFarmsBackToBack_EachMatchesSolo()
         {
             // Solo references: a fresh pipeline per farm (the "clean" single-run result).
@@ -108,25 +103,21 @@ namespace H.Core.Test.Services.Animals
         }
 
         // ----------------------------------------------------------------------------------------------------------------
-        // Composition (mirrors H.CLI/Program.cs + ComponentResultsProcessor): ONE N2OEmissionFactorCalculator instance is
-        // shared across the ICBM/IPCC soil-carbon calculators, the field results service, and the farm results service.
+        // Composition (mirrors H.CLI/Program.cs + ComponentResultsProcessor, and the GUI via CoreModule): FarmResultsService
+        // takes a field-results-service factory and builds a FRESH field graph (one N2O calc shared across the ICBM/IPCC
+        // soil-carbon calculators and the field service) per run. Exercising the real factory is what lets the lifetime
+        // tests verify runs are independent (Option 2 / scoped composition).
         // ----------------------------------------------------------------------------------------------------------------
         private FarmResultsService BuildFarmResultsService()
         {
-            var n2o = new N2OEmissionFactorCalculator(base._climateProvider);
-            var icbm = new ICBMSoilCarbonCalculator(base._climateProvider, n2o);
-            var ipcc = new IPCCTier2SoilCarbonCalculator(base._climateProvider, n2o);
-            var init = new InitializationService();
-
-            var fieldResultsService = new FieldResultsService(icbm, ipcc, n2o, init);
+            var factory = new FieldResultsServiceFactory(base._climateProvider, new InitializationService());
 
             return new FarmResultsService(
                 new EventAggregator(),
-                fieldResultsService,
+                factory,
                 new ADCalculator(),
                 new ManureService(),
-                new AnimalResultsService(),
-                n2o);
+                new AnimalResultsService());
         }
 
         private FarmEmissionResults CalculateFarm(FarmResultsService service, string fixtureFileName)

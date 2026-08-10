@@ -51,7 +51,11 @@ namespace H.Core.Test.Services
         [TestInitialize]
         public void TestInitialize()
         {
-            _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService, new ADCalculator(), new Mock<IManureService>().Object, new Mock<IAnimalService>().Object, _n2OEmissionFactorCalculator);
+            var fieldResultsServiceFactory = new Mock<IFieldResultsServiceFactory>();
+            fieldResultsServiceFactory.Setup(x => x.Create())
+                .Returns(() => new FieldCalculationGraph(_fieldResultsService, _n2OEmissionFactorCalculator));
+
+            _farmResultsService = new FarmResultsService(new EventAggregator(), fieldResultsServiceFactory.Object, new ADCalculator(), new Mock<IManureService>().Object, new Mock<IAnimalService>().Object);
         }
 
         [TestCleanup]
