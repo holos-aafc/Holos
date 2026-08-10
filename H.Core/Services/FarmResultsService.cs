@@ -279,11 +279,6 @@ namespace H.Core.Services
             return finalFieldResults;
         }
 
-        public List<DigestorDailyOutput> CalculateAdResults(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
-        {
-            return _adCalculator.CalculateResults(farm, animalComponentEmissionsResults);
-        }
-
         public List<DigestorDailyOutput> CalculateAdResults(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults, ManureTankStore manureTankStore)
         {
             return _adCalculator.CalculateResults(farm, animalComponentEmissionsResults, manureTankStore);

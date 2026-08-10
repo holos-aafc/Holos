@@ -35,15 +35,6 @@ namespace H.Core.Test.Services.Animals
     public class FarmResultsBaselineTest : UnitTestBase
     {
         [TestMethod]
-        public void Smoke_Farm1_ProducesResults()
-        {
-            var results = CalculateFarm(BuildFarmResultsService(), "Farm1.json");
-
-            Assert.IsTrue(results.AnimalComponentEmissionsResults.Any(), "expected animal component results");
-            Assert.IsTrue(results.FinalFieldResultViewItems.Any(), "expected final field result view items");
-        }
-
-        [TestMethod]
         public void Baseline_Farm1_WholeFarmResults_MatchesGolden()
         {
             RunBaseline("Farm1.json", "Farm1.whole-farm.baseline.txt.gz");
