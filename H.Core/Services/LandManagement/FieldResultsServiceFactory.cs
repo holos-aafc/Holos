@@ -1,6 +1,7 @@
 using System;
 using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Nitrogen;
+using H.Core.Models;
 using H.Core.Providers.Climate;
 using H.Core.Services.Initialization;
 
@@ -23,14 +24,22 @@ namespace H.Core.Services.LandManagement
             _initializationService = initializationService ?? throw new ArgumentNullException(nameof(initializationService));
         }
 
-        public FieldCalculationGraph Create()
+        public FieldCalculationGraph Create(ManureTankStore sharedManureTankStore)
         {
-            var n2OEmissionFactorCalculator = new N2OEmissionFactorCalculator(_climateProvider);
+            var n2OEmissionFactorCalculator = new N2OEmissionFactorCalculator(_climateProvider)
+            {
+                SharedManureTankStore = sharedManureTankStore,
+            };
             var icbmSoilCarbonCalculator = new ICBMSoilCarbonCalculator(_climateProvider, n2OEmissionFactorCalculator);
             var ipccSoilCarbonCalculator = new IPCCTier2SoilCarbonCalculator(_climateProvider, n2OEmissionFactorCalculator);
 
+            // The field service forwards the store to its carbon service and, in turn, the ICBM/IPCC carbon-input
+            // calculators - so the whole field graph reads this run's shared tanks, set once at construction.
             var fieldResultsService = new FieldResultsService(
-                icbmSoilCarbonCalculator, ipccSoilCarbonCalculator, n2OEmissionFactorCalculator, _initializationService);
+                icbmSoilCarbonCalculator, ipccSoilCarbonCalculator, n2OEmissionFactorCalculator, _initializationService)
+            {
+                SharedManureTankStore = sharedManureTankStore,
+            };
 
             return new FieldCalculationGraph(fieldResultsService, n2OEmissionFactorCalculator);
         }

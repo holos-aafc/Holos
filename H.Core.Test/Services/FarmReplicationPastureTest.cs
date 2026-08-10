@@ -27,7 +27,7 @@ namespace H.Core.Test.Services
         public void TestInitialize()
         {
             var fieldResultsServiceFactory = new Mock<IFieldResultsServiceFactory>();
-            fieldResultsServiceFactory.Setup(x => x.Create())
+            fieldResultsServiceFactory.Setup(x => x.Create(It.IsAny<ManureTankStore>()))
                 .Returns(() => new FieldCalculationGraph(_fieldResultsService, _n2OEmissionFactorCalculator));
 
             _sut = new FarmResultsService(

@@ -1,4 +1,5 @@
 using H.Core.Calculators.Nitrogen;
+using H.Core.Models;
 
 namespace H.Core.Services.LandManagement
 {
@@ -10,7 +11,11 @@ namespace H.Core.Services.LandManagement
     /// </summary>
     public interface IFieldResultsServiceFactory
     {
-        FieldCalculationGraph Create();
+        /// <summary>
+        /// Builds the graph with this run's manure-tank store injected into the calculators (so the field / indirect-N2O /
+        /// soil-carbon path reads the same tanks). Pass null for an idle graph that owns private tanks.
+        /// </summary>
+        FieldCalculationGraph Create(ManureTankStore sharedManureTankStore);
     }
 
     /// <summary>

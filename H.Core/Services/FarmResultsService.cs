@@ -102,8 +102,9 @@ namespace H.Core.Services
             {
                 _fieldResultsServiceFactory = fieldResultsServiceFactory;
 
-                // Populate the field-graph fields so the service is usable before the first run; every run rebuilds them.
-                this.RebuildFieldCalculationGraph();
+                // Populate the field-graph fields so the service is usable before the first run; every run rebuilds them
+                // with that run's manure-tank store injected.
+                this.RebuildFieldCalculationGraph(sharedManureTankStore: null);
             }
             else
             {
@@ -166,9 +167,9 @@ namespace H.Core.Services
         /// Builds a fresh field-results calculation graph (field service + its shared N2O calculator + a matching
         /// economics calculator) from the factory. Called once per run so no per-run state carries between farms.
         /// </summary>
-        private void RebuildFieldCalculationGraph()
+        private void RebuildFieldCalculationGraph(ManureTankStore sharedManureTankStore)
         {
-            var graph = _fieldResultsServiceFactory.Create();
+            var graph = _fieldResultsServiceFactory.Create(sharedManureTankStore);
 
             _fieldResultsService = graph.FieldResultsService;
             _n2OEmissionFactorCalculator = graph.N2OEmissionFactorCalculator;
@@ -203,45 +204,29 @@ namespace H.Core.Services
             // Field results will use animal results to calculate indirect emissions from land applied manure. We will need to reset the animal component calculation state here.
             farm.ResetAnimalResults();
 
-            // Build a FRESH field-results calculation graph for this run (Option 2 / scoped composition). The soil-carbon
-            // calculators accumulate N-pool state and the N2O calculator memoizes, so a graph reused across farms leaks
-            // state between runs; a fresh graph per run eliminates that whole class by construction. Byte-identical for a
-            // single run.
-            this.RebuildFieldCalculationGraph();
-
-            // Belt-and-suspenders on the freshly built (empty) N2O caches - a no-op here now, but keeps the guarantee if
-            // the graph is ever reused.
-            _n2OEmissionFactorCalculator.ClearPerRunCaches();
-
             // One manure-tank store per farm run: the animal results populate each tank's daily storage, then
             // ManureService adds the whole-year totals to the same tanks - a single source of truth (issue #451).
             var manureTankStore = new ManureTankStore();
+
+            // Build a FRESH field-results calculation graph for this run (Option 2 / scoped composition) with THIS run's
+            // manure-tank store injected into its calculators, so the field / indirect-N2O / soil-carbon path reads the same
+            // tanks. The graph is built fresh per run and discarded after, so no per-run state (soil-carbon N pools, N2O
+            // caches, the store) can carry between farms - there is nothing to set-and-clear. Byte-identical single run.
+            this.RebuildFieldCalculationGraph(manureTankStore);
+
             var animalResults = _animalResultsService.GetAnimalResults(farm, manureTankStore);
 
             farmResults.AnimalComponentEmissionsResults.AddRange(animalResults);
             _fieldResultsService.AnimalResults = animalResults;
 
-            //var a = farmResults.GetDailyPrint();
-
             farmResults.AnaerobicDigestorResults.AddRange(this.CalculateAdResults(farm, animalResults.ToList(), manureTankStore));
 
-            // Build the shared tanks' whole-year totals now - BEFORE field results - so the field / indirect-N2O path
-            // reads the same tanks rather than rebuilding its own. This is byte-identical: Initialize's output is a pure
-            // function of the animal results and the farm's (static) manure applications, neither of which the field
-            // results mutate. The N2O calculator's store is set only for the field calc and cleared afterwards, so the
-            // shared calculator instance never carries one farm run's tanks into another.
+            // Build the shared tanks' whole-year totals now - BEFORE field results - so the field / indirect-N2O path reads
+            // the same tanks rather than rebuilding its own. Byte-identical: Initialize's output is a pure function of the
+            // animal results and the farm's static manure applications, neither of which the field results mutate.
             _manureService.Initialize(farm, animalResults, manureTankStore);
-            _n2OEmissionFactorCalculator.SharedManureTankStore = manureTankStore;
-            _fieldResultsService.SharedManureTankStore = manureTankStore;
-            try
-            {
-                farmResults.FinalFieldResultViewItems.AddRange(this.CalculateFieldResults(farm));
-            }
-            finally
-            {
-                _n2OEmissionFactorCalculator.SharedManureTankStore = null;
-                _fieldResultsService.SharedManureTankStore = null;
-            }
+
+            farmResults.FinalFieldResultViewItems.AddRange(this.CalculateFieldResults(farm));
 
             farmResults.ManureExportResultsViewItems.AddRange(this.CalculateManureExportEmissions(farm));
 
