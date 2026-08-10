@@ -9,12 +9,6 @@ namespace H.Core.Calculators.Nitrogen
     {
         ManureTankStore SharedManureTankStore { get; set; }
 
-        /// <summary>
-        /// Resets the per-run memoization caches so a reused calculator instance does not leak one farm's cached factors
-        /// (or skip per-view-item reporting-field assignments) into the next farm. Call once at the start of each run.
-        /// </summary>
-        void ClearPerRunCaches();
-
         void Initialize(Farm farm);
         void Initialize(Farm farm, List<AnimalComponentEmissionsResults> animalResults);
 

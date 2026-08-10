@@ -33,6 +33,8 @@ namespace H.Core.Calculators.Nitrogen
         private Dictionary<Tuple<int, Province, int, double, SoilTexture, Region>, double> _baseEcodistrictFactorCache =
             new Dictionary<Tuple<int, Province, int, double, SoilTexture, Region>, double>();
 
+        private IAnimalService _animalService;
+
         #endregion
 
         #region Properties
@@ -42,7 +44,13 @@ namespace H.Core.Calculators.Nitrogen
         public IAnimalEmissionFactorsProvider LivestockEmissionConversionFactorsProvider { get; set; }
         public IAnimalAmmoniaEmissionFactorProvider AnimalAmmoniaEmissionFactorProvider { get; set; }
 
-        private IAnimalService _animalService;
+        /// <summary>
+        /// When set (per farm run), this calculator's manure tanks are built into the shared per-run store instead of a
+        /// private one, so the field/N2O path reads the same tanks the rest of the pipeline uses (issue #451 follow-up).
+        /// Byte-identical to the private store (the totals are a pure function of the same inputs); it just avoids a
+        /// redundant rebuild and unifies the source of truth.
+        /// </summary>
+        public ManureTankStore SharedManureTankStore { get; set; }
 
         #endregion
 
@@ -69,14 +77,6 @@ namespace H.Core.Calculators.Nitrogen
 
         #region Public Methods
 
-        /// <summary>
-        /// When set (per farm run), this calculator's manure tanks are built into the shared per-run store instead of a
-        /// private one, so the field/N2O path reads the same tanks the rest of the pipeline uses (issue #451 follow-up).
-        /// Byte-identical to the private store (the totals are a pure function of the same inputs); it just avoids a
-        /// redundant rebuild and unifies the source of truth.
-        /// </summary>
-        public ManureTankStore SharedManureTankStore { get; set; }
-
         public void Initialize(Farm farm)
         {
             var results = _animalService.GetAnimalResults(farm);
@@ -89,23 +89,6 @@ namespace H.Core.Calculators.Nitrogen
         {
             this.InitializeManureService(farm, animalResults);
             _digestateService.Initialize(farm, animalResults);
-        }
-
-        /// <summary>
-        /// Resets the per-run memoization caches. They memoize WITHIN a single farm calculation (many field-years share an
-        /// ecodistrict / topography key), but they MUST be reset between farm runs: the ecodistrict-factor value also
-        /// depends on the farm's growing-season precipitation/evapotranspiration, which are NOT part of the cache key, and
-        /// that same path sets per-view-item reporting fields only on a cache MISS. A calculator instance is reused across
-        /// farms (both the GUI and CLI build one and run every farm through it), so without this reset one farm's cached
-        /// factors leak into the next and the reporting-field assignments are skipped on every run after the first.
-        /// Clearing per run keeps the within-run caching (byte-identical single-run results) while making runs independent.
-        /// (Found by the whole-farm lifetime baseline; issue #451 follow-up.)
-        /// </summary>
-        public void ClearPerRunCaches()
-        {
-            _baseEmissionFactorCalculationCache.Clear();
-            _baseEcodistrictFactorCache.Clear();
-            _topographyCalculationCache.Clear();
         }
 
         private void InitializeManureService(Farm farm, List<AnimalComponentEmissionsResults> animalResults)
