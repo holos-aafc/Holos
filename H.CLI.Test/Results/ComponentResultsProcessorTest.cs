@@ -24,6 +24,7 @@ using H.Core.Calculators.Nitrogen;
 using H.Core.Providers.Climate;
 using H.Core.Services.LandManagement;
 using H.Core.Test;
+using Moq;
 
 namespace H.CLI.Test.Results
 {
@@ -51,7 +52,10 @@ namespace H.CLI.Test.Results
         public void TestInitialize()
         {
             storage.ApplicationData = new ApplicationData();
-            _componentResultsProcessor = new ComponentResultsProcessor(storage, new TimePeriodHelper(), _fieldResultsService, _n2OEmissionFactorCalculator);
+            var fieldResultsServiceFactory = new Mock<IFieldResultsServiceFactory>();
+            fieldResultsServiceFactory.Setup(x => x.Create(It.IsAny<ManureTankStore>()))
+                .Returns(() => new FieldCalculationGraph(_fieldResultsService, _n2OEmissionFactorCalculator));
+            _componentResultsProcessor = new ComponentResultsProcessor(storage, new TimePeriodHelper(), _fieldResultsService, fieldResultsServiceFactory.Object);
 
 
             var swineStarterGroup = new AnimalGroup()

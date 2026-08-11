@@ -96,8 +96,11 @@ namespace H.Integration
             _ipccTier2SoilCarbonCalculator = new IPCCTier2SoilCarbonCalculator(_climateProvider, _n2OEmissionFactorCalculator);
             _fieldResultsService = new FieldResultsService(_icbmsoilCarbonCalculator, _ipccTier2SoilCarbonCalculator, _n2OEmissionFactorCalculator, _initializationService);
             _animalService = new AnimalResultsService();
-            _componentResultsProcessor = new ComponentResultsProcessor(_storage, _timePeriodHelper, _fieldResultsService, _n2OEmissionFactorCalculator);
-            _farmResultsService = new FarmResultsService(_eventAggregator, _fieldResultsService, _adCalculator, _manureService, _animalService, _n2OEmissionFactorCalculator);
+            var fieldResultsServiceFactory = new Mock<IFieldResultsServiceFactory>();
+            fieldResultsServiceFactory.Setup(x => x.Create(It.IsAny<ManureTankStore>()))
+                .Returns(() => new FieldCalculationGraph(_fieldResultsService, _n2OEmissionFactorCalculator));
+            _componentResultsProcessor = new ComponentResultsProcessor(_storage, _timePeriodHelper, _fieldResultsService, fieldResultsServiceFactory.Object);
+            _farmResultsService = new FarmResultsService(_eventAggregator, fieldResultsServiceFactory.Object, _adCalculator, _manureService, _animalService);
             _animalInitializationService = new AnimalInitializationService();
         }
 
