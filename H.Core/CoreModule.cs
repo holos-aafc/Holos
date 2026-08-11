@@ -55,11 +55,6 @@ namespace H.Core
             containerRegistry.RegisterSingleton<IFeedIngredientProvider, FeedIngredientProvider>();
 
             containerRegistry.RegisterSingleton<IUnitsOfMeasurementCalculator, UnitsOfMeasurementCalculator>();
-
-            // Builds a fresh field-results calculation graph per farm run (Option 2 / scoped composition). Registered here
-            // (public CoreModule, loaded by both the GUI and CLI) so FarmResultsService resolves it without a GUI change;
-            // its IClimateProvider / IInitializationService dependencies are already registered by the host.
-            containerRegistry.RegisterSingleton<IFieldResultsServiceFactory, FieldResultsServiceFactory>();
         }
 
         public void OnInitialized(IContainerProvider containerProvider)
