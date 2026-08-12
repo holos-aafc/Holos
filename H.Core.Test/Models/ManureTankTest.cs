@@ -42,25 +42,57 @@ namespace H.Core.Test.Models
 
         #region Tests
 
+        /// <summary>
+        /// Issue #451 worked example on the tank itself: two management periods feed the tank 100 kg and 50 kg on the
+        /// same day (summed to 150), with 30 kg removed. The shared net-of-removals volume is 150 and the removal
+        /// fraction is 30 / 150 = 0.20 - not 30/100 or 30/50.
+        /// </summary>
         [TestMethod]
-        public void GetVolumeCreatedOnDateTest()
+        public void ComputeDailyStorage_SummedInflow_UsesSharedTankDenominator()
         {
+            var day = new DateTime(2025, 6, 1);
+            _sut.AddDailyInflow(day, 100);
+            _sut.AddDailyInflow(day, 50);
 
+            _sut.ComputeDailyStorage(date => 30);
+
+            Assert.AreEqual(150, _sut.NetOfRemovalsByDate[day.Date], 1e-9);
+            Assert.AreEqual(0.20, _sut.RemovalFractionByDate[day.Date], 1e-9);
         }
 
+        /// <summary>
+        /// The net-of-removals volume carries forward: yesterday's remaining volume (debited by yesterday's removal
+        /// fraction) plus today's inflow.
+        /// </summary>
         [TestMethod]
-        public void AddDailyResultToTankTest()
+        public void ComputeDailyStorage_CarriesVolumeForwardAcrossDays()
         {
-            var groupEmissionsByDay = base.GetGroupEmissionsByDay();
+            var day1 = new DateTime(2025, 6, 1);
+            var day2 = new DateTime(2025, 6, 2);
+            _sut.AddDailyInflow(day1, 100);
+            _sut.AddDailyInflow(day2, 50);
 
-            var targetDate = new DateTime(DateTime.Now.Year, 5, 1);
-            groupEmissionsByDay.DateTime = targetDate;
+            // No removal on day 1, 20 kg removed on day 2.
+            _sut.ComputeDailyStorage(date => date == day2 ? 20 : 0);
 
-            _sut.AddDailyResultToTank(groupEmissionsByDay);
+            Assert.AreEqual(100, _sut.NetOfRemovalsByDate[day1], 1e-9);       // inflow only, nothing removed yet
+            Assert.AreEqual(0, _sut.RemovalFractionByDate[day1], 1e-9);
+            Assert.AreEqual(150, _sut.NetOfRemovalsByDate[day2], 1e-9);       // 50 + 100 * (1 - 0)
+            Assert.AreEqual(20.0 / 150.0, _sut.RemovalFractionByDate[day2], 1e-9);
+        }
 
-            var result = _sut.GetVolumeCreatedOnDate(targetDate);
+        /// <summary>
+        /// A removal larger than the tank is capped at the daily maximum removal fraction.
+        /// </summary>
+        [TestMethod]
+        public void ComputeDailyStorage_RemovalExceedingTank_CapsFraction()
+        {
+            var day = new DateTime(2025, 6, 1);
+            _sut.AddDailyInflow(day, 100);
 
-            Assert.AreEqual(100 * 1000, result);
+            _sut.ComputeDailyStorage(date => 1000); // far more than the 100 in the tank
+
+            Assert.AreEqual(ManureStorageMath.MaximumRemovalFraction, _sut.RemovalFractionByDate[day], 1e-9);
         }
 
         #endregion

@@ -7,7 +7,9 @@ using H.Core.Models.Animals.Beef;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Services;
 using H.Core.Services.Animals;
+using H.Core.Services.LandManagement;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using Moq;
 using Prism.Events;
 
@@ -24,13 +26,16 @@ namespace H.Core.Test.Services
         [TestInitialize]
         public void TestInitialize()
         {
+            var fieldResultsServiceFactory = new Mock<IFieldResultsServiceFactory>();
+            fieldResultsServiceFactory.Setup(x => x.Create(It.IsAny<ManureTankStore>()))
+                .Returns(() => new FieldCalculationGraph(_fieldResultsService, _n2OEmissionFactorCalculator));
+
             _sut = new FarmResultsService(
                 new EventAggregator(),
-                _fieldResultsService,
+                fieldResultsServiceFactory.Object,
                 new ADCalculator(),
                 new Mock<IManureService>().Object,
-                new Mock<IAnimalService>().Object,
-                _n2OEmissionFactorCalculator);
+                new Mock<IAnimalService>().Object);
         }
 
         /// <summary>

@@ -43,7 +43,8 @@ namespace H.Core.Calculators.Carbon
 
         public void AssignInputs(CropViewItem viewItem, Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
         {
-            manureService.Initialize(farm, animalComponentEmissionsResults);
+            // Manure tanks are (re)built inside AssignManureCarbonInputs right before the only manure query, so a manure
+            // Initialize here would just be overwritten unread. Digestate is queried below, so it does need initializing.
             digestateService.Initialize(farm, animalComponentEmissionsResults);
 
             var cropData = _slopeProvider.GetDataByCropType(viewItem.CropType);

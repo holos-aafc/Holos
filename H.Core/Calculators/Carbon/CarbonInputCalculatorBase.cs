@@ -31,6 +31,13 @@ namespace H.Core.Calculators.Carbon
 
         #endregion
 
+        #region Properties
+
+        /// <inheritdoc />
+        public ManureTankStore SharedManureTankStore { get; set; }
+
+        #endregion
+
         #region Public Methods
 
         /// <summary>
@@ -106,7 +113,18 @@ namespace H.Core.Calculators.Carbon
 
         public void AssignManureCarbonInputs(CropViewItem viewItem, Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
         {
-            manureService.Initialize(farm, animalComponentEmissionsResults);
+            // When a per-run shared store is set (issue #451 follow-up), build the tank totals into it rather than
+            // rebuilding a private set - the field / soil-carbon path then reads the same tanks the rest of the pipeline
+            // uses. Byte-identical: the totals are a pure function of the same (farm + animal results) inputs.
+            if (this.SharedManureTankStore != null)
+            {
+                manureService.Initialize(farm, animalComponentEmissionsResults, this.SharedManureTankStore);
+            }
+            else
+            {
+                manureService.Initialize(farm, animalComponentEmissionsResults);
+            }
+
             digestateService.Initialize(farm, animalComponentEmissionsResults);
 
             if (farm.IsCommandLineMode == false)

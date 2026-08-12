@@ -171,6 +171,13 @@ namespace H.Core.Services.LandManagement
 
         public IAnimalService AnimalResultsService { get; set; }
 
+        /// <inheritdoc />
+        public ManureTankStore SharedManureTankStore
+        {
+            get => _carbonService.SharedManureTankStore;
+            set => _carbonService.SharedManureTankStore = value;
+        }
+
         #endregion
 
         #region Public Methods

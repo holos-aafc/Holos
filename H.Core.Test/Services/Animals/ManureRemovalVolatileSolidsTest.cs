@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -45,6 +46,11 @@ namespace H.Core.Test.Services.Animals
             {
                 return base.CalculateAmountInStorageNetOfRemovals(netPrevious, inflow, fractionRemovedPreviousDay);
             }
+
+            public void RunStoragePhase(IEnumerable<AnimalComponentEmissionsResults> componentResults, Farm farm)
+            {
+                base.CompleteLiquidManureStorageForTanks(componentResults, farm);
+            }
         }
 
         [TestInitialize]
@@ -53,6 +59,99 @@ namespace H.Core.Test.Services.Animals
             _resultsService = new DairyCattleResultsService();
             _manureService = new ManureService();
             _testableService = new TestableResultsService();
+        }
+
+        #endregion
+
+        #region CompleteLiquidManureStorageForTanks (shared-tank denominator, issue #451)
+
+        /// <summary>
+        /// Issue #451 worked example: two dairy management periods feed one LiquidNoCrust tank on the same day, with
+        /// daily inflows of 100 kg and 50 kg, and 30 kg removed from the shared tank. The removal fraction must use the
+        /// shared denominator 150 (30 / 150 = 0.20), not each period's own inflow (30 / 100 = 0.30 or 30 / 50 = 0.60).
+        /// </summary>
+        [TestMethod]
+        public void CompleteLiquidManureStorageForTanks_SharedTank_UsesSummedDenominatorNotPerPeriod()
+        {
+            var day = new DateTime(2025, 6, 1);
+
+            var lactatingCows = BuildDairyLiquidDay(AnimalType.DairyLactatingCow, day, inflowKilograms: 100);
+            var heifers = BuildDairyLiquidDay(AnimalType.DairyHeifers, day, inflowKilograms: 50);
+            var componentResults = new List<AnimalComponentEmissionsResults> { lactatingCows, heifers };
+
+            var farm = BuildFarmWithDairyLiquidRemoval(day, removedKilograms: 30);
+
+            _testableService.RunStoragePhase(componentResults, farm);
+
+            var lactatingDay = SingleDailyEmissions(lactatingCows);
+            var heiferDay = SingleDailyEmissions(heifers);
+
+            // Both periods share one physical tank, so both carry the same net-of-removals denominator: the summed
+            // inflow of 150 kg (not 100 kg or 50 kg).
+            Assert.AreEqual(150, lactatingDay.AccumulatedVolumeNetOfRemovals, 1e-6);
+            Assert.AreEqual(150, heiferDay.AccumulatedVolumeNetOfRemovals, 1e-6);
+            Assert.AreEqual(30, lactatingDay.VolumeOfManureRemovedFromStorageOnDay, 1e-6);
+
+            // Removal fraction = 30 / 150 = 0.20 (shared tank), not 30 / 100 = 0.30 or 30 / 50 = 0.60 (per period).
+            Assert.AreEqual(0.20, _testableService.GetFraction(lactatingDay), 1e-6);
+        }
+
+        private static GroupEmissionsByDay SingleDailyEmissions(AnimalComponentEmissionsResults componentResults)
+        {
+            return componentResults.EmissionResultsForAllAnimalGroupsInComponent[0].GroupEmissionsByMonths[0].DailyEmissions[0];
+        }
+
+        // Builds one dairy liquid management period with a single day whose manure volume equals inflowKilograms.
+        // TotalVolumeOfManureAvailableForLandApplicationInKilograms is the reporting-unit value multiplied by 1000.
+        private AnimalComponentEmissionsResults BuildDairyLiquidDay(AnimalType animalType, DateTime day, double inflowKilograms)
+        {
+            var managementPeriod = new ManagementPeriod { AnimalType = animalType };
+            managementPeriod.ManureDetails.StateType = ManureStateType.LiquidNoCrust;
+            managementPeriod.HousingDetails = new HousingDetails();
+
+            var monthsAndDaysData = new MonthsAndDaysData
+            {
+                Year = day.Year,
+                Month = day.Month,
+                ManagementPeriod = managementPeriod,
+            };
+
+            var dailyEmissions = new GroupEmissionsByDay
+            {
+                DateTime = day,
+                TotalVolumeOfManureAvailableForLandApplication = inflowKilograms / 1000.0,
+            };
+
+            var month = new GroupEmissionsByMonth(monthsAndDaysData, new List<GroupEmissionsByDay> { dailyEmissions });
+            var group = new AnimalGroupEmissionResults { GroupEmissionsByMonths = new List<GroupEmissionsByMonth> { month } };
+
+            return new AnimalComponentEmissionsResults
+            {
+                EmissionResultsForAllAnimalGroupsInComponent = new List<AnimalGroupEmissionResults> { group },
+            };
+        }
+
+        private Farm BuildFarmWithDairyLiquidRemoval(DateTime day, double removedKilograms)
+        {
+            var farm = base.GetTestFarm();
+            farm.Components.Clear();
+            farm.ManureExportViewItems.Clear();
+
+            var crop = new CropViewItem { Area = 1 };
+            crop.ManureApplicationViewItems.Add(new ManureApplicationViewItem
+            {
+                DateOfApplication = day,
+                AmountOfManureAppliedPerHectare = removedKilograms, // x 1 ha
+                AnimalType = AnimalType.DairyLactatingCow,
+                ManureLocationSourceType = ManureLocationSourceType.Livestock,
+                ManureStateType = ManureStateType.LiquidNoCrust,
+            });
+
+            var field = new FieldSystemComponent();
+            field.CropViewItems.Add(crop);
+            farm.Components.Add(field);
+
+            return farm;
         }
 
         #endregion

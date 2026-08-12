@@ -26,7 +26,8 @@ namespace H.Core.Calculators.Carbon
             CropViewItem nextYearViewItem,
             Farm farm, List<AnimalComponentEmissionsResults> animalResults)
         {
-            manureService.Initialize(farm, animalResults);
+            // Manure tanks are (re)built inside AssignManureCarbonInputs right before the only manure query, so a manure
+            // Initialize here would just be overwritten unread. Digestate is queried below, so it does need initializing.
             digestateService.Initialize(farm, animalResults);
 
             var isNonSwathingGrazingScenario = farm.IsNonSwathingGrazingScenario(currentYearViewItem);

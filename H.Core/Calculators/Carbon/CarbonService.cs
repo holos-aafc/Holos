@@ -45,6 +45,27 @@ namespace H.Core.Calculators.Carbon
 
         #endregion
 
+        #region Properties
+
+        private ManureTankStore _sharedManureTankStore;
+
+        /// <inheritdoc />
+        public ManureTankStore SharedManureTankStore
+        {
+            get => _sharedManureTankStore;
+            set
+            {
+                _sharedManureTankStore = value;
+
+                // Route the shared store to the concrete calculators that build manure tanks (both share
+                // CarbonInputCalculatorBase.AssignManureCarbonInputs).
+                _ipccTier2CarbonInputCalculator.SharedManureTankStore = value;
+                _icbmCarbonInputCalculator.SharedManureTankStore = value;
+            }
+        }
+
+        #endregion
+
         #region Public Methods
 
         public bool CanCalculateInputsUsingIpccTier2(CropViewItem cropViewItem)

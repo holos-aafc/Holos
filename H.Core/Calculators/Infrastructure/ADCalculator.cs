@@ -672,10 +672,29 @@ namespace H.Core.Calculators.Infrastructure
 
         }
 
+        // The shared per-run manure-tank store, when the digester is run as part of a full farm calculation. Held so AD
+        // can read the unified manure-tank accounting (issue #451); AD still derives its substrate from the animal
+        // daily emissions, so this is null-safe and unused by the current flow rates.
+        private ManureTankStore _manureTankStore;
+
         public List<DigestorDailyOutput> CalculateResults(
             Farm farm,
             List<AnimalComponentEmissionsResults> animalComponentEmissionsResults)
         {
+            return this.CalculateResults(farm, animalComponentEmissionsResults, null);
+        }
+
+        /// <summary>
+        /// Overload used inside a full farm calculation: receives the shared per-run <see cref="ManureTankStore"/> so
+        /// the digester has access to the unified manure-tank accounting (issue #451).
+        /// </summary>
+        public List<DigestorDailyOutput> CalculateResults(
+            Farm farm,
+            List<AnimalComponentEmissionsResults> animalComponentEmissionsResults,
+            ManureTankStore manureTankStore)
+        {
+            _manureTankStore = manureTankStore;
+
             var results = new List<DigestorDailyOutput>();
 
             var component = farm.Components.OfType<AnaerobicDigestionComponent>().SingleOrDefault();
