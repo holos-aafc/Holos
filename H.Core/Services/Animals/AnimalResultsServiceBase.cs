@@ -901,6 +901,9 @@ namespace H.Core.Services.Animals
                 return 0;
             }
 
+// The removed volume is scoped to the exact manure state type by GetTotalVolumeOfManureRemovedFromStorageOnDay,
+// so removals from other storage tanks (including other liquid systems) do not reduce the volatile solids in this tank
+// (Eq. 4.1.3-6, issue #434).
             var fraction = emissionsForDay.VolumeOfManureRemovedFromStorageOnDay / emissionsForDay.AccumulatedVolumeNetOfRemovals;
 
             return this.BoundRemovalFraction(fraction);
@@ -986,8 +989,17 @@ namespace H.Core.Services.Animals
                 fractionOfManureRemovedFromStorageOnPreviousDay: fractionRemovedOnPreviousDay);
 
             // Volume of manure removed from storage on the current day (read by the following day to form the fraction).
+            // Only removals whose ManureStateType exactly matches this management period's state type are counted,
+            // since each state type represents a distinct physical storage tank (issue #434).
+            //
+            // KNOWN LIMITATION (see issue #451): the denominator (AccumulatedVolumeNetOfRemovals) is accumulated
+            // per management period, but the physical model has one shared tank per year/animal-category/state-type.
+            // If multiple management periods feed the same tank (e.g. lactating cows + heifers both using
+            // LiquidNoCrust), the denominator understates the true tank volume, causing the removal fraction to be
+            // overstated for each period. This should be corrected by tracking the accumulated volume at the tank
+            // level rather than the management-period level.
             todaysState.VolumeRemovedOnDay = _manureService.GetTotalVolumeOfManureRemovedFromStorageOnDay(
-                dailyEmissions.DateTime, farm, managementPeriod.AnimalType);
+                dailyEmissions.DateTime, farm, managementPeriod.AnimalType, managementPeriod.ManureDetails.StateType);
 
             WriteManureStorageState(dailyEmissions, todaysState);
         }

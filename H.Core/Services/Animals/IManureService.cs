@@ -33,12 +33,15 @@ namespace H.Core.Services.Animals
         double GetTotalVolumeOfManureExported(int year, Farm farm, AnimalType animalType);
 
         /// <summary>
-        /// Returns the total volume of manure removed from storage on a given day for a given animal type, through
-        /// on-farm land application and off-farm export. Imported manure applications are excluded.
+        /// Returns the total volume of manure removed from storage on a given day for a given animal type and manure
+        /// management system, through on-farm land application and off-farm export. Only removals whose
+        /// <see cref="ManureItemBase.ManureStateType"/> exactly matches <paramref name="manureStateType"/> are counted,
+        /// since each state type represents a distinct storage tank (consistent with how tanks are keyed in
+        /// <see cref="IManureService.GetTank"/>). Imported manure applications are excluded.
         ///
         /// (kg)
         /// </summary>
-        double GetTotalVolumeOfManureRemovedFromStorageOnDay(DateTime dateTime, Farm farm, AnimalType animalType);
+        double GetTotalVolumeOfManureRemovedFromStorageOnDay(DateTime dateTime, Farm farm, AnimalType animalType, ManureStateType manureStateType);
         int GetYearHighestVolumeRemaining(AnimalType animalType);
         DefaultManureCompositionData GetManureCompositionData(Farm farm, ManureStateType manureStateType,
             AnimalType animalType);
