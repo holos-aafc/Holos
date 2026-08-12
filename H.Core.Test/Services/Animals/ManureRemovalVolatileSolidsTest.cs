@@ -228,8 +228,9 @@ namespace H.Core.Test.Services.Animals
         /// When querying a LiquidNoCrust system, removals from a DeepPit tank are excluded because each state type
         /// represents a distinct storage tank (Eq. 4.1.3-6, issue #434).
         /// </summary>
-[TestMethod]
-public void GetTotalVolumeOfManureRemovedFromStorageOnDay_ExcludesDeepPitRemovalsWhenQueryingLiquidNoCrust()
+        [TestMethod]
+        public void GetTotalVolumeOfManureRemovedFromStorageOnDay_ExcludesDeepPitRemovalsWhenQueryingLiquidNoCrust()
+        {
             // Arrange: all removals on this day are from a DeepPit tank.
             var day = new DateTime(2025, 6, 1);
             var farm = BuildFarmWithRemoval(day, AnimalType.DairyLactatingCow, ManureLocationSourceType.Livestock, ManureStateType.DeepPit);
