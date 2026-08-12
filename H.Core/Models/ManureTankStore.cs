@@ -13,10 +13,20 @@ namespace H.Core.Models
     /// </summary>
     public class ManureTankStore
     {
+        #region Fields
+
         private readonly List<ManureTank> _tanks = new List<ManureTank>();
+
+        #endregion
+
+        #region Properties
 
         public IReadOnlyList<ManureTank> Tanks => _tanks;
 
+        #endregion
+
+        #region Public Methods
+        
         /// <summary>
         /// Returns the tank for the (animal category, year, manure state type) triple, creating and adding it if it does
         /// not already exist. There is at most one tank per triple.
@@ -41,5 +51,7 @@ namespace H.Core.Models
         {
             _tanks.Clear();
         }
+
+        #endregion
     }
 }
