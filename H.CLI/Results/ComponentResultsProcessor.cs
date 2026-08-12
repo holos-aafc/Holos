@@ -61,7 +61,7 @@ namespace H.CLI.Results
 
         #region Constructor
 
-        public ComponentResultsProcessor(Storage storage, ITimePeriodHelper timePeriodHelper, IFieldResultsService fieldResultsService, N2OEmissionFactorCalculator n2OEmissionFactorCalculator)
+        public ComponentResultsProcessor(Storage storage, ITimePeriodHelper timePeriodHelper, IFieldResultsService fieldResultsService, IFieldResultsServiceFactory fieldResultsServiceFactory)
         {
             if (fieldResultsService != null)
             {
@@ -78,7 +78,7 @@ namespace H.CLI.Results
             var animalService = new AnimalResultsService();
             var manureService = new ManureService();
 
-            _farmResultsService = new FarmResultsService(new EventAggregator(), _fieldResultsService, new ADCalculator(), manureService, animalService, n2OEmissionFactorCalculator );
+            _farmResultsService = new FarmResultsService(new EventAggregator(), fieldResultsServiceFactory, new ADCalculator(), manureService, animalService);
 
             _emissionsConverter = new EmissionTypeConverter();
             _initializationService = new InitializationService();

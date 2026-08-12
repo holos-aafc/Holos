@@ -33,6 +33,8 @@ namespace H.Core.Calculators.Nitrogen
         private Dictionary<Tuple<int, Province, int, double, SoilTexture, Region>, double> _baseEcodistrictFactorCache =
             new Dictionary<Tuple<int, Province, int, double, SoilTexture, Region>, double>();
 
+        private IAnimalService _animalService;
+
         #endregion
 
         #region Properties
@@ -42,7 +44,13 @@ namespace H.Core.Calculators.Nitrogen
         public IAnimalEmissionFactorsProvider LivestockEmissionConversionFactorsProvider { get; set; }
         public IAnimalAmmoniaEmissionFactorProvider AnimalAmmoniaEmissionFactorProvider { get; set; }
 
-        private IAnimalService _animalService;
+        /// <summary>
+        /// When set (per farm run), this calculator's manure tanks are built into the shared per-run store instead of a
+        /// private one, so the field/N2O path reads the same tanks the rest of the pipeline uses (issue #451 follow-up).
+        /// Byte-identical to the private store (the totals are a pure function of the same inputs); it just avoids a
+        /// redundant rebuild and unifies the source of truth.
+        /// </summary>
+        public ManureTankStore SharedManureTankStore { get; set; }
 
         #endregion
 
@@ -73,14 +81,26 @@ namespace H.Core.Calculators.Nitrogen
         {
             var results = _animalService.GetAnimalResults(farm);
 
-            _manureService.Initialize(farm, results);
+            this.InitializeManureService(farm, results);
             _digestateService.Initialize(farm, results);
         }
 
         public void Initialize(Farm farm, List<AnimalComponentEmissionsResults> animalResults)
         {
-            _manureService.Initialize(farm, animalResults);
+            this.InitializeManureService(farm, animalResults);
             _digestateService.Initialize(farm, animalResults);
+        }
+
+        private void InitializeManureService(Farm farm, List<AnimalComponentEmissionsResults> animalResults)
+        {
+            if (this.SharedManureTankStore != null)
+            {
+                _manureService.Initialize(farm, animalResults, this.SharedManureTankStore);
+            }
+            else
+            {
+                _manureService.Initialize(farm, animalResults);
+            }
         }
 
         /// <summary>

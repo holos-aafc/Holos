@@ -12,6 +12,8 @@ namespace H.Core.Services.Animals
     public interface IManureService
     {
         void Initialize(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults);
+
+        void Initialize(Farm farm, List<AnimalComponentEmissionsResults> animalComponentEmissionsResults, ManureTankStore sharedTankStore);
         ManureTank GetTank(AnimalType animalType, int year, Farm farm, ManureStateType manureStateType);
         List<AnimalType> GetValidManureTypes();
         List<AnimalType> GetManureCategoriesProducedOnFarm(Farm farm);

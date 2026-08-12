@@ -113,15 +113,20 @@ namespace H.Core.Models
 
         public virtual void ResetTank()
         {
-            this.VolumeRemainingInTank = 0;
             this.TotalOrganicNitrogenAvailableForLandApplication = 0;
             this.TotalTanAvailableForLandApplication = 0;
             this.TotalAmountOfCarbonInStoredManure = 0;
+
+            // Zero the "available" amounts BEFORE the "sum of applications" setters: those setters recompute
+            // TotalNitrogenAvailableAfterAllLandApplications / VolumeRemainingInTank from the "available" amounts, so
+            // the available amounts must already be 0 for the recomputed values to reach 0.
             this.TotalNitrogenAvailableForLandApplication = 0;
+            this.VolumeOfManureAvailableForLandApplication = 0;
+
             this.TotalNitrogenAvailableAfterAllLandApplications = 0;
             this.NitrogenSumOfAllManureApplicationsMade = 0;
             this.VolumeSumOfAllManureApplicationsMade = 0;
-            this.VolumeOfManureAvailableForLandApplication = 0;
+            this.VolumeRemainingInTank = 0;
         }
 
         #endregion

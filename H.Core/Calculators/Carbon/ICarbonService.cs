@@ -9,6 +9,13 @@ namespace H.Core.Calculators.Carbon
 {
     public interface ICarbonService
     {
+        /// <summary>
+        /// When set (per farm run), the carbon-input calculators build their manure tanks into this shared per-run store
+        /// instead of private ones, so the soil-carbon manure inputs read the same tanks the rest of the pipeline uses
+        /// (issue #451 follow-up). Byte-identical to the private store; it just avoids a redundant rebuild.
+        /// </summary>
+        ManureTankStore SharedManureTankStore { get; set; }
+
         bool CanCalculateInputsUsingIpccTier2(CropViewItem cropViewItem);
         void AssignInputsAndLosses(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear, Farm farm,
             List<AnimalComponentEmissionsResults> animalResults);
