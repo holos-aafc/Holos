@@ -8,10 +8,16 @@ namespace H.Core.Models
     /// </summary>
     public static class ManureStorageMath
     {
+        #region Fields
+
         /// <summary>
         /// The maximum fraction of the manure in a tank that can be emptied in a single day.
         /// </summary>
-        public const double MaximumRemovalFraction = 0.95;
+        public const double MaximumRemovalFraction = 0.95; 
+
+        #endregion
+
+        #region Public Methods
 
         /// <summary>
         /// Today's net-of-removals volume in storage: today's inflow plus yesterday's remaining volume reduced by the
@@ -43,6 +49,8 @@ namespace H.Core.Models
             }
 
             return fraction;
-        }
+        } 
+
+        #endregion
     }
 }
