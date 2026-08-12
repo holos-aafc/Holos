@@ -901,9 +901,9 @@ namespace H.Core.Services.Animals
                 return 0;
             }
 
-            // The removed volume is scoped to the management system (liquid or solid) by
-            // GetTotalVolumeOfManureRemovedFromStorageOnDay, so solid manure applications do not reduce the volatile
-            // solids held in a separate liquid tank (Eq. 4.1.3-6, issue #434).
+// The removed volume is scoped to the exact manure state type by GetTotalVolumeOfManureRemovedFromStorageOnDay,
+// so removals from other storage tanks (including other liquid systems) do not reduce the volatile solids in this tank
+// (Eq. 4.1.3-6, issue #434).
             var fraction = emissionsForDay.VolumeOfManureRemovedFromStorageOnDay / emissionsForDay.AccumulatedVolumeNetOfRemovals;
 
             return this.BoundRemovalFraction(fraction);
