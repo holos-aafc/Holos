@@ -120,6 +120,10 @@ Holos can handle multiple farms created by the user, each representing different
 </p>
 <br>
 
+Alternatively, if you already know your farm's coordinates, you can enter them directly instead of locating the point on the map. Click the **Enter Coordinates** button in the upper-left corner of the map, type the **latitude** and **longitude** in decimal degrees (for example, latitude `52.30845`, longitude `-112.51918`), and click **OK** (or press **Enter**). The coordinates must fall within your selected province and within one of the mapped (red) regions; if they do not, Holos will let you know so you can adjust them. When a valid location is entered, Holos places the pin and downloads the climate data just as though you had clicked that region on the map.
+
+<br>
+
 2. When you have successfully clicked on one of the regions, Holos will download the climate data directly from NASA.  A progress bar will display the progress in downloading the data, it should only take a few seconds.   The details of that region will be displayed on the right side of the screen (Only for “Advanced Mode” see figure 2.6). You will see the location details, soil and hardiness zones, and climate details for the location you have selected. 
 
 <br>
