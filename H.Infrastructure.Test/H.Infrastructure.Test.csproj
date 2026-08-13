@@ -52,6 +52,7 @@
     <Reference Include="System.IO.Compression" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoordinateParserTest.cs" />
     <Compile Include="KmlHelpersTest.cs" />
     <Compile Include="ListExtensionsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

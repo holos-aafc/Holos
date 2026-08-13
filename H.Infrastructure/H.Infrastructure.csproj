@@ -82,6 +82,7 @@
     <Compile Include="Csv.cs" />
     <Compile Include="CsvReader.cs" />
     <Compile Include="EnumHelper.cs" />
+    <Compile Include="CoordinateParser.cs" />
     <Compile Include="KmlHelpers.cs" />
     <Compile Include="MathHelpers.cs" />
     <Compile Include="MessageBase.cs" />
