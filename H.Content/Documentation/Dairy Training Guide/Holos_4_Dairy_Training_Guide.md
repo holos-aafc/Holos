@@ -342,7 +342,7 @@ In this dairy animal group there are 20 cows that are not milked, allowing for r
 
 1. Under **Step 1**, make sure that the **"Dairy dry"** row is selected in order to enter the associated management information for that group.
 
-2. Under **Step 2** in the **"Dry period"** management period, enter **"November 05, 2025"** as the start date and **"January 4, 2026"** as the end date (61 days).
+2. Under **Step 2** in the **"Dry period"** management period, enter **"November 05, 2025"** as the start date and **"January 4, 2026"** as the end date (60 days).
 
 3. Click on the **General** tab and enter **"20"** as the number of animals.
 
