@@ -225,7 +225,7 @@ Adding animal components follows the same approach used for the land management 
 <br>
 
 <p align="center">
-    <img src="../../Images/DairyGuide/en/Figure13.gif" alt="Figure 14" width="950"/>
+    <img src="../../Images/DairyGuide/en/Figure13.png" alt="Figure 13" width="950"/>
     <br>
     <em>Figure 13: The Dairy Cattle Component.</em>
 </p> 
