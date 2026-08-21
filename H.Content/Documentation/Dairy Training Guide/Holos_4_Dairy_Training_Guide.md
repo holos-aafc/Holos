@@ -536,7 +536,7 @@ If you would like to export your entire farm file, from '**File**' on the main t
 > 
 > The whole-systems approach ensures the effects of management changes are transferred throughout the entire system to the resulting net farm emissions. In some cases, reducing one GHG will actually increase the emissions of another. The whole-systems approach avoids potentially ill-advised practices based on preoccupation with one individual GHG.
 
-To download Holos, for more information, or to access a recent list of Holos-related publications, visit: www.agr.gc.ca
+To download Holos, for more information, or to access a recent list of Holos-related publications, visit: [www.agr.gc.ca](https://agriculture.canada.ca/en/agricultural-science-and-innovation/agricultural-research-results/holos-software-program)
 
 To contact us, email:
 aafc.holos.acc@canada.ca
