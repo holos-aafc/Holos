@@ -310,7 +310,7 @@ Calves that are not used for replacement will enter into the veal system and are
 
 3. Under **Step 3**, click on the **General** tab and enter **"45"** as the number of animals. Click on the **Housing** tab and select **"Free stall barn (slurry scraping)"** as the housing type and click on the **Manure** tab to select **"Liquid/Slurry with no natural crust"**.
 
-4. Returning to **Step 2**, click on the **Add Management Period** button. This will add a second management period for our group of calves. Ensure the start date is **"April 01, 2025"** and the end date is "**June 30, 2025**" (90 days). Since we assumed a mortality rate of 4.4% at four months of age, we will adjust the number of animals in the second management period to **"43"**. The housing and manure management options are the same as for the first dairy calves management period.
+4. Returning to **Step 2**, click on the **Add Management Period** button. This will add a second management period for our group of calves. Ensure the start date is **"April 01, 2025"** and the end date is "**June 30, 2025**" (91 days). Since we assumed a mortality rate of 4.4% at four months of age, we will adjust the number of animals in the second management period to **"43"**. The housing and manure management options are the same as for the first dairy calves management period.
 
 <br>
 
