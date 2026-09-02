@@ -225,7 +225,7 @@ Adding animal components follows the same approach used for the land management 
 <br>
 
 <p align="center">
-    <img src="../../Images/DairyGuide/en/Figure13.gif" alt="Figure 14" width="950"/>
+    <img src="../../Images/DairyGuide/en/Figure13.png" alt="Figure 13" width="950"/>
     <br>
     <em>Figure 13: The Dairy Cattle Component.</em>
 </p> 
@@ -310,7 +310,7 @@ Calves that are not used for replacement will enter into the veal system and are
 
 3. Under **Step 3**, click on the **General** tab and enter **"45"** as the number of animals. Click on the **Housing** tab and select **"Free stall barn (slurry scraping)"** as the housing type and click on the **Manure** tab to select **"Liquid/Slurry with no natural crust"**.
 
-4. Returning to **Step 2**, click on the **Add Management Period** button. This will add a second management period for our group of calves. Ensure the start date is **"April 01, 2025"** and the end date is "**June 30, 2025**" (90 days). Since we assumed a mortality rate of 4.4% at four months of age, we will adjust the number of animals in the second management period to **"43"**. The housing and manure management options are the same as for the first dairy calves management period.
+4. Returning to **Step 2**, click on the **Add Management Period** button. This will add a second management period for our group of calves. Ensure the start date is **"April 01, 2025"** and the end date is "**June 30, 2025**" (91 days). Since we assumed a mortality rate of 4.4% at four months of age, we will adjust the number of animals in the second management period to **"43"**. The housing and manure management options are the same as for the first dairy calves management period.
 
 <br>
 
@@ -342,7 +342,7 @@ In this dairy animal group there are 20 cows that are not milked, allowing for r
 
 1. Under **Step 1**, make sure that the **"Dairy dry"** row is selected in order to enter the associated management information for that group.
 
-2. Under **Step 2** in the **"Dry period"** management period, enter **"November 05, 2025"** as the start date and **"January 4, 2026"** as the end date (61 days).
+2. Under **Step 2** in the **"Dry period"** management period, enter **"November 05, 2025"** as the start date and **"February 27, 2026"** as the end date (115 days).
 
 3. Click on the **General** tab and enter **"20"** as the number of animals.
 
@@ -361,12 +361,12 @@ In Holos, the user can apply livestock manure to a field using either manure pro
 1. Select the **Wheat & hairy vetch** field from the list of components added to our farm.
 
 2. Click on the **Manure tab** and then click the **Add Manure Application** button.
-    * Select **"April 30, 2026"** as the date.
+    * Select **"February 15, 2026"** as the date.
     * Select **"Livestock"** as the origin of manure.
     * Select **"Dairy"** as the manure type.
     * Select **"Liquid/Slurry with no natural crust"** as the manure handling system.
     * Select **"Shallow injection"** as the application method.
-    * Enter **"14,000 kg ha<sup>-1</sup>"** as the amount of manure applied to this field.
+    * Enter **"10,000 kg ha<sup>-1</sup>"** as the amount of manure applied to this field.
 
 > Only dates in 2026 are valid as the chosen date must be in the same year which the currently selected crop is being grown.
 
@@ -536,7 +536,7 @@ If you would like to export your entire farm file, from '**File**' on the main t
 > 
 > The whole-systems approach ensures the effects of management changes are transferred throughout the entire system to the resulting net farm emissions. In some cases, reducing one GHG will actually increase the emissions of another. The whole-systems approach avoids potentially ill-advised practices based on preoccupation with one individual GHG.
 
-To download Holos, for more information, or to access a recent list of Holos-related publications, visit: www.agr.gc.ca
+To download Holos, for more information, or to access a recent list of Holos-related publications, visit: [www.agr.gc.ca](https://agriculture.canada.ca/en/agricultural-science-and-innovation/agricultural-research-results/holos-software-program)
 
 To contact us, email:
 aafc.holos.acc@canada.ca
