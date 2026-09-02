@@ -387,7 +387,7 @@ namespace H.Core.Calculators.Nitrogen
 
             // Take average of coefficients if there is more than one application
             var fertilizerTypeFactor = 0.0;
-            var fertlizerTypeFactors = new List<double>();
+            var fertilizerTypeFactors = new List<double>();
             foreach (var fertilizerApplicationViewItem in cropViewItem.FertilizerApplicationViewItems)
             {
                 if (fertilizerApplicationViewItem.FertilizerBlendData.FertilizerBlend == FertilizerBlends.Urea)
@@ -408,10 +408,10 @@ namespace H.Core.Calculators.Nitrogen
                     fertilizerTypeFactor = -0.238;
                 }
 
-                fertlizerTypeFactors.Add(fertilizerTypeFactor);
+                fertilizerTypeFactors.Add(fertilizerTypeFactor);
             }
 
-            fertilizerTypeFactor = fertlizerTypeFactors.Any() ? fertlizerTypeFactors.Average() : 0;
+            fertilizerTypeFactor = fertilizerTypeFactors.Any() ? fertilizerTypeFactors.Average() : 0;
 
             var methodOfApplicationFactor = 0.0;
             var methodOfApplicationFactors = new List<double>();
