@@ -248,6 +248,9 @@ namespace H.Core.Services.LandManagement
                 cropViewItems: viewItems,
                 farm: farm, fieldSystemComponent: fieldSystemComponent);
 
+            // If the user chose Custom, a perennial hay/forage field's entered harvest is its yield (single source of truth)
+            this.UpdateYieldFromHarvestForCustomPerennials(viewItems, farm);
+
             // After yields have been set, we must consider perennial years in which there is 0 for the yield input (from user or by default yield provider)
             this.UpdatePercentageReturnsForPerennials(
                 viewItems: viewItems);

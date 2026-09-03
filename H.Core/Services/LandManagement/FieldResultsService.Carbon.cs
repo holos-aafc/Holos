@@ -100,6 +100,51 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
+        /// When the yield assignment method is Custom, a perennial hay/forage field's yield is taken from the biomass the
+        /// user actually harvested rather than a separately-typed or modelled value: Yield = Σ(hayed harvest wet biomass)
+        /// / area. This makes the entered harvest the single source of truth - it drives C_p and everything derived from
+        /// it. Non-Custom (modelled) methods keep their estimated yield; grain crops and fields without hayed harvests are
+        /// left untouched.
+        ///
+        /// Wet biomass (<see cref="FieldActivityBase.AboveGroundBiomass"/>) is used because the pipeline treats Yield as
+        /// fresh weight (C_p multiplies it by 1 - moisture); using dry weight would remove moisture twice.
+        ///
+        /// Must run after yields are assigned and before carbon inputs are calculated.
+        /// </summary>
+        public void UpdateYieldFromHarvestForCustomPerennials(IEnumerable<CropViewItem> viewItems, Farm farm)
+        {
+            if (farm == null || farm.YieldAssignmentMethod != YieldAssignmentMethod.Custom)
+            {
+                return;
+            }
+
+            foreach (var cropViewItem in viewItems)
+            {
+                if (cropViewItem.CropType.IsPerennial() == false || cropViewItem.Area <= 0)
+                {
+                    continue;
+                }
+
+                var hayedHarvests = cropViewItem.GetHayHarvests()
+                    .Where(harvest => harvest.ForageActivity == ForageActivities.Hayed)
+                    .ToList();
+
+                if (hayedHarvests.Any() == false)
+                {
+                    continue;
+                }
+
+                var totalWetBiomass = hayedHarvests.Sum(harvest => harvest.AboveGroundBiomass);
+                if (totalWetBiomass <= 0)
+                {
+                    continue;
+                }
+
+                cropViewItem.Yield = totalWetBiomass / cropViewItem.Area;
+            }
+        }
+
+        /// <summary>
         /// Sets a perennial's "percentage of product returned to soil" from the field's harvest / grazing state, per the
         /// algorithm document's perennial handling:
         ///

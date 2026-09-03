@@ -209,6 +209,96 @@ namespace H.Core.Test.Services
         }
 
         [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsSetsYieldFromHayedHarvest()
+        {
+            // Custom + hay/forage perennial: yield comes from the harvested wet biomass. 20000 kg over 10 ha = 2000 kg/ha.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom});
+
+            Assert.AreEqual(2000, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsSumsMultipleCuts()
+        {
+            // Two cuts (12000 + 8000 = 20000 kg wet) over 10 ha = 2000 kg/ha.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 6, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 12000});
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 8000});
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom});
+
+            Assert.AreEqual(2000, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsLeavesYieldWhenNoHarvest()
+        {
+            // Custom + perennial but no harvest entered -> keep the existing (typed/modelled) yield.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom});
+
+            Assert.AreEqual(1234, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsDoesNotChangeAnnualCrops()
+        {
+            // Grain / annual crops keep their (typed) yield - the derivation is perennial hay/forage only.
+            var crop = new CropViewItem()
+                {CropType = CropType.Barley, Area = 10, Yield = 1234, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom});
+
+            Assert.AreEqual(1234, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsDoesNotDeriveForModelledMethod()
+        {
+            // Method gate: under a modelled method (e.g. Small Area Data) the estimated yield is kept, even with harvests.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData});
+
+            Assert.AreEqual(1234, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsGuardsAgainstZeroBiomass()
+        {
+            // A harvest with no biomass (uninitialized) must not zero out the yield.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 0});
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom});
+
+            Assert.AreEqual(1234, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
         public void UpdatePercentageReturnsForPerennialsLeavesReturnUnchangedWhenGrazed()
         {
             // Regression guard: a grazed perennial has its return governed by utilization (handled elsewhere), so it
