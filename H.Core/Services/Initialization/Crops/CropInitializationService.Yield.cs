@@ -30,7 +30,7 @@ namespace H.Core.Services.Initialization.Crops
                 return;
             }
 
-            var yieldAssignmentMethod = farm.UseFieldLevelYieldAssignement ? fieldSystemComponent.YieldAssignmentMethod : farm.YieldAssignmentMethod;
+            var yieldAssignmentMethod = farm.GetYieldAssignmentMethod(fieldSystemComponent);
             if (viewItem.CropType == CropType.NotSelected || viewItem.Year == 0)
             {
                 Trace.TraceError($"{nameof(FieldResultsService)}.{nameof(InitializeYieldForYear)}: bad crop type or bad year for view item '{viewItem}'");

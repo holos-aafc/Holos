@@ -111,9 +111,9 @@ namespace H.Core.Services.LandManagement
         ///
         /// Must run after yields are assigned and before carbon inputs are calculated.
         /// </summary>
-        public void UpdateYieldFromHarvestForCustomPerennials(IEnumerable<CropViewItem> viewItems, Farm farm)
+        public void UpdateYieldFromHarvestForCustomPerennials(IEnumerable<CropViewItem> viewItems, Farm farm, FieldSystemComponent fieldSystemComponent)
         {
-            if (farm == null || farm.YieldAssignmentMethod != YieldAssignmentMethod.Custom)
+            if (farm == null || farm.GetYieldAssignmentMethod(fieldSystemComponent) != YieldAssignmentMethod.Custom)
             {
                 return;
             }

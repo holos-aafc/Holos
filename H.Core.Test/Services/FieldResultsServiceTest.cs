@@ -218,7 +218,7 @@ namespace H.Core.Test.Services
                 {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
 
             _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
-                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom});
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
 
             Assert.AreEqual(2000, crop.Yield, 0.0001);
         }
@@ -235,7 +235,7 @@ namespace H.Core.Test.Services
                 {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 8000});
 
             _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
-                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom});
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
 
             Assert.AreEqual(2000, crop.Yield, 0.0001);
         }
@@ -248,7 +248,7 @@ namespace H.Core.Test.Services
                 {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
 
             _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
-                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom});
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
 
             Assert.AreEqual(1234, crop.Yield, 0.0001);
         }
@@ -263,7 +263,7 @@ namespace H.Core.Test.Services
                 {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
 
             _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
-                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom});
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
 
             Assert.AreEqual(1234, crop.Yield, 0.0001);
         }
@@ -278,7 +278,7 @@ namespace H.Core.Test.Services
                 {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
 
             _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
-                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData});
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData}, null);
 
             Assert.AreEqual(1234, crop.Yield, 0.0001);
         }
@@ -293,7 +293,7 @@ namespace H.Core.Test.Services
                 {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 0});
 
             _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
-                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom});
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
 
             Assert.AreEqual(1234, crop.Yield, 0.0001);
         }
@@ -310,7 +310,7 @@ namespace H.Core.Test.Services
                 {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
 
             _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
-                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom});
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
 
             Assert.AreEqual(1234, crop.Yield, 0.0001);
         }
@@ -329,6 +329,43 @@ namespace H.Core.Test.Services
             _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
 
             Assert.AreEqual(42, crop.PercentageOfProductYieldReturnedToSoil, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsUsesFieldLevelMethodWhenEnabled()
+        {
+            // Field-level yield assignment: the FIELD's method (Custom) drives the derivation even though the farm-level
+            // method is a modelled estimate.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
+
+            var farm = new Farm()
+                {UseFieldLevelYieldAssignement = true, YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData};
+            var field = new FieldSystemComponent() {YieldAssignmentMethod = YieldAssignmentMethod.Custom};
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop}, farm, field);
+
+            Assert.AreEqual(2000, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsHonoursFieldLevelNonCustom()
+        {
+            // Field-level yield assignment: a FIELD set to a modelled method is not derived, even if the farm is Custom.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
+
+            var farm = new Farm()
+                {UseFieldLevelYieldAssignement = true, YieldAssignmentMethod = YieldAssignmentMethod.Custom};
+            var field = new FieldSystemComponent() {YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData};
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop}, farm, field);
+
+            Assert.AreEqual(1234, crop.Yield, 0.0001);
         }
 
         [TestMethod]
