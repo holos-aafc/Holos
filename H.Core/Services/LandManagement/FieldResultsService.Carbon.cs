@@ -100,12 +100,17 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// Per the algorithm document (perennial crop handling): in any year where a perennial crop is grown and there is
-        /// neither a harvest operation nor grazing animals on the field, nothing is removed from the field. All of the
-        /// product therefore stays in place and the percentage of product returned to soil is 100% (rather than the 35%
-        /// perennial default). A zero yield is one instance of this (nothing was harvested), but a modelled or custom
-        /// non-zero yield with no harvest and no grazing is equally an all-returned year, so we key off the harvest /
-        /// grazing state directly rather than only off a zero yield.
+        /// Sets a perennial's "percentage of product returned to soil" from the field's harvest / grazing state, per the
+        /// algorithm document's perennial handling:
+        ///
+        /// - No harvest and no grazing: nothing is removed from the field, so all of the product stays and the return is
+        ///   100% (rather than the 35% perennial default). A zero yield is one instance of this, but a modelled or custom
+        ///   non-zero yield with no harvest and no grazing is equally an all-returned year, so we key off the harvest /
+        ///   grazing state directly rather than only off a zero yield.
+        /// - Hayed (not grazed): the user-entered "Harvest loss %" on the hayed harvest(s) drives the return, since harvest
+        ///   loss is exactly the fraction of product left on the field. Only hayed harvests are wired here - silage / swath
+        ///   harvests keep their own established returns (their harvest-loss default is a placeholder that does not
+        ///   represent a returned-to-soil fraction).
         ///
         /// This method has to be called after we assign yields.
         /// </summary>
@@ -113,18 +118,60 @@ namespace H.Core.Services.LandManagement
         {
             foreach (var cropViewItem in viewItems)
             {
-                if (cropViewItem.CropType.IsPerennial())
+                if (cropViewItem.CropType.IsPerennial() == false)
                 {
-                    var isHarvested = cropViewItem.IsHarvested();
-                    var isGrazed = cropViewItem.HasGrazingItemsForTheCurrentYear();
+                    continue;
+                }
 
-                    if (cropViewItem.Yield == 0 || (isHarvested == false && isGrazed == false))
+                var isHarvested = cropViewItem.IsHarvested();
+                var isGrazed = cropViewItem.HasGrazingItemsForTheCurrentYear();
+
+                if (cropViewItem.Yield == 0 || (isHarvested == false && isGrazed == false))
+                {
+                    cropViewItem.PercentageOfProductYieldReturnedToSoil =
+                        100; // Nothing removes product from the field this year, so all of it stays
+                }
+                else if (isGrazed == false)
+                {
+                    // Harvested but not grazed: let the hayed harvest's "Harvest loss %" (the fraction left on the field)
+                    // set how much product is returned to soil. A non-positive result means there were no hayed harvests
+                    // or their loss values were uninitialized, so we leave the existing (default) return in place.
+                    var harvestLoss = this.GetHayedHarvestLossPercentage(cropViewItem);
+                    if (harvestLoss > 0)
                     {
-                        cropViewItem.PercentageOfProductYieldReturnedToSoil =
-                            100; // Now C inputs will be calculated correctly for this year
+                        cropViewItem.PercentageOfProductYieldReturnedToSoil = harvestLoss;
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Combines the "Harvest loss %" of a perennial's hayed harvests for the year into a single percentage of product
+        /// returned to soil. Cuts are weighted by the biomass they removed
+        /// (<see cref="HarvestViewItem.AboveGroundBiomassDryWeight"/>) so a larger cut dominates the field's overall
+        /// returned fraction; falls back to a simple mean when biomass weights are unavailable. Returns 0 when there are
+        /// no hayed harvests (silage / swath harvests are excluded), signalling the caller to leave the existing return.
+        /// </summary>
+        private double GetHayedHarvestLossPercentage(CropViewItem cropViewItem)
+        {
+            var hayedHarvests = cropViewItem.GetHayHarvests()
+                .Where(harvest => harvest.ForageActivity == ForageActivities.Hayed)
+                .ToList();
+
+            if (hayedHarvests.Any() == false)
+            {
+                return 0;
+            }
+
+            var totalBiomass = hayedHarvests.Sum(harvest => harvest.AboveGroundBiomassDryWeight);
+            if (totalBiomass > 0)
+            {
+                // Biomass (yield) weighted average of the per-cut harvest-loss percentages
+                return hayedHarvests.Sum(harvest => harvest.HarvestLossPercentage * harvest.AboveGroundBiomassDryWeight) / totalBiomass;
+            }
+
+            // No biomass weights available - fall back to a simple average of the loss percentages
+            return hayedHarvests.Average(harvest => harvest.HarvestLossPercentage);
         }
 
         #endregion

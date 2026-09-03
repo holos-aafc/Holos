@@ -134,14 +134,74 @@ namespace H.Core.Test.Services
         }
 
         [TestMethod]
-        public void UpdatePercentageReturnsForPerennialsLeavesReturnUnchangedWhenHarvested()
+        public void UpdatePercentageReturnsForPerennialsUsesHayedHarvestLoss()
         {
-            // Regression guard: a harvested perennial removes product from the field, so its harvest-loss return
-            // default must be preserved (not forced to 100%).
+            // A hayed (not grazed) perennial takes its returned-to-soil fraction from the harvest's "Harvest loss %".
             var crop = new CropViewItem()
                 {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 1200, Year = 1985};
             crop.HarvestViewItems.Add(new HarvestViewItem()
-                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed});
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, HarvestLossPercentage = 40, AboveGroundBiomassDryWeight = 1000});
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(40, crop.PercentageOfProductYieldReturnedToSoil);
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsWeightsMultipleHayedHarvestLossesByBiomass()
+        {
+            // Two hayed cuts: (loss 30%, biomass 3000) and (loss 50%, biomass 1000).
+            // Biomass-weighted: (30*3000 + 50*1000) / 4000 = 35  (a plain average would be 40, so this proves weighting).
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 99, Yield = 1200, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 6, 1), ForageActivity = ForageActivities.Hayed, HarvestLossPercentage = 30, AboveGroundBiomassDryWeight = 3000});
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, HarvestLossPercentage = 50, AboveGroundBiomassDryWeight = 1000});
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(35, crop.PercentageOfProductYieldReturnedToSoil, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsFallsBackToSimpleMeanWhenNoBiomass()
+        {
+            // Two hayed cuts with no biomass weights -> simple mean of (30, 50) = 40.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 99, Yield = 1200, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 6, 1), ForageActivity = ForageActivities.Hayed, HarvestLossPercentage = 30});
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, HarvestLossPercentage = 50});
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(40, crop.PercentageOfProductYieldReturnedToSoil, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsKeepsDefaultWhenHayedHarvestLossUninitialized()
+        {
+            // Guard: an uninitialized harvest loss (0) must not zero out the return - the existing default is kept.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 1200, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, HarvestLossPercentage = 0, AboveGroundBiomassDryWeight = 1000});
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(35, crop.PercentageOfProductYieldReturnedToSoil);
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsIgnoresSilageHarvestLoss()
+        {
+            // Only hayed harvests are wired; a silage harvest's (placeholder) loss must NOT drive the return.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 1200, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Silage, HarvestLossPercentage = 65, AboveGroundBiomassDryWeight = 1000});
 
             _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
 
