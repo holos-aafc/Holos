@@ -734,6 +734,7 @@
     <Compile Include="Services\IFarmResultsService.cs" />
     <Compile Include="Services\IFieldComponentHelper.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.Carbon.cs" />
+    <Compile Include="Services\LandManagement\YieldInputPolicy.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.Initialization.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.Energy.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.EstimatesOfProduction.cs" />
