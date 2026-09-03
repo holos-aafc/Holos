@@ -299,6 +299,39 @@ namespace H.Core.Test.Services
         }
 
         [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsSkipsFrozenYield()
+        {
+            // Advanced override (Change 3b): a manually-frozen yield is not overwritten by the harvest derivation.
+            var crop = new CropViewItem()
+            {
+                CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985, DoNotRecalculateYield = true
+            };
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom});
+
+            Assert.AreEqual(1234, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsSkipsFrozenPercentage()
+        {
+            // Advanced override (Change 3b): a manually-frozen percentage returned to soil is not overwritten
+            // (a no-harvest / no-grazing perennial would otherwise be forced to 100).
+            var crop = new CropViewItem()
+            {
+                CropType = CropType.TameGrass, Yield = 1200, Year = 1985,
+                PercentageOfProductYieldReturnedToSoil = 42, DoNotRecalculatePercentageReturnedToSoil = true
+            };
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(42, crop.PercentageOfProductYieldReturnedToSoil, 0.0001);
+        }
+
+        [TestMethod]
         public void UpdatePercentageReturnsForPerennialsLeavesReturnUnchangedWhenGrazed()
         {
             // Regression guard: a grazed perennial has its return governed by utilization (handled elsewhere), so it

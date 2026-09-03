@@ -24,6 +24,12 @@ namespace H.Core.Services.Initialization.Crops
             CropViewItem viewItem,
             FieldSystemComponent fieldSystemComponent)
         {
+            if (viewItem.DoNotRecalculateYield)
+            {
+                // Advanced input editing: the user manually set this yield; do not overwrite it.
+                return;
+            }
+
             var yieldAssignmentMethod = farm.UseFieldLevelYieldAssignement ? fieldSystemComponent.YieldAssignmentMethod : farm.YieldAssignmentMethod;
             if (viewItem.CropType == CropType.NotSelected || viewItem.Year == 0)
             {

@@ -120,8 +120,11 @@ namespace H.Core.Services.LandManagement
 
             foreach (var cropViewItem in viewItems)
             {
-                if (cropViewItem.CropType.IsPerennial() == false || cropViewItem.Area <= 0)
+                if (cropViewItem.DoNotRecalculateYield ||
+                    cropViewItem.CropType.IsPerennial() == false ||
+                    cropViewItem.Area <= 0)
                 {
+                    // A manually-set (frozen) yield is not overwritten by the harvest derivation.
                     continue;
                 }
 
@@ -163,8 +166,10 @@ namespace H.Core.Services.LandManagement
         {
             foreach (var cropViewItem in viewItems)
             {
-                if (cropViewItem.CropType.IsPerennial() == false)
+                if (cropViewItem.CropType.IsPerennial() == false ||
+                    cropViewItem.DoNotRecalculatePercentageReturnedToSoil)
                 {
+                    // A manually-set (frozen) percentage returned to soil is not overwritten.
                     continue;
                 }
 

@@ -196,6 +196,8 @@ namespace H.Core.Models.LandManagement.Fields
             this.PerennialStandLength = DefaultPerennialStandLength;
 
             this.DoNotRecalculatePlantCarbonInAgriculturalProduct = false;
+            this.DoNotRecalculateYield = false;
+            this.DoNotRecalculatePercentageReturnedToSoil = false;
 
             this.GrazingViewItems = new ObservableCollection<GrazingViewItem>();
 
@@ -754,6 +756,19 @@ namespace H.Core.Models.LandManagement.Fields
         /// Used to prevent a custom C_p value from being overwritten from the usual method of calculation for C_p (used with perennials only)
         /// </summary>
         public bool DoNotRecalculatePlantCarbonInAgriculturalProduct { get; set; }
+
+        /// <summary>
+        /// Advanced input editing: prevents a manually-entered yield from being overwritten by the yield provider or the
+        /// hay-harvest derivation. C_p, residue and roots still recompute from the frozen yield (per-value freeze so the
+        /// derivation chain below the yield is preserved).
+        /// </summary>
+        public bool DoNotRecalculateYield { get; set; }
+
+        /// <summary>
+        /// Advanced input editing: prevents a manually-entered "percentage of product returned to soil" from being
+        /// overwritten by the perennial returns / harvest-loss logic.
+        /// </summary>
+        public bool DoNotRecalculatePercentageReturnedToSoil { get; set; }
 
         /// <summary>
         /// C_s (kg ha^-1)
