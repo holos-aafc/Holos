@@ -100,8 +100,12 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// If there is a year where a perennial crop has a 0 yield, it means it wasn't harvested that year. Therefore, when a perennial year has a 0 yield,
-        /// we must set the percentage of product returned to soil to 100% (instead of the default 35% for perennials) since everything stayed in the field that year.
+        /// Per the algorithm document (perennial crop handling): in any year where a perennial crop is grown and there is
+        /// neither a harvest operation nor grazing animals on the field, nothing is removed from the field. All of the
+        /// product therefore stays in place and the percentage of product returned to soil is 100% (rather than the 35%
+        /// perennial default). A zero yield is one instance of this (nothing was harvested), but a modelled or custom
+        /// non-zero yield with no harvest and no grazing is equally an all-returned year, so we key off the harvest /
+        /// grazing state directly rather than only off a zero yield.
         ///
         /// This method has to be called after we assign yields.
         /// </summary>
@@ -111,7 +115,10 @@ namespace H.Core.Services.LandManagement
             {
                 if (cropViewItem.CropType.IsPerennial())
                 {
-                    if (cropViewItem.Yield == 0)
+                    var isHarvested = cropViewItem.IsHarvested();
+                    var isGrazed = cropViewItem.HasGrazingItemsForTheCurrentYear();
+
+                    if (cropViewItem.Yield == 0 || (isHarvested == false && isGrazed == false))
                     {
                         cropViewItem.PercentageOfProductYieldReturnedToSoil =
                             100; // Now C inputs will be calculated correctly for this year

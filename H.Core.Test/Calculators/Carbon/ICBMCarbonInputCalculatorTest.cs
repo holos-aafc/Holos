@@ -672,6 +672,92 @@ namespace H.Core.Test.Calculators.Carbon
             Assert.AreEqual(9, result);
         }
 
+        /// <summary>
+        /// When all product is returned to soil (percentage = 100, as the pipeline sets for a no-harvest / no-grazing
+        /// perennial), plant C is the yield used directly - with no gross-up - for a non-Custom yield assignment method.
+        /// </summary>
+        [TestMethod]
+        public void CalculatePlantCarbonInAgriculturalProductPerennialAllProductReturnedUsesYieldDirectlyForNonCustom()
+        {
+            var currentYearViewItem = new CropViewItem()
+            {
+                CropType = CropType.TameGrass,
+                Yield = 1000,
+                CarbonConcentration = 0.45,
+                PercentageOfProductYieldReturnedToSoil = 100,
+                MoistureContentOfCrop = 0.12,
+                Year = 1985,
+            };
+
+            var farm = new Farm(); // non-Custom (default) yield assignment method
+
+            var result = _sut.CalculatePlantCarbonInAgriculturalProduct(null, currentYearViewItem, farm);
+
+            // Yield used directly: 1000 * (1 - 0.12) * 0.45 = 396
+            Assert.AreEqual(396, result, delta: 1);
+        }
+
+        /// <summary>
+        /// The all-product-returned result must not depend on the yield assignment method - this guards the removal of
+        /// the Custom-only "no harvest and no grazing" branch (both Custom and non-Custom now use the yield directly).
+        /// </summary>
+        [TestMethod]
+        public void CalculatePlantCarbonInAgriculturalProductPerennialAllProductReturnedIsMethodIndependent()
+        {
+            var nonCustomItem = new CropViewItem()
+            {
+                CropType = CropType.TameGrass,
+                Yield = 1000,
+                CarbonConcentration = 0.45,
+                PercentageOfProductYieldReturnedToSoil = 100,
+                MoistureContentOfCrop = 0.12,
+                Year = 1985,
+            };
+            var customItem = new CropViewItem()
+            {
+                CropType = CropType.TameGrass,
+                Yield = 1000,
+                CarbonConcentration = 0.45,
+                PercentageOfProductYieldReturnedToSoil = 100,
+                MoistureContentOfCrop = 0.12,
+                Year = 1985,
+            };
+
+            var nonCustomResult = _sut.CalculatePlantCarbonInAgriculturalProduct(null, nonCustomItem, new Farm());
+            var customResult = _sut.CalculatePlantCarbonInAgriculturalProduct(null, customItem,
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom});
+
+            Assert.AreEqual(nonCustomResult, customResult, delta: 0.0001);
+            Assert.AreEqual(396, nonCustomResult, delta: 1);
+        }
+
+        /// <summary>
+        /// Regression: a harvested perennial (product removed, percentage returned &lt; 100) still grosses the yield up
+        /// by the fraction returned to soil. Removing the Custom no-harvest/no-grazing branch must not affect this path.
+        /// </summary>
+        [TestMethod]
+        public void CalculatePlantCarbonInAgriculturalProductHarvestedPerennialGrossesUpYield()
+        {
+            var currentYearViewItem = new CropViewItem()
+            {
+                CropType = CropType.TameGrass,
+                Yield = 1000,
+                CarbonConcentration = 0.45,
+                PercentageOfProductYieldReturnedToSoil = 35,
+                MoistureContentOfCrop = 0.12,
+                Year = 1985,
+            };
+            currentYearViewItem.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed});
+
+            var farm = new Farm();
+
+            var result = _sut.CalculatePlantCarbonInAgriculturalProduct(null, currentYearViewItem, farm);
+
+            // Grossed up: [1000 / (1 - 0.35)] * (1 - 0.12) * 0.45 = 1538.46 * 0.88 * 0.45 = 609.2
+            Assert.AreEqual(609.2, result, delta: 2);
+        }
+
         [TestMethod]
         public void CalculateProductivity()
         {

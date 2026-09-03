@@ -143,14 +143,15 @@ namespace H.Core.Calculators.Carbon
             var isSwathing = currentYearViewItem.HarvestMethod == HarvestMethods.Swathing;
             var isGreenManure = currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure;
             var isCustomYieldAndIsGrazed = isCustomYieldAssignmentMethod && isGrazed;
-            var hasHarvest = currentYearViewItem.GetHayHarvests().Any();
-            var isCustomYieldAndNoHarvestAndNoGrazing = isCustomYieldAssignmentMethod && (hasHarvest == false) && (isGrazed == false);
 
             var moistureContentAdjustment = (1.0 - moistureContentFraction);
             var carbonConcentration = currentYearViewItem.CarbonConcentration;
             var yield = currentYearViewItem.Yield;
 
-            if (isAllProductReturned || isSwathing || isGreenManure || isCustomYieldAndIsGrazed || isCustomYieldAndNoHarvestAndNoGrazing)
+            // A perennial with neither a harvest nor grazing has already had its "percentage of product returned to soil"
+            // set to 100% (see FieldResultsService.UpdatePercentageReturnsForPerennials), so that all-returned case is
+            // handled here by isAllProductReturned for every yield assignment method - no Custom-only branch is needed.
+            if (isAllProductReturned || isSwathing || isGreenManure || isCustomYieldAndIsGrazed)
             {
                 result = yield * moistureContentAdjustment * carbonConcentration;
             }

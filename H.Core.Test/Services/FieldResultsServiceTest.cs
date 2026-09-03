@@ -90,12 +90,18 @@ namespace H.Core.Test.Services
         [TestMethod]
         public void UpdatePercentageReturnsForPerennialsSetReturnTo100PercentWhenYieldIs0()
         {
+            // A harvested perennial (product is removed from the field) must keep its harvest-loss return default even
+            // though it has a non-zero yield.
+            var harvestedLegume = new CropViewItem()
+                {CropType = CropType.TameLegume, PercentageOfProductYieldReturnedToSoil = 35, Yield = 1000, Year = 1985};
+            harvestedLegume.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed});
+
             var crops = new List<CropViewItem>()
             {
                 new CropViewItem()
-                    {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 0},
-                new CropViewItem()
-                    {CropType = CropType.TameLegume, PercentageOfProductYieldReturnedToSoil = 35, Yield = 1000},
+                    {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 0, Year = 1985},
+                harvestedLegume,
                 new CropViewItem() {CropType = CropType.Barley, PercentageOfProductYieldReturnedToSoil = 2},
             };
 
@@ -104,13 +110,97 @@ namespace H.Core.Test.Services
 
             Assert.AreEqual(100,
                 crops.Single(x => x.CropType == CropType.TameGrass)
-                    .PercentageOfProductYieldReturnedToSoil); // This should have been set to 100 since there is no yield
+                    .PercentageOfProductYieldReturnedToSoil); // Set to 100 since there is no yield (nothing harvested that year)
             Assert.AreEqual(2,
                 crops.Single(x => x.CropType == CropType.Barley)
-                    .PercentageOfProductYieldReturnedToSoil); // This should remain the same since its not a perennial
+                    .PercentageOfProductYieldReturnedToSoil); // Unchanged since it is not a perennial
             Assert.AreEqual(35,
                 crops.Single(x => x.CropType == CropType.TameLegume)
-                    .PercentageOfProductYieldReturnedToSoil); // This should remain the same since it has a non-zero yield
+                    .PercentageOfProductYieldReturnedToSoil); // Unchanged since it has a harvest (product was removed)
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsSetsReturnTo100WhenNoHarvestAndNoGrazingWithNonZeroYield()
+        {
+            // Core of the fix: a perennial with a (non-zero) modelled or custom yield but no harvest operation and no
+            // grazing animals has nothing removing product from the field, so all product stays and the percentage of
+            // product returned to soil should be raised to 100% (not left at the 35% perennial default).
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 1200, Year = 1985};
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(100, crop.PercentageOfProductYieldReturnedToSoil);
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsLeavesReturnUnchangedWhenHarvested()
+        {
+            // Regression guard: a harvested perennial removes product from the field, so its harvest-loss return
+            // default must be preserved (not forced to 100%).
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 1200, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed});
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(35, crop.PercentageOfProductYieldReturnedToSoil);
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsLeavesReturnUnchangedWhenGrazed()
+        {
+            // Regression guard: a grazed perennial has its return governed by utilization (handled elsewhere), so it
+            // must not be forced to 100% here.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 1200, Year = 1985};
+            crop.GrazingViewItems.Add(new GrazingViewItem() {Start = new DateTime(1985, 6, 1)});
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(35, crop.PercentageOfProductYieldReturnedToSoil);
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsDoesNotChangeAnnualCrops()
+        {
+            // Regression guard: the 100% rule is perennial-specific; annual crops must be left untouched even with no
+            // harvest and no grazing.
+            var crop = new CropViewItem()
+                {CropType = CropType.Barley, PercentageOfProductYieldReturnedToSoil = 2, Yield = 3000, Year = 1985};
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(2, crop.PercentageOfProductYieldReturnedToSoil);
+        }
+
+        [TestMethod]
+        public void NoHarvestNoGrazingPerennialUsesYieldDirectlyEndToEnd()
+        {
+            // End-to-end guard for the fix: after UpdatePercentageReturnsForPerennials raises the return to 100% for a
+            // no-harvest / no-grazing perennial, plant C is computed from the yield directly (no gross-up) even for a
+            // non-Custom yield assignment method - i.e. the same result Custom would give.
+            var crop = new CropViewItem()
+            {
+                CropType = CropType.TameGrass,
+                PercentageOfProductYieldReturnedToSoil = 35,
+                Yield = 1000,
+                CarbonConcentration = 0.45,
+                MoistureContentOfCrop = 0.12,
+                Year = 1985,
+            };
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+            Assert.AreEqual(100, crop.PercentageOfProductYieldReturnedToSoil);
+
+            var farm = new Farm(); // default (non-Custom) yield assignment method
+            var carbonInputCalculator = new ICBMCarbonInputCalculator();
+
+            var plantCarbon = carbonInputCalculator.CalculatePlantCarbonInAgriculturalProduct(null, crop, farm);
+
+            // Yield used directly: 1000 * (1 - 0.12) * 0.45 = 396 (NOT grossed up to [1000 / (1 - 0.35)] * ... = 609)
+            Assert.AreEqual(396, plantCarbon, delta: 1);
         }
 
         #endregion

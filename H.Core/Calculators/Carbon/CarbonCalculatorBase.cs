@@ -40,8 +40,8 @@ namespace H.Core.Calculators.Carbon
         #region Methods
 
         /// <summary>
-        /// Equation 2.2.2-26
-        /// 
+        /// Equation 4.7.1-6
+        ///
         /// Calculate amount of carbon input from all manure applications in a year.
         /// </summary>
         /// <returns>The amount of carbon input during the year (kg C ha^-1)</returns>
