@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -3747,7 +3747,13 @@
     <value>Switchback grazing</value>
   </data>
   <data name="LabelHarvestLoss" xml:space="preserve">
-    <value>Harvest loss</value>
+    <value>Harvest loss, left on field</value>
+  </data>
+  <data name="TooltipHarvestLossPercentage" xml:space="preserve">
+    <value>The share of this cut that is left on the field rather than removed as bales. Holos uses it as the percentage of product returned to soil for this perennial, shown on the Details screen.</value>
+  </data>
+  <data name="TooltipPercentReturnedFromHarvestLoss" xml:space="preserve">
+    <value>Calculated from the harvest loss you entered on the Harvest tab, which is the share of the crop left on the field. Change it there, or turn on 'Advanced input editing' to override this value directly.</value>
   </data>
   <data name="LabelYieldDryWeight" xml:space="preserve">
     <value>Yield (dry weight)</value>

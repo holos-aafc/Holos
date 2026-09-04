@@ -10136,14 +10136,32 @@ namespace H.Core.Properties {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to Harvest loss.
+        ///   Looks up a localized string similar to Harvest loss, left on field.
         /// </summary>
         public static string LabelHarvestLoss {
             get {
                 return ResourceManager.GetString("LabelHarvestLoss", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to The share of this cut that is left on the field rather than removed as bales.
+        /// </summary>
+        public static string TooltipHarvestLossPercentage {
+            get {
+                return ResourceManager.GetString("TooltipHarvestLossPercentage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Calculated from the harvest loss you entered on the Harvest tab, which is the share of the crop left on the field.
+        /// </summary>
+        public static string TooltipPercentReturnedFromHarvestLoss {
+            get {
+                return ResourceManager.GetString("TooltipPercentReturnedFromHarvestLoss", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Harvest method.
         /// </summary>
