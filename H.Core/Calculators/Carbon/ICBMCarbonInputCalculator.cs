@@ -109,6 +109,23 @@ namespace H.Core.Calculators.Carbon
             base.AssignManureCarbonInputs(currentYearViewItem, farm, animalResults);
         }
 
+        /// <summary>
+        /// True when the custom yield assignment method applies to the field this view item belongs to. The method is
+        /// resolved per field rather than read off the farm so that field-level yield assignment is honoured here as it
+        /// is elsewhere; with field-level assignment off this is the farm-level method, as before.
+        /// </summary>
+        private static bool IsCustomYieldAssignmentMethod(CropViewItem viewItem, Farm farm)
+        {
+            if (farm == null)
+            {
+                return false;
+            }
+
+            var field = farm.GetFieldSystemComponent(viewItem?.FieldSystemComponentGuid ?? Guid.Empty);
+
+            return farm.GetYieldAssignmentMethod(field) == YieldAssignmentMethod.Custom;
+        }
+
         public double CalculatePlantCarbonInAgriculturalProduct(
             CropViewItem previousYearViewItem, 
             CropViewItem currentYearViewItem, 
@@ -138,7 +155,7 @@ namespace H.Core.Calculators.Carbon
                 moistureContentFraction = (currentYearViewItem.GrazingViewItems.Average(x => x.MoistureContentAsPercentage) / 100.0);
             }
 
-            var isCustomYieldAssignmentMethod = farm.YieldAssignmentMethod == YieldAssignmentMethod.Custom;
+            var isCustomYieldAssignmentMethod = IsCustomYieldAssignmentMethod(currentYearViewItem, farm);
             var isAllProductReturned = Math.Abs(currentYearViewItem.PercentageOfProductYieldReturnedToSoil - 100) < double.Epsilon;
             var isSwathing = currentYearViewItem.HarvestMethod == HarvestMethods.Swathing;
             var isGreenManure = currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure;
@@ -240,7 +257,7 @@ namespace H.Core.Calculators.Carbon
 
                     carbonInputFromProduct = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100);
 
-                    var isCustomYieldAssignmentMethod = farm.YieldAssignmentMethod == YieldAssignmentMethod.Custom;
+                    var isCustomYieldAssignmentMethod = IsCustomYieldAssignmentMethod(currentYearViewItem, farm);
                     var isGrazed = currentYearViewItem.HasGrazingViewItems;
 
                     if (isGrazed && isCustomYieldAssignmentMethod)
@@ -327,7 +344,7 @@ namespace H.Core.Calculators.Carbon
 
                     carbonInputFromProduct = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100);
 
-                    var isCustomYieldAssignmentMethod = farm.YieldAssignmentMethod == YieldAssignmentMethod.Custom;
+                    var isCustomYieldAssignmentMethod = IsCustomYieldAssignmentMethod(currentYearViewItem, farm);
                     var isGrazed = currentYearViewItem.HasGrazingViewItems;
 
                     if (isGrazed && isCustomYieldAssignmentMethod)

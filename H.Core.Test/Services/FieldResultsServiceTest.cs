@@ -284,6 +284,41 @@ namespace H.Core.Test.Services
         }
 
         [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsDoesNotDeriveForGrazedField()
+        {
+            // Grazed + hayed under a custom yield: the algorithm document (note under Eq. 2.1.2-1) takes the entered
+            // yield to be the total biomass grown - eaten plus left standing - so deriving it from the baled hay alone
+            // would discard everything the animals consumed.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
+            crop.GrazingViewItems.Add(new GrazingViewItem() {Start = new DateTime(1985, 6, 1)});
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+
+            Assert.AreEqual(1234, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsDerivesWhenGrazingIsInAnotherYear()
+        {
+            // The grazing exclusion is scoped to the year: grazing in a different year must not block the derivation
+            // for this year's hay harvest.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
+            crop.GrazingViewItems.Add(new GrazingViewItem() {Start = new DateTime(1984, 6, 1)});
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+
+            Assert.AreEqual(2000, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
         public void UpdateYieldFromHarvestForCustomPerennialsGuardsAgainstZeroBiomass()
         {
             // A harvest with no biomass (uninitialized) must not zero out the yield.

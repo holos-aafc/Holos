@@ -109,6 +109,11 @@ namespace H.Core.Services.LandManagement
         /// Wet biomass (<see cref="FieldActivityBase.AboveGroundBiomass"/>) is used because the pipeline treats Yield as
         /// fresh weight (C_p multiplies it by 1 - moisture); using dry weight would remove moisture twice.
         ///
+        /// Grazed fields are excluded. Under a custom yield with grazing animals present, the algorithm document takes
+        /// the entered yield to be the total aboveground biomass produced - what the animals ate plus what they left -
+        /// which is why the harvest-loss gross-up is suppressed for that case (note under Eq. 2.1.2-1). Deriving the
+        /// yield from the baled hay alone would discard the grazed portion and understate the field's production.
+        ///
         /// Must run after yields are assigned and before carbon inputs are calculated.
         /// </summary>
         public void UpdateYieldFromHarvestForCustomPerennials(IEnumerable<CropViewItem> viewItems, Farm farm, FieldSystemComponent fieldSystemComponent)
@@ -122,9 +127,11 @@ namespace H.Core.Services.LandManagement
             {
                 if (cropViewItem.DoNotRecalculateYield ||
                     cropViewItem.CropType.IsPerennial() == false ||
-                    cropViewItem.Area <= 0)
+                    cropViewItem.Area <= 0 ||
+                    cropViewItem.HasGrazingItemsForTheCurrentYear())
                 {
-                    // A manually-set (frozen) yield is not overwritten by the harvest derivation.
+                    // A manually-set (frozen) yield is not overwritten by the harvest derivation, and a grazed field's
+                    // yield already represents the total biomass grown, not just the part that was baled.
                     continue;
                 }
 

@@ -1333,6 +1333,94 @@ namespace H.Core.Test.Calculators.Carbon
             Assert.AreEqual(104.131479140329, currentYearViewItem.BelowGroundCarbonInput, 3);
         }
 
+        /// <summary>
+        /// A grazed perennial whose only variable is the yield assignment method. Grazing moisture is zero so the two
+        /// expected values differ only by the harvest-loss gross-up: custom gives 1000 * 0.45 = 450, while a modelled
+        /// method gives 1000 / (1 - 0.35) * 0.45 = 692.31.
+        /// </summary>
+        private static Farm CreateGrazedFieldFarm(out CropViewItem viewItem, out FieldSystemComponent field)
+        {
+            var farm = new Farm();
+            field = new FieldSystemComponent();
+
+            viewItem = new CropViewItem()
+            {
+                CropType = CropType.TameGrass,
+                Year = 1985,
+                FieldSystemComponentGuid = field.Guid,
+                Yield = 1000,
+                PercentageOfProductYieldReturnedToSoil = 35,
+                CarbonConcentration = 0.45,
+                MoistureContentOfCrop = 0,
+            };
+            viewItem.GrazingViewItems.Add(new GrazingViewItem()
+                {Start = new DateTime(1985, 6, 1), MoistureContentAsPercentage = 0});
+
+            field.CropViewItems.Add(viewItem);
+            farm.Components.Add(field);
+
+            return farm;
+        }
+
+        [TestMethod]
+        public void CalculatePlantCarbonInAgriculturalProductUsesFieldLevelCustomMethodWhenEnabled()
+        {
+            // Field-level assignment on and the field is Custom: the entered yield is already the total aboveground
+            // biomass, so the harvest-loss gross-up must be suppressed even though the farm is set to a modelled method.
+            var farm = CreateGrazedFieldFarm(out var viewItem, out var field);
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData;
+            farm.UseFieldLevelYieldAssignement = true;
+            field.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
+
+            var result = _sut.CalculatePlantCarbonInAgriculturalProduct(null, viewItem, farm);
+
+            Assert.AreEqual(450, result, 0.0001);
+        }
+
+        [TestMethod]
+        public void CalculatePlantCarbonInAgriculturalProductUsesFieldLevelModelledMethodWhenEnabled()
+        {
+            // The mirror case: the farm is Custom but this field is modelled, so the gross-up applies.
+            var farm = CreateGrazedFieldFarm(out var viewItem, out var field);
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
+            farm.UseFieldLevelYieldAssignement = true;
+            field.YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData;
+
+            var result = _sut.CalculatePlantCarbonInAgriculturalProduct(null, viewItem, farm);
+
+            Assert.AreEqual(692.3077, result, 0.0001);
+        }
+
+        [TestMethod]
+        public void CalculatePlantCarbonInAgriculturalProductFallsBackToFarmMethodWhenFieldLevelDisabled()
+        {
+            // Regression guard: with field-level assignment off the farm's method decides, so a field marked modelled
+            // is ignored and the custom (no gross-up) result is returned.
+            var farm = CreateGrazedFieldFarm(out var viewItem, out var field);
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
+            farm.UseFieldLevelYieldAssignement = false;
+            field.YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData;
+
+            var result = _sut.CalculatePlantCarbonInAgriculturalProduct(null, viewItem, farm);
+
+            Assert.AreEqual(450, result, 0.0001);
+        }
+
+        [TestMethod]
+        public void CalculatePlantCarbonInAgriculturalProductUsesFarmMethodWhenViewItemHasNoField()
+        {
+            // An orphan view item (no matching field component) must still resolve to the farm-level method rather
+            // than throwing or silently changing branch - this is the shape most unit tests construct.
+            var farm = CreateGrazedFieldFarm(out var viewItem, out var field);
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
+            farm.UseFieldLevelYieldAssignement = true;
+            viewItem.FieldSystemComponentGuid = Guid.NewGuid();
+
+            var result = _sut.CalculatePlantCarbonInAgriculturalProduct(null, viewItem, farm);
+
+            Assert.AreEqual(450, result, 0.0001);
+        }
+
 
 
         #endregion

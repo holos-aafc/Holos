@@ -60,9 +60,13 @@ namespace H.Core.Models
 
         public bool IsNonSwathingGrazingScenario(CropViewItem viewItem)
         {
+            // The effective method has to be resolved per field, not read off the farm, so that field-level yield
+            // assignment picks the same branch here as everywhere else that asks which method applies.
+            var field = this.GetFieldSystemComponent(viewItem.FieldSystemComponentGuid);
+
             return viewItem.TotalCarbonLossesByGrazingAnimals > 0 &&
                    this.CropHasGrazingAnimals(viewItem) &&
-                   this.YieldAssignmentMethod != YieldAssignmentMethod.Custom &&
+                   this.GetYieldAssignmentMethod(field) != YieldAssignmentMethod.Custom &&
                    viewItem.HarvestMethod != HarvestMethods.StubbleGrazing &&
                    viewItem.HarvestMethod != HarvestMethods.Swathing;
         }
