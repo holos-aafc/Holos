@@ -10046,6 +10046,51 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Advanced input editing.
+        /// </summary>
+        public static string LabelAdvancedInputEditing {
+            get {
+                return ResourceManager.GetString("LabelAdvancedInputEditing", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Edit yield, plant carbon and residue directly. Your entries override the computed values and are kept when results are recalculated.
+        /// </summary>
+        public static string TooltipAdvancedInputEditing {
+            get {
+                return ResourceManager.GetString("TooltipAdvancedInputEditing", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Reset overrides.
+        /// </summary>
+        public static string LabelResetOverrides {
+            get {
+                return ResourceManager.GetString("LabelResetOverrides", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Clear all manually entered overrides on this screen and restore the calculated values.
+        /// </summary>
+        public static string TooltipResetOverrides {
+            get {
+                return ResourceManager.GetString("TooltipResetOverrides", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to This value was entered manually and is no longer recalculated. Use &apos;Reset overrides&apos; to restore the calculated value.
+        /// </summary>
+        public static string TooltipManuallyOverriddenValue {
+            get {
+                return ResourceManager.GetString("TooltipManuallyOverriddenValue", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Harvest loss.
         /// </summary>
         public static string LabelHarvestLoss {

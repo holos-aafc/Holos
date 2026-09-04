@@ -2619,16 +2619,16 @@
 </value>
   </data>
   <data name="EnumAverageYield" xml:space="preserve">
-    <value>Average Yield</value>
+    <value>Average — the average of this crop's yields across the rotation</value>
   </data>
   <data name="EnumCARValue" xml:space="preserve">
-    <value>Census Agricultural Region (CAR) value</value>
+    <value>Census Agricultural Region (CAR) — regional CAR yield values</value>
   </data>
   <data name="EnumCustomYield" xml:space="preserve">
-    <value>Custom Yield</value>
+    <value>Custom — use the yield values you enter yourself</value>
   </data>
   <data name="EnumInputFile" xml:space="preserve">
-    <value>Input file</value>
+    <value>Input file — read yields from a file you provide</value>
   </data>
   <data name="GrassHay" xml:space="preserve">
     <value>Grass hay</value>
@@ -2832,7 +2832,7 @@
     <value>kg N₂O</value>
   </data>
   <data name="EnumInputFileThenAverage" xml:space="preserve">
-    <value>Input file then use average for rotation</value>
+    <value>Input file, then rotation average — read from a file, then average across the rotation</value>
   </data>
   <data name="EnumNineteenEightyToTwoThousandTen" xml:space="preserve">
     <value>1980 to 2010</value>
@@ -3687,7 +3687,22 @@
     <value>Fertilizer efficiency</value>
   </data>
   <data name="EnumSmallAreaData" xml:space="preserve">
-    <value>Small area data</value>
+    <value>Small area data (default) — regional yield estimates from Statistics Canada</value>
+  </data>
+  <data name="LabelAdvancedInputEditing" xml:space="preserve">
+    <value>Advanced input editing</value>
+  </data>
+  <data name="TooltipAdvancedInputEditing" xml:space="preserve">
+    <value>Edit yield, plant carbon and residue directly. Your entries override the computed values and are kept when results are recalculated.</value>
+  </data>
+  <data name="LabelResetOverrides" xml:space="preserve">
+    <value>Reset overrides</value>
+  </data>
+  <data name="TooltipResetOverrides" xml:space="preserve">
+    <value>Clear all manually entered overrides on this screen and restore the calculated values.</value>
+  </data>
+  <data name="TooltipManuallyOverriddenValue" xml:space="preserve">
+    <value>This value was entered manually and is no longer recalculated. Use 'Reset overrides' to restore the calculated value.</value>
   </data>
   <data name="EnumContinuousAndMobGrazing" xml:space="preserve">
     <value>Continuous / mob grazing</value>

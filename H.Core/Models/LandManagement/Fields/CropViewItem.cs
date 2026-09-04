@@ -752,23 +752,40 @@ namespace H.Core.Models.LandManagement.Fields
             set { SetProperty(ref _plantCarbonInAgriculturalProduct, value); }
         }
 
+        private bool _doNotRecalculatePlantCarbonInAgriculturalProduct;
+        private bool _doNotRecalculateYield;
+        private bool _doNotRecalculatePercentageReturnedToSoil;
+
         /// <summary>
-        /// Used to prevent a custom C_p value from being overwritten from the usual method of calculation for C_p (used with perennials only)
+        /// Used to prevent a custom C_p value from being overwritten from the usual method of calculation for C_p (used with perennials only).
+        /// Raises change notification so the UI can indicate that the value is pinned.
         /// </summary>
-        public bool DoNotRecalculatePlantCarbonInAgriculturalProduct { get; set; }
+        public bool DoNotRecalculatePlantCarbonInAgriculturalProduct
+        {
+            get { return _doNotRecalculatePlantCarbonInAgriculturalProduct; }
+            set { SetProperty(ref _doNotRecalculatePlantCarbonInAgriculturalProduct, value); }
+        }
 
         /// <summary>
         /// Advanced input editing: prevents a manually-entered yield from being overwritten by the yield provider or the
         /// hay-harvest derivation. C_p, residue and roots still recompute from the frozen yield (per-value freeze so the
         /// derivation chain below the yield is preserved).
         /// </summary>
-        public bool DoNotRecalculateYield { get; set; }
+        public bool DoNotRecalculateYield
+        {
+            get { return _doNotRecalculateYield; }
+            set { SetProperty(ref _doNotRecalculateYield, value); }
+        }
 
         /// <summary>
         /// Advanced input editing: prevents a manually-entered "percentage of product returned to soil" from being
         /// overwritten by the perennial returns / harvest-loss logic.
         /// </summary>
-        public bool DoNotRecalculatePercentageReturnedToSoil { get; set; }
+        public bool DoNotRecalculatePercentageReturnedToSoil
+        {
+            get { return _doNotRecalculatePercentageReturnedToSoil; }
+            set { SetProperty(ref _doNotRecalculatePercentageReturnedToSoil, value); }
+        }
 
         /// <summary>
         /// C_s (kg ha^-1)
