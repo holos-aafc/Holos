@@ -3704,6 +3704,21 @@
   <data name="TooltipManuallyOverriddenValue" xml:space="preserve">
     <value>This value was entered manually and is no longer recalculated. Use 'Reset overrides' to restore the calculated value.</value>
   </data>
+  <data name="TooltipYieldSourceEstimated" xml:space="preserve">
+    <value>Estimated. This yield comes from the selected yield assignment method, not from your own data.</value>
+  </data>
+  <data name="TooltipYieldSourceFromHarvest" xml:space="preserve">
+    <value>From your harvest. This yield is calculated from the {0} bale(s) you entered on the Harvest tab.</value>
+  </data>
+  <data name="TooltipYieldSourceEntered" xml:space="preserve">
+    <value>Entered by you. This yield is the value you typed for this year.</value>
+  </data>
+  <data name="MessageHarvestDataNotUsedForYield" xml:space="preserve">
+    <value>You have entered harvest data, but the yield is using the estimate from the selected yield assignment method. Select the 'Custom' yield assignment method to use your entered harvest as the yield.</value>
+  </data>
+  <data name="MessageDetailsScreenInputHelp" xml:space="preserve">
+    <value>The selected yield assignment method is used for all fields on this farm; select the 'Custom' or 'Input file' method to modify the yields for individual fields. On this screen, white cells are values you enter and grey cells are calculated by Holos. Turn on 'Advanced input editing' to change a calculated value; it will then show in amber to indicate that it overrides the calculation, and 'Reset overrides' restores the calculated values.</value>
+  </data>
   <data name="EnumContinuousAndMobGrazing" xml:space="preserve">
     <value>Continuous / mob grazing</value>
   </data>

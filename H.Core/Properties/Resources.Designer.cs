@@ -10091,6 +10091,51 @@ namespace H.Core.Properties {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Estimated. This yield comes from the selected yield assignment method, not from your own data.
+        /// </summary>
+        public static string TooltipYieldSourceEstimated {
+            get {
+                return ResourceManager.GetString("TooltipYieldSourceEstimated", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to From your harvest. This yield is calculated from the {0} bale(s) you entered on the Harvest tab.
+        /// </summary>
+        public static string TooltipYieldSourceFromHarvest {
+            get {
+                return ResourceManager.GetString("TooltipYieldSourceFromHarvest", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Entered by you. This yield is the value you typed for this year.
+        /// </summary>
+        public static string TooltipYieldSourceEntered {
+            get {
+                return ResourceManager.GetString("TooltipYieldSourceEntered", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to You have entered harvest data, but the yield is using the estimate from the selected yield assignment method.
+        /// </summary>
+        public static string MessageHarvestDataNotUsedForYield {
+            get {
+                return ResourceManager.GetString("MessageHarvestDataNotUsedForYield", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to The selected yield assignment method is used for all fields on this farm; ... white cells are values you enter and grey cells are calculated by Holos.
+        /// </summary>
+        public static string MessageDetailsScreenInputHelp {
+            get {
+                return ResourceManager.GetString("MessageDetailsScreenInputHelp", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Harvest loss.
         /// </summary>
         public static string LabelHarvestLoss {
