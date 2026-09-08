@@ -7,9 +7,11 @@ using H.Infrastructure;
 
 namespace H.Core.Models.LandManagement.Fields
 {
-    public class FertilizerApplicationViewItem : ModelBase
+    public class FertilizerApplicationViewItem : ModelBase, IRepeatableFieldActivity
     {
         #region Fields
+
+        private bool _repeatsInEveryYear;
 
         private FertilizerApplicationMethodologies _fertilizerApplicationMethodology;
         private Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data _carbonFootprintForFertilizerBlendsData;
@@ -30,6 +32,8 @@ namespace H.Core.Models.LandManagement.Fields
 
         public FertilizerApplicationViewItem()
         {
+            this.RepeatsInEveryYear = true;
+
             this.FertilizerEfficiencyPercentage = 75;
 
             this.FertilizerBlendData = new Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data();
@@ -40,6 +44,18 @@ namespace H.Core.Models.LandManagement.Fields
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// See <see cref="IRepeatableFieldActivity.RepeatsInEveryYear"/>. Defaults to true: the algorithm document
+        /// builds the historical period from the management the user specifies once, so repeating is the norm and a
+        /// entry happening in a single year is the exception. Items saved before this property existed deserialize without it and keep
+        /// that default deliberately.
+        /// </summary>
+        public bool RepeatsInEveryYear
+        {
+            get => _repeatsInEveryYear;
+            set => SetProperty(ref _repeatsInEveryYear, value);
+        }
 
         public FertilizerApplicationMethodologies FertilizerApplicationMethodology
         {

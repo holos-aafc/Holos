@@ -109,6 +109,68 @@ namespace H.Core.Test.Models
             Assert.AreEqual(2, farm.GetHayImportsUsingImportedHayFromSourceField(field).Count);
         }
 
+        /// <summary>
+        /// Builds the smallest farm that satisfies IsNonSwathingGrazingScenario's other conditions, so each test below
+        /// varies only the yield assignment method.
+        /// </summary>
+        private static Farm CreateGrazedFieldFarm(out CropViewItem viewItem, out FieldSystemComponent field)
+        {
+            var farm = new Farm();
+            field = new FieldSystemComponent();
+
+            viewItem = new CropViewItem()
+            {
+                CropType = CropType.TameGrass,
+                Year = 1985,
+                FieldSystemComponentGuid = field.Guid,
+                TotalCarbonLossesByGrazingAnimals = 500,
+            };
+            viewItem.GrazingViewItems.Add(new GrazingViewItem() {Start = new DateTime(1985, 6, 1)});
+
+            field.CropViewItems.Add(viewItem);
+            farm.Components.Add(field);
+
+            return farm;
+        }
+
+        [TestMethod]
+        public void IsNonSwathingGrazingScenarioUsesFieldLevelMethodWhenEnabled()
+        {
+            // Field-level assignment on: the field says Custom, so the grazed field must take the custom path even
+            // though the farm as a whole is set to a modelled method.
+            var farm = CreateGrazedFieldFarm(out var viewItem, out var field);
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData;
+            farm.UseFieldLevelYieldAssignement = true;
+            field.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
+
+            Assert.IsFalse(farm.IsNonSwathingGrazingScenario(viewItem));
+        }
+
+        [TestMethod]
+        public void IsNonSwathingGrazingScenarioUsesFieldLevelModelledMethodWhenEnabled()
+        {
+            // The mirror case: the farm is Custom but this field is modelled, so the DMI-derived path applies.
+            var farm = CreateGrazedFieldFarm(out var viewItem, out var field);
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
+            farm.UseFieldLevelYieldAssignement = true;
+            field.YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData;
+
+            Assert.IsTrue(farm.IsNonSwathingGrazingScenario(viewItem));
+        }
+
+        [TestMethod]
+        public void IsNonSwathingGrazingScenarioFallsBackToFarmMethodWhenFieldLevelDisabled()
+        {
+            // Regression guard for the common case: with field-level assignment off, the field's own method is ignored
+            // and the farm's method decides, exactly as before.
+            var farm = CreateGrazedFieldFarm(out var viewItem, out var field);
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
+            farm.UseFieldLevelYieldAssignement = false;
+            field.YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData;
+
+            Assert.IsFalse(farm.IsNonSwathingGrazingScenario(viewItem));
+        }
+
         #endregion
     }
 }

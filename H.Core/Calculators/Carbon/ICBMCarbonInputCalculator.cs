@@ -45,20 +45,51 @@ namespace H.Core.Calculators.Carbon
 
             if (isNonSwathingGrazingScenario)
             {
-                // Total C losses from grazing animals is calculated in Equation 11.3.2-4
+                // A field can lose product two ways in the same year: animals eat it, or it is cut and baled off. The
+                // plant carbon has to account for both, each recovered from what was removed - grazing by the
+                // utilization rate (Equation 11.3.2-4, in TotalCarbonLossesByGrazingAnimals) and hay by its harvest
+                // loss. Only the grazing half used to be counted, so a field that was grazed AND hayed was modelled as
+                // though the hay had never been cut.
+
+                // Equation 11.3.2-3: the carbon baled off, calculated in CarbonService.CalculateCarbonLostFromHayExports.
+                var carbonExportedAsHay = currentYearViewItem.TotalCarbonLossFromBaleExports;
+
+                var harvestLossFraction = currentYearViewItem.GetHayedHarvestLossPercentage() / 100.0;
+                var carbonGrownAndBaled = harvestLossFraction > 0 && harvestLossFraction < 1
+                    ? carbonExportedAsHay / (1.0 - harvestLossFraction)
+                    : carbonExportedAsHay;
+
+                // Equation 11.3.2-5 (single grazing period) and Equation 11.3.2-7 (multiple)
+                var totalPlantCarbon = currentYearViewItem.TotalCarbonLossesByGrazingAnimals + carbonGrownAndBaled;
 
                 // Equation 11.3.2-6
-                currentYearViewItem.PlantCarbonInAgriculturalProduct = currentYearViewItem.TotalCarbonLossesByGrazingAnimals / currentYearViewItem.Area;
+                currentYearViewItem.PlantCarbonInAgriculturalProduct = totalPlantCarbon / currentYearViewItem.Area;
 
-                // Equation 11.3.2-7
-                currentYearViewItem.CarbonInputFromProduct = (currentYearViewItem.TotalCarbonLossesByGrazingAnimals - currentYearViewItem.TotalCarbonUptakeByAnimals) / currentYearViewItem.Area;
+                // Equation 11.3.2-8. Both removals are subtracted: what the animals ate, and what was baled off. The
+                // equation as published brackets these as (uptake - export), which adds the baled hay back to the soil;
+                // the modelling team confirmed that as a sign error. Subtracting both also reduces to Equation 2.1.2-20
+                // when there is no grazing.
+                currentYearViewItem.CarbonInputFromProduct =
+                    (totalPlantCarbon - currentYearViewItem.TotalCarbonUptakeByAnimals - carbonExportedAsHay) / currentYearViewItem.Area;
 
                 // Equation 11.3.2-9
                 var moistureContent = currentYearViewItem.GrazingViewItems.Any() ? currentYearViewItem.GrazingViewItems.Average(x => x.MoistureContentAsPercentage) : 1;
-                var totalYieldForArea = (currentYearViewItem.TotalCarbonLossesByGrazingAnimals / farm.Defaults.CarbonConcentration) / (1 - (moistureContent / 100.0));
+                var totalYieldForArea = (totalPlantCarbon / farm.Defaults.CarbonConcentration) / (1 - (moistureContent / 100.0));
 
                 // Convert to per hectare
                 currentYearViewItem.Yield = totalYieldForArea / currentYearViewItem.Area;
+
+                // Report the share that actually stayed on the field. Until now this read 100 - utilization, which
+                // describes only what the animals left and ignores a hay cut taken from the same standing crop, so the
+                // figure shown on the details screen and written to the field export was higher than what remained.
+                // Deriving it from the two values just computed keeps it true by construction. Nothing downstream reads
+                // it on this path - C_p and the carbon input are both computed directly from the removals above - so
+                // this corrects what is displayed and exported without feeding back into the calculation.
+                if (totalPlantCarbon > 0 && currentYearViewItem.DoNotRecalculatePercentageReturnedToSoil == false)
+                {
+                    currentYearViewItem.PercentageOfProductYieldReturnedToSoil =
+                        100.0 * (currentYearViewItem.CarbonInputFromProduct * currentYearViewItem.Area) / totalPlantCarbon;
+                }
             }
 
             currentYearViewItem.CarbonInputFromStraw = this.CalculateCarbonInputFromStraw(
@@ -109,6 +140,23 @@ namespace H.Core.Calculators.Carbon
             base.AssignManureCarbonInputs(currentYearViewItem, farm, animalResults);
         }
 
+        /// <summary>
+        /// True when the custom yield assignment method applies to the field this view item belongs to. The method is
+        /// resolved per field rather than read off the farm so that field-level yield assignment is honoured here as it
+        /// is elsewhere; with field-level assignment off this is the farm-level method, as before.
+        /// </summary>
+        private static bool IsCustomYieldAssignmentMethod(CropViewItem viewItem, Farm farm)
+        {
+            if (farm == null)
+            {
+                return false;
+            }
+
+            var field = farm.GetFieldSystemComponent(viewItem?.FieldSystemComponentGuid ?? Guid.Empty);
+
+            return farm.GetYieldAssignmentMethod(field) == YieldAssignmentMethod.Custom;
+        }
+
         public double CalculatePlantCarbonInAgriculturalProduct(
             CropViewItem previousYearViewItem, 
             CropViewItem currentYearViewItem, 
@@ -138,19 +186,20 @@ namespace H.Core.Calculators.Carbon
                 moistureContentFraction = (currentYearViewItem.GrazingViewItems.Average(x => x.MoistureContentAsPercentage) / 100.0);
             }
 
-            var isCustomYieldAssignmentMethod = farm.YieldAssignmentMethod == YieldAssignmentMethod.Custom;
+            var isCustomYieldAssignmentMethod = IsCustomYieldAssignmentMethod(currentYearViewItem, farm);
             var isAllProductReturned = Math.Abs(currentYearViewItem.PercentageOfProductYieldReturnedToSoil - 100) < double.Epsilon;
             var isSwathing = currentYearViewItem.HarvestMethod == HarvestMethods.Swathing;
             var isGreenManure = currentYearViewItem.HarvestMethod == HarvestMethods.GreenManure;
             var isCustomYieldAndIsGrazed = isCustomYieldAssignmentMethod && isGrazed;
-            var hasHarvest = currentYearViewItem.GetHayHarvests().Any();
-            var isCustomYieldAndNoHarvestAndNoGrazing = isCustomYieldAssignmentMethod && (hasHarvest == false) && (isGrazed == false);
 
             var moistureContentAdjustment = (1.0 - moistureContentFraction);
             var carbonConcentration = currentYearViewItem.CarbonConcentration;
             var yield = currentYearViewItem.Yield;
 
-            if (isAllProductReturned || isSwathing || isGreenManure || isCustomYieldAndIsGrazed || isCustomYieldAndNoHarvestAndNoGrazing)
+            // A perennial with neither a harvest nor grazing has already had its "percentage of product returned to soil"
+            // set to 100% (see FieldResultsService.UpdatePercentageReturnsForPerennials), so that all-returned case is
+            // handled here by isAllProductReturned for every yield assignment method - no Custom-only branch is needed.
+            if (isAllProductReturned || isSwathing || isGreenManure || isCustomYieldAndIsGrazed)
             {
                 result = yield * moistureContentAdjustment * carbonConcentration;
             }
@@ -239,13 +288,28 @@ namespace H.Core.Calculators.Carbon
 
                     carbonInputFromProduct = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100);
 
-                    var isCustomYieldAssignmentMethod = farm.YieldAssignmentMethod == YieldAssignmentMethod.Custom;
-                    var isGrazed = currentYearViewItem.HasGrazingViewItems;
+                    var isCustomYieldAssignmentMethod = IsCustomYieldAssignmentMethod(currentYearViewItem, farm);
+
+                    // Scoped to this item's own year. HasGrazingViewItems only says the crop has grazing entries at all,
+                    // so a field grazed in one year took this branch in every year of the simulation and had its return
+                    // cut by the utilization rate in years no animals were on it. Which years animals graze is already
+                    // stated by the animal components' management periods, which is what this asks.
+                    var isGrazed = currentYearViewItem.HasGrazingItemsForTheCurrentYear();
 
                     if (isGrazed && isCustomYieldAssignmentMethod)
                     {
+                        // Under a custom yield with grazing the entered yield is already the total aboveground biomass
+                        // produced - what the animals ate plus what they left (note under Eq. 2.1.2-1) - so C_p needs no
+                        // gross-up here. Every removal still has to come off it, though: the animals take their
+                        // utilization share, and anything baled off the remainder has left the field as well.
                         var returned = 1.0 - (currentYearViewItem.GetAverageUtilizationFromGrazingAnimals() / 100.0);
-                        carbonInputFromProduct = currentYearViewItem.PlantCarbonInAgriculturalProduct * returned;
+                        var carbonExportedAsHay = currentYearViewItem.Area > 0
+                            ? currentYearViewItem.TotalCarbonLossFromBaleExports / currentYearViewItem.Area
+                            : 0;
+
+                        carbonInputFromProduct = Math.Max(
+                            0,
+                            (currentYearViewItem.PlantCarbonInAgriculturalProduct * returned) - carbonExportedAsHay);
                     }
                 }
                 else if (currentYearViewItem.PlantCarbonInAgriculturalProduct == 0 && nextYearViewItem != null && (nextYearViewItem.PlantCarbonInAgriculturalProduct > 0 || nextYearViewItem.Yield > 0))
@@ -326,13 +390,28 @@ namespace H.Core.Calculators.Carbon
 
                     carbonInputFromProduct = currentYearViewItem.PlantCarbonInAgriculturalProduct * (currentYearViewItem.PercentageOfProductYieldReturnedToSoil / 100);
 
-                    var isCustomYieldAssignmentMethod = farm.YieldAssignmentMethod == YieldAssignmentMethod.Custom;
-                    var isGrazed = currentYearViewItem.HasGrazingViewItems;
+                    var isCustomYieldAssignmentMethod = IsCustomYieldAssignmentMethod(currentYearViewItem, farm);
+
+                    // Scoped to this item's own year. HasGrazingViewItems only says the crop has grazing entries at all,
+                    // so a field grazed in one year took this branch in every year of the simulation and had its return
+                    // cut by the utilization rate in years no animals were on it. Which years animals graze is already
+                    // stated by the animal components' management periods, which is what this asks.
+                    var isGrazed = currentYearViewItem.HasGrazingItemsForTheCurrentYear();
 
                     if (isGrazed && isCustomYieldAssignmentMethod)
                     {
+                        // Under a custom yield with grazing the entered yield is already the total aboveground biomass
+                        // produced - what the animals ate plus what they left (note under Eq. 2.1.2-1) - so C_p needs no
+                        // gross-up here. Every removal still has to come off it, though: the animals take their
+                        // utilization share, and anything baled off the remainder has left the field as well.
                         var returned = 1.0 - (currentYearViewItem.GetAverageUtilizationFromGrazingAnimals() / 100.0);
-                        carbonInputFromProduct = currentYearViewItem.PlantCarbonInAgriculturalProduct * returned;
+                        var carbonExportedAsHay = currentYearViewItem.Area > 0
+                            ? currentYearViewItem.TotalCarbonLossFromBaleExports / currentYearViewItem.Area
+                            : 0;
+
+                        carbonInputFromProduct = Math.Max(
+                            0,
+                            (currentYearViewItem.PlantCarbonInAgriculturalProduct * returned) - carbonExportedAsHay);
                     }
                 }
                 else

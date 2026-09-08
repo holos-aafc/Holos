@@ -8,12 +8,13 @@ namespace H.Core.Models.LandManagement.Fields
     /// <summary>
     /// A class to hold harvest information so total yield calculations can be made.
     /// </summary>
-    public class HarvestViewItem : BaleActivityBase
+    public class HarvestViewItem : BaleActivityBase, IRepeatableFieldActivity
     {
         #region Fields
 
         private int _totalNumberOfBalesHarvested;
         private double _harvestLossPercentage;
+        private bool _repeatsInEveryYear;
 
         private Guid _fieldGuid;
 
@@ -30,6 +31,12 @@ namespace H.Core.Models.LandManagement.Fields
             // https://hayforks.com/blog/how-much-does-a-bale-of-hay-weigh
             this.BaleWeight = 500;
 
+            // Repeating the entered management across the simulation is the algorithm document's model - the historical
+            // period is built from the rotation the user specifies once - so this is the default, and "this year only"
+            // is the exception a user chooses for a cut that happened in a single year. Farms saved before this property existed deserialize
+            // without it and so keep this default, which is deliberate: they get the corrected behaviour.
+            this.RepeatsInEveryYear = true;
+
             base.PropertyChanged -= OnPropertyChanged;
             base.PropertyChanged += OnPropertyChanged;
         }
@@ -45,6 +52,16 @@ namespace H.Core.Models.LandManagement.Fields
         {
             get => _totalNumberOfBalesHarvested;
             set => SetProperty(ref _totalNumberOfBalesHarvested, value, OnTotalNumberOFBalesHarvestedChanged);
+        }
+
+        /// <summary>
+        /// Whether this harvest describes management that recurs whenever the crop is grown, and so is carried into
+        /// every year of the simulation, or a cut that happened in a single year only.
+        /// </summary>
+        public bool RepeatsInEveryYear
+        {
+            get => _repeatsInEveryYear;
+            set => SetProperty(ref _repeatsInEveryYear, value);
         }
 
         /// <summary>

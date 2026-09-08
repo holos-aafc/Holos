@@ -633,6 +633,18 @@ namespace H.Core.Models
 
         public bool UseFieldLevelYieldAssignement { get; set; }
 
+        /// <summary>
+        /// Resolves the yield assignment method that applies to a field: the field-level method when field-level yield
+        /// assignment is enabled, otherwise the farm-level method. Use this everywhere the effective method is needed so
+        /// field-level assignment is honoured consistently.
+        /// </summary>
+        public YieldAssignmentMethod GetYieldAssignmentMethod(FieldSystemComponent fieldSystemComponent)
+        {
+            return this.UseFieldLevelYieldAssignement && fieldSystemComponent != null
+                ? fieldSystemComponent.YieldAssignmentMethod
+                : this.YieldAssignmentMethod;
+        }
+
         public bool IsCommandLineMode
         {
             get => _isCommandLineMode;

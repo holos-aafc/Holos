@@ -32,6 +32,11 @@ namespace H.Core.Services.LandManagement
             // Copy all manure applications to the detail view item
             foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
             {
+                if (BelongsToAnotherYearOnly(manureApplicationViewItem, manureApplicationViewItem.DateOfApplication.Year, year))
+                {
+                    continue;
+                }
+
                 var copiedManureApplicationViewItem = _manureApplicationViewItemMapper.Map(manureApplicationViewItem);
 
                 // We need to update the year so that the current years' manure applications are copied back in time
@@ -42,10 +47,21 @@ namespace H.Core.Services.LandManagement
 
             foreach (var harvestViewItem in viewItem.HarvestViewItems)
             {
+                if (BelongsToAnotherYearOnly(harvestViewItem, harvestViewItem.Start.Year, year))
+                {
+                    continue;
+                }
+
                 var copiedHarvestViewItem = _harvestViewItemMapper.Map(harvestViewItem);
 
-                // We need to update the year so that the current years' harvest items are copied back in time
+                // We need to update the year so that the current years' harvest items are copied back in time. The year
+                // has to land on Start (and End), not only DateCreated: GetHayHarvestsByYear filters on Start.Year, so
+                // stamping DateCreated alone left every copy matching the year the harvest was entered and no other,
+                // which defeated the copy. Repeating the management across the simulation is what the algorithm document
+                // describes - the historical period is built from the rotation the user specifies once.
                 copiedHarvestViewItem.DateCreated = new DateTime(year, harvestViewItem.DateCreated.Month, harvestViewItem.DateCreated.Day);
+                copiedHarvestViewItem.Start = new DateTime(year, harvestViewItem.Start.Month, harvestViewItem.Start.Day);
+                copiedHarvestViewItem.End = new DateTime(year, harvestViewItem.End.Month, harvestViewItem.End.Day);
 
                 result.HarvestViewItems.Add(copiedHarvestViewItem);
             }
@@ -62,6 +78,11 @@ namespace H.Core.Services.LandManagement
 
             foreach (var hayImportViewItem in viewItem.HayImportViewItems)
             {
+                if (BelongsToAnotherYearOnly(hayImportViewItem, hayImportViewItem.Date.Year, year))
+                {
+                    continue;
+                }
+
                 var copiedHayImportViewItem = _hayImportViewItemMapper.Map(hayImportViewItem);
 
                 // We need to update the year so that the current years' hay import items are copied back in time
@@ -72,25 +93,73 @@ namespace H.Core.Services.LandManagement
 
             foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems)
             {
+                if (BelongsToAnotherYearOnly(fertilizerApplicationViewItem, viewItem.Year, year))
+                {
+                    continue;
+                }
+
                 var copiedFertilizerViewItem = _fertilizerViewItemMapper.Map(fertilizerApplicationViewItem);
 
                 // We need to update the year so that the current years' fertilizer applications are copied back in time
                 copiedFertilizerViewItem.DateCreated = new DateTime(year, fertilizerApplicationViewItem.DateCreated.Month, fertilizerApplicationViewItem.DateCreated.Day);
 
-                result.FertilizerApplicationViewItems.Add(fertilizerApplicationViewItem);
+                result.FertilizerApplicationViewItems.Add(copiedFertilizerViewItem);
             }
 
             foreach (var digestateApplicationViewItem in viewItem.DigestateApplicationViewItems)
             {
+                if (BelongsToAnotherYearOnly(digestateApplicationViewItem, viewItem.Year, year))
+                {
+                    continue;
+                }
+
                 var copiedDigestateViewItem = _digestateViewItemMapper.Map(digestateApplicationViewItem);
 
                 // We need to update the year so that the current years' digestate applications are copied back in time
                 copiedDigestateViewItem.DateCreated = new DateTime(year, digestateApplicationViewItem.DateCreated.Month, digestateApplicationViewItem.DateCreated.Day);
 
-                result.DigestateApplicationViewItems.Add(digestateApplicationViewItem);
+                result.DigestateApplicationViewItems.Add(copiedDigestateViewItem);
             }
 
+            // The N-P-K-S rates are cached on the crop view item and are what the nitrogen calculations read - the
+            // fertilizer collection itself is not summed at calculation time. The mapper copies those cached rates, so
+            // without this a year that was denied a copy of an application still carried its full rate. Only recompute
+            // when the source actually has applications: the CLI sets NitrogenFertilizerRate directly, with no
+            // application items behind it, and summing an empty collection would erase it.
+            if (viewItem.FertilizerApplicationViewItems.Any())
+            {
+                result.UpdateApplicationRateTotals();
+            }
+
+            // Same shape again: these flags are cached fields kept up to date by the collections' change handlers, and
+            // the mapper copies them. A year denied a copy adds nothing, so no handler runs and the flag stays true
+            // beside an empty collection - which makes CalculateHarvest (Eq 11.4.4-1) sum an empty table and report no
+            // harvest instead of falling back to the year's yield.
+            result.HasHarvestViewItems = result.HarvestViewItems.Count > 0;
+            result.HasManureApplicationViewItems = result.ManureApplicationViewItems.Count > 0;
+            result.HasHayImportViewItems = result.HayImportViewItems.Count > 0;
+
             return result;
+        }
+
+
+        /// <summary>
+        /// True when an entry is marked as happening in a single year and this is not that year, so no copy of it is
+        /// made. An empty collection is exactly what "this did not happen that year" means to everything downstream.
+        ///
+        /// Repeating is the default, matching the algorithm document's model of a historical period built from the
+        /// management the user specifies once.
+        ///
+        /// Callers pass the year the entry belongs to, which differs by type. Harvests, manure applications and hay
+        /// imports carry a management date the user sets. Fertilizer and digestate applications do not - their
+        /// DateCreated is a creation timestamp, not a date in the field - so they belong to the year of the crop item
+        /// they were entered against.
+        /// </summary>
+        private static bool BelongsToAnotherYearOnly(object activity, int yearItWasEntered, int yearBeingCreated)
+        {
+            return activity is IRepeatableFieldActivity repeatable
+                   && repeatable.RepeatsInEveryYear == false
+                   && yearItWasEntered != yearBeingCreated;
         }
 
         public FieldSystemDetailsStageState GetStageState(Farm farm)
@@ -247,6 +316,9 @@ namespace H.Core.Services.LandManagement
             _initializationService.InitializeYieldForAllYears(
                 cropViewItems: viewItems,
                 farm: farm, fieldSystemComponent: fieldSystemComponent);
+
+            // If the user chose Custom, a perennial hay/forage field's entered harvest is its yield (single source of truth)
+            this.UpdateYieldFromHarvestForCustomPerennials(viewItems, farm, fieldSystemComponent);
 
             // After yields have been set, we must consider perennial years in which there is 0 for the yield input (from user or by default yield provider)
             this.UpdatePercentageReturnsForPerennials(

@@ -405,6 +405,7 @@
     <Compile Include="Models\LandManagement\Fields\FieldSystemComponent.cs" />
     <Compile Include="Models\LandManagement\Fields\FieldSystemDetailsStageState.cs" />
     <Compile Include="Models\LandManagement\Fields\GrazingViewItem.cs" />
+    <Compile Include="Models\LandManagement\Fields\IRepeatableFieldActivity.cs" />
     <Compile Include="Models\LandManagement\Fields\HarvestViewItem.cs" />
     <Compile Include="Models\LandManagement\Fields\ManureApplicationViewItem.cs" />
     <Compile Include="Models\LandManagement\Rotation\RotationComponent.cs" />
@@ -734,6 +735,8 @@
     <Compile Include="Services\IFarmResultsService.cs" />
     <Compile Include="Services\IFieldComponentHelper.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.Carbon.cs" />
+    <Compile Include="Services\LandManagement\FieldSummaryPolicy.cs" />
+    <Compile Include="Services\LandManagement\YieldInputPolicy.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.Initialization.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.Energy.cs" />
     <Compile Include="Services\LandManagement\FieldResultsService.EstimatesOfProduction.cs" />

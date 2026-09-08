@@ -2273,7 +2273,39 @@ The **Yield Assignment Method** drop-down menu controls where Holos gets the yie
 -	**Small area data** — *(default)* Uses Small Area Data (SAD) yields published by Statistics Canada at [open.canada.ca](https://open.canada.ca/data/en/dataset/65f1cde1-95e0-4a1d-9a1a-c45b2f83a351). SAD yields are available for most crop types and locations in Canada and are a good starting point if you do not have measured yields for your own farm. For silage crops that do not have SAD data available, Holos falls back to default silage yields.
 -	**Average Yield** — Takes the average of the yields across all years of the selected field's rotation and assigns that same average value to every year. Pick this option if you want a single uniform yield across the rotation.
 -	**Input file** — Reads yield values from a CSV file that you provide. Pick this option if you already have measured yields stored in a spreadsheet. See the **Load an Input File** section below for the required file format.
--	**Custom Yield** — Lets you enter your own yield value for each year directly in the details grid — Holos will not overwrite the values you type in. Pick this option if you have measured yields from your own farm records and want to enter them by hand.
+-	**Custom Yield** — Lets you enter your own yield value for each year directly in the details grid, and Holos will not overwrite what you type. The one exception is a perennial field with a hay harvest: there, the harvest you entered *is* the yield, and Holos calculates it for you. See **Perennial Fields: Harvests, Grazing and Yields** below.
+
+<br>
+
+## Perennial Fields: Harvests, Grazing and Yields
+
+A perennial field can lose its crop in two ways in the same year: animals graze it, or it is cut and baled. Holos works backwards from what left the field to work out how much grew, so what you enter on the **Harvest** and **Grazing** tabs decides the yield and the carbon returned to the soil. This section describes the order in which those pieces are applied.
+
+### If you enter a hay harvest
+
+-	Under the **Custom Yield** method, the harvest you enter becomes the field's yield. Holos totals the bales (number × weight), converts them from the moisture of baled hay to the moisture of the standing crop, and divides by the field area. You do not need to type a yield as well.
+-	Under the other methods the estimate is kept and your harvest does not change the yield. If you have entered a harvest that is not being used this way, the Details screen says so.
+-	The **Harvest loss, left on field (%)** value is the share of the cut that stays on the ground. Holos uses it as the percentage of product returned to soil for that year. With more than one cut in a year, the cuts are averaged by the biomass each one removed.
+-	A harvest describes how the field is managed every year the crop is grown, so it is applied to every year of the simulation. Clear **Repeats every year** on the Harvest tab if the cut happened in a single year only - the year you entered it. The same control appears on the Fertilizer and supplemental hay tables.
+
+### If animals graze the field
+
+-	Holos calculates the yield from the forage the animals ate, divided by the utilization rate for the grazing system — not from the yield assignment method. The animals' management periods decide which years this applies to.
+-	The percentage of product returned to soil is what the animals left behind, which is 100% minus the utilization rate.
+
+### If the field is both grazed and hayed
+
+-	Both removals count. What grew is the grazed portion plus the baled portion, each recovered from what was taken; what stays on the field is that total less the forage eaten and less the hay carted off.
+
+### If there is no harvest and no grazing
+
+-	Nothing removes product from the field, so 100% of it is returned to the soil. Holos sets this for you; earlier versions asked you to change it by hand.
+
+### Values Holos calculates for you
+
+-	On the Details screen, **white cells are values you enter** and **grey cells are calculated by Holos**. For a perennial with a harvest, the yield, plant carbon in product, and percentage of product returned to soil are all calculated.
+-	Hover a yield cell to see where its number came from — a regional estimate, the harvest you entered, or a value you typed.
+-	To change a calculated value, turn on **Advanced input editing**. The cell turns amber to show that your value now overrides the calculation and will not be recalculated. **Reset overrides** restores the calculated values.
 
 <br>
 

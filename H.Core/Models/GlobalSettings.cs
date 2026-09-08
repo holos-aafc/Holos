@@ -32,6 +32,8 @@ namespace H.Core.Models
         private FieldSystemDetailsColumnsVisibility _fieldSystemDetailsColumnsVisibility;
         private FieldResultsColumnsVisibility _fieldResultsColumnsVisibility;
         private ManureModelColumnsVisibility _manureModelColumnVisibility;
+
+        private bool _enableAdvancedInputEditing;
         #endregion
 
         #region Constructors
@@ -245,6 +247,17 @@ namespace H.Core.Models
         {
             get { return _manureModelColumnVisibility; }
             set { SetProperty(ref _manureModelColumnVisibility, value); }
+        }
+
+        /// <summary>
+        /// Advanced input editing: when enabled, the derived inputs on the field details screen (yield, plant carbon,
+        /// percentage of product returned to soil) become directly editable and the user's entries override the
+        /// computed values. Off by default, so those values are shown read-only. See YieldInputPolicy.
+        /// </summary>
+        public bool EnableAdvancedInputEditing
+        {
+            get { return _enableAdvancedInputEditing; }
+            set { SetProperty(ref _enableAdvancedInputEditing, value); }
         }
         #endregion
 

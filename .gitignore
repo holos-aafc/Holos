@@ -413,3 +413,7 @@ H.Content/Documentation/Crop_Residue_Nitrogen_Calculator.xlsx
 # (holos-aafc/Holos-4-GUI) and are junctioned in locally; they must never
 # be committed here. Broad pattern so a Telerik version bump stays covered.
 /lib/
+
+# Diagnostic output written beside a golden baseline when one fails - never committed.
+*.baseline.txt.actual
+*.baseline.txt.gz.actual

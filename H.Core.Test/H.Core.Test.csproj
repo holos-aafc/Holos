@@ -197,6 +197,8 @@
     <Compile Include="Mappers\CropViewItemResultsCopyTest.cs" />
     <Compile Include="Services\Animals\ManureRemovalVolatileSolidsTest.cs" />
     <Compile Include="Services\Animals\CarbonInputBaselineTest.cs" />
+    <Compile Include="Services\Animals\PerennialYieldBaselineTest.cs" />
+    <Compile Include="Services\FieldSummaryPolicyTest.cs" />
     <Compile Include="Services\Animals\FarmResultsBaselineTest.cs" />
     <Compile Include="Services\Animals\ManureStorageBaselineTest.cs" />
     <Compile Include="Services\Animals\ManureTankBaselineTest.cs" />
@@ -219,6 +221,7 @@
     <Compile Include="Services\DairyCattleResultsServiceTest.cs" />
     <Compile Include="Services\FarmResultsServiceTest.cs" />
     <Compile Include="Services\FieldResultsServiceTest.cs" />
+    <Compile Include="Services\LandManagement\YieldInputPolicyTest.cs" />
     <Compile Include="Services\FieldResultsServiceTest.ManureNH3Report.cs" />
     <Compile Include="Providers\Climate\BuildNewSLCClimateNorms.cs" />
     <Compile Include="Services\AnimalComponentHelperTest.cs" />

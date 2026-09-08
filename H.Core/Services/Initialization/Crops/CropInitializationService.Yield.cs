@@ -24,7 +24,13 @@ namespace H.Core.Services.Initialization.Crops
             CropViewItem viewItem,
             FieldSystemComponent fieldSystemComponent)
         {
-            var yieldAssignmentMethod = farm.UseFieldLevelYieldAssignement ? fieldSystemComponent.YieldAssignmentMethod : farm.YieldAssignmentMethod;
+            if (viewItem.DoNotRecalculateYield)
+            {
+                // Advanced input editing: the user manually set this yield; do not overwrite it.
+                return;
+            }
+
+            var yieldAssignmentMethod = farm.GetYieldAssignmentMethod(fieldSystemComponent);
             if (viewItem.CropType == CropType.NotSelected || viewItem.Year == 0)
             {
                 Trace.TraceError($"{nameof(FieldResultsService)}.{nameof(InitializeYieldForYear)}: bad crop type or bad year for view item '{viewItem}'");

@@ -5,9 +5,11 @@ using H.Infrastructure;
 
 namespace H.Core.Models.LandManagement.Fields
 {
-    public class DigestateApplicationViewItem : ManureItemBase
+    public class DigestateApplicationViewItem : ManureItemBase, IRepeatableFieldActivity
     {
         #region Fields
+
+        private bool _repeatsInEveryYear;
 
         private DigestateState _digestateState;
 
@@ -22,6 +24,8 @@ namespace H.Core.Models.LandManagement.Fields
 
         public DigestateApplicationViewItem()
         {
+            this.RepeatsInEveryYear = true;
+
             base.DateCreated = DateTime.Now;
             this.DigestateState = DigestateState.Raw;
         }
@@ -29,6 +33,18 @@ namespace H.Core.Models.LandManagement.Fields
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// See <see cref="IRepeatableFieldActivity.RepeatsInEveryYear"/>. Defaults to true: the algorithm document
+        /// builds the historical period from the management the user specifies once, so repeating is the norm and a
+        /// entry happening in a single year is the exception. Items saved before this property existed deserialize without it and keep
+        /// that default deliberately.
+        /// </summary>
+        public bool RepeatsInEveryYear
+        {
+            get => _repeatsInEveryYear;
+            set => SetProperty(ref _repeatsInEveryYear, value);
+        }
 
         public DigestateState DigestateState
         {

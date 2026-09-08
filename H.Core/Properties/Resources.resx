@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -2619,16 +2619,16 @@
 </value>
   </data>
   <data name="EnumAverageYield" xml:space="preserve">
-    <value>Average Yield</value>
+    <value>Average — the average of this crop's yields across the rotation</value>
   </data>
   <data name="EnumCARValue" xml:space="preserve">
-    <value>Census Agricultural Region (CAR) value</value>
+    <value>Census Agricultural Region (CAR) — regional CAR yield values</value>
   </data>
   <data name="EnumCustomYield" xml:space="preserve">
-    <value>Custom Yield</value>
+    <value>Custom — use the yield values you enter yourself</value>
   </data>
   <data name="EnumInputFile" xml:space="preserve">
-    <value>Input file</value>
+    <value>Input file — read yields from a file you provide</value>
   </data>
   <data name="GrassHay" xml:space="preserve">
     <value>Grass hay</value>
@@ -2832,7 +2832,7 @@
     <value>kg N₂O</value>
   </data>
   <data name="EnumInputFileThenAverage" xml:space="preserve">
-    <value>Input file then use average for rotation</value>
+    <value>Input file, then rotation average — read from a file, then average across the rotation</value>
   </data>
   <data name="EnumNineteenEightyToTwoThousandTen" xml:space="preserve">
     <value>1980 to 2010</value>
@@ -2967,7 +2967,7 @@
     <value>Grazing animal group</value>
   </data>
   <data name="LabelMultipleHarvestsCanBeMadeToThisField" xml:space="preserve">
-    <value>Multiple harvests can be made to this field throughout the year. To add a harvest, click 'Add Harvest Date' to specify the details. Harvested hay can be used as supplemental feed for grazing animals. Go to the 'Grazing' tab to add this supplement. All bale weights should be the wet weight.</value>
+    <value>Multiple harvests can be made to this field throughout the year. To add a harvest, click 'Add Harvest Date' to specify the details. Harvested hay can be used as supplemental feed for grazing animals. Go to the 'Grazing' tab to add this supplement. All bale weights should be the wet weight. A harvest marked 'Repeats every year' describes how this field is managed whenever the crop is grown, so Holos applies it to every year of the simulation. Clear that box if the cut happened in a single year only - the year you entered it.</value>
   </data>
   <data name="LabelMultipleFertilizerApplicationsCanBeMadeToThisField" xml:space="preserve">
     <value>Multiple fertilizer applications can be made to this field throughout the year. To add a fertilizer application, click 'Add Fertilizer Application' to specify the details.</value>
@@ -3687,7 +3687,40 @@
     <value>Fertilizer efficiency</value>
   </data>
   <data name="EnumSmallAreaData" xml:space="preserve">
-    <value>Small area data</value>
+    <value>Small area data (default) — regional yield estimates from Statistics Canada</value>
+  </data>
+  <data name="LabelAdvancedInputEditing" xml:space="preserve">
+    <value>Advanced input editing</value>
+  </data>
+  <data name="TooltipAdvancedInputEditing" xml:space="preserve">
+    <value>Edit yield, plant carbon and residue directly. Your entries override the computed values and are kept when results are recalculated.</value>
+  </data>
+  <data name="LabelResetOverrides" xml:space="preserve">
+    <value>Reset overrides</value>
+  </data>
+  <data name="TooltipResetOverrides" xml:space="preserve">
+    <value>Clear all manually entered overrides on this screen and restore the calculated values.</value>
+  </data>
+  <data name="TooltipManuallyOverriddenValue" xml:space="preserve">
+    <value>This value was entered manually and is no longer recalculated. Use 'Reset overrides' to restore the calculated value.</value>
+  </data>
+  <data name="TooltipYieldSourceEstimated" xml:space="preserve">
+    <value>Estimated. This yield comes from the selected yield assignment method, not from your own data.</value>
+  </data>
+  <data name="TooltipYieldSourceFromHarvest" xml:space="preserve">
+    <value>From your harvest. This yield is calculated from the {0} bale(s) you entered on the Harvest tab.</value>
+  </data>
+  <data name="TooltipYieldSourceEntered" xml:space="preserve">
+    <value>Entered by you. This yield is the value you typed for this year.</value>
+  </data>
+  <data name="MessageHarvestDataDrivingYield" xml:space="preserve">
+    <value>Perennial fields with a hay harvest take their yield from the harvests you entered on the Harvest tab. Those yields are calculated for you, so they cannot be typed over here - turn on 'Advanced input editing' if you need to change one.</value>
+  </data>
+  <data name="MessageHarvestDataNotUsedForYield" xml:space="preserve">
+    <value>You have entered harvest data, but the yield is using the estimate from the selected yield assignment method. Select the 'Custom' yield assignment method to use your entered harvest as the yield.</value>
+  </data>
+  <data name="MessageDetailsScreenInputHelp" xml:space="preserve">
+    <value>The selected yield assignment method is used for all fields on this farm; select the 'Custom' or 'Input file' method to modify the yields for individual fields. On this screen, white cells are values you enter and grey cells are calculated by Holos. Turn on 'Advanced input editing' to change a calculated value; it will then show in amber to indicate that it overrides the calculation, and 'Reset overrides' restores the calculated values.</value>
   </data>
   <data name="EnumContinuousAndMobGrazing" xml:space="preserve">
     <value>Continuous / mob grazing</value>
@@ -3717,7 +3750,67 @@
     <value>Switchback grazing</value>
   </data>
   <data name="LabelHarvestLoss" xml:space="preserve">
-    <value>Harvest loss</value>
+    <value>Harvest loss, left on field</value>
+  </data>
+  <data name="LabelRepeatsInEveryYear" xml:space="preserve">
+    <value>Repeats every year</value>
+  </data>
+  <data name="TooltipRepeatsInEveryYear" xml:space="preserve">
+    <value>Checked means this entry describes how the field is managed every year the crop is grown, so Holos applies it to every year of the simulation. Clear it if it happened in a single year only - the year you entered it.</value>
+  </data>
+  <data name="SummaryActivityGrazedAndHayed" xml:space="preserve">
+    <value>This field was grazed and hayed in {0}.</value>
+  </data>
+  <data name="SummaryActivityGrazed" xml:space="preserve">
+    <value>This field was grazed in {0}.</value>
+  </data>
+  <data name="SummaryActivityHayed" xml:space="preserve">
+    <value>This field was hayed in {0}.</value>
+  </data>
+  <data name="SummaryActivityNeither" xml:space="preserve">
+    <value>This field was neither grazed nor hayed in {0}.</value>
+  </data>
+  <data name="SummaryYieldFromHarvest" xml:space="preserve">
+    <value>Your harvest is this field's yield - the {0} bale(s) you entered.</value>
+  </data>
+  <data name="SummaryYieldFromGrazing" xml:space="preserve">
+    <value>Its yield is calculated from the forage the animals ate, rather than from a regional estimate.</value>
+  </data>
+  <data name="SummaryYieldEnteredAsTotalBiomass" xml:space="preserve">
+    <value>Its yield is the value entered on the Details screen, taken to be all the biomass grown - what the animals ate plus what they left.</value>
+  </data>
+  <data name="SummaryYieldEstimateWithHarvest" xml:space="preserve">
+    <value>Your harvest is not used as this field's yield - a regional estimate is used instead. To use it, choose the 'Custom' method on the Details screen.</value>
+  </data>
+  <data name="SummaryYieldEstimate" xml:space="preserve">
+    <value>Its yield is a regional estimate.</value>
+  </data>
+  <data name="SummaryYieldEntered" xml:space="preserve">
+    <value>Its yield is the value entered on the Details screen.</value>
+  </data>
+  <data name="SummaryYieldOverridden" xml:space="preserve">
+    <value>Its yield is a value set by hand on the Details screen, which Holos no longer recalculates.</value>
+  </data>
+  <data name="SummaryReturnedAll" xml:space="preserve">
+    <value>All of the product is returned to the soil - nothing removed it from this field.</value>
+  </data>
+  <data name="SummaryReturnedAfterCut" xml:space="preserve">
+    <value>Your harvest sets how much of the crop is left on the field, from the harvest loss you entered.</value>
+  </data>
+  <data name="SummaryReturnedAfterGrazing" xml:space="preserve">
+    <value>The share the animals leave is returned to the soil, from the utilization rate of the grazing system.</value>
+  </data>
+  <data name="SummaryReturnedBothRemovals" xml:space="preserve">
+    <value>What is left after both the forage eaten and the hay baled off is returned to the soil.</value>
+  </data>
+  <data name="SummaryReturnedOverridden" xml:space="preserve">
+    <value>The share returned to the soil is a value set by hand on the Details screen, which Holos no longer recalculates.</value>
+  </data>
+  <data name="TooltipHarvestLossPercentage" xml:space="preserve">
+    <value>The share of this cut that is left on the field rather than removed as bales. Holos uses it as the percentage of product returned to soil for this perennial, shown on the Details screen.</value>
+  </data>
+  <data name="TooltipPercentReturnedFromHarvestLoss" xml:space="preserve">
+    <value>Calculated from the harvest loss you entered on the Harvest tab, which is the share of the crop left on the field. Change it there, or turn on 'Advanced input editing' to override this value directly.</value>
   </data>
   <data name="LabelYieldDryWeight" xml:space="preserve">
     <value>Yield (dry weight)</value>

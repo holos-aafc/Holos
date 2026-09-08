@@ -90,12 +90,18 @@ namespace H.Core.Test.Services
         [TestMethod]
         public void UpdatePercentageReturnsForPerennialsSetReturnTo100PercentWhenYieldIs0()
         {
+            // A harvested perennial (product is removed from the field) must keep its harvest-loss return default even
+            // though it has a non-zero yield.
+            var harvestedLegume = new CropViewItem()
+                {CropType = CropType.TameLegume, PercentageOfProductYieldReturnedToSoil = 35, Yield = 1000, Year = 1985};
+            harvestedLegume.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed});
+
             var crops = new List<CropViewItem>()
             {
                 new CropViewItem()
-                    {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 0},
-                new CropViewItem()
-                    {CropType = CropType.TameLegume, PercentageOfProductYieldReturnedToSoil = 35, Yield = 1000},
+                    {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 0, Year = 1985},
+                harvestedLegume,
                 new CropViewItem() {CropType = CropType.Barley, PercentageOfProductYieldReturnedToSoil = 2},
             };
 
@@ -104,13 +110,719 @@ namespace H.Core.Test.Services
 
             Assert.AreEqual(100,
                 crops.Single(x => x.CropType == CropType.TameGrass)
-                    .PercentageOfProductYieldReturnedToSoil); // This should have been set to 100 since there is no yield
+                    .PercentageOfProductYieldReturnedToSoil); // Set to 100 since there is no yield (nothing harvested that year)
             Assert.AreEqual(2,
                 crops.Single(x => x.CropType == CropType.Barley)
-                    .PercentageOfProductYieldReturnedToSoil); // This should remain the same since its not a perennial
+                    .PercentageOfProductYieldReturnedToSoil); // Unchanged since it is not a perennial
             Assert.AreEqual(35,
                 crops.Single(x => x.CropType == CropType.TameLegume)
-                    .PercentageOfProductYieldReturnedToSoil); // This should remain the same since it has a non-zero yield
+                    .PercentageOfProductYieldReturnedToSoil); // Unchanged since it has a harvest (product was removed)
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsSetsReturnTo100WhenNoHarvestAndNoGrazingWithNonZeroYield()
+        {
+            // Core of the fix: a perennial with a (non-zero) modelled or custom yield but no harvest operation and no
+            // grazing animals has nothing removing product from the field, so all product stays and the percentage of
+            // product returned to soil should be raised to 100% (not left at the 35% perennial default).
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 1200, Year = 1985};
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(100, crop.PercentageOfProductYieldReturnedToSoil);
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsUsesHayedHarvestLoss()
+        {
+            // A hayed (not grazed) perennial takes its returned-to-soil fraction from the harvest's "Harvest loss %".
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 1200, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, HarvestLossPercentage = 40, AboveGroundBiomassDryWeight = 1000});
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(40, crop.PercentageOfProductYieldReturnedToSoil);
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsWeightsMultipleHayedHarvestLossesByBiomass()
+        {
+            // Two hayed cuts: (loss 30%, biomass 3000) and (loss 50%, biomass 1000).
+            // Biomass-weighted: (30*3000 + 50*1000) / 4000 = 35  (a plain average would be 40, so this proves weighting).
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 99, Yield = 1200, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 6, 1), ForageActivity = ForageActivities.Hayed, HarvestLossPercentage = 30, AboveGroundBiomassDryWeight = 3000});
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, HarvestLossPercentage = 50, AboveGroundBiomassDryWeight = 1000});
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(35, crop.PercentageOfProductYieldReturnedToSoil, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsFallsBackToSimpleMeanWhenNoBiomass()
+        {
+            // Two hayed cuts with no biomass weights -> simple mean of (30, 50) = 40.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 99, Yield = 1200, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 6, 1), ForageActivity = ForageActivities.Hayed, HarvestLossPercentage = 30});
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, HarvestLossPercentage = 50});
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(40, crop.PercentageOfProductYieldReturnedToSoil, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsKeepsDefaultWhenHayedHarvestLossUninitialized()
+        {
+            // Guard: an uninitialized harvest loss (0) must not zero out the return - the existing default is kept.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 1200, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, HarvestLossPercentage = 0, AboveGroundBiomassDryWeight = 1000});
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(35, crop.PercentageOfProductYieldReturnedToSoil);
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsIgnoresSilageHarvestLoss()
+        {
+            // Only hayed harvests are wired; a silage harvest's (placeholder) loss must NOT drive the return.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 1200, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Silage, HarvestLossPercentage = 65, AboveGroundBiomassDryWeight = 1000});
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(35, crop.PercentageOfProductYieldReturnedToSoil);
+        }
+
+        [TestMethod]
+        public void MapDetailsScreenViewItemCopiesFertilizerApplicationsRatherThanSharingThem()
+        {
+            // The loop mapped the item into a copy, stamped the copy with the target year, then added the ORIGINAL.
+            // The stamp was applied to a discarded object and every year shared one instance, so editing a fertilizer
+            // application in one year silently changed it in all of them.
+            var source = new CropViewItem() {CropType = CropType.Wheat, Year = 2020};
+            var fertilizerApplication = new FertilizerApplicationViewItem()
+                {DateCreated = new DateTime(2020, 5, 15), AmountOfNitrogenApplied = 75};
+            source.FertilizerApplicationViewItems.Add(fertilizerApplication);
+
+            var mapped = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 1995);
+
+            var copied = mapped.FertilizerApplicationViewItems.Single();
+            Assert.AreNotSame(fertilizerApplication, copied);
+            Assert.AreEqual(1995, copied.DateCreated.Year);
+            Assert.AreEqual(2020, fertilizerApplication.DateCreated.Year, "the source item must not be restamped");
+        }
+
+        [TestMethod]
+        public void MapDetailsScreenViewItemCopiesDigestateApplicationsRatherThanSharingThem()
+        {
+            // Same defect as the fertilizer loop.
+            var source = new CropViewItem() {CropType = CropType.Wheat, Year = 2020};
+            var digestateApplication = new DigestateApplicationViewItem()
+                {DateCreated = new DateTime(2020, 6, 10), AmountAppliedPerHectare = 40};
+            source.DigestateApplicationViewItems.Add(digestateApplication);
+
+            var mapped = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 1995);
+
+            var copied = mapped.DigestateApplicationViewItems.Single();
+            Assert.AreNotSame(digestateApplication, copied);
+            Assert.AreEqual(1995, copied.DateCreated.Year);
+            Assert.AreEqual(2020, digestateApplication.DateCreated.Year, "the source item must not be restamped");
+        }
+
+        [TestMethod]
+        public void HarvestRepeatsInEveryYearByDefault()
+        {
+            // The algorithm document builds the historical period from the management the user specifies once, so
+            // repeating is the default and "this year only" is the exception. Farms saved before this property existed
+            // deserialize without it and keep this default deliberately.
+            Assert.IsTrue(new HarvestViewItem().RepeatsInEveryYear);
+        }
+
+        [TestMethod]
+        public void MapDetailsScreenViewItemCarriesARepeatingHarvestIntoOtherYears()
+        {
+            var source = new CropViewItem() {CropType = CropType.TameGrass, Year = 2020};
+            source.HarvestViewItems.Add(new HarvestViewItem()
+            {
+                Start = new DateTime(2020, 8, 1),
+                End = new DateTime(2020, 8, 2),
+                ForageActivity = ForageActivities.Hayed,
+                RepeatsInEveryYear = true,
+            });
+
+            var mapped = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 1995);
+
+            var copied = mapped.HarvestViewItems.Single();
+            Assert.AreEqual(1995, copied.Start.Year, "the year has to land on Start - GetHayHarvestsByYear filters on it");
+            Assert.AreEqual(1995, copied.End.Year);
+            Assert.AreEqual(8, copied.Start.Month, "only the year changes; the cut keeps its day of the year");
+        }
+
+        [TestMethod]
+        public void MapDetailsScreenViewItemDoesNotCarryAOneOffHarvestIntoAnotherYear()
+        {
+            var source = new CropViewItem() {CropType = CropType.TameGrass, Year = 2020};
+            source.HarvestViewItems.Add(new HarvestViewItem()
+            {
+                Start = new DateTime(2020, 8, 1),
+                End = new DateTime(2020, 8, 2),
+                ForageActivity = ForageActivities.Hayed,
+                RepeatsInEveryYear = false,
+            });
+
+            var mapped = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 1995);
+
+            Assert.AreEqual(0, mapped.HarvestViewItems.Count,
+                "an empty collection is what 'there was no harvest that year' means downstream");
+        }
+
+        [TestMethod]
+        public void MapDetailsScreenViewItemKeepsAOneOffHarvestInItsOwnYear()
+        {
+            var source = new CropViewItem() {CropType = CropType.TameGrass, Year = 2020};
+            source.HarvestViewItems.Add(new HarvestViewItem()
+            {
+                Start = new DateTime(2020, 8, 1),
+                End = new DateTime(2020, 8, 2),
+                ForageActivity = ForageActivities.Hayed,
+                RepeatsInEveryYear = false,
+            });
+
+            var mapped = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 2020);
+
+            Assert.AreEqual(1, mapped.HarvestViewItems.Count);
+            Assert.AreEqual(2020, mapped.HarvestViewItems.Single().Start.Year);
+        }
+
+        [TestMethod]
+        public void EveryRepeatableActivityRepeatsByDefault()
+        {
+            // Repeating is the norm - the algorithm document builds the historical period from the management the user
+            // specifies once. Items saved before these properties existed deserialize without them and keep this
+            // default deliberately, so their results do not change.
+            Assert.IsTrue(new HarvestViewItem().RepeatsInEveryYear);
+            Assert.IsTrue(new ManureApplicationViewItem().RepeatsInEveryYear);
+            Assert.IsTrue(new FertilizerApplicationViewItem().RepeatsInEveryYear);
+            Assert.IsTrue(new DigestateApplicationViewItem().RepeatsInEveryYear);
+            Assert.IsTrue(new HayImportViewItem().RepeatsInEveryYear);
+        }
+
+        [TestMethod]
+        public void MapDetailsScreenViewItemDoesNotCarryOneOffEntriesIntoAnotherYear()
+        {
+            var source = new CropViewItem() {CropType = CropType.TameGrass, Year = 2020};
+
+            source.ManureApplicationViewItems.Add(new ManureApplicationViewItem()
+                {DateOfApplication = new DateTime(2020, 4, 1), RepeatsInEveryYear = false});
+            source.FertilizerApplicationViewItems.Add(new FertilizerApplicationViewItem()
+                {DateCreated = new DateTime(2020, 5, 15), RepeatsInEveryYear = false});
+            source.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem()
+                {DateCreated = new DateTime(2020, 6, 10), RepeatsInEveryYear = false});
+            source.HayImportViewItems.Add(new HayImportViewItem()
+                {Date = new DateTime(2020, 7, 1), RepeatsInEveryYear = false});
+
+            var mapped = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 1995);
+
+            Assert.AreEqual(0, mapped.ManureApplicationViewItems.Count);
+            Assert.AreEqual(0, mapped.FertilizerApplicationViewItems.Count);
+            Assert.AreEqual(0, mapped.DigestateApplicationViewItems.Count);
+            Assert.AreEqual(0, mapped.HayImportViewItems.Count);
+        }
+
+        [TestMethod]
+        public void MapDetailsScreenViewItemKeepsOneOffEntriesInTheirOwnYear()
+        {
+            var source = new CropViewItem() {CropType = CropType.TameGrass, Year = 2020};
+
+            source.ManureApplicationViewItems.Add(new ManureApplicationViewItem()
+                {DateOfApplication = new DateTime(2020, 4, 1), RepeatsInEveryYear = false});
+            source.FertilizerApplicationViewItems.Add(new FertilizerApplicationViewItem()
+                {DateCreated = new DateTime(2020, 5, 15), RepeatsInEveryYear = false});
+            source.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem()
+                {DateCreated = new DateTime(2020, 6, 10), RepeatsInEveryYear = false});
+            source.HayImportViewItems.Add(new HayImportViewItem()
+                {Date = new DateTime(2020, 7, 1), RepeatsInEveryYear = false});
+
+            var mapped = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 2020);
+
+            Assert.AreEqual(1, mapped.ManureApplicationViewItems.Count);
+            Assert.AreEqual(1, mapped.FertilizerApplicationViewItems.Count);
+            Assert.AreEqual(1, mapped.DigestateApplicationViewItems.Count);
+            Assert.AreEqual(1, mapped.HayImportViewItems.Count);
+        }
+
+        [TestMethod]
+        public void MapDetailsScreenViewItemKeepsSingleYearFertilizerAndDigestateWithoutRelyingOnDateCreated()
+        {
+            // Fertilizer and digestate carry no management date. DateCreated is a creation timestamp that defaults to
+            // DateTime.MinValue, so keying off its year excluded a single-year entry from every year INCLUDING its own.
+            // They belong to the year of the crop item they were entered against.
+            var source = new CropViewItem() {CropType = CropType.Wheat, Year = 2026};
+
+            source.FertilizerApplicationViewItems.Add(new FertilizerApplicationViewItem()
+                {AmountOfNitrogenApplied = 500, RepeatsInEveryYear = false});
+            source.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem()
+                {AmountAppliedPerHectare = 40, RepeatsInEveryYear = false});
+
+            Assert.AreEqual(1, source.FertilizerApplicationViewItems[0].DateCreated.Year,
+                "guards against the assumption this test exists to prevent: DateCreated is not a management date");
+
+            var ownYear = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 2026);
+            Assert.AreEqual(1, ownYear.FertilizerApplicationViewItems.Count, "kept in the year it was entered against");
+            Assert.AreEqual(1, ownYear.DigestateApplicationViewItems.Count);
+
+            var otherYear = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 1995);
+            Assert.AreEqual(0, otherYear.FertilizerApplicationViewItems.Count, "not carried into any other year");
+            Assert.AreEqual(0, otherYear.DigestateApplicationViewItems.Count);
+        }
+
+        [TestMethod]
+        public void MapDetailsScreenViewItemCarriesRepeatingEntriesIntoOtherYears()
+        {
+            // Regression guard for the default: every collection still reaches a year it was not entered in.
+            var source = new CropViewItem() {CropType = CropType.TameGrass, Year = 2020};
+
+            source.ManureApplicationViewItems.Add(new ManureApplicationViewItem() {DateOfApplication = new DateTime(2020, 4, 1)});
+            source.FertilizerApplicationViewItems.Add(new FertilizerApplicationViewItem() {DateCreated = new DateTime(2020, 5, 15)});
+            source.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() {DateCreated = new DateTime(2020, 6, 10)});
+            source.HayImportViewItems.Add(new HayImportViewItem() {Date = new DateTime(2020, 7, 1)});
+
+            var mapped = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 1995);
+
+            Assert.AreEqual(1, mapped.ManureApplicationViewItems.Count);
+            Assert.AreEqual(1, mapped.FertilizerApplicationViewItems.Count);
+            Assert.AreEqual(1, mapped.DigestateApplicationViewItems.Count);
+            Assert.AreEqual(1, mapped.HayImportViewItems.Count);
+        }
+
+        [TestMethod]
+        public void MapDetailsScreenViewItemCopiesEveryCollectionRatherThanSharingInstances()
+        {
+            // Guard for all six collections at once: no generated year may share an instance with the source, or an
+            // edit in one year leaks into every other year.
+            var source = new CropViewItem() {CropType = CropType.TameGrass, Year = 2020};
+            var manure = new ManureApplicationViewItem() {DateOfApplication = new DateTime(2020, 4, 1)};
+            var harvest = new HarvestViewItem() {Start = new DateTime(2020, 8, 1), ForageActivity = ForageActivities.Hayed};
+            var grazing = new GrazingViewItem() {Start = new DateTime(2020, 6, 1)};
+            var hayImport = new HayImportViewItem() {Date = new DateTime(2020, 7, 1)};
+            var fertilizer = new FertilizerApplicationViewItem() {DateCreated = new DateTime(2020, 5, 15)};
+            var digestate = new DigestateApplicationViewItem() {DateCreated = new DateTime(2020, 6, 10)};
+
+            source.ManureApplicationViewItems.Add(manure);
+            source.HarvestViewItems.Add(harvest);
+            source.GrazingViewItems.Add(grazing);
+            source.HayImportViewItems.Add(hayImport);
+            source.FertilizerApplicationViewItems.Add(fertilizer);
+            source.DigestateApplicationViewItems.Add(digestate);
+
+            var mapped = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 1995);
+
+            Assert.AreNotSame(manure, mapped.ManureApplicationViewItems.Single());
+            Assert.AreNotSame(harvest, mapped.HarvestViewItems.Single());
+            Assert.AreNotSame(grazing, mapped.GrazingViewItems.Single());
+            Assert.AreNotSame(hayImport, mapped.HayImportViewItems.Single());
+            Assert.AreNotSame(fertilizer, mapped.FertilizerApplicationViewItems.Single());
+            Assert.AreNotSame(digestate, mapped.DigestateApplicationViewItems.Single());
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsSetsReturnFromGrazingUtilization()
+        {
+            // Grazed: what stays on the field is what the animals did not eat. 60% utilization leaves 40% returned.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 1200, Year = 1985};
+            crop.GrazingViewItems.Add(new GrazingViewItem() {Start = new DateTime(1985, 6, 1), Utilization = 60});
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(40, crop.PercentageOfProductYieldReturnedToSoil, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsAveragesGrazingUtilization()
+        {
+            // Two grazing periods: the returned fraction comes from the average utilization (50 and 70 -> 60 -> 40%).
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 1200, Year = 1985};
+            crop.GrazingViewItems.Add(new GrazingViewItem() {Start = new DateTime(1985, 6, 1), Utilization = 50});
+            crop.GrazingViewItems.Add(new GrazingViewItem() {Start = new DateTime(1985, 8, 1), Utilization = 70});
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(40, crop.PercentageOfProductYieldReturnedToSoil, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsGrazingTakesPrecedenceOverHarvestLoss()
+        {
+            // Grazed and hayed in the same year: utilization describes the whole standing crop, so it wins over the
+            // hayed harvest's loss percentage.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 1200, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, HarvestLossPercentage = 25, AboveGroundBiomassDryWeight = 1000});
+            crop.GrazingViewItems.Add(new GrazingViewItem() {Start = new DateTime(1985, 6, 1), Utilization = 60});
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(40, crop.PercentageOfProductYieldReturnedToSoil, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsKeepsDefaultWhenGrazingUtilizationUninitialized()
+        {
+            // Guard mirroring the harvest-loss case: an uninitialized utilization (0) must not silently mean "100%
+            // returned" - the existing default is kept instead.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 1200, Year = 1985};
+            crop.GrazingViewItems.Add(new GrazingViewItem() {Start = new DateTime(1985, 6, 1), Utilization = 0});
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(35, crop.PercentageOfProductYieldReturnedToSoil, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsIgnoresGrazingFromAnotherYear()
+        {
+            // The utilization average is scoped to the item's own year, matching the condition that selects this branch.
+            // Grazing in 1984 with a hayed harvest in 1985 must take the harvest-loss route, not the grazing route.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 1200, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, HarvestLossPercentage = 25, AboveGroundBiomassDryWeight = 1000});
+            crop.GrazingViewItems.Add(new GrazingViewItem() {Start = new DateTime(1984, 6, 1), Utilization = 60});
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(25, crop.PercentageOfProductYieldReturnedToSoil, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsSetsYieldFromHayedHarvest()
+        {
+            // Custom + hay/forage perennial. The bale dry matter is re-expressed on the crop's moisture basis, because
+            // the pipeline multiplies Yield by (1 - crop moisture): 17000 kg DM over 10 ha = 1700 kg DM/ha, and at 80%
+            // crop moisture that is a standing-crop yield of 1700 / 0.2 = 8500 kg/ha.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985, MoistureContentOfCrop = 0.8};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 17000});
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+
+            Assert.AreEqual(8500, crop.Yield, 0.0001);
+            Assert.AreEqual(1700, crop.DryYield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsSumsMultipleCuts()
+        {
+            // Two cuts (12000 + 8000 = 20000 kg DM) over 10 ha at 80% crop moisture = 20000 / 0.2 / 10 = 10000 kg/ha.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985, MoistureContentOfCrop = 0.8};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 6, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 12000});
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 8000});
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+
+            Assert.AreEqual(10000, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsLeavesYieldWhenNoHarvest()
+        {
+            // Custom + perennial but no harvest entered -> keep the existing (typed/modelled) yield.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+
+            Assert.AreEqual(1234, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsDoesNotChangeAnnualCrops()
+        {
+            // Grain / annual crops keep their (typed) yield - the derivation is perennial hay/forage only.
+            var crop = new CropViewItem()
+                {CropType = CropType.Barley, Area = 10, Yield = 1234, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+
+            Assert.AreEqual(1234, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsDoesNotDeriveForModelledMethod()
+        {
+            // Method gate: under a modelled method (e.g. Small Area Data) the estimated yield is kept, even with harvests.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData}, null);
+
+            Assert.AreEqual(1234, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsConvertsBaleWetWeightToTheCropMoistureBasis()
+        {
+            // A bale is dried (15% moisture) while Yield means the standing crop (80% moisture), and C_p multiplies
+            // Yield by (1 - crop moisture). Feeding the bale's wet weight straight in would strip 80% off material
+            // holding only 15% water. 17500 kg wet at 15% = 14875 kg DM; over 15 ha at 80% crop moisture that is
+            // 14875 / 0.2 / 15 = 4958.33 kg/ha - not the 1166.67 the raw wet weight would have given.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 15, Yield = 1234, Year = 1985, MoistureContentOfCrop = 0.8};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+            {
+                Start = new DateTime(1985, 8, 1),
+                ForageActivity = ForageActivities.Hayed,
+
+                // Built from bales rather than assigned directly: setting the bale count, weight or moisture recomputes
+                // both biomass figures, so assigning AboveGroundBiomass first would simply be overwritten.
+                TotalNumberOfBalesHarvested = 35,
+                BaleWeight = 500,
+                MoistureContentAsPercentage = 15,
+            });
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+
+            Assert.AreEqual(4958.3333, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsYieldTimesDryFractionRecoversTheBaledDryMatter()
+        {
+            // The property the pipeline depends on: whatever Yield we set, multiplying it by (1 - crop moisture) must
+            // give back the dry matter per hectare that was actually baled off the field.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 12, Yield = 1234, Year = 1985, MoistureContentOfCrop = 0.75};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 9000});
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+
+            Assert.AreEqual(9000d / 12d, crop.Yield * (1 - crop.MoistureContentOfCrop), 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsToleratesMoistureStoredAsAPercentage()
+        {
+            // Some saved farms hold the crop moisture as a percentage rather than a fraction; the carbon calculator
+            // corrects that later, so this method has to cope with both forms rather than dividing by a negative.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985, MoistureContentOfCrop = 80};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 2000});
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+
+            Assert.AreEqual(1000, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsDoesNotDeriveForGrazedField()
+        {
+            // Grazed + hayed under a custom yield: the algorithm document (note under Eq. 2.1.2-1) takes the entered
+            // yield to be the total biomass grown - eaten plus left standing - so deriving it from the baled hay alone
+            // would discard everything the animals consumed.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
+            crop.GrazingViewItems.Add(new GrazingViewItem() {Start = new DateTime(1985, 6, 1)});
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+
+            Assert.AreEqual(1234, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsDerivesWhenGrazingIsInAnotherYear()
+        {
+            // The grazing exclusion is scoped to the year: grazing in a different year must not block the derivation
+            // for this year's hay harvest.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985, MoistureContentOfCrop = 0.8};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 20000});
+            crop.GrazingViewItems.Add(new GrazingViewItem() {Start = new DateTime(1984, 6, 1)});
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+
+            Assert.AreEqual(10000, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsGuardsAgainstZeroBiomass()
+        {
+            // A harvest with no biomass (uninitialized) must not zero out the yield.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 0});
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+
+            Assert.AreEqual(1234, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsSkipsFrozenYield()
+        {
+            // Advanced override (Change 3b): a manually-frozen yield is not overwritten by the harvest derivation.
+            var crop = new CropViewItem()
+            {
+                CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985, DoNotRecalculateYield = true
+            };
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+
+            Assert.AreEqual(1234, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsSkipsFrozenPercentage()
+        {
+            // Advanced override (Change 3b): a manually-frozen percentage returned to soil is not overwritten
+            // (a no-harvest / no-grazing perennial would otherwise be forced to 100).
+            var crop = new CropViewItem()
+            {
+                CropType = CropType.TameGrass, Yield = 1200, Year = 1985,
+                PercentageOfProductYieldReturnedToSoil = 42, DoNotRecalculatePercentageReturnedToSoil = true
+            };
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(42, crop.PercentageOfProductYieldReturnedToSoil, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsUsesFieldLevelMethodWhenEnabled()
+        {
+            // Field-level yield assignment: the FIELD's method (Custom) drives the derivation even though the farm-level
+            // method is a modelled estimate.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985, MoistureContentOfCrop = 0.8};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 20000});
+
+            var farm = new Farm()
+                {UseFieldLevelYieldAssignement = true, YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData};
+            var field = new FieldSystemComponent() {YieldAssignmentMethod = YieldAssignmentMethod.Custom};
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop}, farm, field);
+
+            Assert.AreEqual(10000, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsHonoursFieldLevelNonCustom()
+        {
+            // Field-level yield assignment: a FIELD set to a modelled method is not derived, even if the farm is Custom.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
+
+            var farm = new Farm()
+                {UseFieldLevelYieldAssignement = true, YieldAssignmentMethod = YieldAssignmentMethod.Custom};
+            var field = new FieldSystemComponent() {YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData};
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop}, farm, field);
+
+            Assert.AreEqual(1234, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsDoesNotForce100PercentWhenGrazed()
+        {
+            // Regression guard: grazing removes product, so the all-returned rule must never apply to a grazed field.
+            // Fully utilized (100%) is the extreme case - the animals ate everything, so nothing is returned.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 1200, Year = 1985};
+            crop.GrazingViewItems.Add(new GrazingViewItem() {Start = new DateTime(1985, 6, 1), Utilization = 100});
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(0, crop.PercentageOfProductYieldReturnedToSoil, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsDoesNotChangeAnnualCrops()
+        {
+            // Regression guard: the 100% rule is perennial-specific; annual crops must be left untouched even with no
+            // harvest and no grazing.
+            var crop = new CropViewItem()
+                {CropType = CropType.Barley, PercentageOfProductYieldReturnedToSoil = 2, Yield = 3000, Year = 1985};
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(2, crop.PercentageOfProductYieldReturnedToSoil);
+        }
+
+        [TestMethod]
+        public void NoHarvestNoGrazingPerennialUsesYieldDirectlyEndToEnd()
+        {
+            // End-to-end guard for the fix: after UpdatePercentageReturnsForPerennials raises the return to 100% for a
+            // no-harvest / no-grazing perennial, plant C is computed from the yield directly (no gross-up) even for a
+            // non-Custom yield assignment method - i.e. the same result Custom would give.
+            var crop = new CropViewItem()
+            {
+                CropType = CropType.TameGrass,
+                PercentageOfProductYieldReturnedToSoil = 35,
+                Yield = 1000,
+                CarbonConcentration = 0.45,
+                MoistureContentOfCrop = 0.12,
+                Year = 1985,
+            };
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+            Assert.AreEqual(100, crop.PercentageOfProductYieldReturnedToSoil);
+
+            var farm = new Farm(); // default (non-Custom) yield assignment method
+            var carbonInputCalculator = new ICBMCarbonInputCalculator();
+
+            var plantCarbon = carbonInputCalculator.CalculatePlantCarbonInAgriculturalProduct(null, crop, farm);
+
+            // Yield used directly: 1000 * (1 - 0.12) * 0.45 = 396 (NOT grossed up to [1000 / (1 - 0.35)] * ... = 609)
+            Assert.AreEqual(396, plantCarbon, delta: 1);
         }
 
         #endregion
@@ -173,6 +885,80 @@ namespace H.Core.Test.Services
             Assert.AreEqual(CropType.Oats, itemAt2015.CropType);
             Assert.AreEqual(CropType.Wheat, itemAt2016.CropType);
             Assert.AreEqual(CropType.Oats, itemAt2017.CropType);
+        }
+
+        [TestMethod]
+        public void CreateDetailViewItemsKeepsSingleYearFertilizerOutOfTheRepeatedYears()
+        {
+            // The whole GUI path, not just the mapper: a rotation replays one component-screen item across several
+            // years, so this is where a cleared 'Repeats every year' has to actually take effect.
+            var wheat = new CropViewItem() {CropType = CropType.Wheat, Year = 2016};
+            var application = new FertilizerApplicationViewItem() {RepeatsInEveryYear = false};
+            wheat.FertilizerApplicationViewItems.Add(application);
+
+            // Set the amount after adding, as the interface does, so the crop item's cached N rate is updated by its
+            // own change handler. Setting it in an object initializer would leave that rate at zero and the assertions
+            // below would hold no matter what the mapper did.
+            application.AmountOfNitrogenApplied = 500;
+            Assert.AreEqual(500, wheat.NitrogenFertilizerRate, 0.0001, "test setup: the source must carry the rate");
+
+            var fieldSystemComponent = new FieldSystemComponent();
+            fieldSystemComponent.CropViewItems.Add(wheat);
+            fieldSystemComponent.CropViewItems.Add(new CropViewItem() {CropType = CropType.Oats, Year = 2017});
+            fieldSystemComponent.StartYear = 2014;
+            fieldSystemComponent.EndYear = 2017;
+            fieldSystemComponent.BeginOrderingAtStartYearOfRotation = true;
+
+            var farm = new Farm()
+            {
+                Defaults = new Defaults() {CarbonModellingStrategy = CarbonModellingStrategies.ICBM},
+                GeographicData = new GeographicData() {DefaultSoilData = new SoilData()},
+            };
+            farm.Components.Add(fieldSystemComponent);
+
+            _resultsService.CreateDetailViewItems(farm);
+
+            var result = _resultsService.GetStageState(farm).DetailsScreenViewCropViewItems;
+
+            var entered = result.Single(x => x.Year == 2016);
+            var replayed = result.Single(x => x.Year == 2014);
+
+            Assert.AreEqual(1, entered.FertilizerApplicationViewItems.Count, "the year it was entered against keeps it");
+            Assert.AreEqual(0, replayed.FertilizerApplicationViewItems.Count,
+                "the same crop replayed in an earlier year must not pick it up");
+
+            // The collection alone proves nothing: the nitrogen calculations read this cached rate, not the collection,
+            // so an emptied collection beside an untouched rate still put the fertilizer into every year's N2O.
+            Assert.AreEqual(500, entered.NitrogenFertilizerRate, 0.0001);
+            Assert.AreEqual(0, replayed.NitrogenFertilizerRate, 0.0001,
+                "a year with no application must carry no synthetic N rate");
+        }
+
+        [TestMethod]
+        public void MapDetailsScreenViewItemClearsTheCachedFlagsForAYearThatGetsNoCopy()
+        {
+            // The flags are cached fields kept current by the collections' change handlers. A year that adds nothing
+            // runs no handler, so the value the mapper copied has to be corrected explicitly.
+            var source = new CropViewItem() {CropType = CropType.TameGrass, Year = 2026, Area = 1};
+
+            source.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(2026, 8, 1), End = new DateTime(2026, 8, 1), RepeatsInEveryYear = false});
+            source.ManureApplicationViewItems.Add(new ManureApplicationViewItem()
+                {DateOfApplication = new DateTime(2026, 5, 1), RepeatsInEveryYear = false});
+            source.HayImportViewItems.Add(new HayImportViewItem()
+                {Date = new DateTime(2026, 9, 1), RepeatsInEveryYear = false});
+
+            Assert.IsTrue(source.HasHarvestViewItems, "test setup: the source's flags must be set");
+
+            var otherYear = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 1995);
+
+            Assert.IsFalse(otherYear.HasHarvestViewItems, "an empty harvest table must not report that it has one");
+            Assert.IsFalse(otherYear.HasManureApplicationViewItems);
+            Assert.IsFalse(otherYear.HasHayImportViewItems);
+
+            // What the stale flag actually broke: Eq 11.4.4-1 summed the empty table instead of using the yield.
+            otherYear.Yield = 3000;
+            Assert.AreEqual(3000, _resultsService.CalculateHarvest(otherYear), 0.0001);
         }
 
         [TestMethod]
