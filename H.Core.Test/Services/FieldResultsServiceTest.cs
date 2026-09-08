@@ -245,6 +245,71 @@ namespace H.Core.Test.Services
         }
 
         [TestMethod]
+        public void HarvestRepeatsInEveryYearByDefault()
+        {
+            // The algorithm document builds the historical period from the management the user specifies once, so
+            // repeating is the default and "this year only" is the exception. Farms saved before this property existed
+            // deserialize without it and keep this default deliberately.
+            Assert.IsTrue(new HarvestViewItem().RepeatsInEveryYear);
+        }
+
+        [TestMethod]
+        public void MapDetailsScreenViewItemCarriesARepeatingHarvestIntoOtherYears()
+        {
+            var source = new CropViewItem() {CropType = CropType.TameGrass, Year = 2020};
+            source.HarvestViewItems.Add(new HarvestViewItem()
+            {
+                Start = new DateTime(2020, 8, 1),
+                End = new DateTime(2020, 8, 2),
+                ForageActivity = ForageActivities.Hayed,
+                RepeatsInEveryYear = true,
+            });
+
+            var mapped = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 1995);
+
+            var copied = mapped.HarvestViewItems.Single();
+            Assert.AreEqual(1995, copied.Start.Year, "the year has to land on Start - GetHayHarvestsByYear filters on it");
+            Assert.AreEqual(1995, copied.End.Year);
+            Assert.AreEqual(8, copied.Start.Month, "only the year changes; the cut keeps its day of the year");
+        }
+
+        [TestMethod]
+        public void MapDetailsScreenViewItemDoesNotCarryAOneOffHarvestIntoAnotherYear()
+        {
+            var source = new CropViewItem() {CropType = CropType.TameGrass, Year = 2020};
+            source.HarvestViewItems.Add(new HarvestViewItem()
+            {
+                Start = new DateTime(2020, 8, 1),
+                End = new DateTime(2020, 8, 2),
+                ForageActivity = ForageActivities.Hayed,
+                RepeatsInEveryYear = false,
+            });
+
+            var mapped = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 1995);
+
+            Assert.AreEqual(0, mapped.HarvestViewItems.Count,
+                "an empty collection is what 'there was no harvest that year' means downstream");
+        }
+
+        [TestMethod]
+        public void MapDetailsScreenViewItemKeepsAOneOffHarvestInItsOwnYear()
+        {
+            var source = new CropViewItem() {CropType = CropType.TameGrass, Year = 2020};
+            source.HarvestViewItems.Add(new HarvestViewItem()
+            {
+                Start = new DateTime(2020, 8, 1),
+                End = new DateTime(2020, 8, 2),
+                ForageActivity = ForageActivities.Hayed,
+                RepeatsInEveryYear = false,
+            });
+
+            var mapped = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 2020);
+
+            Assert.AreEqual(1, mapped.HarvestViewItems.Count);
+            Assert.AreEqual(2020, mapped.HarvestViewItems.Single().Start.Year);
+        }
+
+        [TestMethod]
         public void MapDetailsScreenViewItemCopiesEveryCollectionRatherThanSharingInstances()
         {
             // Guard for all six collections at once: no generated year may share an instance with the source, or an

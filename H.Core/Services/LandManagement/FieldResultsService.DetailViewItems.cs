@@ -42,10 +42,23 @@ namespace H.Core.Services.LandManagement
 
             foreach (var harvestViewItem in viewItem.HarvestViewItems)
             {
+                // A one-off cut belongs only to the year it was entered, so no copy is made for any other year - an
+                // empty collection is exactly what "there was no harvest that year" means to everything downstream.
+                if (harvestViewItem.RepeatsInEveryYear == false && harvestViewItem.Start.Year != year)
+                {
+                    continue;
+                }
+
                 var copiedHarvestViewItem = _harvestViewItemMapper.Map(harvestViewItem);
 
-                // We need to update the year so that the current years' harvest items are copied back in time
+                // We need to update the year so that the current years' harvest items are copied back in time. The year
+                // has to land on Start (and End), not only DateCreated: GetHayHarvestsByYear filters on Start.Year, so
+                // stamping DateCreated alone left every copy matching the year the harvest was entered and no other,
+                // which defeated the copy. Repeating the management across the simulation is what the algorithm document
+                // describes - the historical period is built from the rotation the user specifies once.
                 copiedHarvestViewItem.DateCreated = new DateTime(year, harvestViewItem.DateCreated.Month, harvestViewItem.DateCreated.Day);
+                copiedHarvestViewItem.Start = new DateTime(year, harvestViewItem.Start.Month, harvestViewItem.Start.Day);
+                copiedHarvestViewItem.End = new DateTime(year, harvestViewItem.End.Month, harvestViewItem.End.Day);
 
                 result.HarvestViewItems.Add(copiedHarvestViewItem);
             }

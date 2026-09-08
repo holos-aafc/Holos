@@ -10145,6 +10145,24 @@ namespace H.Core.Properties {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Repeats every year.
+        /// </summary>
+        public static string LabelHarvestRepeatsInEveryYear {
+            get {
+                return ResourceManager.GetString("LabelHarvestRepeatsInEveryYear", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Checked means this harvest describes how the field is managed every year the crop is grown.
+        /// </summary>
+        public static string TooltipHarvestRepeatsInEveryYear {
+            get {
+                return ResourceManager.GetString("TooltipHarvestRepeatsInEveryYear", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to The share of this cut that is left on the field rather than removed as bales.
         /// </summary>
         public static string TooltipHarvestLossPercentage {

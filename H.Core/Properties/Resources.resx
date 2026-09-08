@@ -3749,6 +3749,12 @@
   <data name="LabelHarvestLoss" xml:space="preserve">
     <value>Harvest loss, left on field</value>
   </data>
+  <data name="LabelHarvestRepeatsInEveryYear" xml:space="preserve">
+    <value>Repeats every year</value>
+  </data>
+  <data name="TooltipHarvestRepeatsInEveryYear" xml:space="preserve">
+    <value>Checked means this harvest describes how the field is managed every year the crop is grown, so Holos applies it across the whole simulation. Clear it for a one-off cut that belongs only to the year you entered it.</value>
+  </data>
   <data name="TooltipHarvestLossPercentage" xml:space="preserve">
     <value>The share of this cut that is left on the field rather than removed as bales. Holos uses it as the percentage of product returned to soil for this perennial, shown on the Details screen.</value>
   </data>
