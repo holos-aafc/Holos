@@ -1488,9 +1488,9 @@ field=Hayed perennial | year=2024 | crop=TameGrass | PercentageOfProductYieldRet
 field=Hayed perennial | year=2024 | crop=TameGrass | PlantCarbonInAgriculturalProduct = 1513.3230
 field=Hayed perennial | year=2024 | crop=TameGrass | TotalCarbonInputs = 2976.3835
 field=Hayed perennial | year=2024 | crop=TameGrass | Yield = 16814.7000
-field=Hayed perennial | year=2025 | crop=TameGrass | AboveGroundCarbonInput = 56.5385
-field=Hayed perennial | year=2025 | crop=TameGrass | BelowGroundCarbonInput = 530.5861
+field=Hayed perennial | year=2025 | crop=TameGrass | AboveGroundCarbonInput = 240.2885
+field=Hayed perennial | year=2025 | crop=TameGrass | BelowGroundCarbonInput = 870.2381
 field=Hayed perennial | year=2025 | crop=TameGrass | PercentageOfProductYieldReturnedToSoil = 35.0000
-field=Hayed perennial | year=2025 | crop=TameGrass | PlantCarbonInAgriculturalProduct = 161.5385
-field=Hayed perennial | year=2025 | crop=TameGrass | TotalCarbonInputs = 3044.5600
-field=Hayed perennial | year=2025 | crop=TameGrass | Yield = 1166.6667
+field=Hayed perennial | year=2025 | crop=TameGrass | PlantCarbonInAgriculturalProduct = 686.5385
+field=Hayed perennial | year=2025 | crop=TameGrass | TotalCarbonInputs = 3567.9620
+field=Hayed perennial | year=2025 | crop=TameGrass | Yield = 4958.3333

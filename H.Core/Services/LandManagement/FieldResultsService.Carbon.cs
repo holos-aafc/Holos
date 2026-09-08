@@ -101,13 +101,19 @@ namespace H.Core.Services.LandManagement
 
         /// <summary>
         /// When the yield assignment method is Custom, a perennial hay/forage field's yield is taken from the biomass the
-        /// user actually harvested rather than a separately-typed or modelled value: Yield = Σ(hayed harvest wet biomass)
-        /// / area. This makes the entered harvest the single source of truth - it drives C_p and everything derived from
-        /// it. Non-Custom (modelled) methods keep their estimated yield; grain crops and fields without hayed harvests are
-        /// left untouched.
+        /// user actually harvested rather than a separately-typed or modelled value. This makes the entered harvest the
+        /// single source of truth - it drives C_p and everything derived from it. Non-Custom (modelled) methods keep
+        /// their estimated yield; grain crops and fields without hayed harvests are left untouched.
         ///
-        /// Wet biomass (<see cref="FieldActivityBase.AboveGroundBiomass"/>) is used because the pipeline treats Yield as
-        /// fresh weight (C_p multiplies it by 1 - moisture); using dry weight would remove moisture twice.
+        /// The two biomass figures are on different moisture bases and must be reconciled: a bale has been dried (around
+        /// 15% moisture) while Yield means the standing crop as it grew (around 80% for forage), and C_p multiplies Yield
+        /// by 1 - the CROP's moisture. Feeding the bale's wet weight in directly therefore strips ~80% of the mass off
+        /// material holding only ~15% water, understating the field's carbon several-fold. So we take the harvest's dry
+        /// matter and re-express it on the crop's basis:
+        ///
+        ///     Yield = Σ(hayed harvest dry matter) / (1 - crop moisture) / area
+        ///
+        /// which leaves Yield x (1 - crop moisture) equal to the dry matter actually baled off, as the pipeline expects.
         ///
         /// Grazed fields are excluded. Under a custom yield with grazing animals present, the algorithm document takes
         /// the entered yield to be the total aboveground biomass produced - what the animals ate plus what they left -
@@ -144,14 +150,50 @@ namespace H.Core.Services.LandManagement
                     continue;
                 }
 
-                var totalWetBiomass = hayedHarvests.Sum(harvest => harvest.AboveGroundBiomass);
-                if (totalWetBiomass <= 0)
+                var totalDryMatter = hayedHarvests.Sum(GetHarvestDryMatter);
+                if (totalDryMatter <= 0)
                 {
                     continue;
                 }
 
-                cropViewItem.Yield = totalWetBiomass / cropViewItem.Area;
+                // Re-express the baled dry matter on the crop's moisture basis so the pipeline's own moisture reduction
+                // recovers it. A crop recorded as all water leaves nothing to scale, so the existing yield is kept.
+                var dryMatterFraction = 1.0 - GetCropMoistureFraction(cropViewItem);
+                if (dryMatterFraction <= 0)
+                {
+                    continue;
+                }
+
+                // Both are set so the item stays self-consistent, matching CropViewItem.CalculateWetWeightYield.
+                cropViewItem.DryYield = totalDryMatter / cropViewItem.Area;
+                cropViewItem.Yield = cropViewItem.DryYield / dryMatterFraction;
             }
+        }
+
+        /// <summary>
+        /// The dry matter baled off in a hayed harvest. <see cref="FieldActivityBase.AboveGroundBiomassDryWeight"/> is
+        /// maintained whenever the bale count, bale weight or moisture changes, but is recomputed here from the wet
+        /// weight when it was never populated (an older saved farm, or an item built without going through those setters).
+        /// </summary>
+        private static double GetHarvestDryMatter(HarvestViewItem harvestViewItem)
+        {
+            if (harvestViewItem.AboveGroundBiomassDryWeight > 0)
+            {
+                return harvestViewItem.AboveGroundBiomassDryWeight;
+            }
+
+            return harvestViewItem.AboveGroundBiomass * (1.0 - (harvestViewItem.MoistureContentAsPercentage / 100.0));
+        }
+
+        /// <summary>
+        /// The crop's moisture content as a fraction. Some saved farms hold this as a percentage instead, which the carbon
+        /// calculator corrects when it runs; this method runs earlier, so it has to tolerate both forms.
+        /// </summary>
+        private static double GetCropMoistureFraction(CropViewItem cropViewItem)
+        {
+            var moistureContent = cropViewItem.MoistureContentOfCrop;
+
+            return moistureContent > 1 ? moistureContent / 100.0 : moistureContent;
         }
 
         /// <summary>

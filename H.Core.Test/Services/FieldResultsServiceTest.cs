@@ -350,33 +350,36 @@ namespace H.Core.Test.Services
         [TestMethod]
         public void UpdateYieldFromHarvestForCustomPerennialsSetsYieldFromHayedHarvest()
         {
-            // Custom + hay/forage perennial: yield comes from the harvested wet biomass. 20000 kg over 10 ha = 2000 kg/ha.
+            // Custom + hay/forage perennial. The bale dry matter is re-expressed on the crop's moisture basis, because
+            // the pipeline multiplies Yield by (1 - crop moisture): 17000 kg DM over 10 ha = 1700 kg DM/ha, and at 80%
+            // crop moisture that is a standing-crop yield of 1700 / 0.2 = 8500 kg/ha.
             var crop = new CropViewItem()
-                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985, MoistureContentOfCrop = 0.8};
             crop.HarvestViewItems.Add(new HarvestViewItem()
-                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 17000});
 
             _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
                 new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
 
-            Assert.AreEqual(2000, crop.Yield, 0.0001);
+            Assert.AreEqual(8500, crop.Yield, 0.0001);
+            Assert.AreEqual(1700, crop.DryYield, 0.0001);
         }
 
         [TestMethod]
         public void UpdateYieldFromHarvestForCustomPerennialsSumsMultipleCuts()
         {
-            // Two cuts (12000 + 8000 = 20000 kg wet) over 10 ha = 2000 kg/ha.
+            // Two cuts (12000 + 8000 = 20000 kg DM) over 10 ha at 80% crop moisture = 20000 / 0.2 / 10 = 10000 kg/ha.
             var crop = new CropViewItem()
-                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985, MoistureContentOfCrop = 0.8};
             crop.HarvestViewItems.Add(new HarvestViewItem()
-                {Start = new DateTime(1985, 6, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 12000});
+                {Start = new DateTime(1985, 6, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 12000});
             crop.HarvestViewItems.Add(new HarvestViewItem()
-                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 8000});
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 8000});
 
             _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
                 new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
 
-            Assert.AreEqual(2000, crop.Yield, 0.0001);
+            Assert.AreEqual(10000, crop.Yield, 0.0001);
         }
 
         [TestMethod]
@@ -423,6 +426,65 @@ namespace H.Core.Test.Services
         }
 
         [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsConvertsBaleWetWeightToTheCropMoistureBasis()
+        {
+            // A bale is dried (15% moisture) while Yield means the standing crop (80% moisture), and C_p multiplies
+            // Yield by (1 - crop moisture). Feeding the bale's wet weight straight in would strip 80% off material
+            // holding only 15% water. 17500 kg wet at 15% = 14875 kg DM; over 15 ha at 80% crop moisture that is
+            // 14875 / 0.2 / 15 = 4958.33 kg/ha - not the 1166.67 the raw wet weight would have given.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 15, Yield = 1234, Year = 1985, MoistureContentOfCrop = 0.8};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+            {
+                Start = new DateTime(1985, 8, 1),
+                ForageActivity = ForageActivities.Hayed,
+
+                // Built from bales rather than assigned directly: setting the bale count, weight or moisture recomputes
+                // both biomass figures, so assigning AboveGroundBiomass first would simply be overwritten.
+                TotalNumberOfBalesHarvested = 35,
+                BaleWeight = 500,
+                MoistureContentAsPercentage = 15,
+            });
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+
+            Assert.AreEqual(4958.3333, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsYieldTimesDryFractionRecoversTheBaledDryMatter()
+        {
+            // The property the pipeline depends on: whatever Yield we set, multiplying it by (1 - crop moisture) must
+            // give back the dry matter per hectare that was actually baled off the field.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 12, Yield = 1234, Year = 1985, MoistureContentOfCrop = 0.75};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 9000});
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+
+            Assert.AreEqual(9000d / 12d, crop.Yield * (1 - crop.MoistureContentOfCrop), 0.0001);
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestForCustomPerennialsToleratesMoistureStoredAsAPercentage()
+        {
+            // Some saved farms hold the crop moisture as a percentage rather than a fraction; the carbon calculator
+            // corrects that later, so this method has to cope with both forms rather than dividing by a negative.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985, MoistureContentOfCrop = 80};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 2000});
+
+            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
+                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+
+            Assert.AreEqual(1000, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
         public void UpdateYieldFromHarvestForCustomPerennialsDoesNotDeriveForGrazedField()
         {
             // Grazed + hayed under a custom yield: the algorithm document (note under Eq. 2.1.2-1) takes the entered
@@ -446,15 +508,15 @@ namespace H.Core.Test.Services
             // The grazing exclusion is scoped to the year: grazing in a different year must not block the derivation
             // for this year's hay harvest.
             var crop = new CropViewItem()
-                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985, MoistureContentOfCrop = 0.8};
             crop.HarvestViewItems.Add(new HarvestViewItem()
-                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 20000});
             crop.GrazingViewItems.Add(new GrazingViewItem() {Start = new DateTime(1984, 6, 1)});
 
             _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
                 new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
 
-            Assert.AreEqual(2000, crop.Yield, 0.0001);
+            Assert.AreEqual(10000, crop.Yield, 0.0001);
         }
 
         [TestMethod]
@@ -511,9 +573,9 @@ namespace H.Core.Test.Services
             // Field-level yield assignment: the FIELD's method (Custom) drives the derivation even though the farm-level
             // method is a modelled estimate.
             var crop = new CropViewItem()
-                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985, MoistureContentOfCrop = 0.8};
             crop.HarvestViewItems.Add(new HarvestViewItem()
-                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 20000});
 
             var farm = new Farm()
                 {UseFieldLevelYieldAssignement = true, YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData};
@@ -521,7 +583,7 @@ namespace H.Core.Test.Services
 
             _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop}, farm, field);
 
-            Assert.AreEqual(2000, crop.Yield, 0.0001);
+            Assert.AreEqual(10000, crop.Yield, 0.0001);
         }
 
         [TestMethod]
