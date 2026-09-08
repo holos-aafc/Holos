@@ -32,6 +32,11 @@ namespace H.Core.Services.LandManagement
             // Copy all manure applications to the detail view item
             foreach (var manureApplicationViewItem in viewItem.ManureApplicationViewItems)
             {
+                if (BelongsToAnotherYearOnly(manureApplicationViewItem, manureApplicationViewItem.DateOfApplication.Year, year))
+                {
+                    continue;
+                }
+
                 var copiedManureApplicationViewItem = _manureApplicationViewItemMapper.Map(manureApplicationViewItem);
 
                 // We need to update the year so that the current years' manure applications are copied back in time
@@ -42,9 +47,7 @@ namespace H.Core.Services.LandManagement
 
             foreach (var harvestViewItem in viewItem.HarvestViewItems)
             {
-                // A one-off cut belongs only to the year it was entered, so no copy is made for any other year - an
-                // empty collection is exactly what "there was no harvest that year" means to everything downstream.
-                if (harvestViewItem.RepeatsInEveryYear == false && harvestViewItem.Start.Year != year)
+                if (BelongsToAnotherYearOnly(harvestViewItem, harvestViewItem.Start.Year, year))
                 {
                     continue;
                 }
@@ -75,6 +78,11 @@ namespace H.Core.Services.LandManagement
 
             foreach (var hayImportViewItem in viewItem.HayImportViewItems)
             {
+                if (BelongsToAnotherYearOnly(hayImportViewItem, hayImportViewItem.Date.Year, year))
+                {
+                    continue;
+                }
+
                 var copiedHayImportViewItem = _hayImportViewItemMapper.Map(hayImportViewItem);
 
                 // We need to update the year so that the current years' hay import items are copied back in time
@@ -85,6 +93,11 @@ namespace H.Core.Services.LandManagement
 
             foreach (var fertilizerApplicationViewItem in viewItem.FertilizerApplicationViewItems)
             {
+                if (BelongsToAnotherYearOnly(fertilizerApplicationViewItem, viewItem.Year, year))
+                {
+                    continue;
+                }
+
                 var copiedFertilizerViewItem = _fertilizerViewItemMapper.Map(fertilizerApplicationViewItem);
 
                 // We need to update the year so that the current years' fertilizer applications are copied back in time
@@ -95,6 +108,11 @@ namespace H.Core.Services.LandManagement
 
             foreach (var digestateApplicationViewItem in viewItem.DigestateApplicationViewItems)
             {
+                if (BelongsToAnotherYearOnly(digestateApplicationViewItem, viewItem.Year, year))
+                {
+                    continue;
+                }
+
                 var copiedDigestateViewItem = _digestateViewItemMapper.Map(digestateApplicationViewItem);
 
                 // We need to update the year so that the current years' digestate applications are copied back in time
@@ -104,6 +122,26 @@ namespace H.Core.Services.LandManagement
             }
 
             return result;
+        }
+
+
+        /// <summary>
+        /// True when an entry is marked as happening in a single year and this is not that year, so no copy of it is
+        /// made. An empty collection is exactly what "this did not happen that year" means to everything downstream.
+        ///
+        /// Repeating is the default, matching the algorithm document's model of a historical period built from the
+        /// management the user specifies once.
+        ///
+        /// Callers pass the year the entry belongs to, which differs by type. Harvests, manure applications and hay
+        /// imports carry a management date the user sets. Fertilizer and digestate applications do not - their
+        /// DateCreated is a creation timestamp, not a date in the field - so they belong to the year of the crop item
+        /// they were entered against.
+        /// </summary>
+        private static bool BelongsToAnotherYearOnly(object activity, int yearItWasEntered, int yearBeingCreated)
+        {
+            return activity is IRepeatableFieldActivity repeatable
+                   && repeatable.RepeatsInEveryYear == false
+                   && yearItWasEntered != yearBeingCreated;
         }
 
         public FieldSystemDetailsStageState GetStageState(Farm farm)

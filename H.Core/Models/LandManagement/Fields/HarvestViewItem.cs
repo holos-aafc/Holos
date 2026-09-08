@@ -8,7 +8,7 @@ namespace H.Core.Models.LandManagement.Fields
     /// <summary>
     /// A class to hold harvest information so total yield calculations can be made.
     /// </summary>
-    public class HarvestViewItem : BaleActivityBase
+    public class HarvestViewItem : BaleActivityBase, IRepeatableFieldActivity
     {
         #region Fields
 
@@ -33,7 +33,7 @@ namespace H.Core.Models.LandManagement.Fields
 
             // Repeating the entered management across the simulation is the algorithm document's model - the historical
             // period is built from the rotation the user specifies once - so this is the default, and "this year only"
-            // is the exception a user chooses for a one-off cut. Farms saved before this property existed deserialize
+            // is the exception a user chooses for a cut that happened in a single year. Farms saved before this property existed deserialize
             // without it and so keep this default, which is deliberate: they get the corrected behaviour.
             this.RepeatsInEveryYear = true;
 
@@ -56,7 +56,7 @@ namespace H.Core.Models.LandManagement.Fields
 
         /// <summary>
         /// Whether this harvest describes management that recurs whenever the crop is grown, and so is carried into
-        /// every year of the simulation, or a one-off cut belonging only to the year it was entered.
+        /// every year of the simulation, or a cut that happened in a single year only.
         /// </summary>
         public bool RepeatsInEveryYear
         {

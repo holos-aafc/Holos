@@ -310,6 +310,107 @@ namespace H.Core.Test.Services
         }
 
         [TestMethod]
+        public void EveryRepeatableActivityRepeatsByDefault()
+        {
+            // Repeating is the norm - the algorithm document builds the historical period from the management the user
+            // specifies once. Items saved before these properties existed deserialize without them and keep this
+            // default deliberately, so their results do not change.
+            Assert.IsTrue(new HarvestViewItem().RepeatsInEveryYear);
+            Assert.IsTrue(new ManureApplicationViewItem().RepeatsInEveryYear);
+            Assert.IsTrue(new FertilizerApplicationViewItem().RepeatsInEveryYear);
+            Assert.IsTrue(new DigestateApplicationViewItem().RepeatsInEveryYear);
+            Assert.IsTrue(new HayImportViewItem().RepeatsInEveryYear);
+        }
+
+        [TestMethod]
+        public void MapDetailsScreenViewItemDoesNotCarryOneOffEntriesIntoAnotherYear()
+        {
+            var source = new CropViewItem() {CropType = CropType.TameGrass, Year = 2020};
+
+            source.ManureApplicationViewItems.Add(new ManureApplicationViewItem()
+                {DateOfApplication = new DateTime(2020, 4, 1), RepeatsInEveryYear = false});
+            source.FertilizerApplicationViewItems.Add(new FertilizerApplicationViewItem()
+                {DateCreated = new DateTime(2020, 5, 15), RepeatsInEveryYear = false});
+            source.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem()
+                {DateCreated = new DateTime(2020, 6, 10), RepeatsInEveryYear = false});
+            source.HayImportViewItems.Add(new HayImportViewItem()
+                {Date = new DateTime(2020, 7, 1), RepeatsInEveryYear = false});
+
+            var mapped = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 1995);
+
+            Assert.AreEqual(0, mapped.ManureApplicationViewItems.Count);
+            Assert.AreEqual(0, mapped.FertilizerApplicationViewItems.Count);
+            Assert.AreEqual(0, mapped.DigestateApplicationViewItems.Count);
+            Assert.AreEqual(0, mapped.HayImportViewItems.Count);
+        }
+
+        [TestMethod]
+        public void MapDetailsScreenViewItemKeepsOneOffEntriesInTheirOwnYear()
+        {
+            var source = new CropViewItem() {CropType = CropType.TameGrass, Year = 2020};
+
+            source.ManureApplicationViewItems.Add(new ManureApplicationViewItem()
+                {DateOfApplication = new DateTime(2020, 4, 1), RepeatsInEveryYear = false});
+            source.FertilizerApplicationViewItems.Add(new FertilizerApplicationViewItem()
+                {DateCreated = new DateTime(2020, 5, 15), RepeatsInEveryYear = false});
+            source.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem()
+                {DateCreated = new DateTime(2020, 6, 10), RepeatsInEveryYear = false});
+            source.HayImportViewItems.Add(new HayImportViewItem()
+                {Date = new DateTime(2020, 7, 1), RepeatsInEveryYear = false});
+
+            var mapped = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 2020);
+
+            Assert.AreEqual(1, mapped.ManureApplicationViewItems.Count);
+            Assert.AreEqual(1, mapped.FertilizerApplicationViewItems.Count);
+            Assert.AreEqual(1, mapped.DigestateApplicationViewItems.Count);
+            Assert.AreEqual(1, mapped.HayImportViewItems.Count);
+        }
+
+        [TestMethod]
+        public void MapDetailsScreenViewItemKeepsSingleYearFertilizerAndDigestateWithoutRelyingOnDateCreated()
+        {
+            // Fertilizer and digestate carry no management date. DateCreated is a creation timestamp that defaults to
+            // DateTime.MinValue, so keying off its year excluded a single-year entry from every year INCLUDING its own.
+            // They belong to the year of the crop item they were entered against.
+            var source = new CropViewItem() {CropType = CropType.Wheat, Year = 2026};
+
+            source.FertilizerApplicationViewItems.Add(new FertilizerApplicationViewItem()
+                {AmountOfNitrogenApplied = 500, RepeatsInEveryYear = false});
+            source.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem()
+                {AmountAppliedPerHectare = 40, RepeatsInEveryYear = false});
+
+            Assert.AreEqual(1, source.FertilizerApplicationViewItems[0].DateCreated.Year,
+                "guards against the assumption this test exists to prevent: DateCreated is not a management date");
+
+            var ownYear = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 2026);
+            Assert.AreEqual(1, ownYear.FertilizerApplicationViewItems.Count, "kept in the year it was entered against");
+            Assert.AreEqual(1, ownYear.DigestateApplicationViewItems.Count);
+
+            var otherYear = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 1995);
+            Assert.AreEqual(0, otherYear.FertilizerApplicationViewItems.Count, "not carried into any other year");
+            Assert.AreEqual(0, otherYear.DigestateApplicationViewItems.Count);
+        }
+
+        [TestMethod]
+        public void MapDetailsScreenViewItemCarriesRepeatingEntriesIntoOtherYears()
+        {
+            // Regression guard for the default: every collection still reaches a year it was not entered in.
+            var source = new CropViewItem() {CropType = CropType.TameGrass, Year = 2020};
+
+            source.ManureApplicationViewItems.Add(new ManureApplicationViewItem() {DateOfApplication = new DateTime(2020, 4, 1)});
+            source.FertilizerApplicationViewItems.Add(new FertilizerApplicationViewItem() {DateCreated = new DateTime(2020, 5, 15)});
+            source.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() {DateCreated = new DateTime(2020, 6, 10)});
+            source.HayImportViewItems.Add(new HayImportViewItem() {Date = new DateTime(2020, 7, 1)});
+
+            var mapped = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 1995);
+
+            Assert.AreEqual(1, mapped.ManureApplicationViewItems.Count);
+            Assert.AreEqual(1, mapped.FertilizerApplicationViewItems.Count);
+            Assert.AreEqual(1, mapped.DigestateApplicationViewItems.Count);
+            Assert.AreEqual(1, mapped.HayImportViewItems.Count);
+        }
+
+        [TestMethod]
         public void MapDetailsScreenViewItemCopiesEveryCollectionRatherThanSharingInstances()
         {
             // Guard for all six collections at once: no generated year may share an instance with the source, or an

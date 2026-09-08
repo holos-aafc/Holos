@@ -10303,18 +10303,18 @@ namespace H.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Repeats every year.
         /// </summary>
-        public static string LabelHarvestRepeatsInEveryYear {
+        public static string LabelRepeatsInEveryYear {
             get {
-                return ResourceManager.GetString("LabelHarvestRepeatsInEveryYear", resourceCulture);
+                return ResourceManager.GetString("LabelRepeatsInEveryYear", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to Checked means this harvest describes how the field is managed every year the crop is grown.
         /// </summary>
-        public static string TooltipHarvestRepeatsInEveryYear {
+        public static string TooltipRepeatsInEveryYear {
             get {
-                return ResourceManager.GetString("TooltipHarvestRepeatsInEveryYear", resourceCulture);
+                return ResourceManager.GetString("TooltipRepeatsInEveryYear", resourceCulture);
             }
         }
 

@@ -2967,7 +2967,7 @@
     <value>Grazing animal group</value>
   </data>
   <data name="LabelMultipleHarvestsCanBeMadeToThisField" xml:space="preserve">
-    <value>Multiple harvests can be made to this field throughout the year. To add a harvest, click 'Add Harvest Date' to specify the details. Harvested hay can be used as supplemental feed for grazing animals. Go to the 'Grazing' tab to add this supplement. All bale weights should be the wet weight. A harvest marked 'Repeats every year' describes how this field is managed whenever the crop is grown, so Holos applies it to every year of the simulation - clear that box for a one-off cut belonging only to the year you entered it.</value>
+    <value>Multiple harvests can be made to this field throughout the year. To add a harvest, click 'Add Harvest Date' to specify the details. Harvested hay can be used as supplemental feed for grazing animals. Go to the 'Grazing' tab to add this supplement. All bale weights should be the wet weight. A harvest marked 'Repeats every year' describes how this field is managed whenever the crop is grown, so Holos applies it to every year of the simulation. Clear that box if the cut happened in a single year only - the year you entered it.</value>
   </data>
   <data name="LabelMultipleFertilizerApplicationsCanBeMadeToThisField" xml:space="preserve">
     <value>Multiple fertilizer applications can be made to this field throughout the year. To add a fertilizer application, click 'Add Fertilizer Application' to specify the details.</value>
@@ -3752,11 +3752,11 @@
   <data name="LabelHarvestLoss" xml:space="preserve">
     <value>Harvest loss, left on field</value>
   </data>
-  <data name="LabelHarvestRepeatsInEveryYear" xml:space="preserve">
+  <data name="LabelRepeatsInEveryYear" xml:space="preserve">
     <value>Repeats every year</value>
   </data>
-  <data name="TooltipHarvestRepeatsInEveryYear" xml:space="preserve">
-    <value>Checked means this harvest describes how the field is managed every year the crop is grown, so Holos applies it across the whole simulation. Clear it for a one-off cut that belongs only to the year you entered it.</value>
+  <data name="TooltipRepeatsInEveryYear" xml:space="preserve">
+    <value>Checked means this entry describes how the field is managed every year the crop is grown, so Holos applies it to every year of the simulation. Clear it if it happened in a single year only - the year you entered it.</value>
   </data>
   <data name="SummaryActivityGrazedAndHayed" xml:space="preserve">
     <value>This field was grazed and hayed in {0}.</value>

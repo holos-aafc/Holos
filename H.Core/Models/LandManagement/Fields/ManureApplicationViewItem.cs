@@ -16,9 +16,11 @@ namespace H.Core.Models.LandManagement.Fields
     /// <summary>
     /// A class to specify the details of one application of manure to a field.
     /// </summary>
-    public class ManureApplicationViewItem : ManureItemBase
+    public class ManureApplicationViewItem : ManureItemBase, IRepeatableFieldActivity
     {
         #region Fields
+
+        private bool _repeatsInEveryYear;
 
         private DateTime _dateOfApplication;
 
@@ -37,6 +39,8 @@ namespace H.Core.Models.LandManagement.Fields
 
         public ManureApplicationViewItem()
         {
+            this.RepeatsInEveryYear = true;
+
             this.DateOfApplication = DateTime.Now;
             this.ManureLocationSourceType = ManureLocationSourceType.Livestock;
             this.DefaultManureCompositionData = new DefaultManureCompositionData();
@@ -49,6 +53,18 @@ namespace H.Core.Models.LandManagement.Fields
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// See <see cref="IRepeatableFieldActivity.RepeatsInEveryYear"/>. Defaults to true: the algorithm document
+        /// builds the historical period from the management the user specifies once, so repeating is the norm and a
+        /// entry happening in a single year is the exception. Items saved before this property existed deserialize without it and keep
+        /// that default deliberately.
+        /// </summary>
+        public bool RepeatsInEveryYear
+        {
+            get => _repeatsInEveryYear;
+            set => SetProperty(ref _repeatsInEveryYear, value);
+        }
 
         public DateTime DateOfApplication
         {

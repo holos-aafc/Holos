@@ -8,9 +8,11 @@ namespace H.Core.Models.LandManagement.Fields
     /// <summary>
     /// Used on fields in the dry season to add forage for animals grazing on a field
     /// </summary>
-    public class HayImportViewItem : BaleActivityBase
+    public class HayImportViewItem : BaleActivityBase, IRepeatableFieldActivity
     {
         #region Fields
+
+        private bool _repeatsInEveryYear;
 
         private DateTime _date;
         private ResourceSourceLocation _sourceOfBales;
@@ -23,6 +25,8 @@ namespace H.Core.Models.LandManagement.Fields
 
         public HayImportViewItem()
         {
+            this.RepeatsInEveryYear = true;
+
             this.Date = DateTime.Now;
 
             this.PropertyChanged -= OnPropertyChanged;
@@ -32,6 +36,18 @@ namespace H.Core.Models.LandManagement.Fields
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// See <see cref="IRepeatableFieldActivity.RepeatsInEveryYear"/>. Defaults to true: the algorithm document
+        /// builds the historical period from the management the user specifies once, so repeating is the norm and a
+        /// entry happening in a single year is the exception. Items saved before this property existed deserialize without it and keep
+        /// that default deliberately.
+        /// </summary>
+        public bool RepeatsInEveryYear
+        {
+            get => _repeatsInEveryYear;
+            set => SetProperty(ref _repeatsInEveryYear, value);
+        }
 
         /// <summary>
         /// The date the hay was added to the field

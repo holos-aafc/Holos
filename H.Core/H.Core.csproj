@@ -405,6 +405,7 @@
     <Compile Include="Models\LandManagement\Fields\FieldSystemComponent.cs" />
     <Compile Include="Models\LandManagement\Fields\FieldSystemDetailsStageState.cs" />
     <Compile Include="Models\LandManagement\Fields\GrazingViewItem.cs" />
+    <Compile Include="Models\LandManagement\Fields\IRepeatableFieldActivity.cs" />
     <Compile Include="Models\LandManagement\Fields\HarvestViewItem.cs" />
     <Compile Include="Models\LandManagement\Fields\ManureApplicationViewItem.cs" />
     <Compile Include="Models\LandManagement\Rotation\RotationComponent.cs" />
