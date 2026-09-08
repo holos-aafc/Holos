@@ -141,59 +141,10 @@ namespace H.Core.Services.LandManagement
                     continue;
                 }
 
-                var hayedHarvests = cropViewItem.GetHayHarvests()
-                    .Where(harvest => harvest.ForageActivity == ForageActivities.Hayed)
-                    .ToList();
-
-                if (hayedHarvests.Any() == false)
-                {
-                    continue;
-                }
-
-                var totalDryMatter = hayedHarvests.Sum(GetHarvestDryMatter);
-                if (totalDryMatter <= 0)
-                {
-                    continue;
-                }
-
-                // Re-express the baled dry matter on the crop's moisture basis so the pipeline's own moisture reduction
-                // recovers it. A crop recorded as all water leaves nothing to scale, so the existing yield is kept.
-                var dryMatterFraction = 1.0 - GetCropMoistureFraction(cropViewItem);
-                if (dryMatterFraction <= 0)
-                {
-                    continue;
-                }
-
-                // Both are set so the item stays self-consistent, matching CropViewItem.CalculateWetWeightYield.
-                cropViewItem.DryYield = totalDryMatter / cropViewItem.Area;
-                cropViewItem.Yield = cropViewItem.DryYield / dryMatterFraction;
+                // The derivation itself lives on the view item so the component selection screen and this pipeline
+                // cannot drift apart; everything above is the policy about when it may run.
+                cropViewItem.CalculateYieldFromHayHarvests();
             }
-        }
-
-        /// <summary>
-        /// The dry matter baled off in a hayed harvest. <see cref="FieldActivityBase.AboveGroundBiomassDryWeight"/> is
-        /// maintained whenever the bale count, bale weight or moisture changes, but is recomputed here from the wet
-        /// weight when it was never populated (an older saved farm, or an item built without going through those setters).
-        /// </summary>
-        private static double GetHarvestDryMatter(HarvestViewItem harvestViewItem)
-        {
-            if (harvestViewItem.AboveGroundBiomassDryWeight > 0)
-            {
-                return harvestViewItem.AboveGroundBiomassDryWeight;
-            }
-
-            return harvestViewItem.AboveGroundBiomass * (1.0 - (harvestViewItem.MoistureContentAsPercentage / 100.0));
-        }
-
-        /// <summary>
-        /// The crop's moisture content as a fraction. Some saved farms hold this as a percentage instead, which the carbon
-        /// calculator corrects when it runs; this method runs earlier, so it has to tolerate both forms.
-        /// </summary>
-        private static double GetCropMoistureFraction(CropViewItem cropViewItem)
-        {
-            var moistureContent = cropViewItem.MoistureContentOfCrop;
-
-            return moistureContent > 1 ? moistureContent / 100.0 : moistureContent;
         }
 
         /// <summary>
