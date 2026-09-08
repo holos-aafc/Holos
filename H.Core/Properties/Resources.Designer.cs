@@ -10120,6 +10120,15 @@ namespace H.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to You have entered harvest data, but the yield is using the estimate from the selected yield assignment method.
         /// </summary>
+        /// <summary>
+        ///   Looks up a localized string similar to The yields below come from the hay harvests you entered on the Harvest tab.
+        /// </summary>
+        public static string MessageHarvestDataDrivingYield {
+            get {
+                return ResourceManager.GetString("MessageHarvestDataDrivingYield", resourceCulture);
+            }
+        }
+
         public static string MessageHarvestDataNotUsedForYield {
             get {
                 return ResourceManager.GetString("MessageHarvestDataNotUsedForYield", resourceCulture);
@@ -10141,6 +10150,153 @@ namespace H.Core.Properties {
         public static string LabelHarvestLoss {
             get {
                 return ResourceManager.GetString("LabelHarvestLoss", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to This field was grazed and hayed in {0}.
+        /// </summary>
+        public static string SummaryActivityGrazedAndHayed {
+            get {
+                return ResourceManager.GetString("SummaryActivityGrazedAndHayed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to This field was grazed in {0}.
+        /// </summary>
+        public static string SummaryActivityGrazed {
+            get {
+                return ResourceManager.GetString("SummaryActivityGrazed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to This field was hayed in {0}.
+        /// </summary>
+        public static string SummaryActivityHayed {
+            get {
+                return ResourceManager.GetString("SummaryActivityHayed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to This field was neither grazed nor hayed in {0}.
+        /// </summary>
+        public static string SummaryActivityNeither {
+            get {
+                return ResourceManager.GetString("SummaryActivityNeither", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Yield: from your harvest - the {0} bale(s) you entered.
+        /// </summary>
+        public static string SummaryYieldFromHarvest {
+            get {
+                return ResourceManager.GetString("SummaryYieldFromHarvest", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Yield: calculated from the forage your animals ate, not from the selec...
+        /// </summary>
+        public static string SummaryYieldFromGrazing {
+            get {
+                return ResourceManager.GetString("SummaryYieldFromGrazing", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Yield: the value you entered, taken to be all the biomass grown - what...
+        /// </summary>
+        public static string SummaryYieldEnteredAsTotalBiomass {
+            get {
+                return ResourceManager.GetString("SummaryYieldEnteredAsTotalBiomass", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Yield: an estimate from the selected yield assignment method.
+        /// </summary>
+        /// <summary>
+        ///   Looks up a localized string similar to Your harvest is not used as this field's yield - a regional estimate is used instead.
+        /// </summary>
+        public static string SummaryYieldEstimateWithHarvest {
+            get {
+                return ResourceManager.GetString("SummaryYieldEstimateWithHarvest", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Its yield is a regional estimate.
+        /// </summary>
+        public static string SummaryYieldEstimate {
+            get {
+                return ResourceManager.GetString("SummaryYieldEstimate", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Yield: the value you entered.
+        /// </summary>
+        public static string SummaryYieldEntered {
+            get {
+                return ResourceManager.GetString("SummaryYieldEntered", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Yield: a value you set yourself, which Holos no longer recalculates.
+        /// </summary>
+        public static string SummaryYieldOverridden {
+            get {
+                return ResourceManager.GetString("SummaryYieldOverridden", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Returned to soil: all of it - nothing removed product from this field.
+        /// </summary>
+        public static string SummaryReturnedAll {
+            get {
+                return ResourceManager.GetString("SummaryReturnedAll", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Returned to soil: {0:F0}%, the share the cut left on the field.
+        /// </summary>
+        public static string SummaryReturnedAfterCut {
+            get {
+                return ResourceManager.GetString("SummaryReturnedAfterCut", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Returned to soil: {0:F0}%, the share the animals left.
+        /// </summary>
+        public static string SummaryReturnedAfterGrazing {
+            get {
+                return ResourceManager.GetString("SummaryReturnedAfterGrazing", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Returned to soil: {0:F0}%, after both the forage eaten and the hay bal...
+        /// </summary>
+        public static string SummaryReturnedBothRemovals {
+            get {
+                return ResourceManager.GetString("SummaryReturnedBothRemovals", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Returned to soil: a value you set yourself, which Holos no longer reca...
+        /// </summary>
+        public static string SummaryReturnedOverridden {
+            get {
+                return ResourceManager.GetString("SummaryReturnedOverridden", resourceCulture);
             }
         }
 

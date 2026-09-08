@@ -3713,6 +3713,9 @@
   <data name="TooltipYieldSourceEntered" xml:space="preserve">
     <value>Entered by you. This yield is the value you typed for this year.</value>
   </data>
+  <data name="MessageHarvestDataDrivingYield" xml:space="preserve">
+    <value>Perennial fields with a hay harvest take their yield from the harvests you entered on the Harvest tab. Those yields are calculated for you, so they cannot be typed over here - turn on 'Advanced input editing' if you need to change one.</value>
+  </data>
   <data name="MessageHarvestDataNotUsedForYield" xml:space="preserve">
     <value>You have entered harvest data, but the yield is using the estimate from the selected yield assignment method. Select the 'Custom' yield assignment method to use your entered harvest as the yield.</value>
   </data>
@@ -3754,6 +3757,54 @@
   </data>
   <data name="TooltipHarvestRepeatsInEveryYear" xml:space="preserve">
     <value>Checked means this harvest describes how the field is managed every year the crop is grown, so Holos applies it across the whole simulation. Clear it for a one-off cut that belongs only to the year you entered it.</value>
+  </data>
+  <data name="SummaryActivityGrazedAndHayed" xml:space="preserve">
+    <value>This field was grazed and hayed in {0}.</value>
+  </data>
+  <data name="SummaryActivityGrazed" xml:space="preserve">
+    <value>This field was grazed in {0}.</value>
+  </data>
+  <data name="SummaryActivityHayed" xml:space="preserve">
+    <value>This field was hayed in {0}.</value>
+  </data>
+  <data name="SummaryActivityNeither" xml:space="preserve">
+    <value>This field was neither grazed nor hayed in {0}.</value>
+  </data>
+  <data name="SummaryYieldFromHarvest" xml:space="preserve">
+    <value>Your harvest is this field's yield - the {0} bale(s) you entered.</value>
+  </data>
+  <data name="SummaryYieldFromGrazing" xml:space="preserve">
+    <value>Its yield is calculated from the forage the animals ate, rather than from a regional estimate.</value>
+  </data>
+  <data name="SummaryYieldEnteredAsTotalBiomass" xml:space="preserve">
+    <value>Its yield is the value entered on the Details screen, taken to be all the biomass grown - what the animals ate plus what they left.</value>
+  </data>
+  <data name="SummaryYieldEstimateWithHarvest" xml:space="preserve">
+    <value>Your harvest is not used as this field's yield - a regional estimate is used instead. To use it, choose the 'Custom' method on the Details screen.</value>
+  </data>
+  <data name="SummaryYieldEstimate" xml:space="preserve">
+    <value>Its yield is a regional estimate.</value>
+  </data>
+  <data name="SummaryYieldEntered" xml:space="preserve">
+    <value>Its yield is the value entered on the Details screen.</value>
+  </data>
+  <data name="SummaryYieldOverridden" xml:space="preserve">
+    <value>Its yield is a value set by hand on the Details screen, which Holos no longer recalculates.</value>
+  </data>
+  <data name="SummaryReturnedAll" xml:space="preserve">
+    <value>All of the product is returned to the soil - nothing removed it from this field.</value>
+  </data>
+  <data name="SummaryReturnedAfterCut" xml:space="preserve">
+    <value>Your harvest sets how much of the crop is left on the field, from the harvest loss you entered.</value>
+  </data>
+  <data name="SummaryReturnedAfterGrazing" xml:space="preserve">
+    <value>The share the animals leave is returned to the soil, from the utilization rate of the grazing system.</value>
+  </data>
+  <data name="SummaryReturnedBothRemovals" xml:space="preserve">
+    <value>What is left after both the forage eaten and the hay baled off is returned to the soil.</value>
+  </data>
+  <data name="SummaryReturnedOverridden" xml:space="preserve">
+    <value>The share returned to the soil is a value set by hand on the Details screen, which Holos no longer recalculates.</value>
   </data>
   <data name="TooltipHarvestLossPercentage" xml:space="preserve">
     <value>The share of this cut that is left on the field rather than removed as bales. Holos uses it as the percentage of product returned to soil for this perennial, shown on the Details screen.</value>
