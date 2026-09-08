@@ -77,7 +77,7 @@ namespace H.Core.Services.LandManagement
                 // We need to update the year so that the current years' fertilizer applications are copied back in time
                 copiedFertilizerViewItem.DateCreated = new DateTime(year, fertilizerApplicationViewItem.DateCreated.Month, fertilizerApplicationViewItem.DateCreated.Day);
 
-                result.FertilizerApplicationViewItems.Add(fertilizerApplicationViewItem);
+                result.FertilizerApplicationViewItems.Add(copiedFertilizerViewItem);
             }
 
             foreach (var digestateApplicationViewItem in viewItem.DigestateApplicationViewItems)
@@ -87,7 +87,7 @@ namespace H.Core.Services.LandManagement
                 // We need to update the year so that the current years' digestate applications are copied back in time
                 copiedDigestateViewItem.DateCreated = new DateTime(year, digestateApplicationViewItem.DateCreated.Month, digestateApplicationViewItem.DateCreated.Day);
 
-                result.DigestateApplicationViewItems.Add(digestateApplicationViewItem);
+                result.DigestateApplicationViewItems.Add(copiedDigestateViewItem);
             }
 
             return result;

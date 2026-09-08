@@ -166,6 +166,9 @@ namespace H.Core.Services.LandManagement
         ///   loss is exactly the fraction of product left on the field. Only hayed harvests are wired here - silage / swath
         ///   harvests keep their own established returns (their harvest-loss default is a placeholder that does not
         ///   represent a returned-to-soil fraction).
+        /// - Grazed: what remains is what the animals did not eat, so the return is 1 - utilization (note under
+        ///   Eq. 2.1.2-20). This applies whether or not the field was also hayed, because the utilization already
+        ///   describes the whole standing crop.
         ///
         /// This method has to be called after we assign yields.
         /// </summary>
@@ -199,7 +202,33 @@ namespace H.Core.Services.LandManagement
                         cropViewItem.PercentageOfProductYieldReturnedToSoil = harvestLoss;
                     }
                 }
+                else
+                {
+                    // Grazed: what stays on the field is what the animals did not eat, i.e. 1 - utilization (note under
+                    // Eq. 2.1.2-20). The carbon calculator derived this privately and never wrote it back, so the value
+                    // shown on the details screen stayed at the crop-type default and disagreed with the calculation.
+                    // A non-positive utilization means the grazing items are uninitialized, so the default is kept.
+                    var utilization = GetAverageUtilizationForTheYear(cropViewItem);
+                    if (utilization > 0)
+                    {
+                        cropViewItem.PercentageOfProductYieldReturnedToSoil = 100 - utilization;
+                    }
+                }
             }
+        }
+
+        /// <summary>
+        /// The average grazing utilization rate for the view item's own year. Scoped to the year to match
+        /// <see cref="CropViewItem.HasGrazingItemsForTheCurrentYear"/>, which decides whether the grazed branch applies -
+        /// <see cref="CropViewItem.GetAverageUtilizationFromGrazingAnimals"/> averages every grazing item regardless of year.
+        /// </summary>
+        private static double GetAverageUtilizationForTheYear(CropViewItem cropViewItem)
+        {
+            var grazingForTheYear = cropViewItem.GrazingViewItems
+                .Where(grazing => grazing.Start.Year == cropViewItem.Year)
+                .ToList();
+
+            return grazingForTheYear.Any() ? grazingForTheYear.Average(grazing => grazing.Utilization) : 0;
         }
 
         /// <summary>
