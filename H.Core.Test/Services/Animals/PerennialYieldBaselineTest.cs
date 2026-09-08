@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -119,6 +119,41 @@ namespace H.Core.Test.Services.Animals
             }
 
             farm.Components.Add(hayField);
+
+            // The field the hay field was copied from keeps its grazing animals and now also gets a hay cut, so the
+            // fixture covers the grazed-and-hayed case as well - the one Eq. 11.3.2-5 / -7 combine, and the one no
+            // fixture reached before.
+            //
+            // That case only arises under a modelled method, because IsNonSwathingGrazingScenario excludes Custom, so
+            // the two fields are given different methods through field-level assignment. This keeps one fixture for
+            // both cases and exercises the per-field method resolution at the same time.
+            farm.UseFieldLevelYieldAssignement = true;
+            hayField.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
+            sourceField.YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData;
+
+            foreach (var cropViewItem in sourceField.CropViewItems.Where(crop => crop.CropType.IsPerennial()))
+            {
+                cropViewItem.HarvestViewItems.Add(new HarvestViewItem()
+                {
+                    Start = new DateTime(cropViewItem.Year, 8, 1),
+                    End = new DateTime(cropViewItem.Year, 8, 2),
+                    ForageActivity = ForageActivities.Hayed,
+                    TotalNumberOfBalesHarvested = 20,
+                    BaleWeight = 500,
+                    MoistureContentAsPercentage = 15,
+                    HarvestLossPercentage = 35,
+                    FieldGuid = sourceField.Guid,
+                });
+            }
+
+            // NOTE: a third field for the grazed-AND-hayed case under the CUSTOM method was tried and does not
+            // work. FieldComponentHelper.Replicate copies the grazing view items, but InitializeGrazingViewItems
+            // rebuilds a field's grazing from the animal components by matching PastureLocation against the field's
+            // Guid, so a replicated field - which has a new Guid no management period points at - has its grazing
+            // cleared and behaves as hayed-only. Grazing cannot be synthesised by copying; it would need an animal
+            // component pointed at the new field. Since the animals point at Field #4, that field can be modelled-and-
+            // grazed or custom-and-grazed but not both, and the modelled case is the one carrying the Eq. 11.3.2-5/-7
+            // hay term. The custom-and-grazed branch is covered by unit tests in ICBMCarbonInputCalculatorTest instead.
 
             // Force the detail view items to be rebuilt from the component data when the baseline runs.
             farm.StageStates.Clear();
