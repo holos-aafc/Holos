@@ -1,4 +1,4 @@
-# Make the entered hay harvest the source of a perennial field's yield
+﻿# Make the entered hay harvest the source of a perennial field's yield
 
 Branches: `feature/hay-yield-single-source` (this repo) and
 `feature/hay-yield-single-source-gui` (views). Both are needed; the views branch will not build
@@ -46,7 +46,17 @@ in amber, survives recalculation, and can be undone with **Reset overrides**.
 - **A hay harvest is carried across the simulation**, which is what the document describes - the
   historical period is built from the rotation the user specifies once. The year stamp was landing on
   `DateCreated` while the code that reads harvests filters on `Start.Year`, so a harvest only ever
-  applied to the year it was entered. A per-harvest **Repeats every year** checkbox marks the exception.
+  applied to the year it was entered. A per-harvest **Repeats every year** checkbox marks the exception,
+  and the same control is offered on the Fertilizer and supplemental hay tables.
+- **Cached values are recomputed with the collections they summarise.** A crop view item caches the
+  N-P-K-S rates and the "has any" flags for its collections, and the nitrogen calculations read the
+  cached rate rather than summing the fertilizer applications. A year kept out of a repeat therefore
+  still carried its full nitrogen rate into the synthetic N2O, and a year with no harvest made
+  `CalculateHarvest` (Eq. 11.4.4-1) sum an empty table instead of falling back to the year's yield.
+- **The hay cut off a grazed field is accounted for.** For a field both grazed and hayed, the carbon in
+  the baled hay was in neither what the field produced nor what was removed from it, so the residue the
+  cut leaves behind was never counted as an input. Eq. 11.3.2-8 subtracts both removals - the modelling
+  team confirmed the document's sign error.
 - **The yield assignment method is resolved per field** in the grazing paths, which read the farm-level
   method directly and would have ignored field-level assignment.
 - **The fertilizer and digestate copy loops added the original item rather than the mapped copy**, so
@@ -68,7 +78,7 @@ version bump and release note are still outstanding and should land before relea
 
 ## Testing
 
-`H.Core` is green at 1301 passed / 0 failed / 14 skipped.
+`H.Core` is green at 1328 passed / 0 failed / 14 skipped.
 
 The existing golden baselines could not see any of this work - they call `CalculateFinalResults`,
 which does not rebuild the detail view items, while these adjustments run inside
@@ -80,13 +90,22 @@ year. Regenerate the fixture with `HOLOS_BUILD_FIXTURES=1` and the baselines wit
 
 Every GUI change has been exercised in the running application.
 
+## Deliberately not included
+
+**Repeats every year is not offered on the Manure or Digestate tables.** Holos answers "which year does
+this application belong to?" two different ways: the carbon and N2O calculations resolve it from the
+date on the application, while `ManureCarbonInputsFromManureOnly` and a recalculation in `CarbonService`
+use whichever years hold a copy of it. An application dated outside its own crop row's year is counted
+in a different year by each - one fixture field has an imported application on a 2026 row dated
+2025-01-01. No default preserves existing results and makes the checkbox honest at the same time, so the
+control is withheld rather than shipped inert. The question is written up for the modelling team.
+
 ## Still outstanding
 
-- Version bump, release note, and a first-open notice for the results change.
-- User Guide updates, English and French, plus `fr-CA` translations for the strings added here.
-- Scenario 4 of the flow diagrams (a field both grazed and hayed) is undrawn, and the hay-export term
-  of Eq. 11.3.2-5/-7 is not implemented for that case - it is blocked on confirming the sign of
-  Eq. 11.3.2-8 against the formatted algorithm document.
+- Version bump to 4.0.1.135. The changelog entry is written; the `H.csproj` bump is not in this branch.
+- A changelog line for the Fertilizer and supplemental hay toggles - the existing entry covers only the
+  Harvest tab.
+- French: `UserGuide_French.md` and `fr-CA` strings for everything added here.
 - Four corrections for the algorithm document authors are written up separately, the substantive one
   being that Eq. 2.1.2-1 states the harvest-loss gross-up as an addition where its own Eq. 2.1.2-20 and
   Eq. 11.3.2-5 require a division.
