@@ -2967,7 +2967,7 @@
     <value>Grazing animal group</value>
   </data>
   <data name="LabelMultipleHarvestsCanBeMadeToThisField" xml:space="preserve">
-    <value>Multiple harvests can be made to this field throughout the year. To add a harvest, click 'Add Harvest Date' to specify the details. Harvested hay can be used as supplemental feed for grazing animals. Go to the 'Grazing' tab to add this supplement. All bale weights should be the wet weight.</value>
+    <value>Multiple harvests can be made to this field throughout the year. To add a harvest, click 'Add Harvest Date' to specify the details. Harvested hay can be used as supplemental feed for grazing animals. Go to the 'Grazing' tab to add this supplement. All bale weights should be the wet weight. A harvest marked 'Repeats every year' describes how this field is managed whenever the crop is grown, so Holos applies it to every year of the simulation - clear that box for a one-off cut belonging only to the year you entered it.</value>
   </data>
   <data name="LabelMultipleFertilizerApplicationsCanBeMadeToThisField" xml:space="preserve">
     <value>Multiple fertilizer applications can be made to this field throughout the year. To add a fertilizer application, click 'Add Fertilizer Application' to specify the details.</value>
