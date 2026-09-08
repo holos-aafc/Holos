@@ -657,10 +657,14 @@ namespace H.Core.Test.Calculators.Carbon
                 MoistureContentOfCrop = 0.12,
                 YearInPerennialStand = 1,
                 PlantCarbonInAgriculturalProduct = 20,
+
+                // The grazed branch is scoped to the item's own year, so the year and the grazing period have to agree.
+                Year = 1985,
             };
 
             var grazingViewItem = new GrazingViewItem();
             grazingViewItem.Utilization = 55;
+            grazingViewItem.Start = new DateTime(1985, 6, 1);
 
             currentYearViewItem.GrazingViewItems.Add(grazingViewItem);
 
@@ -1338,6 +1342,194 @@ namespace H.Core.Test.Calculators.Carbon
         /// expected values differ only by the harvest-loss gross-up: custom gives 1000 * 0.45 = 450, while a modelled
         /// method gives 1000 / (1 - 0.35) * 0.45 = 692.31.
         /// </summary>
+        /// <summary>
+        /// A field that is both grazed and hayed in the same year, with round numbers chosen so the expected values can
+        /// be checked by hand. The animals ate 1000 kg C at a utilization that implies 1667 kg C grew, and 500 kg C was
+        /// baled off at a 35% harvest loss, implying a further 500 / 0.65 = 769.23 kg C grew.
+        ///
+        ///     plant carbon  = 1667 + 769.23                = 2436.23 kg C ha^-1
+        ///     returned      = 2436.23 - 1000 (eaten) - 500 (baled) =  936.23 kg C ha^-1
+        ///
+        /// Before the hay term existed these were 1667 and 667: the hay was modelled as though it had never been cut,
+        /// and the 269 kg C of residue the cut left behind went uncounted.
+        /// </summary>
+        private Farm CreateGrazedAndHayedFarm(out CropViewItem viewItem)
+        {
+            var farm = CreateGrazedFieldFarm(out viewItem, out var field);
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData;
+            farm.Defaults.CarbonConcentration = 0.45;
+
+            viewItem.Area = 1;
+            viewItem.TotalCarbonLossesByGrazingAnimals = 1667;
+            viewItem.TotalCarbonUptakeByAnimals = 1000;
+            viewItem.TotalCarbonLossFromBaleExports = 500;
+
+            viewItem.HarvestViewItems.Add(new HarvestViewItem()
+            {
+                Start = new DateTime(1985, 8, 1),
+                ForageActivity = ForageActivities.Hayed,
+                HarvestLossPercentage = 35,
+                AboveGroundBiomassDryWeight = 1000,
+            });
+
+            return farm;
+        }
+
+        [TestMethod]
+        public void CalculateCarbonInputFromProductSubtractsBaledHayUnderACustomYieldWithGrazing()
+        {
+            // Under Custom the entered yield is already the total aboveground biomass produced, so C_p needs no
+            // gross-up - but the hay carted off still has to come off what the animals left. C_p 2000 kg C/ha at 60%
+            // utilization leaves 800, and baling 500 kg C off one hectare leaves 300.
+            var farm = CreateGrazedFieldFarm(out var viewItem, out var field);
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
+
+            viewItem.Area = 1;
+            viewItem.PlantCarbonInAgriculturalProduct = 2000;
+            viewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct = true;
+            viewItem.GrazingViewItems[0].Utilization = 60;
+            viewItem.TotalCarbonLossFromBaleExports = 500;
+
+            var result = _sut.CalculateCarbonInputFromProduct(null, viewItem, null, farm);
+
+            Assert.AreEqual(300, result, 0.001);
+        }
+
+        [TestMethod]
+        public void CalculateCarbonInputFromProductUnderACustomYieldWithGrazingIsUnchangedWithoutHay()
+        {
+            // Regression guard: with nothing baled off, the utilization-only result stands as before.
+            var farm = CreateGrazedFieldFarm(out var viewItem, out var field);
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
+
+            viewItem.Area = 1;
+            viewItem.PlantCarbonInAgriculturalProduct = 2000;
+            viewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct = true;
+            viewItem.GrazingViewItems[0].Utilization = 60;
+            viewItem.TotalCarbonLossFromBaleExports = 0;
+
+            var result = _sut.CalculateCarbonInputFromProduct(null, viewItem, null, farm);
+
+            Assert.AreEqual(800, result, 0.001);
+        }
+
+        [TestMethod]
+        public void CalculateCarbonInputFromProductNeverReturnsNegativeCarbonWhenMoreWasBaledThanRemained()
+        {
+            // A user can enter a harvest larger than the yield implies. That is their data to fix, but the carbon input
+            // must not go negative and pull soil carbon down with it.
+            var farm = CreateGrazedFieldFarm(out var viewItem, out var field);
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
+
+            viewItem.Area = 1;
+            viewItem.PlantCarbonInAgriculturalProduct = 2000;
+            viewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct = true;
+            viewItem.GrazingViewItems[0].Utilization = 60;
+            viewItem.TotalCarbonLossFromBaleExports = 5000;
+
+            var result = _sut.CalculateCarbonInputFromProduct(null, viewItem, null, farm);
+
+            Assert.AreEqual(0, result, 0.001);
+        }
+
+        [TestMethod]
+        public void CalculateCarbonInputFromProductIgnoresGrazingFromAnotherYearUnderACustomYield()
+        {
+            // The grazing branch is scoped to the item's own year. A field grazed in 1984 must not have its 1985 return
+            // cut by the utilization rate: with no animals on it that year, the ordinary percentage returned applies.
+            // C_p 2000 at the 35% default gives 700, not the 800 that a utilization of 60% would have produced.
+            var farm = CreateGrazedFieldFarm(out var viewItem, out var field);
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
+
+            viewItem.Area = 1;
+            viewItem.PlantCarbonInAgriculturalProduct = 2000;
+            viewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct = true;
+            viewItem.PercentageOfProductYieldReturnedToSoil = 35;
+            viewItem.GrazingViewItems[0].Start = new DateTime(1984, 6, 1);
+            viewItem.GrazingViewItems[0].Utilization = 60;
+
+            var result = _sut.CalculateCarbonInputFromProduct(null, viewItem, null, farm);
+
+            Assert.AreEqual(700, result, 0.001);
+        }
+
+        [TestMethod]
+        public void AssignInputsAddsTheBaledHayToPlantCarbonOnAGrazedField()
+        {
+            // Equation 11.3.2-5 / -7: what grew is the grazed portion recovered from utilization PLUS the baled portion
+            // recovered from its harvest loss. Only the grazing half was counted before.
+            var farm = CreateGrazedAndHayedFarm(out var viewItem);
+
+            _sut.AssignInputs(null, viewItem, null, farm, new List<AnimalComponentEmissionsResults>());
+
+            Assert.AreEqual(2436.2308, viewItem.PlantCarbonInAgriculturalProduct, 0.001);
+        }
+
+        [TestMethod]
+        public void AssignInputsSubtractsBothRemovalsFromWhatIsReturnedToSoil()
+        {
+            // Equation 11.3.2-8, with the sign corrected: subtract what the animals ate AND what was baled off. The
+            // published equation brackets these as (uptake - export), which would give 2436.23 - (1000 - 500) = 1936.23,
+            // leaving more carbon on the field than was removed from it.
+            var farm = CreateGrazedAndHayedFarm(out var viewItem);
+
+            _sut.AssignInputs(null, viewItem, null, farm, new List<AnimalComponentEmissionsResults>());
+
+            Assert.AreEqual(936.2308, viewItem.CarbonInputFromProduct, 0.001);
+        }
+
+        [TestMethod]
+        public void AssignInputsLeavesAGrazedFieldWithoutHayUnchanged()
+        {
+            // Regression guard: with nothing baled off, the hay term is zero and the grazing-only result stands.
+            var farm = CreateGrazedAndHayedFarm(out var viewItem);
+            viewItem.TotalCarbonLossFromBaleExports = 0;
+            viewItem.HarvestViewItems.Clear();
+
+            _sut.AssignInputs(null, viewItem, null, farm, new List<AnimalComponentEmissionsResults>());
+
+            Assert.AreEqual(1667, viewItem.PlantCarbonInAgriculturalProduct, 0.001);
+            Assert.AreEqual(667, viewItem.CarbonInputFromProduct, 0.001);
+        }
+
+        [TestMethod]
+        public void AssignInputsReportsThePercentageThatActuallyStayedOnAGrazedAndHayedField()
+        {
+            // 936.23 of the 2436.23 kg C that grew stayed on the field, so 38.4295% was returned - not the 40% that
+            // 100 - utilization would suggest, which counts only what the animals left and ignores the hay cut.
+            var farm = CreateGrazedAndHayedFarm(out var viewItem);
+            viewItem.PercentageOfProductYieldReturnedToSoil = 40;
+
+            _sut.AssignInputs(null, viewItem, null, farm, new List<AnimalComponentEmissionsResults>());
+
+            Assert.AreEqual(38.4295, viewItem.PercentageOfProductYieldReturnedToSoil, 0.001);
+        }
+
+        [TestMethod]
+        public void AssignInputsDoesNotReportOverAManuallyOverriddenPercentageReturned()
+        {
+            // A value the user pinned through advanced input editing is theirs to keep.
+            var farm = CreateGrazedAndHayedFarm(out var viewItem);
+            viewItem.PercentageOfProductYieldReturnedToSoil = 40;
+            viewItem.DoNotRecalculatePercentageReturnedToSoil = true;
+
+            _sut.AssignInputs(null, viewItem, null, farm, new List<AnimalComponentEmissionsResults>());
+
+            Assert.AreEqual(40, viewItem.PercentageOfProductYieldReturnedToSoil, 0.001);
+        }
+
+        [TestMethod]
+        public void AssignInputsIncludesTheBaledHayInTheBackCalculatedYield()
+        {
+            // Equation 11.3.2-9 works from the same plant carbon, so the hay reaches the reported yield too:
+            // 2436.2308 / 0.45 = 5413.85 kg ha^-1 at zero moisture.
+            var farm = CreateGrazedAndHayedFarm(out var viewItem);
+
+            _sut.AssignInputs(null, viewItem, null, farm, new List<AnimalComponentEmissionsResults>());
+
+            Assert.AreEqual(5413.8462, viewItem.Yield, 0.001);
+        }
+
         private static Farm CreateGrazedFieldFarm(out CropViewItem viewItem, out FieldSystemComponent field)
         {
             var farm = new Farm();

@@ -189,7 +189,7 @@ namespace H.Core.Services.LandManagement
                     // Harvested but not grazed: let the hayed harvest's "Harvest loss %" (the fraction left on the field)
                     // set how much product is returned to soil. A non-positive result means there were no hayed harvests
                     // or their loss values were uninitialized, so we leave the existing (default) return in place.
-                    var harvestLoss = this.GetHayedHarvestLossPercentage(cropViewItem);
+                    var harvestLoss = cropViewItem.GetHayedHarvestLossPercentage();
                     if (harvestLoss > 0)
                     {
                         cropViewItem.PercentageOfProductYieldReturnedToSoil = harvestLoss;
@@ -231,27 +231,6 @@ namespace H.Core.Services.LandManagement
         /// returned fraction; falls back to a simple mean when biomass weights are unavailable. Returns 0 when there are
         /// no hayed harvests (silage / swath harvests are excluded), signalling the caller to leave the existing return.
         /// </summary>
-        private double GetHayedHarvestLossPercentage(CropViewItem cropViewItem)
-        {
-            var hayedHarvests = cropViewItem.GetHayHarvests()
-                .Where(harvest => harvest.ForageActivity == ForageActivities.Hayed)
-                .ToList();
-
-            if (hayedHarvests.Any() == false)
-            {
-                return 0;
-            }
-
-            var totalBiomass = hayedHarvests.Sum(harvest => harvest.AboveGroundBiomassDryWeight);
-            if (totalBiomass > 0)
-            {
-                // Biomass (yield) weighted average of the per-cut harvest-loss percentages
-                return hayedHarvests.Sum(harvest => harvest.HarvestLossPercentage * harvest.AboveGroundBiomassDryWeight) / totalBiomass;
-            }
-
-            // No biomass weights available - fall back to a simple average of the loss percentages
-            return hayedHarvests.Average(harvest => harvest.HarvestLossPercentage);
-        }
 
         #endregion
 

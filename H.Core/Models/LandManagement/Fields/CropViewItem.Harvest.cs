@@ -131,6 +131,33 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
+        /// The share of this year's hayed product left on the field, as a percentage - the harvest loss, which is also
+        /// the percentage of product returned to soil for a hayed year (S_p in the algorithm document).
+        ///
+        /// Cuts are weighted by the dry matter they removed, so a large cut counts for more than a small one. A simple
+        /// mean is used when no biomass weights are available. Returns 0 when there are no hayed harvests.
+        /// </summary>
+        public double GetHayedHarvestLossPercentage()
+        {
+            var hayedHarvests = this.GetHayHarvests()
+                .Where(harvest => harvest.ForageActivity == ForageActivities.Hayed)
+                .ToList();
+
+            if (hayedHarvests.Any() == false)
+            {
+                return 0;
+            }
+
+            var totalBiomass = hayedHarvests.Sum(harvest => harvest.AboveGroundBiomassDryWeight);
+            if (totalBiomass > 0)
+            {
+                return hayedHarvests.Sum(harvest => harvest.HarvestLossPercentage * harvest.AboveGroundBiomassDryWeight) / totalBiomass;
+            }
+
+            return hayedHarvests.Average(harvest => harvest.HarvestLossPercentage);
+        }
+
+        /// <summary>
         /// Sets this item's yield from the hay actually baled off it, and reports whether it could.
         ///
         /// This is the single place the derivation lives. It used to be done in two: once on the component selection

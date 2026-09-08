@@ -82,15 +82,17 @@ namespace H.Core.Calculators.Carbon
         public void AssignInputsAndLosses(CropViewItem previousYear, CropViewItem viewItem, CropViewItem nextYear,
             Farm farm, List<AnimalComponentEmissionsResults> animalResults)
         {
-            this.AssignInputs(previousYear, viewItem, nextYear, farm, animalResults);
+            // Losses first: the carbon baled off the field is an input to the grazing-scenario plant carbon
+            // (Eq. 11.3.2-5 / -7), so it has to be known before inputs are assigned.
             this.CalculateLosses(viewItem, farm);
+            this.AssignInputs(previousYear, viewItem, nextYear, farm, animalResults);
         }
 
         public void AssignInputsAndLosses(List<CropViewItem> viewItems, Farm farm,
             List<AnimalComponentEmissionsResults> animalResults)
         {
-            this.AssignInputs(viewItems, farm, animalResults);
             this.CalculateLosses(viewItems, farm);
+            this.AssignInputs(viewItems, farm, animalResults);
         }
 
         public void CalculateLosses(List<CropViewItem> viewItems, Farm farm)
