@@ -121,6 +121,24 @@ namespace H.Core.Services.LandManagement
                 result.DigestateApplicationViewItems.Add(copiedDigestateViewItem);
             }
 
+            // The N-P-K-S rates are cached on the crop view item and are what the nitrogen calculations read - the
+            // fertilizer collection itself is not summed at calculation time. The mapper copies those cached rates, so
+            // without this a year that was denied a copy of an application still carried its full rate. Only recompute
+            // when the source actually has applications: the CLI sets NitrogenFertilizerRate directly, with no
+            // application items behind it, and summing an empty collection would erase it.
+            if (viewItem.FertilizerApplicationViewItems.Any())
+            {
+                result.UpdateApplicationRateTotals();
+            }
+
+            // Same shape again: these flags are cached fields kept up to date by the collections' change handlers, and
+            // the mapper copies them. A year denied a copy adds nothing, so no handler runs and the flag stays true
+            // beside an empty collection - which makes CalculateHarvest (Eq 11.4.4-1) sum an empty table and report no
+            // harvest instead of falling back to the year's yield.
+            result.HasHarvestViewItems = result.HarvestViewItems.Count > 0;
+            result.HasManureApplicationViewItems = result.ManureApplicationViewItems.Count > 0;
+            result.HasHayImportViewItems = result.HayImportViewItems.Count > 0;
+
             return result;
         }
 

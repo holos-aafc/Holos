@@ -2286,7 +2286,7 @@ A perennial field can lose its crop in two ways in the same year: animals graze 
 -	Under the **Custom Yield** method, the harvest you enter becomes the field's yield. Holos totals the bales (number × weight), converts them from the moisture of baled hay to the moisture of the standing crop, and divides by the field area. You do not need to type a yield as well.
 -	Under the other methods the estimate is kept and your harvest does not change the yield. If you have entered a harvest that is not being used this way, the Details screen says so.
 -	The **Harvest loss, left on field (%)** value is the share of the cut that stays on the ground. Holos uses it as the percentage of product returned to soil for that year. With more than one cut in a year, the cuts are averaged by the biomass each one removed.
--	A harvest describes how the field is managed every year the crop is grown, so it is applied to every year of the simulation. Clear **Repeats every year** on the Harvest tab if the cut happened in a single year only - the year you entered it. The same control appears on the Fertilizer, Manure, Digestate and supplemental hay tables.
+-	A harvest describes how the field is managed every year the crop is grown, so it is applied to every year of the simulation. Clear **Repeats every year** on the Harvest tab if the cut happened in a single year only - the year you entered it. The same control appears on the Fertilizer and supplemental hay tables.
 
 ### If animals graze the field
 

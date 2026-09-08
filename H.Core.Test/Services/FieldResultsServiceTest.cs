@@ -888,6 +888,80 @@ namespace H.Core.Test.Services
         }
 
         [TestMethod]
+        public void CreateDetailViewItemsKeepsSingleYearFertilizerOutOfTheRepeatedYears()
+        {
+            // The whole GUI path, not just the mapper: a rotation replays one component-screen item across several
+            // years, so this is where a cleared 'Repeats every year' has to actually take effect.
+            var wheat = new CropViewItem() {CropType = CropType.Wheat, Year = 2016};
+            var application = new FertilizerApplicationViewItem() {RepeatsInEveryYear = false};
+            wheat.FertilizerApplicationViewItems.Add(application);
+
+            // Set the amount after adding, as the interface does, so the crop item's cached N rate is updated by its
+            // own change handler. Setting it in an object initializer would leave that rate at zero and the assertions
+            // below would hold no matter what the mapper did.
+            application.AmountOfNitrogenApplied = 500;
+            Assert.AreEqual(500, wheat.NitrogenFertilizerRate, 0.0001, "test setup: the source must carry the rate");
+
+            var fieldSystemComponent = new FieldSystemComponent();
+            fieldSystemComponent.CropViewItems.Add(wheat);
+            fieldSystemComponent.CropViewItems.Add(new CropViewItem() {CropType = CropType.Oats, Year = 2017});
+            fieldSystemComponent.StartYear = 2014;
+            fieldSystemComponent.EndYear = 2017;
+            fieldSystemComponent.BeginOrderingAtStartYearOfRotation = true;
+
+            var farm = new Farm()
+            {
+                Defaults = new Defaults() {CarbonModellingStrategy = CarbonModellingStrategies.ICBM},
+                GeographicData = new GeographicData() {DefaultSoilData = new SoilData()},
+            };
+            farm.Components.Add(fieldSystemComponent);
+
+            _resultsService.CreateDetailViewItems(farm);
+
+            var result = _resultsService.GetStageState(farm).DetailsScreenViewCropViewItems;
+
+            var entered = result.Single(x => x.Year == 2016);
+            var replayed = result.Single(x => x.Year == 2014);
+
+            Assert.AreEqual(1, entered.FertilizerApplicationViewItems.Count, "the year it was entered against keeps it");
+            Assert.AreEqual(0, replayed.FertilizerApplicationViewItems.Count,
+                "the same crop replayed in an earlier year must not pick it up");
+
+            // The collection alone proves nothing: the nitrogen calculations read this cached rate, not the collection,
+            // so an emptied collection beside an untouched rate still put the fertilizer into every year's N2O.
+            Assert.AreEqual(500, entered.NitrogenFertilizerRate, 0.0001);
+            Assert.AreEqual(0, replayed.NitrogenFertilizerRate, 0.0001,
+                "a year with no application must carry no synthetic N rate");
+        }
+
+        [TestMethod]
+        public void MapDetailsScreenViewItemClearsTheCachedFlagsForAYearThatGetsNoCopy()
+        {
+            // The flags are cached fields kept current by the collections' change handlers. A year that adds nothing
+            // runs no handler, so the value the mapper copied has to be corrected explicitly.
+            var source = new CropViewItem() {CropType = CropType.TameGrass, Year = 2026, Area = 1};
+
+            source.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(2026, 8, 1), End = new DateTime(2026, 8, 1), RepeatsInEveryYear = false});
+            source.ManureApplicationViewItems.Add(new ManureApplicationViewItem()
+                {DateOfApplication = new DateTime(2026, 5, 1), RepeatsInEveryYear = false});
+            source.HayImportViewItems.Add(new HayImportViewItem()
+                {Date = new DateTime(2026, 9, 1), RepeatsInEveryYear = false});
+
+            Assert.IsTrue(source.HasHarvestViewItems, "test setup: the source's flags must be set");
+
+            var otherYear = _resultsService.MapDetailsScreenViewItemFromComponentScreenViewItem(source, 1995);
+
+            Assert.IsFalse(otherYear.HasHarvestViewItems, "an empty harvest table must not report that it has one");
+            Assert.IsFalse(otherYear.HasManureApplicationViewItems);
+            Assert.IsFalse(otherYear.HasHayImportViewItems);
+
+            // What the stale flag actually broke: Eq 11.4.4-1 summed the empty table instead of using the yield.
+            otherYear.Yield = 3000;
+            Assert.AreEqual(3000, _resultsService.CalculateHarvest(otherYear), 0.0001);
+        }
+
+        [TestMethod]
         public void CreateDetailViewItemsWhenUserSelectsToOrderFromEndYearYear()
         {
             var componentSelectionScreenViewItems = new List<CropViewItem>();
