@@ -10118,6 +10118,15 @@ namespace H.Core.Properties {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Not from your harvest. Animals grazed this field in this year, and a grazed year&apos;s yield is never taken from a hay harvest. The Harvest tab explains what Holos used instead.
+        /// </summary>
+        public static string TooltipYieldSourceGrazed {
+            get {
+                return ResourceManager.GetString("TooltipYieldSourceGrazed", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to You have entered harvest data, but the yield is using the estimate from the selected yield assignment method.
         /// </summary>
         /// <summary>

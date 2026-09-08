@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Services.LandManagement;
@@ -16,6 +16,17 @@ namespace H.Core.Test.Services.LandManagement
             var crop = new CropViewItem {CropType = CropType.TameGrass, Year = 1985};
             crop.HarvestViewItems.Add(new HarvestViewItem
                 {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed});
+            return crop;
+        }
+
+        /// <summary>
+        /// Grazed and hayed in the same year - the case that was mislabelled, because both are present and only one
+        /// of them decides the yield.
+        /// </summary>
+        private static CropViewItem GrazedAndHayedPerennial()
+        {
+            var crop = HayedPerennial();
+            crop.GrazingViewItems.Add(new GrazingViewItem {Start = new DateTime(1985, 6, 1)});
             return crop;
         }
 
@@ -163,6 +174,23 @@ namespace H.Core.Test.Services.LandManagement
         public void SourceFromHarvestForCustomHay()
         {
             Assert.AreEqual(YieldSource.FromHarvest, YieldInputPolicy.GetYieldSource(HayedPerennial(), YieldAssignmentMethod.Custom));
+        }
+
+        [TestMethod]
+        public void SourceIsGrazedWhenTheYearIsGrazedEvenWithAHarvestUnderCustom()
+        {
+            // UpdateYieldFromHarvestForCustomPerennials skips any year with grazing on it, so calling this one
+            // "from your harvest" described a derivation that never ran.
+            Assert.AreEqual(YieldSource.Grazed,
+                YieldInputPolicy.GetYieldSource(GrazedAndHayedPerennial(), YieldAssignmentMethod.Custom));
+        }
+
+        [TestMethod]
+        public void SourceIsGrazedUnderAModelledMethodToo()
+        {
+            // Grazing is asked before the method because it holds under all of them.
+            Assert.AreEqual(YieldSource.Grazed,
+                YieldInputPolicy.GetYieldSource(GrazedAndHayedPerennial(), YieldAssignmentMethod.Average));
         }
 
         [TestMethod]

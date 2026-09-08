@@ -17,6 +17,13 @@ namespace H.Core.Services.LandManagement
 
         /// <summary>Typed directly by the user (Custom, no hay harvest to derive from).</summary>
         Entered,
+
+        /// <summary>
+        /// The year is grazed, so the harvest does not set the yield whatever else the user has entered. Grazing takes
+        /// precedence over a hay harvest in <c>UpdateYieldFromHarvestForCustomPerennials</c>, which skips any year with
+        /// grazing on it. Without this case the label claimed the yield came from a harvest that was never used.
+        /// </summary>
+        Grazed,
     }
 
     /// <summary>
@@ -93,6 +100,14 @@ namespace H.Core.Services.LandManagement
         /// </summary>
         public static YieldSource GetYieldSource(CropViewItem viewItem, YieldAssignmentMethod method)
         {
+            // Asked before the method, because it holds under every method: a grazed year's yield is never taken from a
+            // hay harvest. UpdateYieldFromHarvestForCustomPerennials skips any year with grazing on it, so labelling
+            // such a year "from your harvest" describes a derivation that did not run.
+            if (viewItem.HasGrazingItemsForTheCurrentYear())
+            {
+                return YieldSource.Grazed;
+            }
+
             if (method != YieldAssignmentMethod.Custom)
             {
                 return YieldSource.Estimated;

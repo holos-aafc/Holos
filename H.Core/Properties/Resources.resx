@@ -3713,6 +3713,9 @@
   <data name="TooltipYieldSourceEntered" xml:space="preserve">
     <value>Entered by you. This yield is the value you typed for this year.</value>
   </data>
+  <data name="TooltipYieldSourceGrazed" xml:space="preserve">
+    <value>Not from your harvest. Animals grazed this field in this year, and a grazed year's yield is never taken from a hay harvest. The Harvest tab explains what Holos used instead.</value>
+  </data>
   <data name="MessageHarvestDataDrivingYield" xml:space="preserve">
     <value>Perennial fields with a hay harvest take their yield from the harvests you entered on the Harvest tab. Those yields are calculated for you, so they cannot be typed over here - turn on 'Advanced input editing' if you need to change one.</value>
   </data>

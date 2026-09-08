@@ -1,4 +1,4 @@
-<p align="center">
+﻿<p align="center">
  <img src="../../Images/logo.png" alt="Holos Logo" width="650"/>
     <br>
 </p>
@@ -2279,7 +2279,19 @@ The **Yield Assignment Method** drop-down menu controls where Holos gets the yie
 
 ## Perennial Fields: Harvests, Grazing and Yields
 
-A perennial field can lose its crop in two ways in the same year: animals graze it, or it is cut and baled. Holos works backwards from what left the field to work out how much grew, so what you enter on the **Harvest** and **Grazing** tabs decides the yield and the carbon returned to the soil. This section describes the order in which those pieces are applied.
+A perennial field can lose its crop in two ways in the same year: animals graze it, or it is cut and baled. Holos works backwards from what left the field to work out how much grew, so what you enter on the **Harvest** and **Grazing** tabs decides the yield and the carbon returned to the soil.
+
+### Which one decides the yield
+
+More than one of these can be true for the same field, so Holos applies them in a fixed order. The first one that matches decides where the yield comes from:
+
+1.	**The year is grazed.** Grazing decides the yield, and the **Yield Assignment Method** you chose does not apply to that year. This holds under every method, including Custom Yield. A hay harvest entered on the same field does not set the yield for a grazed year.
+2.	**The year has a hay harvest and the method is Custom Yield.** The harvest you entered becomes the yield.
+3.	**Neither.** The yield comes from the Yield Assignment Method you chose, or from the value you typed under Custom Yield.
+
+Only the yield follows this order. The percentage of product returned to soil is worked out separately for each case, and the sections below describe both.
+
+To see which rule applied to a particular year, hover its **Yield** cell on the Details screen — the tooltip names the source.
 
 ### If you enter a hay harvest
 
@@ -2290,7 +2302,7 @@ A perennial field can lose its crop in two ways in the same year: animals graze 
 
 ### If animals graze the field
 
--	Holos calculates the yield from the forage the animals ate, divided by the utilization rate for the grazing system — not from the yield assignment method. The animals' management periods decide which years this applies to.
+-	Holos calculates the yield from the forage the animals ate, divided by the utilization rate for the grazing system — not from the yield assignment method, and not from a hay harvest if you entered one. The animals' management periods decide which years this applies to, so a field grazed in one year is not treated as grazed in the others.
 -	The percentage of product returned to soil is what the animals left behind, which is 100% minus the utilization rate.
 
 ### If the field is both grazed and hayed
@@ -2303,7 +2315,7 @@ A perennial field can lose its crop in two ways in the same year: animals graze 
 
 ### Values Holos calculates for you
 
--	On the Details screen, **white cells are values you enter** and **grey cells are calculated by Holos**. For a perennial with a harvest, the yield, plant carbon in product, and percentage of product returned to soil are all calculated.
+-	On the Details screen, **white cells are values you enter** and **grey cells are calculated by Holos**. For a perennial that is grazed, or that has a hay harvest under the Custom Yield method, the yield, plant carbon in product, and percentage of product returned to soil are all calculated.
 -	Hover a yield cell to see where its number came from — a regional estimate, the harvest you entered, or a value you typed.
 -	To change a calculated value, turn on **Advanced input editing**. The cell turns amber to show that your value now overrides the calculation and will not be recalculated. **Reset overrides** restores the calculated values.
 
