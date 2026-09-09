@@ -10118,6 +10118,15 @@ namespace H.Core.Properties {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Entered by you, for a grazed year. Holos takes the value you typed to be all the biomass the field grew.
+        /// </summary>
+        public static string TooltipYieldSourceGrazedEntered {
+            get {
+                return ResourceManager.GetString("TooltipYieldSourceGrazedEntered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not from your harvest. Animals grazed this field in this year, and a grazed year&apos;s yield is never taken from a hay harvest. The Harvest tab explains what Holos used instead.
         /// </summary>
         public static string TooltipYieldSourceGrazed {
@@ -14591,6 +14600,24 @@ namespace H.Core.Properties {
         public static string MessageResetNitrogenFixation {
             get {
                 return ResourceManager.GetString("MessageResetNitrogenFixation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the harvest loss (the share of each cut left on the field) to the default value.
+        /// </summary>
+        public static string MessageResetHarvestLoss {
+            get {
+                return ResourceManager.GetString("MessageResetHarvestLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grazing utilization rate.
+        /// </summary>
+        public static string LabelResetPastureUtilization {
+            get {
+                return ResourceManager.GetString("LabelResetPastureUtilization", resourceCulture);
             }
         }
         

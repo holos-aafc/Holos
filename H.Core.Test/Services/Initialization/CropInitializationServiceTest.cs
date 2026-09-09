@@ -387,5 +387,58 @@ namespace H.Core.Test.Services.Initialization
         }
 
         #endregion
+
+        #region InitializeUtilization
+
+        [TestMethod]
+        public void InitializeUtilizationResetsEveryGrazingItemToTheCropDefault()
+        {
+            // Utilization is a user input, so nothing resets it automatically and rebuilding the grazing items from the
+            // animal components deliberately preserves whatever is there. That protects a deliberate entry but leaves no
+            // way back from a mistaken one - and a mistaken one is costly, because grazing carbon is grossed up by
+            // dividing by the rate, so a value near zero inflates the field's production enormously. This is the way
+            // back, reached from the reset defaults window.
+            var farm = new Farm();
+            var field = new FieldSystemComponent();
+            var crop = new CropViewItem {CropType = CropType.TameGrass, Year = 1985};
+
+            crop.GrazingViewItems.Add(new GrazingViewItem {Start = new DateTime(1985, 6, 1), Utilization = 1});
+            crop.GrazingViewItems.Add(new GrazingViewItem {Start = new DateTime(1985, 8, 1), Utilization = 0});
+
+            field.CropViewItems.Add(crop);
+            farm.Components.Add(field);
+
+            _cropsInitializationService.InitializeUtilization(farm);
+
+            // Table 60: 60% for tame grass, as a percentage.
+            foreach (var grazingViewItem in crop.GrazingViewItems)
+            {
+                Assert.AreEqual(60, grazingViewItem.Utilization, 0.0001);
+            }
+        }
+
+        [TestMethod]
+        public void InitializeUtilizationUsesTheRateForEachCropType()
+        {
+            var farm = new Farm();
+            var field = new FieldSystemComponent();
+
+            var tameGrass = new CropViewItem {CropType = CropType.TameGrass, Year = 1985};
+            tameGrass.GrazingViewItems.Add(new GrazingViewItem {Start = new DateTime(1985, 6, 1), Utilization = 1});
+
+            var rangeland = new CropViewItem {CropType = CropType.RangelandNative, Year = 1985};
+            rangeland.GrazingViewItems.Add(new GrazingViewItem {Start = new DateTime(1985, 6, 1), Utilization = 1});
+
+            field.CropViewItems.Add(tameGrass);
+            field.CropViewItems.Add(rangeland);
+            farm.Components.Add(field);
+
+            _cropsInitializationService.InitializeUtilization(farm);
+
+            Assert.AreEqual(60, tameGrass.GrazingViewItems[0].Utilization, 0.0001);
+            Assert.AreEqual(40, rangeland.GrazingViewItems[0].Utilization, 0.0001);
+        }
+
+        #endregion
     }
 }

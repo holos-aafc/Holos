@@ -386,6 +386,11 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeHarvestLoss(farm);
         }
 
+        public void InitializeUtilization(Farm farm)
+        {
+            _cropInitializationService.InitializeUtilization(farm);
+        }
+
         public void InitializeFertilizerApplicationMethod(Farm farm)
         {
             _cropInitializationService.InitializeFertilizerApplicationMethod(farm);

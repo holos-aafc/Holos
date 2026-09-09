@@ -37,6 +37,28 @@ namespace H.Core.Services.Initialization.Crops
             grazingViewItem.Utilization = utilization;
         }
 
+        /// <summary>
+        /// Resets the grazing utilization rate on every grazing item on the farm to the Table 60 default for the crop.
+        ///
+        /// Utilization is a user input - it is editable on the Grazing tab - so nothing resets it automatically, and
+        /// <see cref="InitializeGrazingViewItems"/> deliberately preserves it when it rebuilds the items from the animal
+        /// components. That protects a deliberate entry, but leaves no way back from a mistaken one, and a low rate does
+        /// not fail quietly: grazing carbon is grossed up by dividing by it, so a rate near zero inflates the field's
+        /// production enormously. This is the way back, offered through the reset defaults window so the user asks for
+        /// it rather than having their entry overwritten.
+        /// </summary>
+        public void InitializeUtilization(Farm farm)
+        {
+            foreach (var cropViewItem in farm.GetAllCropViewItems())
+            {
+                foreach (var grazingViewItem in cropViewItem.GrazingViewItems)
+                {
+                    grazingViewItem.Utilization =
+                        _utilizationRatesForLivestockGrazingProvider.GetUtilizationRate(cropViewItem.CropType);
+                }
+            }
+        }
+
         public string InitializeDescription(ManagementPeriod managementPeriod, AnimalGroup animalGroup)
         {
             // Create a string that will be used on the field view to list details of this view item

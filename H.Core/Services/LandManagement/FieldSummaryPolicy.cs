@@ -50,7 +50,7 @@ namespace H.Core.Services.LandManagement
             var isHayed = viewItem.IsHarvested();
 
             summary.Activity = GetActivity(viewItem, isGrazed, isHayed);
-            summary.YieldSource = GetYieldSource(viewItem, method, isGrazed, isHayed);
+            summary.YieldSource = GetYieldSource(viewItem, method);
             summary.ReturnedToSoil = GetReturnedToSoil(viewItem, isGrazed, isHayed);
 
             return summary;
@@ -76,7 +76,7 @@ namespace H.Core.Services.LandManagement
             return string.Format(Resources.SummaryActivityNeither, viewItem.Year);
         }
 
-        private static string GetYieldSource(CropViewItem viewItem, YieldAssignmentMethod method, bool isGrazed, bool isHayed)
+        private static string GetYieldSource(CropViewItem viewItem, YieldAssignmentMethod method)
         {
             // A pinned value beats every other rule - nothing recalculates it.
             if (viewItem.DoNotRecalculateYield)
@@ -84,17 +84,16 @@ namespace H.Core.Services.LandManagement
                 return Resources.SummaryYieldOverridden;
             }
 
-            // A grazed field's yield is worked out backwards from intake, whatever the method says. Under Custom the
-            // entered yield is kept and taken to be the total biomass grown, so say that rather than claiming otherwise.
-            if (isGrazed)
-            {
-                return method == YieldAssignmentMethod.Custom
-                    ? Resources.SummaryYieldEnteredAsTotalBiomass
-                    : Resources.SummaryYieldFromGrazing;
-            }
-
+            // Every case below comes from YieldInputPolicy.GetYieldSource, which is the one place the precedence lives.
+            // This used to re-derive the grazed branch itself, which is how the two drifted apart.
             switch (YieldInputPolicy.GetYieldSource(viewItem, method))
             {
+                case LandManagement.YieldSource.GrazedEnteredAsTotalBiomass:
+                    return Resources.SummaryYieldEnteredAsTotalBiomass;
+
+                case LandManagement.YieldSource.GrazedDerived:
+                    return Resources.SummaryYieldFromGrazing;
+
                 case LandManagement.YieldSource.FromHarvest:
                     var bales = viewItem.GetHayHarvests()
                         .Where(harvest => harvest.ForageActivity == ForageActivities.Hayed)

@@ -3713,6 +3713,9 @@
   <data name="TooltipYieldSourceEntered" xml:space="preserve">
     <value>Entered by you. This yield is the value you typed for this year.</value>
   </data>
+  <data name="TooltipYieldSourceGrazedEntered" xml:space="preserve">
+    <value>Entered by you, for a grazed year. Animals grazed this field, so Holos takes the value you typed to be all the biomass the field grew - what the animals ate plus what they left - rather than only the part that was cut.</value>
+  </data>
   <data name="TooltipYieldSourceGrazed" xml:space="preserve">
     <value>Not from your harvest. Animals grazed this field in this year, and a grazed year's yield is never taken from a hay harvest. The Harvest tab explains what Holos used instead.</value>
   </data>
@@ -6201,6 +6204,12 @@ Please note: emissions related to the deposition or application of livestock man
   </data>
   <data name="MessageResetMilkProduction" xml:space="preserve">
     <value>Resets the milk production for each animal group (for each management period) to the default value</value>
+  </data>
+  <data name="MessageResetHarvestLoss" xml:space="preserve">
+    <value>Resets the harvest loss (the share of each cut left on the field) to the default value</value>
+  </data>
+  <data name="LabelResetPastureUtilization" xml:space="preserve">
+    <value>Grazing utilization rate</value>
   </data>
   <data name="MessageResetPastureUtilization" xml:space="preserve">
     <value>Resets the utilization for each crop (in each year) to the default value</value>
