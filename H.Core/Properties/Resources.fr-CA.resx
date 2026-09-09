@@ -5786,7 +5786,7 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
     <value>Réinitialiser les valeurs par défaut des utilisateurs</value>
   </data>
   <data name="LabelResetHarvestLoss" xml:space="preserve">
-    <value>Réinitialiser l’utilisation des pâturages</value>
+    <value>Réinitialiser la perte de récolte</value>
   </data>
   <data name="LabelResetYieldsAllYears" xml:space="preserve">
     <value>Réinitialiser les rendements pour toutes les années</value>
@@ -6218,5 +6218,122 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
   </data>
   <data name="EnumHay" xml:space="preserve">
     <value>foin</value>
+  </data>
+  <data name="LabelAdvancedInputEditing" xml:space="preserve">
+    <value>Modification avancée des entrées</value>
+  </data>
+  <data name="TooltipAdvancedInputEditing" xml:space="preserve">
+    <value>Modifiez directement le rendement, le carbone végétal et les résidus. Vos entrées remplacent les valeurs calculées et sont conservées lors du recalcul des résultats.</value>
+  </data>
+  <data name="LabelResetOverrides" xml:space="preserve">
+    <value>Réinitialiser les valeurs remplacées</value>
+  </data>
+  <data name="TooltipResetOverrides" xml:space="preserve">
+    <value>Efface toutes les valeurs saisies manuellement dans cet écran et rétablit les valeurs calculées.</value>
+  </data>
+  <data name="TooltipManuallyOverriddenValue" xml:space="preserve">
+    <value>Cette valeur a été saisie manuellement et n’est plus recalculée. Utilisez « Réinitialiser les valeurs remplacées » pour rétablir la valeur calculée.</value>
+  </data>
+  <data name="TooltipYieldSourceEstimated" xml:space="preserve">
+    <value>Estimé. Ce rendement provient de la méthode d’attribution du rendement sélectionnée, et non de vos propres données.</value>
+  </data>
+  <data name="TooltipYieldSourceFromHarvest" xml:space="preserve">
+    <value>Provient de votre récolte. Ce rendement est calculé à partir des {0} balle(s) que vous avez saisies dans l’onglet Récolte.</value>
+  </data>
+  <data name="TooltipYieldSourceEntered" xml:space="preserve">
+    <value>Saisi par vous. Ce rendement est la valeur que vous avez entrée pour cette année.</value>
+  </data>
+  <data name="TooltipYieldSourceGrazedEntered" xml:space="preserve">
+    <value>Saisi par vous, pour une année de pâturage. Des animaux ont pâturé ce champ; Holos considère donc que la valeur que vous avez entrée correspond à toute la biomasse produite par le champ — ce que les animaux ont consommé plus ce qu’ils ont laissé — et non seulement à la partie qui a été fauchée.</value>
+  </data>
+  <data name="TooltipYieldSourceGrazed" xml:space="preserve">
+    <value>Ne provient pas de votre récolte. Des animaux ont pâturé ce champ cette année, et le rendement d’une année de pâturage n’est jamais tiré d’une récolte de foin. L’onglet Récolte explique ce que Holos a utilisé à la place.</value>
+  </data>
+  <data name="MessageHarvestDataDrivingYield" xml:space="preserve">
+    <value>Les champs de cultures vivaces ayant une récolte de foin tirent leur rendement des récoltes que vous avez saisies dans l’onglet Récolte. Ces rendements sont calculés pour vous et ne peuvent donc pas être remplacés ici — activez « Modification avancée des entrées » si vous devez en modifier un.</value>
+  </data>
+  <data name="MessageHayCutExceedsYield" xml:space="preserve">
+    <value>Dans un champ pâturé, la récolte de foin saisie pour une année retire plus que ce que le rendement de cette année peut justifier — il ne peut pas sortir d’un champ plus que ce qui y a poussé. Holos n’a crédité aucun carbone retourné au sol pour cette année. Vérifiez le nombre de balles et le poids des balles dans l’onglet Récolte par rapport au rendement affiché dans cet écran.</value>
+  </data>
+  <data name="MessageHarvestHasNoUsableWeight" xml:space="preserve">
+    <value>Une récolte de foin est saisie pour une année sans poids de balle enregistré; Holos ne peut donc pas s’en servir pour établir le rendement de cette année. Entrez le nombre de balles et le poids humide des balles dans l’onglet Récolte, ou supprimez la récolte si rien n’a été fauché.</value>
+  </data>
+  <data name="MessageDetailsScreenInputHelp" xml:space="preserve">
+    <value>La méthode d’attribution du rendement sélectionnée s’applique à tous les champs de cette ferme; sélectionnez la méthode « rendement personnalisé » ou « fichier d’entrée » pour modifier les rendements de champs individuels. Dans cet écran, les cellules blanches sont des valeurs que vous saisissez et les cellules grises sont calculées par Holos. Activez « Modification avancée des entrées » pour changer une valeur calculée; elle s’affichera alors en ambre pour indiquer qu’elle remplace le calcul, et « Réinitialiser les valeurs remplacées » rétablit les valeurs calculées.</value>
+  </data>
+  <data name="LabelRepeatsInEveryYear" xml:space="preserve">
+    <value>Se répète chaque année</value>
+  </data>
+  <data name="TooltipRepeatsInEveryYear" xml:space="preserve">
+    <value>Cochée, cette case indique que l’entrée décrit la façon dont le champ est géré chaque année où la culture est produite; Holos l’applique donc à toutes les années de la simulation. Décochez-la si l’activité n’a eu lieu qu’une seule année — celle pour laquelle vous l’avez saisie.</value>
+  </data>
+  <data name="SummaryActivityGrazedAndHayed" xml:space="preserve">
+    <value>Ce champ a été pâturé et fauché en {0}.</value>
+  </data>
+  <data name="SummaryActivityGrazed" xml:space="preserve">
+    <value>Ce champ a été pâturé en {0}.</value>
+  </data>
+  <data name="SummaryActivityHayed" xml:space="preserve">
+    <value>Ce champ a été fauché en {0}.</value>
+  </data>
+  <data name="SummaryActivityNeither" xml:space="preserve">
+    <value>Ce champ n’a été ni pâturé ni fauché en {0}.</value>
+  </data>
+  <data name="SummaryYieldFromHarvest" xml:space="preserve">
+    <value>Votre récolte constitue le rendement de ce champ — les {0} balle(s) que vous avez saisies.</value>
+  </data>
+  <data name="SummaryYieldFromGrazing" xml:space="preserve">
+    <value>Son rendement est calculé à partir du fourrage consommé par les animaux, et non à partir d’une estimation régionale.</value>
+  </data>
+  <data name="SummaryYieldEnteredAsTotalBiomass" xml:space="preserve">
+    <value>Son rendement est la valeur saisie dans l’écran Détails, considérée comme toute la biomasse produite — ce que les animaux ont consommé plus ce qu’ils ont laissé.</value>
+  </data>
+  <data name="SummaryYieldEstimate" xml:space="preserve">
+    <value>Son rendement est une estimation régionale.</value>
+  </data>
+  <data name="SummaryYieldEntered" xml:space="preserve">
+    <value>Son rendement est la valeur saisie dans l’écran Détails.</value>
+  </data>
+  <data name="SummaryYieldOverridden" xml:space="preserve">
+    <value>Son rendement est une valeur établie manuellement dans l’écran Détails, que Holos ne recalcule plus.</value>
+  </data>
+  <data name="SummaryReturnedAll" xml:space="preserve">
+    <value>La totalité du produit est retournée au sol — rien ne l’a retiré de ce champ.</value>
+  </data>
+  <data name="SummaryReturnedAfterCut" xml:space="preserve">
+    <value>Votre récolte détermine la quantité de culture laissée au champ, d’après la perte de récolte que vous avez saisie.</value>
+  </data>
+  <data name="SummaryReturnedAfterGrazing" xml:space="preserve">
+    <value>La part laissée par les animaux est retournée au sol, d’après le taux d’utilisation du système de pâturage.</value>
+  </data>
+  <data name="SummaryReturnedBothRemovals" xml:space="preserve">
+    <value>Ce qui reste après le fourrage consommé et le foin mis en balles est retourné au sol.</value>
+  </data>
+  <data name="SummaryReturnedOverridden" xml:space="preserve">
+    <value>La part retournée au sol est une valeur établie manuellement dans l’écran Détails, que Holos ne recalcule plus.</value>
+  </data>
+  <data name="TooltipHarvestLossPercentage" xml:space="preserve">
+    <value>La part de cette coupe qui est laissée au champ plutôt que retirée sous forme de balles. Holos l’utilise comme pourcentage du rendement du produit retourné au sol pour cette culture vivace, affiché dans l’écran Détails.</value>
+  </data>
+  <data name="TooltipPercentReturnedFromHarvestLoss" xml:space="preserve">
+    <value>Calculée à partir de la perte de récolte que vous avez saisie dans l’onglet Récolte, soit la part de la culture laissée au champ. Modifiez-la à cet endroit, ou activez « Modification avancée des entrées » pour remplacer directement cette valeur.</value>
+  </data>
+  <data name="MessageResetHarvestLoss" xml:space="preserve">
+    <value>Remet la perte de récolte (la part de chaque coupe laissée au champ) à la valeur par défaut.</value>
+  </data>
+  <data name="LabelUseCustomGrazingUtilizationRate" xml:space="preserve">
+    <value>Utiliser un taux d’utilisation du pâturage personnalisé</value>
+  </data>
+  <data name="ToolTipUseCustomGrazingUtilizationRate" xml:space="preserve">
+    <value>Par défaut, Holos utilise un taux d’utilisation propre à chaque type de culture — 60 % pour le pâturage artificiel, 40 % pour les pâturages indigènes, 50 % pour la prairie ensemencée. Choisissez « oui » pour utiliser plutôt un seul taux de votre choix pour tous les champs pâturés de cette ferme.</value>
+  </data>
+  <data name="LabelCustomGrazingUtilizationRate" xml:space="preserve">
+    <value>Taux d’utilisation du pâturage personnalisé</value>
+  </data>
+  <data name="ToolTipCustomGrazingUtilizationRate" xml:space="preserve">
+    <value>La part de la culture sur pied que les animaux consomment. Holos établit la quantité produite en divisant ce que les animaux ont consommé par ce taux; une valeur faible suppose donc une très grande culture. Ce taux s’applique aux nouvelles entrées de pâturage, ainsi qu’à toutes les entrées de pâturage de la ferme lorsque vous réinitialisez le taux d’utilisation du pâturage depuis la fenêtre de rétablissement des valeurs par défaut.</value>
+  </data>
+  <data name="LabelResetPastureUtilization" xml:space="preserve">
+    <value>Taux d’utilisation du pâturage</value>
   </data>
 </root>
