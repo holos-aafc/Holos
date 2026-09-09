@@ -632,6 +632,17 @@ The default data for this screen is based on information found in the algorithm 
 
 > *Note: the **Supplemental feeding loss (%)** setting (default 20%) controls the portion of supplemental hay (bales) fed to grazing animals on pasture that is treated as wasted and returned to soil as residue. This single value applies farm-wide to all supplemental hay configured on the farm.*
 
+### Grazing
+
+The **Grazing** section at the bottom of this screen sets the utilization rate Holos uses for grazed fields — the share of the standing crop the animals take.
+
+-	By default, **Use a custom grazing utilization rate** is **No** and Holos uses a rate for each crop type: 60% for tame grass, 40% for native rangeland, 50% for seeded grassland.
+-	Select **Yes** to use a single rate of your own for every grazed field on this farm instead, and enter it as **Custom grazing utilization rate**. The field stays disabled while the setting is **No**.
+-	The rate applies to new grazing entries as you create them. To apply it to grazing already entered on the farm, use **Grazing utilization rate** in the **Reset Defaults** screen described below.
+-	This setting belongs to the farm, so it is saved with the farm and does not carry over to your other farms.
+
+The utilization rate has a large effect on a grazed field's yield: Holos works out how much grew by dividing what the animals ate by this rate, so a low rate implies a very large crop. See *Perennial Fields: Harvests, Grazing and Yields* in **Chapter 8 - Details**.
+
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter4/figure4-3.png" alt="Figure4-3" width="550"/>
@@ -713,6 +724,10 @@ The default data for this screen is based on information found in the algorithm 
   <br>
 
   3. Select all values that you would like to have reverted to defaults and click **Apply** to apply the changes to the farm(s) and **Cancel** will undo any changes made to the tab.  
+
+  4. Hover over any item in the list to see a description of what it resets.
+
+> *Note: **Grazing utilization rate** resets the utilization on every grazing entry on the farm, in every year. It uses the rate for each crop type, unless you have set a custom rate under **Grazing** in the **User Settings** screen, in which case it uses yours. Reach for this if a field's utilization has been left at a value that does not describe how it is grazed — a rate far below the crop's default will make Holos report a much larger crop than actually grew.*
 
 # Chapter 5 - Tools
 
@@ -2306,6 +2321,8 @@ To see which rule applied to a particular year, hover its **Yield** cell on the 
 
 -	Holos calculates the yield from the forage the animals ate, divided by the utilization rate for the grazing system — not from the yield assignment method, and not from a hay harvest if you entered one. The animals' management periods decide which years this applies to, so a field grazed in one year is not treated as grazed in the others.
 -	The percentage of product returned to soil is what the animals left behind, which is 100% minus the utilization rate.
+-	The **Utilization (%)** column on the Grazing tab holds that rate, and you can change it there for a single grazing entry. Holos fills it in from the crop type — 60% for tame grass, 40% for native rangeland, 50% for seeded grassland — or from your own rate if you set one under **Grazing** in the **User Settings** screen.
+-	Because the yield is the forage eaten *divided by* this rate, a rate much lower than the crop's default produces a very large yield. If a field's yields look implausible, check this column first. **Grazing utilization rate** in the **Reset Defaults** screen puts every grazing entry on the farm back to the default in one step.
 
 ### If the field is both grazed and hayed
 
