@@ -110,13 +110,46 @@ namespace H.Core.Test.Services
 
             Assert.AreEqual(100,
                 crops.Single(x => x.CropType == CropType.TameGrass)
-                    .PercentageOfProductYieldReturnedToSoil); // Set to 100 since there is no yield (nothing harvested that year)
+                    .PercentageOfProductYieldReturnedToSoil); // 100 because nothing was removed - no cut and no grazing
             Assert.AreEqual(2,
                 crops.Single(x => x.CropType == CropType.Barley)
                     .PercentageOfProductYieldReturnedToSoil); // Unchanged since it is not a perennial
             Assert.AreEqual(35,
                 crops.Single(x => x.CropType == CropType.TameLegume)
                     .PercentageOfProductYieldReturnedToSoil); // Unchanged since it has a harvest (product was removed)
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsDoesNotForce100JustBecauseTheYieldIsZero()
+        {
+            // A zero yield nearly always means Holos had no yield to assign - no Small Area Data for the crop and
+            // location, a Custom field not filled in, an input file with no row for the year - not that nothing grew.
+            // With a cut recorded, product plainly did leave the field, so the harvest loss decides the return.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 0, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+            {
+                Start = new DateTime(1985, 8, 1),
+                ForageActivity = ForageActivities.Hayed,
+                HarvestLossPercentage = 20,
+            });
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(20, crop.PercentageOfProductYieldReturnedToSoil, 0.0001,
+                "a recorded cut decides the return, not the absent yield");
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsStillReturns100ForAZeroYieldWithNothingRemoved()
+        {
+            // The other half: with no cut and no grazing the rule still applies, and a zero yield is one instance of it.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 0, Year = 1985};
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(100, crop.PercentageOfProductYieldReturnedToSoil, 0.0001);
         }
 
         [TestMethod]
@@ -570,6 +603,31 @@ namespace H.Core.Test.Services
             _resultsService.UpdateYieldFromHarvest(new List<CropViewItem>() {crop});
 
             Assert.AreEqual(1234, crop.Yield, 0.0001);
+        }
+
+        [TestMethod]
+        public void HasHayedHarvestWithNoUsableWeightSpotsACutThatCannotSetAYield()
+        {
+            // The contradiction M2 asks Holos to speak up about: a cut is recorded, so product left the field, but
+            // there is no weight behind it for the yield to be worked out from.
+            var crop = new CropViewItem() {CropType = CropType.TameGrass, Area = 10, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed});
+
+            Assert.IsTrue(crop.HasHayedHarvestWithNoUsableWeight());
+
+            // And it must not fire on the ordinary cases: a real cut, or no cut at all.
+            var weighed = new CropViewItem() {CropType = CropType.TameGrass, Area = 10, Year = 1985};
+            weighed.HarvestViewItems.Add(new HarvestViewItem()
+            {
+                Start = new DateTime(1985, 8, 1),
+                ForageActivity = ForageActivities.Hayed,
+                AboveGroundBiomassDryWeight = 20000,
+            });
+            Assert.IsFalse(weighed.HasHayedHarvestWithNoUsableWeight());
+
+            Assert.IsFalse(new CropViewItem() {CropType = CropType.TameGrass, Area = 10, Year = 1985}
+                .HasHayedHarvestWithNoUsableWeight());
         }
 
         [TestMethod]

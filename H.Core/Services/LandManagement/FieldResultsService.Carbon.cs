@@ -151,9 +151,12 @@ namespace H.Core.Services.LandManagement
         /// algorithm document's perennial handling:
         ///
         /// - No harvest and no grazing: nothing is removed from the field, so all of the product stays and the return is
-        ///   100% (rather than the 35% perennial default). A zero yield is one instance of this, but a modelled or custom
-        ///   non-zero yield with no harvest and no grazing is equally an all-returned year, so we key off the harvest /
-        ///   grazing state directly rather than only off a zero yield.
+        ///   100% (rather than the 35% perennial default). This asks only what was removed. A zero yield used to trigger
+        ///   the same rule on its own, but a zero yield is nearly always a yield Holos could not assign - no Small Area
+        ///   Data for the crop and location, a Custom field the user has not filled in yet, an input file with no row for
+        ///   that year - rather than a statement that nothing grew. Concluding "nothing left this field" from a number
+        ///   that is simply absent asserts a fact about the farm on the strength of missing information, and in an
+        ///   establishment year, where C_p is estimated from the following year, that assertion becomes real carbon.
         /// - Hayed (not grazed): the user-entered "Harvest loss %" on the hayed harvest(s) drives the return, since harvest
         ///   loss is exactly the fraction of product left on the field. Only hayed harvests are wired here - silage / swath
         ///   harvests keep their own established returns (their harvest-loss default is a placeholder that does not
@@ -178,7 +181,7 @@ namespace H.Core.Services.LandManagement
                 var isHarvested = cropViewItem.IsHarvested();
                 var isGrazed = cropViewItem.HasGrazingItemsForTheCurrentYear();
 
-                if (cropViewItem.Yield == 0 || (isHarvested == false && isGrazed == false))
+                if (isHarvested == false && isGrazed == false)
                 {
                     cropViewItem.PercentageOfProductYieldReturnedToSoil =
                         100; // Nothing removes product from the field this year, so all of it stays

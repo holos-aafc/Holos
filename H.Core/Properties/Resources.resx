@@ -3719,6 +3719,9 @@
   <data name="MessageHarvestDataDrivingYield" xml:space="preserve">
     <value>Perennial fields with a hay harvest take their yield from the harvests you entered on the Harvest tab. Those yields are calculated for you, so they cannot be typed over here - turn on 'Advanced input editing' if you need to change one.</value>
   </data>
+  <data name="MessageHarvestHasNoUsableWeight" xml:space="preserve">
+    <value>A hay harvest is entered for a year with no bale weight recorded, so Holos cannot use it to work out that year's yield. Enter the number of bales and the wet bale weight on the Harvest tab, or remove the harvest if nothing was cut.</value>
+  </data>
   <data name="MessageHarvestDataNotUsedForYield" xml:space="preserve">
     <value>You have entered harvest data, but the yield is using the estimate from the selected yield assignment method. Select the 'Custom' yield assignment method to use your entered harvest as the yield.</value>
   </data>
