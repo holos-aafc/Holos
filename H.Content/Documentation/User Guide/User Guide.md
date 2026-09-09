@@ -2300,7 +2300,7 @@ Start by asking whether animals grazed the field in the year you are looking at.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter8/figure8-2.svg" alt="Decision diagram. If animals grazed the field this year, grazing decides the yield and neither the Yield Assignment Method nor a hay cut sets it, though a cut is still subtracted from the carbon. If they did not, a cut decides the yield if there is one, otherwise the Yield Assignment Method supplies it, and if nothing was cut either then all of the product is returned to the soil." width="700"/>
+ <img src="../../Images/UserGuide/en/chapter8/figure8-2.svg" alt="Decision diagram. If animals grazed the field this year, grazing decides the yield and neither the Yield Assignment Method nor a hay cut sets it, though a cut is still subtracted from the carbon. If they did not, a cut decides the yield if there is one, otherwise the Yield Assignment Method supplies it, and if nothing was cut either then all of the product is returned to the soil." width="900"/>
     <br>
     <em>
 		Figure 8.2: Which situation the field is in
@@ -2327,7 +2327,7 @@ For a year with **no grazing**, the two figures below show the same two rules as
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter8/figure8-3.svg" alt="Decision diagram for the yield in a year with no grazing. If you overrode the yield with Advanced input editing, your value stands. Otherwise, if there is a cut on the Harvest tab for that year, the yield is worked out from the cut whichever method is selected. Otherwise the Yield Assignment Method supplies it." width="700"/>
+ <img src="../../Images/UserGuide/en/chapter8/figure8-3.svg" alt="Decision diagram for the yield in a year with no grazing. If you overrode the yield with Advanced input editing, your value stands. Otherwise, if there is a cut on the Harvest tab for that year, the yield is worked out from the cut whichever method is selected. Otherwise the Yield Assignment Method supplies it." width="900"/>
     <br>
     <em>
 		Figure 8.3: Where the yield comes from, in a year with no grazing
@@ -2335,7 +2335,7 @@ For a year with **no grazing**, the two figures below show the same two rules as
 </p>
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter8/figure8-4.svg" alt="Decision diagram for the percentage of product returned to soil in a year with no grazing. If you overrode it with Advanced input editing, your value stands. Otherwise, if nothing was cut and nothing grazed, the return is 100 percent. Otherwise the Harvest loss left on field percentage sets it." width="700"/>
+ <img src="../../Images/UserGuide/en/chapter8/figure8-4.svg" alt="Decision diagram for the percentage of product returned to soil in a year with no grazing. If you overrode it with Advanced input editing, your value stands. Otherwise, if nothing was cut and nothing grazed, the return is 100 percent. Otherwise the Harvest loss left on field percentage sets it." width="900"/>
     <br>
     <em>
 		Figure 8.4: Where the percentage of product returned to soil comes from, in a year with no grazing
@@ -2366,7 +2366,7 @@ For a year with **no grazing**, the two figures below show the same two rules as
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter8/figure8-5.svg" alt="Diagram of a year both grazed and hayed. The hay you baled is subtracted from the carbon under every method, and the method decides only where the yield number comes from. Under Custom Yield the chain runs forwards from the yield you typed to the plant carbon, with no gross-up. Under any other method it runs backwards from what was removed to the plant carbon, and a yield is then reported back to you. Both paths end at the same step, where both removals are subtracted to give the carbon returned to soil." width="700"/>
+ <img src="../../Images/UserGuide/en/chapter8/figure8-5.svg" alt="Diagram of a year both grazed and hayed. The hay you baled is subtracted from the carbon under every method, and the method decides only where the yield number comes from. Under Custom Yield the chain runs forwards from the yield you typed to the plant carbon, with no gross-up. Under any other method it runs backwards from what was removed to the plant carbon, and a yield is then reported back to you. Both paths end at the same step, where both removals are subtracted to give the carbon returned to soil." width="900"/>
     <br>
     <em>
 		Figure 8.5: A year that was both grazed and hayed
