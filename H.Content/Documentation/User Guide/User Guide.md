@@ -2263,7 +2263,7 @@ The shelterbelt timeline works similarly to the farm crop timeline. The timeline
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter8/figure8-1.png" alt="Figure8-1" width="850"/>
+ <img src="../../Images/UserGuide/en/chapter8/figure8-1.png" alt="The Details screen, showing the per-year rows for a field with the yield, plant carbon and percentage returned columns." width="900"/>
     <br>
     <em>
 		Figure 8.1 – Detail Screen
