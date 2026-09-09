@@ -260,18 +260,39 @@ namespace H.Core.Services.Initialization.Crops
         #region Private Methods
 
         /// <summary>
-        /// Equation 2.1.2-1
+        /// The Small Area Data yield for a perennial is a hay yield: the biomass actually taken off the field, which
+        /// already excludes the share left behind at harvest. Turning it into the total standing biomass therefore takes
+        /// two steps, per the note under Eq. 2.1.2-1 in the algorithm document:
+        ///
+        ///     Yield_standing = [ Yield_hay / (1 - Sp/100) ] x [ (1 - moisture_hay) / (1 - moisture_standing) ]
+        ///
+        /// The gross-up recovers the harvest losses; the ratio moves the result from the moisture of baled hay (13%) to
+        /// that of the fresh standing crop.
+        ///
+        /// The gross-up used to be absent here and happened by accident further downstream instead: these years carried
+        /// the 35% perennial default for "percentage of product returned to soil", so Eq. 2.1.2-1 divided by (1 - 0.35)
+        /// and arrived at the right plant carbon by a different route. Once such a year was correctly given a 100%
+        /// return - nothing is removed from a field that was neither cut nor grazed - Eq. 2.1.2-1 stopped grossing up,
+        /// and with nothing here to replace it the standing biomass fell about 35% short of what the document
+        /// specifies. Doing it here, where the document puts it, holds under either return percentage.
         /// </summary>
-        /// <param name="yield"></param>
-        /// <param name="moistureContent">Default moisture content for all crops (default 13%) which represents the moisture content of the hay crop (see algorithm document)</param>
-        /// <param name="viewItem"></param>
-        private double CalculateStandingBiomassAdjustment(double yield, double moistureContent, CropViewItem viewItem)
+        /// <param name="yield">The Small Area Data hay yield (kg wet weight ha^-1)</param>
+        /// <param name="farm">Supplies Sp. The previous signature also took a moisture content and a view item and used
+        /// neither - the two moisture contents this conversion needs are the constants below.</param>
+        private double CalculateStandingBiomassAdjustment(double yield, Farm farm)
         {
             // The moisture content fraction should be 80% by default and will represent the moisture content of fresh standing biomass (see algorithm document).
             var moistureContentFreshBiomass = 0.8;
             var moistureContentHay = 0.13;
 
-            var result = yield * ((1.0 - moistureContentHay) / (1.0 - moistureContentFreshBiomass));
+            // Sp for hay - the "haying loss" constant of 35% in the algorithm document.
+            var harvestLossFraction = farm.Defaults.PercentageOfProductReturnedToSoilForPerennials / 100.0;
+
+            var grossedUpForHarvestLosses = harvestLossFraction > 0 && harvestLossFraction < 1
+                ? yield / (1.0 - harvestLossFraction)
+                : yield;
+
+            var result = grossedUpForHarvestLosses * ((1.0 - moistureContentHay) / (1.0 - moistureContentFreshBiomass));
 
             return result;
         }
@@ -300,7 +321,7 @@ namespace H.Core.Services.Initialization.Crops
                     {
                         if (viewItem.CropType.IsPerennial())
                         {
-                            var adjustment = this.CalculateStandingBiomassAdjustment(smallAreaYieldData.Yield, viewItem.MoistureContentOfCrop, viewItem);
+                            var adjustment = this.CalculateStandingBiomassAdjustment(smallAreaYieldData.Yield, farm);
                             yields.Add(adjustment);
                         }
                         else
@@ -335,7 +356,7 @@ namespace H.Core.Services.Initialization.Crops
             {
                 if (viewItem.CropType.IsPerennial())
                 {
-                    var adjustment = this.CalculateStandingBiomassAdjustment(smallAreaYield.Yield, viewItem.MoistureContentOfCrop, viewItem);
+                    var adjustment = this.CalculateStandingBiomassAdjustment(smallAreaYield.Yield, farm);
                     viewItem.Yield = adjustment;
                 }
                 else
