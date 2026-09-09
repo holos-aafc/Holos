@@ -14613,6 +14613,42 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use a custom grazing utilization rate.
+        /// </summary>
+        public static string LabelUseCustomGrazingUtilizationRate {
+            get {
+                return ResourceManager.GetString("LabelUseCustomGrazingUtilizationRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to By default Holos uses a utilization rate for each crop type - 60% for tame grass, 40% for native rangeland, 50.
+        /// </summary>
+        public static string ToolTipUseCustomGrazingUtilizationRate {
+            get {
+                return ResourceManager.GetString("ToolTipUseCustomGrazingUtilizationRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom grazing utilization rate.
+        /// </summary>
+        public static string LabelCustomGrazingUtilizationRate {
+            get {
+                return ResourceManager.GetString("LabelCustomGrazingUtilizationRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The share of the standing crop the animals take. Holos works out how much grew by dividing what the animals at.
+        /// </summary>
+        public static string ToolTipCustomGrazingUtilizationRate {
+            get {
+                return ResourceManager.GetString("ToolTipCustomGrazingUtilizationRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Grazing utilization rate.
         /// </summary>
         public static string LabelResetPastureUtilization {

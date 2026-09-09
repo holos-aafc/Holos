@@ -231,7 +231,7 @@ namespace H.Core.Services.Initialization.Crops
         void InitializeUtilization(Farm farm);
         void InitializeFertilizerApplicationMethod(Farm farm);
         void InitializeDefaultSoilForField(Farm farm); 
-        void InitializeGrazingViewItem(GrazingViewItem grazingViewItem, ManagementPeriod managementPeriod,
+        void InitializeGrazingViewItem(Farm farm, GrazingViewItem grazingViewItem, ManagementPeriod managementPeriod,
             AnimalComponentBase animalComponent, AnimalGroup animalGroup, CropViewItem cropViewItem);
 
         void InitializeNitrogenContent(List<CropViewItem> viewItem, Farm farm);

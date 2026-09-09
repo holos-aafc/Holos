@@ -2993,9 +2993,6 @@
   <data name="MessageResidueTabDescription" xml:space="preserve">
     <value>The residue tab can be used to change the default carbon allocation coefficients for the main crop. Additional details such as nitrogen concentrations and percentages of the plant returned to soil can be entered here. Default values have been provided that the model will use unless custom values are entered here</value>
   </data>
-  <data name="TitleGrazing" xml:space="preserve">
-    <value>Grazing</value>
-  </data>
   <data name="EnumChemicalTerminationType" xml:space="preserve">
     <value>Chemical</value>
   </data>
@@ -6207,6 +6204,21 @@ Please note: emissions related to the deposition or application of livestock man
   </data>
   <data name="MessageResetHarvestLoss" xml:space="preserve">
     <value>Resets the harvest loss (the share of each cut left on the field) to the default value</value>
+  </data>
+  <data name="TitleGrazing" xml:space="preserve">
+    <value>Grazing</value>
+  </data>
+  <data name="LabelUseCustomGrazingUtilizationRate" xml:space="preserve">
+    <value>Use a custom grazing utilization rate</value>
+  </data>
+  <data name="ToolTipUseCustomGrazingUtilizationRate" xml:space="preserve">
+    <value>By default Holos uses a utilization rate for each crop type - 60% for tame grass, 40% for native rangeland, 50% for seeded grassland. Choose Yes to use one rate of your own for every grazed field on this farm instead.</value>
+  </data>
+  <data name="LabelCustomGrazingUtilizationRate" xml:space="preserve">
+    <value>Custom grazing utilization rate</value>
+  </data>
+  <data name="ToolTipCustomGrazingUtilizationRate" xml:space="preserve">
+    <value>The share of the standing crop the animals take. Holos works out how much grew by dividing what the animals ate by this rate, so a low value implies a very large crop. This rate is applied to new grazing entries, and to every grazing entry on the farm when you reset the grazing utilization rate from the reset defaults window.</value>
   </data>
   <data name="LabelResetPastureUtilization" xml:space="preserve">
     <value>Grazing utilization rate</value>

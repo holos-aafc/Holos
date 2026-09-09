@@ -13,6 +13,7 @@ namespace H.Core.Services.Initialization.Crops
         #region Public Methods
 
         public void InitializeGrazingViewItem(
+            Farm farm,
             GrazingViewItem grazingViewItem,
             ManagementPeriod managementPeriod,
             AnimalComponentBase animalComponent,
@@ -32,9 +33,7 @@ namespace H.Core.Services.Initialization.Crops
             // Create a string that will be used on the field view to list details of this view item
             grazingViewItem.Description = this.InitializeDescription(managementPeriod, animalGroup);
 
-            // set utilization based on crop type
-            var utilization = _utilizationRatesForLivestockGrazingProvider.GetUtilizationRate(cropViewItem.CropType);
-            grazingViewItem.Utilization = utilization;
+            grazingViewItem.Utilization = this.GetUtilizationRate(farm, cropViewItem);
         }
 
         /// <summary>
@@ -53,10 +52,26 @@ namespace H.Core.Services.Initialization.Crops
             {
                 foreach (var grazingViewItem in cropViewItem.GrazingViewItems)
                 {
-                    grazingViewItem.Utilization =
-                        _utilizationRatesForLivestockGrazingProvider.GetUtilizationRate(cropViewItem.CropType);
+                    grazingViewItem.Utilization = this.GetUtilizationRate(farm, cropViewItem);
                 }
             }
+        }
+
+        /// <summary>
+        /// The utilization rate to apply to a grazing item: the farm's own rate when the user has set one, otherwise
+        /// the Table 60 rate for the crop type. Resolved here so item creation and the reset defaults window cannot
+        /// disagree about which rate applies.
+        /// </summary>
+        private double GetUtilizationRate(Farm farm, CropViewItem cropViewItem)
+        {
+            if (farm?.Defaults != null &&
+                farm.Defaults.UseCustomGrazingUtilizationRate &&
+                farm.Defaults.CustomGrazingUtilizationRate > 0)
+            {
+                return farm.Defaults.CustomGrazingUtilizationRate;
+            }
+
+            return _utilizationRatesForLivestockGrazingProvider.GetUtilizationRate(cropViewItem.CropType);
         }
 
         public string InitializeDescription(ManagementPeriod managementPeriod, AnimalGroup animalGroup)
@@ -97,7 +112,7 @@ namespace H.Core.Services.Initialization.Crops
                                 // Create a grazing view item that specifies when the animals started grazing and when they completed the grazing
                                 var grazingViewItem = new GrazingViewItem();
 
-                                this.InitializeGrazingViewItem(grazingViewItem, managementPeriod, animalComponent, animalGroup, viewItem);
+                                this.InitializeGrazingViewItem(farm, grazingViewItem, managementPeriod, animalComponent, animalGroup, viewItem);
 
                                 /*
                                  * Check which items exist in list, and keep the ones that exist according to the management period

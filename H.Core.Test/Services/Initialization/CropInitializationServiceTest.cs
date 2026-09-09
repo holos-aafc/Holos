@@ -418,6 +418,55 @@ namespace H.Core.Test.Services.Initialization
         }
 
         [TestMethod]
+        public void InitializeUtilizationPrefersTheFarmsOwnRateWhenOneIsSet()
+        {
+            // A farm whose grazing systems all differ from Table 60 had to correct every grazing item by hand. One
+            // number on the farm's settings now covers them, and the reset applies it.
+            var farm = new Farm();
+            farm.Defaults.UseCustomGrazingUtilizationRate = true;
+            farm.Defaults.CustomGrazingUtilizationRate = 45;
+
+            var field = new FieldSystemComponent();
+            var tameGrass = new CropViewItem {CropType = CropType.TameGrass, Year = 1985};
+            tameGrass.GrazingViewItems.Add(new GrazingViewItem {Start = new DateTime(1985, 6, 1), Utilization = 1});
+            var rangeland = new CropViewItem {CropType = CropType.RangelandNative, Year = 1985};
+            rangeland.GrazingViewItems.Add(new GrazingViewItem {Start = new DateTime(1985, 6, 1), Utilization = 1});
+            field.CropViewItems.Add(tameGrass);
+            field.CropViewItems.Add(rangeland);
+            farm.Components.Add(field);
+
+            _cropsInitializationService.InitializeUtilization(farm);
+
+            // The farm's rate overrides the per-crop table, so both crops take it.
+            Assert.AreEqual(45, tameGrass.GrazingViewItems[0].Utilization, 0.0001);
+            Assert.AreEqual(45, rangeland.GrazingViewItems[0].Utilization, 0.0001);
+        }
+
+        [TestMethod]
+        public void InitializeUtilizationFallsBackToTheTableWhenTheFarmsRateIsOffOrUnset()
+        {
+            // Off by default, so nothing changes for farms that never touch the setting. A zero rate is refused too:
+            // grazing carbon is grossed up by dividing by it, so honouring zero would be worse than ignoring it.
+            foreach (var (useCustom, rate) in new[] {(false, 45.0), (true, 0.0)})
+            {
+                var farm = new Farm();
+                farm.Defaults.UseCustomGrazingUtilizationRate = useCustom;
+                farm.Defaults.CustomGrazingUtilizationRate = rate;
+
+                var field = new FieldSystemComponent();
+                var crop = new CropViewItem {CropType = CropType.TameGrass, Year = 1985};
+                crop.GrazingViewItems.Add(new GrazingViewItem {Start = new DateTime(1985, 6, 1), Utilization = 1});
+                field.CropViewItems.Add(crop);
+                farm.Components.Add(field);
+
+                _cropsInitializationService.InitializeUtilization(farm);
+
+                Assert.AreEqual(60, crop.GrazingViewItems[0].Utilization, 0.0001,
+                    $"useCustom={useCustom} rate={rate}");
+            }
+        }
+
+        [TestMethod]
         public void InitializeUtilizationUsesTheRateForEachCropType()
         {
             var farm = new Farm();
