@@ -53,10 +53,6 @@ namespace H.Core.Services.LandManagement
             summary.YieldSource = GetYieldSource(viewItem, method, isGrazed, isHayed);
             summary.ReturnedToSoil = GetReturnedToSoil(viewItem, isGrazed, isHayed);
 
-            // No warning about a harvest that is not driving the yield: the details screen already carries that
-            // message, next to the yield assignment method dropdown, which is the only place the user can act on it.
-            // Repeating it here - on a screen without that control - would be noise they cannot do anything about.
-
             return summary;
         }
 
@@ -110,11 +106,9 @@ namespace H.Core.Services.LandManagement
                     return Resources.SummaryYieldEntered;
 
                 default:
-                    // A user who has just entered a harvest needs to be told what became of it, and what to do about
-                    // it. Someone with no harvest entered needs neither, and would only be puzzled by the offer.
-                    return isHayed
-                        ? Resources.SummaryYieldEstimateWithHarvest
-                        : Resources.SummaryYieldEstimate;
+                    // Only reachable with no cut for this year. A cut sets the yield under every method now, so there
+                    // is no longer a case where a harvest was entered and the estimate was used instead.
+                    return Resources.SummaryYieldEstimate;
             }
         }
 

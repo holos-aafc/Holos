@@ -3782,9 +3782,6 @@
   <data name="SummaryYieldEnteredAsTotalBiomass" xml:space="preserve">
     <value>Its yield is the value entered on the Details screen, taken to be all the biomass grown - what the animals ate plus what they left.</value>
   </data>
-  <data name="SummaryYieldEstimateWithHarvest" xml:space="preserve">
-    <value>Your harvest is not used as this field's yield - a regional estimate is used instead. To use it, choose the 'Custom' method on the Details screen.</value>
-  </data>
   <data name="SummaryYieldEstimate" xml:space="preserve">
     <value>Its yield is a regional estimate.</value>
   </data>

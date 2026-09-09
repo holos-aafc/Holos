@@ -140,34 +140,20 @@ namespace H.Core.Test.Services.LandManagement
 
         #endregion
 
-        #region HasHarvestButUsingEstimate (mismatch nudge)
-
-        [TestMethod]
-        public void MismatchTrueForModelledWithHay()
-        {
-            Assert.IsTrue(YieldInputPolicy.HasHarvestButUsingEstimate(HayedPerennial(), YieldAssignmentMethod.SmallAreaData));
-        }
-
-        [TestMethod]
-        public void MismatchFalseForCustomWithHay()
-        {
-            Assert.IsFalse(YieldInputPolicy.HasHarvestButUsingEstimate(HayedPerennial(), YieldAssignmentMethod.Custom));
-        }
-
-        [TestMethod]
-        public void MismatchFalseForModelledWithoutHay()
-        {
-            Assert.IsFalse(YieldInputPolicy.HasHarvestButUsingEstimate(PerennialNoHarvest(), YieldAssignmentMethod.SmallAreaData));
-        }
-
-        #endregion
-
         #region GetYieldSource
 
         [TestMethod]
-        public void SourceEstimatedForModelled()
+        public void SourceIsFromHarvestUnderAModelledMethodToo()
         {
-            Assert.AreEqual(YieldSource.Estimated, YieldInputPolicy.GetYieldSource(HayedPerennial(), YieldAssignmentMethod.Average));
+            // A cut sets the yield whichever method is selected, so the label must say so. This returned Estimated
+            // while the derivation was gated on Custom.
+            Assert.AreEqual(YieldSource.FromHarvest, YieldInputPolicy.GetYieldSource(HayedPerennial(), YieldAssignmentMethod.Average));
+        }
+
+        [TestMethod]
+        public void SourceEstimatedForModelledWithNoCut()
+        {
+            Assert.AreEqual(YieldSource.Estimated, YieldInputPolicy.GetYieldSource(PerennialNoHarvest(), YieldAssignmentMethod.SmallAreaData));
         }
 
         [TestMethod]
@@ -191,6 +177,8 @@ namespace H.Core.Test.Services.LandManagement
             // Grazing is asked before the method because it holds under all of them.
             Assert.AreEqual(YieldSource.Grazed,
                 YieldInputPolicy.GetYieldSource(GrazedAndHayedPerennial(), YieldAssignmentMethod.Average));
+            Assert.AreEqual(YieldSource.Grazed,
+                YieldInputPolicy.GetYieldSource(GrazedAndHayedPerennial(), YieldAssignmentMethod.InputFile));
         }
 
         [TestMethod]

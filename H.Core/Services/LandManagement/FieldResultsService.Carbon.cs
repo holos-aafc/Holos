@@ -100,10 +100,14 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// When the yield assignment method is Custom, a perennial hay/forage field's yield is taken from the biomass the
-        /// user actually harvested rather than a separately-typed or modelled value. This makes the entered harvest the
-        /// single source of truth - it drives C_p and everything derived from it. Non-Custom (modelled) methods keep
-        /// their estimated yield; grain crops and fields without hayed harvests are left untouched.
+        /// A perennial hay/forage field's yield is taken from the biomass the user actually harvested. A recorded cut is
+        /// the most direct measurement of what left that field in that year, so it sets the yield whichever yield
+        /// assignment method is selected, and the method is left to supply the years with no cut. Grain crops and fields
+        /// without hayed harvests are untouched.
+        ///
+        /// This used to apply only under the Custom method, which meant a user could enter a season of cuts in detail
+        /// under the default method and see no effect on carbon. The method now fills the gaps rather than competing
+        /// with the measurement.
         ///
         /// The two biomass figures are on different moisture bases and must be reconciled: a bale has been dried (around
         /// 15% moisture) while Yield means the standing crop as it grew (around 80% for forage), and C_p multiplies Yield
@@ -122,13 +126,8 @@ namespace H.Core.Services.LandManagement
         ///
         /// Must run after yields are assigned and before carbon inputs are calculated.
         /// </summary>
-        public void UpdateYieldFromHarvestForCustomPerennials(IEnumerable<CropViewItem> viewItems, Farm farm, FieldSystemComponent fieldSystemComponent)
+        public void UpdateYieldFromHarvest(IEnumerable<CropViewItem> viewItems)
         {
-            if (farm == null || farm.GetYieldAssignmentMethod(fieldSystemComponent) != YieldAssignmentMethod.Custom)
-            {
-                return;
-            }
-
             foreach (var cropViewItem in viewItems)
             {
                 if (cropViewItem.DoNotRecalculateYield ||

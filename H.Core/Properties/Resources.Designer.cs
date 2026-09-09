@@ -10226,18 +10226,6 @@ namespace H.Core.Properties {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to Yield: an estimate from the selected yield assignment method.
-        /// </summary>
-        /// <summary>
-        ///   Looks up a localized string similar to Your harvest is not used as this field's yield - a regional estimate is used instead.
-        /// </summary>
-        public static string SummaryYieldEstimateWithHarvest {
-            get {
-                return ResourceManager.GetString("SummaryYieldEstimateWithHarvest", resourceCulture);
-            }
-        }
-
-        /// <summary>
         ///   Looks up a localized string similar to Its yield is a regional estimate.
         /// </summary>
         public static string SummaryYieldEstimate {

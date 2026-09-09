@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 
@@ -12,16 +12,17 @@ namespace H.Core.Services.LandManagement
         /// <summary>Regional/modelled estimate (Small Area Data, Average, etc.).</summary>
         Estimated,
 
-        /// <summary>Derived from the user's entered hay harvest (Custom + hay/forage).</summary>
+        /// <summary>Derived from the user's entered hay cut, whichever yield assignment method is selected.</summary>
         FromHarvest,
 
-        /// <summary>Typed directly by the user (Custom, no hay harvest to derive from).</summary>
+        /// <summary>Typed directly by the user (Custom method, no hay cut to derive from).</summary>
         Entered,
 
         /// <summary>
         /// The year is grazed, so the harvest does not set the yield whatever else the user has entered. Grazing takes
-        /// precedence over a hay harvest in <c>UpdateYieldFromHarvestForCustomPerennials</c>, which skips any year with
-        /// grazing on it. Without this case the label claimed the yield came from a harvest that was never used.
+        /// precedence over a hay cut: the derivation skips any year with grazing on it, because a grazed field's yield
+        /// stands for the whole standing crop. Without this case the label claimed the yield came from a cut that was
+        /// never used.
         /// </summary>
         Grazed,
     }
@@ -48,8 +49,9 @@ namespace H.Core.Services.LandManagement
 
         /// <summary>
         /// Yield is read-only unless it is a genuine typed input: it stays editable only in advanced mode, or under the
-        /// Custom method for a field whose yield is NOT derived from a hay harvest (e.g. grain, or a perennial with no
-        /// hayed harvest). It is read-only for every modelled method (the estimate) and for Custom + hay (from the bales).
+        /// Custom method for a field whose yield is NOT derived from a hay cut (e.g. grain, or a perennial with no cut
+        /// that year). A cut derives the yield under every method now, so a cut makes the cell read-only regardless of
+        /// the method, as does any modelled method supplying an estimate.
         /// </summary>
         public static bool IsYieldReadOnly(CropViewItem viewItem, YieldAssignmentMethod method, bool advancedEditing)
         {
@@ -86,34 +88,25 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// True when the user has entered a hay harvest but the yield method is a modelled estimate, so the entered
-        /// harvest is NOT driving the carbon. Drives the "switch to Custom to use your harvest" nudge.
-        /// </summary>
-        public static bool HasHarvestButUsingEstimate(CropViewItem viewItem, YieldAssignmentMethod method)
-        {
-            return method != YieldAssignmentMethod.Custom && HasHayedHarvest(viewItem);
-        }
-
-        /// <summary>
         /// Where the field's yield comes from, for labelling: a modelled estimate, the user's entered harvest, or a
         /// directly typed value.
         /// </summary>
         public static YieldSource GetYieldSource(CropViewItem viewItem, YieldAssignmentMethod method)
         {
-            // Asked before the method, because it holds under every method: a grazed year's yield is never taken from a
-            // hay harvest. UpdateYieldFromHarvestForCustomPerennials skips any year with grazing on it, so labelling
-            // such a year "from your harvest" describes a derivation that did not run.
+            // Grazing first, because it holds under every method: a grazed year's yield is never taken from a hay cut,
+            // so labelling such a year "from your harvest" would describe a derivation that did not run.
             if (viewItem.HasGrazingItemsForTheCurrentYear())
             {
                 return YieldSource.Grazed;
             }
 
-            if (method != YieldAssignmentMethod.Custom)
+            // Then the cut, also under every method. The assignment method only supplies the years without one.
+            if (HasHayedHarvest(viewItem))
             {
-                return YieldSource.Estimated;
+                return YieldSource.FromHarvest;
             }
 
-            return HasHayedHarvest(viewItem) ? YieldSource.FromHarvest : YieldSource.Entered;
+            return method == YieldAssignmentMethod.Custom ? YieldSource.Entered : YieldSource.Estimated;
         }
     }
 }
