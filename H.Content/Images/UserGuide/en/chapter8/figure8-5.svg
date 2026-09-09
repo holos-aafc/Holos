@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 534" role="img"
+     aria-label="How a year that was both grazed and hayed is worked out. The hay you baled is subtracted from the carbon under every Yield Assignment Method. The method decides only where the yield number comes from. Under Custom Yield the chain runs forwards: the yield you typed gives the plant carbon, with no gross-up, because the entered yield is already the whole crop. Under any other method it runs backwards: what was removed by grazing and by baling gives the plant carbon, and a yield is then reported back to you. Both paths end at the same step, where both removals are subtracted to give the carbon returned to soil.">
+  <defs>
+    <marker id="g5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <g color="#7d8b98" font-family="Segoe UI, system-ui, sans-serif">
+
+    <rect x="260" y="10" width="380" height="44" rx="22" fill="#eef2f5" stroke="#7d8b98" stroke-width="1.5"/>
+    <text x="450" y="38" font-size="15" fill="#16191c" text-anchor="middle" font-weight="600">Grazed and hayed in the same year</text>
+    <line x1="450" y1="54" x2="450" y2="76" stroke="currentColor" stroke-width="1.5" marker-end="url(#g5)"/>
+
+    <rect x="170" y="82" width="560" height="44" rx="5" fill="#e9f2ec" stroke="#3f7a5a" stroke-width="2"/>
+    <text x="450" y="110" font-size="15" fill="#2c5a42" text-anchor="middle" font-weight="700">The hay you baled is subtracted from the carbon — under every method.</text>
+    <line x1="450" y1="126" x2="450" y2="148" stroke="currentColor" stroke-width="1.5" marker-end="url(#g5)"/>
+
+    <rect x="270" y="154" width="360" height="44" rx="5" fill="#eef2f5" stroke="#7d8b98" stroke-width="1.5"/>
+    <text x="450" y="182" font-size="14.5" fill="#16191c" text-anchor="middle">The method decides only <tspan font-weight="600">the yield number</tspan>.</text>
+
+    <line x1="350" y1="198" x2="350" y2="214" stroke="currentColor" stroke-width="1.5"/>
+    <line x1="350" y1="214" x2="230" y2="214" stroke="currentColor" stroke-width="1.5"/>
+    <line x1="230" y1="214" x2="230" y2="234" stroke="currentColor" stroke-width="1.5" marker-end="url(#g5)"/>
+    <line x1="550" y1="198" x2="550" y2="214" stroke="currentColor" stroke-width="1.5"/>
+    <line x1="550" y1="214" x2="670" y2="214" stroke="currentColor" stroke-width="1.5"/>
+    <line x1="670" y1="214" x2="670" y2="234" stroke="currentColor" stroke-width="1.5" marker-end="url(#g5)"/>
+
+    <rect x="40" y="240" width="380" height="194" rx="5" fill="#e9f2ec" stroke="#3f7a5a" stroke-width="1.5"/>
+    <text x="62" y="266" font-size="14" fill="#2c5a42" font-weight="700">Custom Yield</text>
+    <text x="398" y="266" font-size="12" fill="#6c757d" text-anchor="end">forwards</text>
+    <line x1="62" y1="276" x2="398" y2="276" stroke="#3f7a5a" stroke-width="1"/>
+
+    <text x="68" y="302" font-size="14" fill="#16191c" font-weight="600">Your yield</text>
+    <text x="68" y="318" font-size="12" fill="#6c757d">the value you typed — an input</text>
+    <line x1="80" y1="328" x2="80" y2="352" stroke="currentColor" stroke-width="1.5" marker-end="url(#g5)"/>
+    <text x="96" y="346" font-size="12" fill="#495057">no gross-up is applied</text>
+
+    <text x="68" y="376" font-size="14" fill="#16191c" font-weight="600">Plant carbon</text>
+    <text x="68" y="398" font-size="12" fill="#6c757d">Your entered yield is taken to be the whole crop —</text>
+    <text x="68" y="413" font-size="12" fill="#6c757d">what the animals ate plus what they left.</text>
+
+    <rect x="480" y="240" width="380" height="194" rx="5" fill="#e9f2ec" stroke="#3f7a5a" stroke-width="1.5"/>
+    <text x="502" y="266" font-size="14" fill="#2c5a42" font-weight="700">Any other method</text>
+    <text x="838" y="266" font-size="12" fill="#6c757d" text-anchor="end">backwards</text>
+    <line x1="502" y1="276" x2="838" y2="276" stroke="#3f7a5a" stroke-width="1"/>
+
+    <text x="508" y="300" font-size="12" fill="#6c757d">Small area data, Average or Input file</text>
+    <text x="508" y="324" font-size="14" fill="#16191c" font-weight="600">What was removed</text>
+    <text x="508" y="340" font-size="12" fill="#6c757d">the grazed portion, plus the baled portion</text>
+    <line x1="520" y1="350" x2="520" y2="368" stroke="currentColor" stroke-width="1.5" marker-end="url(#g5)"/>
+
+    <text x="508" y="388" font-size="14" fill="#16191c" font-weight="600">Plant carbon</text>
+    <line x1="520" y1="396" x2="520" y2="412" stroke="currentColor" stroke-width="1.5" marker-end="url(#g5)"/>
+
+    <text x="508" y="428" font-size="14" fill="#16191c" font-weight="600">Yield — reported, not entered</text>
+
+    <line x1="230" y1="434" x2="230" y2="460" stroke="currentColor" stroke-width="1.5"/>
+    <line x1="230" y1="460" x2="450" y2="460" stroke="currentColor" stroke-width="1.5"/>
+    <line x1="670" y1="434" x2="670" y2="460" stroke="currentColor" stroke-width="1.5"/>
+    <line x1="670" y1="460" x2="450" y2="460" stroke="currentColor" stroke-width="1.5"/>
+    <line x1="450" y1="460" x2="450" y2="478" stroke="currentColor" stroke-width="1.5" marker-end="url(#g5)"/>
+
+    <rect x="110" y="484" width="680" height="46" rx="5" fill="#e9f2ec" stroke="#3f7a5a" stroke-width="2"/>
+    <text x="450" y="504" font-size="14.5" fill="#16191c" text-anchor="middle" font-weight="600">Both removals come off, giving the carbon returned to soil.</text>
+    <text x="450" y="522" font-size="12.5" fill="#495057" text-anchor="middle">Reported as Product returned to soil (%), under every method.</text>
+  </g>
+</svg>

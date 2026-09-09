@@ -1530,6 +1530,69 @@ namespace H.Core.Test.Calculators.Carbon
             Assert.AreEqual(5413.8462, viewItem.Yield, 0.001);
         }
 
+        [TestMethod]
+        public void AssignInputsReportsThePercentageFromTheBalanceUnderACustomYieldToo()
+        {
+            // M4. The Custom path used to leave this at 100 - utilization, which describes only what the animals left
+            // and ignores the hay taken from the same standing crop - so the figure on screen disagreed with the carbon
+            // credited whenever a cut was entered. Both methods now report from the balance.
+            var farm = CreateGrazedAndHayedFarm(out var viewItem);
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
+            viewItem.PercentageOfProductYieldReturnedToSoil = 40;
+
+            _sut.AssignInputs(null, viewItem, null, farm, new List<AnimalComponentEmissionsResults>());
+
+            var expected = 100.0 * viewItem.CarbonInputFromProduct / viewItem.PlantCarbonInAgriculturalProduct;
+            Assert.AreEqual(expected, viewItem.PercentageOfProductYieldReturnedToSoil, 0.001,
+                "the reported percentage must be what actually stayed on the field");
+            Assert.AreNotEqual(40, viewItem.PercentageOfProductYieldReturnedToSoil, 0.001);
+        }
+
+        [TestMethod]
+        public void AssignInputsKeepsAPinnedPercentageUnderACustomYieldWithGrazing()
+        {
+            var farm = CreateGrazedAndHayedFarm(out var viewItem);
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
+            viewItem.PercentageOfProductYieldReturnedToSoil = 40;
+            viewItem.DoNotRecalculatePercentageReturnedToSoil = true;
+
+            _sut.AssignInputs(null, viewItem, null, farm, new List<AnimalComponentEmissionsResults>());
+
+            Assert.AreEqual(40, viewItem.PercentageOfProductYieldReturnedToSoil, 0.001);
+        }
+
+        [TestMethod]
+        public void AssignInputsRecordsWhenTheCutRemovesMoreThanTheYieldAccountsFor()
+        {
+            // M5. Only a yield typed independently of the removals can contradict them, so this is the one path where
+            // it can happen. The floor at zero stays - nothing more than grew can be returned - but the year is marked
+            // so the interface can say so instead of reporting a plausible-looking zero.
+            var farm = CreateGrazedAndHayedFarm(out var viewItem);
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
+            viewItem.TotalCarbonLossFromBaleExports = 500000;
+
+            _sut.AssignInputs(null, viewItem, null, farm, new List<AnimalComponentEmissionsResults>());
+
+            Assert.AreEqual(0, viewItem.CarbonInputFromProduct, 0.001, "floored, not negative");
+            Assert.IsTrue(viewItem.HayCutExceedsWhatTheYieldAccountsFor);
+        }
+
+        [TestMethod]
+        public void AssignInputsDoesNotRecordAContradictionWhenTheYieldCoversTheCut()
+        {
+            // The counterpart. The shared fixture's yield of 1000 is deliberately small next to its bale exports, so it
+            // trips the contradiction under a custom yield - which is the case above. Give the field a yield that can
+            // account for the cut and the flag must stay clear.
+            var farm = CreateGrazedAndHayedFarm(out var viewItem);
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.Custom;
+            viewItem.Yield = 100000;
+
+            _sut.AssignInputs(null, viewItem, null, farm, new List<AnimalComponentEmissionsResults>());
+
+            Assert.IsTrue(viewItem.CarbonInputFromProduct > 0, "test setup: the yield must cover the cut");
+            Assert.IsFalse(viewItem.HayCutExceedsWhatTheYieldAccountsFor);
+        }
+
         private static Farm CreateGrazedFieldFarm(out CropViewItem viewItem, out FieldSystemComponent field)
         {
             var farm = new Farm();

@@ -103,6 +103,8 @@ namespace H.Core.Models
         private double _customN2OEmissionFactor;
 
         private bool _useCustomN2OEmissionFactor;
+        private bool _useCustomGrazingUtilizationRate;
+        private double _customGrazingUtilizationRate;
         
         private EquilibriumCalculationStrategies _equilibriumCalculationStrategy;
 
@@ -209,6 +211,11 @@ namespace H.Core.Models
 
             // Perennial crops
             this.PercentageOfProductReturnedToSoilForPerennials = 35;
+
+            // Off by default, so Table 60 supplies the rate per crop type as before. The value here is only consulted
+            // once the user turns it on, and 60 - the tame grass rate - is a sensible place for them to start from.
+            this.UseCustomGrazingUtilizationRate = false;
+            this.CustomGrazingUtilizationRate = 60;
             this.PercentageOfStrawReturnedToSoilForPerennials = 0;
             this.PercentageOfRootsReturnedToSoilForPerennials = 100;
             this.EstablishmentGrowthFactorPercentageForPerennials = 50;
@@ -780,6 +787,30 @@ namespace H.Core.Models
         {
             get => _useCustomElectricityConversionFactorForSwine;
             set => SetProperty(ref _useCustomElectricityConversionFactorForSwine, value);
+        }
+
+        /// <summary>
+        /// When set, <paramref name="CustomGrazingUtilizationRate"/> is used for every grazing item on the farm in
+        /// place of the Table 60 rate for the crop type. Off by default.
+        ///
+        /// Utilization is a user input and a consequential one - grazing carbon is grossed up by dividing by it - so a
+        /// farm whose grazing systems all differ from the table has had to correct every item by hand. This gives them
+        /// one number instead, applied when grazing items are created and when the rate is reset.
+        /// </summary>
+        public bool UseCustomGrazingUtilizationRate
+        {
+            get => _useCustomGrazingUtilizationRate;
+            set => SetProperty(ref _useCustomGrazingUtilizationRate, value);
+        }
+
+        /// <summary>
+        /// The farm's own grazing utilization rate as a percentage, used when
+        /// <see cref="UseCustomGrazingUtilizationRate"/> is set. Ignored otherwise.
+        /// </summary>
+        public double CustomGrazingUtilizationRate
+        {
+            get => _customGrazingUtilizationRate;
+            set => SetProperty(ref _customGrazingUtilizationRate, value);
         }
 
         /// <summary>

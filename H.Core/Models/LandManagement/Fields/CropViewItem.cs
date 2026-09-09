@@ -755,6 +755,21 @@ namespace H.Core.Models.LandManagement.Fields
         private bool _doNotRecalculatePlantCarbonInAgriculturalProduct;
         private bool _doNotRecalculateYield;
         private bool _doNotRecalculatePercentageReturnedToSoil;
+        private bool _hayCutExceedsWhatTheYieldAccountsFor;
+
+        /// <summary>
+        /// Set by the carbon calculation when a grazed field's hay cut removes more carbon than the entered yield can
+        /// account for, so the carbon returned to soil had to be floored at zero. The two entries contradict each other -
+        /// nothing more than grew can leave the field - and only a yield the user typed independently of the removals can
+        /// disagree with them, which is why this arises on a grazed field under a user-supplied yield and nowhere else.
+        ///
+        /// Recorded rather than recomputed so the screen and the calculation cannot drift apart.
+        /// </summary>
+        public bool HayCutExceedsWhatTheYieldAccountsFor
+        {
+            get { return _hayCutExceedsWhatTheYieldAccountsFor; }
+            set { SetProperty(ref _hayCutExceedsWhatTheYieldAccountsFor, value); }
+        }
 
         /// <summary>
         /// Used to prevent a custom C_p value from being overwritten from the usual method of calculation for C_p (used with perennials only).

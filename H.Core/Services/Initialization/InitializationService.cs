@@ -386,6 +386,11 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeHarvestLoss(farm);
         }
 
+        public void InitializeUtilization(Farm farm)
+        {
+            _cropInitializationService.InitializeUtilization(farm);
+        }
+
         public void InitializeFertilizerApplicationMethod(Farm farm)
         {
             _cropInitializationService.InitializeFertilizerApplicationMethod(farm);
@@ -396,10 +401,10 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeDefaultSoilForField(farm);
         }
 
-        public void InitializeGrazingViewItem(GrazingViewItem grazingViewItem, ManagementPeriod managementPeriod,
+        public void InitializeGrazingViewItem(Farm farm, GrazingViewItem grazingViewItem, ManagementPeriod managementPeriod,
             AnimalComponentBase animalComponent, AnimalGroup animalGroup, CropViewItem cropViewItem)
         {
-            _cropInitializationService.InitializeGrazingViewItem(grazingViewItem, managementPeriod, animalComponent, animalGroup, cropViewItem);
+            _cropInitializationService.InitializeGrazingViewItem(farm, grazingViewItem, managementPeriod, animalComponent, animalGroup, cropViewItem);
         }
 
         public void InitializeNitrogenContent(List<CropViewItem> viewItem, Farm farm)

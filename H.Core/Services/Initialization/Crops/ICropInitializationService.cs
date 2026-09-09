@@ -223,9 +223,15 @@ namespace H.Core.Services.Initialization.Crops
         void InitializePhosphorusFertilizerRate(Farm farm);
 
         void InitializeHarvestLoss(Farm farm);
+
+        /// <summary>
+        /// Resets the grazing utilization rate on every grazing item on the farm to the default for its crop type.
+        /// Offered through the reset defaults window, because utilization is a user input and is never reset otherwise.
+        /// </summary>
+        void InitializeUtilization(Farm farm);
         void InitializeFertilizerApplicationMethod(Farm farm);
         void InitializeDefaultSoilForField(Farm farm); 
-        void InitializeGrazingViewItem(GrazingViewItem grazingViewItem, ManagementPeriod managementPeriod,
+        void InitializeGrazingViewItem(Farm farm, GrazingViewItem grazingViewItem, ManagementPeriod managementPeriod,
             AnimalComponentBase animalComponent, AnimalGroup animalGroup, CropViewItem cropViewItem);
 
         void InitializeNitrogenContent(List<CropViewItem> viewItem, Farm farm);

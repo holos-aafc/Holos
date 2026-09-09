@@ -87,20 +87,18 @@ namespace H.Core.Test.Services
         }
 
         [TestMethod]
-        public void DescribeSaysTheYieldIsAnEstimateWhenAHarvestIsNotDrivingIt()
+        public void DescribeSaysTheHarvestDrivesTheYieldUnderAModelledMethodToo()
         {
-            // The panel does not warn about this. The details screen already carries that message, beside the yield
-            // assignment method dropdown - the only screen where the user can act on it.
+            // There is no longer a case where a cut is entered and an estimate is used instead, so the panel no longer
+            // has to explain one away. Under Small Area Data the cut still sets the yield and the panel says so.
             var farm = CreateFarm(out var viewItem, YieldAssignmentMethod.SmallAreaData);
             AddHayHarvest(viewItem);
 
             var summary = FieldSummaryPolicy.Describe(viewItem, farm);
 
-            StringAssert.Contains(summary.YieldSource, "not used as this field's yield");
-
-            // Saying the harvest is not driving the yield without saying what to do about it leaves the user stranded,
-            // having just entered one. The remedy goes in the same sentence.
-            StringAssert.Contains(summary.YieldSource, "Custom");
+            StringAssert.Contains(summary.YieldSource, "harvest");
+            Assert.IsFalse(summary.YieldSource.Contains("not used"),
+                "the panel must not claim the harvest is being ignored");
         }
 
         [TestMethod]

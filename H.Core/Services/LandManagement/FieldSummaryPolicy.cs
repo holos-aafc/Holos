@@ -50,12 +50,8 @@ namespace H.Core.Services.LandManagement
             var isHayed = viewItem.IsHarvested();
 
             summary.Activity = GetActivity(viewItem, isGrazed, isHayed);
-            summary.YieldSource = GetYieldSource(viewItem, method, isGrazed, isHayed);
+            summary.YieldSource = GetYieldSource(viewItem, method);
             summary.ReturnedToSoil = GetReturnedToSoil(viewItem, isGrazed, isHayed);
-
-            // No warning about a harvest that is not driving the yield: the details screen already carries that
-            // message, next to the yield assignment method dropdown, which is the only place the user can act on it.
-            // Repeating it here - on a screen without that control - would be noise they cannot do anything about.
 
             return summary;
         }
@@ -80,7 +76,7 @@ namespace H.Core.Services.LandManagement
             return string.Format(Resources.SummaryActivityNeither, viewItem.Year);
         }
 
-        private static string GetYieldSource(CropViewItem viewItem, YieldAssignmentMethod method, bool isGrazed, bool isHayed)
+        private static string GetYieldSource(CropViewItem viewItem, YieldAssignmentMethod method)
         {
             // A pinned value beats every other rule - nothing recalculates it.
             if (viewItem.DoNotRecalculateYield)
@@ -88,17 +84,16 @@ namespace H.Core.Services.LandManagement
                 return Resources.SummaryYieldOverridden;
             }
 
-            // A grazed field's yield is worked out backwards from intake, whatever the method says. Under Custom the
-            // entered yield is kept and taken to be the total biomass grown, so say that rather than claiming otherwise.
-            if (isGrazed)
-            {
-                return method == YieldAssignmentMethod.Custom
-                    ? Resources.SummaryYieldEnteredAsTotalBiomass
-                    : Resources.SummaryYieldFromGrazing;
-            }
-
+            // Every case below comes from YieldInputPolicy.GetYieldSource, which is the one place the precedence lives.
+            // This used to re-derive the grazed branch itself, which is how the two drifted apart.
             switch (YieldInputPolicy.GetYieldSource(viewItem, method))
             {
+                case LandManagement.YieldSource.GrazedEnteredAsTotalBiomass:
+                    return Resources.SummaryYieldEnteredAsTotalBiomass;
+
+                case LandManagement.YieldSource.GrazedDerived:
+                    return Resources.SummaryYieldFromGrazing;
+
                 case LandManagement.YieldSource.FromHarvest:
                     var bales = viewItem.GetHayHarvests()
                         .Where(harvest => harvest.ForageActivity == ForageActivities.Hayed)
@@ -110,11 +105,9 @@ namespace H.Core.Services.LandManagement
                     return Resources.SummaryYieldEntered;
 
                 default:
-                    // A user who has just entered a harvest needs to be told what became of it, and what to do about
-                    // it. Someone with no harvest entered needs neither, and would only be puzzled by the offer.
-                    return isHayed
-                        ? Resources.SummaryYieldEstimateWithHarvest
-                        : Resources.SummaryYieldEstimate;
+                    // Only reachable with no cut for this year. A cut sets the yield under every method now, so there
+                    // is no longer a case where a harvest was entered and the estimate was used instead.
+                    return Resources.SummaryYieldEstimate;
             }
         }
 

@@ -110,13 +110,46 @@ namespace H.Core.Test.Services
 
             Assert.AreEqual(100,
                 crops.Single(x => x.CropType == CropType.TameGrass)
-                    .PercentageOfProductYieldReturnedToSoil); // Set to 100 since there is no yield (nothing harvested that year)
+                    .PercentageOfProductYieldReturnedToSoil); // 100 because nothing was removed - no cut and no grazing
             Assert.AreEqual(2,
                 crops.Single(x => x.CropType == CropType.Barley)
                     .PercentageOfProductYieldReturnedToSoil); // Unchanged since it is not a perennial
             Assert.AreEqual(35,
                 crops.Single(x => x.CropType == CropType.TameLegume)
                     .PercentageOfProductYieldReturnedToSoil); // Unchanged since it has a harvest (product was removed)
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsDoesNotForce100JustBecauseTheYieldIsZero()
+        {
+            // A zero yield nearly always means Holos had no yield to assign - no Small Area Data for the crop and
+            // location, a Custom field not filled in, an input file with no row for the year - not that nothing grew.
+            // With a cut recorded, product plainly did leave the field, so the harvest loss decides the return.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 0, Year = 1985};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+            {
+                Start = new DateTime(1985, 8, 1),
+                ForageActivity = ForageActivities.Hayed,
+                HarvestLossPercentage = 20,
+            });
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(20, crop.PercentageOfProductYieldReturnedToSoil, 0.0001,
+                "a recorded cut decides the return, not the absent yield");
+        }
+
+        [TestMethod]
+        public void UpdatePercentageReturnsForPerennialsStillReturns100ForAZeroYieldWithNothingRemoved()
+        {
+            // The other half: with no cut and no grazing the rule still applies, and a zero yield is one instance of it.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, PercentageOfProductYieldReturnedToSoil = 35, Yield = 0, Year = 1985};
+
+            _resultsService.UpdatePercentageReturnsForPerennials(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(100, crop.PercentageOfProductYieldReturnedToSoil, 0.0001);
         }
 
         [TestMethod]
@@ -514,7 +547,7 @@ namespace H.Core.Test.Services
         }
 
         [TestMethod]
-        public void UpdateYieldFromHarvestForCustomPerennialsSetsYieldFromHayedHarvest()
+        public void UpdateYieldFromHarvestSetsYieldFromHayedHarvest()
         {
             // Custom + hay/forage perennial. The bale dry matter is re-expressed on the crop's moisture basis, because
             // the pipeline multiplies Yield by (1 - crop moisture): 17000 kg DM over 10 ha = 1700 kg DM/ha, and at 80%
@@ -524,15 +557,14 @@ namespace H.Core.Test.Services
             crop.HarvestViewItems.Add(new HarvestViewItem()
                 {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 17000});
 
-            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
-                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+            _resultsService.UpdateYieldFromHarvest(new List<CropViewItem>() {crop});
 
             Assert.AreEqual(8500, crop.Yield, 0.0001);
             Assert.AreEqual(1700, crop.DryYield, 0.0001);
         }
 
         [TestMethod]
-        public void UpdateYieldFromHarvestForCustomPerennialsSumsMultipleCuts()
+        public void UpdateYieldFromHarvestSumsMultipleCuts()
         {
             // Two cuts (12000 + 8000 = 20000 kg DM) over 10 ha at 80% crop moisture = 20000 / 0.2 / 10 = 10000 kg/ha.
             var crop = new CropViewItem()
@@ -542,27 +574,25 @@ namespace H.Core.Test.Services
             crop.HarvestViewItems.Add(new HarvestViewItem()
                 {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 8000});
 
-            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
-                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+            _resultsService.UpdateYieldFromHarvest(new List<CropViewItem>() {crop});
 
             Assert.AreEqual(10000, crop.Yield, 0.0001);
         }
 
         [TestMethod]
-        public void UpdateYieldFromHarvestForCustomPerennialsLeavesYieldWhenNoHarvest()
+        public void UpdateYieldFromHarvestLeavesYieldWhenNoHarvest()
         {
             // Custom + perennial but no harvest entered -> keep the existing (typed/modelled) yield.
             var crop = new CropViewItem()
                 {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
 
-            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
-                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+            _resultsService.UpdateYieldFromHarvest(new List<CropViewItem>() {crop});
 
             Assert.AreEqual(1234, crop.Yield, 0.0001);
         }
 
         [TestMethod]
-        public void UpdateYieldFromHarvestForCustomPerennialsDoesNotChangeAnnualCrops()
+        public void UpdateYieldFromHarvestDoesNotChangeAnnualCrops()
         {
             // Grain / annual crops keep their (typed) yield - the derivation is perennial hay/forage only.
             var crop = new CropViewItem()
@@ -570,29 +600,53 @@ namespace H.Core.Test.Services
             crop.HarvestViewItems.Add(new HarvestViewItem()
                 {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
 
-            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
-                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+            _resultsService.UpdateYieldFromHarvest(new List<CropViewItem>() {crop});
 
             Assert.AreEqual(1234, crop.Yield, 0.0001);
         }
 
         [TestMethod]
-        public void UpdateYieldFromHarvestForCustomPerennialsDoesNotDeriveForModelledMethod()
+        public void HasHayedHarvestWithNoUsableWeightSpotsACutThatCannotSetAYield()
         {
-            // Method gate: under a modelled method (e.g. Small Area Data) the estimated yield is kept, even with harvests.
-            var crop = new CropViewItem()
-                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
+            // The contradiction M2 asks Holos to speak up about: a cut is recorded, so product left the field, but
+            // there is no weight behind it for the yield to be worked out from.
+            var crop = new CropViewItem() {CropType = CropType.TameGrass, Area = 10, Year = 1985};
             crop.HarvestViewItems.Add(new HarvestViewItem()
-                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed});
 
-            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
-                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData}, null);
+            Assert.IsTrue(crop.HasHayedHarvestWithNoUsableWeight());
 
-            Assert.AreEqual(1234, crop.Yield, 0.0001);
+            // And it must not fire on the ordinary cases: a real cut, or no cut at all.
+            var weighed = new CropViewItem() {CropType = CropType.TameGrass, Area = 10, Year = 1985};
+            weighed.HarvestViewItems.Add(new HarvestViewItem()
+            {
+                Start = new DateTime(1985, 8, 1),
+                ForageActivity = ForageActivities.Hayed,
+                AboveGroundBiomassDryWeight = 20000,
+            });
+            Assert.IsFalse(weighed.HasHayedHarvestWithNoUsableWeight());
+
+            Assert.IsFalse(new CropViewItem() {CropType = CropType.TameGrass, Area = 10, Year = 1985}
+                .HasHayedHarvestWithNoUsableWeight());
         }
 
         [TestMethod]
-        public void UpdateYieldFromHarvestForCustomPerennialsConvertsBaleWetWeightToTheCropMoistureBasis()
+        public void UpdateYieldFromHarvestDerivesUnderAModelledMethodToo()
+        {
+            // A recorded cut is the most direct measurement of what left the field, so it sets the yield whichever
+            // method is selected. This used to keep the Small Area Data estimate and ignore the cut entirely.
+            var crop = new CropViewItem()
+                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985, MoistureContentOfCrop = 0.8};
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 20000});
+
+            _resultsService.UpdateYieldFromHarvest(new List<CropViewItem>() {crop});
+
+            Assert.AreEqual(10000, crop.Yield, 0.0001, "the cut overrides the estimate");
+        }
+
+        [TestMethod]
+        public void UpdateYieldFromHarvestConvertsBaleWetWeightToTheCropMoistureBasis()
         {
             // A bale is dried (15% moisture) while Yield means the standing crop (80% moisture), and C_p multiplies
             // Yield by (1 - crop moisture). Feeding the bale's wet weight straight in would strip 80% off material
@@ -612,14 +666,13 @@ namespace H.Core.Test.Services
                 MoistureContentAsPercentage = 15,
             });
 
-            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
-                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+            _resultsService.UpdateYieldFromHarvest(new List<CropViewItem>() {crop});
 
             Assert.AreEqual(4958.3333, crop.Yield, 0.0001);
         }
 
         [TestMethod]
-        public void UpdateYieldFromHarvestForCustomPerennialsYieldTimesDryFractionRecoversTheBaledDryMatter()
+        public void UpdateYieldFromHarvestYieldTimesDryFractionRecoversTheBaledDryMatter()
         {
             // The property the pipeline depends on: whatever Yield we set, multiplying it by (1 - crop moisture) must
             // give back the dry matter per hectare that was actually baled off the field.
@@ -628,14 +681,13 @@ namespace H.Core.Test.Services
             crop.HarvestViewItems.Add(new HarvestViewItem()
                 {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 9000});
 
-            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
-                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+            _resultsService.UpdateYieldFromHarvest(new List<CropViewItem>() {crop});
 
             Assert.AreEqual(9000d / 12d, crop.Yield * (1 - crop.MoistureContentOfCrop), 0.0001);
         }
 
         [TestMethod]
-        public void UpdateYieldFromHarvestForCustomPerennialsToleratesMoistureStoredAsAPercentage()
+        public void UpdateYieldFromHarvestToleratesMoistureStoredAsAPercentage()
         {
             // Some saved farms hold the crop moisture as a percentage rather than a fraction; the carbon calculator
             // corrects that later, so this method has to cope with both forms rather than dividing by a negative.
@@ -644,14 +696,13 @@ namespace H.Core.Test.Services
             crop.HarvestViewItems.Add(new HarvestViewItem()
                 {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 2000});
 
-            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
-                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+            _resultsService.UpdateYieldFromHarvest(new List<CropViewItem>() {crop});
 
             Assert.AreEqual(1000, crop.Yield, 0.0001);
         }
 
         [TestMethod]
-        public void UpdateYieldFromHarvestForCustomPerennialsDoesNotDeriveForGrazedField()
+        public void UpdateYieldFromHarvestDoesNotDeriveForGrazedField()
         {
             // Grazed + hayed under a custom yield: the algorithm document (note under Eq. 2.1.2-1) takes the entered
             // yield to be the total biomass grown - eaten plus left standing - so deriving it from the baled hay alone
@@ -662,14 +713,13 @@ namespace H.Core.Test.Services
                 {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
             crop.GrazingViewItems.Add(new GrazingViewItem() {Start = new DateTime(1985, 6, 1)});
 
-            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
-                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+            _resultsService.UpdateYieldFromHarvest(new List<CropViewItem>() {crop});
 
             Assert.AreEqual(1234, crop.Yield, 0.0001);
         }
 
         [TestMethod]
-        public void UpdateYieldFromHarvestForCustomPerennialsDerivesWhenGrazingIsInAnotherYear()
+        public void UpdateYieldFromHarvestDerivesWhenGrazingIsInAnotherYear()
         {
             // The grazing exclusion is scoped to the year: grazing in a different year must not block the derivation
             // for this year's hay harvest.
@@ -679,14 +729,13 @@ namespace H.Core.Test.Services
                 {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 20000});
             crop.GrazingViewItems.Add(new GrazingViewItem() {Start = new DateTime(1984, 6, 1)});
 
-            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
-                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+            _resultsService.UpdateYieldFromHarvest(new List<CropViewItem>() {crop});
 
             Assert.AreEqual(10000, crop.Yield, 0.0001);
         }
 
         [TestMethod]
-        public void UpdateYieldFromHarvestForCustomPerennialsGuardsAgainstZeroBiomass()
+        public void UpdateYieldFromHarvestGuardsAgainstZeroBiomass()
         {
             // A harvest with no biomass (uninitialized) must not zero out the yield.
             var crop = new CropViewItem()
@@ -694,14 +743,13 @@ namespace H.Core.Test.Services
             crop.HarvestViewItems.Add(new HarvestViewItem()
                 {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 0});
 
-            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
-                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+            _resultsService.UpdateYieldFromHarvest(new List<CropViewItem>() {crop});
 
             Assert.AreEqual(1234, crop.Yield, 0.0001);
         }
 
         [TestMethod]
-        public void UpdateYieldFromHarvestForCustomPerennialsSkipsFrozenYield()
+        public void UpdateYieldFromHarvestSkipsFrozenYield()
         {
             // Advanced override (Change 3b): a manually-frozen yield is not overwritten by the harvest derivation.
             var crop = new CropViewItem()
@@ -711,8 +759,7 @@ namespace H.Core.Test.Services
             crop.HarvestViewItems.Add(new HarvestViewItem()
                 {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
 
-            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop},
-                new Farm() {YieldAssignmentMethod = YieldAssignmentMethod.Custom}, null);
+            _resultsService.UpdateYieldFromHarvest(new List<CropViewItem>() {crop});
 
             Assert.AreEqual(1234, crop.Yield, 0.0001);
         }
@@ -734,40 +781,27 @@ namespace H.Core.Test.Services
         }
 
         [TestMethod]
-        public void UpdateYieldFromHarvestForCustomPerennialsUsesFieldLevelMethodWhenEnabled()
+        public void UpdateYieldFromHarvestDoesNotDependOnTheAssignmentMethodAtAll()
         {
-            // Field-level yield assignment: the FIELD's method (Custom) drives the derivation even though the farm-level
-            // method is a modelled estimate.
-            var crop = new CropViewItem()
-                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985, MoistureContentOfCrop = 0.8};
-            crop.HarvestViewItems.Add(new HarvestViewItem()
-                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 20000});
+            // The derivation used to resolve the method per field, so that field-level assignment picked the same
+            // branch as everywhere else. There is no branch left to pick: every method derives from the cut.
+            foreach (var method in new[]
+                     {
+                         YieldAssignmentMethod.Custom,
+                         YieldAssignmentMethod.SmallAreaData,
+                         YieldAssignmentMethod.Average,
+                         YieldAssignmentMethod.InputFile,
+                     })
+            {
+                var crop = new CropViewItem()
+                    {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985, MoistureContentOfCrop = 0.8};
+                crop.HarvestViewItems.Add(new HarvestViewItem()
+                    {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomassDryWeight = 20000});
 
-            var farm = new Farm()
-                {UseFieldLevelYieldAssignement = true, YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData};
-            var field = new FieldSystemComponent() {YieldAssignmentMethod = YieldAssignmentMethod.Custom};
+                _resultsService.UpdateYieldFromHarvest(new List<CropViewItem>() {crop});
 
-            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop}, farm, field);
-
-            Assert.AreEqual(10000, crop.Yield, 0.0001);
-        }
-
-        [TestMethod]
-        public void UpdateYieldFromHarvestForCustomPerennialsHonoursFieldLevelNonCustom()
-        {
-            // Field-level yield assignment: a FIELD set to a modelled method is not derived, even if the farm is Custom.
-            var crop = new CropViewItem()
-                {CropType = CropType.TameGrass, Area = 10, Yield = 1234, Year = 1985};
-            crop.HarvestViewItems.Add(new HarvestViewItem()
-                {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed, AboveGroundBiomass = 20000});
-
-            var farm = new Farm()
-                {UseFieldLevelYieldAssignement = true, YieldAssignmentMethod = YieldAssignmentMethod.Custom};
-            var field = new FieldSystemComponent() {YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData};
-
-            _resultsService.UpdateYieldFromHarvestForCustomPerennials(new List<CropViewItem>() {crop}, farm, field);
-
-            Assert.AreEqual(1234, crop.Yield, 0.0001);
+                Assert.AreEqual(10000, crop.Yield, 0.0001, $"derivation must not depend on {method}");
+            }
         }
 
         [TestMethod]

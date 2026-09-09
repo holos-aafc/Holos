@@ -1,22 +1,40 @@
-using System.Linq;
+﻿using System.Linq;
 using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 
 namespace H.Core.Services.LandManagement
 {
     /// <summary>
-    /// Where a field's yield comes from (used to label the yield in the UI).
+    /// What decided a field's yield for one year. This is the precedence itself, in one place: every consumer - the
+    /// cell's read-only state, its tooltip, the Harvest tab summary - answers from this rather than restating the rule.
+    ///
+    /// Each case was previously re-derived independently, which is how they drifted apart: the tooltip learned that
+    /// grazing decides the yield while the read-only rule never asked about grazing at all, so a grazed field under a
+    /// user-supplied yield showed an editable cell beside a tooltip saying the value was not the user's to set.
     /// </summary>
     public enum YieldSource
     {
-        /// <summary>Regional/modelled estimate (Small Area Data, Average, etc.).</summary>
+        /// <summary>Regional/modelled estimate (Small Area Data, Average, Input file).</summary>
         Estimated,
 
-        /// <summary>Derived from the user's entered hay harvest (Custom + hay/forage).</summary>
+        /// <summary>Derived from the user's entered hay cut, whichever yield assignment method is selected.</summary>
         FromHarvest,
 
-        /// <summary>Typed directly by the user (Custom, no hay harvest to derive from).</summary>
+        /// <summary>Typed directly by the user (Custom method, no hay cut and no grazing to derive from).</summary>
         Entered,
+
+        /// <summary>
+        /// Grazed, with the yield worked backwards from what the animals ate and what was baled (Eq. 11.3.2-9). An
+        /// output, not an input.
+        /// </summary>
+        GrazedDerived,
+
+        /// <summary>
+        /// Grazed, but the user supplied the yield, which the algorithm document then takes to be the total aboveground
+        /// biomass - what the animals ate plus what they left - with no gross-up (note under Eq. 2.1.2-1). Still the
+        /// user's own input, so the cell stays editable; it simply means something different from an ordinary yield.
+        /// </summary>
+        GrazedEnteredAsTotalBiomass,
     }
 
     /// <summary>
@@ -40,9 +58,14 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// Yield is read-only unless it is a genuine typed input: it stays editable only in advanced mode, or under the
-        /// Custom method for a field whose yield is NOT derived from a hay harvest (e.g. grain, or a perennial with no
-        /// hayed harvest). It is read-only for every modelled method (the estimate) and for Custom + hay (from the bales).
+        /// Yield is read-only unless it is a genuine typed input. Rather than restate the precedence, this asks
+        /// <see cref="GetYieldSource"/> what decided the yield and edits only what the user actually supplies: a value
+        /// typed under the Custom method, with or without grazing. Everything else - an estimate, a value derived from
+        /// a cut, a value worked backwards from grazing - is an output and is shown read-only.
+        ///
+        /// Deriving it this way is what keeps the cell's state and its tooltip from disagreeing. The rule used to be
+        /// written out separately here and asked only about the method and the cut, so a grazed field under a
+        /// user-supplied yield offered an editable cell while its tooltip said the value was not the user's to set.
         /// </summary>
         public static bool IsYieldReadOnly(CropViewItem viewItem, YieldAssignmentMethod method, bool advancedEditing)
         {
@@ -51,7 +74,9 @@ namespace H.Core.Services.LandManagement
                 return false;
             }
 
-            return method != YieldAssignmentMethod.Custom || HasHayedHarvest(viewItem);
+            var source = GetYieldSource(viewItem, method);
+
+            return source != YieldSource.Entered && source != YieldSource.GrazedEnteredAsTotalBiomass;
         }
 
         /// <summary>
@@ -79,26 +104,28 @@ namespace H.Core.Services.LandManagement
         }
 
         /// <summary>
-        /// True when the user has entered a hay harvest but the yield method is a modelled estimate, so the entered
-        /// harvest is NOT driving the carbon. Drives the "switch to Custom to use your harvest" nudge.
-        /// </summary>
-        public static bool HasHarvestButUsingEstimate(CropViewItem viewItem, YieldAssignmentMethod method)
-        {
-            return method != YieldAssignmentMethod.Custom && HasHayedHarvest(viewItem);
-        }
-
-        /// <summary>
         /// Where the field's yield comes from, for labelling: a modelled estimate, the user's entered harvest, or a
         /// directly typed value.
         /// </summary>
         public static YieldSource GetYieldSource(CropViewItem viewItem, YieldAssignmentMethod method)
         {
-            if (method != YieldAssignmentMethod.Custom)
+            // Grazing first, because it holds under every method: a grazed year's yield is never taken from a hay cut,
+            // so labelling such a year "from your harvest" would describe a derivation that did not run. Which of the
+            // two grazed cases applies is decided by the method - the two columns of the grazed-and-hayed chart.
+            if (viewItem.HasGrazingItemsForTheCurrentYear())
             {
-                return YieldSource.Estimated;
+                return method == YieldAssignmentMethod.Custom
+                    ? YieldSource.GrazedEnteredAsTotalBiomass
+                    : YieldSource.GrazedDerived;
             }
 
-            return HasHayedHarvest(viewItem) ? YieldSource.FromHarvest : YieldSource.Entered;
+            // Then the cut, also under every method. The assignment method only supplies the years without one.
+            if (HasHayedHarvest(viewItem))
+            {
+                return YieldSource.FromHarvest;
+            }
+
+            return method == YieldAssignmentMethod.Custom ? YieldSource.Entered : YieldSource.Estimated;
         }
     }
 }

@@ -353,5 +353,141 @@ namespace H.Core.Test.Services.Initialization
         }
 
         #endregion
+
+        #region Standing biomass conversion
+
+        [TestMethod]
+        public void SmallAreaDataPerennialYieldIsGrossedUpForHarvestLossesAndPutOnTheStandingBasis()
+        {
+            // Algorithm document, note under Eq. 2.1.2-1: a Small Area Data perennial yield is a hay yield - the
+            // biomass taken off the field, which already excludes what was left behind - so it takes two steps to
+            // become the total standing biomass:
+            //
+            //     Yield_standing = [ Yield_hay / (1 - Sp/100) ] x [ (1 - moisture_hay) / (1 - moisture_standing) ]
+            //
+            // at Sp = 35%, moisture_hay = 13%, moisture_standing = 80%. Only the moisture ratio was applied, which left
+            // the standing biomass about 35% short. The gross-up had been happening downstream by accident, through
+            // Eq. 2.1.2-1 dividing by (1 - Sp/100) while these years still carried the 35% perennial return default;
+            // giving such a year its correct 100% return removed that, and nothing here replaced it.
+            var farm = new Farm();
+            farm.Defaults.PercentageOfProductReturnedToSoilForPerennials = 35;
+
+            var method = typeof(CropInitializationService).GetMethod(
+                "CalculateStandingBiomassAdjustment",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            Assert.IsNotNull(method, "the conversion this test pins has been renamed or removed");
+
+            var result = (double)method.Invoke(new CropInitializationService(), new object[] {1000.0, farm});
+
+            // 1000 / 0.65 = 1538.46, then x (0.87 / 0.20) = 6692.31
+            Assert.AreEqual(6692.3077, result, 0.001);
+
+            // Without the gross-up this returned 4350 - the moisture ratio alone.
+            Assert.AreNotEqual(4350, result, 0.001);
+        }
+
+        #endregion
+
+        #region InitializeUtilization
+
+        [TestMethod]
+        public void InitializeUtilizationResetsEveryGrazingItemToTheCropDefault()
+        {
+            // Utilization is a user input, so nothing resets it automatically and rebuilding the grazing items from the
+            // animal components deliberately preserves whatever is there. That protects a deliberate entry but leaves no
+            // way back from a mistaken one - and a mistaken one is costly, because grazing carbon is grossed up by
+            // dividing by the rate, so a value near zero inflates the field's production enormously. This is the way
+            // back, reached from the reset defaults window.
+            var farm = new Farm();
+            var field = new FieldSystemComponent();
+            var crop = new CropViewItem {CropType = CropType.TameGrass, Year = 1985};
+
+            crop.GrazingViewItems.Add(new GrazingViewItem {Start = new DateTime(1985, 6, 1), Utilization = 1});
+            crop.GrazingViewItems.Add(new GrazingViewItem {Start = new DateTime(1985, 8, 1), Utilization = 0});
+
+            field.CropViewItems.Add(crop);
+            farm.Components.Add(field);
+
+            _cropsInitializationService.InitializeUtilization(farm);
+
+            // Table 60: 60% for tame grass, as a percentage.
+            foreach (var grazingViewItem in crop.GrazingViewItems)
+            {
+                Assert.AreEqual(60, grazingViewItem.Utilization, 0.0001);
+            }
+        }
+
+        [TestMethod]
+        public void InitializeUtilizationPrefersTheFarmsOwnRateWhenOneIsSet()
+        {
+            // A farm whose grazing systems all differ from Table 60 had to correct every grazing item by hand. One
+            // number on the farm's settings now covers them, and the reset applies it.
+            var farm = new Farm();
+            farm.Defaults.UseCustomGrazingUtilizationRate = true;
+            farm.Defaults.CustomGrazingUtilizationRate = 45;
+
+            var field = new FieldSystemComponent();
+            var tameGrass = new CropViewItem {CropType = CropType.TameGrass, Year = 1985};
+            tameGrass.GrazingViewItems.Add(new GrazingViewItem {Start = new DateTime(1985, 6, 1), Utilization = 1});
+            var rangeland = new CropViewItem {CropType = CropType.RangelandNative, Year = 1985};
+            rangeland.GrazingViewItems.Add(new GrazingViewItem {Start = new DateTime(1985, 6, 1), Utilization = 1});
+            field.CropViewItems.Add(tameGrass);
+            field.CropViewItems.Add(rangeland);
+            farm.Components.Add(field);
+
+            _cropsInitializationService.InitializeUtilization(farm);
+
+            // The farm's rate overrides the per-crop table, so both crops take it.
+            Assert.AreEqual(45, tameGrass.GrazingViewItems[0].Utilization, 0.0001);
+            Assert.AreEqual(45, rangeland.GrazingViewItems[0].Utilization, 0.0001);
+        }
+
+        [TestMethod]
+        public void InitializeUtilizationFallsBackToTheTableWhenTheFarmsRateIsOffOrUnset()
+        {
+            // Off by default, so nothing changes for farms that never touch the setting. A zero rate is refused too:
+            // grazing carbon is grossed up by dividing by it, so honouring zero would be worse than ignoring it.
+            foreach (var (useCustom, rate) in new[] {(false, 45.0), (true, 0.0)})
+            {
+                var farm = new Farm();
+                farm.Defaults.UseCustomGrazingUtilizationRate = useCustom;
+                farm.Defaults.CustomGrazingUtilizationRate = rate;
+
+                var field = new FieldSystemComponent();
+                var crop = new CropViewItem {CropType = CropType.TameGrass, Year = 1985};
+                crop.GrazingViewItems.Add(new GrazingViewItem {Start = new DateTime(1985, 6, 1), Utilization = 1});
+                field.CropViewItems.Add(crop);
+                farm.Components.Add(field);
+
+                _cropsInitializationService.InitializeUtilization(farm);
+
+                Assert.AreEqual(60, crop.GrazingViewItems[0].Utilization, 0.0001,
+                    $"useCustom={useCustom} rate={rate}");
+            }
+        }
+
+        [TestMethod]
+        public void InitializeUtilizationUsesTheRateForEachCropType()
+        {
+            var farm = new Farm();
+            var field = new FieldSystemComponent();
+
+            var tameGrass = new CropViewItem {CropType = CropType.TameGrass, Year = 1985};
+            tameGrass.GrazingViewItems.Add(new GrazingViewItem {Start = new DateTime(1985, 6, 1), Utilization = 1});
+
+            var rangeland = new CropViewItem {CropType = CropType.RangelandNative, Year = 1985};
+            rangeland.GrazingViewItems.Add(new GrazingViewItem {Start = new DateTime(1985, 6, 1), Utilization = 1});
+
+            field.CropViewItems.Add(tameGrass);
+            field.CropViewItems.Add(rangeland);
+            farm.Components.Add(field);
+
+            _cropsInitializationService.InitializeUtilization(farm);
+
+            Assert.AreEqual(60, tameGrass.GrazingViewItems[0].Utilization, 0.0001);
+            Assert.AreEqual(40, rangeland.GrazingViewItems[0].Utilization, 0.0001);
+        }
+
+        #endregion
     }
 }

@@ -10118,8 +10118,44 @@ namespace H.Core.Properties {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Entered by you, for a grazed year. Holos takes the value you typed to be all the biomass the field grew.
+        /// </summary>
+        public static string TooltipYieldSourceGrazedEntered {
+            get {
+                return ResourceManager.GetString("TooltipYieldSourceGrazedEntered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not from your harvest. Animals grazed this field in this year, and a grazed year&apos;s yield is never taken from a hay harvest. The Harvest tab explains what Holos used instead.
+        /// </summary>
+        public static string TooltipYieldSourceGrazed {
+            get {
+                return ResourceManager.GetString("TooltipYieldSourceGrazed", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to You have entered harvest data, but the yield is using the estimate from the selected yield assignment method.
         /// </summary>
+        /// <summary>
+        ///   Looks up a localized string similar to On a grazed field, the hay harvest entered for a year removes more than the yield for that year can account for.
+        /// </summary>
+        public static string MessageHayCutExceedsYield {
+            get {
+                return ResourceManager.GetString("MessageHayCutExceedsYield", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A hay harvest is entered for a year with no bale weight recorded, so Holos cannot use it to work out that year&apos;s yield. Enter the number of bales and the wet bale weight on the Harvest tab, or remove the harvest if nothing was cut.
+        /// </summary>
+        public static string MessageHarvestHasNoUsableWeight {
+            get {
+                return ResourceManager.GetString("MessageHarvestHasNoUsableWeight", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to The yields below come from the hay harvests you entered on the Harvest tab.
         /// </summary>
@@ -10213,18 +10249,6 @@ namespace H.Core.Properties {
         public static string SummaryYieldEnteredAsTotalBiomass {
             get {
                 return ResourceManager.GetString("SummaryYieldEnteredAsTotalBiomass", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Yield: an estimate from the selected yield assignment method.
-        /// </summary>
-        /// <summary>
-        ///   Looks up a localized string similar to Your harvest is not used as this field's yield - a regional estimate is used instead.
-        /// </summary>
-        public static string SummaryYieldEstimateWithHarvest {
-            get {
-                return ResourceManager.GetString("SummaryYieldEstimateWithHarvest", resourceCulture);
             }
         }
 
@@ -14576,6 +14600,60 @@ namespace H.Core.Properties {
         public static string MessageResetNitrogenFixation {
             get {
                 return ResourceManager.GetString("MessageResetNitrogenFixation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets the harvest loss (the share of each cut left on the field) to the default value.
+        /// </summary>
+        public static string MessageResetHarvestLoss {
+            get {
+                return ResourceManager.GetString("MessageResetHarvestLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use a custom grazing utilization rate.
+        /// </summary>
+        public static string LabelUseCustomGrazingUtilizationRate {
+            get {
+                return ResourceManager.GetString("LabelUseCustomGrazingUtilizationRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to By default Holos uses a utilization rate for each crop type - 60% for tame grass, 40% for native rangeland, 50.
+        /// </summary>
+        public static string ToolTipUseCustomGrazingUtilizationRate {
+            get {
+                return ResourceManager.GetString("ToolTipUseCustomGrazingUtilizationRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom grazing utilization rate.
+        /// </summary>
+        public static string LabelCustomGrazingUtilizationRate {
+            get {
+                return ResourceManager.GetString("LabelCustomGrazingUtilizationRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The share of the standing crop the animals take. Holos works out how much grew by dividing what the animals at.
+        /// </summary>
+        public static string ToolTipCustomGrazingUtilizationRate {
+            get {
+                return ResourceManager.GetString("ToolTipCustomGrazingUtilizationRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grazing utilization rate.
+        /// </summary>
+        public static string LabelResetPastureUtilization {
+            get {
+                return ResourceManager.GetString("LabelResetPastureUtilization", resourceCulture);
             }
         }
         

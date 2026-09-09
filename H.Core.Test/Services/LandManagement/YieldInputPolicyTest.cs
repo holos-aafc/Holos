@@ -1,5 +1,7 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using H.Core.Enumerations;
+using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Services.LandManagement;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -16,6 +18,17 @@ namespace H.Core.Test.Services.LandManagement
             var crop = new CropViewItem {CropType = CropType.TameGrass, Year = 1985};
             crop.HarvestViewItems.Add(new HarvestViewItem
                 {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed});
+            return crop;
+        }
+
+        /// <summary>
+        /// Grazed and hayed in the same year - the case that was mislabelled, because both are present and only one
+        /// of them decides the yield.
+        /// </summary>
+        private static CropViewItem GrazedAndHayedPerennial()
+        {
+            var crop = HayedPerennial();
+            crop.GrazingViewItems.Add(new GrazingViewItem {Start = new DateTime(1985, 6, 1)});
             return crop;
         }
 
@@ -129,46 +142,126 @@ namespace H.Core.Test.Services.LandManagement
 
         #endregion
 
-        #region HasHarvestButUsingEstimate (mismatch nudge)
+        #region GetYieldSource - the precedence, as a table
 
-        [TestMethod]
-        public void MismatchTrueForModelledWithHay()
+        /// <summary>
+        /// Every combination of the four things that decide a yield, in one place. The precedence used to be written
+        /// out separately by each consumer - the source label, the read-only rule, the Harvest tab summary - and they
+        /// drifted: the label learned that grazing decides the yield while the read-only rule never asked about
+        /// grazing, so a grazed field under a user-supplied yield showed an editable cell beside a tooltip saying the
+        /// value was not the user's to set. This table is what stops that happening again.
+        /// </summary>
+        private static IEnumerable<object[]> PrecedenceMatrix()
         {
-            Assert.IsTrue(YieldInputPolicy.HasHarvestButUsingEstimate(HayedPerennial(), YieldAssignmentMethod.SmallAreaData));
+            // method, grazed, hayed, expected source, expected editable (outside advanced mode)
+            yield return new object[] {YieldAssignmentMethod.Custom,        false, false, YieldSource.Entered,                     true};
+            yield return new object[] {YieldAssignmentMethod.Custom,        false, true,  YieldSource.FromHarvest,                 false};
+            yield return new object[] {YieldAssignmentMethod.Custom,        true,  false, YieldSource.GrazedEnteredAsTotalBiomass, true};
+            yield return new object[] {YieldAssignmentMethod.Custom,        true,  true,  YieldSource.GrazedEnteredAsTotalBiomass, true};
+
+            yield return new object[] {YieldAssignmentMethod.SmallAreaData, false, false, YieldSource.Estimated,                   false};
+            yield return new object[] {YieldAssignmentMethod.SmallAreaData, false, true,  YieldSource.FromHarvest,                 false};
+            yield return new object[] {YieldAssignmentMethod.SmallAreaData, true,  false, YieldSource.GrazedDerived,               false};
+            yield return new object[] {YieldAssignmentMethod.SmallAreaData, true,  true,  YieldSource.GrazedDerived,               false};
+
+            yield return new object[] {YieldAssignmentMethod.Average,       false, false, YieldSource.Estimated,                   false};
+            yield return new object[] {YieldAssignmentMethod.Average,       false, true,  YieldSource.FromHarvest,                 false};
+            yield return new object[] {YieldAssignmentMethod.Average,       true,  false, YieldSource.GrazedDerived,               false};
+            yield return new object[] {YieldAssignmentMethod.Average,       true,  true,  YieldSource.GrazedDerived,               false};
+
+            yield return new object[] {YieldAssignmentMethod.InputFile,     false, false, YieldSource.Estimated,                   false};
+            yield return new object[] {YieldAssignmentMethod.InputFile,     false, true,  YieldSource.FromHarvest,                 false};
+            yield return new object[] {YieldAssignmentMethod.InputFile,     true,  false, YieldSource.GrazedDerived,               false};
+            yield return new object[] {YieldAssignmentMethod.InputFile,     true,  true,  YieldSource.GrazedDerived,               false};
+        }
+
+        private static CropViewItem Build(bool grazed, bool hayed)
+        {
+            var crop = new CropViewItem {CropType = CropType.TameGrass, Year = 1985};
+
+            if (hayed)
+            {
+                crop.HarvestViewItems.Add(new HarvestViewItem
+                    {Start = new DateTime(1985, 8, 1), ForageActivity = ForageActivities.Hayed});
+            }
+
+            if (grazed)
+            {
+                crop.GrazingViewItems.Add(new GrazingViewItem {Start = new DateTime(1985, 6, 1)});
+            }
+
+            return crop;
         }
 
         [TestMethod]
-        public void MismatchFalseForCustomWithHay()
+        public void EveryCombinationResolvesToOneSource()
         {
-            Assert.IsFalse(YieldInputPolicy.HasHarvestButUsingEstimate(HayedPerennial(), YieldAssignmentMethod.Custom));
+            foreach (var row in PrecedenceMatrix())
+            {
+                var method = (YieldAssignmentMethod)row[0];
+                var crop = Build((bool)row[1], (bool)row[2]);
+                var expected = (YieldSource)row[3];
+
+                Assert.AreEqual(expected, YieldInputPolicy.GetYieldSource(crop, method),
+                    $"method={method} grazed={row[1]} hayed={row[2]}");
+            }
         }
 
         [TestMethod]
-        public void MismatchFalseForModelledWithoutHay()
+        public void ReadOnlyStateAgreesWithTheSourceForEveryCombination()
         {
-            Assert.IsFalse(YieldInputPolicy.HasHarvestButUsingEstimate(PerennialNoHarvest(), YieldAssignmentMethod.SmallAreaData));
-        }
+            // The cell is editable exactly where the user supplies the value. Derived from the source rather than
+            // restated, so these two can no longer disagree.
+            foreach (var row in PrecedenceMatrix())
+            {
+                var method = (YieldAssignmentMethod)row[0];
+                var crop = Build((bool)row[1], (bool)row[2]);
+                var expectedEditable = (bool)row[4];
 
-        #endregion
-
-        #region GetYieldSource
-
-        [TestMethod]
-        public void SourceEstimatedForModelled()
-        {
-            Assert.AreEqual(YieldSource.Estimated, YieldInputPolicy.GetYieldSource(HayedPerennial(), YieldAssignmentMethod.Average));
-        }
-
-        [TestMethod]
-        public void SourceFromHarvestForCustomHay()
-        {
-            Assert.AreEqual(YieldSource.FromHarvest, YieldInputPolicy.GetYieldSource(HayedPerennial(), YieldAssignmentMethod.Custom));
+                Assert.AreEqual(expectedEditable, YieldInputPolicy.IsYieldReadOnly(crop, method, false) == false,
+                    $"method={method} grazed={row[1]} hayed={row[2]}");
+            }
         }
 
         [TestMethod]
-        public void SourceEnteredForCustomNoHay()
+        public void AdvancedInputEditingMakesEveryCombinationEditable()
         {
-            Assert.AreEqual(YieldSource.Entered, YieldInputPolicy.GetYieldSource(PerennialNoHarvest(), YieldAssignmentMethod.Custom));
+            foreach (var row in PrecedenceMatrix())
+            {
+                var crop = Build((bool)row[1], (bool)row[2]);
+
+                Assert.IsFalse(YieldInputPolicy.IsYieldReadOnly(crop, (YieldAssignmentMethod)row[0], true),
+                    $"method={row[0]} grazed={row[1]} hayed={row[2]}");
+            }
+        }
+
+        [TestMethod]
+        public void TheSummaryPanelDescribesTheSameSourceForEveryCombination()
+        {
+            // The third consumer. It used to re-derive the grazed branch itself, which is where the drift began.
+            foreach (var row in PrecedenceMatrix())
+            {
+                var method = (YieldAssignmentMethod)row[0];
+                var crop = Build((bool)row[1], (bool)row[2]);
+                crop.Area = 1;
+
+                var field = new FieldSystemComponent {YieldAssignmentMethod = method};
+                crop.FieldSystemComponentGuid = field.Guid;
+                var farm = new Farm {YieldAssignmentMethod = method};
+                farm.Components.Add(field);
+
+                var summary = FieldSummaryPolicy.Describe(crop, farm);
+
+                Assert.IsFalse(string.IsNullOrWhiteSpace(summary.YieldSource),
+                    $"no summary sentence for method={method} grazed={row[1]} hayed={row[2]}");
+
+                // A grazed year must never be described as taking its yield from the cut.
+                if ((bool)row[1])
+                {
+                    Assert.IsFalse(summary.YieldSource.IndexOf("bale", StringComparison.OrdinalIgnoreCase) >= 0,
+                        $"grazed year described as coming from the cut: method={method} hayed={row[2]}");
+                }
+            }
         }
 
         #endregion

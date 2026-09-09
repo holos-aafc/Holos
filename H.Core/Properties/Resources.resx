@@ -2993,9 +2993,6 @@
   <data name="MessageResidueTabDescription" xml:space="preserve">
     <value>The residue tab can be used to change the default carbon allocation coefficients for the main crop. Additional details such as nitrogen concentrations and percentages of the plant returned to soil can be entered here. Default values have been provided that the model will use unless custom values are entered here</value>
   </data>
-  <data name="TitleGrazing" xml:space="preserve">
-    <value>Grazing</value>
-  </data>
   <data name="EnumChemicalTerminationType" xml:space="preserve">
     <value>Chemical</value>
   </data>
@@ -3713,8 +3710,20 @@
   <data name="TooltipYieldSourceEntered" xml:space="preserve">
     <value>Entered by you. This yield is the value you typed for this year.</value>
   </data>
+  <data name="TooltipYieldSourceGrazedEntered" xml:space="preserve">
+    <value>Entered by you, for a grazed year. Animals grazed this field, so Holos takes the value you typed to be all the biomass the field grew - what the animals ate plus what they left - rather than only the part that was cut.</value>
+  </data>
+  <data name="TooltipYieldSourceGrazed" xml:space="preserve">
+    <value>Not from your harvest. Animals grazed this field in this year, and a grazed year's yield is never taken from a hay harvest. The Harvest tab explains what Holos used instead.</value>
+  </data>
   <data name="MessageHarvestDataDrivingYield" xml:space="preserve">
     <value>Perennial fields with a hay harvest take their yield from the harvests you entered on the Harvest tab. Those yields are calculated for you, so they cannot be typed over here - turn on 'Advanced input editing' if you need to change one.</value>
+  </data>
+  <data name="MessageHayCutExceedsYield" xml:space="preserve">
+    <value>On a grazed field, the hay harvest entered for a year removes more than the yield for that year can account for - more cannot leave a field than grew on it. Holos has credited no carbon returned to soil for that year. Check the number of bales and the bale weight on the Harvest tab against the yield on this screen.</value>
+  </data>
+  <data name="MessageHarvestHasNoUsableWeight" xml:space="preserve">
+    <value>A hay harvest is entered for a year with no bale weight recorded, so Holos cannot use it to work out that year's yield. Enter the number of bales and the wet bale weight on the Harvest tab, or remove the harvest if nothing was cut.</value>
   </data>
   <data name="MessageHarvestDataNotUsedForYield" xml:space="preserve">
     <value>You have entered harvest data, but the yield is using the estimate from the selected yield assignment method. Select the 'Custom' yield assignment method to use your entered harvest as the yield.</value>
@@ -3778,9 +3787,6 @@
   </data>
   <data name="SummaryYieldEnteredAsTotalBiomass" xml:space="preserve">
     <value>Its yield is the value entered on the Details screen, taken to be all the biomass grown - what the animals ate plus what they left.</value>
-  </data>
-  <data name="SummaryYieldEstimateWithHarvest" xml:space="preserve">
-    <value>Your harvest is not used as this field's yield - a regional estimate is used instead. To use it, choose the 'Custom' method on the Details screen.</value>
   </data>
   <data name="SummaryYieldEstimate" xml:space="preserve">
     <value>Its yield is a regional estimate.</value>
@@ -6195,6 +6201,27 @@ Please note: emissions related to the deposition or application of livestock man
   </data>
   <data name="MessageResetMilkProduction" xml:space="preserve">
     <value>Resets the milk production for each animal group (for each management period) to the default value</value>
+  </data>
+  <data name="MessageResetHarvestLoss" xml:space="preserve">
+    <value>Resets the harvest loss (the share of each cut left on the field) to the default value</value>
+  </data>
+  <data name="TitleGrazing" xml:space="preserve">
+    <value>Grazing</value>
+  </data>
+  <data name="LabelUseCustomGrazingUtilizationRate" xml:space="preserve">
+    <value>Use a custom grazing utilization rate</value>
+  </data>
+  <data name="ToolTipUseCustomGrazingUtilizationRate" xml:space="preserve">
+    <value>By default Holos uses a utilization rate for each crop type - 60% for tame grass, 40% for native rangeland, 50% for seeded grassland. Choose Yes to use one rate of your own for every grazed field on this farm instead.</value>
+  </data>
+  <data name="LabelCustomGrazingUtilizationRate" xml:space="preserve">
+    <value>Custom grazing utilization rate</value>
+  </data>
+  <data name="ToolTipCustomGrazingUtilizationRate" xml:space="preserve">
+    <value>The share of the standing crop the animals take. Holos works out how much grew by dividing what the animals ate by this rate, so a low value implies a very large crop. This rate is applied to new grazing entries, and to every grazing entry on the farm when you reset the grazing utilization rate from the reset defaults window.</value>
+  </data>
+  <data name="LabelResetPastureUtilization" xml:space="preserve">
+    <value>Grazing utilization rate</value>
   </data>
   <data name="MessageResetPastureUtilization" xml:space="preserve">
     <value>Resets the utilization for each crop (in each year) to the default value</value>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" role="img"
+     aria-label="Where the yield comes from in a year with no grazing. If you overrode the yield with Advanced input editing, your value stands. Otherwise, if there is a cut on the Harvest tab for that year, the yield is worked out from the cut whichever Yield Assignment Method is selected. Otherwise the Yield Assignment Method supplies it.">
+  <defs>
+    <marker id="g3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <g color="#7d8b98" font-family="Segoe UI, system-ui, sans-serif">
+
+    <rect x="30" y="16" width="360" height="56" rx="5" fill="#eef2f5" stroke="#7d8b98" stroke-width="1.5"/>
+    <text x="50" y="40" font-size="14.5" fill="#16191c">Did you override the yield with</text>
+    <text x="50" y="59" font-size="14.5" fill="#16191c" font-weight="600">Advanced input editing?</text>
+    <line x1="390" y1="44" x2="492" y2="44" stroke="currentColor" stroke-width="1.5" marker-end="url(#g3)"/>
+    <text x="424" y="36" font-size="12.5" fill="#495057">Yes</text>
+    <rect x="500" y="16" width="370" height="56" rx="5" fill="#e9f2ec" stroke="#3f7a5a" stroke-width="1.5"/>
+    <text x="520" y="49" font-size="14.5" fill="#16191c">Your value — the amber cell wins.</text>
+    <line x1="210" y1="72" x2="210" y2="98" stroke="currentColor" stroke-width="1.5" marker-end="url(#g3)"/>
+    <text x="220" y="90" font-size="12.5" fill="#495057">No</text>
+
+    <rect x="30" y="104" width="360" height="56" rx="5" fill="#eef2f5" stroke="#7d8b98" stroke-width="1.5"/>
+    <text x="50" y="128" font-size="14.5" fill="#16191c">Is there a cut on the Harvest tab</text>
+    <text x="50" y="147" font-size="14.5" fill="#16191c" font-weight="600">for this year?</text>
+    <line x1="390" y1="132" x2="492" y2="132" stroke="currentColor" stroke-width="1.5" marker-end="url(#g3)"/>
+    <text x="424" y="124" font-size="12.5" fill="#495057">Yes</text>
+    <rect x="500" y="104" width="370" height="56" rx="5" fill="#e9f2ec" stroke="#3f7a5a" stroke-width="2"/>
+    <text x="520" y="128" font-size="14.5" fill="#16191c" font-weight="600">Worked out from your cut —</text>
+    <text x="520" y="147" font-size="13.5" fill="#495057">whichever method is selected.</text>
+    <line x1="210" y1="160" x2="210" y2="186" stroke="currentColor" stroke-width="1.5" marker-end="url(#g3)"/>
+    <text x="220" y="178" font-size="12.5" fill="#495057">No</text>
+
+    <rect x="30" y="192" width="840" height="76" rx="5" fill="#e9f2ec" stroke="#3f7a5a" stroke-width="2"/>
+    <text x="52" y="220" font-size="15" fill="#16191c" font-weight="600">The Yield Assignment Method supplies it.</text>
+    <text x="52" y="242" font-size="14" fill="#495057">A Small area data or Average estimate, the value you typed under Custom Yield, or an Input file row.</text>
+    <text x="52" y="261" font-size="13.5" fill="#6c757d">Its job is to fill the years you have no measurement for.</text>
+  </g>
+</svg>

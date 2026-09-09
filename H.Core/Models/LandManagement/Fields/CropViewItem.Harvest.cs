@@ -158,6 +158,26 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
+        /// True when a hay cut is recorded for this year but carries no weight Holos can use, so it cannot set the
+        /// yield. The two entries contradict each other - you cannot cut a crop and record nothing coming off it - and
+        /// the year would otherwise fall through to the estimate with nothing said. Used to tell the user rather than
+        /// to change the arithmetic.
+        /// </summary>
+        public bool HasHayedHarvestWithNoUsableWeight()
+        {
+            var hayedHarvests = this.GetHayHarvests()
+                .Where(harvest => harvest.ForageActivity == ForageActivities.Hayed)
+                .ToList();
+
+            if (hayedHarvests.Any() == false || this.Area <= 0)
+            {
+                return false;
+            }
+
+            return hayedHarvests.Sum(GetHarvestDryMatter) <= 0;
+        }
+
+        /// <summary>
         /// Sets this item's yield from the hay actually baled off it, and reports whether it could.
         ///
         /// This is the single place the derivation lives. It used to be done in two: once on the component selection
