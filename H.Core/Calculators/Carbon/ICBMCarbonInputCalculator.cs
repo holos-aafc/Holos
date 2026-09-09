@@ -298,18 +298,7 @@ namespace H.Core.Calculators.Carbon
 
                     if (isGrazed && isCustomYieldAssignmentMethod)
                     {
-                        // Under a custom yield with grazing the entered yield is already the total aboveground biomass
-                        // produced - what the animals ate plus what they left (note under Eq. 2.1.2-1) - so C_p needs no
-                        // gross-up here. Every removal still has to come off it, though: the animals take their
-                        // utilization share, and anything baled off the remainder has left the field as well.
-                        var returned = 1.0 - (currentYearViewItem.GetAverageUtilizationFromGrazingAnimals() / 100.0);
-                        var carbonExportedAsHay = currentYearViewItem.Area > 0
-                            ? currentYearViewItem.TotalCarbonLossFromBaleExports / currentYearViewItem.Area
-                            : 0;
-
-                        carbonInputFromProduct = Math.Max(
-                            0,
-                            (currentYearViewItem.PlantCarbonInAgriculturalProduct * returned) - carbonExportedAsHay);
+                        carbonInputFromProduct = this.CalculateCarbonInputForGrazedFieldWithSuppliedYield(currentYearViewItem);
                     }
                 }
                 else if (currentYearViewItem.PlantCarbonInAgriculturalProduct == 0 && nextYearViewItem != null && (nextYearViewItem.PlantCarbonInAgriculturalProduct > 0 || nextYearViewItem.Yield > 0))
@@ -400,18 +389,7 @@ namespace H.Core.Calculators.Carbon
 
                     if (isGrazed && isCustomYieldAssignmentMethod)
                     {
-                        // Under a custom yield with grazing the entered yield is already the total aboveground biomass
-                        // produced - what the animals ate plus what they left (note under Eq. 2.1.2-1) - so C_p needs no
-                        // gross-up here. Every removal still has to come off it, though: the animals take their
-                        // utilization share, and anything baled off the remainder has left the field as well.
-                        var returned = 1.0 - (currentYearViewItem.GetAverageUtilizationFromGrazingAnimals() / 100.0);
-                        var carbonExportedAsHay = currentYearViewItem.Area > 0
-                            ? currentYearViewItem.TotalCarbonLossFromBaleExports / currentYearViewItem.Area
-                            : 0;
-
-                        carbonInputFromProduct = Math.Max(
-                            0,
-                            (currentYearViewItem.PlantCarbonInAgriculturalProduct * returned) - carbonExportedAsHay);
+                        carbonInputFromProduct = this.CalculateCarbonInputForGrazedFieldWithSuppliedYield(currentYearViewItem);
                     }
                 }
                 else
@@ -689,5 +667,46 @@ namespace H.Core.Calculators.Carbon
         }
 
         #endregion
+
+        /// <summary>
+        /// Carbon returned to soil on a grazed field whose yield the user supplied.
+        ///
+        /// The algorithm document takes the entered yield to be the total aboveground biomass already - what the animals
+        /// ate plus what they left - so C_p is not grossed up here: "when grazing animals are present on a field and the
+        /// user specifies a custom yield ... Yield x Sp/100 is equal to zero" (note under Eq. 2.1.2-1). Every removal
+        /// still comes off it: the animals take their utilization share, and anything baled off the remainder has left
+        /// the field as well.
+        ///
+        /// The percentage shown on the details screen is written back from the result. It used to be left at
+        /// 100 - utilization, which describes only what the animals left and silently ignores a cut taken from the same
+        /// standing crop, so the reported figure disagreed with the carbon actually credited whenever hay was baled. The
+        /// modelled methods already report from the balance; this makes the column mean one thing under all of them.
+        ///
+        /// Nothing more than grew can be returned, so the result is floored at zero. Reaching that floor means the cut
+        /// and the entered yield contradict each other, which is recorded for the interface to report - this is the only
+        /// path where a yield is supplied independently of the removals, so it is the only place the two can disagree.
+        /// </summary>
+        private double CalculateCarbonInputForGrazedFieldWithSuppliedYield(CropViewItem currentYearViewItem)
+        {
+            var returned = 1.0 - (currentYearViewItem.GetAverageUtilizationFromGrazingAnimals() / 100.0);
+            var carbonExportedAsHay = currentYearViewItem.Area > 0
+                ? currentYearViewItem.TotalCarbonLossFromBaleExports / currentYearViewItem.Area
+                : 0;
+
+            var remainingOnField = (currentYearViewItem.PlantCarbonInAgriculturalProduct * returned) - carbonExportedAsHay;
+
+            currentYearViewItem.HayCutExceedsWhatTheYieldAccountsFor = remainingOnField < 0;
+
+            var result = Math.Max(0, remainingOnField);
+
+            if (currentYearViewItem.PlantCarbonInAgriculturalProduct > 0 &&
+                currentYearViewItem.DoNotRecalculatePercentageReturnedToSoil == false)
+            {
+                currentYearViewItem.PercentageOfProductYieldReturnedToSoil =
+                    100.0 * result / currentYearViewItem.PlantCarbonInAgriculturalProduct;
+            }
+
+            return result;
+        }
     }
 }

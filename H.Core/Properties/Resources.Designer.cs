@@ -10130,6 +10130,15 @@ namespace H.Core.Properties {
         ///   Looks up a localized string similar to You have entered harvest data, but the yield is using the estimate from the selected yield assignment method.
         /// </summary>
         /// <summary>
+        ///   Looks up a localized string similar to On a grazed field, the hay harvest entered for a year removes more than the yield for that year can account for.
+        /// </summary>
+        public static string MessageHayCutExceedsYield {
+            get {
+                return ResourceManager.GetString("MessageHayCutExceedsYield", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A hay harvest is entered for a year with no bale weight recorded, so Holos cannot use it to work out that year&apos;s yield. Enter the number of bales and the wet bale weight on the Harvest tab, or remove the harvest if nothing was cut.
         /// </summary>
         public static string MessageHarvestHasNoUsableWeight {
