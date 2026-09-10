@@ -6336,4 +6336,142 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
   <data name="LabelResetPastureUtilization" xml:space="preserve">
     <value>Taux d’utilisation du pâturage</value>
   </data>
+  <data name="LabelTypeOfGrazing" xml:space="preserve">
+    <value>Type de pâturage</value>
+  </data>
+  <data name="ToolTipTurkeyMeatProduction" xml:space="preserve">
+    <value>Les dindonneaux qui arrivent à l’exploitation depuis un couvoir multiplicateur sont élevés jusqu’au poids du marché en 12 à 16 semaines environ.</value>
+  </data>
+  <data name="CoverCropGrowingType" xml:space="preserve">
+    <value>Culture de couverture</value>
+  </data>
+  <data name="RootCropGrowingType" xml:space="preserve">
+    <value>Culture racine</value>
+  </data>
+  <data name="LabelEnterDetailsOfGrazingLocation" xml:space="preserve">
+    <value>Lorsque les animaux sont logés au pâturage, l’emplacement et le type de système de pâturage peuvent être saisis ici</value>
+  </data>
+  <data name="EnumLargeGreenLentils" xml:space="preserve">
+    <value>grosses lentilles vertes</value>
+  </data>
+  <data name="EnumSunflowerOil" xml:space="preserve">
+    <value>huile de tournesol</value>
+  </data>
+  <data name="EnumWheatNorthernHardRed" xml:space="preserve">
+    <value>blé roux vitreux du Nord</value>
+  </data>
+  <data name="LabelUseCustomMethaneConversionFactor" xml:space="preserve">
+    <value>Utiliser un facteur de conversion du méthane personnalisé</value>
+  </data>
+  <data name="LabelUseCustomNFertilizerConversionFactor" xml:space="preserve">
+    <value>Utiliser un facteur de conversion de l’engrais azoté personnalisé</value>
+  </data>
+  <data name="LabelUseCustomPFertilizerConversionFactor" xml:space="preserve">
+    <value>Utiliser un facteur de conversion de l’engrais phosphaté personnalisé</value>
+  </data>
+  <data name="MessageAtLeastOneAnimalComponentMustBeAddedToFarmToApplyManureToFields" xml:space="preserve">
+    <value>Au moins une composante animale doit être ajoutée à la ferme pour pouvoir épandre du fumier sur les champs</value>
+  </data>
+  <data name="MessageRemovingUndersownStatus" xml:space="preserve">
+    <value>Retrait du statut de sous-semis pour la culture produite en {0}</value>
+  </data>
+  <data name="ToolTipLandEconomicsBuildingRepairsCostInfo" xml:space="preserve">
+    <value>coût des réparations des bâtiments</value>
+  </data>
+  <data name="ToolTipLandEconomicsCustomWorkCostInfo" xml:space="preserve">
+    <value>coût du travail à forfait</value>
+  </data>
+  <data name="ToolTipLandEconomicsLabourCostInfo" xml:space="preserve">
+    <value>coût de la main-d’œuvre (rémunérée et non rémunérée)</value>
+  </data>
+  <data name="ToolTipLandEconomicsOperatingInterestCostInfo" xml:space="preserve">
+    <value>coût des intérêts d’exploitation</value>
+  </data>
+  <data name="ToolTipLandEconomicsUtilitiesCostInfo" xml:space="preserve">
+    <value>coût des services publics</value>
+  </data>
+  <data name="ToolTipLandUseChangeEmissions" xml:space="preserve">
+    <value>Comprend les émissions liées au changement d’affectation des terres (p. ex. le passage du travail intensif du sol au semis direct). Le changement d’affectation des terres est pris en compte sur une période de 20 ans.</value>
+  </data>
+  <data name="ToolTipLandManureTableAmountOfManureInfo" xml:space="preserve">
+    <value>quantité de fumier épandue</value>
+  </data>
+  <data name="VitB5Info" xml:space="preserve">
+    <value>acide pantothénique</value>
+  </data>
+  <data name="VitEInfo" xml:space="preserve">
+    <value>alpha-tocophérol</value>
+  </data>
+  <data name="MenuExportClimateData" xml:space="preserve">
+    <value>Exporter les données climatiques</value>
+  </data>
+  <data name="TitleSelectFarmClimateToExport" xml:space="preserve">
+    <value>Sélectionnez les fermes dont les données climatiques doivent être exportées</value>
+  </data>
+  <data name="MessageSoilDataMissing" xml:space="preserve">
+    <value>Les données pédologiques ne sont pas disponibles pour le polygone sélectionné. Les propriétés du sol doivent donc être fournies par l’utilisateur.</value>
+  </data>
+  <data name="SomeSoilDataMissingMessage" xml:space="preserve">
+    <value>Veuillez noter que les données pédologiques peuvent être absentes à certains endroits de la carte, Holos ne disposant pas de données pour tous les polygones.</value>
+  </data>
+  <data name="LabelDirectNitrousOxideEmissionsFromOrganicNitrogenExcludingRemainingAmounts" xml:space="preserve">
+    <value>N2O-N provenant de l’azote organique (excluant tout fumier non épandu, N2O-N_ONdirect)</value>
+  </data>
+  <data name="ResetWaterIrrigation" xml:space="preserve">
+    <value>Réinitialiser l’irrigation</value>
+  </data>
+  <data name="LabelResetManureCompositionData" xml:space="preserve">
+    <value>Réinitialiser les données de composition du fumier</value>
+  </data>
+  <data name="LabelDefaultResetWindow" xml:space="preserve">
+    <value>Cette fenêtre permet à l’utilisateur de rétablir les valeurs par défaut des cultures et des animaux.</value>
+  </data>
+  <data name="Beta_B_N" xml:space="preserve">
+    <value>Bêta (B_N)</value>
+  </data>
+  <data name="Alpha_a_N" xml:space="preserve">
+    <value>Alpha (a_N)</value>
+  </data>
+  <data name="TitleActivePoolDecayRate" xml:space="preserve">
+    <value>Taux de décomposition du bassin actif (ka)</value>
+  </data>
+  <data name="TitleSlowPoolDecayRate" xml:space="preserve">
+    <value>Taux de décomposition du bassin lent (ks)</value>
+  </data>
+  <data name="TitlePassivePoolDecayRate" xml:space="preserve">
+    <value>Taux de décomposition du bassin passif (kp)</value>
+  </data>
+  <data name="TitleActivePoolSteadyState" xml:space="preserve">
+    <value>État d’équilibre du bassin actif (ActiveN_y*)</value>
+  </data>
+  <data name="TitleSlowPoolSteadyState" xml:space="preserve">
+    <value>État d’équilibre du bassin lent (SlowN_y*)</value>
+  </data>
+  <data name="TitlePassivePoolSteadyState" xml:space="preserve">
+    <value>État d’équilibre du bassin passif (PassiveN_y*)</value>
+  </data>
+  <data name="TitleActivePoolN" xml:space="preserve">
+    <value>Bassin actif (ActiveN_y)</value>
+  </data>
+  <data name="TitleSlowPoolN" xml:space="preserve">
+    <value>Bassin lent (SlowN_y)</value>
+  </data>
+  <data name="TitlePassivePoolN" xml:space="preserve">
+    <value>Bassin passif (PassiveN_y)</value>
+  </data>
+  <data name="LabelDateOfApplication" xml:space="preserve">
+    <value>Date d’épandage</value>
+  </data>
+  <data name="LabelManureSource" xml:space="preserve">
+    <value>Source du fumier</value>
+  </data>
+  <data name="LabelAmountOfNitrogenApplied" xml:space="preserve">
+    <value>Azote épandu (kg N ha-1)</value>
+  </data>
+  <data name="LabelEmissionFactorBasis" xml:space="preserve">
+    <value>Base du facteur d’émission</value>
+  </data>
+  <data name="LabelFinalAmmoniaEmissionFactorForLandApplication" xml:space="preserve">
+    <value>Facteur d’émission final de NH3-N pour l’épandage</value>
+  </data>
 </root>
