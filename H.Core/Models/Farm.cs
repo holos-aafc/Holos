@@ -1424,14 +1424,34 @@ namespace H.Core.Models
         public List<HayImportViewItem> GetHayImportsUsingImportedHayFromSourceFieldByYear(Guid fieldSystemGuid, int year)
         {
             var field = this.GetFieldSystemComponent(fieldSystemGuid);
-            if (field != null)
-            {
-                return this.GetHayImportsUsingImportedHayFromSourceField(field).Where(x => x.Start.Year.Equals(year)).ToList(); ;
-            }
-            else
+            if (field == null)
             {
                 return new List<HayImportViewItem>();
             }
+
+            return this.GetHayImportsUsingImportedHayFromSourceField(field)
+                       .Where(hayImport => HayImportBelongsToYear(hayImport, year))
+                       .ToList();
+        }
+
+        /// <summary>
+        /// Which year a hay import belongs to.
+        ///
+        /// This used to read <see cref="TimePeriodBase.Start"/>, which nothing ever assigns on a hay import - the date
+        /// the user sets is <see cref="HayImportViewItem.Date"/>, and that is also what the copy loop stamps when it
+        /// builds the per-year view items. Start was therefore left at DateTime.MinValue, no import matched any
+        /// simulation year, and bales fed back onto the field they were cut from were still counted as having left it.
+        /// On a field that is both hayed and grazed that removed the same carbon twice and could drive the carbon
+        /// returned to soil to zero.
+        ///
+        /// The date alone decides. Repeating management is already expanded into one copy per year by the time this
+        /// runs, each carrying its own date, so also matching on <see cref="IRepeatableFieldActivity.RepeatsInEveryYear"/>
+        /// would count every year's copy against every year - on a farm with an eight year simulation that netted
+        /// roughly eight times the hay that was actually fed.
+        /// </summary>
+        private static bool HayImportBelongsToYear(HayImportViewItem hayImport, int year)
+        {
+            return hayImport.Date.Year == year;
         }
 
         #endregion
