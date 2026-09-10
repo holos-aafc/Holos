@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 534" role="img"
-     aria-label="How a year that was both grazed and hayed is worked out. The hay you baled is subtracted from the carbon under every Yield Assignment Method. The method decides only where the yield number comes from. Under Custom Yield the chain runs forwards: the yield you typed gives the plant carbon, with no gross-up, because the entered yield is already the whole crop. Under any other method it runs backwards: what was removed by grazing and by baling gives the plant carbon, and a yield is then reported back to you. Both paths end at the same step, where both removals are subtracted to give the carbon returned to soil.">
+     aria-label="How a year that was both grazed and hayed is worked out. The hay that leaves the field is subtracted from the carbon under every Yield Assignment Method; hay fed back to animals on the same farm has not left it. The method decides only where the yield number comes from. Under Custom Yield the chain runs forwards: the yield you typed gives the plant carbon, with no gross-up, because the entered yield is already the whole crop. Under any other method it runs backwards: what was removed by grazing and by baling gives the plant carbon, and a yield is then reported back to you. Both paths end at the same step, where both removals are subtracted to give the carbon returned to soil.">
   <defs>
     <marker id="g5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="currentColor"/>
@@ -12,7 +12,7 @@
     <line x1="450" y1="54" x2="450" y2="76" stroke="currentColor" stroke-width="1.5" marker-end="url(#g5)"/>
 
     <rect x="170" y="82" width="560" height="44" rx="5" fill="#e9f2ec" stroke="#3f7a5a" stroke-width="2"/>
-    <text x="450" y="110" font-size="15" fill="#2c5a42" text-anchor="middle" font-weight="700">The hay you baled is subtracted from the carbon — under every method.</text>
+    <text x="450" y="110" font-size="15" fill="#2c5a42" text-anchor="middle" font-weight="700">The hay that leaves the field is subtracted — under every method.</text>
     <line x1="450" y1="126" x2="450" y2="148" stroke="currentColor" stroke-width="1.5" marker-end="url(#g5)"/>
 
     <rect x="270" y="154" width="360" height="44" rx="5" fill="#eef2f5" stroke="#7d8b98" stroke-width="1.5"/>
@@ -46,7 +46,7 @@
 
     <text x="508" y="300" font-size="12" fill="#6c757d">Small area data, Average or Input file</text>
     <text x="508" y="324" font-size="14" fill="#16191c" font-weight="600">What was removed</text>
-    <text x="508" y="340" font-size="12" fill="#6c757d">the grazed portion, plus the baled portion</text>
+    <text x="508" y="340" font-size="12" fill="#6c757d">the grazed portion, plus the hay that left</text>
     <line x1="520" y1="350" x2="520" y2="368" stroke="currentColor" stroke-width="1.5" marker-end="url(#g5)"/>
 
     <text x="508" y="388" font-size="14" fill="#16191c" font-weight="600">Plant carbon</text>
