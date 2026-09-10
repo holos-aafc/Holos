@@ -25,7 +25,7 @@
     <text x="52" y="130" font-size="14.5" fill="#2c5a42" font-weight="700">Grazing decides the yield.</text>
     <text x="52" y="153" font-size="13.5" fill="#495057">The Yield Assignment Method does not set it, and</text>
     <text x="52" y="170" font-size="13.5" fill="#495057">neither does a cut entered on the Harvest tab.</text>
-    <text x="52" y="196" font-size="13.5" fill="#16191c">A cut is still subtracted from the carbon.</text>
+    <text x="52" y="196" font-size="13.5" fill="#16191c">Hay that leaves the field is still subtracted.</text>
     <text x="52" y="220" font-size="13" fill="#6c757d">See the two grazing sections that follow</text>
     <text x="52" y="236" font-size="13" fill="#6c757d">this list.</text>
 

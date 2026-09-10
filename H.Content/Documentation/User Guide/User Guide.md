@@ -2363,6 +2363,7 @@ For a year with **no grazing**, the two figures below show the same two rules as
 -	Both removals count. What stays on the field is what grew, less the forage the animals ate, and less the hay carted off. The **Product returned to soil (%)** shown on the Details screen is worked out from that result, so it is what actually stayed rather than only what the animals left.
 -	Under **Custom Yield** the yield you enter is taken to be all the biomass the field grew — what the animals ate plus what they left — so Holos does not scale it up, and both removals come off it.
 -	If the hay you entered removes more than that yield can account for, the two entries contradict each other: more cannot leave a field than grew on it. Holos credits no carbon returned to soil for that year and the Details screen says so. Check the bale count and bale weight against the yield.
+-	Only the hay that actually leaves the field is subtracted. Bales you cut here and feed back to animals on the farm are not counted as leaving, provided you record where they came from — see *If you feed your own hay back to animals on the farm* below.
 
 <br>
 <p align="center">
