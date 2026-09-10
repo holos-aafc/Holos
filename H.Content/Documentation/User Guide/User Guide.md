@@ -2399,6 +2399,10 @@ Both columns describe the same 1 hectare field, grazed at a **utilization rate o
 
 Both paths follow the screens in order: everything about the field, the animals and the cut is entered on **Component Selection**, and the **Yield Assignment Method** exists only on the **Details** screen, so choosing it is always the last step. If you do go back to Component Selection afterwards — to change a bale count, say — use **Reload Data From Previous Screen** on the Details screen so the per-year rows pick the change up.
 
+> *Note: Holos treats a grazed and hayed field as **one** standing crop. Everything the animals ate and everything you baled are taken from that same total, which assumes the animals and the hay were competing for the same growth.*
+>
+> *This means Holos cannot at present represent a field that is cut for hay and then grazed later in the season, where the animals are eating regrowth rather than the hay crop. Entered as a hay cut plus grazing on the same field, both removals come off one crop, so the field can appear to have had more taken from it than it grew. If that describes how you manage a field, contact the Holos team before relying on the carbon results for it.*
+
 ### If there is no harvest and no grazing
 
 -	Nothing removes product from the field, so 100% of it is returned to the soil. Holos sets this for you; earlier versions asked you to change it by hand.
