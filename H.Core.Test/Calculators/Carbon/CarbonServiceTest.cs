@@ -170,6 +170,92 @@ namespace H.Core.Test.Calculators.Carbon
             Assert.AreEqual(850, result);
         }
 
+        /// <summary>
+        /// The real-world shape of a hay import: the user sets Date, and nothing ever assigns Start. The netting used
+        /// to filter on Start, which therefore sat at DateTime.MinValue and matched no simulation year, so hay fed back
+        /// onto the field it was cut from was still counted as having left the farm.
+        /// </summary>
+        [TestMethod]
+        public void CalculateTotalDryMatterLossFromResidueExportsNetsImportThatHasNoStartDateAssigned()
+        {
+            var farm = BuildFarmWithHayCut(out var field, out var exportingCropViewItem);
+            var withoutImport = _sut.CalculateTotalDryMatterLossFromResidueExports(exportingCropViewItem, farm);
+
+            var hayImportViewItem = new HayImportViewItem
+            {
+                FieldSourceGuid = field.Guid,
+                BaleWeight = 100,
+                NumberOfBales = 10,
+                MoistureContentAsPercentage = 50,
+                Date = new DateTime(exportingCropViewItem.Year, 10, 30),
+            };
+
+            Assert.AreEqual(1, hayImportViewItem.Start.Year, "this test is only meaningful while Start is left unassigned");
+
+            exportingCropViewItem.HayImportViewItems.Add(hayImportViewItem);
+
+            var withImport = _sut.CalculateTotalDryMatterLossFromResidueExports(exportingCropViewItem, farm);
+
+            Assert.IsTrue(withImport < withoutImport,
+                $"hay fed back onto its own field must reduce what is counted as exported ({withImport} vs {withoutImport})");
+        }
+
+        /// <summary>
+        /// The import's own date decides which year it is netted against. Repeating management is already expanded
+        /// into one copy per year before this runs, so matching on the repeat flag as well would count every year's
+        /// copy against every year.
+        /// </summary>
+        [TestMethod]
+        public void CalculateTotalDryMatterLossFromResidueExportsIgnoresImportFromAnotherYear()
+        {
+            var farm = BuildFarmWithHayCut(out var field, out var exportingCropViewItem);
+            var withoutImport = _sut.CalculateTotalDryMatterLossFromResidueExports(exportingCropViewItem, farm);
+
+            var hayImportViewItem = new HayImportViewItem
+            {
+                FieldSourceGuid = field.Guid,
+                BaleWeight = 100,
+                NumberOfBales = 10,
+                MoistureContentAsPercentage = 50,
+                Date = new DateTime(exportingCropViewItem.Year - 3, 10, 30),
+            };
+
+            exportingCropViewItem.HayImportViewItems.Add(hayImportViewItem);
+
+            Assert.AreEqual(withoutImport, _sut.CalculateTotalDryMatterLossFromResidueExports(exportingCropViewItem, farm));
+
+            // ... and is netted once it is dated to the year being calculated.
+            hayImportViewItem.Date = new DateTime(exportingCropViewItem.Year, 10, 30);
+
+            Assert.IsTrue(_sut.CalculateTotalDryMatterLossFromResidueExports(exportingCropViewItem, farm) < withoutImport);
+        }
+
+        private static Farm BuildFarmWithHayCut(out FieldSystemComponent field, out CropViewItem exportingCropViewItem)
+        {
+            field = new FieldSystemComponent { Guid = Guid.NewGuid() };
+
+            exportingCropViewItem = new CropViewItem
+            {
+                FieldSystemComponentGuid = field.Guid,
+                Year = DateTime.Now.Year,
+            };
+
+            exportingCropViewItem.HarvestViewItems.Add(new HarvestViewItem
+            {
+                Start = new DateTime(exportingCropViewItem.Year, 8, 3),
+                TotalNumberOfBalesHarvested = 20,
+                MoistureContentAsPercentage = 50,
+                BaleWeight = 100,
+            });
+
+            field.CropViewItems.Add(exportingCropViewItem);
+
+            var farm = new Farm();
+            farm.Components.Add(field);
+
+            return farm;
+        }
+
         #endregion
     }
 }
