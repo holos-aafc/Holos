@@ -31,17 +31,11 @@ namespace H.Core.Services.LandManagement
 
             foreach (var cropViewItem in viewItemsForField)
             {
-                var nextYear = cropViewItem.Year + 1;
-                var hasCropInNextYear = viewItemsForField.SingleOrDefault(x => x.Year == nextYear && x.IsSecondaryCrop == false) != null;
-
-                if (cropViewItem.CropType.IsPerennial() && cropViewItem.IsFinalYearInPerennialStand() && hasCropInNextYear == false && cropViewItem.OverrideResidueReturnedToSoilDefaults == false)
-                {
-                    cropViewItem.PercentageOfRootsReturnedToSoil = 30;
-                }
-                else
-                {
-                    // Leave whatever was set for the last year (by default this will be 100% set at initialization)
-                }
+                // The percentage of roots returned is NOT adjusted here. It used to be - a stand whose final year had
+                // no crop after it was put back to the annual turnover at this point - but this method runs after
+                // AssignCarbonInputs, which has already derived the root carbon from that percentage, so the change
+                // never reached the number it was meant to correct. It is decided in
+                // CropInitializationService.AssignPerennialRootsReturned instead, which runs before anything reads it.
 
                 if (farm.IsNonSwathingGrazingScenario(cropViewItem))
                 {

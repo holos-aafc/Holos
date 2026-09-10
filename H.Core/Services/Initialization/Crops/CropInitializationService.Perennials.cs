@@ -33,17 +33,23 @@ namespace H.Core.Services.Initialization.Crops
         }
 
         /// <summary>
+        /// The share of a perennial's root biomass turned over, and so returned to the soil, in a year the stand
+        /// continues. The algorithm document gives Sr as 30% in every year but the termination year.
+        /// </summary>
+        private const double AnnualRootTurnoverPercentage = 30;
+
+        /// <summary>
         /// It is assumed that 30% of the root biomass is turned over (input) annually before harvest, and 100% on harvest for perennials
         /// </summary>
         public void AssignPerennialRootsReturned(IEnumerable<CropViewItem> list)
         {
-            var perennialStands = list.Where(x => x.CropType.IsPerennial()).GroupBy(x => x.PerennialStandGroupId);
+            var viewItemsForField = list.ToList();
+
+            var perennialStands = viewItemsForField.Where(x => x.CropType.IsPerennial()).GroupBy(x => x.PerennialStandGroupId);
             foreach (var currentPerennialStand in perennialStands)
             {
-                for (var index = 0; index < currentPerennialStand.OrderBy(x => x.Year).Count(); index++)
+                foreach (var cropViewItem in currentPerennialStand)
                 {
-                    var cropViewItem = currentPerennialStand.ElementAt(index);
-
                     // If the user has manually overridden the residue return values, skip this crop and preserve their custom values.
                     // This allows users to specify their own percentages for product, straw, roots, and extraroots returned to soil
                     // instead of using the default calculations. The user can set this override via the "Override residue return values"
@@ -53,26 +59,40 @@ namespace H.Core.Services.Initialization.Crops
                         continue;
                     }
 
-                    if (cropViewItem.YearInPerennialStand == cropViewItem.PerennialStandLength)
-                    {
-                        if (cropViewItem.CropType == CropType.RangelandNative)
-                        {
-                            // Range lands are never harvested and so we continue with 30% root turnover
-                            cropViewItem.PercentageOfRootsReturnedToSoil = 30;
-                        }
-                        else
-                        {
-                            // Last year of stand is when 100% of roots are returned
-                            cropViewItem.PercentageOfRootsReturnedToSoil = 100;
-                        }
-                    }
-                    else
-                    {
-                        // In years leading up to the last, only 30% of roots are returned
-                        cropViewItem.PercentageOfRootsReturnedToSoil = 30;
-                    }
+                    cropViewItem.PercentageOfRootsReturnedToSoil = IsStandTerminated(cropViewItem, viewItemsForField)
+                        ? 100
+                        : AnnualRootTurnoverPercentage;
                 }
             }
+        }
+
+        /// <summary>
+        /// The whole root mass is returned only when the stand is actually ploughed under and a different crop follows
+        /// it. Every other year - and every year of a stand that is never terminated - keeps the annual turnover.
+        ///
+        /// The "a different crop follows it" half of that used to be decided in
+        /// <see cref="H.Core.Services.LandManagement.FieldResultsService.PostProcessPerennials"/>, which runs after the
+        /// carbon inputs derived from this percentage have already been calculated, so the correction never reached
+        /// them: a stand running to the end of the simulation had its root carbon worked out at 100% while the details
+        /// screen displayed 30%. Deciding it here settles the value before anything reads it.
+        /// </summary>
+        private static bool IsStandTerminated(CropViewItem cropViewItem, List<CropViewItem> viewItemsForField)
+        {
+            if (cropViewItem.IsFinalYearInPerennialStand() == false)
+            {
+                return false;
+            }
+
+            // Range lands are never harvested and so continue with the annual root turnover
+            if (cropViewItem.CropType == CropType.RangelandNative)
+            {
+                return false;
+            }
+
+            // A stand that lasts to the end of the simulation is not ploughed under either. The algorithm document
+            // states this directly: a continuous perennial crop lasting until the end of the simulation period returns
+            // the annual turnover each year, "incl. the final year of the simulation".
+            return viewItemsForField.Any(x => x.Year == cropViewItem.Year + 1 && x.IsSecondaryCrop == false);
         }
 
         public void AssignPerennialViewItemsDescription(IEnumerable<CropViewItem> viewItems)
