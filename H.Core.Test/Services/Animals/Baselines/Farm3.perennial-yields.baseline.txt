@@ -991,10 +991,10 @@ field=Field #4 | year=2024 | crop=TameGrass | PlantCarbonInAgriculturalProduct =
 field=Field #4 | year=2024 | crop=TameGrass | TotalCarbonInputs = 4315.4164
 field=Field #4 | year=2024 | crop=TameGrass | Yield = 25868.8000
 field=Field #4 | year=2025 | crop=TameGrass | AboveGroundCarbonInput = 9642.6072
-field=Field #4 | year=2025 | crop=TameGrass | BelowGroundCarbonInput = 14778.4875
+field=Field #4 | year=2025 | crop=TameGrass | BelowGroundCarbonInput = 12851.6954
 field=Field #4 | year=2025 | crop=TameGrass | PercentageOfProductYieldReturnedToSoil = 40.0000
 field=Field #4 | year=2025 | crop=TameGrass | PlantCarbonInAgriculturalProduct = 24106.5179
-field=Field #4 | year=2025 | crop=TameGrass | TotalCarbonInputs = 32925.2653
+field=Field #4 | year=2025 | crop=TameGrass | TotalCarbonInputs = 30998.4731
 field=Field #4 | year=2025 | crop=TameGrass | Yield = 267850.1990
 field=Field #5 | year=1985 | crop=RangelandNative | AboveGroundCarbonInput = 1764.7615
 field=Field #5 | year=1985 | crop=RangelandNative | BelowGroundCarbonInput = 3343.9580
