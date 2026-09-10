@@ -892,6 +892,107 @@ namespace H.Core.Test.Calculators.Carbon
             Assert.AreEqual(59.675, result);
         }
 
+        /// <summary>
+        /// The stand is terminated, so the whole accumulated root mass is returned. The algorithm document gives this
+        /// as Cr(final year of stand) = (Cr(t-1) / 3) * 10 - built from the previous year's root input, not from this
+        /// year's above ground carbon.
+        /// </summary>
+        [TestMethod]
+        public void CalculateCarbonInputFromRootsForPerennialsInFinalYearBuildsOnPreviousYear()
+        {
+            var standId = Guid.NewGuid();
+
+            var previousYearViewItem = new CropViewItem()
+            {
+                PerennialStandGroupId = standId,
+                CarbonInputFromRoots = 784.6,
+            };
+
+            var currentYearViewItem = new CropViewItem()
+            {
+                PerennialStandGroupId = standId,
+                YearInPerennialStand = 13,
+                PerennialStandLength = 13,
+                PercentageOfRootsReturnedToSoil = 100,
+                PlantCarbonInAgriculturalProduct = 1676.7,
+                BiomassCoefficientRoots = 0.339,
+                BiomassCoefficientProduct = 0.441,
+            };
+
+            var result = _sut.CalculateCarbonInputFromRootsForPerennials(
+                previousYearViewItem: previousYearViewItem,
+                currentYearViewItem: currentYearViewItem,
+                new Farm());
+
+            Assert.AreEqual((784.6 / 3.0) * 10.0, result, 0.01);
+
+            // Guards the defect this replaced: the final year used to be recomputed from this year's above ground
+            // carbon, which discarded every year of root accumulation and reported the establishment year's value.
+            var aboveGroundDerivedValue = 1676.7 * (0.339 / 0.441);
+            Assert.AreNotEqual(aboveGroundDerivedValue, result, 0.01);
+        }
+
+        /// <summary>
+        /// The first year of a stand has no root mass carried in, so it is the one year that is built from the above
+        /// ground carbon.
+        /// </summary>
+        [TestMethod]
+        public void CalculateCarbonInputFromRootsForPerennialsInFirstYearUsesAboveGroundCarbon()
+        {
+            var currentYearViewItem = new CropViewItem()
+            {
+                YearInPerennialStand = 1,
+                PerennialStandLength = 13,
+                PercentageOfRootsReturnedToSoil = 30,
+                PlantCarbonInAgriculturalProduct = 1676.7,
+                BiomassCoefficientRoots = 0.339,
+                BiomassCoefficientProduct = 0.441,
+            };
+
+            var result = _sut.CalculateCarbonInputFromRootsForPerennials(
+                previousYearViewItem: null,
+                currentYearViewItem: currentYearViewItem,
+                new Farm());
+
+            Assert.AreEqual(1676.7 * (0.339 / 0.441) * 0.30, result, 0.01);
+        }
+
+        /// <summary>
+        /// A stand that runs to the end of the simulation, or a native rangeland, is never terminated - it keeps the
+        /// 30% annual turnover in its last year, so that year continues the chain rather than returning the whole
+        /// root mass.
+        /// </summary>
+        [TestMethod]
+        public void CalculateCarbonInputFromRootsForPerennialsInFinalYearWithoutTerminationContinuesTheChain()
+        {
+            var standId = Guid.NewGuid();
+
+            var previousYearViewItem = new CropViewItem()
+            {
+                PerennialStandGroupId = standId,
+                CarbonInputFromRoots = 784.6,
+            };
+
+            var currentYearViewItem = new CropViewItem()
+            {
+                PerennialStandGroupId = standId,
+                YearInPerennialStand = 13,
+                PerennialStandLength = 13,
+                PercentageOfRootsReturnedToSoil = 30,
+                PlantCarbonInAgriculturalProduct = 1676.7,
+                BiomassCoefficientRoots = 0.339,
+                BiomassCoefficientProduct = 0.441,
+            };
+
+            var result = _sut.CalculateCarbonInputFromRootsForPerennials(
+                previousYearViewItem: previousYearViewItem,
+                currentYearViewItem: currentYearViewItem,
+                new Farm());
+
+            // Past year 5 the chain is flat, so the last year matches the one before it
+            Assert.AreEqual(784.6, result, 0.01);
+        }
+
         [TestMethod]
         public void CalculateCarbonInputFromExtrarootsForPerennialsWhenCurrentYearInputsIsGreaterThanPreviousYearInputs()
         {

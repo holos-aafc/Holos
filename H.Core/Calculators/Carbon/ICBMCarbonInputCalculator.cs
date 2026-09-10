@@ -456,6 +456,12 @@ namespace H.Core.Calculators.Carbon
             return result;
         }
 
+        /// <summary>
+        /// The share of a perennial's root biomass turned over, and so returned to the soil, in a year the stand
+        /// continues. The algorithm document gives Sr as 30% in every year but the termination year, where it is 100%.
+        /// </summary>
+        private const double AnnualPerennialRootTurnoverPercentage = 30.0;
+
         public double CalculateCarbonInputFromRootsForPerennials(
             CropViewItem previousYearViewItem,
             CropViewItem currentYearViewItem,
@@ -475,22 +481,48 @@ namespace H.Core.Calculators.Carbon
 
             // Equation 2.1.2-28
             var carbonInputFromRoots = carbonInput * (currentYearViewItem.PercentageOfRootsReturnedToSoil / 100.0);
-            if (currentYearViewItem.YearInPerennialStand == 1 || currentYearViewItem.IsFinalYearInPerennialStand())
+
+            // The first year of a stand has no root mass carried in from a previous year, so it is the only year that
+            // takes its root input from the above ground carbon.
+            if (currentYearViewItem.YearInPerennialStand == 1)
             {
-                // If we are in the final year of the perennial stand, or the first year, we do not consider the previous year's root inputs and do not apply any increase (e.g. Equation 2.1.2-30)
                 return carbonInputFromRoots;
             }
 
             // We only consider the previous year if that year was growing the same perennial. It is possible the previous year was not a year in the same perennial (i.e. previous year could have been Barley)
-            if (previousYearViewItem != null && (previousYearViewItem.PerennialStandGroupId.Equals(currentYearViewItem.PerennialStandGroupId)))
+            var previousYearIsSameStand = previousYearViewItem != null &&
+                                          previousYearViewItem.PerennialStandGroupId.Equals(currentYearViewItem.PerennialStandGroupId) &&
+                                          previousYearViewItem.CarbonInputFromRoots > 0;
+            if (previousYearIsSameStand == false)
             {
-                // Equation 2.1.2-30
-                carbonInputFromRoots = previousYearViewItem.CarbonInputFromRoots + (previousYearViewItem.CarbonInputFromRoots * (19.35 / 100.0));
+                return carbonInputFromRoots;
+            }
 
-                if (currentYearViewItem.YearInPerennialStand > 5)
-                {
-                    carbonInputFromRoots = previousYearViewItem.CarbonInputFromRoots;
-                }
+            if (currentYearViewItem.IsFinalYearInPerennialStand() &&
+                currentYearViewItem.PercentageOfRootsReturnedToSoil > AnnualPerennialRootTurnoverPercentage)
+            {
+                /*
+                 * The stand is terminated this year - a different crop follows it - so the whole root mass is returned
+                 * rather than the annual turnover. The previous year's root input is that turnover, so scaling it back
+                 * up by the turnover fraction recovers the root mass standing at termination.
+                 *
+                 * Cr(final year of stand) = (Cr(t-1) / 3) * 10, from the perennial constants in the algorithm document.
+                 *
+                 * This year's above ground carbon cannot stand in for that. It describes what grew this season, not the
+                 * root mass the stand accumulated over its life, and using it discarded every year of accumulation -
+                 * a terminating stand reported the same root input as its establishment year.
+                 */
+                return previousYearViewItem.CarbonInputFromRoots *
+                       (100.0 / AnnualPerennialRootTurnoverPercentage) *
+                       (currentYearViewItem.PercentageOfRootsReturnedToSoil / 100.0);
+            }
+
+            // Equation 2.1.2-30
+            carbonInputFromRoots = previousYearViewItem.CarbonInputFromRoots + (previousYearViewItem.CarbonInputFromRoots * (19.35 / 100.0));
+
+            if (currentYearViewItem.YearInPerennialStand > 5)
+            {
+                carbonInputFromRoots = previousYearViewItem.CarbonInputFromRoots;
             }
 
             return carbonInputFromRoots;
