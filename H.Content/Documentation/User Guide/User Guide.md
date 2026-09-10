@@ -2403,6 +2403,25 @@ Both paths follow the screens in order: everything about the field, the animals 
 -	Nothing removes product from the field, so 100% of it is returned to the soil. Holos sets this for you; earlier versions asked you to change it by hand.
 -	This depends on nothing being taken off the field, not on the yield being zero. A yield of zero usually means Holos had no yield to assign for that year — no Small Area Data for the crop and location, a Custom field you have not filled in, or an input file with no row for it — rather than that nothing grew, so it is not treated as evidence that the field was left uncut.
 
+### If you feed your own hay back to animals on the farm
+
+Hay that is cut from a field and then fed to animals somewhere on the same farm has not left the farm. Holos does not count it as exported, so the carbon in those bales is not treated as leaving the field it was cut from.
+
+-	This only happens if you tell Holos where the bales came from. In the **Add Supplemental Hay/Forage for Grazing Animals** table, set **Source of bales** to **On-farm**, then choose the field the hay was cut from in the **Field** column beside it. Leave the source as **Off-farm** and Holos treats the bales as bought in, so hay cut from your own field is still counted as having left it.
+-	Only the amount fed is deducted. If you cut 1,000 bales and feed 400 of them back, the remaining 600 count as leaving the field.
+-	This matters most on a field that is both cut and grazed. There, the forage the animals ate and the hay carted off are both taken away from the same crop, so hay wrongly counted as exported is removed twice — which can leave nothing credited as returned to soil and produce the message that the cut exceeds what the yield accounts for.
+-	The **Supplemental feeding loss (%)** setting in **User Settings** (default 20%) is separate. It is the share of the hay fed that the animals waste, which is returned to the soil as residue where they were fed.
+
+### How much of a perennial's roots is returned each year
+
+Perennial roots are handled differently from the above-ground crop, and you do not enter any of this — Holos works it out from the length of the stand and what follows it.
+
+-	While a stand continues, **30%** of the root mass turns over and is returned to the soil each year. The remainder stays alive in the ground.
+-	The root mass builds up over the life of the stand rather than starting fresh each year — it grows by about 19% a year for the first five years, then holds steady. A stand's first year also has a minimum: root carbon is never taken as less than 450 kg C per hectare. On a low-yielding perennial that minimum is what sets the first year, which is why several stands can start from the same figure and climb the same way.
+-	When the stand is **ploughed under and a different crop follows it**, the whole accumulated root mass is returned to the soil in that final year. You will see below-ground carbon input rise sharply in that year, which is expected.
+-	A stand that is **not** ploughed under keeps the 30% turnover right through its last year, with no rise. That covers native rangeland, which is never harvested, and any perennial that is still growing at the end of your simulation period — the simulation simply stops, it does not terminate the stand.
+-	So whether the last year of a perennial shows a jump depends on whether a crop follows it in the rotation, not on it being the last year on screen.
+
 ### Values Holos calculates for you
 
 -	On the Details screen, **white cells are values you enter** and **grey cells are calculated by Holos**. For a perennial that is grazed, or that has a hay harvest under the Custom Yield method, the yield, plant carbon in product, and percentage of product returned to soil are all calculated.
