@@ -991,10 +991,10 @@ field=Field #4 | year=2024 | crop=TameGrass | PlantCarbonInAgriculturalProduct =
 field=Field #4 | year=2024 | crop=TameGrass | TotalCarbonInputs = 4315.4164
 field=Field #4 | year=2024 | crop=TameGrass | Yield = 25868.8000
 field=Field #4 | year=2025 | crop=TameGrass | AboveGroundCarbonInput = 9642.6072
-field=Field #4 | year=2025 | crop=TameGrass | BelowGroundCarbonInput = 30556.7880
+field=Field #4 | year=2025 | crop=TameGrass | BelowGroundCarbonInput = 14778.4875
 field=Field #4 | year=2025 | crop=TameGrass | PercentageOfProductYieldReturnedToSoil = 40.0000
 field=Field #4 | year=2025 | crop=TameGrass | PlantCarbonInAgriculturalProduct = 24106.5179
-field=Field #4 | year=2025 | crop=TameGrass | TotalCarbonInputs = 48703.5658
+field=Field #4 | year=2025 | crop=TameGrass | TotalCarbonInputs = 32925.2653
 field=Field #4 | year=2025 | crop=TameGrass | Yield = 267850.1990
 field=Field #5 | year=1985 | crop=RangelandNative | AboveGroundCarbonInput = 1764.7615
 field=Field #5 | year=1985 | crop=RangelandNative | BelowGroundCarbonInput = 3343.9580
@@ -1243,8 +1243,8 @@ field=Field #5 | year=2025 | crop=RangelandNative | PlantCarbonInAgriculturalPro
 field=Field #5 | year=2025 | crop=RangelandNative | TotalCarbonInputs = 7489.6967
 field=Field #5 | year=2025 | crop=RangelandNative | Yield = 25868.8000
 field=Field #5 | year=2026 | crop=RangelandNative | AboveGroundCarbonInput = 2328.1920
-field=Field #5 | year=2026 | crop=RangelandNative | BelowGroundCarbonInput = 4411.5741
+field=Field #5 | year=2026 | crop=RangelandNative | BelowGroundCarbonInput = 5161.5047
 field=Field #5 | year=2026 | crop=RangelandNative | PercentageOfProductYieldReturnedToSoil = 100.0000
 field=Field #5 | year=2026 | crop=RangelandNative | PlantCarbonInAgriculturalProduct = 2328.1920
-field=Field #5 | year=2026 | crop=RangelandNative | TotalCarbonInputs = 6739.7661
+field=Field #5 | year=2026 | crop=RangelandNative | TotalCarbonInputs = 7489.6967
 field=Field #5 | year=2026 | crop=RangelandNative | Yield = 25868.8000
