@@ -282,6 +282,14 @@ namespace H.CLI
                 Console.WriteLine("Would you like to run another scenario? (Y/N)");
                 continueWithAnotherRun = Console.ReadLine();
 
+                // Null means the input stream has ended. The run itself has already finished and written its
+                // results, so stop here and exit normally - this used to throw out of Main and report a failure
+                // for a run that had succeeded, which any script checking the exit code would believe.
+                if (continueWithAnotherRun == null)
+                {
+                    break;
+                }
+
                 if (_inputHelper.IsYesResponse(continueWithAnotherRun))
                 {
                     Console.Clear();
@@ -290,7 +298,11 @@ namespace H.CLI
 
             } while (_inputHelper.IsYesResponse(continueWithAnotherRun));
 
-            Environment.Exit(1);
+            // Reaching here means every run the user asked for finished. This was Exit(1) unconditionally, so the
+            // CLI reported a failure on every run it had just completed successfully - invisible interactively, but
+            // anything driving the CLI from a script or a pipeline reads the exit code and concludes the run failed.
+            // Failure paths set their own non-zero codes before this point.
+            Environment.Exit(0);
         }
 
         static void ShowBanner()

@@ -49,6 +49,15 @@ namespace H.CLI.UserInput
                 Console.WriteLine();
                 Console.WriteLine(Properties.Resources.PromptUserForUnitsOfMeasurement);
                 userChosenMeasurementString = Console.ReadLine();
+
+                // Null means the input stream has ended - nobody is there to answer. Re-prompting would spin
+                // forever against a closed stream, so fall back to metric, which is what -u metric selects.
+                if (userChosenMeasurementString == null)
+                {
+                    measurementSystem = MeasurementSystemType.Metric;
+                    return;
+                }
+
                 int.TryParse(userChosenMeasurementString, out userChosenMeasurement);
 
             } while (userChosenMeasurement < 0 || userChosenMeasurement > 2 || !int.TryParse(userChosenMeasurementString, out userChosenMeasurement));

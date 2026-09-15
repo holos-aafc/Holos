@@ -232,6 +232,16 @@ namespace H.CLI.FileAndDirectoryAccessors
                     Console.WriteLine(Properties.Resources.LabelYesNo);
 
                     usePreviousDirectory = Console.ReadLine();
+
+                    // Null means the input stream has ended - nobody is there to answer. Re-prompting would spin
+                    // forever against a closed stream, so keep the directory the previous run remembered, which
+                    // is the only choice that needs no further input.
+                    if (usePreviousDirectory == null)
+                    {
+                        Directory.SetCurrentDirectory(previousFarmsFolderPath);
+                        break;
+                    }
+
                     if (_inputHelper.IsYesResponse(usePreviousDirectory))
                     {
                         Directory.SetCurrentDirectory(previousFarmsFolderPath);
