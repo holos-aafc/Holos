@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1519,6 +1519,9 @@ Would you like to continue using this directory?</value>
 	</data>
   <data name="UseCustomIndoorHousingTemperature" xml:space="preserve">
 	  <value>Use Custom Indoor Housing Temperature</value>
+  </data>
+  <data name="NoConsoleInputAvailable" xml:space="preserve">
+    <value>This prompt needs an answer, but there is no console input to read. Holos cannot continue. Run Holos from a terminal so the prompt can be answered.</value>
   </data>
 </root>
 

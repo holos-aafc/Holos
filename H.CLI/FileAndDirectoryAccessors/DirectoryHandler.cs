@@ -182,6 +182,18 @@ namespace H.CLI.FileAndDirectoryAccessors
                 Console.WriteLine();
                 Console.WriteLine(Properties.Resources.PromptForFarmsFolderLocation);
                 farmsFolderPath = Console.ReadLine();
+
+                // Null means the input stream has ended. Directory.Exists(null) is false, so without this the loop
+                // re-asks forever against a stream that will never answer. There is no sensible default here - Holos
+                // cannot run without knowing where the farms are - so say why and stop.
+                if (farmsFolderPath == null)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(Properties.Resources.NoConsoleInputAvailable);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Environment.Exit(1);
+                }
+
             } while (!Directory.Exists(farmsFolderPath));
             File.WriteAllText(@"FarmsPathFile" + @"\" + "UserFarmsPath.txt", farmsFolderPath);
             return farmsFolderPath;
@@ -232,6 +244,27 @@ namespace H.CLI.FileAndDirectoryAccessors
                     Console.WriteLine(Properties.Resources.LabelYesNo);
 
                     usePreviousDirectory = Console.ReadLine();
+
+                    // Null means the input stream has ended - nobody is there to answer. Re-prompting would spin
+                    // forever against a closed stream, so keep the directory the previous run remembered, which
+                    // is the only choice that needs no further input.
+                    if (usePreviousDirectory == null)
+                    {
+                        // The remembered path comes from a file written by an earlier run and may since have been
+                        // moved or deleted, in which case SetCurrentDirectory throws. With nobody available to give
+                        // a new one, say so and stop rather than surfacing a DirectoryNotFoundException.
+                        if (Directory.Exists(previousFarmsFolderPath) == false)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine(Properties.Resources.NoConsoleInputAvailable);
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Environment.Exit(1);
+                        }
+
+                        Directory.SetCurrentDirectory(previousFarmsFolderPath);
+                        break;
+                    }
+
                     if (_inputHelper.IsYesResponse(usePreviousDirectory))
                     {
                         Directory.SetCurrentDirectory(previousFarmsFolderPath);
