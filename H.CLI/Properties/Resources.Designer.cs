@@ -2446,7 +2446,7 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This prompt needs an answer, but there is no console input to read. Holos cannot continue. Run Holos from a terminal, or supply the answer with a command line argument.
+        ///   Looks up a localized string similar to This prompt needs an answer, but there is no console input to read. Holos cannot continue. Run Holos from a terminal so the prompt can be answered.
         /// </summary>
         public static string NoConsoleInputAvailable {
             get {

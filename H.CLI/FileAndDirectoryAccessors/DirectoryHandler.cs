@@ -250,6 +250,17 @@ namespace H.CLI.FileAndDirectoryAccessors
                     // is the only choice that needs no further input.
                     if (usePreviousDirectory == null)
                     {
+                        // The remembered path comes from a file written by an earlier run and may since have been
+                        // moved or deleted, in which case SetCurrentDirectory throws. With nobody available to give
+                        // a new one, say so and stop rather than surfacing a DirectoryNotFoundException.
+                        if (Directory.Exists(previousFarmsFolderPath) == false)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine(Properties.Resources.NoConsoleInputAvailable);
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Environment.Exit(1);
+                        }
+
                         Directory.SetCurrentDirectory(previousFarmsFolderPath);
                         break;
                     }

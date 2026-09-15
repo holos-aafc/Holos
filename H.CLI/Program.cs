@@ -81,7 +81,13 @@ namespace H.CLI
             _storage = new Storage();
         }
 
-        private static void Run(string[] args)
+        /// <summary>
+        /// Returns true when farms were actually processed. The two branches that fall through having done no work -
+        /// no farms in the application data, and an empty farms folder - return false so Main can exit non-zero.
+        /// Before the exit code was fixed every run exited 1, so those cases were non-zero by accident; without a
+        /// result here they would have started reporting success.
+        /// </summary>
+        private static bool Run(string[] args)
         {
             // CLI arguments access 
             CLIArguments argValues = new CLIArguments();
@@ -236,6 +242,8 @@ namespace H.CLI
                     Console.WriteLine(Properties.Resources.LabelProcessingComplete);
                     
                     ResetConsoleColor();
+
+                    return true;
                 }
                 else
                 {
@@ -243,6 +251,8 @@ namespace H.CLI
                     Console.WriteLine(Properties.Resources.NoFarmsToProcess);
                     
                     ResetConsoleColor();
+
+                    return false;
                 }
             }
             else
@@ -262,6 +272,9 @@ namespace H.CLI
                 {
                     _ = Console.ReadKey();
                 }
+
+                // A template farm was created and the user was told to populate it. Nothing was processed.
+                return false;
             }
         }
 
@@ -280,9 +293,10 @@ namespace H.CLI
         static void Main(string[] args)
         {
             var continueWithAnotherRun = string.Empty;
+            var lastRunProcessedFarms = false;
             do
             {
-                Run(args);
+                lastRunProcessedFarms = Run(args);
 
                 Console.WriteLine();
                 Console.WriteLine();
@@ -305,11 +319,12 @@ namespace H.CLI
 
             } while (_inputHelper.IsYesResponse(continueWithAnotherRun));
 
-            // Reaching here means every run the user asked for finished. This was Exit(1) unconditionally, so the
-            // CLI reported a failure on every run it had just completed successfully - invisible interactively, but
-            // anything driving the CLI from a script or a pipeline reads the exit code and concludes the run failed.
-            // Failure paths set their own non-zero codes before this point.
-            Environment.Exit(0);
+            // This was Exit(1) unconditionally, so the CLI reported a failure on every run it had just completed
+            // successfully - invisible interactively, but anything driving the CLI from a script or a pipeline reads
+            // the exit code and concludes the run failed. It now reflects what actually happened: zero when the last
+            // run processed farms, non-zero when it had nothing to process. Other failure paths set their own
+            // non-zero codes before reaching here.
+            Environment.Exit(lastRunProcessedFarms ? 0 : 1);
         }
 
         static void ShowBanner()

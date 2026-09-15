@@ -1458,6 +1458,6 @@
     <value />
   </data>
   <data name="NoConsoleInputAvailable" xml:space="preserve">
-    <value>Cette invite exige une réponse, mais aucune entrée de console n’est disponible. Holos ne peut pas continuer. Exécutez Holos depuis un terminal ou fournissez la réponse au moyen d’un argument de ligne de commande.</value>
+    <value>Cette invite exige une réponse, mais aucune entrée de console n’est disponible. Holos ne peut pas continuer. Exécutez Holos depuis un terminal afin de pouvoir répondre à l’invite.</value>
   </data>
 </root>
