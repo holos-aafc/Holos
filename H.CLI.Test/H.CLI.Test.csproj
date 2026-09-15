@@ -59,6 +59,8 @@
     <Compile Include="FilesAndDirectoryAccessors\DataInputHandlerTest.cs" />
     <Compile Include="Handlers\ExportedFarmsHandlerTest.cs" />
     <Compile Include="InfrastructureConstantsTest.cs" />
+    <Compile Include="TemporaryComponentStorage\InputHelperTest.cs" />
+    <Compile Include="UserInput\CLIUnitsOfMeasurementConstantsTest.cs" />
     <Compile Include="Processors\FieldProcessorTest.cs" />
     <Compile Include="ResourceManagerHelperTest.cs" />
     <Compile Include="UserInput\CLIArgumentsTest.cs" />
