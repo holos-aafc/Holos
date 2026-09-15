@@ -182,6 +182,18 @@ namespace H.CLI.FileAndDirectoryAccessors
                 Console.WriteLine();
                 Console.WriteLine(Properties.Resources.PromptForFarmsFolderLocation);
                 farmsFolderPath = Console.ReadLine();
+
+                // Null means the input stream has ended. Directory.Exists(null) is false, so without this the loop
+                // re-asks forever against a stream that will never answer. There is no sensible default here - Holos
+                // cannot run without knowing where the farms are - so say why and stop.
+                if (farmsFolderPath == null)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(Properties.Resources.NoConsoleInputAvailable);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Environment.Exit(1);
+                }
+
             } while (!Directory.Exists(farmsFolderPath));
             File.WriteAllText(@"FarmsPathFile" + @"\" + "UserFarmsPath.txt", farmsFolderPath);
             return farmsFolderPath;

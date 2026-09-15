@@ -254,7 +254,14 @@ namespace H.CLI
                 templateFarmHandler.CreateTemplateFarmIfNotExists(farmsFolderPath, _geographicDataProvider);
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine(String.Format(Properties.Resources.InitialMessageAfterInstallation, farmsFolderPath));
-                _ = Console.ReadKey();
+
+                // ReadKey needs a real console: with input redirected it throws InvalidOperationException, so a
+                // first run from a script died here on what is only a "press any key to continue". There is
+                // nobody to press a key, so carry on.
+                if (Console.IsInputRedirected == false)
+                {
+                    _ = Console.ReadKey();
+                }
             }
         }
 

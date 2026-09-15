@@ -204,6 +204,18 @@ namespace H.CLI.FileAndDirectoryAccessors
                                   Properties.Resources.SettingsFileWillBeCreatedHere + Environment.NewLine +
                                   Properties.Resources.EnterYourChoice, farmDirectoryPath));
                 userMenuChoice = Console.ReadLine();
+
+                // Null means the input stream has ended. int.TryParse(null) does not throw, it simply fails the
+                // loop condition, so without this the menu re-draws forever against a stream that will never
+                // answer. None of the choices is safe to assume on someone's behalf, so say why and stop.
+                if (userMenuChoice == null)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(Properties.Resources.NoConsoleInputAvailable);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Environment.Exit(1);
+                }
+
                 int.TryParse(userMenuChoice, out userChosenMenuNumber);
             } while (userChosenMenuNumber < 0 || userChosenMenuNumber > 3 || !int.TryParse(userMenuChoice, out userChosenMenuNumber));
 
@@ -224,6 +236,17 @@ namespace H.CLI.FileAndDirectoryAccessors
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine(Properties.Resources.PromptToEnterPolygonID);
                 var polygonIDString = Console.ReadLine();
+
+                // int.Parse(null) throws ArgumentNullException, which would surface as a crash rather than an
+                // explanation.
+                if (polygonIDString == null)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(Properties.Resources.NoConsoleInputAvailable);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Environment.Exit(1);
+                }
+
                 var polygonID = int.Parse(polygonIDString);
 
                 if (PolygonIDList.Contains(polygonID))
