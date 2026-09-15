@@ -3070,6 +3070,8 @@ There are two methods to add a new farm to an existing farms folder. [The common
 -	**Undersown Crop Data**: Under Sown Crops Used
 -	**Grazed Crop Data**: Crop Is Grazed
 -	**Crop Climate Data**: Climate Parameter, Tillage Factor, Fuel Energy
+
+> *Note: the field data input file records **whether** a crop is grazed, but not the individual grazing periods, utilization rates, hay harvests or supplemental hay that you can enter in the Holos interface. If a field uses any of those, build the farm in the interface and export it for the CLI rather than writing the input file by hand — the carbon and nitrogen those entries contribute are worked out when the farm is exported, and cannot be expressed in the file directly.*
 -	The figures below are an example of the different data groups based on the field data input Excel file to make it easier to visualize.
 
 <br>
