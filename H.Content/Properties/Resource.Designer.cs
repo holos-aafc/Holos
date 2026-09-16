@@ -1969,6 +1969,17 @@ namespace H.Content.Properties {
                 return ResourceManager.GetString("Table_9_Default_Values_For_Nitrogen_Lignin_In_Crops", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Crop,Nitrogen fixation (%NDFA),Source
+        ///Soybeans,55,Karimi et al. (2020)
+        ///Dry peas,54,Karimi et al. (2020).
+        /// </summary>
+        public static string NitrogenFixationByCropType {
+            get {
+                return ResourceManager.GetString("NitrogenFixationByCropType", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Diet,VS Adjustment (kg kg-1),N Excreted Adjustment (kg kg-1)

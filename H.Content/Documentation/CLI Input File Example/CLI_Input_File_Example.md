@@ -353,7 +353,7 @@ Valid range of values: (0 ≤ x ≤ 1)
 
 note: A fraction, not a percentage - enter 0.55 for 55%. Indexed by crop type; crops that do not fix nitrogen default to 0.
 
-Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Core/Providers/Nitrogen/NitogenFixationProvider.cs 
+Source (source code file, table, algorithm document, etc.): https://github.com/holos-aafc/Holos/blob/main/H.Content/Resources/NitrogenFixationByCropType.csv 
 
 ***
 ## NitrogenDeposit

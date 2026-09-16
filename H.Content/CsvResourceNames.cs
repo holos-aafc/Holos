@@ -161,5 +161,7 @@
 
         UpdatedSmallAreaYields,
         IndoorBarnTemperatures,
+
+        NitrogenFixationByCropType,
     }
 }

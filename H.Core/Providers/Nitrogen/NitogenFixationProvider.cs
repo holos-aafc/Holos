@@ -2,16 +2,25 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using H.Content;
+using H.Core.Converters;
 using H.Core.Enumerations;
 using H.Core.Tools;
 using H.Infrastructure;
 
 namespace H.Core.Providers.Nitrogen
 {
-    public class NitogenFixationProvider
+    /// <summary>
+    /// %NDFA - the share of a crop's nitrogen derived from the atmosphere - for the crops that fix nitrogen, taken
+    /// from the Nfixation definition in the algorithm document (Eq. 2.5.5-6, Eq. 2.6.8-12 and Eq. 2.7.7-11).
+    ///
+    /// The values live in Resources\NitrogenFixationByCropType.csv so they can be revised without a code change.
+    /// </summary>
+    public class NitogenFixationProvider : ProviderBase
     {
         #region Fields
 
+        private readonly CropTypeStringConverter _cropTypeStringConverter;
         private readonly List<NitrogenFixationResult> _table;
 
         #endregion
@@ -22,32 +31,8 @@ namespace H.Core.Providers.Nitrogen
         {
             HTraceListener.AddTraceListener();
 
-            /*
-             * %NDFA - the share of a crop's nitrogen derived from the atmosphere - held as a fraction, taken from the
-             * Nfixation definition in the algorithm document (Eq. 2.5.5-6, Eq. 2.6.8-12 and Eq. 2.7.7-11), sourced to
-             * Karimi et al. (2020).
-             *
-             * Only the crops named there fix nitrogen. Anything absent from this table fixes none, which includes
-             * legumes the document does not give a value for - faba beans and white beans among them.
-             */
-            _table = new List<NitrogenFixationResult>()
-            {
-                new NitrogenFixationResult() { CropType = CropType.Soybeans, Fixation = 0.55 },
-                new NitrogenFixationResult() { CropType = CropType.DryPeas, Fixation = 0.54 },
-                new NitrogenFixationResult() { CropType = CropType.FieldPeas, Fixation = 0.54 },
-                new NitrogenFixationResult() { CropType = CropType.BeansDryField, Fixation = 0.40 },
-                new NitrogenFixationResult() { CropType = CropType.Lentils, Fixation = 0.53 },
-                new NitrogenFixationResult() { CropType = CropType.Chickpeas, Fixation = 0.52 },
-
-                // The document calculates this one as the average of beans (dry field), chickpeas, dry/field peas,
-                // lentils and soybeans.
-                new NitrogenFixationResult() { CropType = CropType.PulseCrops, Fixation = 0.51 },
-
-                // Perennials. These fixed no nitrogen before, because the previous code answered from IsPulseCrop()
-                // and neither of them is a pulse crop.
-                new NitrogenFixationResult() { CropType = CropType.TameLegume, Fixation = 0.66 },
-                new NitrogenFixationResult() { CropType = CropType.TameMixed, Fixation = 0.66 },
-            };
+            _cropTypeStringConverter = new CropTypeStringConverter();
+            _table = this.ReadFile();
         }
 
         #endregion
@@ -55,16 +40,54 @@ namespace H.Core.Providers.Nitrogen
         #region Public Methods
 
         /// <summary>
-        /// The share of the crop's nitrogen fixed from the atmosphere, as a fraction. Zero for a crop that fixes none.
-        ///
-        /// This used to ignore the table and answer a flat 0.7 for anything IsPulseCrop() recognised, and zero for
-        /// everything else, so every pulse shared one value and the two perennial legumes fixed nothing at all.
+        /// The share of the crop's nitrogen fixed from the atmosphere, as a fraction. A crop the file does not list
+        /// fixes none, which includes legumes the algorithm document gives no value for - faba beans and white beans
+        /// among them.
         /// </summary>
         public NitrogenFixationResult GetNitrogenFixationResult(CropType cropType)
         {
-            var result = _table.SingleOrDefault(entry => entry.CropType == cropType);
+            var result = _table.Find(entry => entry.CropType == cropType);
 
             return result ?? new NitrogenFixationResult() { CropType = cropType, Fixation = 0 };
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// The file states each value as a percentage, the way the algorithm document does; it is held here as a
+        /// fraction, which is what every caller expects.
+        /// </summary>
+        private List<NitrogenFixationResult> ReadFile()
+        {
+            var results = new List<NitrogenFixationResult>();
+
+            var fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.NitrogenFixationByCropType);
+
+            foreach (var line in fileLines.Skip(1))
+            {
+                if (line.All(string.IsNullOrWhiteSpace))
+                {
+                    continue;
+                }
+
+                var cropType = _cropTypeStringConverter.Convert(line[0]);
+                if (cropType == CropType.NotSelected)
+                {
+                    Trace.TraceError($"{nameof(NitogenFixationProvider)}.{nameof(ReadFile)}: could not parse '{line[0]}' as a crop type. This crop will fix no nitrogen.");
+
+                    continue;
+                }
+
+                results.Add(new NitrogenFixationResult()
+                {
+                    CropType = cropType,
+                    Fixation = base.ParseDouble(line[1]) / 100.0,
+                });
+            }
+
+            return results;
         }
 
         #endregion
