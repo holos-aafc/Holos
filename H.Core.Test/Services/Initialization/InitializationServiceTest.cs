@@ -1295,7 +1295,11 @@ namespace H.Core.Test.Services.Initialization
             var viewItem = new CropViewItem();
             viewItem.CropType = CropType.PulseCrops;
             _initializationService.InitializeNitrogenFixation(viewItem);
-            Assert.AreEqual(expected: 51, actual: viewItem.NitrogenFixationPercentage);
+
+            // The percentage is the stored fraction multiplied back up, so it does not always land on a round number:
+            // 0.55 * 100 is 55.00000000000001. 51 happens to be exact, but comparing without a tolerance would make
+            // this test fail for a value that is merely correct.
+            Assert.AreEqual(51, viewItem.NitrogenFixationPercentage, 0.0001);
         }
 
         /// <summary>
@@ -1393,8 +1397,8 @@ namespace H.Core.Test.Services.Initialization
             fieldSystemDetailsStageState.DetailsScreenViewCropViewItems = cropViewItemCollection;
             _farm1.StageStates.Add(fieldSystemDetailsStageState);
             _initializationService.InitializeNitrogenFixation(_farm1);
-            Assert.AreEqual(expected: 0, actual: cropViewItemOne.NitrogenFixationPercentage);
-            Assert.AreEqual(expected: 51, actual: cropViewItemTwo.NitrogenFixationPercentage);
+            Assert.AreEqual(0, cropViewItemOne.NitrogenFixationPercentage, 0.0001);
+            Assert.AreEqual(51, cropViewItemTwo.NitrogenFixationPercentage, 0.0001);
         }
 
         [TestMethod]
