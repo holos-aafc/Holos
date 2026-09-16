@@ -21,35 +21,32 @@ namespace H.Core.Providers.Nitrogen
         public NitogenFixationProvider()
         {
             HTraceListener.AddTraceListener();
+
+            /*
+             * %NDFA - the share of a crop's nitrogen derived from the atmosphere - held as a fraction, taken from the
+             * Nfixation definition in the algorithm document (Eq. 2.5.5-6, Eq. 2.6.8-12 and Eq. 2.7.7-11), sourced to
+             * Karimi et al. (2020).
+             *
+             * Only the crops named there fix nitrogen. Anything absent from this table fixes none, which includes
+             * legumes the document does not give a value for - faba beans and white beans among them.
+             */
             _table = new List<NitrogenFixationResult>()
             {
-                new NitrogenFixationResult() { CropType = CropType.Soybeans, Fixation = 108 },
-                new NitrogenFixationResult() { CropType = CropType.Peas, Fixation = 126 },
-                new NitrogenFixationResult() { CropType = CropType.Lentils, Fixation = 40 },
-                new NitrogenFixationResult() { CropType = CropType.ColouredWhiteFabaBeans, Fixation = 129 },
-                new NitrogenFixationResult() { CropType = CropType.Chickpeas, Fixation = 61 },
-                new NitrogenFixationResult() { CropType = CropType.BeansDryField, Fixation = 38 },
-                new NitrogenFixationResult() { CropType = CropType.WhiteBeans, Fixation = 38 },
-                new NitrogenFixationResult() { CropType = CropType.BeansWhite, Fixation = 38 },
-                new NitrogenFixationResult() { CropType = CropType.FabaBeans, Fixation = 129 },                
-                new NitrogenFixationResult() { CropType = CropType.DryPeas, Fixation = 126 },
-                new NitrogenFixationResult() { CropType = CropType.FieldPeas, Fixation = 126 },
-                new NitrogenFixationResult() { CropType = CropType.PulseCrops, Fixation = 9 },
+                new NitrogenFixationResult() { CropType = CropType.Soybeans, Fixation = 0.55 },
+                new NitrogenFixationResult() { CropType = CropType.DryPeas, Fixation = 0.54 },
+                new NitrogenFixationResult() { CropType = CropType.FieldPeas, Fixation = 0.54 },
+                new NitrogenFixationResult() { CropType = CropType.BeansDryField, Fixation = 0.40 },
+                new NitrogenFixationResult() { CropType = CropType.Lentils, Fixation = 0.53 },
+                new NitrogenFixationResult() { CropType = CropType.Chickpeas, Fixation = 0.52 },
 
-                new NitrogenFixationResult() { CropType = CropType.Vegetables, Fixation = 10 },
+                // The document calculates this one as the average of beans (dry field), chickpeas, dry/field peas,
+                // lentils and soybeans.
+                new NitrogenFixationResult() { CropType = CropType.PulseCrops, Fixation = 0.51 },
 
-                // Other field crops
-                new NitrogenFixationResult() { CropType = CropType.Safflower, Fixation = 9 },
-                new NitrogenFixationResult() { CropType = CropType.SunflowerSeed, Fixation = 9 },
-                new NitrogenFixationResult() { CropType = CropType.Tobacco, Fixation = 9 },
-                new NitrogenFixationResult() { CropType = CropType.BerriesAndGrapes, Fixation = 9 },
-                new NitrogenFixationResult() { CropType = CropType.OtherFieldCrops, Fixation = 9 },
-
-                // Perennials
-                new NitrogenFixationResult() { CropType = CropType.TameLegume, Fixation =  86},
-                new NitrogenFixationResult() { CropType = CropType.TameMixed, Fixation =  12},
-                new NitrogenFixationResult() { CropType = CropType.SeededGrassland, Fixation = 2 },
-                new NitrogenFixationResult() { CropType = CropType.ForageForSeed, Fixation = 4 },
+                // Perennials. These fixed no nitrogen before, because the previous code answered from IsPulseCrop()
+                // and neither of them is a pulse crop.
+                new NitrogenFixationResult() { CropType = CropType.TameLegume, Fixation = 0.66 },
+                new NitrogenFixationResult() { CropType = CropType.TameMixed, Fixation = 0.66 },
             };
         }
 
@@ -57,17 +54,17 @@ namespace H.Core.Providers.Nitrogen
 
         #region Public Methods
 
+        /// <summary>
+        /// The share of the crop's nitrogen fixed from the atmosphere, as a fraction. Zero for a crop that fixes none.
+        ///
+        /// This used to ignore the table and answer a flat 0.7 for anything IsPulseCrop() recognised, and zero for
+        /// everything else, so every pulse shared one value and the two perennial legumes fixed nothing at all.
+        /// </summary>
         public NitrogenFixationResult GetNitrogenFixationResult(CropType cropType)
         {
-            // Table values are no longer used. A default of 0.7 is used for legumous crops and 0 for non-legumous crops
-            if (cropType.IsPulseCrop())
-            {
-                return new NitrogenFixationResult() {Fixation = 0.7};
-            }
-            else
-            {
-                return new NitrogenFixationResult() { Fixation = 0 };
-            }
+            var result = _table.SingleOrDefault(entry => entry.CropType == cropType);
+
+            return result ?? new NitrogenFixationResult() { CropType = cropType, Fixation = 0 };
         }
 
         #endregion

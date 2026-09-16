@@ -1295,7 +1295,88 @@ namespace H.Core.Test.Services.Initialization
             var viewItem = new CropViewItem();
             viewItem.CropType = CropType.PulseCrops;
             _initializationService.InitializeNitrogenFixation(viewItem);
-            Assert.AreEqual(expected: 70, actual: viewItem.NitrogenFixationPercentage);
+            Assert.AreEqual(expected: 51, actual: viewItem.NitrogenFixationPercentage);
+        }
+
+        /// <summary>
+        /// Each legume named in the algorithm document now gets its own value. Before this, they all shared 70%.
+        /// </summary>
+        [TestMethod]
+        public void InitializeNitrogenFixationUsesPerCropValues()
+        {
+            var expectations = new Dictionary<CropType, double>()
+            {
+                {CropType.Soybeans, 55},
+                {CropType.DryPeas, 54},
+                {CropType.FieldPeas, 54},
+                {CropType.BeansDryField, 40},
+                {CropType.Lentils, 53},
+                {CropType.Chickpeas, 52},
+                {CropType.PulseCrops, 51},
+            };
+
+            foreach (var expectation in expectations)
+            {
+                var viewItem = new CropViewItem() {CropType = expectation.Key};
+
+                _initializationService.InitializeNitrogenFixation(viewItem);
+
+                Assert.AreEqual(expectation.Value, viewItem.NitrogenFixationPercentage, 0.0001, expectation.Key.ToString());
+            }
+        }
+
+        /// <summary>
+        /// These two fixed nothing before, since the old code answered from <see cref="CropTypeExtensions.IsPulseCrop"/>
+        /// and neither is a pulse crop.
+        /// </summary>
+        [TestMethod]
+        public void InitializeNitrogenFixationPerennialLegumes()
+        {
+            var tameLegume = new CropViewItem() {CropType = CropType.TameLegume};
+            var tameMixed = new CropViewItem() {CropType = CropType.TameMixed};
+
+            _initializationService.InitializeNitrogenFixation(tameLegume);
+            _initializationService.InitializeNitrogenFixation(tameMixed);
+
+            Assert.AreEqual(66, tameLegume.NitrogenFixationPercentage, 0.0001);
+            Assert.AreEqual(66, tameMixed.NitrogenFixationPercentage, 0.0001);
+        }
+
+        /// <summary>
+        /// Legumes the algorithm document gives no %NDFA for. They fix nothing, which is what they did before this
+        /// change as well - the document would have to name them before that can change.
+        /// </summary>
+        [TestMethod]
+        public void InitializeNitrogenFixationLegumesWithoutAPublishedValue()
+        {
+            var cropTypes = new List<CropType>()
+            {
+                CropType.FabaBeans,
+                CropType.WhiteBeans,
+                CropType.AlfalfaMedicagoSativaL,
+            };
+
+            foreach (var cropType in cropTypes)
+            {
+                var viewItem = new CropViewItem() {CropType = cropType};
+
+                _initializationService.InitializeNitrogenFixation(viewItem);
+
+                Assert.AreEqual(0, viewItem.NitrogenFixationPercentage, 0.0001, cropType.ToString());
+            }
+        }
+
+        /// <summary>
+        /// The view item stores the fraction, not the percentage, and the two must stay in step.
+        /// </summary>
+        [TestMethod]
+        public void InitializeNitrogenFixationSetsFractionAlongsidePercentage()
+        {
+            var viewItem = new CropViewItem() {CropType = CropType.Soybeans};
+
+            _initializationService.InitializeNitrogenFixation(viewItem);
+
+            Assert.AreEqual(0.55, viewItem.NitrogenFixation, 0.0001);
         }
 
         [TestMethod]
@@ -1313,7 +1394,7 @@ namespace H.Core.Test.Services.Initialization
             _farm1.StageStates.Add(fieldSystemDetailsStageState);
             _initializationService.InitializeNitrogenFixation(_farm1);
             Assert.AreEqual(expected: 0, actual: cropViewItemOne.NitrogenFixationPercentage);
-            Assert.AreEqual(expected: 70, actual: cropViewItemTwo.NitrogenFixationPercentage);
+            Assert.AreEqual(expected: 51, actual: cropViewItemTwo.NitrogenFixationPercentage);
         }
 
         [TestMethod]

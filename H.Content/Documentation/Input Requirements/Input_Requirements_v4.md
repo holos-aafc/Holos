@@ -346,7 +346,7 @@ Fertilizer management (if applicable)
 |Method	 |    |Required |indirect N<sub>2</sub>O emissions 
 |Rate of application |kg ha<sup>-1</sup> |Required |indirect N<sub>2</sub>O emissions
 |Atmospheric nitrogen deposition |kg N ha<sup>-1</sup> |Optional (reduces default fertilizer rate) |indirect N<sub>2</sub>O emissions (default =  5 kg N ha<sup>-1</sup>)
-|Nitrogen fixation |kg N ha <sup>-1</sup>year<sup>-1</sup> |Optional (reduces default fertilizer rate) |indirect N<sub>2</sub>O emissions (default of 70% of Crop N requirement)
+|Nitrogen fixation |% |Optional (reduces default fertilizer rate) |indirect N<sub>2</sub>O emissions (default varies by crop type; 0% for crops that do not fix nitrogen)
 |Soil test nitrogen |kg N ha<sup>-1</sup> |Optional (reduces default fertilizer rate)|    |	
 |Fertilizer efficiency |% |Optional (reduces default fertilizer rate) |indirect N<sub>2</sub>O emissions (default =  75%)
 |Nitrogen |% |Operational (custom blends) |indirect N<sub>2</sub>O emissions
@@ -475,7 +475,7 @@ Fertilizer management (if applicable)
 |Method |    |Required |indirect N<sub>2</sub>O emissions 
 |Rate of application |kg ha<sup>-1</sup> |Required |direct and indirect N<sub>2</sub>O emissions
 |Atmospheric nitrogen deposition |kg N ha<sup>-1</sup> |Optional (reduces default fertilizer rate) |direct and indirect N<sub>2</sub>O emissions (default =  5 kg N ha<sup>-1</sup>)
-|Nitrogen fixation |kg N ha <sup>-1</sup> year<sup>-1</sup> |Optional (reduces default fertilizer rate) |indirect N<sub>2</sub>O emissions (default of 70% of Crop N requirement)
+|Nitrogen fixation |% |Optional (reduces default fertilizer rate) |indirect N<sub>2</sub>O emissions (default varies by crop type; 0% for crops that do not fix nitrogen)
 |Soil test nitrogen |kg N ha<sup>-1</sup> |Optional (reduces default fertilizer rate)|    |	
 |Fertilizer efficiency |% |Optional (reduces default fertilizer rate) |direct and indirect N<sub>2</sub>O emissions (default =  75%)
 |Nitrogen |% |Operational (custom blends) |direct and indirect N<sub>2</sub>O emissions
