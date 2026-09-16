@@ -398,7 +398,7 @@
     <value>..\Resources\Table_9_Default_Values_For_Nitrogen_Lignin_In_Crops.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="NitrogenFixationByCropType" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NitrogenFixationByCropType.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\NitrogenFixationByCropType.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="silage_yields" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\silage_yields.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>

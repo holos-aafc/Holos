@@ -77,7 +77,9 @@ namespace H.Core.Test.Providers.Nitrogen
 
             foreach (var line in lines)
             {
-                if (line.Length > 0 && string.IsNullOrWhiteSpace(line[0]) == false)
+                if (line.Length > 0 &&
+                    string.IsNullOrWhiteSpace(line[0]) == false &&
+                    line[0].TrimStart().StartsWith("#") == false)
                 {
                     rowCount++;
                 }

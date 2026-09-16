@@ -65,13 +65,14 @@ namespace H.Core.Providers.Nitrogen
 
             var fileLines = CsvResourceReader.GetFileLines(CsvResourceNames.NitrogenFixationByCropType);
 
-            foreach (var line in fileLines.Skip(1))
-            {
-                if (line.All(string.IsNullOrWhiteSpace))
-                {
-                    continue;
-                }
+            // The file leads with a comment block, so the header is the first line that is neither blank nor a
+            // comment - it cannot be found by position.
+            var rows = fileLines
+                .Where(line => line.All(string.IsNullOrWhiteSpace) == false && IsComment(line) == false)
+                .Skip(1);
 
+            foreach (var line in rows)
+            {
                 var cropType = _cropTypeStringConverter.Convert(line[0]);
                 if (cropType == CropType.NotSelected)
                 {
@@ -88,6 +89,14 @@ namespace H.Core.Providers.Nitrogen
             }
 
             return results;
+        }
+
+        /// <summary>
+        /// Lines starting with '#' carry the citation and the equations the values feed, for whoever opens the file.
+        /// </summary>
+        private static bool IsComment(string[] line)
+        {
+            return line.Length > 0 && line[0].TrimStart().StartsWith("#");
         }
 
         #endregion
