@@ -161,6 +161,7 @@
     <Compile Include="Providers\Economics\Beef_Cattle_Pasture_Summer_Feed_Cost_Provider_Test.cs" />
     <Compile Include="Providers\Energy\Table_49_Electricity_Conversion_Defaults_Provider_Test.cs" />
     <Compile Include="Providers\Nitrogen\NitrogenFixationProviderTest.cs" />
+    <Compile Include="Providers\ProviderBaseTest.cs" />
     <Compile Include="Providers\Energy\Table_50_Fuel_Energy_Estimates_Provider_Test.cs" />
     <Compile Include="Providers\Energy\Table_51_Herbicide_Energy_Estimates_Provider_Test.cs" />
     <Compile Include="Providers\Feed\DietProviderTest.cs" />

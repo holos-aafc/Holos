@@ -75,6 +75,9 @@ namespace H.Core.Test.Providers.Nitrogen
             var lines = H.Content.CsvResourceReader.GetFileLines(H.Content.CsvResourceNames.NitrogenFixationByCropType);
             var rowCount = 0;
 
+            // Deliberately spelled out rather than calling ProviderBase.IsComment. If that method ever mistook a data
+            // row for a comment, sharing it here would make the test skip the same rows as the reader and still pass,
+            // while those crops quietly fixed nothing - which is the very thing this test exists to catch.
             foreach (var line in lines)
             {
                 if (line.Length > 0 &&

@@ -68,7 +68,7 @@ namespace H.Core.Providers.Nitrogen
             // The file leads with a comment block, so the header is the first line that is neither blank nor a
             // comment - it cannot be found by position.
             var rows = fileLines
-                .Where(line => line.All(string.IsNullOrWhiteSpace) == false && IsComment(line) == false)
+                .Where(line => base.IsBlank(line) == false && base.IsComment(line) == false)
                 .Skip(1);
 
             foreach (var line in rows)
@@ -89,14 +89,6 @@ namespace H.Core.Providers.Nitrogen
             }
 
             return results;
-        }
-
-        /// <summary>
-        /// Lines starting with '#' carry the citation and the equations the values feed, for whoever opens the file.
-        /// </summary>
-        private static bool IsComment(string[] line)
-        {
-            return line.Length > 0 && line[0].TrimStart().StartsWith("#");
         }
 
         #endregion

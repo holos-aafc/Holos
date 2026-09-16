@@ -110,7 +110,7 @@ namespace H.Core.Providers.Plants
 
             foreach (string[] line in fileLines.Skip(1).Take(58))
             {
-                if (line.All(string.IsNullOrWhiteSpace))
+                if (base.IsBlank(line))
                 {
                     continue;
                 }
