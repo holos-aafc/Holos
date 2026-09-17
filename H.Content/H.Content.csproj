@@ -379,6 +379,7 @@
     <None Include="Resources\MM_31_allclusters_past_CBM.csv" />
     <None Include="Resources\MM__31_allclusters_future_DOM.csv" />
     <None Include="Resources\Table_9_Default_Values_For_Nitrogen_Lignin_In_Crops.csv" />
+    <None Include="Resources\NitrogenFixationByCropType.csv" />
     <None Include="Resources\on_default_yields.csv" />
     <None Include="Resources\Table_46_Parameters_For_Calculating_Biogas_Methane_Production_In_AD_System.csv" />
     <None Include="Resources\pat.csv" />

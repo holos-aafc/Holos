@@ -1,0 +1,29 @@
+# Biological nitrogen fixation by crop type, as %NDFA - the share of a crop's nitrogen derived from the atmosphere.
+#
+# Source: Karimi, R., Pogue, S.J., Kröbel, R., Beauchemin, K.A., Schwinghamer, T., Janzen, H.H. (2020)
+#         An updated nitrogen budget for Canadian agroecosystems.
+#         Agriculture, Ecosystems and Environment 304: 107046. https://doi.org/10.1016/j.agee.2020.107046
+#
+# The algorithm document gives these values in its definition of Nfixation, which it uses in:
+#         Eq. 2.5.5-6    default fertilizer rate
+#         Eq. 2.6.8-12   crop nitrogen demand (ICBM)
+#         Eq. 2.7.7-11   crop nitrogen demand (IPCC Tier 2)
+#
+# Editing this file:
+#   - Values are percentages. Holos converts them to fractions when it reads the file.
+#   - A crop that is not listed here fixes no nitrogen. Legumes the algorithm document gives no value for,
+#     such as faba beans and white beans, are deliberately absent.
+#   - Crop names must be ones Holos recognises (see CropTypeStringConverter). A name it cannot match is
+#     skipped, and NitrogenFixationProviderTest fails to say so.
+#   - Do not use a comma inside a field; the reader splits on every comma.
+#
+Crop,Nitrogen fixation (%NDFA),Source
+Soybeans,55,Karimi et al. (2020)
+Dry peas,54,Karimi et al. (2020)
+Field peas,54,Karimi et al. (2020)
+Beans (dry field),40,Karimi et al. (2020)
+Lentils,53,Karimi et al. (2020)
+Chickpeas,52,Karimi et al. (2020)
+Pulse crops,51,Derived - the average of beans (dry field); chickpeas; dry/field peas; lentils and soybeans
+Tame legume,66,Karimi et al. (2020)
+Tame mixed,66,Karimi et al. (2020)
