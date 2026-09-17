@@ -451,10 +451,19 @@ namespace H.Core
             return newFilePath;
         }
 
+        /// <summary>
+        /// Appends an exception to the log file in the user's data folder.
+        /// </summary>
+        /// <remarks>
+        /// The folder is created if it is not there yet. On a machine where Holos has not written anything before, it
+        /// is not: the first thing to need it may well be this method, and failing here would throw a second exception
+        /// out of the handler that was reporting the first.
+        /// </remarks>
         public void WriteExceptionToFile(Exception e)
         {
-            var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            var userFilePath = Path.Combine(localAppData, "HOLOS_4");
+            var userFilePath = this.GetUserFolderPath();
+
+            Directory.CreateDirectory(userFilePath);
 
             var fullpath = Path.Combine(userFilePath, "logfile.txt");
 
