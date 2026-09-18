@@ -22,7 +22,7 @@
     </SccProvider>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>C:\Users\Aaron\Documents\WORK\Projects\Holos\Software\ClickOnce output\CLI\</PublishUrl>
+    <PublishUrl>Z:\Projects\Holos\Software\ClickOnce output\CLI\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
