@@ -13,6 +13,7 @@ using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Infrastructure;
 using H.Core.Calculators.Nitrogen;
 using H.Core.Emissions.Results;
+using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Services;
 using H.Core.Services.Animals;
@@ -50,6 +51,20 @@ namespace H.Core.Test.Services.Animals
         public void Baseline_Farm3_WholeFarmResults_MatchesGolden()
         {
             RunBaseline("Farm3.json", "Farm3.whole-farm.baseline.txt.gz");
+        }
+
+        /// <summary>
+        /// The other fixtures are all saved under IPCC Tier 2, so without this the ICBM model has no end-to-end cover:
+        /// its carbon and nitrogen paths are exercised only by unit tests. Farm3 is reused rather than copied because
+        /// the fixture is several megabytes, and it carries a tame mixed stand, which fixes nitrogen.
+        /// </summary>
+        [TestMethod]
+        public void Baseline_Farm3_UnderIcbm_WholeFarmResults_MatchesGolden()
+        {
+            RunBaseline(
+                "Farm3.json",
+                "Farm3-icbm.whole-farm.baseline.txt.gz",
+                farm => farm.Defaults.CarbonModellingStrategy = CarbonModellingStrategies.ICBM);
         }
 
         // ----------------------------------------------------------------------------------------------------------------
@@ -111,9 +126,16 @@ namespace H.Core.Test.Services.Animals
                 new AnimalResultsService());
         }
 
-        private FarmEmissionResults CalculateFarm(FarmResultsService service, string fixtureFileName)
+        /// <param name="configure">
+        /// Applied to the loaded farm before it is initialized, so a fixture can be run under settings it was not saved
+        /// with. That keeps a variant from needing its own multi-megabyte copy of the fixture.
+        /// </param>
+        private FarmEmissionResults CalculateFarm(FarmResultsService service, string fixtureFileName, Action<Farm> configure = null)
         {
             var farm = new Storage().GetFarmsFromExportFile(GetFixtureFilePath(fixtureFileName)).Single();
+
+            configure?.Invoke(farm);
+
             base._initializationService.ReInitializeFarms(new[] { farm });
 
             return service.CalculateFarmEmissionResults(farm);
@@ -122,15 +144,15 @@ namespace H.Core.Test.Services.Animals
         // ----------------------------------------------------------------------------------------------------------------
         // Reflective snapshot: walk the result graph, emit every numeric/enum/bool leaf as a sorted "path = value" line.
         // ----------------------------------------------------------------------------------------------------------------
-        private string BuildSnapshot(string fixtureFileName)
+        private string BuildSnapshot(string fixtureFileName, Action<Farm> configure = null)
         {
             // A fresh pipeline per farm - the "clean" single-run reference the golden master pins.
-            return SnapshotVia(BuildFarmResultsService(), fixtureFileName);
+            return SnapshotVia(BuildFarmResultsService(), fixtureFileName, configure);
         }
 
-        private string SnapshotVia(FarmResultsService service, string fixtureFileName)
+        private string SnapshotVia(FarmResultsService service, string fixtureFileName, Action<Farm> configure = null)
         {
-            var results = CalculateFarm(service, fixtureFileName);
+            var results = CalculateFarm(service, fixtureFileName, configure);
 
             var rows = new List<string>();
             Walk("FarmEmissionResults", results, rows, new HashSet<object>(RefComparer.Instance), 0);
@@ -328,9 +350,9 @@ namespace H.Core.Test.Services.Animals
         // ----------------------------------------------------------------------------------------------------------------
         // Golden-master diff harness (same mechanism as the other baselines).
         // ----------------------------------------------------------------------------------------------------------------
-        private void RunBaseline(string fixtureFileName, string baselineFileName)
+        private void RunBaseline(string fixtureFileName, string baselineFileName, Action<Farm> configure = null)
         {
-            var snapshot = BuildSnapshot(fixtureFileName);
+            var snapshot = BuildSnapshot(fixtureFileName, configure);
             var goldenPath = GetFixtureFilePath(baselineFileName);
 
             var updating = Environment.GetEnvironmentVariable("HOLOS_UPDATE_BASELINES") == "1";
