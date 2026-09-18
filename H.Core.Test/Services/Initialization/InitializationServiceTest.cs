@@ -1303,7 +1303,7 @@ namespace H.Core.Test.Services.Initialization
         }
 
         /// <summary>
-        /// Each legume named in the algorithm document now gets its own value. Before this, they all shared 70%.
+        /// Each legume named in the algorithm document has its own %NDFA rather than a rate shared across them.
         /// </summary>
         [TestMethod]
         public void InitializeNitrogenFixationUsesPerCropValues()
@@ -1330,8 +1330,8 @@ namespace H.Core.Test.Services.Initialization
         }
 
         /// <summary>
-        /// These two fixed nothing before, since the old code answered from <see cref="CropTypeExtensions.IsPulseCrop"/>
-        /// and neither is a pulse crop.
+        /// Two perennial legumes. Neither is a pulse crop, so they are easily missed by anything keying off
+        /// <see cref="CropTypeExtensions.IsPulseCrop"/>.
         /// </summary>
         [TestMethod]
         public void InitializeNitrogenFixationPerennialLegumes()
@@ -1347,8 +1347,7 @@ namespace H.Core.Test.Services.Initialization
         }
 
         /// <summary>
-        /// Legumes the algorithm document gives no %NDFA for. They fix nothing, which is what they did before this
-        /// change as well - the document would have to name them before that can change.
+        /// Legumes the algorithm document gives no %NDFA for. They fix nothing until the document names them.
         /// </summary>
         [TestMethod]
         public void InitializeNitrogenFixationLegumesWithoutAPublishedValue()
