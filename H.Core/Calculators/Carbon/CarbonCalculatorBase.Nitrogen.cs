@@ -282,7 +282,13 @@ namespace H.Core.Calculators.Carbon
 
         /// <summary>
         /// Equation 2.6.8-12
+        ///
+        /// The fixation term multiplies the summed pools: a crop that fixes 55% of its own nitrogen demands 45% as
+        /// much from the soil. It used to be subtracted, which took a number no greater than 1 off a demand measured
+        /// in kg N ha^-1 - so a legume's fixation was all but ignored, and a crop fixing nothing was charged 1 kg N
+        /// ha^-1 it did not owe.
         /// </summary>
+        /// <param name="nitrogenFixation">The share of the crop's nitrogen fixed from the atmosphere, as a fraction.</param>
         public double CalculateCropNitrogenDemand(
             double carbonInputFromProduct,
             double carbonInputFromStraw,
@@ -304,7 +310,7 @@ namespace H.Core.Calculators.Carbon
                     nitrogenConcentrationInTheRoots +
 
                     (carbonInputFromExtraroots / carbonConcentration * (1 - moistureContentOfCropFraction)) *
-                    nitrogenConcentrationInExtraroots) - (1 - nitrogenFixation);
+                    nitrogenConcentrationInExtraroots) * (1 - nitrogenFixation);
         }
 
         #endregion

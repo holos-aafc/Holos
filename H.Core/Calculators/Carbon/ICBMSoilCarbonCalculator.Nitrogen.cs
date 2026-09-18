@@ -87,7 +87,10 @@ namespace H.Core.Calculators.Carbon
                 nitrogenConcentrationInTheStraw: currentYearResults.NitrogenContentInStraw,
                 nitrogenConcentrationInTheRoots: currentYearResults.NitrogenContentInRoots,
                 nitrogenConcentrationInExtraroots: currentYearResults.NitrogenContentInExtraroot,
-                nitrogenFixation: farm.Defaults.DefaultNitrogenFixation,
+                // The crop's own value, not the farm-wide default. Taking the default applied one rate to every crop
+                // on the farm, so the per-crop rates never reached this model - only the IPCC Tier 2 one, which has
+                // always read the view item.
+                nitrogenFixation: currentYearResults.NitrogenFixation,
                 carbonConcentration: farm.Defaults.CarbonConcentration);
 
             // This is the second adjustment after the crop demand has been determined
