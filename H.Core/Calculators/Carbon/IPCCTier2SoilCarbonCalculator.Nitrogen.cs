@@ -123,11 +123,15 @@ namespace H.Core.Calculators.Carbon
 
             this.CurrentYearResults.MicrobialPoolAfterOldPoolDemandAdjustment = base.MicrobePool;
 
-            // Equation 2.7.7-11
-            base.CropNitrogenDemand =
-                (this.CurrentYearResults.AboveGroundResidueDryMatter * this.CurrentYearResults.NitrogenContentInStraw +
-                 ((this.CurrentYearResults.BelowGroundResidueDryMatter / this.CurrentYearResults.Area) *
-                  this.CurrentYearResults.NitrogenContentInRoots)) * (1 - this.CurrentYearResults.NitrogenFixation);
+            // Equation 2.7.7-11. The pools are summed differently here than under ICBM - the document gives the two
+            // models different equations - but both end by crediting the crop's fixation, which is why that step is
+            // shared rather than written out again.
+            var nitrogenDemand =
+                this.CurrentYearResults.AboveGroundResidueDryMatter * this.CurrentYearResults.NitrogenContentInStraw +
+                ((this.CurrentYearResults.BelowGroundResidueDryMatter / this.CurrentYearResults.Area) *
+                 this.CurrentYearResults.NitrogenContentInRoots);
+
+            base.CropNitrogenDemand = base.ApplyNitrogenFixation(nitrogenDemand, this.CurrentYearResults.NitrogenFixation);
 
             base.AdjustPoolsAfterDemandCalculation(this.CropNitrogenDemand);
 
