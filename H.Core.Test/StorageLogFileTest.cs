@@ -7,8 +7,8 @@ namespace H.Core.Test
 {
     /// <summary>
     /// Coverage of <see cref="Storage.WriteExceptionToFile"/> against a data folder that does not exist yet, which is
-    /// the state of a machine Holos has not run on before. The method used to assume the folder was there and threw a
-    /// DirectoryNotFoundException when it was not - a second exception raised by the handler reporting the first.
+    /// the state of a machine Holos has not run on. Failing there would raise a second exception out of the handler
+    /// reporting the first, so the folder has to be created rather than assumed.
     ///
     /// Storage is redirected to a temporary folder for these. It must never run against the real one.
     /// </summary>
