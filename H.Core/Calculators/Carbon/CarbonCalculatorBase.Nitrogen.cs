@@ -285,10 +285,8 @@ namespace H.Core.Calculators.Carbon
         /// its own nitrogen demands proportionally less of it from the soil, so a crop fixing 55% asks for 45% of
         /// what it would otherwise need.
         ///
-        /// The two models sum their pools differently - the document gives them different equations - but they end
-        /// the same way, and each used to spell that ending out for itself. They disagreed: this one subtracted the
-        /// term, taking a number no greater than 1 off a demand measured in kg N ha^-1, which all but ignored a
-        /// legume's fixation and charged a crop fixing nothing 1 kg N ha^-1 it did not owe.
+        /// The two models sum their pools differently - the document gives them different equations - but both end
+        /// this way, so the term is shared rather than stated in each.
         /// </summary>
         /// <param name="nitrogenDemand">The summed pools, before any fixation is credited (kg N ha^-1).</param>
         /// <param name="nitrogenFixation">The share of the crop's nitrogen fixed from the atmosphere, as a fraction.</param>

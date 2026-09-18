@@ -65,8 +65,8 @@ namespace H.Core.Test.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// Equation 2.6.8-12. The expected value here has always been the one the equation gives; the tolerance used
-        /// to be 4, wide enough to hide that the code was subtracting the fixation term rather than multiplying by it.
+        /// Equation 2.6.8-12. The tolerance is tight enough to distinguish the fixation term scaling the demand from
+        /// it being taken off the demand.
         /// </summary>
         [TestMethod]
         public void CalculateCropNitrogenDemand()
@@ -91,8 +91,8 @@ namespace H.Core.Test.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// The fixation term scales the demand rather than being taken off it. A crop fixing 55% of its own nitrogen
-        /// asks the soil for 45% of what it would otherwise need - not 0.45 kg N ha^-1 less.
+        /// The fixation term scales the demand rather than being taken off it: a crop fixing 55% of its own nitrogen
+        /// asks the soil for 45% of what it would otherwise need, not 0.45 kg N ha^-1 less.
         /// </summary>
         [TestMethod]
         public void CalculateCropNitrogenDemandScalesByTheFixationFraction()
@@ -104,8 +104,7 @@ namespace H.Core.Test.Calculators.Nitrogen
         }
 
         /// <summary>
-        /// A crop fixing all of its own nitrogen asks the soil for none. Subtracting the term instead would leave
-        /// the whole demand standing.
+        /// A crop fixing all of its own nitrogen asks the soil for none.
         /// </summary>
         [TestMethod]
         public void CalculateCropNitrogenDemandWithCompleteFixationIsZero()
