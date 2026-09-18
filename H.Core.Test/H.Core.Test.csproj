@@ -217,6 +217,7 @@
     <None Include="Services\Animals\Baselines\Farm1.whole-farm.baseline.txt.gz" />
     <None Include="Services\Animals\Baselines\Farm2.whole-farm.baseline.txt.gz" />
     <None Include="Services\Animals\Baselines\Farm3.whole-farm.baseline.txt.gz" />
+    <None Include="Services\Animals\Baselines\Farm3-icbm.whole-farm.baseline.txt.gz" />
     <Compile Include="Services\Animals\ScaleUpServiceTest.cs" />
     <Compile Include="Services\Animals\AnimalInitializationServiceTest.cs" />
     <Compile Include="Services\Animals\ManagementPeriodServiceTest.cs" />
