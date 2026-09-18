@@ -87,7 +87,8 @@ namespace H.Core.Calculators.Carbon
                 nitrogenConcentrationInTheStraw: currentYearResults.NitrogenContentInStraw,
                 nitrogenConcentrationInTheRoots: currentYearResults.NitrogenContentInRoots,
                 nitrogenConcentrationInExtraroots: currentYearResults.NitrogenContentInExtraroot,
-                nitrogenFixation: farm.Defaults.DefaultNitrogenFixation,
+                // Fixation is a property of the crop, so it comes from the view item rather than the farm defaults.
+                nitrogenFixation: currentYearResults.NitrogenFixation,
                 carbonConcentration: farm.Defaults.CarbonConcentration);
 
             // This is the second adjustment after the crop demand has been determined

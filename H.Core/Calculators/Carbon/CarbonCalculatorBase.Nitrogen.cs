@@ -281,8 +281,24 @@ namespace H.Core.Calculators.Carbon
 
 
         /// <summary>
+        /// The closing term shared by Eq. 2.6.8-12 (ICBM) and Eq. 2.7.7-11 (IPCC Tier 2): a crop that fixes part of
+        /// its own nitrogen demands proportionally less of it from the soil, so a crop fixing 55% asks for 45% of
+        /// what it would otherwise need.
+        ///
+        /// The two models sum their pools differently - the document gives them different equations - but both end
+        /// this way, so the term is shared rather than stated in each.
+        /// </summary>
+        /// <param name="nitrogenDemand">The summed pools, before any fixation is credited (kg N ha^-1).</param>
+        /// <param name="nitrogenFixation">The share of the crop's nitrogen fixed from the atmosphere, as a fraction.</param>
+        protected double ApplyNitrogenFixation(double nitrogenDemand, double nitrogenFixation)
+        {
+            return nitrogenDemand * (1 - nitrogenFixation);
+        }
+
+        /// <summary>
         /// Equation 2.6.8-12
         /// </summary>
+        /// <param name="nitrogenFixation">The share of the crop's nitrogen fixed from the atmosphere, as a fraction.</param>
         public double CalculateCropNitrogenDemand(
             double carbonInputFromProduct,
             double carbonInputFromStraw,
@@ -296,15 +312,18 @@ namespace H.Core.Calculators.Carbon
             double nitrogenFixation,
             double carbonConcentration)
         {
-            return ((carbonInputFromProduct / carbonConcentration * (1 - moistureContentOfCropFraction)) *
-                    nitrogenConcentrationInTheProduct +
-                    (carbonInputFromStraw / carbonConcentration * (1 - moistureContentOfCropFraction)) *
-                    nitrogenConcentrationInTheStraw +
-                    (carbonInputFromRoots / carbonConcentration * (1 - moistureContentOfCropFraction)) *
-                    nitrogenConcentrationInTheRoots +
+            var nitrogenDemand =
+                   (carbonInputFromProduct / carbonConcentration * (1 - moistureContentOfCropFraction)) *
+                   nitrogenConcentrationInTheProduct +
+                   (carbonInputFromStraw / carbonConcentration * (1 - moistureContentOfCropFraction)) *
+                   nitrogenConcentrationInTheStraw +
+                   (carbonInputFromRoots / carbonConcentration * (1 - moistureContentOfCropFraction)) *
+                   nitrogenConcentrationInTheRoots +
 
-                    (carbonInputFromExtraroots / carbonConcentration * (1 - moistureContentOfCropFraction)) *
-                    nitrogenConcentrationInExtraroots) - (1 - nitrogenFixation);
+                   (carbonInputFromExtraroots / carbonConcentration * (1 - moistureContentOfCropFraction)) *
+                   nitrogenConcentrationInExtraroots;
+
+            return this.ApplyNitrogenFixation(nitrogenDemand, nitrogenFixation);
         }
 
         #endregion

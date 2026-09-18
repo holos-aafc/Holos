@@ -123,11 +123,14 @@ namespace H.Core.Calculators.Carbon
 
             this.CurrentYearResults.MicrobialPoolAfterOldPoolDemandAdjustment = base.MicrobePool;
 
-            // Equation 2.7.7-11
-            base.CropNitrogenDemand =
-                (this.CurrentYearResults.AboveGroundResidueDryMatter * this.CurrentYearResults.NitrogenContentInStraw +
-                 ((this.CurrentYearResults.BelowGroundResidueDryMatter / this.CurrentYearResults.Area) *
-                  this.CurrentYearResults.NitrogenContentInRoots)) * (1 - this.CurrentYearResults.NitrogenFixation);
+            // Equation 2.7.7-11. This model sums residue dry matter directly, where ICBM converts carbon pools by
+            // moisture and carbon concentration; both then credit the crop's fixation through the shared term.
+            var nitrogenDemand =
+                this.CurrentYearResults.AboveGroundResidueDryMatter * this.CurrentYearResults.NitrogenContentInStraw +
+                ((this.CurrentYearResults.BelowGroundResidueDryMatter / this.CurrentYearResults.Area) *
+                 this.CurrentYearResults.NitrogenContentInRoots);
+
+            base.CropNitrogenDemand = base.ApplyNitrogenFixation(nitrogenDemand, this.CurrentYearResults.NitrogenFixation);
 
             base.AdjustPoolsAfterDemandCalculation(this.CropNitrogenDemand);
 
