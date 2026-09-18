@@ -94,7 +94,6 @@ namespace H.Core.Models
         private double _denitrification;
         private double _fertilizerEfficiency;
         private double _fTopo;
-        private double _defaultNitrogenFixation;
 
         // N2O
         private double _emissionFactorForLeachingAndRunoff;
@@ -253,7 +252,6 @@ namespace H.Core.Models
             this.Denitrification = 0.5;
             this.FertilizerEfficiency = 0.5;
             this.FTopo = 14.03;
-            this.DefaultNitrogenFixation = 0.7;
 
             this.UseClimateParameterInsteadOfManagementFactor = true;
 
@@ -1056,12 +1054,6 @@ namespace H.Core.Models
         { 
             get => _defaultBiodegradableFractionGreenWaste; 
             set => SetProperty(ref _defaultBiodegradableFractionGreenWaste, value); 
-        }
-
-        public double DefaultNitrogenFixation
-        {
-            get => _defaultNitrogenFixation;
-            set => SetProperty(ref _defaultNitrogenFixation, value);
         }
 
         public TillageType RunInPeriodTillageType

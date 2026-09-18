@@ -94,6 +94,7 @@
     <Compile Include="GeographicDataProviderTest.cs" />
     <Compile Include="Integration\FieldComponentIntegrationTest.cs" />
     <Compile Include="Models\Animals\Beef\CowCalfComponentTest.cs" />
+    <Compile Include="Models\DefaultsSerializationTest.cs" />
     <Compile Include="Models\StorageTankBaseTest.cs" />
     <Compile Include="Models\Animals\Swine\FarrowToFinishViewModelTest.cs" />
     <Compile Include="Models\LandManagement\Fields\CropViewItemTest.cs" />
