@@ -1328,6 +1328,23 @@ namespace H.Core.Models.LandManagement.Fields
         }
 
         /// <summary>
+        /// The part of <see cref="NitrogenFertilizerRate"/> that was applied as organic fertilizer. That nitrogen
+        /// belongs to the organic nitrogen pool, so it is taken off the rate before the synthetic pool is loaded and
+        /// a blend is counted in one pool only.
+        ///
+        /// This is the same quantity as <see cref="GetTotalOrganicNitrogenInYear"/> expressed per hectare, without
+        /// multiplying by the field area and dividing it out again.
+        ///
+        /// (kg N ha^-1)
+        /// </summary>
+        public double GetTotalOrganicNitrogenFertilizerRateInYear()
+        {
+            return this.FertilizerApplicationViewItems
+                .Where(x => x.FertilizerBlendData.FertilizerBlend == FertilizerBlends.CustomOrganic)
+                .Sum(x => x.AmountOfNitrogenApplied);
+        }
+
+        /// <summary>
         /// This is not manure or digestate, but organic fertilizers.
         ///
         /// (kg N)
