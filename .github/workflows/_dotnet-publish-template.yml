@@ -25,10 +25,10 @@ jobs:
       id: vars
       run: echo "sha_short=`echo ${{ github.sha }} | cut -c1-8`" >> $GITHUB_OUTPUT
 
-    # Replaces the old create-release -> upload-release-asset -> publish-release chain
-    # (all three actions are archived and still run on Node 12/20). action-gh-release
-    # creates the release and attaches the asset in one step, so there is no window
-    # where a half-built draft release exists.
+    # The release is created first, the asset uploaded into it, and the draft flag
+    # cleared last - so a failed upload leaves the release behind as a draft with
+    # nothing attached. Re-running the job completes it. A draft release that outlives
+    # a run is the sign of an upload that failed rather than something in progress.
     - name: Create release and attach build
       uses: softprops/action-gh-release@v3
       with:
