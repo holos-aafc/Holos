@@ -2241,6 +2241,10 @@
   <data name="LabelSyntheticInputsBeforeAdjustment" xml:space="preserve">
     <value>Synthetic Inputs Before Adjustments (N_SN)</value>
   </data>
+  <data name="LabelOrganicNitrogenBeforeAdjustment" xml:space="preserve">
+    <value>Organic Nitrogen Before Adjustments (N_ON)</value>
+    <comment>N_ON</comment>
+  </data>
   <data name="LabelTillageFactor" xml:space="preserve">
     <value>Tillage Factor (r_c)</value>
     <comment>r_c</comment>

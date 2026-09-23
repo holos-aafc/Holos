@@ -2214,6 +2214,9 @@
   <data name="LabelSyntheticInputsBeforeAdjustment" xml:space="preserve">
     <value>Apports d’azote de synthèse avant rajustements (N_synt)</value>
   </data>
+  <data name="LabelOrganicNitrogenBeforeAdjustment" xml:space="preserve">
+    <value>Apports d’azote organique avant rajustements (N_org)</value>
+  </data>
   <data name="LabelTillageFactor" xml:space="preserve">
     <value>facteur de travail du sol (r_c)</value>
   </data>

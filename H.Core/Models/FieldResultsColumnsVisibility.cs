@@ -43,6 +43,7 @@ namespace H.Core.Models
         private bool _belowGroundResiduePool_BGredidueN;
         private bool _cropResiduesBeforeAdjustment;
         private bool _organicNitrogenResiduesBeforeAdjustment;
+        private bool _manureResiduePool_ManureN;
         private bool _cropNitrogenDemand;
         private bool _nMinFromDecompositionOfOldCarbon;
         private bool _oldPoolNitrogenRequirement;
@@ -279,6 +280,11 @@ namespace H.Core.Models
         {
             get { return _organicNitrogenResiduesBeforeAdjustment; }
             set { SetProperty(ref _organicNitrogenResiduesBeforeAdjustment, value); }
+        }
+        public bool ManureResiduePool_ManureN
+        {
+            get { return _manureResiduePool_ManureN; }
+            set { SetProperty(ref _manureResiduePool_ManureN, value); }
         }
         public bool CropNitrogenDemand
         {
