@@ -98,6 +98,7 @@
     <Compile Include="Models\StorageTankBaseTest.cs" />
     <Compile Include="Models\Animals\Swine\FarrowToFinishViewModelTest.cs" />
     <Compile Include="Models\LandManagement\Fields\CropViewItemTest.cs" />
+    <Compile Include="Models\LandManagement\Fields\CropViewItemFertilizerPoolTest.cs" />
     <Compile Include="Models\LandManagement\Fields\CropEconomicDataTest.cs" />
     <Compile Include="Models\LandManagement\Fields\DigestateApplicationViewItemTest.cs" />
     <Compile Include="Models\LandManagement\Fields\FertilizerApplicationViewItemTest.cs" />

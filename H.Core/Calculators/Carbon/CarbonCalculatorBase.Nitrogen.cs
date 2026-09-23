@@ -334,7 +334,12 @@ namespace H.Core.Calculators.Carbon
         {
             // Equation 2.6.1-1
             // Equation 2.7.1-1
-            this.SyntheticNitrogenPool += currentYearResults.NitrogenFertilizerRate;
+            //
+            // NitrogenFertilizerRate is the field's whole fertilizer rate, organic blends included. The organic part
+            // belongs to the organic nitrogen pool, which SetOrganicNitrogenPoolStartState loads, so it comes off
+            // here and each source of nitrogen is counted in one pool only.
+            this.SyntheticNitrogenPool += currentYearResults.NitrogenFertilizerRate -
+                                          currentYearResults.GetTotalOrganicNitrogenFertilizerRateInYear();
 
             // Equation 2.6.1-2
             // Equation 2.7.1-2
