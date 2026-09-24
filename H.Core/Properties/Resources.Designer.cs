@@ -12690,6 +12690,15 @@ namespace H.Core.Properties {
                 return ResourceManager.GetString("LabelSyntheticInputsBeforeAdjustment", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Organic Nitrogen Before Adjustments (N_ON).
+        /// </summary>
+        public static string LabelOrganicNitrogenBeforeAdjustment {
+            get {
+                return ResourceManager.GetString("LabelOrganicNitrogenBeforeAdjustment", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Temperature effect.
