@@ -77,7 +77,7 @@ namespace H.Core.Test.Services.LandManagement
             var path = _folder + Path.DirectorySeparatorChar;
 
             var exported = _resultsService.ExportResultsToFile(
-                results: new List<CropViewItem>() {new CropViewItem() {Year = 2026, CropType = CropType.Barley, Area = 1, CropEnergyResults = new CropEnergyResults()}},
+                results: new List<CropViewItem>() {BuildViewItem()},
                 path: path,
                 cultureInfo: CultureInfo.InvariantCulture,
                 measurementSystemType: MeasurementSystemType.Metric,
@@ -104,9 +104,86 @@ namespace H.Core.Test.Services.LandManagement
                 "added to the heading row or the data row without the other");
         }
 
+        /// <summary>
+        /// A count check alone would still pass if the column carried some other property, so this reads the value
+        /// back from under its own heading.
+        /// </summary>
+        [TestMethod]
+        public void TheOrganicNitrogenColumnCarriesTheOrganicNitrogenPool()
+        {
+            var viewItem = BuildViewItem();
+            viewItem.OrganicNitrogenResiduesBeforeAdjustment = 46.25;
+
+            var path = _folder + Path.DirectorySeparatorChar;
+
+            _resultsService.ExportResultsToFile(
+                results: new List<CropViewItem>() {viewItem},
+                path: path,
+                cultureInfo: CultureInfo.InvariantCulture,
+                measurementSystemType: MeasurementSystemType.Metric,
+                languageAddOn: string.Empty,
+                exportedFromGui: false,
+                farm: new Farm());
+
+            var lines = File.ReadAllLines(Directory.GetFiles(_folder, "*.csv").Single())
+                .Where(x => string.IsNullOrWhiteSpace(x) == false)
+                .ToList();
+
+            var column = Fields(lines[1])
+                .FindIndex(x => x.Contains(H.Core.Properties.Resources.LabelOrganicNitrogenBeforeAdjustment));
+
+            Assert.AreNotEqual(-1, column, "the organic nitrogen heading is not in the export");
+
+            var exported = Fields(lines[2])[column].Trim('"', ' ');
+
+            Assert.AreEqual(46.25, double.Parse(exported, CultureInfo.InvariantCulture), 0.0001,
+                "the value under the organic nitrogen heading is not the organic nitrogen pool");
+        }
+
         #endregion
 
         #region Private Methods
+
+        private static CropViewItem BuildViewItem()
+        {
+            return new CropViewItem()
+            {
+                Year = 2026,
+                CropType = CropType.Barley,
+                Area = 1,
+                CropEnergyResults = new CropEnergyResults(),
+            };
+        }
+
+        /// <summary>
+        /// Splits a line on its commas, ignoring commas inside a quoted value.
+        /// </summary>
+        private static List<string> Fields(string line)
+        {
+            var fields = new List<string>();
+            var current = string.Empty;
+            var inQuotes = false;
+
+            foreach (var character in line)
+            {
+                if (character == '"')
+                {
+                    inQuotes = inQuotes == false;
+                }
+                else if (character == ',' && inQuotes == false)
+                {
+                    fields.Add(current);
+                    current = string.Empty;
+                    continue;
+                }
+
+                current += character;
+            }
+
+            fields.Add(current);
+
+            return fields;
+        }
 
         /// <summary>
         /// Counts comma separated fields, ignoring commas inside a quoted value.
