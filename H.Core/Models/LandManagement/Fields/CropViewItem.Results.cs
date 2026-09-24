@@ -157,7 +157,7 @@ namespace H.Core.Models.LandManagement.Fields
         /// </summary>
         public double MicrobeNitrogenPool_N_microbeN { get; set; }
         /// <summary>
-        /// kg N
+        /// kg N ha^-1
         /// </summary>
         public double N_min_FromDecompositionOfOldCarbon { get; set; }
         public double MineralizedNitrogenPool_N_min { get; set; }

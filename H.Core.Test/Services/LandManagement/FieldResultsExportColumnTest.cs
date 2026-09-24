@@ -9,6 +9,7 @@ using H.Core.Models;
 using H.Core.Emissions.Results;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Services.Animals;
+using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.Services.LandManagement;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -138,6 +139,35 @@ namespace H.Core.Test.Services.LandManagement
 
             Assert.AreEqual(46.25, double.Parse(exported, CultureInfo.InvariantCulture), 0.0001,
                 "the value under the organic nitrogen heading is not the organic nitrogen pool");
+        }
+
+        /// <summary>
+        /// The unit a column is exported with only changes the number on one path: an imperial export that did not
+        /// come from the interface, which is the command line. Metric ignores the unit, and an imperial export from
+        /// the interface arrives already converted, so neither of the tests above can tell an areal unit from a total
+        /// one.
+        ///
+        /// End to end coverage of that path is not possible yet - building an imperial heading throws, because
+        /// KilogramsPerHectareCropWetWeight on the yield column is unknown to the units calculator. Until that is
+        /// fixed this pins the distinction the export relies on: the two units do not convert alike, so naming the
+        /// wrong one changes the number.
+        /// </summary>
+        [TestMethod]
+        public void TheArealAndTotalNitrogenUnitsDoNotConvertAlike()
+        {
+            var calculator = new UnitsOfMeasurementCalculator();
+
+            var asTotal = calculator.GetUnitsOfMeasurementValue(
+                MeasurementSystemType.Imperial, MetricUnitsOfMeasurement.KilogramsNitrogen, 100, false);
+
+            var asAreal = calculator.GetUnitsOfMeasurementValue(
+                MeasurementSystemType.Imperial, MetricUnitsOfMeasurement.KilogramsNitrogenPerHectare, 100, false);
+
+            Assert.AreNotEqual(asTotal, asAreal,
+                "an areal pool exported with the total unit would convert to the same number, and the fix would be untestable");
+
+            // Pounds per acre divides by the hectares to acres factor; pounds alone does not.
+            Assert.AreEqual(asTotal / 2.4711, asAreal, 0.01);
         }
 
         #endregion
