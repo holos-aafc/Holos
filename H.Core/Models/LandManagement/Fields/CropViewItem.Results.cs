@@ -146,6 +146,9 @@ namespace H.Core.Models.LandManagement.Fields
         /// </summary>
         public double MineralNitrogenPool_N_mineralN { get; set; }
 
+        /// <summary>
+        /// kg N ha^-1
+        /// </summary>
         public double ManureResiduePool_ManureN { get; set; }
 
         public double CropResidueNitrogenPool_N_CropResidues { get; set; }
@@ -379,12 +382,12 @@ namespace H.Core.Models.LandManagement.Fields
         public double BelowGroundResidueNitrogenForCrop { get; set; }
 
         /// <summary>
-        /// kg N
+        /// kg N ha^-1
         /// </summary>
         public double OldPoolNitrogenRequirement { get; set; }
 
         /// <summary>
-        /// kg ha^-1
+        /// kg N ha^-1
         /// </summary>
         public double CropNitrogenDemand { get; set; }
 
@@ -402,6 +405,8 @@ namespace H.Core.Models.LandManagement.Fields
 
         /// <summary>
         /// Sum total of all emission types for the field (N2O-N, NO-N, NO3-N, and NH4-N)
+        ///
+        /// kg N ha^-1
         /// </summary>
         public double TotalNitrogenEmissions { get; set; }
 
@@ -441,9 +446,13 @@ namespace H.Core.Models.LandManagement.Fields
         /// </summary>
         public double OrganicNitrogenResiduesBeforeAdjustment { get; set; }
         /// <summary>
-        /// kg N
+        /// kg N ha^-1
         /// </summary>
         public double TotalUptake { get; set; }
+
+        /// <summary>
+        /// kg N ha^-1
+        /// </summary>
         public double Overflow { get; set; }
 
         /// <summary>
