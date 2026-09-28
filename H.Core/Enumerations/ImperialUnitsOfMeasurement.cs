@@ -243,5 +243,12 @@ namespace H.Core.Enumerations
 
         [LocalizedDescription("PoundsN2ONPerField", typeof(Resources))]
         PoundsN2ONPerField,
+
+        /// <summary>
+        /// The imperial counterpart of KilogramsPerHectareCropWetWeight. Crop yield is reported in bushels per acre,
+        /// crop by crop, so the unit is bushels and not pounds.
+        /// </summary>
+        [LocalizedDescription("BushelsPerAcreCropWetWeight", typeof(Resources))]
+        BushelsPerAcreCropWetWeight,
     }
 }

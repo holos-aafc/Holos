@@ -7830,6 +7830,15 @@ namespace H.Core.Properties {
                 return ResourceManager.GetString("KilogramsPerHectareCropWetWeight", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to bu ac^-1 (wet wt).
+        /// </summary>
+        public static string BushelsPerAcreCropWetWeight {
+            get {
+                return ResourceManager.GetString("BushelsPerAcreCropWetWeight", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to kg (kg protein intake)^-1.

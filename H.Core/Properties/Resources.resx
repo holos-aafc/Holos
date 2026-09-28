@@ -6554,6 +6554,9 @@ Please note: emissions related to the deposition or application of livestock man
   <data name="KilogramsPerHectareCropWetWeight" xml:space="preserve">
     <value>kg ha^-1 (wet wt)</value>
   </data>
+  <data name="BushelsPerAcreCropWetWeight" xml:space="preserve">
+    <value>bu ac^-1 (wet wt)</value>
+  </data>
   <data name="EnumTotalNitrogen" xml:space="preserve">
     <value>Total nitrogen</value>
   </data>
