@@ -156,7 +156,7 @@ Our first field on the farm will grow continuous wheat with a cover crop of hair
 
 1. Rename the field to “**Wheat & Hairy Vetch**” in the **Step 1** section of the screen. Change the area of the field to **"18 ha"**.
 
-2. Leave the start and end years as **"1985"** and **"2025"**, respectively.
+2. Leave the start and end years as **"1985"** and **"2026"**, respectively.
 
 3. Select "**Wheat**" as the main crop and "**Hairy Vetch**" as the cover crop in **Step 2**.
 
