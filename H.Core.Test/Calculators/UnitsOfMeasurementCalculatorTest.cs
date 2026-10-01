@@ -550,32 +550,39 @@ namespace H.Core.Test.Calculators
         /// <summary>
         /// A crop with a bushel weight has to have it in both directions. Reading a yield in bushels per acre and
         /// reporting one are the same lookup, so a crop handled by one converter and not the other reads a value in
-        /// and then reports it as zero.
+        /// and then reports it as zero, or the reverse.
+        ///
+        /// Neither direction is treated as the reference, so adding a crop to either converter alone fails this.
         /// </summary>
         [TestMethod]
         public void EveryCropWithABushelWeightConvertsInBothDirections()
         {
-            var missing = new List<CropType>();
+            var readableOnly = new List<CropType>();
+            var reportableOnly = new List<CropType>();
 
             foreach (CropType crop in Enum.GetValues(typeof(CropType)))
             {
-                // A crop the reverse converter knows returns a non zero value; one it does not falls to its default.
-                var readIn = _calculator.ConvertBushelsPerAcreToMetricKilogramsPerHectareBasedOnCropType(crop, 1);
+                // A crop a converter knows returns a non zero value; one it does not falls to that converter's default.
+                var canBeRead = _calculator.ConvertBushelsPerAcreToMetricKilogramsPerHectareBasedOnCropType(crop, 1) != 0;
+                var canBeReported = _calculator.ConvertKilogramsPerHectareToImperialBushelPerAcresBasedOnCropType(crop, 1) != 0;
 
-                if (readIn == 0)
+                if (canBeRead && canBeReported == false)
                 {
-                    continue;
+                    readableOnly.Add(crop);
                 }
-
-                if (_calculator.ConvertKilogramsPerHectareToImperialBushelPerAcresBasedOnCropType(crop, 1) == 0)
+                else if (canBeReported && canBeRead == false)
                 {
-                    missing.Add(crop);
+                    reportableOnly.Add(crop);
                 }
             }
 
-            Assert.AreEqual(0, missing.Count,
-                $"{missing.Count} crop types have a bushel weight when a yield is read in but not when one is " +
-                $"reported, so an imperial export writes zero for them: {string.Join(", ", missing)}");
+            Assert.AreEqual(0, readableOnly.Count,
+                $"{readableOnly.Count} crop types have a bushel weight when a yield is read in but not when one is " +
+                $"reported, so an imperial export writes zero for them: {string.Join(", ", readableOnly)}");
+
+            Assert.AreEqual(0, reportableOnly.Count,
+                $"{reportableOnly.Count} crop types have a bushel weight when a yield is reported but not when one is " +
+                $"read in, so a yield entered in bushels per acre reads as zero: {string.Join(", ", reportableOnly)}");
         }
 
         /// <summary>
