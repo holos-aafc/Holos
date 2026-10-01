@@ -6179,7 +6179,10 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
     <value>kg NH3-N ha-1</value>
   </data>
   <data name="KilogramsPerHectareCropWetWeight" xml:space="preserve">
-    <value />
+    <value>kg ha^-1 (poids humide)</value>
+  </data>
+  <data name="BushelsPerAcreCropWetWeight" xml:space="preserve">
+    <value>boiss. a^-1 (poids humide)</value>
   </data>
   <data name="EnumTotalNitrogen" xml:space="preserve">
     <value />

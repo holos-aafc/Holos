@@ -1058,6 +1058,15 @@ namespace H.Core.Calculators.UnitsOfMeasurement
                 case MetricUnitsOfMeasurement.AmmoniaPerCubicMeterPerDay:
                     return ImperialUnitsOfMeasurement.AmmoniaPerCubicYardPerDay;
 
+                case MetricUnitsOfMeasurement.KilogramsN2OPerHectare:
+                    return ImperialUnitsOfMeasurement.PoundsN2OPerAcre;
+
+                case MetricUnitsOfMeasurement.KilogramsN2ONPerField:
+                    return ImperialUnitsOfMeasurement.PoundsN2ONPerField;
+
+                case MetricUnitsOfMeasurement.KilogramsPerHectareCropWetWeight:
+                    return ImperialUnitsOfMeasurement.BushelsPerAcreCropWetWeight;
+
                 default:
                     throw new Exception($"{unitsOfMeasurement} is an Invalid Unit Of Measurement");
             }
@@ -1099,6 +1108,9 @@ namespace H.Core.Calculators.UnitsOfMeasurement
 
                 case ImperialUnitsOfMeasurement.BushelsPerAcre:
                     return MetricUnitsOfMeasurement.KilogramsPerHectareCrop;
+
+                case ImperialUnitsOfMeasurement.BushelsPerAcreCropWetWeight:
+                    return MetricUnitsOfMeasurement.KilogramsPerHectareCropWetWeight;
 
                 case ImperialUnitsOfMeasurement.PoundsPerAcre:
                     return MetricUnitsOfMeasurement.KilogramsPerHectare;
