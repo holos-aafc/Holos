@@ -286,21 +286,42 @@ namespace H.Core.Calculators.UnitsOfMeasurement
             }
         }
 
+        /// <summary>
+        /// The crops grouped onto one bushel weight here are the same groups
+        /// <see cref="ConvertBushelsPerAcreToMetricKilogramsPerHectareBasedOnCropType"/> uses, so a yield converted
+        /// to bushels per acre and back returns the value it started with.
+        /// </summary>
         public double ConvertKilogramsPerHectareToImperialBushelPerAcresBasedOnCropType(CropType crop, double value)
         {
             switch (crop)
             {
                 case CropType.Barley:
+                case CropType.FeedBarley:
+                case CropType.MaltBarley:
                     return value * KgToLbsFactor / (HectaresToAcresFactor * BarleyBushelToPoundsFactor);
                 case CropType.Canola:
+                case CropType.Camelina:
+                case CropType.PolishCanola:
+                case CropType.ArgentineHTCanola:
                     return value * KgToLbsFactor / (HectaresToAcresFactor * CanolaBushelToPoundsFactor);
                 case CropType.Chickpeas:
+                case CropType.Peas:
+                case CropType.FieldPeas:
+                case CropType.RedLentils:
+                case CropType.DesiChickpeas:
+                case CropType.KabuliChickpea:
+                case CropType.EdibleGreenPeas:
+                case CropType.EdibleYellowPeas:
+                case CropType.LargeGreenLentils:
+                case CropType.SmallKabuliChickpea:
+                case CropType.LargeKabuliChickpea:
                     return value * KgToLbsFactor / (HectaresToAcresFactor * ChickPeasBushelToPoundsFactor);
                 case CropType.Corn:
                     return value * KgToLbsFactor / (HectaresToAcresFactor * CornBushelToPoundsFactor);
                 case CropType.DryPeas:
                     return value * KgToLbsFactor / (HectaresToAcresFactor * DryPeasBushelToPoundsFactor);
                 case CropType.Flax:
+                case CropType.FlaxSeed:
                     return value * KgToLbsFactor / (HectaresToAcresFactor * FlaxBushelToPoundsFactor);
                 case CropType.FodderCorn:
                     return value * KgToLbsFactor / (HectaresToAcresFactor * FodderCornBushelToPoundsFactor);
@@ -317,12 +338,20 @@ namespace H.Core.Calculators.UnitsOfMeasurement
                 case CropType.Lentils:
                     return value * KgToLbsFactor / (HectaresToAcresFactor * LentilsBushelToPoundsFactor);
                 case CropType.Mustard:
+                case CropType.BrownMustard:
+                case CropType.YellowMustard:
+                case CropType.OrientalMustard:
                     return value * KgToLbsFactor / (HectaresToAcresFactor * MustardBushelToPoundsFactor);
                 case CropType.Oats:
+                case CropType.MillingOats:
                     return value * KgToLbsFactor / (HectaresToAcresFactor * OatsBushelToPoundsFactor);
                 case CropType.Soybeans:
+                case CropType.DryBean:
+                case CropType.BeansPinto:
+                case CropType.BeansWhite:
                     return value * KgToLbsFactor / (HectaresToAcresFactor * SoyBeansBushelToPoundsFactor);
                 case CropType.Triticale:
+                case CropType.HybridFallRye:
                     return value * KgToLbsFactor / (HectaresToAcresFactor * TriticaleBushelToPoundsFactor);
                 case CropType.UndersownBarley:
                     return value * KgToLbsFactor / (HectaresToAcresFactor * UnderSownBarleyBushelToPoundsFactor);
@@ -331,8 +360,22 @@ namespace H.Core.Calculators.UnitsOfMeasurement
                 case CropType.WheatBolinder:
                     return value * KgToLbsFactor / (HectaresToAcresFactor * WheatBolinderBushelToPoundsFactor);
                 case CropType.Wheat:
+                case CropType.Durum:
+                case CropType.CPSWheat:
+                case CropType.SoftWheat:
+                case CropType.SpringWheat:
+                case CropType.WinterWheat:
+                case CropType.WheatOtherSpring:
+                case CropType.WheatHardRedSpring:
+                case CropType.HardRedSpringWheat:
+                case CropType.WheatPrairieSpring:
+                case CropType.WheatNorthernHardRed:
                     return value * KgToLbsFactor / (HectaresToAcresFactor * WheatBushelToPoundsFactor);
                 default:
+                    // No bushel weight is defined for this crop, so there is no bushels per acre value to report.
+                    Trace.TraceError($"{nameof(UnitsOfMeasurementCalculator)}.{nameof(ConvertKilogramsPerHectareToImperialBushelPerAcresBasedOnCropType)}:" +
+                                     $" no bushel weight for {crop}, reporting a yield of zero.");
+
                     return 0;
             }
         }
