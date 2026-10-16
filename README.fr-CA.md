@@ -19,6 +19,14 @@ Voir <a href="https://github.com/holos-aafc/Holos/blob/main/CONTRIBUTING.fr-CA.m
 
 Pour voir les réponses aux questions les plus fréquemment posées sur Holos (à la fois le logiciel et le modèle), visitez le <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/FAQ/FAQ_French.md" target="_blank">FAQ ici.</a>
 
+# Document sur l'algorithme (version imprimable)
+
+Une version imprimable du document sur l'algorithme Holos (version 4.0) est mise à disposition.
+
+Le document sur l'algorithme Holos (version 4.0) est accessible via le lien suivant:
+
+<a href="https://github.com/holos-aafc/Holos/raw/913bc8ca6f690f10716c6143921cfee39000b694/Pogue%20et%20al%202026_Printversion_Holos_V4.0_Algorithm_Document_FRENCH_FINAL.pdf" target="_blank">Pogue et al 2026_Printversion_Holos_V4.0_Algorithm_Document_FRENCH_FINAL.pdf</a>
+
 # Guide de formation
 
 Il existe un <a href="https://github.com/holos-aafc/Holos/blob/main/H.Content/Documentation/Training/Holos_4_Training_Guide-fr.md" target="_blank">guide de formation Holos 4</a> pour l'interface utilisateur graphique (GUI) disponible. Ce guide peut être utilisé comme un didacticiel étape par étape sur la façon de configurer une batterie de serveurs et de calculer les émissions dans l'interface graphique.
