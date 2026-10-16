@@ -24,7 +24,7 @@ A print version of the Holos version 4.0 algorithm document is being made availa
 
 The Holos version 4.0 algorithm document can be found at the following link:
 
-<a href="https://github.com/holos-aafc/Holos/raw/refs/heads/main/Pogue%20et%20al%202025_Printversion_Holos_V4.0_Algorithm_Document%201.docx" target="_blank">Pogue et al 2025_Printversion_Holos_V4.0_Algorithm_Document.docx</a>
+<a href="https://github.com/holos-aafc/Holos/raw/913bc8ca6f690f10716c6143921cfee39000b694/Pogue%20et%20al%202026_Printversion_Holos_V4.0_Algorithm_Document_ENGLISH_FINAL.pdf" target="_blank">Pogue et al 2026_Printversion_Holos_V4.0_Algorithm_Document_ENGLISH_FINAL.pdf</a>
 
 # Training Guide
 
