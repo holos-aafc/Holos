@@ -2615,6 +2615,136 @@ namespace H.Core.Test.Services
         }
 
         /// <summary>
+        /// A hayed perennial's yield is its harvested dry matter scaled up by the standing crop's moisture, and the
+        /// moisture on the row is replaced with the hay's once the yield has been derived from it. Repeating the
+        /// derivation on the row as it stands therefore scales by the wrong number, which would change the yield of a
+        /// row nobody had overridden.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsLeavesAHayedPerennialYieldThatWasNotOverridden()
+        {
+            var farm = BuildFarmWithHayedPerennial(out var viewItem);
+
+            var yieldAfterTheScreenWasBuilt = viewItem.Yield;
+            var moistureAfterTheScreenWasBuilt = viewItem.MoistureContentOfCrop;
+
+            Assert.IsTrue(yieldAfterTheScreenWasBuilt > 0, "this test needs a yield derived from the harvest");
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.AreEqual(yieldAfterTheScreenWasBuilt, viewItem.Yield, 0.0001,
+                "the reset changed a hayed perennial's yield on a row with no override");
+            Assert.AreEqual(moistureAfterTheScreenWasBuilt, viewItem.MoistureContentOfCrop, 0.0001,
+                "the row was left showing the standing crop's moisture rather than the hay's, as a rebuilt screen would show");
+        }
+
+        /// <summary>
+        /// The same row once the user has overridden it: the reset has to land back on the yield the harvest gives,
+        /// which is only reachable with the moisture the derivation originally read.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsPutsAHayedPerennialYieldBackToTheHarvestDerivedValue()
+        {
+            var farm = BuildFarmWithHayedPerennial(out var viewItem);
+
+            var yieldAfterTheScreenWasBuilt = viewItem.Yield;
+
+            viewItem.Yield = 4242;
+            viewItem.DoNotRecalculateYield = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.AreEqual(yieldAfterTheScreenWasBuilt, viewItem.Yield, 0.0001,
+                "the reset did not put the hayed perennial's yield back to what the harvest gives");
+        }
+
+        /// <summary>
+        /// A row whose source crop cannot be found - a stage state saved before a secondary crop's row recorded a
+        /// resolvable one, or a rotation the user has since changed - has nothing to be put back to. Clearing its flag
+        /// would leave the user's number in the calculation with nothing marking it as theirs, which is the state the
+        /// reset exists to prevent, so the override stands.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsKeepsAnOverrideItCannotPutBack()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(
+                out var viewItem,
+                yieldAssignmentMethod: YieldAssignmentMethod.Custom,
+                yieldOnComponentSelectionScreenCrops: 3000);
+
+            // The row can no longer say which crop it came from.
+            viewItem.DetailViewItemToComponentSelectionViewItemMap = Guid.NewGuid();
+
+            viewItem.Yield = 4242;
+            viewItem.DoNotRecalculateYield = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.IsTrue(viewItem.DoNotRecalculateYield,
+                "the override was cleared on a row the reset had nothing to put back, so the typed value is now indistinguishable from a calculated one");
+            Assert.AreEqual(4242, viewItem.Yield, 0.0001, "the value and its marking have to agree either way");
+        }
+
+        /// <summary>
+        /// A perennial field cut for hay, built through the same path the details screen uses so that the moisture the
+        /// yield was derived from has already been replaced by the hay's by the time the reset runs.
+        /// </summary>
+        private Farm BuildFarmWithHayedPerennial(out CropViewItem viewItem)
+        {
+            var fieldSystemComponent = new FieldSystemComponent()
+            {
+                StartYear = 2016,
+                EndYear = 2016,
+                BeginOrderingAtStartYearOfRotation = true,
+            };
+
+            var crop = new CropViewItem()
+            {
+                CropType = CropType.TameGrass,
+                Year = 2016,
+                Area = 1,
+                Yield = 1200,
+                MoistureContentOfCrop = 0.8,
+            };
+
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+            {
+                Start = new DateTime(2016, 8, 1),
+                ForageActivity = ForageActivities.Hayed,
+                TotalNumberOfBalesHarvested = 10,
+                BaleWeight = 100,
+                MoistureContentAsPercentage = 15,
+                HarvestLossPercentage = 10,
+            });
+
+            fieldSystemComponent.CropViewItems.Add(crop);
+
+            var farm = new Farm()
+            {
+                YieldAssignmentMethod = YieldAssignmentMethod.Custom,
+                Defaults = new Defaults()
+                {
+                    CarbonModellingStrategy = CarbonModellingStrategies.ICBM,
+                },
+                GeographicData = new GeographicData()
+                {
+                    DefaultSoilData = new SoilData(),
+                },
+            };
+
+            farm.Components.Add(fieldSystemComponent);
+
+            // The whole build, so PostProcessPerennials runs and replaces the crop moisture with the hay's.
+            _resultsService.CreateDetailViewItems(farm);
+
+            var stageState = _resultsService.GetStageState(farm);
+
+            viewItem = stageState.DetailsScreenViewCropViewItems.Single(x => x.Year == 2016);
+
+            return farm;
+        }
+
+        /// <summary>
         /// A farm whose details screen has been built, so the reset has the items the grid binds to rather than the
         /// field's own crop view items.
         /// </summary>

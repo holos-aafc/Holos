@@ -224,11 +224,37 @@ namespace H.Core.Services.LandManagement
                     var managementPeriod = grouping.Key;
                     var viewItems = grouping.ToList();
 
+                    var moistureToPutBack = new List<KeyValuePair<CropViewItem, double>>();
+
                     foreach (var viewItem in viewItems)
                     {
+                        var componentSelectionScreenCrop = GetComponentSelectionScreenCropForItem(managementPeriod, viewItem);
+                        if (componentSelectionScreenCrop == null)
+                        {
+                            // There is nothing to put this row back to - the crop it was created from is gone, or the
+                            // row was built before a secondary crop's row recorded a resolvable one. Its override is
+                            // left standing: clearing the flag would leave the user's number in the calculation with
+                            // nothing saying it was theirs, which is the state this method exists to prevent. The row
+                            // becomes resettable again once the screen is rebuilt.
+                            continue;
+                        }
+
                         // Restored before the flags are cleared, since which inputs are put back depends on which
                         // ones the user had frozen.
-                        RestoreOverridableInputsFromComponentSelectionScreen(managementPeriod, viewItem);
+                        RestoreOverridableInputs(componentSelectionScreenCrop, viewItem);
+
+                        // A hayed row's yield is its harvested dry matter scaled up by the standing crop's moisture,
+                        // and the moisture the row carries afterwards is the hay's - PostProcessPerennials assigns it
+                        // once the yield has been derived. Repeating the derivation against the row as it stands would
+                        // scale by the hay's moisture and change the yield of a row nobody overrode, so the entered
+                        // moisture is borrowed for the derivation and the row is put back to what it was showing. The
+                        // moisture is not one of the inputs being reset, so it has to end where it started.
+                        if (YieldInputPolicy.HasHayedHarvest(viewItem))
+                        {
+                            moistureToPutBack.Add(new KeyValuePair<CropViewItem, double>(viewItem, viewItem.MoistureContentOfCrop));
+
+                            viewItem.MoistureContentOfCrop = componentSelectionScreenCrop.MoistureContentOfCrop;
+                        }
 
                         viewItem.DoNotRecalculateYield = false;
                         viewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct = false;
@@ -253,6 +279,11 @@ namespace H.Core.Services.LandManagement
                     // line is the only caller that reprocesses them later. Without this the results would combine
                     // restored carbon with the nitrogen derived from the discarded values.
                     this.AssignNitrogenInputs(viewItems: viewItems, farm: farm);
+
+                    foreach (var borrowed in moistureToPutBack)
+                    {
+                        borrowed.Key.MoistureContentOfCrop = borrowed.Value;
+                    }
                 }
             }
         }
@@ -313,16 +344,10 @@ namespace H.Core.Services.LandManagement
         /// years, so a discarded override left in place on a later row would be read as though it had been calculated
         /// before that row's turn to be recalculated came.
         /// </summary>
-        private static void RestoreOverridableInputsFromComponentSelectionScreen(
-            FieldSystemComponent managementPeriod,
+        private static void RestoreOverridableInputs(
+            CropViewItem componentSelectionScreenCrop,
             CropViewItem viewItem)
         {
-            var componentSelectionScreenCrop = GetComponentSelectionScreenCropForItem(managementPeriod, viewItem);
-            if (componentSelectionScreenCrop == null)
-            {
-                return;
-            }
-
             if (viewItem.DoNotRecalculateYield)
             {
                 viewItem.Yield = componentSelectionScreenCrop.Yield;
