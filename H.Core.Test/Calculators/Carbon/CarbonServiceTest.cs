@@ -3,6 +3,7 @@ using H.Core.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using H.Core.Calculators.Carbon;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using System.Collections.Generic;
 
@@ -254,6 +255,45 @@ namespace H.Core.Test.Calculators.Carbon
             farm.Components.Add(field);
 
             return farm;
+        }
+
+        /// <summary>
+        /// The call the details screen makes when the user edits a yield. The view model reacts to the property change
+        /// by reassigning inputs on the same stack, so this is the path a user's override has to survive - the field
+        /// details screen freezes the value before changing it precisely so the flag is already set by the time this
+        /// runs.
+        /// </summary>
+        [TestMethod]
+        public void AssignInputsAndLossesKeepsAnOverriddenYieldOnAGrazedYear()
+        {
+            var field = new FieldSystemComponent();
+            var viewItem = new CropViewItem()
+            {
+                CropType = CropType.RangelandNative,
+                Year = 2022,
+                FieldSystemComponentGuid = field.Guid,
+                Area = 1,
+                MoistureContentOfCrop = 0,
+                TotalCarbonLossesByGrazingAnimals = 1667,
+                Yield = 4242,
+                DoNotRecalculateYield = true,
+            };
+
+            viewItem.GrazingViewItems.Add(new GrazingViewItem()
+                {Start = new DateTime(2022, 6, 1), MoistureContentAsPercentage = 0});
+
+            field.CropViewItems.Add(viewItem);
+
+            var farm = new Farm();
+            farm.Components.Add(field);
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData;
+            farm.Defaults.CarbonConcentration = 0.45;
+
+            new CarbonService().AssignInputsAndLosses(
+                null, viewItem, null, farm, new List<AnimalComponentEmissionsResults>());
+
+            Assert.AreEqual(4242, viewItem.Yield, 0.0001,
+                "the yield the user typed was recalculated away on the path the details screen uses");
         }
 
         #endregion
