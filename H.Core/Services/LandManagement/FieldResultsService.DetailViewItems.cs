@@ -190,7 +190,13 @@ namespace H.Core.Services.LandManagement
         /// free to change at the next recalculation.
         ///
         /// Rebuilding the stage state would also do it, and would throw away every other input on the screen along
-        /// with the overrides. Only the derivation is repeated here.
+        /// with the overrides, so each row is restored in place instead: back to the crop it was created from on the
+        /// component selection screen, which is the state a rebuild would start from, and then derived again.
+        ///
+        /// Restoring before deriving is what makes this complete. The derivation does not reach every row - it leaves
+        /// a Custom field's yields alone, and only perennials have a percentage returned to soil derived for them - so
+        /// deriving alone would leave those rows holding the number the user typed with the flag that protected it now
+        /// cleared, which is the state this method exists to get out of.
         /// </summary>
         public void ResetOverriddenInputs(Farm farm)
         {
@@ -200,39 +206,101 @@ namespace H.Core.Services.LandManagement
                 return;
             }
 
-            var itemsByField = stageState.DetailsScreenViewCropViewItems
-                .GroupBy(viewItem => viewItem.FieldSystemComponentGuid);
-
-            foreach (var grouping in itemsByField)
+            foreach (var fieldSystemComponent in farm.FieldSystemComponents)
             {
-                var fieldSystemComponent = farm.GetFieldSystemComponent(grouping.Key);
-                if (fieldSystemComponent == null)
+                var managementPeriods = GetManagementPeriods(fieldSystemComponent);
+
+                // A field's rows all carry the current period's guid - AssignInitialProperties assigns it so the
+                // results screen can group a field's rows together - so the period a row belongs to has to be resolved
+                // from the crop it was created from. Each period has its own rotation and the yield a row gets can
+                // depend on it (an Average yield is the mean of its own period's crops), so the periods are derived
+                // separately here, as they are when the screen is first built.
+                var itemsByPeriod = stageState.DetailsScreenViewCropViewItems
+                    .Where(viewItem => viewItem.FieldSystemComponentGuid == fieldSystemComponent.Guid)
+                    .GroupBy(viewItem => GetManagementPeriodForItem(managementPeriods, viewItem) ?? fieldSystemComponent);
+
+                foreach (var grouping in itemsByPeriod)
                 {
-                    continue;
+                    var managementPeriod = grouping.Key;
+                    var viewItems = grouping.ToList();
+
+                    foreach (var viewItem in viewItems)
+                    {
+                        viewItem.DoNotRecalculateYield = false;
+                        viewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct = false;
+                        viewItem.DoNotRecalculatePercentageReturnedToSoil = false;
+
+                        RestoreOverridableInputsFromComponentSelectionScreen(managementPeriod, viewItem);
+                    }
+
+                    // The same order the items were derived in when the screen was first built. Each step reads what
+                    // the one before it wrote, and each already honours the flags, which are now clear.
+                    _initializationService.InitializeYieldForAllYears(
+                        cropViewItems: viewItems,
+                        farm: farm,
+                        fieldSystemComponent: managementPeriod);
+
+                    this.UpdateYieldFromHarvest(viewItems);
+
+                    this.UpdatePercentageReturnsForPerennials(viewItems: viewItems);
+
+                    this.AssignCarbonInputs(viewItems: viewItems, farm: farm);
                 }
-
-                var viewItems = grouping.ToList();
-
-                foreach (var viewItem in viewItems)
-                {
-                    viewItem.DoNotRecalculateYield = false;
-                    viewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct = false;
-                    viewItem.DoNotRecalculatePercentageReturnedToSoil = false;
-                }
-
-                // The same order the items were derived in when the screen was first built. Each step reads what the
-                // one before it wrote, and each already honours the flags, which are now clear.
-                _initializationService.InitializeYieldForAllYears(
-                    cropViewItems: viewItems,
-                    farm: farm,
-                    fieldSystemComponent: fieldSystemComponent);
-
-                this.UpdateYieldFromHarvest(viewItems);
-
-                this.UpdatePercentageReturnsForPerennials(viewItems: viewItems);
-
-                this.AssignCarbonInputs(viewItems: viewItems, farm: farm);
             }
+        }
+
+        /// <summary>
+        /// A field's management periods, oldest first: its historical period(s), the current one, then its projected
+        /// period(s). The same order CreateDetailViewItems builds them in.
+        /// </summary>
+        private static List<FieldSystemComponent> GetManagementPeriods(FieldSystemComponent fieldSystemComponent)
+        {
+            var result = new List<FieldSystemComponent>();
+
+            result.AddRange(fieldSystemComponent.HistoricalComponents.OfType<FieldSystemComponent>());
+            result.Add(fieldSystemComponent);
+            result.AddRange(fieldSystemComponent.ProjectedComponents.OfType<FieldSystemComponent>());
+
+            return result;
+        }
+
+        /// <summary>
+        /// The management period holding the component selection screen crop a details screen row was created from,
+        /// or null when that crop can no longer be found - a row created before the user changed the rotation, say.
+        /// </summary>
+        private static FieldSystemComponent GetManagementPeriodForItem(
+            IEnumerable<FieldSystemComponent> managementPeriods,
+            CropViewItem viewItem)
+        {
+            return managementPeriods.FirstOrDefault(managementPeriod => managementPeriod.CropViewItems
+                .Any(crop => crop.Guid == viewItem.DetailViewItemToComponentSelectionViewItemMap));
+        }
+
+        /// <summary>
+        /// Puts the three overridable inputs back to the values the details screen row was created with. The mapper
+        /// that creates a row copies all three from the component selection screen crop, so these are what a rebuilt
+        /// screen would start from.
+        ///
+        /// Plant carbon has to be restored even where it was not the input the user overrode. A perennial
+        /// establishment year reads the following year's plant carbon to estimate its own, and the carbon pass works
+        /// forwards through the years, so a discarded override left in place on a later row would be read as though it
+        /// were calculated before that row's turn to be recalculated came.
+        /// </summary>
+        private static void RestoreOverridableInputsFromComponentSelectionScreen(
+            FieldSystemComponent managementPeriod,
+            CropViewItem viewItem)
+        {
+            var componentSelectionScreenCrop = managementPeriod.CropViewItems
+                .SingleOrDefault(crop => crop.Guid == viewItem.DetailViewItemToComponentSelectionViewItemMap);
+
+            if (componentSelectionScreenCrop == null)
+            {
+                return;
+            }
+
+            viewItem.Yield = componentSelectionScreenCrop.Yield;
+            viewItem.PercentageOfProductYieldReturnedToSoil = componentSelectionScreenCrop.PercentageOfProductYieldReturnedToSoil;
+            viewItem.PlantCarbonInAgriculturalProduct = componentSelectionScreenCrop.PlantCarbonInAgriculturalProduct;
         }
 
         public void InitializeStageState(Farm farm)

@@ -2302,10 +2302,195 @@ namespace H.Core.Test.Services
         }
 
         /// <summary>
+        /// Under Custom yield assignment there is nothing to re-derive - InitializeYieldForYear returns without
+        /// touching the yield, and UpdateYieldFromHarvest only derives a perennial's - so the value has to be put back
+        /// from the crop the row was created with. Clearing the flag alone would leave the typed number in a cell that
+        /// no longer shows it as an override.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsPutsAnOverriddenYieldBackOnACustomYieldFarm()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(
+                out var viewItem,
+                yieldAssignmentMethod: YieldAssignmentMethod.Custom,
+                yieldOnComponentSelectionScreenCrops: 3000);
+
+            Assert.AreEqual(3000, viewItem.Yield, 0.0001, "this test needs the row to start from the entered yield");
+
+            viewItem.Yield = 4242;
+            viewItem.DoNotRecalculateYield = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.IsFalse(viewItem.DoNotRecalculateYield, "the override flag was not cleared");
+            Assert.AreEqual(3000, viewItem.Yield, 0.0001,
+                "the typed value survived the reset on a Custom farm, so the cell would show it as though it were entered");
+        }
+
+        /// <summary>
+        /// Only a perennial's percentage returned to soil is derived (UpdatePercentageReturnsForPerennials skips
+        /// everything else), so an annual's has to be put back from the crop the row was created with. The percentage
+        /// is read by the carbon calculation, so a stale override is not only a display problem.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsPutsAnOverriddenPercentageReturnedBackOnAnAnnualCrop()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(out var viewItem);
+
+            Assert.IsTrue(viewItem.CropType.IsAnnual(), "this test is about the crops the perennial derivation skips");
+
+            var calculatedPercentage = viewItem.PercentageOfProductYieldReturnedToSoil;
+
+            viewItem.PercentageOfProductYieldReturnedToSoil = 42;
+            viewItem.DoNotRecalculatePercentageReturnedToSoil = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.IsFalse(viewItem.DoNotRecalculatePercentageReturnedToSoil, "the override flag was not cleared");
+            Assert.AreEqual(calculatedPercentage, viewItem.PercentageOfProductYieldReturnedToSoil, 0.0001,
+                "the typed percentage survived the reset, and the carbon calculation reads it");
+        }
+
+        /// <summary>
+        /// Every row of a field carries the current period's guid, so the period a row belongs to has to be resolved
+        /// from the crop it was created from. An Average yield is the mean of its own period's rotation, so resolving
+        /// this wrongly rewrites a historical row's yield with the current rotation's mean - a row the user never
+        /// overrode.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsUsesEachManagementPeriodsOwnRotationForAnAverageYield()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(
+                out var viewItem,
+                yieldOnComponentSelectionScreenCrops: 1000);
+
+            var currentPeriod = farm.FieldSystemComponents.Single();
+
+            var historicalPeriod = new FieldSystemComponent()
+            {
+                CurrentPeriodComponentGuid = currentPeriod.Guid,
+                TimePeriodCategory = TimePeriodCategory.Past,
+                StartYear = 2014,
+                EndYear = 2015,
+                BeginOrderingAtStartYearOfRotation = true,
+            };
+
+            historicalPeriod.CropViewItems.Add(new CropViewItem()
+            {
+                CropType = CropType.Wheat,
+                Year = 2014,
+                Area = 1,
+                Yield = 100,
+            });
+
+            currentPeriod.HistoricalComponents.Add(historicalPeriod);
+
+            _resultsService.InitializeStageState(farm);
+
+            var stageState = _resultsService.GetStageState(farm);
+            var historicalItem = stageState.DetailsScreenViewCropViewItems.Single(x => x.Year == 2014);
+
+            Assert.AreEqual(100, historicalItem.Yield, 0.0001,
+                "this test needs the historical period to start from its own rotation's average");
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.AreEqual(100, historicalItem.Yield, 0.0001,
+                "the reset gave a historical row the current rotation's average instead of its own period's");
+        }
+
+        /// <summary>
+        /// A perennial establishment year estimates its own plant carbon from the following year's, and the carbon
+        /// pass works forwards through the years, so the row holding a discarded override is still holding it when the
+        /// establishment year is calculated. Resetting has to put that value back before the pass, not only clear the
+        /// flag, or the establishment year's carbon is derived from the number the user threw away.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsDoesNotLetADiscardedPlantCarbonOverrideReachTheEstablishmentYear()
+        {
+            var untouchedFarm = BuildPerennialFarmWithAnEstablishmentYear(out var untouchedEstablishmentYear, out _);
+            _resultsService.ResetOverriddenInputs(untouchedFarm);
+
+            var establishmentYearCarbonWithNoOverride = untouchedEstablishmentYear.PlantCarbonInAgriculturalProduct;
+
+            Assert.IsTrue(establishmentYearCarbonWithNoOverride > 0,
+                "this test needs an establishment year whose plant carbon comes from the following year");
+
+            var farm = BuildPerennialFarmWithAnEstablishmentYear(out var establishmentYear, out var followingYear);
+
+            followingYear.PlantCarbonInAgriculturalProduct = 99999;
+            followingYear.DoNotRecalculatePlantCarbonInAgriculturalProduct = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.AreEqual(establishmentYearCarbonWithNoOverride, establishmentYear.PlantCarbonInAgriculturalProduct, 0.0001,
+                "the establishment year's plant carbon was derived from the override that had just been discarded");
+        }
+
+        /// <summary>
+        /// A two year perennial stand whose first year has no yield of its own, which is the shape that makes the
+        /// establishment year read the following year's plant carbon.
+        /// </summary>
+        private Farm BuildPerennialFarmWithAnEstablishmentYear(
+            out CropViewItem establishmentYear,
+            out CropViewItem followingYear)
+        {
+            var fieldSystemComponent = new FieldSystemComponent()
+            {
+                StartYear = 2016,
+                EndYear = 2017,
+                BeginOrderingAtStartYearOfRotation = true,
+            };
+
+            fieldSystemComponent.CropViewItems.Add(new CropViewItem()
+            {
+                CropType = CropType.TameGrass,
+                Year = 2016,
+                Area = 1,
+                Yield = 0,
+            });
+
+            fieldSystemComponent.CropViewItems.Add(new CropViewItem()
+            {
+                CropType = CropType.TameGrass,
+                Year = 2017,
+                Area = 1,
+                Yield = 2500,
+            });
+
+            var farm = new Farm()
+            {
+                YieldAssignmentMethod = YieldAssignmentMethod.Custom,
+                Defaults = new Defaults()
+                {
+                    CarbonModellingStrategy = CarbonModellingStrategies.ICBM,
+                },
+                GeographicData = new GeographicData()
+                {
+                    DefaultSoilData = new SoilData(),
+                },
+            };
+
+            farm.Components.Add(fieldSystemComponent);
+
+            _resultsService.CreateDetailViewItems(farm);
+
+            var stageState = _resultsService.GetStageState(farm);
+
+            establishmentYear = stageState.DetailsScreenViewCropViewItems.Single(x => x.Year == 2016);
+            followingYear = stageState.DetailsScreenViewCropViewItems.Single(x => x.Year == 2017);
+
+            return farm;
+        }
+
+        /// <summary>
         /// A farm whose details screen has been built, so the reset has the items the grid binds to rather than the
         /// field's own crop view items.
         /// </summary>
-        private Farm BuildFarmWithDetailsScreenItems(out CropViewItem viewItem)
+        private Farm BuildFarmWithDetailsScreenItems(
+            out CropViewItem viewItem,
+            YieldAssignmentMethod yieldAssignmentMethod = YieldAssignmentMethod.Average,
+            double yieldOnComponentSelectionScreenCrops = 0)
         {
             var fieldSystemComponent = new FieldSystemComponent()
             {
@@ -2319,6 +2504,7 @@ namespace H.Core.Test.Services
                 CropType = CropType.Wheat,
                 Year = 2016,
                 Area = 1,
+                Yield = yieldOnComponentSelectionScreenCrops,
             });
 
             fieldSystemComponent.CropViewItems.Add(new CropViewItem()
@@ -2326,11 +2512,12 @@ namespace H.Core.Test.Services
                 CropType = CropType.Oats,
                 Year = 2017,
                 Area = 1,
+                Yield = yieldOnComponentSelectionScreenCrops,
             });
 
             var farm = new Farm()
             {
-                YieldAssignmentMethod = YieldAssignmentMethod.Average,
+                YieldAssignmentMethod = yieldAssignmentMethod,
                 Defaults = new Defaults()
                 {
                     CarbonModellingStrategy = CarbonModellingStrategies.ICBM,
