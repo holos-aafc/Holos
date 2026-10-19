@@ -2748,6 +2748,106 @@ namespace H.Core.Test.Services
         }
 
         /// <summary>
+        /// The crops the rows were created from are what a rebuilt screen starts from, so an override marker left on
+        /// one of them would pin the value again on the new rows. The reset clears them itself: a caller that cleared
+        /// them beforehand would also clear the row flags, and the reset reads those to decide which inputs to put
+        /// back.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsClearsTheOverrideFlagsOnTheCropsTheRowsCameFrom()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(out var viewItem);
+
+            var componentSelectionScreenCrop = farm.FieldSystemComponents
+                .Single()
+                .CropViewItems
+                .Single(crop => crop.Guid == viewItem.DetailViewItemToComponentSelectionViewItemMap);
+
+            componentSelectionScreenCrop.DoNotRecalculateYield = true;
+            componentSelectionScreenCrop.DoNotRecalculatePlantCarbonInAgriculturalProduct = true;
+            componentSelectionScreenCrop.DoNotRecalculatePercentageReturnedToSoil = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.IsFalse(componentSelectionScreenCrop.DoNotRecalculateYield);
+            Assert.IsFalse(componentSelectionScreenCrop.DoNotRecalculatePlantCarbonInAgriculturalProduct);
+            Assert.IsFalse(componentSelectionScreenCrop.DoNotRecalculatePercentageReturnedToSoil);
+        }
+
+        /// <summary>
+        /// The carbon pass freezes a plant carbon it estimated for a later year itself, so a row can come out of the
+        /// reset's own derivation carrying a flag the user never set - and the cell would be marked as an override
+        /// immediately after the button that clears overrides.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsLeavesNothingMarkedAfterItsOwnDerivation()
+        {
+            var farm = BuildPerennialFarmWithNoYieldInEitherYear(out var establishmentYear, out var followingYear);
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.IsFalse(establishmentYear.DoNotRecalculatePlantCarbonInAgriculturalProduct);
+            Assert.IsFalse(followingYear.DoNotRecalculatePlantCarbonInAgriculturalProduct,
+                "the carbon pass froze the plant carbon it estimated for this year and the reset left it marked");
+        }
+
+        /// <summary>
+        /// A stand with nothing to work from in either year, which is the shape that makes the carbon pass estimate a
+        /// plant carbon for the following year and freeze it.
+        /// </summary>
+        private Farm BuildPerennialFarmWithNoYieldInEitherYear(
+            out CropViewItem establishmentYear,
+            out CropViewItem followingYear)
+        {
+            var fieldSystemComponent = new FieldSystemComponent()
+            {
+                StartYear = 2016,
+                EndYear = 2017,
+                BeginOrderingAtStartYearOfRotation = true,
+            };
+
+            fieldSystemComponent.CropViewItems.Add(new CropViewItem()
+            {
+                CropType = CropType.TameGrass,
+                Year = 2016,
+                Area = 1,
+                Yield = 0,
+            });
+
+            fieldSystemComponent.CropViewItems.Add(new CropViewItem()
+            {
+                CropType = CropType.TameGrass,
+                Year = 2017,
+                Area = 1,
+                Yield = 0,
+            });
+
+            var farm = new Farm()
+            {
+                YieldAssignmentMethod = YieldAssignmentMethod.Custom,
+                Defaults = new Defaults()
+                {
+                    CarbonModellingStrategy = CarbonModellingStrategies.ICBM,
+                },
+                GeographicData = new GeographicData()
+                {
+                    DefaultSoilData = new SoilData(),
+                },
+            };
+
+            farm.Components.Add(fieldSystemComponent);
+
+            _resultsService.CreateDetailViewItems(farm);
+
+            var stageState = _resultsService.GetStageState(farm);
+
+            establishmentYear = stageState.DetailsScreenViewCropViewItems.Single(x => x.Year == 2016);
+            followingYear = stageState.DetailsScreenViewCropViewItems.Single(x => x.Year == 2017);
+
+            return farm;
+        }
+
+        /// <summary>
         /// A farm whose details screen has been built, so the reset has the items the grid binds to rather than the
         /// field's own crop view items.
         /// </summary>

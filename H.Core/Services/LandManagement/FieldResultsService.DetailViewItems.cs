@@ -225,6 +225,7 @@ namespace H.Core.Services.LandManagement
                     var viewItems = grouping.ToList();
 
                     var moistureToPutBack = new List<BorrowedMoisture>();
+                    var restoredItems = new List<CropViewItem>();
 
                     foreach (var viewItem in viewItems)
                     {
@@ -263,9 +264,9 @@ namespace H.Core.Services.LandManagement
                                 componentSelectionScreenCrop.MoistureContentOfCrop);
                         }
 
-                        viewItem.DoNotRecalculateYield = false;
-                        viewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct = false;
-                        viewItem.DoNotRecalculatePercentageReturnedToSoil = false;
+                        ClearOverrideFlags(viewItem);
+
+                        restoredItems.Add(viewItem);
                     }
 
                     // The same order the items were derived in when the screen was first built. Each step reads what
@@ -291,8 +292,34 @@ namespace H.Core.Services.LandManagement
                     {
                         SetMoisture(borrowed.ViewItem, borrowed.Percentage, borrowed.Fraction);
                     }
+
+                    // The carbon pass freezes a plant carbon it estimated for a later year itself (Equation 2.1.2-25),
+                    // so a row can come out of the derivation carrying a flag the user never set. Clearing them again
+                    // leaves the screen showing nothing as overridden, which is what the button says it does. Only the
+                    // rows that were restored are touched - a row whose override had to be left standing keeps it.
+                    foreach (var restoredItem in restoredItems)
+                    {
+                        ClearOverrideFlags(restoredItem);
+                    }
+
+                    // The crops the rows were created from are what a rebuilt screen starts from, so an override
+                    // marker left on one of them would pin the value again on the new rows. Nothing writes these from
+                    // the details screen, so this is a sweep rather than a correction - and it is done here rather
+                    // than by the caller, which cannot clear them before this runs without hiding from it which
+                    // inputs the user had frozen.
+                    foreach (var crop in managementPeriod.CropViewItems.Concat(managementPeriod.CoverCrops))
+                    {
+                        ClearOverrideFlags(crop);
+                    }
                 }
             }
+        }
+
+        private static void ClearOverrideFlags(CropViewItem viewItem)
+        {
+            viewItem.DoNotRecalculateYield = false;
+            viewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct = false;
+            viewItem.DoNotRecalculatePercentageReturnedToSoil = false;
         }
 
         /// <summary>
