@@ -2848,6 +2848,57 @@ namespace H.Core.Test.Services
         }
 
         /// <summary>
+        /// The button resets every field on the farm, so a second field must not be left out - or missed rows would
+        /// keep a value whose marking had been cleared.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsReachesEveryFieldOnTheFarm()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(
+                out var firstFieldItem,
+                yieldAssignmentMethod: YieldAssignmentMethod.Custom,
+                yieldOnComponentSelectionScreenCrops: 3000);
+
+            var secondField = new FieldSystemComponent()
+            {
+                StartYear = 2016,
+                EndYear = 2016,
+                BeginOrderingAtStartYearOfRotation = true,
+            };
+
+            secondField.CropViewItems.Add(new CropViewItem()
+            {
+                CropType = CropType.Barley,
+                Year = 2016,
+                Area = 1,
+                Yield = 1500,
+            });
+
+            farm.Components.Add(secondField);
+
+            _resultsService.InitializeStageState(farm);
+
+            var stageState = _resultsService.GetStageState(farm);
+
+            firstFieldItem = stageState.DetailsScreenViewCropViewItems
+                .First(x => x.FieldSystemComponentGuid != secondField.Guid);
+
+            var secondFieldItem = stageState.DetailsScreenViewCropViewItems
+                .Single(x => x.FieldSystemComponentGuid == secondField.Guid);
+
+            firstFieldItem.Yield = 4242;
+            firstFieldItem.DoNotRecalculateYield = true;
+
+            secondFieldItem.Yield = 9999;
+            secondFieldItem.DoNotRecalculateYield = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.AreEqual(3000, firstFieldItem.Yield, 0.0001, "the first field was not reset");
+            Assert.AreEqual(1500, secondFieldItem.Yield, 0.0001, "the second field on the farm was left out of the reset");
+        }
+
+        /// <summary>
         /// A farm whose details screen has been built, so the reset has the items the grid binds to rather than the
         /// field's own crop view items.
         /// </summary>
