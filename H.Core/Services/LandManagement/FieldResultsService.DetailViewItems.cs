@@ -180,6 +180,61 @@ namespace H.Core.Services.LandManagement
             return stageState;
         }
 
+        /// <summary>
+        /// Clears every manual override on the details screen and puts the three overridable inputs back to their
+        /// calculated values, in place on the items the screen is bound to.
+        ///
+        /// The results pipeline cannot do this. CalculateFinalResults merges the details items into copies and
+        /// calculates over those, so clearing the flags and recalculating leaves the screen showing the number the
+        /// user typed - no longer marked as an override, and so indistinguishable from a calculated value, while being
+        /// free to change at the next recalculation.
+        ///
+        /// Rebuilding the stage state would also do it, and would throw away every other input on the screen along
+        /// with the overrides. Only the derivation is repeated here.
+        /// </summary>
+        public void ResetOverriddenInputs(Farm farm)
+        {
+            var stageState = this.GetStageState(farm);
+            if (stageState == null)
+            {
+                return;
+            }
+
+            var itemsByField = stageState.DetailsScreenViewCropViewItems
+                .GroupBy(viewItem => viewItem.FieldSystemComponentGuid);
+
+            foreach (var grouping in itemsByField)
+            {
+                var fieldSystemComponent = farm.GetFieldSystemComponent(grouping.Key);
+                if (fieldSystemComponent == null)
+                {
+                    continue;
+                }
+
+                var viewItems = grouping.ToList();
+
+                foreach (var viewItem in viewItems)
+                {
+                    viewItem.DoNotRecalculateYield = false;
+                    viewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct = false;
+                    viewItem.DoNotRecalculatePercentageReturnedToSoil = false;
+                }
+
+                // The same order the items were derived in when the screen was first built. Each step reads what the
+                // one before it wrote, and each already honours the flags, which are now clear.
+                _initializationService.InitializeYieldForAllYears(
+                    cropViewItems: viewItems,
+                    farm: farm,
+                    fieldSystemComponent: fieldSystemComponent);
+
+                this.UpdateYieldFromHarvest(viewItems);
+
+                this.UpdatePercentageReturnsForPerennials(viewItems: viewItems);
+
+                this.AssignCarbonInputs(viewItems: viewItems, farm: farm);
+            }
+        }
+
         public void InitializeStageState(Farm farm)
         {
             var stageState = this.GetStageState(farm);

@@ -2232,6 +2232,128 @@ namespace H.Core.Test.Services
             Assert.AreEqual(1, viewItem4.PercentageOfRootsReturnedToSoil);
         }
 
+        #region Reset overrides
+
+        /// <summary>
+        /// The reset button on the details screen. Clearing the flags is not enough on its own: the results pipeline
+        /// merges the details items into copies and calculates over those, so the screen would go on showing the
+        /// number the user typed, no longer marked as an override and free to change at the next recalculation.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsPutsAnOverriddenYieldBack()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(out var viewItem);
+
+            var calculatedYield = viewItem.Yield;
+
+            viewItem.Yield = 4242;
+            viewItem.DoNotRecalculateYield = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.IsFalse(viewItem.DoNotRecalculateYield, "the override flag was not cleared");
+            Assert.AreNotEqual(4242, viewItem.Yield, 0.0001,
+                "the typed value survived the reset, so the cell would show it as though it were calculated");
+            Assert.AreEqual(calculatedYield, viewItem.Yield, 0.1,
+                "the yield did not return to the value Holos calculates");
+        }
+
+        /// <summary>
+        /// The assertion that stops the tempting fix. Rebuilding the stage state would also restore the overridden
+        /// values, and would discard every other input on the screen while doing it.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsLeavesOtherInputsOnTheRowAlone()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(out var viewItem);
+
+            viewItem.Yield = 4242;
+            viewItem.DoNotRecalculateYield = true;
+
+            viewItem.PercentageOfStrawReturnedToSoil = 17;
+            viewItem.TillageType = TillageType.NoTill;
+            viewItem.PercentageOfRootsReturnedToSoil = 23;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.AreEqual(17, viewItem.PercentageOfStrawReturnedToSoil, 0.0001,
+                "an unrelated input on the same row was reset as well");
+            Assert.AreEqual(TillageType.NoTill, viewItem.TillageType);
+            Assert.AreEqual(23, viewItem.PercentageOfRootsReturnedToSoil, 0.0001);
+        }
+
+        /// <summary>
+        /// The reset clears every override on the screen, not only the yield.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsClearsEveryOverrideFlag()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(out var viewItem);
+
+            viewItem.DoNotRecalculateYield = true;
+            viewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct = true;
+            viewItem.DoNotRecalculatePercentageReturnedToSoil = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.IsFalse(viewItem.DoNotRecalculateYield);
+            Assert.IsFalse(viewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct);
+            Assert.IsFalse(viewItem.DoNotRecalculatePercentageReturnedToSoil);
+        }
+
+        /// <summary>
+        /// A farm whose details screen has been built, so the reset has the items the grid binds to rather than the
+        /// field's own crop view items.
+        /// </summary>
+        private Farm BuildFarmWithDetailsScreenItems(out CropViewItem viewItem)
+        {
+            var fieldSystemComponent = new FieldSystemComponent()
+            {
+                StartYear = 2016,
+                EndYear = 2017,
+                BeginOrderingAtStartYearOfRotation = true,
+            };
+
+            fieldSystemComponent.CropViewItems.Add(new CropViewItem()
+            {
+                CropType = CropType.Wheat,
+                Year = 2016,
+                Area = 1,
+            });
+
+            fieldSystemComponent.CropViewItems.Add(new CropViewItem()
+            {
+                CropType = CropType.Oats,
+                Year = 2017,
+                Area = 1,
+            });
+
+            var farm = new Farm()
+            {
+                YieldAssignmentMethod = YieldAssignmentMethod.Average,
+                Defaults = new Defaults()
+                {
+                    CarbonModellingStrategy = CarbonModellingStrategies.ICBM,
+                },
+                GeographicData = new GeographicData()
+                {
+                    DefaultSoilData = new SoilData(),
+                },
+            };
+
+            farm.Components.Add(fieldSystemComponent);
+
+            _resultsService.CreateDetailViewItems(farm);
+
+            var stageState = _resultsService.GetStageState(farm);
+
+            viewItem = stageState.DetailsScreenViewCropViewItems.First(x => x.Year == 2016);
+
+            return farm;
+        }
+
+        #endregion
+
         #endregion
     }
 }
