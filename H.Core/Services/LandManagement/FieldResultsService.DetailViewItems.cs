@@ -224,7 +224,7 @@ namespace H.Core.Services.LandManagement
                     var managementPeriod = grouping.Key;
                     var viewItems = grouping.ToList();
 
-                    var moistureToPutBack = new List<KeyValuePair<CropViewItem, double>>();
+                    var moistureToPutBack = new List<BorrowedMoisture>();
 
                     foreach (var viewItem in viewItems)
                     {
@@ -249,11 +249,18 @@ namespace H.Core.Services.LandManagement
                         // scale by the hay's moisture and change the yield of a row nobody overrode, so the entered
                         // moisture is borrowed for the derivation and the row is put back to what it was showing. The
                         // moisture is not one of the inputs being reset, so it has to end where it started.
+                        //
+                        // Both forms are carried. The percentage writes through to the fraction only when its value
+                        // changes, so setting one of them alone leaves the row holding two moistures that disagree,
+                        // and the passes below do not all read the same one.
                         if (YieldInputPolicy.HasHayedHarvest(viewItem))
                         {
-                            moistureToPutBack.Add(new KeyValuePair<CropViewItem, double>(viewItem, viewItem.MoistureContentOfCrop));
+                            moistureToPutBack.Add(BorrowedMoisture.From(viewItem));
 
-                            viewItem.MoistureContentOfCrop = componentSelectionScreenCrop.MoistureContentOfCrop;
+                            SetMoisture(
+                                viewItem,
+                                componentSelectionScreenCrop.MoistureContentOfCropPercentage,
+                                componentSelectionScreenCrop.MoistureContentOfCrop);
                         }
 
                         viewItem.DoNotRecalculateYield = false;
@@ -282,9 +289,41 @@ namespace H.Core.Services.LandManagement
 
                     foreach (var borrowed in moistureToPutBack)
                     {
-                        borrowed.Key.MoistureContentOfCrop = borrowed.Value;
+                        SetMoisture(borrowed.ViewItem, borrowed.Percentage, borrowed.Fraction);
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Both forms of a row's crop moisture, in the one order that leaves them agreeing: the percentage first,
+        /// since assigning it writes a converted value into the fraction, and then the fraction itself.
+        /// </summary>
+        private static void SetMoisture(CropViewItem viewItem, double percentage, double fraction)
+        {
+            viewItem.MoistureContentOfCropPercentage = percentage;
+            viewItem.MoistureContentOfCrop = fraction;
+        }
+
+        /// <summary>
+        /// A row's crop moisture, held while the reset derives a yield from a different one.
+        /// </summary>
+        private class BorrowedMoisture
+        {
+            public CropViewItem ViewItem { get; private set; }
+
+            public double Percentage { get; private set; }
+
+            public double Fraction { get; private set; }
+
+            public static BorrowedMoisture From(CropViewItem viewItem)
+            {
+                return new BorrowedMoisture()
+                {
+                    ViewItem = viewItem,
+                    Percentage = viewItem.MoistureContentOfCropPercentage,
+                    Fraction = viewItem.MoistureContentOfCrop,
+                };
             }
         }
 

@@ -2627,6 +2627,7 @@ namespace H.Core.Test.Services
 
             var yieldAfterTheScreenWasBuilt = viewItem.Yield;
             var moistureAfterTheScreenWasBuilt = viewItem.MoistureContentOfCrop;
+            var plantCarbonAfterTheScreenWasBuilt = viewItem.PlantCarbonInAgriculturalProduct;
 
             Assert.IsTrue(yieldAfterTheScreenWasBuilt > 0, "this test needs a yield derived from the harvest");
 
@@ -2636,6 +2637,8 @@ namespace H.Core.Test.Services
                 "the reset changed a hayed perennial's yield on a row with no override");
             Assert.AreEqual(moistureAfterTheScreenWasBuilt, viewItem.MoistureContentOfCrop, 0.0001,
                 "the row was left showing the standing crop's moisture rather than the hay's, as a rebuilt screen would show");
+            Assert.AreEqual(plantCarbonAfterTheScreenWasBuilt, viewItem.PlantCarbonInAgriculturalProduct, 0.0001,
+                "the carbon derived from the row moved even though nothing on it was overridden");
         }
 
         /// <summary>
@@ -2704,7 +2707,7 @@ namespace H.Core.Test.Services
                 Year = 2016,
                 Area = 1,
                 Yield = 1200,
-                MoistureContentOfCrop = 0.8,
+                MoistureContentOfCropPercentage = 80,
             };
 
             crop.HarvestViewItems.Add(new HarvestViewItem()
