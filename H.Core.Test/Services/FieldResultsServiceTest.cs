@@ -2484,6 +2484,137 @@ namespace H.Core.Test.Services
         }
 
         /// <summary>
+        /// A yield under the Custom method is an ordinary editable input outside advanced input editing, so a row the
+        /// user typed one into without overriding anything is not the reset's business. Resetting an override
+        /// somewhere else on the screen must leave it alone.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsLeavesAYieldTheUserTypedWithoutOverridingIt()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(
+                out var viewItem,
+                yieldAssignmentMethod: YieldAssignmentMethod.Custom,
+                yieldOnComponentSelectionScreenCrops: 3000);
+
+            // Typed in, not overridden - no flag is set for a cell that is editable without advanced input editing.
+            viewItem.Yield = 5000;
+
+            // Something else on the screen is overridden, which is what the user presses the button for.
+            viewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.AreEqual(5000, viewItem.Yield, 0.0001,
+                "the reset discarded a yield the user entered normally rather than overrode");
+        }
+
+        /// <summary>
+        /// An annual crop's percentage of product returned to soil is an editable residue parameter outside advanced
+        /// input editing, so the same rule applies to it.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsLeavesAnAnnualPercentageReturnedTheUserTypedWithoutOverridingIt()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(out var viewItem);
+
+            Assert.IsTrue(viewItem.CropType.IsAnnual(), "an annual's percentage returned is editable in normal mode");
+
+            viewItem.PercentageOfProductYieldReturnedToSoil = 42;
+
+            viewItem.DoNotRecalculateYield = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.AreEqual(42, viewItem.PercentageOfProductYieldReturnedToSoil, 0.0001,
+                "the reset discarded a percentage the user entered normally rather than overrode");
+        }
+
+        /// <summary>
+        /// The nitrogen in a crop's residues is derived from its carbon inputs, and in GUI mode the final results are
+        /// calculated on the understanding that both passes already ran when the screen was built. Leaving the
+        /// nitrogen pass out of the reset would combine restored carbon with the nitrogen derived from the value the
+        /// user discarded.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsRefreshesNitrogenInputs()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(
+                out var viewItem,
+                yieldOnComponentSelectionScreenCrops: 1000);
+
+            // Residue nitrogen is the crop's carbon inputs at the crop's nitrogen concentrations, and a crop built
+            // for a test carries neither the coefficients that turn a yield into carbon nor the concentrations.
+            viewItem.BiomassCoefficientProduct = 0.4;
+            viewItem.BiomassCoefficientStraw = 0.3;
+            viewItem.PercentageOfProductYieldReturnedToSoil = 2;
+            viewItem.PercentageOfStrawReturnedToSoil = 100;
+            viewItem.NitrogenContentInProduct = 0.02;
+            viewItem.NitrogenContentInStraw = 0.01;
+
+            var viewItems = new List<CropViewItem>() { viewItem };
+
+            _resultsService.AssignCarbonInputs(viewItems, farm);
+            _resultsService.AssignNitrogenInputs(viewItems, farm);
+
+            var calculatedNitrogenInputs = viewItem.AbovegroundNitrogenInputs;
+
+            Assert.IsTrue(calculatedNitrogenInputs > 0, "this test needs a row with residue nitrogen to begin with");
+
+            viewItem.Yield = 40000;
+            viewItem.DoNotRecalculateYield = true;
+
+            _resultsService.AssignCarbonInputs(viewItems, farm);
+            _resultsService.AssignNitrogenInputs(viewItems, farm);
+
+            Assert.AreNotEqual(calculatedNitrogenInputs, viewItem.AbovegroundNitrogenInputs, 0.0001,
+                "this test needs the override to have moved the residue nitrogen first");
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.AreEqual(calculatedNitrogenInputs, viewItem.AbovegroundNitrogenInputs, 0.0001,
+                "the residue nitrogen still came from the yield the user discarded");
+        }
+
+        /// <summary>
+        /// A secondary crop's row is created from a throwaway copy of the crop the user entered, so without carrying
+        /// that crop's identity the row cannot say where it came from - and the reset has nothing to restore it from.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsPutsASecondaryCropsOverriddenYieldBack()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(
+                out _,
+                yieldAssignmentMethod: YieldAssignmentMethod.Custom,
+                yieldOnComponentSelectionScreenCrops: 3000);
+
+            var fieldSystemComponent = farm.FieldSystemComponents.Single();
+
+            fieldSystemComponent.CoverCrops.Add(new CropViewItem()
+            {
+                CropType = CropType.WinterWheat,
+                Year = 2016,
+                Area = 1,
+                Yield = 800,
+            });
+
+            _resultsService.InitializeStageState(farm);
+
+            var stageState = _resultsService.GetStageState(farm);
+            var secondaryItem = stageState.DetailsScreenViewCropViewItems.Single(x => x.IsSecondaryCrop);
+
+            Assert.AreEqual(800, secondaryItem.Yield, 0.0001, "this test needs the secondary row to start from the entered yield");
+
+            secondaryItem.Yield = 4242;
+            secondaryItem.DoNotRecalculateYield = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.IsFalse(secondaryItem.DoNotRecalculateYield, "the override flag was not cleared");
+            Assert.AreEqual(800, secondaryItem.Yield, 0.0001,
+                "a secondary crop's row could not be traced back to the crop it was created from");
+        }
+
+        /// <summary>
         /// A farm whose details screen has been built, so the reset has the items the grid binds to rather than the
         /// field's own crop view items.
         /// </summary>

@@ -226,11 +226,13 @@ namespace H.Core.Services.LandManagement
 
                     foreach (var viewItem in viewItems)
                     {
+                        // Restored before the flags are cleared, since which inputs are put back depends on which
+                        // ones the user had frozen.
+                        RestoreOverridableInputsFromComponentSelectionScreen(managementPeriod, viewItem);
+
                         viewItem.DoNotRecalculateYield = false;
                         viewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct = false;
                         viewItem.DoNotRecalculatePercentageReturnedToSoil = false;
-
-                        RestoreOverridableInputsFromComponentSelectionScreen(managementPeriod, viewItem);
                     }
 
                     // The same order the items were derived in when the screen was first built. Each step reads what
@@ -245,6 +247,12 @@ namespace H.Core.Services.LandManagement
                     this.UpdatePercentageReturnsForPerennials(viewItems: viewItems);
 
                     this.AssignCarbonInputs(viewItems: viewItems, farm: farm);
+
+                    // The nitrogen in a crop's residues is derived from its carbon inputs, and in GUI mode the final
+                    // results are calculated on the understanding that both passes have already run here - the command
+                    // line is the only caller that reprocesses them later. Without this the results would combine
+                    // restored carbon with the nitrogen derived from the discarded values.
+                    this.AssignNitrogenInputs(viewItems: viewItems, farm: farm);
                 }
             }
         }
@@ -272,34 +280,59 @@ namespace H.Core.Services.LandManagement
             IEnumerable<FieldSystemComponent> managementPeriods,
             CropViewItem viewItem)
         {
-            return managementPeriods.FirstOrDefault(managementPeriod => managementPeriod.CropViewItems
-                .Any(crop => crop.Guid == viewItem.DetailViewItemToComponentSelectionViewItemMap));
+            return managementPeriods.FirstOrDefault(
+                managementPeriod => GetComponentSelectionScreenCropForItem(managementPeriod, viewItem) != null);
         }
 
         /// <summary>
-        /// Puts the three overridable inputs back to the values the details screen row was created with. The mapper
-        /// that creates a row copies all three from the component selection screen crop, so these are what a rebuilt
-        /// screen would start from.
+        /// The component selection screen crop a details screen row was created from. A row's main crop is held in
+        /// CropViewItems and a secondary crop in CoverCrops, so both are searched.
+        /// </summary>
+        private static CropViewItem GetComponentSelectionScreenCropForItem(
+            FieldSystemComponent managementPeriod,
+            CropViewItem viewItem)
+        {
+            return managementPeriod.CropViewItems
+                .Concat(managementPeriod.CoverCrops)
+                .FirstOrDefault(crop => crop.Guid == viewItem.DetailViewItemToComponentSelectionViewItemMap);
+        }
+
+        /// <summary>
+        /// Puts the inputs the user froze back to the values the details screen row was created with. The mapper that
+        /// creates a row copies all three from the component selection screen crop, so these are what a rebuilt screen
+        /// would start from.
         ///
-        /// Plant carbon has to be restored even where it was not the input the user overrode. A perennial
-        /// establishment year reads the following year's plant carbon to estimate its own, and the carbon pass works
-        /// forwards through the years, so a discarded override left in place on a later row would be read as though it
-        /// were calculated before that row's turn to be recalculated came.
+        /// Only an input that was actually frozen is put back. A yield under the Custom method and an annual crop's
+        /// percentage of product returned to soil are ordinary editable inputs outside advanced input editing
+        /// (see YieldInputPolicy), so a row where the user typed one of those and overrode nothing is not this
+        /// method's business - resetting another row's override must not discard it.
+        ///
+        /// Plant carbon is the exception and is restored on every row. It is never editable outside advanced input
+        /// editing, so there is no ordinary input to protect, and the carbon pass needs it: a perennial establishment
+        /// year reads the following year's plant carbon to estimate its own, and the pass works forwards through the
+        /// years, so a discarded override left in place on a later row would be read as though it had been calculated
+        /// before that row's turn to be recalculated came.
         /// </summary>
         private static void RestoreOverridableInputsFromComponentSelectionScreen(
             FieldSystemComponent managementPeriod,
             CropViewItem viewItem)
         {
-            var componentSelectionScreenCrop = managementPeriod.CropViewItems
-                .SingleOrDefault(crop => crop.Guid == viewItem.DetailViewItemToComponentSelectionViewItemMap);
-
+            var componentSelectionScreenCrop = GetComponentSelectionScreenCropForItem(managementPeriod, viewItem);
             if (componentSelectionScreenCrop == null)
             {
                 return;
             }
 
-            viewItem.Yield = componentSelectionScreenCrop.Yield;
-            viewItem.PercentageOfProductYieldReturnedToSoil = componentSelectionScreenCrop.PercentageOfProductYieldReturnedToSoil;
+            if (viewItem.DoNotRecalculateYield)
+            {
+                viewItem.Yield = componentSelectionScreenCrop.Yield;
+            }
+
+            if (viewItem.DoNotRecalculatePercentageReturnedToSoil)
+            {
+                viewItem.PercentageOfProductYieldReturnedToSoil = componentSelectionScreenCrop.PercentageOfProductYieldReturnedToSoil;
+            }
+
             viewItem.PlantCarbonInAgriculturalProduct = componentSelectionScreenCrop.PlantCarbonInAgriculturalProduct;
         }
 
@@ -686,6 +719,11 @@ namespace H.Core.Services.LandManagement
                 var secondaryCrop = this.MapDetailsScreenViewItemFromComponentScreenViewItem(cropViewItem, cropViewItem.Year);
 
                 secondaryCrop.IsSecondaryCrop = true;
+
+                // The mapper does not copy the guid, and this copy is thrown away once the details screen rows have
+                // been created from it. Carrying the entered crop's guid is what lets a secondary row record which
+                // crop it came from, the same way a main crop's row does.
+                secondaryCrop.Guid = cropViewItem.Guid;
 
                 // If the secondary crop is a perennial and the main crop is a perennial of the same type, do not add an extra view item for the perennial grown in the second slot of the same year.
                 // This is confusing on the details screen because the user will see two entries for the same year (1985 = Tame Legume && 1985 Tame Legume (cover crop))
