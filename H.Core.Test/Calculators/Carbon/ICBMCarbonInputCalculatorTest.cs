@@ -1694,6 +1694,88 @@ namespace H.Core.Test.Calculators.Carbon
             Assert.IsFalse(viewItem.HayCutExceedsWhatTheYieldAccountsFor);
         }
 
+        /// <summary>
+        /// A grazed year's yield is an output: it is worked backwards from what the animals ate (Equation 11.3.2-9),
+        /// so the details screen shows the cell read-only. Advanced input editing makes it editable and freezes what
+        /// the user types by setting DoNotRecalculateYield, and every other place that assigns a yield honours that.
+        /// This branch did not, so on a grazed year the typed value was recalculated away on the next results build -
+        /// the one year of a grazed field where advanced editing silently did nothing.
+        /// </summary>
+        [TestMethod]
+        public void AGrazedYearKeepsAYieldTheUserOverrode()
+        {
+            var farm = CreateGrazedFieldFarm(out var viewItem, out var field);
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData;
+            farm.Defaults.CarbonConcentration = 0.45;
+
+            viewItem.Area = 1;
+            viewItem.TotalCarbonLossesByGrazingAnimals = 1667;
+            viewItem.Yield = 4242;
+            viewItem.DoNotRecalculateYield = true;
+
+            _sut.AssignInputs(null, viewItem, null, farm, new List<AnimalComponentEmissionsResults>());
+
+            Assert.AreEqual(4242, viewItem.Yield, 0.0001,
+                "the yield the user typed was recalculated away");
+        }
+
+        /// <summary>
+        /// The companion to the test above: without the override the yield is still derived, so the guard protects a
+        /// user's value rather than disabling the derivation.
+        /// </summary>
+        [TestMethod]
+        public void AGrazedYearDerivesTheYieldWhenTheUserHasNotOverroddenIt()
+        {
+            var farm = CreateGrazedFieldFarm(out var viewItem, out var field);
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData;
+            farm.Defaults.CarbonConcentration = 0.45;
+
+            viewItem.Area = 1;
+            viewItem.TotalCarbonLossesByGrazingAnimals = 1667;
+            viewItem.Yield = 4242;
+
+            _sut.AssignInputs(null, viewItem, null, farm, new List<AnimalComponentEmissionsResults>());
+
+            // Equation 11.3.2-9 at zero grazing moisture: 1667 / 0.45 = 3704.44 kg ha^-1.
+            Assert.AreEqual(3704.44, viewItem.Yield, 0.01);
+        }
+
+        /// <summary>
+        /// Plant carbon has the same override, honoured by CalculatePlantCarbonInAgriculturalProduct and then written
+        /// over by this branch.
+        /// </summary>
+        [TestMethod]
+        public void AGrazedYearKeepsAPlantCarbonTheUserOverrode()
+        {
+            var farm = CreateGrazedFieldFarm(out var viewItem, out var field);
+            farm.YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData;
+            farm.Defaults.CarbonConcentration = 0.45;
+
+            viewItem.Area = 1;
+            viewItem.TotalCarbonLossesByGrazingAnimals = 1667;
+            viewItem.PlantCarbonInAgriculturalProduct = 999;
+            viewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct = true;
+
+            _sut.AssignInputs(null, viewItem, null, farm, new List<AnimalComponentEmissionsResults>());
+
+            Assert.AreEqual(999, viewItem.PlantCarbonInAgriculturalProduct, 0.0001,
+                "the plant carbon the user typed was recalculated away");
+        }
+
+        /// <summary>
+        /// Why the two tests above matter on an IPCC Tier 2 farm as well as an ICBM one. Tier 2 can only calculate
+        /// inputs for a crop that has a slope in Table 9, and the perennial forages carry a -9 placeholder there, so
+        /// they fall back to this calculator. A grazed tame grass field reaches the code above under either model.
+        /// </summary>
+        [TestMethod]
+        public void ATameGrassFieldCannotUseTheTierTwoInputCalculator()
+        {
+            var tierTwo = new IPCCTier2CarbonInputCalculator();
+
+            Assert.IsFalse(tierTwo.CanCalculateInputsForCrop(new CropViewItem() {CropType = CropType.TameGrass}),
+                "if this becomes true, tame grass no longer falls back to the ICBM input calculator");
+        }
+
         private static Farm CreateGrazedFieldFarm(out CropViewItem viewItem, out FieldSystemComponent field)
         {
             var farm = new Farm();

@@ -180,6 +180,253 @@ namespace H.Core.Services.LandManagement
             return stageState;
         }
 
+        /// <summary>
+        /// Clears every manual override on the details screen and puts the three overridable inputs back to their
+        /// calculated values, in place on the items the screen is bound to.
+        ///
+        /// The results pipeline cannot do this. CalculateFinalResults merges the details items into copies and
+        /// calculates over those, so clearing the flags and recalculating leaves the screen showing the number the
+        /// user typed - no longer marked as an override, and so indistinguishable from a calculated value, while being
+        /// free to change at the next recalculation.
+        ///
+        /// Rebuilding the stage state would also do it, and would throw away every other input on the screen along
+        /// with the overrides, so each row is restored in place instead: back to the crop it was created from on the
+        /// component selection screen, which is the state a rebuild would start from, and then derived again.
+        ///
+        /// Restoring before deriving is what makes this complete. The derivation does not reach every row - it leaves
+        /// a Custom field's yields alone, and only perennials have a percentage returned to soil derived for them - so
+        /// deriving alone would leave those rows holding the number the user typed with the flag that protected it now
+        /// cleared, which is the state this method exists to get out of.
+        /// </summary>
+        public void ResetOverriddenInputs(Farm farm)
+        {
+            var stageState = this.GetStageState(farm);
+            if (stageState == null)
+            {
+                return;
+            }
+
+            foreach (var fieldSystemComponent in farm.FieldSystemComponents)
+            {
+                var managementPeriods = GetManagementPeriods(fieldSystemComponent);
+
+                // A field's rows all carry the current period's guid - AssignInitialProperties assigns it so the
+                // results screen can group a field's rows together - so the period a row belongs to has to be resolved
+                // from the crop it was created from. Each period has its own rotation and the yield a row gets can
+                // depend on it (an Average yield is the mean of its own period's crops), so the periods are derived
+                // separately here, as they are when the screen is first built.
+                var itemsByPeriod = stageState.DetailsScreenViewCropViewItems
+                    .Where(viewItem => viewItem.FieldSystemComponentGuid == fieldSystemComponent.Guid)
+                    .GroupBy(viewItem => GetManagementPeriodForItem(managementPeriods, viewItem) ?? fieldSystemComponent);
+
+                foreach (var grouping in itemsByPeriod)
+                {
+                    var managementPeriod = grouping.Key;
+                    var viewItems = grouping.ToList();
+
+                    var moistureToPutBack = new List<BorrowedMoisture>();
+                    var restoredItems = new List<CropViewItem>();
+
+                    foreach (var viewItem in viewItems)
+                    {
+                        var componentSelectionScreenCrop = GetComponentSelectionScreenCropForItem(managementPeriod, viewItem);
+                        if (componentSelectionScreenCrop == null)
+                        {
+                            // There is nothing to put this row back to - the crop it was created from is gone, or the
+                            // row was built before a secondary crop's row recorded a resolvable one. Its override is
+                            // left standing: clearing the flag would leave the user's number in the calculation with
+                            // nothing saying it was theirs, which is the state this method exists to prevent. The row
+                            // becomes resettable again once the screen is rebuilt.
+                            continue;
+                        }
+
+                        // Restored before the flags are cleared, since which inputs are put back depends on which
+                        // ones the user had frozen.
+                        RestoreOverridableInputs(componentSelectionScreenCrop, viewItem);
+
+                        // A hayed row's yield is its harvested dry matter scaled up by the standing crop's moisture,
+                        // and the moisture the row carries afterwards is the hay's - PostProcessPerennials assigns it
+                        // once the yield has been derived. Repeating the derivation against the row as it stands would
+                        // scale by the hay's moisture and change the yield of a row nobody overrode, so the entered
+                        // moisture is borrowed for the derivation and the row is put back to what it was showing. The
+                        // moisture is not one of the inputs being reset, so it has to end where it started.
+                        //
+                        // Both forms are carried. The percentage writes through to the fraction only when its value
+                        // changes, so setting one of them alone leaves the row holding two moistures that disagree,
+                        // and the passes below do not all read the same one.
+                        if (YieldInputPolicy.HasHayedHarvest(viewItem))
+                        {
+                            moistureToPutBack.Add(BorrowedMoisture.From(viewItem));
+
+                            SetMoisture(
+                                viewItem,
+                                componentSelectionScreenCrop.MoistureContentOfCropPercentage,
+                                componentSelectionScreenCrop.MoistureContentOfCrop);
+                        }
+
+                        ClearOverrideFlags(viewItem);
+
+                        restoredItems.Add(viewItem);
+                    }
+
+                    // The same order the items were derived in when the screen was first built. Each step reads what
+                    // the one before it wrote, and each already honours the flags, which are now clear.
+                    _initializationService.InitializeYieldForAllYears(
+                        cropViewItems: viewItems,
+                        farm: farm,
+                        fieldSystemComponent: managementPeriod);
+
+                    this.UpdateYieldFromHarvest(viewItems);
+
+                    this.UpdatePercentageReturnsForPerennials(viewItems: viewItems);
+
+                    this.AssignCarbonInputs(viewItems: viewItems, farm: farm);
+
+                    // The nitrogen in a crop's residues is derived from its carbon inputs, and in GUI mode the final
+                    // results are calculated on the understanding that both passes have already run here - the command
+                    // line is the only caller that reprocesses them later. Without this the results would combine
+                    // restored carbon with the nitrogen derived from the discarded values.
+                    this.AssignNitrogenInputs(viewItems: viewItems, farm: farm);
+
+                    foreach (var borrowed in moistureToPutBack)
+                    {
+                        SetMoisture(borrowed.ViewItem, borrowed.Percentage, borrowed.Fraction);
+                    }
+
+                    // The carbon pass freezes a plant carbon it estimated for a later year itself (Equation 2.1.2-25),
+                    // so a row can come out of the derivation carrying a flag the user never set. Clearing them again
+                    // leaves the screen showing nothing as overridden, which is what the button says it does. Only the
+                    // rows that were restored are touched - a row whose override had to be left standing keeps it.
+                    foreach (var restoredItem in restoredItems)
+                    {
+                        ClearOverrideFlags(restoredItem);
+                    }
+
+                    // The crops the rows were created from are what a rebuilt screen starts from, so an override
+                    // marker left on one of them would pin the value again on the new rows. Nothing writes these from
+                    // the details screen, so this is a sweep rather than a correction - and it is done here rather
+                    // than by the caller, which cannot clear them before this runs without hiding from it which
+                    // inputs the user had frozen.
+                    foreach (var crop in managementPeriod.CropViewItems.Concat(managementPeriod.CoverCrops))
+                    {
+                        ClearOverrideFlags(crop);
+                    }
+                }
+            }
+        }
+
+        private static void ClearOverrideFlags(CropViewItem viewItem)
+        {
+            viewItem.DoNotRecalculateYield = false;
+            viewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct = false;
+            viewItem.DoNotRecalculatePercentageReturnedToSoil = false;
+        }
+
+        /// <summary>
+        /// Both forms of a row's crop moisture, in the one order that leaves them agreeing: the percentage first,
+        /// since assigning it writes a converted value into the fraction, and then the fraction itself.
+        /// </summary>
+        private static void SetMoisture(CropViewItem viewItem, double percentage, double fraction)
+        {
+            viewItem.MoistureContentOfCropPercentage = percentage;
+            viewItem.MoistureContentOfCrop = fraction;
+        }
+
+        /// <summary>
+        /// A row's crop moisture, held while the reset derives a yield from a different one.
+        /// </summary>
+        private class BorrowedMoisture
+        {
+            public CropViewItem ViewItem { get; private set; }
+
+            public double Percentage { get; private set; }
+
+            public double Fraction { get; private set; }
+
+            public static BorrowedMoisture From(CropViewItem viewItem)
+            {
+                return new BorrowedMoisture()
+                {
+                    ViewItem = viewItem,
+                    Percentage = viewItem.MoistureContentOfCropPercentage,
+                    Fraction = viewItem.MoistureContentOfCrop,
+                };
+            }
+        }
+
+        /// <summary>
+        /// A field's management periods, oldest first: its historical period(s), the current one, then its projected
+        /// period(s). The same order CreateDetailViewItems builds them in.
+        /// </summary>
+        private static List<FieldSystemComponent> GetManagementPeriods(FieldSystemComponent fieldSystemComponent)
+        {
+            var result = new List<FieldSystemComponent>();
+
+            result.AddRange(fieldSystemComponent.HistoricalComponents.OfType<FieldSystemComponent>());
+            result.Add(fieldSystemComponent);
+            result.AddRange(fieldSystemComponent.ProjectedComponents.OfType<FieldSystemComponent>());
+
+            return result;
+        }
+
+        /// <summary>
+        /// The management period holding the component selection screen crop a details screen row was created from,
+        /// or null when that crop can no longer be found - a row created before the user changed the rotation, say.
+        /// </summary>
+        private static FieldSystemComponent GetManagementPeriodForItem(
+            IEnumerable<FieldSystemComponent> managementPeriods,
+            CropViewItem viewItem)
+        {
+            return managementPeriods.FirstOrDefault(
+                managementPeriod => GetComponentSelectionScreenCropForItem(managementPeriod, viewItem) != null);
+        }
+
+        /// <summary>
+        /// The component selection screen crop a details screen row was created from. A row's main crop is held in
+        /// CropViewItems and a secondary crop in CoverCrops, so both are searched.
+        /// </summary>
+        private static CropViewItem GetComponentSelectionScreenCropForItem(
+            FieldSystemComponent managementPeriod,
+            CropViewItem viewItem)
+        {
+            return managementPeriod.CropViewItems
+                .Concat(managementPeriod.CoverCrops)
+                .FirstOrDefault(crop => crop.Guid == viewItem.DetailViewItemToComponentSelectionViewItemMap);
+        }
+
+        /// <summary>
+        /// Puts the inputs the user froze back to the values the details screen row was created with. The mapper that
+        /// creates a row copies all three from the component selection screen crop, so these are what a rebuilt screen
+        /// would start from.
+        ///
+        /// Only an input that was actually frozen is put back. A yield under the Custom method and an annual crop's
+        /// percentage of product returned to soil are ordinary editable inputs outside advanced input editing
+        /// (see YieldInputPolicy), so a row where the user typed one of those and overrode nothing is not this
+        /// method's business - resetting another row's override must not discard it.
+        ///
+        /// Plant carbon is the exception and is restored on every row. It is never editable outside advanced input
+        /// editing, so there is no ordinary input to protect, and the carbon pass needs it: a perennial establishment
+        /// year reads the following year's plant carbon to estimate its own, and the pass works forwards through the
+        /// years, so a discarded override left in place on a later row would be read as though it had been calculated
+        /// before that row's turn to be recalculated came.
+        /// </summary>
+        private static void RestoreOverridableInputs(
+            CropViewItem componentSelectionScreenCrop,
+            CropViewItem viewItem)
+        {
+            if (viewItem.DoNotRecalculateYield)
+            {
+                viewItem.Yield = componentSelectionScreenCrop.Yield;
+            }
+
+            if (viewItem.DoNotRecalculatePercentageReturnedToSoil)
+            {
+                viewItem.PercentageOfProductYieldReturnedToSoil = componentSelectionScreenCrop.PercentageOfProductYieldReturnedToSoil;
+            }
+
+            viewItem.PlantCarbonInAgriculturalProduct = componentSelectionScreenCrop.PlantCarbonInAgriculturalProduct;
+        }
+
         public void InitializeStageState(Farm farm)
         {
             var stageState = this.GetStageState(farm);
@@ -563,6 +810,11 @@ namespace H.Core.Services.LandManagement
                 var secondaryCrop = this.MapDetailsScreenViewItemFromComponentScreenViewItem(cropViewItem, cropViewItem.Year);
 
                 secondaryCrop.IsSecondaryCrop = true;
+
+                // The mapper does not copy the guid, and this copy is thrown away once the details screen rows have
+                // been created from it. Carrying the entered crop's guid is what lets a secondary row record which
+                // crop it came from, the same way a main crop's row does.
+                secondaryCrop.Guid = cropViewItem.Guid;
 
                 // If the secondary crop is a perennial and the main crop is a perennial of the same type, do not add an extra view item for the perennial grown in the second slot of the same year.
                 // This is confusing on the details screen because the user will see two entries for the same year (1985 = Tame Legume && 1985 Tame Legume (cover crop))

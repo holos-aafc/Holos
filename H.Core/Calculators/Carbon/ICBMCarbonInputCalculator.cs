@@ -63,7 +63,10 @@ namespace H.Core.Calculators.Carbon
                 var totalPlantCarbon = currentYearViewItem.TotalCarbonLossesByGrazingAnimals + carbonGrownAndBaled;
 
                 // Equation 11.3.2-6
-                currentYearViewItem.PlantCarbonInAgriculturalProduct = totalPlantCarbon / currentYearViewItem.Area;
+                if (currentYearViewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct == false)
+                {
+                    currentYearViewItem.PlantCarbonInAgriculturalProduct = totalPlantCarbon / currentYearViewItem.Area;
+                }
 
                 // Equation 11.3.2-8. Both removals are subtracted: what the animals ate, and what was baled off. The
                 // equation as published brackets these as (uptake - export), which adds the baled hay back to the soil;
@@ -76,8 +79,14 @@ namespace H.Core.Calculators.Carbon
                 var moistureContent = currentYearViewItem.GrazingViewItems.Any() ? currentYearViewItem.GrazingViewItems.Average(x => x.MoistureContentAsPercentage) : 1;
                 var totalYieldForArea = (totalPlantCarbon / farm.Defaults.CarbonConcentration) / (1 - (moistureContent / 100.0));
 
-                // Convert to per hectare
-                currentYearViewItem.Yield = totalYieldForArea / currentYearViewItem.Area;
+                // Convert to per hectare. A grazed year's yield is normally an output, worked backwards from what the
+                // animals ate, so the details screen shows it read-only. Advanced input editing makes it editable and
+                // sets DoNotRecalculateYield, and that override is honoured here as it is everywhere else the yield is
+                // assigned - without this the value the user typed is recalculated away on the next results build.
+                if (currentYearViewItem.DoNotRecalculateYield == false)
+                {
+                    currentYearViewItem.Yield = totalYieldForArea / currentYearViewItem.Area;
+                }
 
                 // Report the share that actually stayed on the field. Until now this read 100 - utilization, which
                 // describes only what the animals left and ignores a hay cut taken from the same standing crop, so the

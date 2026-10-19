@@ -39,6 +39,12 @@ namespace H.Core.Services.LandManagement
         FieldSystemDetailsStageState GetStageState(Farm farm);
         CropViewItem MapDetailsScreenViewItemFromComponentScreenViewItem(CropViewItem viewItem, int year);
         void InitializeStageState(Farm farm);
+
+        /// <summary>
+        /// Clears every manual override on the details screen and puts the overridable inputs back to their calculated
+        /// values, without rebuilding the rest of the screen.
+        /// </summary>
+        void ResetOverriddenInputs(Farm farm);
         List<CropViewItem> CalculateFinalResults(Farm farm);
         List<AnimalComponentEmissionsResults> AnimalResults { get; set; }
 

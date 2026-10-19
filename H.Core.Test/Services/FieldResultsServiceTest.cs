@@ -2232,6 +2232,730 @@ namespace H.Core.Test.Services
             Assert.AreEqual(1, viewItem4.PercentageOfRootsReturnedToSoil);
         }
 
+        #region Reset overrides
+
+        /// <summary>
+        /// The reset button on the details screen. Clearing the flags is not enough on its own: the results pipeline
+        /// merges the details items into copies and calculates over those, so the screen would go on showing the
+        /// number the user typed, no longer marked as an override and free to change at the next recalculation.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsPutsAnOverriddenYieldBack()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(out var viewItem);
+
+            var calculatedYield = viewItem.Yield;
+
+            viewItem.Yield = 4242;
+            viewItem.DoNotRecalculateYield = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.IsFalse(viewItem.DoNotRecalculateYield, "the override flag was not cleared");
+            Assert.AreNotEqual(4242, viewItem.Yield, 0.0001,
+                "the typed value survived the reset, so the cell would show it as though it were calculated");
+            Assert.AreEqual(calculatedYield, viewItem.Yield, 0.1,
+                "the yield did not return to the value Holos calculates");
+        }
+
+        /// <summary>
+        /// The assertion that stops the tempting fix. Rebuilding the stage state would also restore the overridden
+        /// values, and would discard every other input on the screen while doing it.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsLeavesOtherInputsOnTheRowAlone()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(out var viewItem);
+
+            viewItem.Yield = 4242;
+            viewItem.DoNotRecalculateYield = true;
+
+            viewItem.PercentageOfStrawReturnedToSoil = 17;
+            viewItem.TillageType = TillageType.NoTill;
+            viewItem.PercentageOfRootsReturnedToSoil = 23;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.AreEqual(17, viewItem.PercentageOfStrawReturnedToSoil, 0.0001,
+                "an unrelated input on the same row was reset as well");
+            Assert.AreEqual(TillageType.NoTill, viewItem.TillageType);
+            Assert.AreEqual(23, viewItem.PercentageOfRootsReturnedToSoil, 0.0001);
+        }
+
+        /// <summary>
+        /// The reset clears every override on the screen, not only the yield.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsClearsEveryOverrideFlag()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(out var viewItem);
+
+            viewItem.DoNotRecalculateYield = true;
+            viewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct = true;
+            viewItem.DoNotRecalculatePercentageReturnedToSoil = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.IsFalse(viewItem.DoNotRecalculateYield);
+            Assert.IsFalse(viewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct);
+            Assert.IsFalse(viewItem.DoNotRecalculatePercentageReturnedToSoil);
+        }
+
+        /// <summary>
+        /// Under Custom yield assignment there is nothing to re-derive - InitializeYieldForYear returns without
+        /// touching the yield, and UpdateYieldFromHarvest only derives a perennial's - so the value has to be put back
+        /// from the crop the row was created with. Clearing the flag alone would leave the typed number in a cell that
+        /// no longer shows it as an override.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsPutsAnOverriddenYieldBackOnACustomYieldFarm()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(
+                out var viewItem,
+                yieldAssignmentMethod: YieldAssignmentMethod.Custom,
+                yieldOnComponentSelectionScreenCrops: 3000);
+
+            Assert.AreEqual(3000, viewItem.Yield, 0.0001, "this test needs the row to start from the entered yield");
+
+            viewItem.Yield = 4242;
+            viewItem.DoNotRecalculateYield = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.IsFalse(viewItem.DoNotRecalculateYield, "the override flag was not cleared");
+            Assert.AreEqual(3000, viewItem.Yield, 0.0001,
+                "the typed value survived the reset on a Custom farm, so the cell would show it as though it were entered");
+        }
+
+        /// <summary>
+        /// Only a perennial's percentage returned to soil is derived (UpdatePercentageReturnsForPerennials skips
+        /// everything else), so an annual's has to be put back from the crop the row was created with. The percentage
+        /// is read by the carbon calculation, so a stale override is not only a display problem.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsPutsAnOverriddenPercentageReturnedBackOnAnAnnualCrop()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(out var viewItem);
+
+            Assert.IsTrue(viewItem.CropType.IsAnnual(), "this test is about the crops the perennial derivation skips");
+
+            var calculatedPercentage = viewItem.PercentageOfProductYieldReturnedToSoil;
+
+            viewItem.PercentageOfProductYieldReturnedToSoil = 42;
+            viewItem.DoNotRecalculatePercentageReturnedToSoil = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.IsFalse(viewItem.DoNotRecalculatePercentageReturnedToSoil, "the override flag was not cleared");
+            Assert.AreEqual(calculatedPercentage, viewItem.PercentageOfProductYieldReturnedToSoil, 0.0001,
+                "the typed percentage survived the reset, and the carbon calculation reads it");
+        }
+
+        /// <summary>
+        /// Every row of a field carries the current period's guid, so the period a row belongs to has to be resolved
+        /// from the crop it was created from. An Average yield is the mean of its own period's rotation, so resolving
+        /// this wrongly rewrites a historical row's yield with the current rotation's mean - a row the user never
+        /// overrode.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsUsesEachManagementPeriodsOwnRotationForAnAverageYield()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(
+                out var viewItem,
+                yieldOnComponentSelectionScreenCrops: 1000);
+
+            var currentPeriod = farm.FieldSystemComponents.Single();
+
+            var historicalPeriod = new FieldSystemComponent()
+            {
+                CurrentPeriodComponentGuid = currentPeriod.Guid,
+                TimePeriodCategory = TimePeriodCategory.Past,
+                StartYear = 2014,
+                EndYear = 2015,
+                BeginOrderingAtStartYearOfRotation = true,
+            };
+
+            historicalPeriod.CropViewItems.Add(new CropViewItem()
+            {
+                CropType = CropType.Wheat,
+                Year = 2014,
+                Area = 1,
+                Yield = 100,
+            });
+
+            currentPeriod.HistoricalComponents.Add(historicalPeriod);
+
+            _resultsService.InitializeStageState(farm);
+
+            var stageState = _resultsService.GetStageState(farm);
+            var historicalItem = stageState.DetailsScreenViewCropViewItems.Single(x => x.Year == 2014);
+
+            Assert.AreEqual(100, historicalItem.Yield, 0.0001,
+                "this test needs the historical period to start from its own rotation's average");
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.AreEqual(100, historicalItem.Yield, 0.0001,
+                "the reset gave a historical row the current rotation's average instead of its own period's");
+        }
+
+        /// <summary>
+        /// A perennial establishment year estimates its own plant carbon from the following year's, and the carbon
+        /// pass works forwards through the years, so the row holding a discarded override is still holding it when the
+        /// establishment year is calculated. Resetting has to put that value back before the pass, not only clear the
+        /// flag, or the establishment year's carbon is derived from the number the user threw away.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsDoesNotLetADiscardedPlantCarbonOverrideReachTheEstablishmentYear()
+        {
+            var untouchedFarm = BuildPerennialFarmWithAnEstablishmentYear(out var untouchedEstablishmentYear, out _);
+            _resultsService.ResetOverriddenInputs(untouchedFarm);
+
+            var establishmentYearCarbonWithNoOverride = untouchedEstablishmentYear.PlantCarbonInAgriculturalProduct;
+
+            Assert.IsTrue(establishmentYearCarbonWithNoOverride > 0,
+                "this test needs an establishment year whose plant carbon comes from the following year");
+
+            var farm = BuildPerennialFarmWithAnEstablishmentYear(out var establishmentYear, out var followingYear);
+
+            followingYear.PlantCarbonInAgriculturalProduct = 99999;
+            followingYear.DoNotRecalculatePlantCarbonInAgriculturalProduct = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.AreEqual(establishmentYearCarbonWithNoOverride, establishmentYear.PlantCarbonInAgriculturalProduct, 0.0001,
+                "the establishment year's plant carbon was derived from the override that had just been discarded");
+        }
+
+        /// <summary>
+        /// A two year perennial stand whose first year has no yield of its own, which is the shape that makes the
+        /// establishment year read the following year's plant carbon.
+        /// </summary>
+        private Farm BuildPerennialFarmWithAnEstablishmentYear(
+            out CropViewItem establishmentYear,
+            out CropViewItem followingYear)
+        {
+            var fieldSystemComponent = new FieldSystemComponent()
+            {
+                StartYear = 2016,
+                EndYear = 2017,
+                BeginOrderingAtStartYearOfRotation = true,
+            };
+
+            fieldSystemComponent.CropViewItems.Add(new CropViewItem()
+            {
+                CropType = CropType.TameGrass,
+                Year = 2016,
+                Area = 1,
+                Yield = 0,
+            });
+
+            fieldSystemComponent.CropViewItems.Add(new CropViewItem()
+            {
+                CropType = CropType.TameGrass,
+                Year = 2017,
+                Area = 1,
+                Yield = 2500,
+            });
+
+            var farm = new Farm()
+            {
+                YieldAssignmentMethod = YieldAssignmentMethod.Custom,
+                Defaults = new Defaults()
+                {
+                    CarbonModellingStrategy = CarbonModellingStrategies.ICBM,
+                },
+                GeographicData = new GeographicData()
+                {
+                    DefaultSoilData = new SoilData(),
+                },
+            };
+
+            farm.Components.Add(fieldSystemComponent);
+
+            _resultsService.CreateDetailViewItems(farm);
+
+            var stageState = _resultsService.GetStageState(farm);
+
+            establishmentYear = stageState.DetailsScreenViewCropViewItems.Single(x => x.Year == 2016);
+            followingYear = stageState.DetailsScreenViewCropViewItems.Single(x => x.Year == 2017);
+
+            return farm;
+        }
+
+        /// <summary>
+        /// A yield under the Custom method is an ordinary editable input outside advanced input editing, so a row the
+        /// user typed one into without overriding anything is not the reset's business. Resetting an override
+        /// somewhere else on the screen must leave it alone.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsLeavesAYieldTheUserTypedWithoutOverridingIt()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(
+                out var viewItem,
+                yieldAssignmentMethod: YieldAssignmentMethod.Custom,
+                yieldOnComponentSelectionScreenCrops: 3000);
+
+            // Typed in, not overridden - no flag is set for a cell that is editable without advanced input editing.
+            viewItem.Yield = 5000;
+
+            // Something else on the screen is overridden, which is what the user presses the button for.
+            viewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.AreEqual(5000, viewItem.Yield, 0.0001,
+                "the reset discarded a yield the user entered normally rather than overrode");
+        }
+
+        /// <summary>
+        /// An annual crop's percentage of product returned to soil is an editable residue parameter outside advanced
+        /// input editing, so the same rule applies to it.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsLeavesAnAnnualPercentageReturnedTheUserTypedWithoutOverridingIt()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(out var viewItem);
+
+            Assert.IsTrue(viewItem.CropType.IsAnnual(), "an annual's percentage returned is editable in normal mode");
+
+            viewItem.PercentageOfProductYieldReturnedToSoil = 42;
+
+            viewItem.DoNotRecalculateYield = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.AreEqual(42, viewItem.PercentageOfProductYieldReturnedToSoil, 0.0001,
+                "the reset discarded a percentage the user entered normally rather than overrode");
+        }
+
+        /// <summary>
+        /// The nitrogen in a crop's residues is derived from its carbon inputs, and in GUI mode the final results are
+        /// calculated on the understanding that both passes already ran when the screen was built. Leaving the
+        /// nitrogen pass out of the reset would combine restored carbon with the nitrogen derived from the value the
+        /// user discarded.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsRefreshesNitrogenInputs()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(
+                out var viewItem,
+                yieldOnComponentSelectionScreenCrops: 1000);
+
+            // Residue nitrogen is the crop's carbon inputs at the crop's nitrogen concentrations, and a crop built
+            // for a test carries neither the coefficients that turn a yield into carbon nor the concentrations.
+            viewItem.BiomassCoefficientProduct = 0.4;
+            viewItem.BiomassCoefficientStraw = 0.3;
+            viewItem.PercentageOfProductYieldReturnedToSoil = 2;
+            viewItem.PercentageOfStrawReturnedToSoil = 100;
+            viewItem.NitrogenContentInProduct = 0.02;
+            viewItem.NitrogenContentInStraw = 0.01;
+
+            var viewItems = new List<CropViewItem>() { viewItem };
+
+            _resultsService.AssignCarbonInputs(viewItems, farm);
+            _resultsService.AssignNitrogenInputs(viewItems, farm);
+
+            var calculatedNitrogenInputs = viewItem.AbovegroundNitrogenInputs;
+
+            Assert.IsTrue(calculatedNitrogenInputs > 0, "this test needs a row with residue nitrogen to begin with");
+
+            viewItem.Yield = 40000;
+            viewItem.DoNotRecalculateYield = true;
+
+            _resultsService.AssignCarbonInputs(viewItems, farm);
+            _resultsService.AssignNitrogenInputs(viewItems, farm);
+
+            Assert.AreNotEqual(calculatedNitrogenInputs, viewItem.AbovegroundNitrogenInputs, 0.0001,
+                "this test needs the override to have moved the residue nitrogen first");
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.AreEqual(calculatedNitrogenInputs, viewItem.AbovegroundNitrogenInputs, 0.0001,
+                "the residue nitrogen still came from the yield the user discarded");
+        }
+
+        /// <summary>
+        /// A secondary crop's row is created from a throwaway copy of the crop the user entered, so without carrying
+        /// that crop's identity the row cannot say where it came from - and the reset has nothing to restore it from.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsPutsASecondaryCropsOverriddenYieldBack()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(
+                out _,
+                yieldAssignmentMethod: YieldAssignmentMethod.Custom,
+                yieldOnComponentSelectionScreenCrops: 3000);
+
+            var fieldSystemComponent = farm.FieldSystemComponents.Single();
+
+            fieldSystemComponent.CoverCrops.Add(new CropViewItem()
+            {
+                CropType = CropType.WinterWheat,
+                Year = 2016,
+                Area = 1,
+                Yield = 800,
+            });
+
+            _resultsService.InitializeStageState(farm);
+
+            var stageState = _resultsService.GetStageState(farm);
+            var secondaryItem = stageState.DetailsScreenViewCropViewItems.Single(x => x.IsSecondaryCrop);
+
+            Assert.AreEqual(800, secondaryItem.Yield, 0.0001, "this test needs the secondary row to start from the entered yield");
+
+            secondaryItem.Yield = 4242;
+            secondaryItem.DoNotRecalculateYield = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.IsFalse(secondaryItem.DoNotRecalculateYield, "the override flag was not cleared");
+            Assert.AreEqual(800, secondaryItem.Yield, 0.0001,
+                "a secondary crop's row could not be traced back to the crop it was created from");
+        }
+
+        /// <summary>
+        /// A hayed perennial's yield is its harvested dry matter scaled up by the standing crop's moisture, and the
+        /// moisture on the row is replaced with the hay's once the yield has been derived from it. Repeating the
+        /// derivation on the row as it stands therefore scales by the wrong number, which would change the yield of a
+        /// row nobody had overridden.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsLeavesAHayedPerennialYieldThatWasNotOverridden()
+        {
+            var farm = BuildFarmWithHayedPerennial(out var viewItem);
+
+            var yieldAfterTheScreenWasBuilt = viewItem.Yield;
+            var moistureAfterTheScreenWasBuilt = viewItem.MoistureContentOfCrop;
+            var plantCarbonAfterTheScreenWasBuilt = viewItem.PlantCarbonInAgriculturalProduct;
+
+            Assert.IsTrue(yieldAfterTheScreenWasBuilt > 0, "this test needs a yield derived from the harvest");
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.AreEqual(yieldAfterTheScreenWasBuilt, viewItem.Yield, 0.0001,
+                "the reset changed a hayed perennial's yield on a row with no override");
+            Assert.AreEqual(moistureAfterTheScreenWasBuilt, viewItem.MoistureContentOfCrop, 0.0001,
+                "the row was left showing the standing crop's moisture rather than the hay's, as a rebuilt screen would show");
+            Assert.AreEqual(plantCarbonAfterTheScreenWasBuilt, viewItem.PlantCarbonInAgriculturalProduct, 0.0001,
+                "the carbon derived from the row moved even though nothing on it was overridden");
+        }
+
+        /// <summary>
+        /// The same row once the user has overridden it: the reset has to land back on the yield the harvest gives,
+        /// which is only reachable with the moisture the derivation originally read.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsPutsAHayedPerennialYieldBackToTheHarvestDerivedValue()
+        {
+            var farm = BuildFarmWithHayedPerennial(out var viewItem);
+
+            var yieldAfterTheScreenWasBuilt = viewItem.Yield;
+
+            viewItem.Yield = 4242;
+            viewItem.DoNotRecalculateYield = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.AreEqual(yieldAfterTheScreenWasBuilt, viewItem.Yield, 0.0001,
+                "the reset did not put the hayed perennial's yield back to what the harvest gives");
+        }
+
+        /// <summary>
+        /// A row whose source crop cannot be found - a stage state saved before a secondary crop's row recorded a
+        /// resolvable one, or a rotation the user has since changed - has nothing to be put back to. Clearing its flag
+        /// would leave the user's number in the calculation with nothing marking it as theirs, which is the state the
+        /// reset exists to prevent, so the override stands.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsKeepsAnOverrideItCannotPutBack()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(
+                out var viewItem,
+                yieldAssignmentMethod: YieldAssignmentMethod.Custom,
+                yieldOnComponentSelectionScreenCrops: 3000);
+
+            // The row can no longer say which crop it came from.
+            viewItem.DetailViewItemToComponentSelectionViewItemMap = Guid.NewGuid();
+
+            viewItem.Yield = 4242;
+            viewItem.DoNotRecalculateYield = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.IsTrue(viewItem.DoNotRecalculateYield,
+                "the override was cleared on a row the reset had nothing to put back, so the typed value is now indistinguishable from a calculated one");
+            Assert.AreEqual(4242, viewItem.Yield, 0.0001, "the value and its marking have to agree either way");
+        }
+
+        /// <summary>
+        /// A perennial field cut for hay, built through the same path the details screen uses so that the moisture the
+        /// yield was derived from has already been replaced by the hay's by the time the reset runs.
+        /// </summary>
+        private Farm BuildFarmWithHayedPerennial(out CropViewItem viewItem)
+        {
+            var fieldSystemComponent = new FieldSystemComponent()
+            {
+                StartYear = 2016,
+                EndYear = 2016,
+                BeginOrderingAtStartYearOfRotation = true,
+            };
+
+            var crop = new CropViewItem()
+            {
+                CropType = CropType.TameGrass,
+                Year = 2016,
+                Area = 1,
+                Yield = 1200,
+                MoistureContentOfCropPercentage = 80,
+            };
+
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+            {
+                Start = new DateTime(2016, 8, 1),
+                ForageActivity = ForageActivities.Hayed,
+                TotalNumberOfBalesHarvested = 10,
+                BaleWeight = 100,
+                MoistureContentAsPercentage = 15,
+                HarvestLossPercentage = 10,
+            });
+
+            fieldSystemComponent.CropViewItems.Add(crop);
+
+            var farm = new Farm()
+            {
+                YieldAssignmentMethod = YieldAssignmentMethod.Custom,
+                Defaults = new Defaults()
+                {
+                    CarbonModellingStrategy = CarbonModellingStrategies.ICBM,
+                },
+                GeographicData = new GeographicData()
+                {
+                    DefaultSoilData = new SoilData(),
+                },
+            };
+
+            farm.Components.Add(fieldSystemComponent);
+
+            // The whole build, so PostProcessPerennials runs and replaces the crop moisture with the hay's.
+            _resultsService.CreateDetailViewItems(farm);
+
+            var stageState = _resultsService.GetStageState(farm);
+
+            viewItem = stageState.DetailsScreenViewCropViewItems.Single(x => x.Year == 2016);
+
+            return farm;
+        }
+
+        /// <summary>
+        /// The crops the rows were created from are what a rebuilt screen starts from, so an override marker left on
+        /// one of them would pin the value again on the new rows. The reset clears them itself: a caller that cleared
+        /// them beforehand would also clear the row flags, and the reset reads those to decide which inputs to put
+        /// back.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsClearsTheOverrideFlagsOnTheCropsTheRowsCameFrom()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(out var viewItem);
+
+            var componentSelectionScreenCrop = farm.FieldSystemComponents
+                .Single()
+                .CropViewItems
+                .Single(crop => crop.Guid == viewItem.DetailViewItemToComponentSelectionViewItemMap);
+
+            componentSelectionScreenCrop.DoNotRecalculateYield = true;
+            componentSelectionScreenCrop.DoNotRecalculatePlantCarbonInAgriculturalProduct = true;
+            componentSelectionScreenCrop.DoNotRecalculatePercentageReturnedToSoil = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.IsFalse(componentSelectionScreenCrop.DoNotRecalculateYield);
+            Assert.IsFalse(componentSelectionScreenCrop.DoNotRecalculatePlantCarbonInAgriculturalProduct);
+            Assert.IsFalse(componentSelectionScreenCrop.DoNotRecalculatePercentageReturnedToSoil);
+        }
+
+        /// <summary>
+        /// The carbon pass freezes a plant carbon it estimated for a later year itself, so a row can come out of the
+        /// reset's own derivation carrying a flag the user never set - and the cell would be marked as an override
+        /// immediately after the button that clears overrides.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsLeavesNothingMarkedAfterItsOwnDerivation()
+        {
+            var farm = BuildPerennialFarmWithNoYieldInEitherYear(out var establishmentYear, out var followingYear);
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.IsFalse(establishmentYear.DoNotRecalculatePlantCarbonInAgriculturalProduct);
+            Assert.IsFalse(followingYear.DoNotRecalculatePlantCarbonInAgriculturalProduct,
+                "the carbon pass froze the plant carbon it estimated for this year and the reset left it marked");
+        }
+
+        /// <summary>
+        /// A stand with nothing to work from in either year, which is the shape that makes the carbon pass estimate a
+        /// plant carbon for the following year and freeze it.
+        /// </summary>
+        private Farm BuildPerennialFarmWithNoYieldInEitherYear(
+            out CropViewItem establishmentYear,
+            out CropViewItem followingYear)
+        {
+            var fieldSystemComponent = new FieldSystemComponent()
+            {
+                StartYear = 2016,
+                EndYear = 2017,
+                BeginOrderingAtStartYearOfRotation = true,
+            };
+
+            fieldSystemComponent.CropViewItems.Add(new CropViewItem()
+            {
+                CropType = CropType.TameGrass,
+                Year = 2016,
+                Area = 1,
+                Yield = 0,
+            });
+
+            fieldSystemComponent.CropViewItems.Add(new CropViewItem()
+            {
+                CropType = CropType.TameGrass,
+                Year = 2017,
+                Area = 1,
+                Yield = 0,
+            });
+
+            var farm = new Farm()
+            {
+                YieldAssignmentMethod = YieldAssignmentMethod.Custom,
+                Defaults = new Defaults()
+                {
+                    CarbonModellingStrategy = CarbonModellingStrategies.ICBM,
+                },
+                GeographicData = new GeographicData()
+                {
+                    DefaultSoilData = new SoilData(),
+                },
+            };
+
+            farm.Components.Add(fieldSystemComponent);
+
+            _resultsService.CreateDetailViewItems(farm);
+
+            var stageState = _resultsService.GetStageState(farm);
+
+            establishmentYear = stageState.DetailsScreenViewCropViewItems.Single(x => x.Year == 2016);
+            followingYear = stageState.DetailsScreenViewCropViewItems.Single(x => x.Year == 2017);
+
+            return farm;
+        }
+
+        /// <summary>
+        /// The button resets every field on the farm, so a second field must not be left out - or missed rows would
+        /// keep a value whose marking had been cleared.
+        /// </summary>
+        [TestMethod]
+        public void ResetOverriddenInputsReachesEveryFieldOnTheFarm()
+        {
+            var farm = BuildFarmWithDetailsScreenItems(
+                out var firstFieldItem,
+                yieldAssignmentMethod: YieldAssignmentMethod.Custom,
+                yieldOnComponentSelectionScreenCrops: 3000);
+
+            var secondField = new FieldSystemComponent()
+            {
+                StartYear = 2016,
+                EndYear = 2016,
+                BeginOrderingAtStartYearOfRotation = true,
+            };
+
+            secondField.CropViewItems.Add(new CropViewItem()
+            {
+                CropType = CropType.Barley,
+                Year = 2016,
+                Area = 1,
+                Yield = 1500,
+            });
+
+            farm.Components.Add(secondField);
+
+            _resultsService.InitializeStageState(farm);
+
+            var stageState = _resultsService.GetStageState(farm);
+
+            firstFieldItem = stageState.DetailsScreenViewCropViewItems
+                .First(x => x.FieldSystemComponentGuid != secondField.Guid);
+
+            var secondFieldItem = stageState.DetailsScreenViewCropViewItems
+                .Single(x => x.FieldSystemComponentGuid == secondField.Guid);
+
+            firstFieldItem.Yield = 4242;
+            firstFieldItem.DoNotRecalculateYield = true;
+
+            secondFieldItem.Yield = 9999;
+            secondFieldItem.DoNotRecalculateYield = true;
+
+            _resultsService.ResetOverriddenInputs(farm);
+
+            Assert.AreEqual(3000, firstFieldItem.Yield, 0.0001, "the first field was not reset");
+            Assert.AreEqual(1500, secondFieldItem.Yield, 0.0001, "the second field on the farm was left out of the reset");
+        }
+
+        /// <summary>
+        /// A farm whose details screen has been built, so the reset has the items the grid binds to rather than the
+        /// field's own crop view items.
+        /// </summary>
+        private Farm BuildFarmWithDetailsScreenItems(
+            out CropViewItem viewItem,
+            YieldAssignmentMethod yieldAssignmentMethod = YieldAssignmentMethod.Average,
+            double yieldOnComponentSelectionScreenCrops = 0)
+        {
+            var fieldSystemComponent = new FieldSystemComponent()
+            {
+                StartYear = 2016,
+                EndYear = 2017,
+                BeginOrderingAtStartYearOfRotation = true,
+            };
+
+            fieldSystemComponent.CropViewItems.Add(new CropViewItem()
+            {
+                CropType = CropType.Wheat,
+                Year = 2016,
+                Area = 1,
+                Yield = yieldOnComponentSelectionScreenCrops,
+            });
+
+            fieldSystemComponent.CropViewItems.Add(new CropViewItem()
+            {
+                CropType = CropType.Oats,
+                Year = 2017,
+                Area = 1,
+                Yield = yieldOnComponentSelectionScreenCrops,
+            });
+
+            var farm = new Farm()
+            {
+                YieldAssignmentMethod = yieldAssignmentMethod,
+                Defaults = new Defaults()
+                {
+                    CarbonModellingStrategy = CarbonModellingStrategies.ICBM,
+                },
+                GeographicData = new GeographicData()
+                {
+                    DefaultSoilData = new SoilData(),
+                },
+            };
+
+            farm.Components.Add(fieldSystemComponent);
+
+            _resultsService.CreateDetailViewItems(farm);
+
+            var stageState = _resultsService.GetStageState(farm);
+
+            viewItem = stageState.DetailsScreenViewCropViewItems.First(x => x.Year == 2016);
+
+            return farm;
+        }
+
+        #endregion
+
         #endregion
     }
 }
