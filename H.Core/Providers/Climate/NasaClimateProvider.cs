@@ -5,6 +5,7 @@ using SharpKml.Dom;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Threading;
@@ -53,6 +54,18 @@ namespace H.Core.Providers.Climate
         #region Properties
 
         public TimeSpan Expiry { get; set; } = TimeSpan.FromMinutes(60);
+
+        /// <summary>
+        /// The window used to check the precipitation scale, and how closely the days of it have to agree before the
+        /// response is treated as uniformly scaled.
+        /// </summary>
+        private const string CalibrationStartDate = "20200601";
+        private const string CalibrationEndDate = "20200630";
+        private const int MinimumCalibrationDays = 3;
+        private const double CalibrationAgreement = 0.01;
+
+        private static readonly Dictionary<string, Tuple<DateTime, double>> ScalingFactors = new Dictionary<string, Tuple<DateTime, double>>();
+        private static readonly object ScalingFactorsLock = new object();
         public DateTime StartDate { get; set; } = new DateTime(1981, 1, 1);
         public DateTime EndDate { get; set; } = DateTime.Now;
 
@@ -208,7 +221,194 @@ namespace H.Core.Providers.Climate
                 customClimateData.Add(data);
             }
 
+            this.CorrectPrecipitationScale(latitude, longitude, customClimateData);
+
             return customClimateData;
+        }
+
+        /// <summary>
+        /// Puts the precipitation series back to its true scale when the service has returned it multiplied.
+        ///
+        /// A request that reaches into the months the service has not finished reanalysing has returned every
+        /// precipitation value in the response at twenty four times its true size, historical days included, while
+        /// reporting the same units and leaving every other parameter alone. Holos asks for the record up to today,
+        /// so its requests fall in that case.
+        ///
+        /// The factor is measured rather than assumed - see <see cref="CalculatePrecipitationScalingFactor"/> - so
+        /// nothing is changed while the service answers consistently, and the correction stops applying by itself
+        /// once the service is fixed.
+        /// </summary>
+        private void CorrectPrecipitationScale(
+            double latitude,
+            double longitude,
+            List<DailyClimateData> customClimateData)
+        {
+            var factor = this.GetPrecipitationScalingFactor(latitude, longitude, customClimateData);
+            if (factor <= 1)
+            {
+                return;
+            }
+
+            Trace.TraceWarning(
+                $"{nameof(NasaClimateProvider)}: precipitation for lat: {latitude}, long: {longitude} was returned at " +
+                $"{factor} times its true scale and has been divided back down.");
+
+            foreach (var dailyClimateData in customClimateData)
+            {
+                dailyClimateData.MeanDailyPrecipitation = dailyClimateData.MeanDailyPrecipitation / factor;
+            }
+        }
+
+        /// <summary>
+        /// Asks the service a second time for a short window that ends well inside the settled part of the record,
+        /// where the scale has been reliable, and compares those days against the same days in the full response.
+        /// </summary>
+        private double GetPrecipitationScalingFactor(
+            double latitude,
+            double longitude,
+            List<DailyClimateData> customClimateData)
+        {
+            lock (ScalingFactorsLock)
+            {
+                var key = $"{latitude}_{longitude}";
+                if (ScalingFactors.TryGetValue(key, out var cached) && DateTime.Now - cached.Item1 < this.Expiry)
+                {
+                    return cached.Item2;
+                }
+
+                var factor = 1.0;
+
+                try
+                {
+                    var url = this.GetCalibrationApiUrl(latitude, longitude);
+
+                    var getNasaApi = Task.Run(() => GetNasaApiString(url));
+                    if (getNasaApi.Wait(TimeSpan.FromSeconds(Timeout)))
+                    {
+                        var calibrationValues = ParsePrecipitationByDate(getNasaApi.Result);
+
+                        factor = CalculatePrecipitationScalingFactor(calibrationValues, customClimateData);
+                    }
+                    else
+                    {
+                        Trace.TraceError(
+                            $"{nameof(NasaClimateProvider)}.{nameof(GetPrecipitationScalingFactor)}: the calibration " +
+                            "request did not return in time, so the precipitation scale could not be checked.");
+                    }
+                }
+                catch (Exception e)
+                {
+                    Trace.TraceError(
+                        $"{nameof(NasaClimateProvider)}.{nameof(GetPrecipitationScalingFactor)}: the precipitation " +
+                        $"scale could not be checked. Exception message: {e.Message}");
+                }
+
+                ScalingFactors[key] = new Tuple<DateTime, double>(DateTime.Now, factor);
+
+                return factor;
+            }
+        }
+
+        /// <summary>
+        /// How many times larger the precipitation in a response is than the same days asked for on their own, or 1
+        /// when it is the same size, cannot be told, or is smaller.
+        ///
+        /// Every day in a scaled response has been scaled by the same amount, so the days are required to agree with
+        /// each other before anything is divided: a set of ratios that disagree means something other than a uniform
+        /// scaling, which this is not entitled to correct. Dry days carry no information and are passed over.
+        /// </summary>
+        public static double CalculatePrecipitationScalingFactor(
+            Dictionary<DateTime, double> calibrationValues,
+            List<DailyClimateData> customClimateData)
+        {
+            if (calibrationValues == null || customClimateData == null)
+            {
+                return 1;
+            }
+
+            var byDate = new Dictionary<DateTime, double>();
+            foreach (var dailyClimateData in customClimateData)
+            {
+                byDate[dailyClimateData.Date] = dailyClimateData.MeanDailyPrecipitation;
+            }
+
+            var ratios = new List<double>();
+            foreach (var calibrationValue in calibrationValues)
+            {
+                if (calibrationValue.Value <= 0)
+                {
+                    continue;
+                }
+
+                if (byDate.TryGetValue(calibrationValue.Key, out var valueInResponse) && valueInResponse > 0)
+                {
+                    ratios.Add(valueInResponse / calibrationValue.Value);
+                }
+            }
+
+            if (ratios.Count < MinimumCalibrationDays)
+            {
+                return 1;
+            }
+
+            var first = ratios[0];
+            foreach (var ratio in ratios)
+            {
+                if (Math.Abs(ratio - first) > first * CalibrationAgreement)
+                {
+                    return 1;
+                }
+            }
+
+            return first < 1 + CalibrationAgreement ? 1 : first;
+        }
+
+        /// <summary>
+        /// The precipitation values of a response, by the day they belong to.
+        /// </summary>
+        public static Dictionary<DateTime, double> ParsePrecipitationByDate(string content)
+        {
+            var result = new Dictionary<DateTime, double>();
+            if (string.IsNullOrWhiteSpace(content))
+            {
+                return result;
+            }
+
+            var parameters = (JObject)JObject.Parse(content)["properties"]?["parameter"];
+            var precipitation = (JObject)parameters?["PRECTOTCORR"];
+            if (precipitation == null)
+            {
+                return result;
+            }
+
+            foreach (var day in precipitation)
+            {
+                if (DateTime.TryParseExact(day.Key, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var date))
+                {
+                    var value = (double)day.Value;
+                    if (Math.Abs(value - DataUndefined) > double.Epsilon)
+                    {
+                        result[date] = value;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// A month deep inside the settled record, asking for precipitation alone. Chosen in summer so there are wet
+        /// days to compare, and left fixed so the window can never drift into the part of the record still being
+        /// revised.
+        /// </summary>
+        private string GetCalibrationApiUrl(double latitude, double longitude)
+        {
+            var latitudeString = latitude.ToString(Infrastructure.InfrastructureConstants.EnglishCultureInfo.NumberFormat);
+            var longitudeString = longitude.ToString(Infrastructure.InfrastructureConstants.EnglishCultureInfo.NumberFormat);
+
+            return "https://power.larc.nasa.gov/api/temporal/daily/point?" +
+                   $"parameters=PRECTOTCORR&community=AG&longitude={longitudeString}&latitude={latitudeString}" +
+                   $"&start={CalibrationStartDate}&end={CalibrationEndDate}&format=JSON";
         }
 
         /// <summary>
