@@ -54,13 +54,8 @@ namespace H.Core.Calculators.Carbon
                 // Equation 11.3.2-3: the carbon baled off, calculated in CarbonService.CalculateCarbonLostFromHayExports.
                 var carbonExportedAsHay = currentYearViewItem.TotalCarbonLossFromBaleExports;
 
-                var harvestLossFraction = currentYearViewItem.GetHayedHarvestLossPercentage() / 100.0;
-                var carbonGrownAndBaled = harvestLossFraction > 0 && harvestLossFraction < 1
-                    ? carbonExportedAsHay / (1.0 - harvestLossFraction)
-                    : carbonExportedAsHay;
-
                 // Equation 11.3.2-5 (single grazing period) and Equation 11.3.2-7 (multiple)
-                var totalPlantCarbon = currentYearViewItem.TotalCarbonLossesByGrazingAnimals + carbonGrownAndBaled;
+                var totalPlantCarbon = CalculateTotalPlantCarbonForGrazedYear(currentYearViewItem);
 
                 // Equation 11.3.2-6
                 if (currentYearViewItem.DoNotRecalculatePlantCarbonInAgriculturalProduct == false)
@@ -269,6 +264,65 @@ namespace H.Core.Calculators.Carbon
             return result;
         }
 
+        /// <summary>
+        /// The total plant carbon a grazed year grew, recovered from what left the field: what the animals ate, by the
+        /// utilization rate (Equation 11.3.2-4, already in TotalCarbonLossesByGrazingAnimals), plus what was baled,
+        /// grossed back up by the harvest loss that stayed behind.
+        ///
+        /// Equation 11.3.2-5 for a single grazing period and Equation 11.3.2-7 for several.
+        /// </summary>
+        public static double CalculateTotalPlantCarbonForGrazedYear(CropViewItem viewItem)
+        {
+            var carbonExportedAsHay = viewItem.TotalCarbonLossFromBaleExports;
+
+            var harvestLossFraction = viewItem.GetHayedHarvestLossPercentage() / 100.0;
+            var carbonGrownAndBaled = harvestLossFraction > 0 && harvestLossFraction < 1
+                ? carbonExportedAsHay / (1.0 - harvestLossFraction)
+                : carbonExportedAsHay;
+
+            return viewItem.TotalCarbonLossesByGrazingAnimals + carbonGrownAndBaled;
+        }
+
+        /// <summary>
+        /// Next year's plant carbon, by whichever route the algorithm document gives for it, or zero when it cannot be
+        /// determined from next year alone. A perennial establishment year takes a fraction of this (Equation 2.1.2-21),
+        /// and only falls back to the Thorpe (2011) productivity estimate when this is zero (Equation 2.1.2-22).
+        ///
+        /// A grazed year is one of the routes. Section 11.3.2 calculates its plant carbon from the forage removed, so
+        /// the value is available without reference to any other year - but it is assigned when the pass reaches that
+        /// year, which is after this one. Asking the row for its value would therefore read zero and send an
+        /// establishment year to the productivity estimate although the following year's carbon is known.
+        /// </summary>
+        public double GetPlantCarbonForNextYear(CropViewItem nextYearViewItem, Farm farm)
+        {
+            if (nextYearViewItem == null)
+            {
+                return 0;
+            }
+
+            if (nextYearViewItem.PlantCarbonInAgriculturalProduct > 0)
+            {
+                return nextYearViewItem.PlantCarbonInAgriculturalProduct;
+            }
+
+            // A yield the user supplied drives the carbon forwards, grazed or not.
+            if (nextYearViewItem.Yield > 0)
+            {
+                return this.CalculatePlantCarbonInAgriculturalProduct(
+                    previousYearViewItem: null,
+                    currentYearViewItem: nextYearViewItem,
+                    farm: farm);
+            }
+
+            if (farm.IsNonSwathingGrazingScenario(nextYearViewItem) && nextYearViewItem.Area > 0)
+            {
+                // Equation 11.3.2-6
+                return CalculateTotalPlantCarbonForGrazedYear(nextYearViewItem) / nextYearViewItem.Area;
+            }
+
+            return 0;
+        }
+
         public double CalculateAboveGroundCarbonInputFromPerennials(
             CropViewItem previousYearViewItem,
             CropViewItem currentYearViewItem,
@@ -310,29 +364,16 @@ namespace H.Core.Calculators.Carbon
                         carbonInputFromProduct = this.CalculateCarbonInputForGrazedFieldWithSuppliedYield(currentYearViewItem);
                     }
                 }
-                else if (currentYearViewItem.PlantCarbonInAgriculturalProduct == 0 && nextYearViewItem != null && (nextYearViewItem.PlantCarbonInAgriculturalProduct > 0 || nextYearViewItem.Yield > 0))
+                else if (currentYearViewItem.PlantCarbonInAgriculturalProduct == 0 &&
+                         this.GetPlantCarbonForNextYear(nextYearViewItem, farm) > 0)
                 {
                     /* Equation 2.1.2-21
                      *
-                     * Situation when C_p for the current year (first year in this condition) is not known, but yield or C_p for subsequent year (second year in this condition)
-                     * is known.
-                     *
-                     * If the next years C_p has been set already we use that, otherwise we need to calculate it here.
+                     * Situation when C_p for the current year (first year in this condition) is not known, but C_p for
+                     * the subsequent year (second year in this condition) is known or can be determined.
                      */
 
-                    var plantCarbonInAgriculturalProductForNextYear = 0.0;
-                    if (nextYearViewItem.PlantCarbonInAgriculturalProduct > 0)
-                    {
-                        // We will already have a calculated C_p value for the next year when the previous year set it for us (down below)
-                        plantCarbonInAgriculturalProductForNextYear = nextYearViewItem.PlantCarbonInAgriculturalProduct;
-                    }
-                    else
-                    {
-                        plantCarbonInAgriculturalProductForNextYear = this.CalculatePlantCarbonInAgriculturalProduct(
-                            previousYearViewItem: null,
-                            currentYearViewItem: nextYearViewItem,
-                            farm: farm);
-                    }
+                    var plantCarbonInAgriculturalProductForNextYear = this.GetPlantCarbonForNextYear(nextYearViewItem, farm);
 
                     // This year's C_p will be a fraction of next year's C_p
 
