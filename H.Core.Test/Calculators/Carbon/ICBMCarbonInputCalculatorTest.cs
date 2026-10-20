@@ -1776,6 +1776,144 @@ namespace H.Core.Test.Calculators.Carbon
                 "if this becomes true, tame grass no longer falls back to the ICBM input calculator");
         }
 
+        /// <summary>
+        /// A perennial establishment year reads the following year's plant carbon and takes a fraction of it
+        /// (Equation 2.1.2-21), and only reaches for the Thorpe (2011) productivity estimate when the following year's
+        /// carbon cannot be determined at all (Equation 2.1.2-22).
+        ///
+        /// A grazed year's can always be determined: section 11.3.2 derives it from the forage removed, which depends
+        /// on nothing but that year. The row does not hold the value yet - the pass assigns it when it reaches that
+        /// year, which is after this one - so asking the row would read zero and send the establishment year to the
+        /// productivity estimate although the carbon is known.
+        /// </summary>
+        [TestMethod]
+        public void AnEstablishmentYearTakesItsCarbonFromAGrazedFollowingYear()
+        {
+            var farm = CreateTwoYearStandGrazedInTheSecondYear(out var establishmentYear, out var grazedYear);
+
+            var carbonFromTheRemovals = ICBMCarbonInputCalculator.CalculateTotalPlantCarbonForGrazedYear(grazedYear) / grazedYear.Area;
+
+            Assert.IsTrue(carbonFromTheRemovals > 0, "this test needs a grazed year whose carbon comes from the removals");
+
+            _sut.CalculateAboveGroundCarbonInputFromPerennials(
+                previousYearViewItem: null,
+                currentYearViewItem: establishmentYear,
+                nextYearViewItem: grazedYear,
+                farm: farm);
+
+            var expected = carbonFromTheRemovals * farm.Defaults.EstablishmentGrowthFactorFractionForPerennials;
+
+            Assert.AreEqual(expected, establishmentYear.PlantCarbonInAgriculturalProduct, 0.0001,
+                "the establishment year took a productivity estimate instead of a fraction of the grazed year's carbon");
+        }
+
+        /// <summary>
+        /// And the grazed year is left for the grazing calculation to fill in. Freezing an estimate onto it suppresses
+        /// that calculation, so the year the animals were on would report a climate estimate rather than what they ate.
+        /// </summary>
+        [TestMethod]
+        public void AnEstablishmentYearDoesNotFreezeAnEstimateOntoAGrazedFollowingYear()
+        {
+            var farm = CreateTwoYearStandGrazedInTheSecondYear(out var establishmentYear, out var grazedYear);
+
+            _sut.CalculateAboveGroundCarbonInputFromPerennials(
+                previousYearViewItem: null,
+                currentYearViewItem: establishmentYear,
+                nextYearViewItem: grazedYear,
+                farm: farm);
+
+            Assert.IsFalse(grazedYear.DoNotRecalculatePlantCarbonInAgriculturalProduct,
+                "the grazed year's carbon was frozen to an estimate before the grazing calculation could set it");
+            Assert.AreEqual(0, grazedYear.PlantCarbonInAgriculturalProduct, 0.0001,
+                "the grazed year was given a value it should derive from the forage removed");
+        }
+
+        /// <summary>
+        /// The productivity estimate still applies where the algorithm document calls for it: neither year has a yield
+        /// and no animals grazed either of them, so there is nothing to work backwards from.
+        /// </summary>
+        [TestMethod]
+        public void AnEstablishmentYearStillUsesTheEstimateWhenTheFollowingYearIsUngrazedAndHasNoYield()
+        {
+            var farm = CreateTwoYearStandGrazedInTheSecondYear(out var establishmentYear, out var followingYear);
+
+            followingYear.GrazingViewItems.Clear();
+            followingYear.TotalCarbonLossesByGrazingAnimals = 0;
+
+            _sut.CalculateAboveGroundCarbonInputFromPerennials(
+                previousYearViewItem: null,
+                currentYearViewItem: establishmentYear,
+                nextYearViewItem: followingYear,
+                farm: farm);
+
+            Assert.IsTrue(followingYear.DoNotRecalculatePlantCarbonInAgriculturalProduct,
+                "with nothing to work backwards from, the following year's estimate is still assigned and frozen");
+            Assert.IsTrue(followingYear.PlantCarbonInAgriculturalProduct > 0);
+        }
+
+        /// <summary>
+        /// A two year perennial stand with no yield in either year and grazing animals in the second, which is the
+        /// shape that makes the establishment year look ahead.
+        /// </summary>
+        private Farm CreateTwoYearStandGrazedInTheSecondYear(
+            out CropViewItem establishmentYear,
+            out CropViewItem grazedYear)
+        {
+            var farm = new Farm()
+            {
+                YieldAssignmentMethod = YieldAssignmentMethod.SmallAreaData,
+            };
+
+            farm.Defaults.CarbonModellingStrategy = CarbonModellingStrategies.ICBM;
+            farm.ClimateData.PrecipitationData.January = 30;
+            farm.ClimateData.EvapotranspirationData.January = 20;
+
+            // The field has to be on the farm and hold both years: whether a year counts as grazed is answered by
+            // looking the field up from the row and asking whether a crop of that type has animals on it that year.
+            var field = new FieldSystemComponent();
+
+            establishmentYear = new CropViewItem()
+            {
+                CropType = CropType.TameGrass,
+                Year = 2022,
+                Area = 1,
+                Yield = 0,
+                YearInPerennialStand = 1,
+                PercentageOfProductYieldReturnedToSoil = 35,
+            };
+
+            grazedYear = new CropViewItem()
+            {
+                CropType = CropType.TameGrass,
+                Year = 2023,
+                Area = 1,
+                Yield = 0,
+                YearInPerennialStand = 2,
+                PercentageOfProductYieldReturnedToSoil = 35,
+                MoistureContentOfCrop = 0,
+
+                // Assigned before the carbon pass runs, by CarbonService.CalculateCarbonLostByGrazingAnimals.
+                TotalCarbonLossesByGrazingAnimals = 1800,
+                TotalCarbonUptakeByAnimals = 1080,
+            };
+
+            grazedYear.GrazingViewItems.Add(new GrazingViewItem()
+            {
+                Start = new DateTime(2023, 6, 1),
+                Utilization = 60,
+                MoistureContentAsPercentage = 0,
+            });
+
+            establishmentYear.FieldSystemComponentGuid = field.Guid;
+            grazedYear.FieldSystemComponentGuid = field.Guid;
+
+            field.CropViewItems.Add(establishmentYear);
+            field.CropViewItems.Add(grazedYear);
+            farm.Components.Add(field);
+
+            return farm;
+        }
+
         private static Farm CreateGrazedFieldFarm(out CropViewItem viewItem, out FieldSystemComponent field)
         {
             var farm = new Farm();
