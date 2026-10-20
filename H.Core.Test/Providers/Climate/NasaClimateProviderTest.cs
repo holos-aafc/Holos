@@ -278,5 +278,128 @@ namespace H.Core.Test.Providers.Climate
 
             File.WriteAllText($"Climate\\Output.csv", stringBuilder.ToString());
         }
+
+        #region Precipitation scale
+
+        /// <summary>
+        /// The precipitation in a response has come back multiplied when the request reaches into the months the
+        /// service has not finished reanalysing. The factor is measured against a window from the settled part of the
+        /// record rather than assumed, so that nothing is corrected while the service answers consistently.
+        /// </summary>
+        [TestMethod]
+        public void AUniformlyScaledResponseIsMeasuredAtItsScale()
+        {
+            var calibration = BuildCalibration(0.77, 1.26, 3.63, 0.38);
+            var response = BuildResponse(0.77 * 24, 1.26 * 24, 3.63 * 24, 0.38 * 24);
+
+            Assert.AreEqual(24, NasaClimateProvider.CalculatePrecipitationScalingFactor(calibration, response), 0.0001);
+        }
+
+        [TestMethod]
+        public void AResponseThatAgreesWithTheCalibrationIsLeftAlone()
+        {
+            var calibration = BuildCalibration(0.77, 1.26, 3.63, 0.38);
+            var response = BuildResponse(0.77, 1.26, 3.63, 0.38);
+
+            Assert.AreEqual(1, NasaClimateProvider.CalculatePrecipitationScalingFactor(calibration, response), 0.0001,
+                "a response at the right scale was going to be divided");
+        }
+
+        /// <summary>
+        /// Every day of a scaled response is scaled alike. Days that disagree mean something other than a uniform
+        /// scaling, which is not something this is entitled to correct.
+        /// </summary>
+        [TestMethod]
+        public void DaysThatDisagreeWithEachOtherAreNotCorrected()
+        {
+            var calibration = BuildCalibration(0.77, 1.26, 3.63, 0.38);
+            var response = BuildResponse(0.77 * 24, 1.26 * 24, 3.63 * 11, 0.38 * 24);
+
+            Assert.AreEqual(1, NasaClimateProvider.CalculatePrecipitationScalingFactor(calibration, response), 0.0001);
+        }
+
+        /// <summary>
+        /// A dry day says nothing about the scale, so there have to be enough wet ones to compare.
+        /// </summary>
+        [TestMethod]
+        public void TooFewWetDaysToCompareLeavesTheResponseAlone()
+        {
+            var calibration = BuildCalibration(0.77, 0, 0, 0);
+            var response = BuildResponse(0.77 * 24, 0, 0, 0);
+
+            Assert.AreEqual(1, NasaClimateProvider.CalculatePrecipitationScalingFactor(calibration, response), 0.0001);
+        }
+
+        /// <summary>
+        /// Correcting only ever divides. A response smaller than the calibration is not something this understands,
+        /// and multiplying it up would invent rainfall.
+        /// </summary>
+        [TestMethod]
+        public void AResponseSmallerThanTheCalibrationIsLeftAlone()
+        {
+            var calibration = BuildCalibration(0.77, 1.26, 3.63, 0.38);
+            var response = BuildResponse(0.77 / 24, 1.26 / 24, 3.63 / 24, 0.38 / 24);
+
+            Assert.AreEqual(1, NasaClimateProvider.CalculatePrecipitationScalingFactor(calibration, response), 0.0001);
+        }
+
+        [TestMethod]
+        public void NoCalibrationWindowLeavesTheResponseAlone()
+        {
+            var response = BuildResponse(0.77 * 24, 1.26 * 24, 3.63 * 24, 0.38 * 24);
+
+            Assert.AreEqual(1, NasaClimateProvider.CalculatePrecipitationScalingFactor(new Dictionary<DateTime, double>(), response), 0.0001);
+            Assert.AreEqual(1, NasaClimateProvider.CalculatePrecipitationScalingFactor(null, response), 0.0001);
+        }
+
+        [TestMethod]
+        public void ParsePrecipitationByDateReadsTheDaysAndSkipsTheUndefinedOnes()
+        {
+            var content = "{\"properties\":{\"parameter\":{\"PRECTOTCORR\":" +
+                          "{\"20200601\":0.77,\"20200602\":-999.0,\"20200603\":1.26}}}}";
+
+            var result = NasaClimateProvider.ParsePrecipitationByDate(content);
+
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual(0.77, result[new DateTime(2020, 6, 1)], 0.0001);
+            Assert.AreEqual(1.26, result[new DateTime(2020, 6, 3)], 0.0001);
+            Assert.IsFalse(result.ContainsKey(new DateTime(2020, 6, 2)), "the placeholder for a missing day was read as rainfall");
+        }
+
+        [TestMethod]
+        public void ParsePrecipitationByDateHandlesAResponseWithNothingInIt()
+        {
+            Assert.AreEqual(0, NasaClimateProvider.ParsePrecipitationByDate(string.Empty).Count);
+            Assert.AreEqual(0, NasaClimateProvider.ParsePrecipitationByDate("{}").Count);
+        }
+
+        private static Dictionary<DateTime, double> BuildCalibration(params double[] values)
+        {
+            var result = new Dictionary<DateTime, double>();
+            for (var i = 0; i < values.Length; i++)
+            {
+                result[new DateTime(2020, 6, 1).AddDays(i)] = values[i];
+            }
+
+            return result;
+        }
+
+        private static List<DailyClimateData> BuildResponse(params double[] values)
+        {
+            var result = new List<DailyClimateData>();
+            for (var i = 0; i < values.Length; i++)
+            {
+                result.Add(new DailyClimateData()
+                {
+                    Date = new DateTime(2020, 6, 1).AddDays(i),
+                    Year = 2020,
+                    MeanDailyPrecipitation = values[i],
+                });
+            }
+
+            return result;
+        }
+
+        #endregion
     }
 }
