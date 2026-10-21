@@ -50,7 +50,7 @@ namespace H.Core.Services.LandManagement
             var isHayed = viewItem.IsHarvested();
 
             summary.Activity = GetActivity(viewItem, isGrazed, isHayed);
-            summary.YieldSource = GetYieldSource(viewItem, method);
+            summary.YieldSource = GetYieldSource(viewItem, method, farm);
             summary.ReturnedToSoil = GetReturnedToSoil(viewItem, isGrazed, isHayed);
 
             return summary;
@@ -76,7 +76,7 @@ namespace H.Core.Services.LandManagement
             return string.Format(Resources.SummaryActivityNeither, viewItem.Year);
         }
 
-        private static string GetYieldSource(CropViewItem viewItem, YieldAssignmentMethod method)
+        private static string GetYieldSource(CropViewItem viewItem, YieldAssignmentMethod method, Farm farm)
         {
             // A pinned value beats every other rule - nothing recalculates it.
             if (viewItem.DoNotRecalculateYield)
@@ -99,7 +99,20 @@ namespace H.Core.Services.LandManagement
                         .Where(harvest => harvest.ForageActivity == ForageActivities.Hayed)
                         .Sum(harvest => harvest.TotalNumberOfBalesHarvested);
 
-                    return string.Format(Resources.SummaryYieldFromHarvest, bales);
+                    // The harvest tab shows the field's total while the Details screen shows yield per hectare, so the
+                    // two figures differ by the field's area. Saying so here stops a correct number looking like a bug.
+                    var yieldPerHectare = viewItem.GetYieldFromHayHarvests();
+                    if (yieldPerHectare <= 0)
+                    {
+                        return string.Format(Resources.SummaryYieldFromHarvest, bales);
+                    }
+
+                    if (farm.MeasurementSystemType == MeasurementSystemType.Metric)
+                    {
+                        return string.Format(Resources.SummaryYieldFromHarvestPerHectare, bales, viewItem.Area, yieldPerHectare);
+                    }
+
+                    return string.Format(Resources.SummaryYieldFromHarvestPerArea, bales);
 
                 case LandManagement.YieldSource.Entered:
                     return Resources.SummaryYieldEntered;

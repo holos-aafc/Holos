@@ -10235,6 +10235,24 @@ namespace H.Core.Properties {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Your harvest is this field&apos;s yield - the {0} bale(s) you entered. Spread over the field&apos;s {1:#,0.##} ha, that is {2:N0} kg ha⁻¹, which is the figure the Details screen shows: yield per hectare, not the field&apos;s total..
+        /// </summary>
+        public static string SummaryYieldFromHarvestPerHectare {
+            get {
+                return ResourceManager.GetString("SummaryYieldFromHarvestPerHectare", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your harvest is this field&apos;s yield - the {0} bale(s) you entered. The Details screen shows this yield per unit of field area, not the field&apos;s total, so its figure is smaller than the total harvested..
+        /// </summary>
+        public static string SummaryYieldFromHarvestPerArea {
+            get {
+                return ResourceManager.GetString("SummaryYieldFromHarvestPerArea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Yield: from your harvest - the {0} bale(s) you entered.
         /// </summary>
         public static string SummaryYieldFromHarvest {

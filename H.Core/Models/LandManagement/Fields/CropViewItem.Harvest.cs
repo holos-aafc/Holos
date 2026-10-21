@@ -195,6 +195,39 @@ namespace H.Core.Models.LandManagement.Fields
         /// </summary>
         public bool CalculateYieldFromHayHarvests()
         {
+            if (this.TryGetYieldFromHayHarvests(out var dryYield, out var yield) == false)
+            {
+                return false;
+            }
+
+            // The total biomass stays the wet weight actually baled - it is what the harvest tab reports - while the
+            // yield is the standing-crop equivalent of that biomass.
+            this.TotalBiomassHarvest = this.GetHayHarvests()
+                .Where(harvest => harvest.ForageActivity == ForageActivities.Hayed)
+                .Sum(harvest => harvest.AboveGroundBiomass);
+            this.DryYield = dryYield;
+            this.Yield = yield;
+
+            return true;
+        }
+
+        /// <summary>
+        /// The yield per hectare that <see cref="CalculateYieldFromHayHarvests"/> would set, without setting anything.
+        /// Returns 0 when the harvests cannot support a yield.
+        ///
+        /// The harvest tab reports the field's total, and a screen that only reports must not change the yield, so it
+        /// asks here for the per-hectare figure the results will use.
+        /// </summary>
+        public double GetYieldFromHayHarvests()
+        {
+            return this.TryGetYieldFromHayHarvests(out _, out var yield) ? yield : 0;
+        }
+
+        private bool TryGetYieldFromHayHarvests(out double dryYield, out double yield)
+        {
+            dryYield = 0;
+            yield = 0;
+
             var hayedHarvests = this.GetHayHarvests()
                 .Where(harvest => harvest.ForageActivity == ForageActivities.Hayed)
                 .ToList();
@@ -217,11 +250,8 @@ namespace H.Core.Models.LandManagement.Fields
                 return false;
             }
 
-            // The total biomass stays the wet weight actually baled - it is what the harvest tab reports - while the
-            // yield is the standing-crop equivalent of that biomass.
-            this.TotalBiomassHarvest = hayedHarvests.Sum(harvest => harvest.AboveGroundBiomass);
-            this.DryYield = totalDryMatter / this.Area;
-            this.Yield = this.DryYield / dryMatterFraction;
+            dryYield = totalDryMatter / this.Area;
+            yield = dryYield / dryMatterFraction;
 
             return true;
         }

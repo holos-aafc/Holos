@@ -87,6 +87,59 @@ namespace H.Core.Test.Models.LandManagement.Fields
             Assert.IsFalse(result);
         }
 
+
+        /// <summary>
+        /// The harvest tab quotes this figure as the yield the Details screen will show, so it has to be the number the
+        /// results set - and asking for it must not set anything, because that screen only reports.
+        /// </summary>
+        [TestMethod]
+        public void GetYieldFromHayHarvests_MatchesWhatCalculateSetsWithoutChangingTheItem()
+        {
+            _sut.Area = 10;
+            _sut.MoistureContentOfCrop = 0.6;
+            _sut.HarvestViewItems.Add(new HarvestViewItem
+            {
+                Start = new DateTime(_sut.Year, 8, 1),
+                ForageActivity = ForageActivities.Hayed,
+                TotalNumberOfBalesHarvested = 6,
+                BaleWeight = 500,
+                MoistureContentAsPercentage = 15,
+            });
+
+            var yieldBefore = _sut.Yield;
+            var dryYieldBefore = _sut.DryYield;
+            var totalBiomassBefore = _sut.TotalBiomassHarvest;
+
+            var reported = _sut.GetYieldFromHayHarvests();
+
+            Assert.AreEqual(yieldBefore, _sut.Yield, "asking for the yield changed it");
+            Assert.AreEqual(dryYieldBefore, _sut.DryYield, "asking for the yield changed the dry yield");
+            Assert.AreEqual(totalBiomassBefore, _sut.TotalBiomassHarvest, "asking for the yield changed the total biomass");
+
+            Assert.IsTrue(_sut.CalculateYieldFromHayHarvests());
+
+            // 3,000 kg baled at 15% moisture is 2,550 kg dry matter: 255 kg per hectare, or 637.5 kg of standing crop
+            // at 60% moisture.
+            Assert.AreEqual(637.5, reported, 0.0001);
+            Assert.AreEqual(_sut.Yield, reported, 0.0001);
+            Assert.AreEqual(255, _sut.DryYield, 0.0001);
+            Assert.AreEqual(3000, _sut.TotalBiomassHarvest, 0.0001);
+        }
+
+        [TestMethod]
+        public void GetYieldFromHayHarvests_WithNoUsableHarvest_ReturnsZero()
+        {
+            _sut.Area = 10;
+            _sut.MoistureContentOfCrop = 0.6;
+            _sut.HarvestViewItems.Add(new HarvestViewItem
+            {
+                Start = new DateTime(_sut.Year, 8, 1),
+                ForageActivity = ForageActivities.Hayed,
+            });
+
+            Assert.AreEqual(0, _sut.GetYieldFromHayHarvests());
+        }
+
         #endregion
     }
 }
