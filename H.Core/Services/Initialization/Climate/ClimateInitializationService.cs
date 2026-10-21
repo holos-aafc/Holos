@@ -41,6 +41,64 @@ namespace H.Core.Services.Initialization.Climate
             this.InitializeClimate(farm, dailyClimateData);
         }
 
+        /// <summary>
+        /// Replaces a farm's climate with a fresh download, and reports whether it did.
+        ///
+        /// A farm keeps the climate it was built with, so a farm that was given bad data goes on using it however many
+        /// times it is opened. This is what puts it right, and it is deliberately something the user asks for: the
+        /// farm's results move when the climate underneath them does.
+        ///
+        /// The two halves are also available separately - <see cref="DownloadClimateData"/> and
+        /// <see cref="ReplaceClimate"/> - because the download is slow and touches nothing on the farm, so a caller with
+        /// a screen to keep responsive can run it on another thread and replace the climate once it is back.
+        /// </summary>
+        public bool ReDownloadClimate(Farm farm)
+        {
+            return this.ReplaceClimate(farm, this.DownloadClimateData(farm));
+        }
+
+        /// <summary>
+        /// A fresh copy of the climate for a farm's location, or an empty list when the service could not be reached.
+        /// Changes nothing on the farm.
+        ///
+        /// The provider holds the last response for a location and renews it on every read, so asking again would be
+        /// answered from the copy being replaced. What it holds is discarded first.
+        /// </summary>
+        public List<DailyClimateData> DownloadClimateData(Farm farm)
+        {
+            if (farm == null)
+            {
+                return new List<DailyClimateData>();
+            }
+
+            _nasaClimateProvider.ClearCachedData(farm.Latitude, farm.Longitude);
+
+            return _nasaClimateProvider.GetCustomClimateData(farm.Latitude, farm.Longitude);
+        }
+
+        /// <summary>
+        /// Replaces a farm's daily climate with the series given and recalculates its normals. Returns false, and leaves
+        /// the farm exactly as it was, when there is nothing to replace it with - a failed download comes back empty, and
+        /// clearing first would leave the farm with no climate at all.
+        ///
+        /// The farm's daily records are added to rather than replaced by <see cref="InitializeClimate(Farm, IEnumerable{DailyClimateData})"/>,
+        /// so they are cleared here first. Left in place, the farm would hold two of every day and report twice the
+        /// rainfall.
+        /// </summary>
+        public bool ReplaceClimate(Farm farm, List<DailyClimateData> dailyClimateData)
+        {
+            if (farm == null || dailyClimateData == null || dailyClimateData.Any() == false)
+            {
+                return false;
+            }
+
+            farm.ClimateData.DailyClimateData.Clear();
+
+            this.InitializeClimate(farm, dailyClimateData);
+
+            return true;
+        }
+
         public void InitializeClimate(Farm farm, int startYear, int endYear)
         {
             var dailyClimateData = _nasaClimateProvider.GetCustomClimateData(farm.Latitude, farm.Longitude);

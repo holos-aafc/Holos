@@ -505,6 +505,40 @@ namespace H.Core.Providers.Climate
             return Path.GetTempPath() + "\\" + $"nasa_climate_data_lat_{latitude}_long_{longitude}";
         }
 
+        /// <summary>
+        /// Forgets everything held for a location, so the next request for it goes to the service.
+        ///
+        /// The response is kept on disk for an hour, and every read of it puts its expiry back - so a location that is
+        /// being used never reaches that hour on its own. Asking for the data again is therefore not enough to replace
+        /// it; what is held has to be thrown away first.
+        /// </summary>
+        public void ClearCachedData(double latitude, double longitude)
+        {
+            lock (ScalingFactorsLock)
+            {
+                ScalingFactors.Remove($"{latitude}_{longitude}");
+            }
+
+            var path = this.GetCachedPath(latitude, longitude);
+
+            try
+            {
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+
+                    Trace.TraceInformation($"{nameof(NasaClimateProvider)}: discarded the climate data held for lat: {latitude}, long: {longitude}.");
+                }
+            }
+            catch (Exception e)
+            {
+                // Leaving it in place only means the next request is served from it, which is where this started.
+                Trace.TraceError(
+                    $"{nameof(NasaClimateProvider)}.{nameof(ClearCachedData)}: could not discard the climate data held " +
+                    $"for lat: {latitude}, long: {longitude}. Exception message: {e.Message}");
+            }
+        }
+
         private void CacheData(double latitude, double longitude, string content)
         {
             Trace.TraceInformation($"Caching NASA climate data for lat: {latitude}, long: {longitude}");
