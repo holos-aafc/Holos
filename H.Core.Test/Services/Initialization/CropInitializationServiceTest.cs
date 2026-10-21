@@ -377,13 +377,63 @@ namespace H.Core.Test.Services.Initialization
                 System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             Assert.IsNotNull(method, "the conversion this test pins has been renamed or removed");
 
-            var result = (double)method.Invoke(new CropInitializationService(), new object[] {1000.0, farm});
+            var crop = new CropViewItem() {CropType = CropType.TameMixed, MoistureContentOfCropPercentage = 80};
+
+            var result = (double)method.Invoke(new CropInitializationService(), new object[] {1000.0, farm, crop});
 
             // 1000 / 0.65 = 1538.46, then x (0.87 / 0.20) = 6692.31
             Assert.AreEqual(6692.3077, result, 0.001);
 
             // Without the gross-up this returned 4350 - the moisture ratio alone.
             Assert.AreNotEqual(4350, result, 0.001);
+        }
+
+        /// <summary>
+        /// The carbon calculation reads a yield's dry matter as Yield x (1 - the crop's moisture), so the converted yield
+        /// has to carry the same dry matter whatever moisture the crop has. Converting to a fixed 80% gave a crop
+        /// entered at 13% - the hay's own moisture, a natural thing to type - over four times the dry matter of the hay
+        /// yield, and the Tier 2 starting soil carbon built from the run-in years followed it.
+        /// </summary>
+        [TestMethod]
+        public void SmallAreaDataPerennialYieldCarriesTheSameDryMatterWhateverTheCropMoisture()
+        {
+            var farm = new Farm();
+            farm.Defaults.PercentageOfProductReturnedToSoilForPerennials = 35;
+
+            var method = typeof(CropInitializationService).GetMethod(
+                "CalculateStandingBiomassAdjustment",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            Assert.IsNotNull(method, "the conversion this test pins has been renamed or removed");
+
+            // 1000 kg of hay at 13% moisture, grossed up for the 35% left behind: 1000 x 0.87 / 0.65 = 1338.46 kg DM.
+            const double expectedDryMatter = 1000 * 0.87 / 0.65;
+
+            foreach (var moisturePercentage in new[] {13.0, 50.0, 80.0})
+            {
+                var crop = new CropViewItem() {CropType = CropType.TameMixed, MoistureContentOfCropPercentage = moisturePercentage};
+
+                var yield = (double)method.Invoke(new CropInitializationService(), new object[] {1000.0, farm, crop});
+                var dryMatter = yield * (1 - moisturePercentage / 100.0);
+
+                Assert.AreEqual(expectedDryMatter, dryMatter, 0.001, $"a crop at {moisturePercentage}% moisture was given a different dry matter");
+            }
+        }
+
+        [TestMethod]
+        public void SmallAreaDataPerennialYieldFallsBackTo80PercentForAMoistureThatCannotDescribeACrop()
+        {
+            var farm = new Farm();
+            farm.Defaults.PercentageOfProductReturnedToSoilForPerennials = 35;
+
+            var method = typeof(CropInitializationService).GetMethod(
+                "CalculateStandingBiomassAdjustment",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+
+            var crop = new CropViewItem() {CropType = CropType.TameMixed, MoistureContentOfCropPercentage = -5};
+
+            var result = (double)method.Invoke(new CropInitializationService(), new object[] {1000.0, farm, crop});
+
+            Assert.AreEqual(6692.3077, result, 0.001);
         }
 
         #endregion

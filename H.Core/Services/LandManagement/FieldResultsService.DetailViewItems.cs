@@ -719,6 +719,7 @@ namespace H.Core.Services.LandManagement
                 var mainCropAtYear = mainCrops.ElementAt(moduloIndex);
 
                 var createdMainCrop = this.MapDetailsScreenViewItemFromComponentScreenViewItem(mainCropAtYear, indexYear);
+                UseEnteredMoisture(createdMainCrop, mainCropAtYear, fieldComponent);
                 createdMainCrop.Year = indexYear;
                 createdMainCrop.DetailViewItemToComponentSelectionViewItemMap = mainCropAtYear.Guid;
                 createdMainCrop.FieldSystemComponentGuid = fieldComponent.Guid;
@@ -730,6 +731,7 @@ namespace H.Core.Services.LandManagement
                 if (coverCropAtYear != null)
                 {
                     var createdCoverCrop = this.MapDetailsScreenViewItemFromComponentScreenViewItem(coverCropAtYear, indexYear);
+                    UseEnteredMoisture(createdCoverCrop, coverCropAtYear, fieldComponent);
                     createdCoverCrop.Year = indexYear;
                     createdCoverCrop.DetailViewItemToComponentSelectionViewItemMap = coverCropAtYear.Guid;
                     createdCoverCrop.FieldSystemComponentGuid = fieldComponent.Guid;
@@ -748,6 +750,27 @@ namespace H.Core.Services.LandManagement
             }
 
             return runInPeriodItems.OrderBy(x => x.Year).ToList();
+        }
+
+        /// <summary>
+        /// Gives a run-in item the crop moisture the user entered rather than the one on the details screen row it was
+        /// copied from.
+        ///
+        /// A hayed row's moisture is the hay's once PostProcessPerennials has run, while its yield is the standing crop
+        /// as it grew. The run-in items calculate their carbon inputs afresh, so a copied row would take the dry matter
+        /// of a standing crop to be that of hay - for forage at 80% moisture baled at 15%, over four times the carbon
+        /// actually grown - and the starting soil carbon is built from those inputs. Left as it is when the entered crop
+        /// cannot be found.
+        /// </summary>
+        private static void UseEnteredMoisture(CropViewItem runInItem, CropViewItem detailsScreenRow, FieldSystemComponent fieldComponent)
+        {
+            var enteredCrop = GetComponentSelectionScreenCropForItem(fieldComponent, detailsScreenRow);
+            if (enteredCrop == null)
+            {
+                return;
+            }
+
+            SetMoisture(runInItem, enteredCrop.MoistureContentOfCropPercentage, enteredCrop.MoistureContentOfCrop);
         }
 
         public void SetRunInPeriodTillageType(List<CropViewItem> mainCrops, List<CropViewItem> runInPeriodItems, Farm farm)
