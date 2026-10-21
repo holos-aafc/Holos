@@ -6288,6 +6288,12 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
   <data name="SummaryYieldFromHarvest" xml:space="preserve">
     <value>Votre récolte constitue le rendement de ce champ — les {0} balle(s) que vous avez saisies.</value>
   </data>
+  <data name="SummaryYieldFromHarvestPerHectare" xml:space="preserve">
+    <value>Votre récolte constitue le rendement de ce champ — les {0} balle(s) que vous avez saisies. Réparties sur les {1:#,0.##} ha du champ, elles donnent {2:N0} kg ha⁻¹, soit la valeur affichée à l'écran Détails : le rendement par hectare, et non le total du champ.</value>
+  </data>
+  <data name="SummaryYieldFromHarvestPerArea" xml:space="preserve">
+    <value>Votre récolte constitue le rendement de ce champ — les {0} balle(s) que vous avez saisies. L'écran Détails affiche ce rendement par unité de superficie, et non le total du champ; sa valeur est donc inférieure au total récolté.</value>
+  </data>
   <data name="SummaryYieldFromGrazing" xml:space="preserve">
     <value>Son rendement est calculé à partir du fourrage consommé par les animaux, et non à partir d’une estimation régionale.</value>
   </data>

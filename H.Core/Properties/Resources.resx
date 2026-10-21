@@ -3786,6 +3786,12 @@
   <data name="SummaryYieldFromHarvest" xml:space="preserve">
     <value>Your harvest is this field's yield - the {0} bale(s) you entered.</value>
   </data>
+  <data name="SummaryYieldFromHarvestPerHectare" xml:space="preserve">
+    <value>Your harvest is this field's yield - the {0} bale(s) you entered. Spread over the field's {1:#,0.##} ha, that is {2:N0} kg ha⁻¹, which is the figure the Details screen shows: yield per hectare, not the field's total.</value>
+  </data>
+  <data name="SummaryYieldFromHarvestPerArea" xml:space="preserve">
+    <value>Your harvest is this field's yield - the {0} bale(s) you entered. The Details screen shows this yield per unit of field area, not the field's total, so its figure is smaller than the total harvested.</value>
+  </data>
   <data name="SummaryYieldFromGrazing" xml:space="preserve">
     <value>Its yield is calculated from the forage the animals ate, rather than from a regional estimate.</value>
   </data>

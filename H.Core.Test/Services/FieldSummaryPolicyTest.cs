@@ -200,6 +200,55 @@ namespace H.Core.Test.Services
             Assert.IsFalse(summary.ReturnedToSoil.Contains("12345"));
         }
 
+
+        /// <summary>
+        /// The harvest tab shows the field's total next to this line, while the Details screen shows yield per hectare.
+        /// Without the per-hectare figure, 3,000 kg on one screen and 300 on the other looks like a bug.
+        /// </summary>
+        [TestMethod]
+        public void DescribeGivesTheHarvestAsAYieldPerHectareOnAMetricFarm()
+        {
+            var farm = CreateFarm(out var viewItem, YieldAssignmentMethod.Custom);
+            farm.MeasurementSystemType = MeasurementSystemType.Metric;
+            viewItem.MoistureContentOfCrop = 0.15;
+            AddHayHarvest(viewItem, bales: 6);
+
+            var summary = FieldSummaryPolicy.Describe(viewItem, farm);
+
+            StringAssert.Contains(summary.YieldSource, "the 6 bale(s) you entered");
+            StringAssert.Contains(summary.YieldSource, "10 ha");
+            StringAssert.Contains(summary.YieldSource, "300 kg ha");
+            StringAssert.Contains(summary.YieldSource, "Details screen");
+        }
+
+        [TestMethod]
+        public void DescribeExplainsThePerAreaYieldWithoutMetricUnitsOnAnImperialFarm()
+        {
+            var farm = CreateFarm(out var viewItem, YieldAssignmentMethod.Custom);
+            farm.MeasurementSystemType = MeasurementSystemType.Imperial;
+            viewItem.MoistureContentOfCrop = 0.15;
+            AddHayHarvest(viewItem, bales: 6);
+
+            var summary = FieldSummaryPolicy.Describe(viewItem, farm);
+
+            StringAssert.Contains(summary.YieldSource, "per unit of field area");
+            Assert.IsFalse(summary.YieldSource.Contains("kg"), "an imperial farm was given metric units");
+        }
+
+        [TestMethod]
+        public void DescribeLeavesOutThePerHectareYieldWhenTheHarvestCannotSetOne()
+        {
+            var farm = CreateFarm(out var viewItem, YieldAssignmentMethod.Custom);
+            viewItem.MoistureContentOfCrop = 0.15;
+            viewItem.Area = 0;
+            AddHayHarvest(viewItem, bales: 6);
+
+            var summary = FieldSummaryPolicy.Describe(viewItem, farm);
+
+            StringAssert.Contains(summary.YieldSource, "the 6 bale(s) you entered");
+            Assert.IsFalse(summary.YieldSource.Contains("Details screen"), "a yield was quoted that the results will not use");
+        }
+
         #endregion
     }
 }
