@@ -232,6 +232,7 @@
     <Compile Include="Services\FieldResultsServiceTest.ManureNH3Report.cs" />
     <Compile Include="Providers\Climate\BuildNewSLCClimateNorms.cs" />
     <Compile Include="Services\AnimalComponentHelperTest.cs" />
+    <Compile Include="Services\Initialization\ClimateInitializationServiceTest.cs" />
     <Compile Include="Services\Initialization\CropInitializationServiceTest.cs" />
     <Compile Include="Services\LandManagement\IrrigationServiceTest.cs" />
     <Compile Include="Services\LandManagement\Soil\DefaultSoilServiceTest.cs" />

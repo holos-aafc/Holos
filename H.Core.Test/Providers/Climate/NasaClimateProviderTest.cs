@@ -401,5 +401,44 @@ namespace H.Core.Test.Providers.Climate
         }
 
         #endregion
+
+        #region Clearing what is held for a location
+
+        /// <summary>
+        /// The response for a location is kept on disk for an hour and every read puts that hour back, so a location in
+        /// use never expires on its own. Asking for the data again therefore cannot replace it - what is held has to be
+        /// thrown away, which is what the re-download on the farm relies on.
+        /// </summary>
+        [TestMethod]
+        public void ClearCachedDataDiscardsWhatIsHeldForThatLocation()
+        {
+            var provider = new NasaClimateProvider();
+
+            var latitude = 12.3456;
+            var longitude = -98.7654;
+
+            var path = Path.GetTempPath() + "\\" + $"nasa_climate_data_lat_{latitude}_long_{longitude}";
+            File.WriteAllText(path, "{}");
+
+            Assert.IsTrue(provider.IsCached(latitude, longitude), "this test needs something held for the location");
+
+            provider.ClearCachedData(latitude, longitude);
+
+            Assert.IsFalse(provider.IsCached(latitude, longitude),
+                "the response held for the location survived, so the next request would be answered from it");
+        }
+
+        /// <summary>
+        /// Nothing held for the location is the ordinary case the first time one is used.
+        /// </summary>
+        [TestMethod]
+        public void ClearCachedDataWithNothingHeldDoesNotThrow()
+        {
+            var provider = new NasaClimateProvider();
+
+            provider.ClearCachedData(11.1111, -22.2222);
+        }
+
+        #endregion
     }
 }
