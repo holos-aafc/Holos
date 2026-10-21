@@ -2082,6 +2082,76 @@ namespace H.Core.Test.Services
             Assert.AreEqual(items[2].CropType, CropType.TameGrass);
         }
 
+        /// <summary>
+        /// A hayed perennial's details screen rows carry the hay's moisture once the screen is built, while their yield
+        /// is the standing crop's. The run-in items are copied from those rows and calculate their carbon afresh, so
+        /// with the hay's moisture they took a crop at 80% water to be 15% water - over four times the carbon - and the
+        /// Tier 2 starting soil carbon is built from them.
+        /// </summary>
+        [TestMethod]
+        public void GetRunInItemsUsesTheEnteredCropMoistureForAHayedPerennial()
+        {
+            var crop = new CropViewItem()
+            {
+                CropType = CropType.TameMixed,
+                Year = 2020,
+                Area = 1,
+                MoistureContentOfCropPercentage = 80,
+            };
+
+            crop.HarvestViewItems.Add(new HarvestViewItem()
+            {
+                Start = new DateTime(2020, 7, 15),
+                End = new DateTime(2020, 7, 15),
+                ForageActivity = ForageActivities.Hayed,
+                TotalNumberOfBalesHarvested = 8,
+                BaleWeight = 500,
+                MoistureContentAsPercentage = 15,
+            });
+
+            var field = new FieldSystemComponent() { StartYear = 2018 };
+            field.CropViewItems.Add(crop);
+
+            var farm = new Farm()
+            {
+                Defaults = new Defaults()
+                {
+                    CarbonModellingStrategy = CarbonModellingStrategies.IPCCTier2,
+                    DefaultRunInPeriod = 3,
+                },
+
+                GeographicData = new GeographicData()
+                {
+                    DefaultSoilData = new SoilData(),
+                }
+            };
+            farm.Components.Add(field);
+
+            _resultsService.CreateDetailViewItems(farm);
+
+            var rows = _resultsService.GetStageState(farm).DetailsScreenViewCropViewItems
+                .Where(x => x.FieldSystemComponentGuid == field.Guid)
+                .OrderBy(x => x.Year)
+                .ToList();
+
+            Assert.IsTrue(rows.Any(x => Math.Abs(x.MoistureContentOfCropPercentage - 15) < 1e-9),
+                "the details screen rows no longer carry the hay's moisture, so this test no longer reproduces the case");
+
+            var runInItems = _resultsService.GetRunInPeriodItems(
+                farm: farm,
+                viewItemsForRotation: field.CropViewItems,
+                startYearOfField: field.StartYear,
+                viewItemsForField: rows,
+                fieldComponent: field);
+
+            Assert.AreEqual(3, runInItems.Count);
+            foreach (var runInItem in runInItems)
+            {
+                Assert.AreEqual(80, runInItem.MoistureContentOfCropPercentage, 1e-9, $"run-in year {runInItem.Year} took the hay's moisture");
+                Assert.AreEqual(0.8, runInItem.MoistureContentOfCrop, 1e-9, $"run-in year {runInItem.Year} took the hay's moisture as a fraction");
+            }
+        }
+
         #endregion
 
 

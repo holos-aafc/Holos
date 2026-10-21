@@ -269,6 +269,11 @@ namespace H.Core.Services.Initialization.Crops
         /// The gross-up recovers the harvest losses; the ratio moves the result from the moisture of baled hay (13%) to
         /// that of the fresh standing crop.
         ///
+        /// The standing crop's moisture is the crop's own - 80% unless the user entered another. The carbon calculation
+        /// takes the yield's dry matter as Yield x (1 - the crop's moisture), so the conversion has to use the same
+        /// figure: converting to 80% and then reading the yield at a crop moisture of 13% treats a crop scaled as mostly
+        /// water as mostly dry matter, over four times the carbon the hay yield supports.
+        ///
         /// The gross-up used to be absent here and happened by accident further downstream instead: these years carried
         /// the 35% perennial default for "percentage of product returned to soil", so Eq. 2.1.2-1 divided by (1 - 0.35)
         /// and arrived at the right plant carbon by a different route. Once such a year was correctly given a 100%
@@ -277,12 +282,20 @@ namespace H.Core.Services.Initialization.Crops
         /// specifies. Doing it here, where the document puts it, holds under either return percentage.
         /// </summary>
         /// <param name="yield">The Small Area Data hay yield (kg wet weight ha^-1)</param>
-        /// <param name="farm">Supplies Sp. The previous signature also took a moisture content and a view item and used
-        /// neither - the two moisture contents this conversion needs are the constants below.</param>
-        private double CalculateStandingBiomassAdjustment(double yield, Farm farm)
+        /// <param name="farm">Supplies Sp.</param>
+        /// <param name="viewItem">Supplies the moisture of the standing crop.</param>
+        private double CalculateStandingBiomassAdjustment(double yield, Farm farm, CropViewItem viewItem)
         {
-            // The moisture content fraction should be 80% by default and will represent the moisture content of fresh standing biomass (see algorithm document).
-            var moistureContentFreshBiomass = 0.8;
+            // The algorithm document's default for fresh standing biomass, used when the crop's own moisture cannot
+            // describe a crop - below nothing, or so wet there is no dry matter to scale to.
+            const double DefaultMoistureContentFreshBiomass = 0.8;
+
+            var moistureContentFreshBiomass = viewItem.GetMoistureContentOfCropAsFraction();
+            if (moistureContentFreshBiomass < 0 || moistureContentFreshBiomass >= 1)
+            {
+                moistureContentFreshBiomass = DefaultMoistureContentFreshBiomass;
+            }
+
             var moistureContentHay = 0.13;
 
             // Sp for hay - the "haying loss" constant of 35% in the algorithm document.
@@ -321,7 +334,7 @@ namespace H.Core.Services.Initialization.Crops
                     {
                         if (viewItem.CropType.IsPerennial())
                         {
-                            var adjustment = this.CalculateStandingBiomassAdjustment(smallAreaYieldData.Yield, farm);
+                            var adjustment = this.CalculateStandingBiomassAdjustment(smallAreaYieldData.Yield, farm, viewItem);
                             yields.Add(adjustment);
                         }
                         else
@@ -356,7 +369,7 @@ namespace H.Core.Services.Initialization.Crops
             {
                 if (viewItem.CropType.IsPerennial())
                 {
-                    var adjustment = this.CalculateStandingBiomassAdjustment(smallAreaYield.Yield, farm);
+                    var adjustment = this.CalculateStandingBiomassAdjustment(smallAreaYield.Yield, farm, viewItem);
                     viewItem.Yield = adjustment;
                 }
                 else
