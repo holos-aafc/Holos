@@ -88,6 +88,30 @@ namespace H.Core.Test.Services.Initialization
             Assert.AreEqual(januaryBefore, farm.ClimateData.PrecipitationData.January, 0.0001);
         }
 
+        /// <summary>
+        /// The farm's yearly figures - what the N2O and carbon calculations read for each year - follow the replacement
+        /// for every year, not only a partial year that falls back to the normals. Each year is read before the
+        /// replacement, as it would have been when the farm's results were first shown.
+        /// </summary>
+        [TestMethod]
+        public void ReplaceClimateReplacesTheYearlyFiguresForEveryYear()
+        {
+            var farm = new Farm();
+            _sut.ReplaceClimate(farm, BuildYears(2019, 2021, precipitation: 24.0));
+
+            var inflated = new[] {2019, 2020, 2021}.ToDictionary(year => year, year => farm.GetGrowingSeasonPrecipitation(year));
+
+            _sut.ReplaceClimate(farm, BuildYears(2019, 2021, precipitation: 1.0));
+
+            foreach (var year in inflated.Keys)
+            {
+                Assert.AreEqual(inflated[year] / 24.0, farm.GetGrowingSeasonPrecipitation(year), 0.0001,
+                    $"{year} still reports the growing season precipitation of the climate that was replaced");
+                Assert.AreEqual(DateTime.IsLeapYear(year) ? 366 : 365, farm.ClimateData.GetTotalPrecipitationForYear(year), 0.0001,
+                    $"{year}'s annual precipitation is not the new series'");
+            }
+        }
+
         [TestMethod]
         public void ReplaceClimateWithNoFarmReportsNothingReplaced()
         {

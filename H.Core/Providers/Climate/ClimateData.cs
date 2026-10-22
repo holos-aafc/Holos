@@ -55,7 +55,6 @@ namespace H.Core.Providers.Climate
         public ClimateData(List<DailyClimateData> dailyClimate)
         {
             this.DailyClimateData = new ObservableCollection<DailyClimateData>();
-            this.DailyClimateData.CollectionChanged += DailyClimateData_CollectionChanged;
 
             foreach (var dailyClimateData in dailyClimate)
             {
@@ -63,41 +62,90 @@ namespace H.Core.Providers.Climate
             }
         }
 
+        /// <summary>
+        /// Keeps the lookups and the per-year figures in step with the daily records. Added records are indexed and
+        /// the figures for their years recalculated on the next read. Anything else - records cleared, removed or
+        /// replaced, as when a farm's climate is downloaded again - rebuilds everything from the records as they now
+        /// stand, so no figure outlives the records it was calculated from.
+        /// </summary>
         private void DailyClimateData_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
             {
-                var addedItem = e.NewItems[0] as DailyClimateData;
-
-                var monthAndYearKey = new Tuple<int, int>(addedItem.Year, addedItem.Date.Month);
-                var monthYearAndDayKey = new Tuple<int, int, int>(addedItem.Year, addedItem.Date.Month, addedItem.Date.Day);
-
-                if (_dataByDate.ContainsKey(monthYearAndDayKey))
+                foreach (var addedItem in e.NewItems.OfType<DailyClimateData>())
                 {
-                    _dataByDate[monthYearAndDayKey] = addedItem;
-                }
-                else
-                {
-                    _dataByDate.Add(new Tuple<int, int, int>(addedItem.Year, addedItem.Date.Month, addedItem.Date.Day), addedItem);
+                    this.IndexDailyClimateData(addedItem);
+                    this.ForgetFiguresForYear(addedItem.Year);
                 }
 
-                if (_dataByYearAndMonth.ContainsKey(monthAndYearKey))
-                {
-                    _dataByYearAndMonth[monthAndYearKey].Add(addedItem);
-                }
-                else
-                {
-                    _dataByYearAndMonth.Add(new Tuple<int, int>(addedItem.Year, addedItem.Date.Month), new List<DailyClimateData>() { addedItem });
-                }
+                _temperaturesByDateRange.Clear();
+            }
+            else
+            {
+                this.RebuildDailyClimateIndexes();
+            }
+        }
 
-                if (_dailyClimateByYear.ContainsKey(addedItem.Year))
-                {
-                    _dailyClimateByYear[addedItem.Year].Add(addedItem);
-                }
-                else
-                {
-                    _dailyClimateByYear.Add(addedItem.Year, new List<DailyClimateData>() {addedItem});
-                }
+        private void RebuildDailyClimateIndexes()
+        {
+            _dataByYearAndMonth.Clear();
+            _dataByDate.Clear();
+            _dailyClimateByYear.Clear();
+            _evapotranspirationByYear.Clear();
+            _precipitationByYear.Clear();
+            _growingSeasonPrecipitationByYear.Clear();
+            _growingSeasonEvapotranspirationByYear.Clear();
+            _temperaturesByDateRange.Clear();
+
+            if (_dailyClimateData == null)
+            {
+                return;
+            }
+
+            foreach (var dailyClimateData in _dailyClimateData)
+            {
+                this.IndexDailyClimateData(dailyClimateData);
+            }
+        }
+
+        private void ForgetFiguresForYear(int year)
+        {
+            _evapotranspirationByYear.Remove(year);
+            _precipitationByYear.Remove(year);
+            _growingSeasonPrecipitationByYear.Remove(year);
+            _growingSeasonEvapotranspirationByYear.Remove(year);
+        }
+
+        private void IndexDailyClimateData(DailyClimateData addedItem)
+        {
+            var monthAndYearKey = new Tuple<int, int>(addedItem.Year, addedItem.Date.Month);
+            var monthYearAndDayKey = new Tuple<int, int, int>(addedItem.Year, addedItem.Date.Month, addedItem.Date.Day);
+
+            if (_dataByDate.ContainsKey(monthYearAndDayKey))
+            {
+                _dataByDate[monthYearAndDayKey] = addedItem;
+            }
+            else
+            {
+                _dataByDate.Add(new Tuple<int, int, int>(addedItem.Year, addedItem.Date.Month, addedItem.Date.Day), addedItem);
+            }
+
+            if (_dataByYearAndMonth.ContainsKey(monthAndYearKey))
+            {
+                _dataByYearAndMonth[monthAndYearKey].Add(addedItem);
+            }
+            else
+            {
+                _dataByYearAndMonth.Add(new Tuple<int, int>(addedItem.Year, addedItem.Date.Month), new List<DailyClimateData>() { addedItem });
+            }
+
+            if (_dailyClimateByYear.ContainsKey(addedItem.Year))
+            {
+                _dailyClimateByYear[addedItem.Year].Add(addedItem);
+            }
+            else
+            {
+                _dailyClimateByYear.Add(addedItem.Year, new List<DailyClimateData>() {addedItem});
             }
         }
 
@@ -132,10 +180,29 @@ namespace H.Core.Providers.Climate
             set { SetProperty(ref _evapotranspirationData, value); }
         }
 
+        /// <summary>
+        /// The daily records. Assigning a new collection moves the indexing over to it and rebuilds the lookups from
+        /// its records.
+        /// </summary>
         public ObservableCollection<DailyClimateData> DailyClimateData
         {
             get { return _dailyClimateData; }
-            set { SetProperty(ref _dailyClimateData, value); }
+            set
+            {
+                if (_dailyClimateData != null)
+                {
+                    _dailyClimateData.CollectionChanged -= DailyClimateData_CollectionChanged;
+                }
+
+                SetProperty(ref _dailyClimateData, value);
+
+                if (_dailyClimateData != null)
+                {
+                    _dailyClimateData.CollectionChanged += DailyClimateData_CollectionChanged;
+                }
+
+                this.RebuildDailyClimateIndexes();
+            }
         }
 
         public TemperatureData BarnTemperatureData
