@@ -45,6 +45,12 @@ namespace H.Core.Services.LandManagement
         /// values, without rebuilding the rest of the screen.
         /// </summary>
         void ResetOverriddenInputs(Farm farm);
+
+        /// <summary>
+        /// Recalculates the details screen values that depend on the farm's climate after the climate has been
+        /// replaced, keeping every user override, without rebuilding the rest of the screen.
+        /// </summary>
+        void RefreshClimateDependentInputs(Farm farm);
         List<CropViewItem> CalculateFinalResults(Farm farm);
         List<AnimalComponentEmissionsResults> AnimalResults { get; set; }
 

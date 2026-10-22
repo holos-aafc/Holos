@@ -244,25 +244,7 @@ namespace H.Core.Services.LandManagement
                         // ones the user had frozen.
                         RestoreOverridableInputs(componentSelectionScreenCrop, viewItem);
 
-                        // A hayed row's yield is its harvested dry matter scaled up by the standing crop's moisture,
-                        // and the moisture the row carries afterwards is the hay's - PostProcessPerennials assigns it
-                        // once the yield has been derived. Repeating the derivation against the row as it stands would
-                        // scale by the hay's moisture and change the yield of a row nobody overrode, so the entered
-                        // moisture is borrowed for the derivation and the row is put back to what it was showing. The
-                        // moisture is not one of the inputs being reset, so it has to end where it started.
-                        //
-                        // Both forms are carried. The percentage writes through to the fraction only when its value
-                        // changes, so setting one of them alone leaves the row holding two moistures that disagree,
-                        // and the passes below do not all read the same one.
-                        if (YieldInputPolicy.HasHayedHarvest(viewItem))
-                        {
-                            moistureToPutBack.Add(BorrowedMoisture.From(viewItem));
-
-                            SetMoisture(
-                                viewItem,
-                                componentSelectionScreenCrop.MoistureContentOfCropPercentage,
-                                componentSelectionScreenCrop.MoistureContentOfCrop);
-                        }
+                        BorrowEnteredMoisture(viewItem, componentSelectionScreenCrop, moistureToPutBack);
 
                         ClearOverrideFlags(viewItem);
 
@@ -313,6 +295,89 @@ namespace H.Core.Services.LandManagement
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Recalculates the details screen rows that depend on the farm's climate, in place, after the climate has been
+        /// replaced - by downloading it again, for example. Every user override is kept.
+        ///
+        /// The rows hold values calculated from the climate when the screen was built: the climate parameter and
+        /// management factor ICBM decomposes with, and the carbon and nitrogen inputs derived alongside them. They are
+        /// saved with the farm and the screen is not rebuilt on its own, so without this a farm goes on using the
+        /// climate it had before - through saving and reopening as well. Rebuilding the screen would also do it, and
+        /// would discard every value the user entered or overrode on it.
+        ///
+        /// The carbon and nitrogen passes are repeated in the order the screen was built in, and they already honour
+        /// the override flags. A plant carbon the carbon pass estimated for a perennial's second year (Equation
+        /// 2.1.2-25) is frozen by that pass with the same flag a user override sets, so it is kept as well.
+        /// </summary>
+        public void RefreshClimateDependentInputs(Farm farm)
+        {
+            var stageState = this.GetStageState(farm);
+            if (stageState == null || stageState.DetailsScreenViewCropViewItems.Any() == false)
+            {
+                return;
+            }
+
+            foreach (var fieldSystemComponent in farm.FieldSystemComponents)
+            {
+                var managementPeriods = GetManagementPeriods(fieldSystemComponent);
+
+                // Grouped by management period, as the screen is built and as ResetOverriddenInputs derives them.
+                var itemsByPeriod = stageState.DetailsScreenViewCropViewItems
+                    .Where(viewItem => viewItem.FieldSystemComponentGuid == fieldSystemComponent.Guid)
+                    .GroupBy(viewItem => GetManagementPeriodForItem(managementPeriods, viewItem) ?? fieldSystemComponent);
+
+                foreach (var grouping in itemsByPeriod)
+                {
+                    var managementPeriod = grouping.Key;
+                    var viewItems = grouping.OrderBy(x => x.Year).ThenBy(x => x.IsSecondaryCrop).ToList();
+
+                    var moistureToPutBack = new List<BorrowedMoisture>();
+                    foreach (var viewItem in viewItems)
+                    {
+                        var componentSelectionScreenCrop = GetComponentSelectionScreenCropForItem(managementPeriod, viewItem);
+                        if (componentSelectionScreenCrop != null)
+                        {
+                            BorrowEnteredMoisture(viewItem, componentSelectionScreenCrop, moistureToPutBack);
+                        }
+                    }
+
+                    this.AssignCarbonInputs(viewItems: viewItems, farm: farm);
+                    this.AssignNitrogenInputs(viewItems: viewItems, farm: farm);
+
+                    foreach (var borrowed in moistureToPutBack)
+                    {
+                        SetMoisture(borrowed.ViewItem, borrowed.Percentage, borrowed.Fraction);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// A hayed row's yield is its harvested dry matter scaled up by the standing crop's moisture, and the moisture
+        /// the row carries afterwards is the hay's - PostProcessPerennials assigns it once the yield has been derived.
+        /// Repeating a derivation against the row as it stands would read that yield at the hay's moisture, so the
+        /// moisture entered on the crop is lent to the row for the derivation and recorded so the row can be put back
+        /// to what it was showing afterwards.
+        ///
+        /// Both forms are carried. The percentage writes through to the fraction only when its value changes, so
+        /// setting one of them alone leaves the row holding two moistures that disagree, and the passes do not all
+        /// read the same one.
+        /// </summary>
+        private static void BorrowEnteredMoisture(CropViewItem viewItem, CropViewItem componentSelectionScreenCrop, List<BorrowedMoisture> moistureToPutBack)
+        {
+            if (YieldInputPolicy.HasHayedHarvest(viewItem) == false)
+            {
+                return;
+            }
+
+            moistureToPutBack.Add(BorrowedMoisture.From(viewItem));
+
+            SetMoisture(
+                viewItem,
+                componentSelectionScreenCrop.MoistureContentOfCropPercentage,
+                componentSelectionScreenCrop.MoistureContentOfCrop);
         }
 
         private static void ClearOverrideFlags(CropViewItem viewItem)

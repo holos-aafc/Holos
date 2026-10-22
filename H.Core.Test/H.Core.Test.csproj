@@ -202,6 +202,7 @@
     <Compile Include="Mappers\CropViewItemResultsCopyTest.cs" />
     <Compile Include="Services\Animals\ManureRemovalVolatileSolidsTest.cs" />
     <Compile Include="Services\Animals\CarbonInputBaselineTest.cs" />
+    <Compile Include="Services\Animals\ClimateRefreshTest.cs" />
     <Compile Include="Services\Animals\PerennialYieldBaselineTest.cs" />
     <Compile Include="Services\FieldSummaryPolicyTest.cs" />
     <Compile Include="Services\Animals\FarmResultsBaselineTest.cs" />
