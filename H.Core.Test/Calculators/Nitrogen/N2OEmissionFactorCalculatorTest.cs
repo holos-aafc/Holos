@@ -157,6 +157,32 @@ namespace H.Core.Test.Calculators.Nitrogen
         }
 
         /// <summary>
+        /// Ensure cache key uses the year's climate: a farm whose climate is replaced (downloaded again, or a different
+        /// farm in the same ecodistrict) gets a factor from its own precipitation and evapotranspiration, not one
+        /// calculated from the climate it had before. The calculator lives for the whole session in the GUI.
+        /// </summary>
+        [TestMethod]
+        public void CalculateBaseEcodistrictFactor_ReturnsDifferent_When_ClimateChanges()
+        {
+            var year = _viewItem.Year;
+
+            var soilData = new SoilData();
+            soilData.EcodistrictId = 371;
+            soilData.Province = Province.Ontario;
+
+            _farm.GeographicData.DefaultSoilData = soilData;
+
+            _farm.ClimateData.PrecipitationData = new PrecipitationData() { GrowingSeasonPrecipitation = 2400 };
+            _farm.ClimateData.EvapotranspirationData = new EvapotranspirationData() { GrowingSeasonEvapotranspiration = 200 };
+            var inflated = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
+
+            _farm.ClimateData.PrecipitationData = new PrecipitationData() { GrowingSeasonPrecipitation = 100 };
+            var corrected = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
+
+            Assert.AreNotEqual(inflated, corrected, 1e-12, "The factor for the climate that was replaced was returned.");
+        }
+
+        /// <summary>
         /// Ensure cache key uses soil texture: changing texture yields a different value.
         /// </summary>
         [TestMethod]

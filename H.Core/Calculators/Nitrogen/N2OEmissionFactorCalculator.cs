@@ -30,8 +30,8 @@ namespace H.Core.Calculators.Nitrogen
         private Dictionary<Tuple<double, SoilTexture, Region>, double> _baseEmissionFactorCalculationCache = new Dictionary<Tuple<double, SoilTexture, Region>, double>();
 
         // Cache for CalculateBaseEcodistrictFactor lookups
-        private Dictionary<Tuple<int, Province, int, double, SoilTexture, Region>, double> _baseEcodistrictFactorCache =
-            new Dictionary<Tuple<int, Province, int, double, SoilTexture, Region>, double>();
+        private Dictionary<Tuple<int, Province, double, double, double, SoilTexture, Region>, double> _baseEcodistrictFactorCache =
+            new Dictionary<Tuple<int, Province, double, double, double, SoilTexture, Region>, double>();
 
         private IAnimalService _animalService;
 
@@ -168,10 +168,17 @@ namespace H.Core.Calculators.Nitrogen
             // Item may be null if there are no fields on the farm
             var soilData = viewItem == null ? farm.DefaultSoilData : farm.GetPreferredSoilData(viewItem);
 
-            var cacheKey = new Tuple<int, Province, int, double, SoilTexture, Region>(
+            var growingSeasonPrecipitation = farm.GetGrowingSeasonPrecipitation(year);
+            var growingSeasonEvapotranspiration = farm.GetGrowingSeasonEvapotranspiration(year);
+
+            // Keyed on the year's climate rather than the year: the calculator lives for the whole session in the GUI,
+            // and the same year can have a different climate - a farm's climate downloaded again, or another farm in
+            // the same ecodistrict.
+            var cacheKey = new Tuple<int, Province, double, double, double, SoilTexture, Region>(
                 soilData.EcodistrictId,
                 soilData.Province,
-                year,
+                growingSeasonPrecipitation,
+                growingSeasonEvapotranspiration,
                 viewItem == null ? 0.0 : viewItem.AmountOfIrrigation,
                 soilData.SoilTexture,
                 soilData.Province.GetRegion());
@@ -187,8 +194,8 @@ namespace H.Core.Calculators.Nitrogen
 
             var emissionsDueToLandscapeAndTopography = this.CalculateTopographyEmissions(
                 fractionOfLandOccupiedByLowerPortionsOfLandscape: fractionOfLandOccupiedByLowerPortionsOfLandscape,
-                growingSeasonPrecipitation: farm.GetGrowingSeasonPrecipitation(year),
-                growingSeasonEvapotranspiration: farm.GetGrowingSeasonEvapotranspiration(year),
+                growingSeasonPrecipitation: growingSeasonPrecipitation,
+                growingSeasonEvapotranspiration: growingSeasonEvapotranspiration,
                 amountOfIrrigation: viewItem == null ? 0.0 : viewItem.AmountOfIrrigation);
 
             var baseEcodistrictFactor = this.CalculateBaseEcodistrictValue(
