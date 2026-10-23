@@ -145,6 +145,7 @@ namespace H.Core.Models
         // IPCC Tier 2 Carbon
         private int _defaultRunInPeriod;
         private TillageType _runInPeriodTillageType;
+        private RunInPeriodYieldSource _runInPeriodYieldSource;
 
         private double _defaultBiodegradableFractionDairyManure;
         private double _defaultBiodegradableFractionSwineManure;
@@ -282,6 +283,7 @@ namespace H.Core.Models
             // Previous run-in period of 5 years was too small and resulted in very high starting/equilibrium states. Using a higher value is needed.
             this.DefaultRunInPeriod = 15;
             this.RunInPeriodTillageType = TillageType.Reduced;
+            this.RunInPeriodYieldSource = RunInPeriodYieldSource.FieldHistory;
             this.CarbonModellingStrategy = CarbonModellingStrategies.IPCCTier2;
 
             // AD
@@ -1060,6 +1062,15 @@ namespace H.Core.Models
         {
             get => _runInPeriodTillageType;
             set => SetProperty(ref _runInPeriodTillageType, value);
+        }
+
+        /// <summary>
+        /// Where the IPCC Tier 2 run-in period takes its yields from. See <see cref="Enumerations.RunInPeriodYieldSource"/>.
+        /// </summary>
+        public RunInPeriodYieldSource RunInPeriodYieldSource
+        {
+            get => _runInPeriodYieldSource;
+            set => SetProperty(ref _runInPeriodYieldSource, value);
         }
 
         public bool ScaleUpEmissionsEnabled

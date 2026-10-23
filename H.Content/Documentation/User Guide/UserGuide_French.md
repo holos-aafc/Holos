@@ -602,6 +602,18 @@ Dans la section Renseignements sur la ferme, les catégories de renseignements s
 
 Les données par défaut pour cet écran sont basées sur les informations contenues dans le document de l’algorithme à consulter ici. 1. Cliquez sur l’icône Paramètres d’utilisateur. 2. Ici, vous pourrez définir certains paramètres d’utilisateur par défaut, tels que : concentration de carbone (kg kg^-1), jour d’émergence ou épaisseur de la surface du sol (mm). 3. Cliquez sur OK pour sauvegarder les changements à vos paramètres d’utilisateur.
 
+### Période de rodage (IPCC Niveau 2)
+
+Lorsqu’une ferme utilise le modèle de carbone du sol IPCC Niveau 2, Holos simule une **période de rodage** - un certain nombre d’années avant le début de l’historique de chaque champ - afin d’établir le carbone du sol initial de chaque champ. Ces paramètres déterminent la façon dont ces années sont simulées.
+
+-	**Période de rodage** fixe le nombre d’années simulées (15 par défaut).
+-	**Utiliser le travail du sol personnalisé pour la période de rodage** et **Travail du sol pour la période de rodage** fixent le travail du sol utilisé pendant ces années, au lieu de celui tiré de l’historique du champ.
+-	**Rendements de la période de rodage** détermine sur quoi reposent les années de rodage :
+	-	**Historique du champ** (par défaut) : les années de rodage répètent les premières années de l’historique de chaque champ, autant que la durée de la période de rodage, avec les cultures de ces années, leur météo et les rendements que vous avez fournis pour elles - au moyen de récoltes de foin, du pâturage, d’un rendement saisi selon la méthode d’attribution personnalisée ou d’une valeur modifiée à l’écran Détails. Lorsque Holos a estimé le rendement d’une année (par exemple à partir des données de petites régions), chaque année de rodage conserve sa propre estimation. Le carbone du sol commence alors à un niveau cohérent avec le champ tel que vous l’avez décrit. Utiliser la météo de l’historique du champ évite aussi les années antérieures au début de la plupart des historiques, pour lesquelles les données météorologiques quotidiennes manquent souvent.
+	-	**Méthode d’attribution** : les années de rodage prolongent en arrière la première rotation de chaque champ à partir de l’année de début, avec la méthode d’attribution du rendement de la ferme (par exemple les données de petites régions) et la météo des années de rodage elles-mêmes, quelles que soient vos saisies. Si vos récoltes sont nettement inférieures ou supérieures au rendement régional, le carbone du sol évoluera vers le niveau propre à votre champ au cours des premières années de la simulation. Cette évolution découle du changement de rendements, et non d’un événement survenu sur la ferme.
+-	Si vous disposez d’une mesure du carbone du sol au début de l’historique de vos champs, **utiliser la valeur personnalisée de carbone à l’équilibre** l’utilise au lieu du résultat de la période de rodage.
+-	Ces paramètres sont propres à la ferme et sont donc enregistrés avec elle. Le modèle ICBM n’utilise pas de période de rodage.
+
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/fr/chapter4/figure4-3.png" alt="Figure4-3" width=""/>

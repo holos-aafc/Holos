@@ -643,6 +643,18 @@ The **Grazing** section at the bottom of this screen sets the utilization rate H
 
 The utilization rate has a large effect on a grazed field's yield: Holos works out how much grew by dividing what the animals ate by this rate, so a low rate implies a very large crop. See *Perennial Fields: Harvests, Grazing and Yields* in **Chapter 8 - Details**.
 
+### Run-in Period (IPCC Tier 2)
+
+When a farm uses the IPCC Tier 2 soil carbon model, Holos simulates a **run-in period** - a number of years before each field's history begins - to work out the soil carbon each field starts with. These settings control how those years are simulated.
+
+-	**Run in period** sets how many years are simulated (default 15).
+-	**Use custom run-in period tillage** and **Run-in period tillage** set the tillage used in those years, instead of the tillage taken from the field's history.
+-	**Run-in period yields** sets what the run-in years are based on:
+	-	**Same as the field history** (the default): the run-in years repeat the first years of each field's history, as many as the run-in period is long, with those years' crops, their weather, and the yields you supplied for them - through hay harvests, grazing, a yield typed under the Custom yield assignment method, or an override on the Details screen. Where Holos estimated a year's yield (for example from Small Area Data), each run-in year keeps its own estimate. Soil carbon then starts at a level consistent with the field as you described it. Using the field history's weather also avoids the years before most histories begin, for which daily weather is often not available.
+	-	**Yield assignment method**: the run-in years continue each field's first rotation backwards from the start year, using the farm's yield assignment method (for example Small Area Data) and the weather of the run-in years themselves, whatever you entered. If your harvests are much smaller or larger than the regional yield, soil carbon will move towards your field's own level over the first years of the simulation. That movement comes from the change in yields, not from anything that happened on the farm.
+-	If you have a measured soil carbon for the start of your field history, **Use custom equilibrium carbon value** uses it instead of the run-in period's result.
+-	These settings belong to the farm, so they are saved with the farm. The ICBM model does not use a run-in period.
+
 <br>
 <p align="center">
  <img src="../../Images/UserGuide/en/chapter4/figure4-3.png" alt="Figure4-3" width="550"/>

@@ -2036,11 +2036,13 @@ namespace H.Core.Test.Services
         [TestMethod]
         public void GetRunInItems()
         {
+            // The rotation-based run-in: the first rotation continued backwards from the start year.
             var farm = new Farm()
             {
                 Defaults = new Defaults()
                 {
                     DefaultRunInPeriod = 3,
+                    RunInPeriodYieldSource = RunInPeriodYieldSource.YieldAssignmentMethod,
                 }
             };
 
@@ -2080,6 +2082,75 @@ namespace H.Core.Test.Services
             Assert.AreEqual(items[0].CropType, CropType.Wheat);
             Assert.AreEqual(items[1].CropType, CropType.TameGrass);
             Assert.AreEqual(items[2].CropType, CropType.TameGrass);
+        }
+
+        /// <summary>
+        /// Under the default, the run-in period repeats the first years of the field history, as many as it is long, in
+        /// order: the run-in year just before the history begins repeats the last of them.
+        /// </summary>
+        [TestMethod]
+        public void GetRunInItemsRepeatsTheFirstYearsOfTheFieldHistory()
+        {
+            var farm = new Farm() { Defaults = new Defaults() { DefaultRunInPeriod = 3 } };
+            Assert.AreEqual(RunInPeriodYieldSource.FieldHistory, farm.Defaults.RunInPeriodYieldSource, "the default changed");
+
+            var items = _resultsService.GetRunInPeriodItems(
+                farm: farm,
+                viewItemsForRotation: new List<CropViewItem>() { new CropViewItem() { CropType = CropType.Barley } },
+                startYearOfField: 1985,
+                viewItemsForField: FieldHistory(1985, CropType.Barley, CropType.Wheat, CropType.TameGrass, CropType.Canola),
+                fieldComponent: new FieldSystemComponent());
+
+            CollectionAssert.AreEqual(new[] { 1982, 1983, 1984 }, items.Select(x => x.Year).ToList());
+            CollectionAssert.AreEqual(new[] { CropType.Barley, CropType.Wheat, CropType.TameGrass }, items.Select(x => x.CropType).ToList());
+        }
+
+        /// <summary>
+        /// A field history shorter than the run-in period is repeated to fill it.
+        /// </summary>
+        [TestMethod]
+        public void GetRunInItemsRepeatsAShortFieldHistory()
+        {
+            var farm = new Farm() { Defaults = new Defaults() { DefaultRunInPeriod = 5 } };
+
+            var items = _resultsService.GetRunInPeriodItems(
+                farm: farm,
+                viewItemsForRotation: new List<CropViewItem>() { new CropViewItem() { CropType = CropType.Barley } },
+                startYearOfField: 1985,
+                viewItemsForField: FieldHistory(1985, CropType.Barley, CropType.Wheat, CropType.Canola),
+                fieldComponent: new FieldSystemComponent());
+
+            CollectionAssert.AreEqual(new[] { 1980, 1981, 1982, 1983, 1984 }, items.Select(x => x.Year).ToList());
+            CollectionAssert.AreEqual(
+                new[] { CropType.Barley, CropType.Wheat, CropType.Canola, CropType.Barley, CropType.Wheat },
+                items.Select(x => x.CropType).ToList());
+        }
+
+        /// <summary>
+        /// Under the default each run-in year uses the weather of the history year it repeats; otherwise its own.
+        /// </summary>
+        [TestMethod]
+        public void GetRunInPeriodWeatherYearsPairsEachRunInYearWithTheHistoryYearItRepeats()
+        {
+            var history = FieldHistory(1985, CropType.Barley, CropType.Wheat, CropType.Canola);
+            var farm = new Farm() { Defaults = new Defaults() { DefaultRunInPeriod = 3 } };
+
+            var items = _resultsService.GetRunInPeriodItems(farm, new List<CropViewItem>() { new CropViewItem() }, 1985, history, new FieldSystemComponent());
+            var weatherYears = _resultsService.GetRunInPeriodWeatherYears(farm, items, history);
+
+            CollectionAssert.AreEquivalent(new[] { 1982, 1983, 1984 }, weatherYears.Keys.ToList());
+            Assert.AreEqual(1985, weatherYears[1982]);
+            Assert.AreEqual(1986, weatherYears[1983]);
+            Assert.AreEqual(1987, weatherYears[1984]);
+
+            farm.Defaults.RunInPeriodYieldSource = RunInPeriodYieldSource.YieldAssignmentMethod;
+            var ownYears = _resultsService.GetRunInPeriodWeatherYears(farm, _resultsService.GetRunInPeriodItems(farm, new List<CropViewItem>() { new CropViewItem() }, 1985, history, new FieldSystemComponent()), history);
+            Assert.AreEqual(0, ownYears.Count, "the yield assignment method option should keep every run-in year's own weather");
+        }
+
+        private static List<CropViewItem> FieldHistory(int startYear, params CropType[] crops)
+        {
+            return crops.Select((crop, index) => new CropViewItem() { CropType = crop, Year = startYear + index }).ToList();
         }
 
         /// <summary>

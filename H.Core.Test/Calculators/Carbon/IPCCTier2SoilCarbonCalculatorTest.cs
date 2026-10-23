@@ -910,6 +910,46 @@ namespace H.Core.Test.Calculators.Carbon
 
 
 
+        /// <summary>
+        /// A run-in year that repeats a field history year takes that year's weather. Run-in years usually fall before
+        /// the daily weather begins and would otherwise be calculated from the normals.
+        /// </summary>
+        [TestMethod]
+        public void CalculateRunInPeriodUsesTheWeatherOfTheHistoryYearEachRunInYearRepeats()
+        {
+            var farm = new Farm();
+            for (var day = 0; day < 365; day++)
+            {
+                farm.ClimateData.DailyClimateData.Add(new DailyClimateData()
+                {
+                    Year = 1985, JulianDay = day + 1, Date = new System.DateTime(1985, 1, 1).AddDays(day),
+                    MeanDailyAirTemperature = 15, MeanDailyPrecipitation = 2, MeanDailyPET = 3,
+                });
+            }
+
+            var historyYear = new CropViewItem() { CropType = CropType.Wheat, Year = 1985, TillageType = TillageType.Reduced };
+            _sut.CalculateClimateAdjustments(historyYear, farm);
+
+            var runInItems = new List<CropViewItem>()
+            {
+                new CropViewItem() { CropType = CropType.Wheat, Year = 1983, TillageType = TillageType.Reduced, TotalCarbonInputs = 1000 },
+                new CropViewItem() { CropType = CropType.Wheat, Year = 1984, TillageType = TillageType.Reduced, TotalCarbonInputs = 1000 },
+            };
+
+            _sut.CalculateRunInPeriod(farm, runInItems, new Dictionary<int, int>() { { 1983, 1985 }, { 1984, 1985 } });
+
+            foreach (var item in runInItems)
+            {
+                Assert.AreEqual(historyYear.TFac, item.TFac, 1e-9, $"run-in {item.Year} did not take 1985's temperature factor");
+                Assert.AreEqual(historyYear.WFac, item.WFac, 1e-9, $"run-in {item.Year} did not take 1985's water factor");
+            }
+
+            // Without the map each run-in year uses its own weather - here the normals, since 1983 and 1984 have none.
+            var ownWeather = new CropViewItem() { CropType = CropType.Wheat, Year = 1983, TillageType = TillageType.Reduced, TotalCarbonInputs = 1000 };
+            _sut.CalculateRunInPeriod(farm, new List<CropViewItem>() { ownWeather });
+            Assert.AreNotEqual(historyYear.TFac, ownWeather.TFac, 1e-9, "the normals gave 1985's factor, so this test cannot tell them apart");
+        }
+
         [TestMethod]
         public void UseCustomStartingPoint()
         {

@@ -2394,6 +2394,12 @@
   <data name="WetWeight" xml:space="preserve">
     <value>poids humide</value>
   </data>
+  <data name="EnumRunInPeriodYieldSourceFieldHistory" xml:space="preserve">
+    <value>Historique du champ</value>
+  </data>
+  <data name="EnumRunInPeriodYieldSourceYieldAssignmentMethod" xml:space="preserve">
+    <value>Méthode d'attribution</value>
+  </data>
   <data name="EnumCarMultipleYearAverage" xml:space="preserve">
     <value>moyenne RAR</value>
   </data>

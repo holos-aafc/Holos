@@ -768,41 +768,58 @@ namespace H.Core.Services.LandManagement
                 rotationSize = viewItemsForRotation.Count();
             }
 
-            // Take the first phase of the rotation from the view items and use that as the basis for the run in period since these items will differ depending on
-            // which field is being considered in the rotation.
-            var mainCrops = viewItemsForField.OrderBy(x => x.Year).Where(y => y.IsSecondaryCrop == false).Take(rotationSize).ToList();
-            var coverCrops = viewItemsForField.OrderBy(x => x.Year).Where(y => y.IsSecondaryCrop == true).Take(rotationSize).ToList();
+            var mainCropsInHistory = viewItemsForField.OrderBy(x => x.Year).Where(y => y.IsSecondaryCrop == false).ToList();
+            var coverCropsInHistory = viewItemsForField.OrderBy(x => x.Year).Where(y => y.IsSecondaryCrop == true).ToList();
 
-            // Reverse items so we can use indexes from the beginning of collection
-            mainCrops.Reverse();
-            coverCrops.Reverse();          
+            // The field history years each run-in year repeats, and the years whose tillage the run-in takes.
+            var sourceForYear = new List<Tuple<int, CropViewItem, CropViewItem>>();
+            List<CropViewItem> mainCrops;
 
-            // Start at the year before the user-defined start year and work backwards towards the start year of the run in period
-            for (int indexYear = startYearOfField - 1; indexYear >= runInPeriodStartYear; indexYear--, moduloCounter++)
+            if (farm.Defaults.RunInPeriodYieldSource == RunInPeriodYieldSource.FieldHistory)
             {
-                var moduloIndex = moduloCounter % rotationSize;
-                var mainCropAtYear = mainCrops.ElementAt(moduloIndex);
+                // The run-in period repeats the first years of the field history, as many as it is long, in order - the
+                // run-in year before the history begins repeats the last of them. Its inputs are averaged into the
+                // starting state, so taking the history's first years rather than only its first rotation keeps a single
+                // untypical year from setting it: a perennial stand's establishment year, for one, whose roots are still
+                // building up. A history shorter than the run-in period is repeated.
+                mainCrops = mainCropsInHistory.Take(runInPeriod).ToList();
 
-                var createdMainCrop = this.MapDetailsScreenViewItemFromComponentScreenViewItem(mainCropAtYear, indexYear);
-                UseEnteredMoisture(createdMainCrop, mainCropAtYear, fieldComponent);
-                createdMainCrop.Year = indexYear;
-                createdMainCrop.DetailViewItemToComponentSelectionViewItemMap = mainCropAtYear.Guid;
-                createdMainCrop.FieldSystemComponentGuid = fieldComponent.Guid;
-
-                // Add to list of run in period items;
-                runInPeriodItems.Add(createdMainCrop);
-
-                var coverCropAtYear = coverCrops.ElementAtOrDefault(moduloIndex);
-                if (coverCropAtYear != null)
+                for (var index = 0; index < runInPeriod; index++)
                 {
-                    var createdCoverCrop = this.MapDetailsScreenViewItemFromComponentScreenViewItem(coverCropAtYear, indexYear);
-                    UseEnteredMoisture(createdCoverCrop, coverCropAtYear, fieldComponent);
-                    createdCoverCrop.Year = indexYear;
-                    createdCoverCrop.DetailViewItemToComponentSelectionViewItemMap = coverCropAtYear.Guid;
-                    createdCoverCrop.FieldSystemComponentGuid = fieldComponent.Guid;
+                    var mainCropAtYear = mainCrops[index % mainCrops.Count];
+                    var coverCropAtYear = coverCropsInHistory.FirstOrDefault(x => x.Year == mainCropAtYear.Year);
 
-                    // Add to list of run in period items;
-                    runInPeriodItems.Add(createdCoverCrop);
+                    sourceForYear.Add(Tuple.Create(runInPeriodStartYear + index, mainCropAtYear, coverCropAtYear));
+                }
+            }
+            else
+            {
+                // Take the first phase of the rotation from the view items and use that as the basis for the run in period since these items will differ depending on
+                // which field is being considered in the rotation.
+                mainCrops = mainCropsInHistory.Take(rotationSize).ToList();
+                var coverCrops = coverCropsInHistory.Take(rotationSize).ToList();
+
+                // Reverse items so we can use indexes from the beginning of collection
+                mainCrops.Reverse();
+                coverCrops.Reverse();
+
+                // Start at the year before the user-defined start year and work backwards towards the start year of the run in period
+                for (int indexYear = startYearOfField - 1; indexYear >= runInPeriodStartYear; indexYear--, moduloCounter++)
+                {
+                    var moduloIndex = moduloCounter % rotationSize;
+
+                    sourceForYear.Add(Tuple.Create(indexYear, mainCrops.ElementAt(moduloIndex), coverCrops.ElementAtOrDefault(moduloIndex)));
+                }
+            }
+
+            foreach (var source in sourceForYear)
+            {
+                // Add to list of run in period items;
+                runInPeriodItems.Add(this.CreateRunInPeriodItem(source.Item2, source.Item1, fieldComponent));
+
+                if (source.Item3 != null)
+                {
+                    runInPeriodItems.Add(this.CreateRunInPeriodItem(source.Item3, source.Item1, fieldComponent));
                 }
             }
 
@@ -815,6 +832,21 @@ namespace H.Core.Services.LandManagement
             }
 
             return runInPeriodItems.OrderBy(x => x.Year).ToList();
+        }
+
+        /// <summary>
+        /// A run-in item for the given year, copied from a field history row. The item records the row it was copied
+        /// from, which <see cref="AssignRunInPeriodYields"/> reads.
+        /// </summary>
+        private CropViewItem CreateRunInPeriodItem(CropViewItem fieldHistoryRow, int year, FieldSystemComponent fieldComponent)
+        {
+            var createdItem = this.MapDetailsScreenViewItemFromComponentScreenViewItem(fieldHistoryRow, year);
+            UseEnteredMoisture(createdItem, fieldHistoryRow, fieldComponent);
+            createdItem.Year = year;
+            createdItem.DetailViewItemToComponentSelectionViewItemMap = fieldHistoryRow.Guid;
+            createdItem.FieldSystemComponentGuid = fieldComponent.Guid;
+
+            return createdItem;
         }
 
         /// <summary>
@@ -836,6 +868,88 @@ namespace H.Core.Services.LandManagement
             }
 
             SetMoisture(runInItem, enteredCrop.MoistureContentOfCropPercentage, enteredCrop.MoistureContentOfCrop);
+        }
+
+        /// <summary>
+        /// Assigns the run-in period's yields. The run-in period's average inputs set the IPCC Tier 2 starting soil
+        /// carbon, so its yields decide where soil carbon starts.
+        ///
+        /// Every run-in year first takes the yield assignment method's yield for that year. Under
+        /// <see cref="RunInPeriodYieldSource.FieldHistory"/>, a run-in year then takes the yield of the field history
+        /// year it repeats wherever that yield came from the user - a hay harvest, grazing, a typed (Custom) yield or an
+        /// override - since the harvest and grazing derivations only run on the field history's own years. Without
+        /// that, a field whose history records harvests starts from the method's estimate, often regional hay
+        /// productivity, and moves towards the harvested yields from the first simulated year. Years whose yield is
+        /// the method's estimate keep the run-in year's own estimate, so a field with nothing entered is unaffected.
+        /// </summary>
+        public void AssignRunInPeriodYields(
+            Farm farm,
+            List<CropViewItem> runInPeriodItems,
+            IEnumerable<CropViewItem> viewItemsForField,
+            FieldSystemComponent fieldSystemComponent)
+        {
+            _initializationService.InitializeYieldForAllYears(runInPeriodItems, farm, fieldSystemComponent);
+
+            if (farm.Defaults.RunInPeriodYieldSource != RunInPeriodYieldSource.FieldHistory)
+            {
+                return;
+            }
+
+            var method = farm.GetYieldAssignmentMethod(fieldSystemComponent);
+
+            // Each run-in item records the guid of the field history row it was copied from (GetRunInPeriodItems).
+            var fieldHistoryRows = viewItemsForField
+                .GroupBy(row => row.Guid)
+                .ToDictionary(grouping => grouping.Key, grouping => grouping.First());
+
+            foreach (var runInPeriodItem in runInPeriodItems)
+            {
+                if (fieldHistoryRows.TryGetValue(runInPeriodItem.DetailViewItemToComponentSelectionViewItemMap, out var fieldHistoryRow) == false)
+                {
+                    continue;
+                }
+
+                var yieldIsTheUsers = fieldHistoryRow.DoNotRecalculateYield ||
+                                      YieldInputPolicy.GetYieldSource(fieldHistoryRow, method) != YieldSource.Estimated;
+
+                if (yieldIsTheUsers)
+                {
+                    runInPeriodItem.Yield = fieldHistoryRow.Yield;
+                    runInPeriodItem.DryYield = fieldHistoryRow.DryYield;
+                }
+            }
+        }
+
+        /// <summary>
+        /// For each run-in year, the field history year whose weather it uses. Under
+        /// <see cref="RunInPeriodYieldSource.FieldHistory"/> a run-in year repeats a history year - its crop, its yield
+        /// where the user supplied one, and its weather - so the run-in period stands for the first years of the history
+        /// as they were. Otherwise empty, and every run-in year uses its own weather.
+        /// </summary>
+        public Dictionary<int, int> GetRunInPeriodWeatherYears(
+            Farm farm,
+            IEnumerable<CropViewItem> runInPeriodItems,
+            IEnumerable<CropViewItem> viewItemsForField)
+        {
+            var result = new Dictionary<int, int>();
+            if (farm.Defaults.RunInPeriodYieldSource != RunInPeriodYieldSource.FieldHistory)
+            {
+                return result;
+            }
+
+            var fieldHistoryRows = viewItemsForField
+                .GroupBy(row => row.Guid)
+                .ToDictionary(grouping => grouping.Key, grouping => grouping.First());
+
+            foreach (var runInPeriodItem in runInPeriodItems.Where(x => x.IsSecondaryCrop == false))
+            {
+                if (fieldHistoryRows.TryGetValue(runInPeriodItem.DetailViewItemToComponentSelectionViewItemMap, out var fieldHistoryRow))
+                {
+                    result[runInPeriodItem.Year] = fieldHistoryRow.Year;
+                }
+            }
+
+            return result;
         }
 
         public void SetRunInPeriodTillageType(List<CropViewItem> mainCrops, List<CropViewItem> runInPeriodItems, Farm farm)
