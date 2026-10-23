@@ -679,7 +679,7 @@ Lorsqu’une ferme utilise le modèle de carbone du sol IPCC Niveau 2, Holos sim
 
 # Chapitre 5 – Outils
 
-Sous l’en-tête Outils, vous pouvez créer une ration personnalisée pour le bétail de votre choix.
+Sous l’en-tête Outils, vous pouvez créer une ration personnalisée pour le bétail de votre choix, afficher les données climatiques de votre ferme et les télécharger de nouveau.
 
 <br>
 <p align="center">
@@ -801,6 +801,31 @@ Des infobulles sont également disponibles pour les termes abrégés que l’on 
 	</em>
 </p>
      
+<br>
+<br>
+
+## Données climatiques
+
+Holos calcule les émissions de votre ferme à partir des données climatiques quotidiennes téléchargées pour son emplacement. Il est donc utile de vérifier que ces données correspondent à votre région.
+
+### Affichage des données climatiques
+
+1. Cliquez sur « **Outils** », puis sur « **Afficher les données climatiques** ».
+2. Le graphique présente les précipitations de votre ferme totalisées par année. La ligne pointillée indique les précipitations normales à long terme pour le polygone de sol de votre ferme (1980 à 2010).
+3. Comparez les totaux avec ce que vous savez de votre emplacement : une station météorologique voisine, les normales climatiques d’Environnement et Changement climatique Canada ou vos propres relevés.
+4. Sélectionnez une année dans le tableau pour en voir les mois à côté des normales mensuelles.
+
+Le tableau présente aussi, pour chaque année, les précipitations de mai à septembre, l’évapotranspiration, la température moyenne et le nombre de jours dont des valeurs sont manquantes. Les jours dont des valeurs sont manquantes ne sont pas inclus dans les totaux.
+
+> *Remarque : Les années dont les précipitations atteignent trois fois la normale ou plus sont surlignées en rouge, et un message s’affiche au-dessus du graphique. Cela indique un écart dans les données climatiques téléchargées; un nouveau téléchargement des données climatiques devrait le corriger.*
+
+### Nouveau téléchargement des données climatiques
+
+1. Cliquez sur « **Outils** », puis sur « **Télécharger de nouveau les données climatiques** », ou cliquez sur « **Télécharger de nouveau les données climatiques** » dans la fenêtre des données climatiques.
+2. Confirmez que vous voulez remplacer les données climatiques de la ferme.
+
+Holos télécharge de nouveau les données climatiques pour l’emplacement de votre ferme et remplace celles que la ferme contient. Les résultats de la ferme utilisent les nouvelles données et peuvent donc changer. Cette option n’est offerte que pour une ferme dont les données climatiques ont été téléchargées de la NASA, et non pour une ferme qui utilise un fichier de données climatiques personnalisé.
+
 <br>
 <br>
 

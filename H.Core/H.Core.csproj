@@ -707,6 +707,9 @@
     <Compile Include="Services\Initialization\Animals\IAnimalInitializationService.cs" />
     <Compile Include="Services\Initialization\Climate\ClimateInitializationService.cs" />
     <Compile Include="Services\Initialization\Climate\IClimateInitializationService.cs" />
+    <Compile Include="Services\Climate\ClimateSummary.cs" />
+    <Compile Include="Services\Climate\ClimateSummaryService.cs" />
+    <Compile Include="Services\Climate\IClimateSummaryService.cs" />
     <Compile Include="Services\Initialization\Crops\CropInitializationService.cs" />
     <Compile Include="Services\Initialization\Crops\CropInitializationService.Carbon.cs" />
     <Compile Include="Services\Initialization\Crops\CropInitializationService.Yield.cs" />
