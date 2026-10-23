@@ -743,7 +743,7 @@ When a farm uses the IPCC Tier 2 soil carbon model, Holos simulates a **run-in p
 
 # Chapter 5 - Tools
 
-Under the “**Tools**” header, you can create a custom diet for your chosen livestock
+Under the “**Tools**” header, you can create a custom diet for your chosen livestock, view your farm's climate data, and re-download it.
 
 <br>
 <p align="center">
@@ -916,6 +916,31 @@ Tooltips are also available for abbreviated terms found in various parts of the 
 <br>
 <br>
 
+
+## Climate Data
+
+Holos calculates your farm's emissions from the daily climate data downloaded for its location, so it is worth checking that the data look right for your area.
+
+### Viewing Climate Data
+
+1. Click "**Tools**", then "**View climate data**".
+2. The chart shows your farm's precipitation totalled by year. The dashed line is the long-term normal precipitation for your farm's soil polygon (1980 to 2010).
+3. Compare the totals with what you know of your location: a nearby weather station, Environment and Climate Change Canada's climate normals, or your own records.
+4. Select a year in the table to see its months beside the monthly normals.
+
+The table also shows each year's May to September precipitation, evapotranspiration, mean temperature, and the number of days with missing values. Days with missing values are left out of the totals.
+
+> *Note: Years with precipitation at three times the normal or more are highlighted in red, with a message above the chart. This suggests a discrepancy in the downloaded climate data, and re-downloading the climate data should correct it.*
+
+### Re-downloading Climate Data
+
+1. Click "**Tools**", then "**Re-download climate data**", or click "**Re-download climate data**" in the climate data window.
+2. Confirm that you want to replace the farm's climate data.
+
+Holos downloads the climate data for your farm's location again and replaces the data the farm holds. The farm's results use the new data, so they can change. This option is only available for a farm whose climate data was downloaded from NASA, not for a farm using a custom climate data file.
+
+<br>
+<br>
 
 # Chapter 6 - Creating and Modifying Farm Components
 
