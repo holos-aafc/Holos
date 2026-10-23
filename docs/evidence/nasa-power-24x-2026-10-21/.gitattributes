@@ -1,0 +1,2 @@
+# Raw API responses: keep every byte exactly as received so the SHA-256 checksums verify.
+* -text
