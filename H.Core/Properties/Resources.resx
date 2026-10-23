@@ -2426,6 +2426,12 @@
   <data name="WetWeight" xml:space="preserve">
     <value>Wet weight</value>
   </data>
+  <data name="EnumRunInPeriodYieldSourceFieldHistory" xml:space="preserve">
+    <value>Same as the field history</value>
+  </data>
+  <data name="EnumRunInPeriodYieldSourceYieldAssignmentMethod" xml:space="preserve">
+    <value>Yield assignment method</value>
+  </data>
   <data name="EnumCarMultipleYearAverage" xml:space="preserve">
     <value>CAR average</value>
   </data>

@@ -1829,6 +1829,24 @@ namespace H.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Same as the field history.
+        /// </summary>
+        public static string EnumRunInPeriodYieldSourceFieldHistory {
+            get {
+                return ResourceManager.GetString("EnumRunInPeriodYieldSourceFieldHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yield assignment method.
+        /// </summary>
+        public static string EnumRunInPeriodYieldSourceYieldAssignmentMethod {
+            get {
+                return ResourceManager.GetString("EnumRunInPeriodYieldSourceYieldAssignmentMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CAR average.
         /// </summary>
         public static string EnumCarMultipleYearAverage {

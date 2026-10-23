@@ -199,6 +199,7 @@
     <Compile Include="Enumerations\EmissionTypes.cs" />
     <Compile Include="Enumerations\EntericMethanEmissionMethodologies.cs" />
     <Compile Include="Enumerations\EquilibriumCalculationStrategies.cs" />
+    <Compile Include="Enumerations\RunInPeriodYieldSource.cs" />
     <Compile Include="Enumerations\FallowPracticeChangeType.cs" />
     <Compile Include="Enumerations\FarmResidueType.cs" />
     <Compile Include="Enumerations\FertilizerApplicationMethodologies.cs" />

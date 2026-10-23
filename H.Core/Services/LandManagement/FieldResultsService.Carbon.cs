@@ -303,7 +303,7 @@ namespace H.Core.Services.LandManagement
             var runInPeriodItems = this.GetRunInPeriodItems(farm, leftMost.CropViewItems, leftMost.StartYear,
                 viewItemsForField, leftMost);
 
-            _initializationService.InitializeYieldForAllYears(runInPeriodItems, farm, leftMost);
+            this.AssignRunInPeriodYields(farm, runInPeriodItems, viewItemsForField, leftMost);
 
             // Check if user specified ICBM or Tier 2 carbon modelling
             if (farm.Defaults.CarbonModellingStrategy == CarbonModellingStrategies.IPCCTier2)
@@ -347,7 +347,8 @@ namespace H.Core.Services.LandManagement
                     farm: farm,
                     viewItemsByField: viewItemsForField,
                     fieldSystemComponent: leftMost,
-                    runInPeriodItems: mergedRunInItems);
+                    runInPeriodItems: mergedRunInItems,
+                    runInPeriodWeatherYears: this.GetRunInPeriodWeatherYears(farm, runInPeriodItems, viewItemsForField));
             }
             else
             {

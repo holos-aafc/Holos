@@ -108,15 +108,19 @@ namespace H.Core.Calculators.Carbon
             currentYearViewItem.SoilCarbon = farm.StartingSoilOrganicCarbon;
         }
 
+        /// <param name="runInPeriodWeatherYears">For each run-in year, the year whose weather it uses, when that is not
+        /// its own. See <see cref="CalculateRunInPeriod"/>.</param>
         public void CalculateResults(
             Farm farm,
             List<CropViewItem> viewItemsByField,
             FieldSystemComponent fieldSystemComponent,
-            List<CropViewItem> runInPeriodItems)
+            List<CropViewItem> runInPeriodItems,
+            IDictionary<int, int> runInPeriodWeatherYears = null)
         {
             var runInPeriod = this.CalculateRunInPeriod(
                 farm: farm,
-                runInPeriodItems: runInPeriodItems);
+                runInPeriodItems: runInPeriodItems,
+                runInPeriodWeatherYears: runInPeriodWeatherYears);
 
             var nonRunInPeriodItems = viewItemsByField.OrderBy(x => x.Year).ToList();
 
@@ -171,17 +175,29 @@ namespace H.Core.Calculators.Carbon
         /// <summary>
         /// The run in period is the 'year' that is the averages carbon inputs, climate effects etc. and is used as the 'year 0' item when
         /// calculating the pools.
+        ///
+        /// A run-in year normally uses its own year's weather. When it repeats a year of the field history, it uses that
+        /// year's weather instead (<paramref name="runInPeriodWeatherYears"/>), as it uses that year's crop: the years
+        /// before the field history often have no daily weather - none before 1981 from NASA POWER, and no solar
+        /// radiation, so no evapotranspiration, until 1984 - and fall back to normals that need not describe the years
+        /// the run-in stands for.
         /// </summary>
         public CropViewItem CalculateRunInPeriod(
             Farm farm,
-            List<CropViewItem> runInPeriodItems)
+            List<CropViewItem> runInPeriodItems,
+            IDictionary<int, int> runInPeriodWeatherYears = null)
         {
             // Calculate TFac, WFac, etc. for each item in the run in period
             foreach (var item in runInPeriodItems)
             {
+                var weatherYear = runInPeriodWeatherYears != null && runInPeriodWeatherYears.TryGetValue(item.Year, out var historyYear)
+                    ? historyYear
+                    : item.Year;
+
                 this.CalculateClimateAdjustments(
                     currentYearViewItem: item,
-                    farm: farm);
+                    farm: farm,
+                    weatherYear: weatherYear);
             }
 
             // Calculate averages of all inputs from the items in the run-in period
@@ -237,6 +253,14 @@ namespace H.Core.Calculators.Carbon
         /// </summary>
         public void CalculateClimateAdjustments(CropViewItem currentYearViewItem, Farm farm)
         {
+            this.CalculateClimateAdjustments(currentYearViewItem, farm, currentYearViewItem.Year);
+        }
+
+        /// <summary>
+        /// Calculates the factors for an item from the weather of the given year.
+        /// </summary>
+        public void CalculateClimateAdjustments(CropViewItem currentYearViewItem, Farm farm, int weatherYear)
+        {
             var optimumTemperature = _globallyCalibratedModelParametersProvider.GetGloballyCalibratedModelParametersInstance(
                parameter: ModelParameters.OptimumTemperature,
                tillageType: currentYearViewItem.TillageType);
@@ -248,13 +272,13 @@ namespace H.Core.Calculators.Carbon
             var climateData = farm.ClimateData;
 
             var precipitationsForYear = climateData.GetMonthlyPrecipitationsForYear(
-                year: currentYearViewItem.Year).Select(x => x.Value).ToList();
+                year: weatherYear).Select(x => x.Value).ToList();
 
             var evapotranspirationsForYear = climateData.GetMonthlyEvapotranspirationForYear(
-                year: currentYearViewItem.Year).Select(x => x.Value).ToList();
+                year: weatherYear).Select(x => x.Value).ToList();
 
             var temperaturesForYear = climateData.GetMonthlyTemperaturesForYear(
-                year: currentYearViewItem.Year).Select(x => x.Value).ToList();
+                year: weatherYear).Select(x => x.Value).ToList();
 
             currentYearViewItem.TFac = this.CalculateAverageAnnualTemperatureFactor(
                 monthlyAverageTemperatures: temperaturesForYear,
