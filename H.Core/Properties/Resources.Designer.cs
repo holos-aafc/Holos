@@ -10136,7 +10136,7 @@ namespace H.Core.Properties {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to Entered by you. This yield is the value you typed for this year.
+        ///   Looks up a localized string similar to Custom yield method. Holos keeps the value in this cell and does not recalculate it. Type your own yield here; if you have not, it is the value that was in place when the method was set to Custom.
         /// </summary>
         public static string TooltipYieldSourceEntered {
             get {
@@ -10145,7 +10145,7 @@ namespace H.Core.Properties {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to Entered by you, for a grazed year. Holos takes the value you typed to be all the biomass the field grew.
+        ///   Looks up a localized string similar to Custom yield method, for a grazed year. Holos keeps the value in this cell and does not recalculate it. Animals grazed this field, so the value is taken to be all the biomass the field grew (what the animals ate plus what they left), not only the part that was cut. Type your own; if you have not, it is the value that was in place when the method was set to Custom.
         /// </summary>
         public static string TooltipYieldSourceGrazedEntered {
             get {
