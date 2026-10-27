@@ -140,6 +140,32 @@ namespace H.Core.Test.Models.LandManagement.Fields
             Assert.AreEqual(0, _sut.GetYieldFromHayHarvests());
         }
 
+        [TestMethod]
+        public void GetMoistureContentOfYield_WhenNotGrazed_ReturnsTheCropMoistureContent()
+        {
+            _sut.MoistureContentOfCrop = 0.8;
+
+            Assert.AreEqual(0.8, _sut.GetMoistureContentOfYield(), 1e-9);
+        }
+
+        [TestMethod]
+        public void GetMoistureContentOfYield_WhenGrazedThisYear_ReturnsTheGrazingMoistureContentAsAFraction()
+        {
+            _sut.MoistureContentOfCrop = 0.8;
+            _sut.GrazingViewItems.Add(new GrazingViewItem { Start = new DateTime(_sut.Year, 6, 1), MoistureContentAsPercentage = 70 });
+
+            Assert.AreEqual(0.7, _sut.GetMoistureContentOfYield(), 1e-9);
+        }
+
+        [TestMethod]
+        public void GetMoistureContentOfYield_WhenGrazedOnlyInAnotherYear_ReturnsTheCropMoistureContent()
+        {
+            _sut.MoistureContentOfCrop = 0.8;
+            _sut.GrazingViewItems.Add(new GrazingViewItem { Start = new DateTime(_sut.Year - 1, 6, 1), MoistureContentAsPercentage = 70 });
+
+            Assert.AreEqual(0.8, _sut.GetMoistureContentOfYield(), 1e-9);
+        }
+
         #endregion
     }
 }

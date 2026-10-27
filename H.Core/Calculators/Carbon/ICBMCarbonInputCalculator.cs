@@ -183,12 +183,8 @@ namespace H.Core.Calculators.Carbon
             }
 
             var result = 0d;
-            var moistureContentFraction = currentYearViewItem.MoistureContentOfCrop;
+            var moistureContentFraction = currentYearViewItem.GetMoistureContentOfYield();
             var isGrazed = currentYearViewItem.HasGrazingItemsForTheCurrentYear();
-            if (isGrazed)
-            {
-                moistureContentFraction = (currentYearViewItem.GrazingViewItems.Average(x => x.MoistureContentAsPercentage) / 100.0);
-            }
 
             var isCustomYieldAssignmentMethod = IsCustomYieldAssignmentMethod(currentYearViewItem, farm);
             var isAllProductReturned = Math.Abs(currentYearViewItem.PercentageOfProductYieldReturnedToSoil - 100) < double.Epsilon;

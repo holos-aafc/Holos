@@ -78,7 +78,9 @@ namespace H.Core.Calculators.Climate
             var soilData = farm.GetPreferredSoilData(cropViewItem);
 
             var defaults = farm.Defaults;
-            var yield = cropViewItem.Yield;
+
+            // Eq. 2.1.1-1 takes yield as dry matter, while the view item holds it at the crop's moisture content
+            var yield = cropViewItem.Yield * (1 - cropViewItem.GetMoistureContentOfYield());
 
             var ripeningDay = cropViewItem.CropType.IsPerennial() ? defaults.RipeningDayForPerennnials : defaults.RipeningDay;
             var variance = cropViewItem.CropType.IsPerennial() ? defaults.VarianceForPerennials : defaults.Variance;
@@ -519,6 +521,7 @@ namespace H.Core.Calculators.Climate
         /// <summary>
         /// Equation 2.1.1-1
         /// </summary>
+        /// <param name="yield">Crop yield (kg DM ha^-1)</param>
         private double CalculateGreenAreaIndexMax(double yield)
         {
             var greenAreaIndexMaximum = 0.0731 * Math.Pow(yield / 1000, 2) + 0.408 * yield / 1000;

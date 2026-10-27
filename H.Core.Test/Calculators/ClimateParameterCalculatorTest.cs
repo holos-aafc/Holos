@@ -6,6 +6,10 @@ using System.Runtime.InteropServices;
 using H.Content;
 using H.Core.Calculators.Climate;
 using H.Core.Enumerations;
+using H.Core.Models;
+using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers;
+using H.Core.Providers.Soil;
 using H.Core.Providers.Temperature;
 using H.Infrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -547,6 +551,44 @@ namespace H.Core.Test.Calculators
 
             // Assert
             Assert.AreEqual(expected, actual, 1e-12);
+        }
+
+        /// <summary>
+        /// The green area index (Eq. 2.1.1-1) is driven by dry matter, so two crops with the same dry matter yield reach the same
+        /// climate parameter however much water their reported yields carry.
+        /// </summary>
+        [TestMethod]
+        public void ClimateParameterDependsOnDryMatterYieldNotMoistureContent()
+        {
+            var farm = new Farm
+            {
+                GeographicData = new GeographicData
+                {
+                    DefaultSoilData = new SoilData
+                    {
+                        ProportionOfClayInSoil = 0.3,
+                        ProportionOfSandInSoil = 0.3,
+                        TopLayerThickness = 300,
+                        ProportionOfSoilOrganicCarbon = 2,
+                    },
+                },
+            };
+
+            var freshStandingCrop = new CropViewItem { Year = 2020, CropType = CropType.RangelandNative, Yield = 10000, MoistureContentOfCrop = 0.8 };
+            var dryHay = new CropViewItem { Year = 2020, CropType = CropType.RangelandNative, Yield = 2000 / (1 - 0.12), MoistureContentOfCrop = 0.12 };
+            var sameWeightAsDryMatter = new CropViewItem { Year = 2020, CropType = CropType.RangelandNative, Yield = 10000, MoistureContentOfCrop = 0 };
+
+            var temperatures = Enumerable.Range(1, 365).Select(day => 5 + 18 * Math.Sin(2 * Math.PI * (day - 105) / 365.0)).ToList();
+            var minimumTemperatures = temperatures.Select(temperature => temperature - 6).ToList();
+            var maximumTemperatures = temperatures.Select(temperature => temperature + 6).ToList();
+            var precipitation = Enumerable.Repeat(1.0, 365).ToList();
+            var evapotranspiration = temperatures.Select(temperature => Math.Max(0, temperature / 4)).ToList();
+
+            double ClimateParameterFor(CropViewItem cropViewItem) => _sut.CalculateClimateParameterForYear(
+                farm, cropViewItem, evapotranspiration, precipitation, temperatures, minimumTemperatures, maximumTemperatures);
+
+            Assert.AreEqual(ClimateParameterFor(dryHay), ClimateParameterFor(freshStandingCrop), 1e-9);
+            Assert.AreNotEqual(ClimateParameterFor(sameWeightAsDryMatter), ClimateParameterFor(freshStandingCrop), 1e-3);
         }
 
         #endregion
