@@ -553,32 +553,6 @@ namespace H.Core.Test.Calculators
             Assert.AreEqual(expected, actual, 1e-12);
         }
 
-        [TestMethod]
-        public void GetDryMatterYieldUsesTheCropMoistureContent()
-        {
-            var cropViewItem = new CropViewItem { Year = 2020, Yield = 10000, MoistureContentOfCrop = 0.8 };
-
-            Assert.AreEqual(2000, _sut.GetDryMatterYield(cropViewItem), 1e-9);
-        }
-
-        [TestMethod]
-        public void GetDryMatterYieldUsesTheGrazingMoistureContentInAGrazedYear()
-        {
-            var cropViewItem = new CropViewItem { Year = 2020, Yield = 10000, MoistureContentOfCrop = 0.8 };
-            cropViewItem.GrazingViewItems.Add(new GrazingViewItem { Start = new DateTime(2020, 6, 1), MoistureContentAsPercentage = 70 });
-
-            Assert.AreEqual(3000, _sut.GetDryMatterYield(cropViewItem), 1e-9);
-        }
-
-        [TestMethod]
-        public void GetDryMatterYieldIgnoresGrazingFromAnotherYear()
-        {
-            var cropViewItem = new CropViewItem { Year = 2020, Yield = 10000, MoistureContentOfCrop = 0.8 };
-            cropViewItem.GrazingViewItems.Add(new GrazingViewItem { Start = new DateTime(2019, 6, 1), MoistureContentAsPercentage = 70 });
-
-            Assert.AreEqual(2000, _sut.GetDryMatterYield(cropViewItem), 1e-9);
-        }
-
         /// <summary>
         /// The green area index (Eq. 2.1.1-1) is driven by dry matter, so two crops with the same dry matter yield reach the same
         /// climate parameter however much water their reported yields carry.

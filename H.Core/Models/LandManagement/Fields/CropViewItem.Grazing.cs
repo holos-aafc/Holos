@@ -67,6 +67,21 @@ namespace H.Core.Models.LandManagement.Fields
             return this.GrazingViewItems.Any(x => x.Start.Year == this.Year);
         }
 
+        /// <summary>
+        /// The moisture content the yield is held at (fraction): in a grazed year, the average over the grazing periods,
+        /// otherwise <see cref="MoistureContentOfCrop"/>. Used wherever the yield is converted to dry matter (Eq. 2.1.1-1,
+        /// Eq. 2.1.2-1) so those equations work from the same dry matter.
+        /// </summary>
+        public double GetMoistureContentOfYield()
+        {
+            if (this.HasGrazingItemsForTheCurrentYear())
+            {
+                return this.GrazingViewItems.Average(x => x.MoistureContentAsPercentage) / 100.0;
+            }
+
+            return this.MoistureContentOfCrop;
+        }
+
         #endregion
     }
 }
