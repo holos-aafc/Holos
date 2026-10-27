@@ -3718,10 +3718,10 @@
     <value>From your harvest. This yield is calculated from the {0} bale(s) you entered on the Harvest tab.</value>
   </data>
   <data name="TooltipYieldSourceEntered" xml:space="preserve">
-    <value>Entered by you. This yield is the value you typed for this year.</value>
+    <value>Custom yield method. Holos keeps the value in this cell and does not recalculate it. Type your own yield here; if you have not, it is the value that was in place when the method was set to Custom.</value>
   </data>
   <data name="TooltipYieldSourceGrazedEntered" xml:space="preserve">
-    <value>Entered by you, for a grazed year. Animals grazed this field, so Holos takes the value you typed to be all the biomass the field grew - what the animals ate plus what they left - rather than only the part that was cut.</value>
+    <value>Custom yield method, for a grazed year. Holos keeps the value in this cell and does not recalculate it. Animals grazed this field, so the value is taken to be all the biomass the field grew (what the animals ate plus what they left), not only the part that was cut. Type your own; if you have not, it is the value that was in place when the method was set to Custom.</value>
   </data>
   <data name="TooltipYieldSourceGrazed" xml:space="preserve">
     <value>Not from your harvest. Animals grazed this field in this year, and a grazed year's yield is never taken from a hay harvest. The Harvest tab explains what Holos used instead.</value>

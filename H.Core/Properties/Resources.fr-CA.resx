@@ -6253,10 +6253,10 @@ Veuillez noter que les émissions liées au dépôt ou à l’application de fum
     <value>Provient de votre récolte. Ce rendement est calculé à partir des {0} balle(s) que vous avez saisies dans l’onglet Récolte.</value>
   </data>
   <data name="TooltipYieldSourceEntered" xml:space="preserve">
-    <value>Saisi par vous. Ce rendement est la valeur que vous avez entrée pour cette année.</value>
+    <value>Méthode de rendement personnalisé. Holos conserve la valeur de cette cellule et ne la recalcule pas. Entrez votre propre rendement ici; si vous ne l’avez pas fait, il s’agit de la valeur en place lorsque la méthode a été réglée à « rendement personnalisé ».</value>
   </data>
   <data name="TooltipYieldSourceGrazedEntered" xml:space="preserve">
-    <value>Saisi par vous, pour une année de pâturage. Des animaux ont pâturé ce champ; Holos considère donc que la valeur que vous avez entrée correspond à toute la biomasse produite par le champ — ce que les animaux ont consommé plus ce qu’ils ont laissé — et non seulement à la partie qui a été fauchée.</value>
+    <value>Méthode de rendement personnalisé, pour une année de pâturage. Holos conserve la valeur de cette cellule et ne la recalcule pas. Des animaux ont pâturé ce champ; la valeur est donc considérée comme toute la biomasse produite par le champ (ce que les animaux ont consommé plus ce qu’ils ont laissé), et non seulement la partie qui a été fauchée. Entrez votre propre valeur; si vous ne l’avez pas fait, il s’agit de la valeur en place lorsque la méthode a été réglée à « rendement personnalisé ».</value>
   </data>
   <data name="TooltipYieldSourceGrazed" xml:space="preserve">
     <value>Ne provient pas de votre récolte. Des animaux ont pâturé ce champ cette année, et le rendement d’une année de pâturage n’est jamais tiré d’une récolte de foin. L’onglet Récolte explique ce que Holos a utilisé à la place.</value>
