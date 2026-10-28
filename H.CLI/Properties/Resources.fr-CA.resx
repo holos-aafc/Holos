@@ -267,6 +267,9 @@
   <data name="NoFileData" xml:space="preserve">
     <value>Le fichier suivant n’a aucune donnée à analyser : {0}.</value>
   </data>
+  <data name="NasaClimateDataUnavailable" xml:space="preserve">
+    <value>{0} n’a pas été traité. Les données climatiques quotidiennes pour la latitude {1} et la longitude {2} n’ont pas pu être téléchargées de NASA POWER, ou leurs précipitations n’ont pas pu être vérifiées pour une erreur connue dans les données du service. Réessayez plus tard, ou modifiez « {3} » dans le fichier de paramètres de la ferme pour utiliser une autre source de données climatiques : « InputFile », avec « {4} » indiquant un fichier de données climatiques quotidiennes, ou « Custom », avec les valeurs mensuelles de précipitations, de température moyenne et d’évapotranspiration potentielle saisies dans le fichier de paramètres.</value>
+  </data>
   <data name="NotAValidPolygonID" xml:space="preserve">
     <value>{0} n’est pas un ID de polygone valide.</value>
   </data>

@@ -2428,6 +2428,15 @@ namespace H.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} was not processed. Daily climate data for latitude {1}, longitude {2} could not be downloaded from NASA POWER, or its precipitation could not be checked for a known error in the service&apos;s data. Try again later, or change &quot;{3}&quot; in the farm&apos;s settings file to use anot [rest of string was truncated]&quot;.
+        /// </summary>
+        public static string NasaClimateDataUnavailable {
+            get {
+                return ResourceManager.GetString("NasaClimateDataUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} is not a valid data input. The error is found at Row: {1}, Column {2} in {3}..
         /// </summary>
         public static string NegativeInteger {

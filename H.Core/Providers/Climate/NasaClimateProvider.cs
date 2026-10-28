@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -35,6 +36,7 @@ namespace H.Core.Providers.Climate
         #region Fields
 
         private EvapotranspirationCalculator _evapotranspirationCalculator = new EvapotranspirationCalculator();
+        private readonly Func<string, string> _download;
 
         // Timeout is in seconds. 60s = 1 minute.
         private const int Timeout = 60;
@@ -44,9 +46,19 @@ namespace H.Core.Providers.Climate
 
         #region Constructors
 
-        public NasaClimateProvider()
+        public NasaClimateProvider() : this(null)
+        {
+        }
+
+        /// <param name="download">
+        /// Fetches the content at a URL, standing in for the service. Null uses the service itself; tests pass their own
+        /// so a request can be made to fail or to answer with a known response.
+        /// </param>
+        public NasaClimateProvider(Func<string, string> download)
         {
             HTraceListener.AddTraceListener();
+
+            _download = download ?? this.GetNasaApiString;
         }
 
         #endregion
@@ -63,6 +75,13 @@ namespace H.Core.Providers.Climate
         private const string CalibrationEndDate = "20200630";
         private const int MinimumCalibrationDays = 3;
         private const double CalibrationAgreement = 0.01;
+
+        /// <summary>
+        /// How many times the calibration request is made before the scale is given up as unchecked, and the pause
+        /// between attempts.
+        /// </summary>
+        private const int CalibrationAttempts = 2;
+        private static readonly TimeSpan CalibrationRetryDelay = TimeSpan.FromSeconds(2);
 
         private static readonly Dictionary<string, Tuple<DateTime, double>> ScalingFactors = new Dictionary<string, Tuple<DateTime, double>>();
         private static readonly object ScalingFactorsLock = new object();
@@ -93,7 +112,7 @@ namespace H.Core.Providers.Climate
                     // Run a task that forces the NASA API to timeout if the timeout property isn't able to gracefully time out the API call. If the API
                     // does not respond within this time (slow internet connection or API issues), we
                     // switch over to SLC data.
-                    var getNasaApi = Task.Run(() => GetNasaApiString(url));
+                    var getNasaApi = Task.Run(() => _download(url));
                     if (getNasaApi.Wait(TimeSpan.FromSeconds(Timeout)))
                     {
                         Trace.TraceInformation($"{nameof(NasaClimateProvider)}.{nameof(GetCustomClimateData)}, NASA API Task Status: {getNasaApi.Status}");
@@ -221,7 +240,17 @@ namespace H.Core.Providers.Climate
                 customClimateData.Add(data);
             }
 
-            this.CorrectPrecipitationScale(latitude, longitude, customClimateData);
+            if (this.CorrectPrecipitationScale(latitude, longitude, customClimateData) == false)
+            {
+                // A response whose scale could not be checked may carry precipitation many times its true size, and
+                // nothing else in it shows that. It is treated as a failed download.
+                Trace.TraceError(
+                    $"{nameof(NasaClimateProvider)}: the precipitation scale for lat: {latitude}, long: {longitude} could " +
+                    "not be checked, so the response is not used.");
+                Trace.TraceInformation($"Returning SLC Data.");
+
+                return new List<DailyClimateData>();
+            }
 
             return customClimateData;
         }
@@ -234,19 +263,27 @@ namespace H.Core.Providers.Climate
         /// reporting the same units and leaving every other parameter alone. Holos asks for the record up to today,
         /// so its requests fall in that case.
         ///
-        /// The factor is measured rather than assumed - see <see cref="CalculatePrecipitationScalingFactor"/> - so
+        /// The factor is measured rather than assumed - see <see cref="MeasurePrecipitationScalingFactor"/> - so
         /// nothing is changed while the service answers consistently, and the correction stops applying by itself
         /// once the service is fixed.
+        ///
+        /// Returns false, changing nothing, when the scale could not be checked.
         /// </summary>
-        private void CorrectPrecipitationScale(
+        private bool CorrectPrecipitationScale(
             double latitude,
             double longitude,
             List<DailyClimateData> customClimateData)
         {
-            var factor = this.GetPrecipitationScalingFactor(latitude, longitude, customClimateData);
+            var measuredFactor = this.GetPrecipitationScalingFactor(latitude, longitude, customClimateData);
+            if (measuredFactor.HasValue == false)
+            {
+                return false;
+            }
+
+            var factor = measuredFactor.Value;
             if (factor <= 1)
             {
-                return;
+                return true;
             }
 
             Trace.TraceWarning(
@@ -257,13 +294,19 @@ namespace H.Core.Providers.Climate
             {
                 dailyClimateData.MeanDailyPrecipitation = dailyClimateData.MeanDailyPrecipitation / factor;
             }
+
+            return true;
         }
 
         /// <summary>
         /// Asks the service a second time for a short window that ends well inside the settled part of the record,
         /// where the scale has been reliable, and compares those days against the same days in the full response.
+        ///
+        /// Returns null when the scale could not be measured: the request failed on every attempt, or the window did not
+        /// give enough agreeing wet days to tell. Only a measured factor is remembered, so the next request for the
+        /// location checks again rather than reusing an answer that was never obtained.
         /// </summary>
-        private double GetPrecipitationScalingFactor(
+        private double? GetPrecipitationScalingFactor(
             double latitude,
             double longitude,
             List<DailyClimateData> customClimateData)
@@ -276,54 +319,95 @@ namespace H.Core.Providers.Climate
                     return cached.Item2;
                 }
 
-                var factor = 1.0;
-
-                try
+                for (var attempt = 1; attempt <= CalibrationAttempts; attempt++)
                 {
-                    var url = this.GetCalibrationApiUrl(latitude, longitude);
-
-                    var getNasaApi = Task.Run(() => GetNasaApiString(url));
-                    if (getNasaApi.Wait(TimeSpan.FromSeconds(Timeout)))
+                    if (attempt > 1)
                     {
-                        var calibrationValues = ParsePrecipitationByDate(getNasaApi.Result);
+                        Thread.Sleep(CalibrationRetryDelay);
+                    }
 
-                        factor = CalculatePrecipitationScalingFactor(calibrationValues, customClimateData);
+                    var calibrationValues = this.GetCalibrationValues(latitude, longitude, attempt);
+                    if (calibrationValues == null)
+                    {
+                        continue;
+                    }
+
+                    var factor = MeasurePrecipitationScalingFactor(calibrationValues, customClimateData);
+                    if (factor.HasValue)
+                    {
+                        ScalingFactors[key] = new Tuple<DateTime, double>(DateTime.Now, factor.Value);
                     }
                     else
                     {
                         Trace.TraceError(
                             $"{nameof(NasaClimateProvider)}.{nameof(GetPrecipitationScalingFactor)}: the calibration " +
-                            "request did not return in time, so the precipitation scale could not be checked.");
+                            "window did not give enough agreeing wet days to measure the precipitation scale.");
                     }
-                }
-                catch (Exception e)
-                {
-                    Trace.TraceError(
-                        $"{nameof(NasaClimateProvider)}.{nameof(GetPrecipitationScalingFactor)}: the precipitation " +
-                        $"scale could not be checked. Exception message: {e.Message}");
+
+                    return factor;
                 }
 
-                ScalingFactors[key] = new Tuple<DateTime, double>(DateTime.Now, factor);
-
-                return factor;
+                return null;
             }
         }
 
         /// <summary>
-        /// How many times larger the precipitation in a response is than the same days asked for on their own, or 1
-        /// when it is the same size, cannot be told, or is smaller.
+        /// The calibration window's precipitation by day, or null when the request failed, did not return in time, or
+        /// returned no precipitation (an error page or a maintenance notice parses to nothing).
+        /// </summary>
+        private Dictionary<DateTime, double> GetCalibrationValues(double latitude, double longitude, int attempt)
+        {
+            try
+            {
+                var url = this.GetCalibrationApiUrl(latitude, longitude);
+
+                var getNasaApi = Task.Run(() => _download(url));
+                if (getNasaApi.Wait(TimeSpan.FromSeconds(Timeout)) == false)
+                {
+                    Trace.TraceError(
+                        $"{nameof(NasaClimateProvider)}.{nameof(GetCalibrationValues)}: the calibration request did not " +
+                        $"return in time (attempt {attempt} of {CalibrationAttempts}).");
+
+                    return null;
+                }
+
+                var calibrationValues = ParsePrecipitationByDate(getNasaApi.Result);
+                if (calibrationValues.Any() == false)
+                {
+                    Trace.TraceError(
+                        $"{nameof(NasaClimateProvider)}.{nameof(GetCalibrationValues)}: the calibration request returned " +
+                        $"no precipitation (attempt {attempt} of {CalibrationAttempts}).");
+
+                    return null;
+                }
+
+                return calibrationValues;
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError(
+                    $"{nameof(NasaClimateProvider)}.{nameof(GetCalibrationValues)}: the calibration request failed " +
+                    $"(attempt {attempt} of {CalibrationAttempts}). Exception message: {e.Message}");
+
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// How many times larger the precipitation in a response is than the same days asked for on their own: 1 when it
+        /// is the same size or smaller, and null when it cannot be told.
         ///
         /// Every day in a scaled response has been scaled by the same amount, so the days are required to agree with
         /// each other before anything is divided: a set of ratios that disagree means something other than a uniform
         /// scaling, which this is not entitled to correct. Dry days carry no information and are passed over.
         /// </summary>
-        public static double CalculatePrecipitationScalingFactor(
+        public static double? MeasurePrecipitationScalingFactor(
             Dictionary<DateTime, double> calibrationValues,
             List<DailyClimateData> customClimateData)
         {
             if (calibrationValues == null || customClimateData == null)
             {
-                return 1;
+                return null;
             }
 
             var byDate = new Dictionary<DateTime, double>();
@@ -348,7 +432,7 @@ namespace H.Core.Providers.Climate
 
             if (ratios.Count < MinimumCalibrationDays)
             {
-                return 1;
+                return null;
             }
 
             var first = ratios[0];
@@ -356,7 +440,7 @@ namespace H.Core.Providers.Climate
             {
                 if (Math.Abs(ratio - first) > first * CalibrationAgreement)
                 {
-                    return 1;
+                    return null;
                 }
             }
 

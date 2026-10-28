@@ -297,6 +297,9 @@
     <value>The following file does not have any data to parse: {0}.</value>
     <comment>Shelterbelt Parser</comment>
   </data>
+  <data name="NasaClimateDataUnavailable" xml:space="preserve">
+    <value>{0} was not processed. Daily climate data for latitude {1}, longitude {2} could not be downloaded from NASA POWER, or its precipitation could not be checked for a known error in the service's data. Try again later, or change "{3}" in the farm's settings file to use another source of climate data: "InputFile", with "{4}" set to a daily climate file, or "Custom", with monthly precipitation, mean temperature and potential evapotranspiration values entered in the settings file.</value>
+  </data>
   <data name="NotAValidPolygonID" xml:space="preserve">
     <value>{0} is not a valid Polygon ID</value>
   </data>
