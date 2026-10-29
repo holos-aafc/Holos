@@ -193,6 +193,22 @@ namespace H.CLI
                             reader.ReadGlobalSettings(settingsFilePath);
                             _globalSettingsHandler.ApplySettingsFromUserFile(ref applicationData, ref farm, reader.GlobalSettingsDictionary);
 
+                            if (farm.ClimateData == null)
+                            {
+                                // The NASA download failed, or its precipitation scale could not be checked. The farm is not
+                                // run on climate other than what its settings file asks for, and the user is told how to
+                                // supply it another way.
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine(Properties.Resources.NasaClimateDataUnavailable,
+                                    farm.Name + "_" + farm.SettingsFileName,
+                                    farm.Latitude,
+                                    farm.Longitude,
+                                    Properties.Resources.Settings_ClimateDataAcquisition,
+                                    Properties.Resources.Settings_ClimateFilename);
+
+                                continue;
+                            }
+
                             // Create a KeyValuePair which takes in the farmDirectoryPath and the Farm itself
                             if (farm.Components.Any())
                             {

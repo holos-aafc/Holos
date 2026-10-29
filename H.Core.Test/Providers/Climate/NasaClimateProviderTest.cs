@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading;
@@ -292,7 +294,7 @@ namespace H.Core.Test.Providers.Climate
             var calibration = BuildCalibration(0.77, 1.26, 3.63, 0.38);
             var response = BuildResponse(0.77 * 24, 1.26 * 24, 3.63 * 24, 0.38 * 24);
 
-            Assert.AreEqual(24, NasaClimateProvider.CalculatePrecipitationScalingFactor(calibration, response), 0.0001);
+            Assert.AreEqual(24, NasaClimateProvider.MeasurePrecipitationScalingFactor(calibration, response).Value, 0.0001);
         }
 
         [TestMethod]
@@ -301,33 +303,33 @@ namespace H.Core.Test.Providers.Climate
             var calibration = BuildCalibration(0.77, 1.26, 3.63, 0.38);
             var response = BuildResponse(0.77, 1.26, 3.63, 0.38);
 
-            Assert.AreEqual(1, NasaClimateProvider.CalculatePrecipitationScalingFactor(calibration, response), 0.0001,
+            Assert.AreEqual(1, NasaClimateProvider.MeasurePrecipitationScalingFactor(calibration, response).Value, 0.0001,
                 "a response at the right scale was going to be divided");
         }
 
         /// <summary>
         /// Every day of a scaled response is scaled alike. Days that disagree mean something other than a uniform
-        /// scaling, which is not something this is entitled to correct.
+        /// scaling, which is not something this is entitled to correct, so the scale cannot be measured.
         /// </summary>
         [TestMethod]
-        public void DaysThatDisagreeWithEachOtherAreNotCorrected()
+        public void DaysThatDisagreeWithEachOtherCannotBeMeasured()
         {
             var calibration = BuildCalibration(0.77, 1.26, 3.63, 0.38);
             var response = BuildResponse(0.77 * 24, 1.26 * 24, 3.63 * 11, 0.38 * 24);
 
-            Assert.AreEqual(1, NasaClimateProvider.CalculatePrecipitationScalingFactor(calibration, response), 0.0001);
+            Assert.IsNull(NasaClimateProvider.MeasurePrecipitationScalingFactor(calibration, response));
         }
 
         /// <summary>
         /// A dry day says nothing about the scale, so there have to be enough wet ones to compare.
         /// </summary>
         [TestMethod]
-        public void TooFewWetDaysToCompareLeavesTheResponseAlone()
+        public void TooFewWetDaysToCompareCannotBeMeasured()
         {
             var calibration = BuildCalibration(0.77, 0, 0, 0);
             var response = BuildResponse(0.77 * 24, 0, 0, 0);
 
-            Assert.AreEqual(1, NasaClimateProvider.CalculatePrecipitationScalingFactor(calibration, response), 0.0001);
+            Assert.IsNull(NasaClimateProvider.MeasurePrecipitationScalingFactor(calibration, response));
         }
 
         /// <summary>
@@ -340,16 +342,16 @@ namespace H.Core.Test.Providers.Climate
             var calibration = BuildCalibration(0.77, 1.26, 3.63, 0.38);
             var response = BuildResponse(0.77 / 24, 1.26 / 24, 3.63 / 24, 0.38 / 24);
 
-            Assert.AreEqual(1, NasaClimateProvider.CalculatePrecipitationScalingFactor(calibration, response), 0.0001);
+            Assert.AreEqual(1, NasaClimateProvider.MeasurePrecipitationScalingFactor(calibration, response).Value, 0.0001);
         }
 
         [TestMethod]
-        public void NoCalibrationWindowLeavesTheResponseAlone()
+        public void NoCalibrationWindowCannotBeMeasured()
         {
             var response = BuildResponse(0.77 * 24, 1.26 * 24, 3.63 * 24, 0.38 * 24);
 
-            Assert.AreEqual(1, NasaClimateProvider.CalculatePrecipitationScalingFactor(new Dictionary<DateTime, double>(), response), 0.0001);
-            Assert.AreEqual(1, NasaClimateProvider.CalculatePrecipitationScalingFactor(null, response), 0.0001);
+            Assert.IsNull(NasaClimateProvider.MeasurePrecipitationScalingFactor(new Dictionary<DateTime, double>(), response));
+            Assert.IsNull(NasaClimateProvider.MeasurePrecipitationScalingFactor(null, response));
         }
 
         [TestMethod]
@@ -398,6 +400,160 @@ namespace H.Core.Test.Providers.Climate
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// The scale check could not be made, so nothing shows whether the precipitation is at its true size. The response
+        /// is treated as a failed download, and the check is tried once more before giving up.
+        /// </summary>
+        [TestMethod]
+        public void AResponseIsRejectedWhenItsScaleCannotBeChecked()
+        {
+            var latitude = 21.1357;
+            var longitude = -111.2468;
+            var calibrationRequests = 0;
+            var provider = BuildProviderHolding(latitude, longitude, BuildFirstHalfOf2020Response(1), url =>
+            {
+                calibrationRequests++;
+                throw new WebException("Unable to connect to the remote server");
+            });
+
+            try
+            {
+                Assert.AreEqual(0, provider.GetCustomClimateData(latitude, longitude).Count,
+                    "a response whose precipitation scale was never checked reached the farm");
+                Assert.AreEqual(2, calibrationRequests, "a failed scale check should be tried once more");
+            }
+            finally
+            {
+                provider.ClearCachedData(latitude, longitude);
+            }
+        }
+
+        /// <summary>
+        /// A calibration request that comes back without precipitation - an error page or a maintenance notice - is a
+        /// failed request, not a measurement.
+        /// </summary>
+        [TestMethod]
+        public void ACalibrationResponseWithNoPrecipitationIsAFailedCheck()
+        {
+            var latitude = 22.1357;
+            var longitude = -112.2468;
+            var provider = BuildProviderHolding(latitude, longitude, BuildFirstHalfOf2020Response(1), url => "{\"messages\":[\"Service unavailable\"]}");
+
+            try
+            {
+                Assert.AreEqual(0, provider.GetCustomClimateData(latitude, longitude).Count);
+            }
+            finally
+            {
+                provider.ClearCachedData(latitude, longitude);
+            }
+        }
+
+        /// <summary>
+        /// A failed check is not an answer, so it is not remembered for the location: once the service answers, the next
+        /// request checks again and the response is corrected.
+        /// </summary>
+        [TestMethod]
+        public void AFailedScaleCheckIsNotRememberedForTheLocation()
+        {
+            var latitude = 23.1357;
+            var longitude = -113.2468;
+            var serviceIsReachable = false;
+            var provider = BuildProviderHolding(latitude, longitude, BuildFirstHalfOf2020Response(24), url =>
+            {
+                if (serviceIsReachable == false)
+                {
+                    throw new WebException("Unable to connect to the remote server");
+                }
+
+                return June2020Calibration;
+            });
+
+            try
+            {
+                Assert.AreEqual(0, provider.GetCustomClimateData(latitude, longitude).Count);
+
+                serviceIsReachable = true;
+                var result = provider.GetCustomClimateData(latitude, longitude);
+
+                Assert.AreEqual(FirstHalfOf2020Days, result.Count, "the second request was answered from the failed check");
+                var juneTenth = result.Single(x => x.Date == new DateTime(2020, 6, 10));
+                Assert.AreEqual(PrecipitationOn(juneTenth.Date), juneTenth.MeanDailyPrecipitation, 0.0001,
+                    "the response was not divided back down");
+            }
+            finally
+            {
+                provider.ClearCachedData(latitude, longitude);
+            }
+        }
+
+        [TestMethod]
+        public void AResponseAtItsTrueScaleIsKeptAsIs()
+        {
+            var latitude = 24.1357;
+            var longitude = -114.2468;
+            var provider = BuildProviderHolding(latitude, longitude, BuildFirstHalfOf2020Response(1), url => June2020Calibration);
+
+            try
+            {
+                var result = provider.GetCustomClimateData(latitude, longitude);
+
+                Assert.AreEqual(FirstHalfOf2020Days, result.Count);
+                var juneTenth = result.Single(x => x.Date == new DateTime(2020, 6, 10));
+                Assert.AreEqual(PrecipitationOn(juneTenth.Date), juneTenth.MeanDailyPrecipitation, 0.0001);
+            }
+            finally
+            {
+                provider.ClearCachedData(latitude, longitude);
+            }
+        }
+
+        /// <summary>
+        /// January 1 to June 30, 2020. A response starts on January 1, as a real one does, since the provider numbers
+        /// its days from the start of each year.
+        /// </summary>
+        private const int FirstHalfOf2020Days = 182;
+
+        private static double PrecipitationOn(DateTime date) => date.DayOfYear % 3 == 0 ? 0 : 1.5 + (date.DayOfYear % 10) * 0.1;
+
+        private static string June2020Calibration =>
+            "{\"properties\":{\"parameter\":{\"PRECTOTCORR\":{" + BuildDays(new DateTime(2020, 6, 1), 30, PrecipitationOn) + "}}}}";
+
+        private static string BuildFirstHalfOf2020Response(double precipitationScale)
+        {
+            string Parameter(string name, Func<DateTime, double> value) =>
+                $"\"{name}\":{{{BuildDays(new DateTime(2020, 1, 1), FirstHalfOf2020Days, value)}}}";
+
+            return "{\"properties\":{\"parameter\":{" +
+                   Parameter("PRECTOTCORR", date => PrecipitationOn(date) * precipitationScale) + "," +
+                   Parameter("T2M", date => 5) + "," +
+                   Parameter("RH2M", date => 60) + "," +
+                   Parameter("ALLSKY_SFC_SW_DWN", date => 15) + "," +
+                   Parameter("T2M_MIN", date => -1) + "," +
+                   Parameter("T2M_MAX", date => 11) +
+                   "}}}";
+        }
+
+        private static string BuildDays(DateTime start, int days, Func<DateTime, double> value)
+        {
+            return string.Join(",", Enumerable.Range(0, days).Select(day => start.AddDays(day)).Select(date =>
+                $"\"{date:yyyyMMdd}\":{value(date).ToString(CultureInfo.InvariantCulture)}"));
+        }
+
+        /// <summary>
+        /// A provider holding the given main response for the location, as it would after downloading it, with every
+        /// further request answered by <paramref name="download"/>.
+        /// </summary>
+        private static NasaClimateProvider BuildProviderHolding(double latitude, double longitude, string response, Func<string, string> download)
+        {
+            var provider = new NasaClimateProvider(download);
+            provider.ClearCachedData(latitude, longitude);
+
+            File.WriteAllText(Path.GetTempPath() + "\\" + $"nasa_climate_data_lat_{latitude}_long_{longitude}", response);
+
+            return provider;
         }
 
         #endregion
