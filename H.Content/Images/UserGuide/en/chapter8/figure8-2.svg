@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 264" role="img"
-     aria-label="Which situation a perennial field year is in. Ask first whether animals grazed the field that year. If they did, the grazed and hayed rules apply and the Yield Assignment Method does not set the yield. If they did not, the yield comes from a cut on the Harvest tab if there is one, and otherwise from the Yield Assignment Method.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 281" role="img"
+     aria-label="Which situation a perennial field year is in. Ask first whether animals grazed the field that year. If they did, the grazed and hayed rules apply: Holos works the yield out from what the animals ate, or under Custom Yield uses the yield you type as the whole standing crop, and a cut never sets it. If they did not, the yield comes from a cut on the Harvest tab if there is one, and otherwise from the Yield Assignment Method.">
   <defs>
     <marker id="g2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="currentColor"/>
@@ -21,15 +21,16 @@
     <line x1="670" y1="74" x2="670" y2="98" stroke="currentColor" stroke-width="1.5" marker-end="url(#g2)"/>
     <text x="618" y="90" font-size="12.5" fill="#495057">No</text>
 
-    <rect x="30" y="104" width="400" height="142" rx="5" fill="#e9f2ec" stroke="#3f7a5a" stroke-width="2"/>
+    <rect x="30" y="104" width="400" height="159" rx="5" fill="#e9f2ec" stroke="#3f7a5a" stroke-width="2"/>
     <text x="52" y="130" font-size="14.5" fill="#2c5a42" font-weight="700">Grazing decides the yield.</text>
-    <text x="52" y="153" font-size="13.5" fill="#495057">The Yield Assignment Method does not set it, and</text>
-    <text x="52" y="170" font-size="13.5" fill="#495057">neither does a cut entered on the Harvest tab.</text>
-    <text x="52" y="196" font-size="13.5" fill="#16191c">Hay that leaves the field is still subtracted.</text>
-    <text x="52" y="220" font-size="13" fill="#6c757d">See the two grazing sections that follow</text>
-    <text x="52" y="236" font-size="13" fill="#6c757d">this list.</text>
+    <text x="52" y="153" font-size="13.5" fill="#495057">Holos works it out from what the animals ate.</text>
+    <text x="52" y="170" font-size="13.5" fill="#495057">Under Custom Yield, the yield you type is used</text>
+    <text x="52" y="187" font-size="13.5" fill="#495057">instead, as the whole standing crop.</text>
+    <text x="52" y="213" font-size="13.5" fill="#16191c">A cut never sets it; the hay is still subtracted.</text>
+    <text x="52" y="237" font-size="13" fill="#6c757d">See the two grazing sections that follow</text>
+    <text x="52" y="253" font-size="13" fill="#6c757d">this list.</text>
 
-    <rect x="470" y="104" width="400" height="142" rx="5" fill="#eef2f5" stroke="#7d8b98" stroke-width="1.5"/>
+    <rect x="470" y="104" width="400" height="159" rx="5" fill="#eef2f5" stroke="#7d8b98" stroke-width="1.5"/>
     <text x="492" y="130" font-size="14.5" fill="#16191c" font-weight="600">A cut decides the yield if there is one.</text>
     <text x="492" y="153" font-size="13.5" fill="#495057">Otherwise the Yield Assignment Method</text>
     <text x="492" y="170" font-size="13.5" fill="#495057">supplies it.</text>

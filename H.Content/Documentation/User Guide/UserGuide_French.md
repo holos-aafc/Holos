@@ -2103,9 +2103,9 @@ Le calendrier pour les brise-vent fonctionne de la même façon que le calendrie
   - Les données sont disponibles dans d'autres vues lorsqu'on utilise exactement la même fonctionnalité pour chaque cas.
 - Si vous êtes arrivé à cet écran et que vous êtes retourné pour modifier quelque chose à propos de vos champs, vous devrez peut-être recharger les données pour les tenir à jour en fonction de vos changements. Pour effectuer le rechargement, cliquez sur « **Recharger les données de l'écran précédent** » dans le coin supérieur gauche de la vue.
 
-- Vous pouvez modifier la façon dont l'écran affiche les rendements de vos champs à l'aide du menu déroulant à côté de « **Méthode d'attribution du rendement** » **(la valeur par défaut est « Rendement moyen »).**
+- Vous pouvez modifier la façon dont l'écran affiche les rendements de vos champs à l'aide du menu déroulant à côté de « **Méthode d'attribution du rendement** » **(la valeur par défaut est « Données sur une petite superficie »).**
 
-- Comme pour les autres grilles de Holos, vous pouvez trier et filtrer chaque colonne affichée. Tout ce qui se trouve à droite de la colonne Rendement peut être modifié à la main.
+- Comme pour les autres grilles de Holos, vous pouvez trier et filtrer chaque colonne affichée. Les cellules que vous pouvez modifier à la main dépendent de la culture et de la **Méthode d'attribution du rendement** : les cellules blanches sont des valeurs que vous saisissez, et les cellules grises sont calculées par Holos.
 
 <br>
 <p align="center">
