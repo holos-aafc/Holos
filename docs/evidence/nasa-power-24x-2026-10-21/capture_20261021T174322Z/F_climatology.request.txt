@@ -1,0 +1,29 @@
+Description: NASA POWER's own climatology for the same point, for comparison.
+Request URL: https://power.larc.nasa.gov/api/temporal/climatology/point?parameters=PRECTOTCORR,PRECTOTCORR_SUM&community=AG&longitude=-114.08203125&latitude=53.9125034103343&format=JSON
+Captured (UTC): 2026-10-21T17:43:25.471220+00:00
+Elapsed: 0.3 s
+HTTP: 200 OK
+
+Response headers:
+Content-Type: application/json
+Content-Length: 1095
+Connection: close
+X-Amz-Cf-Pop: SEA900-P9
+Date: Wed, 21 Oct 2026 17:43:25 GMT
+x-objects-time: 0.003
+x-amzn-RequestId: ff877523-f644-4a69-833f-75ad7745d132
+x-process-time: 0.03
+content-disposition: inline; filename=POWER_Point_Climatology_Climatology_2001_2025_053d91N_0114d08W_LST.json
+x-amzn-Remapped-content-length: 1095
+x-data-sources: merra2,power
+content-language: en-US
+x-app-name: climatology
+x-archive-time: 0.158
+x-amz-apigw-id: Fmv1sFj1vHcEV0w=
+x-app-version: v2.10.1
+x-service-time: 0.192
+X-Amzn-Trace-Id: Root=1-6ad8f9bd-6c46230f0278de56656a4bb0;Parent=46d9d9f46f566024;Sampled=0;Lineage=1:b6548d5a:0
+Via: 1.1 2772a76c066120d1905e8bfcd08c4d1c.cloudfront.net (CloudFront), 1.1 dea0b5e705fff834db8ae3992ea09cfa.cloudfront.net (CloudFront)
+X-Cache: Miss from cloudfront
+X-Amz-Cf-Pop: SEA900-P9
+X-Amz-Cf-Id: dRumrwnB6BkVC3IBaybOaW8y9sFIUp3XbAulB22yHKeOEObr71TntA==

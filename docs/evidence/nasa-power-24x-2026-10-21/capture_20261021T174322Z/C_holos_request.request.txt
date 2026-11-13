@@ -1,0 +1,29 @@
+Description: The request Holos makes: Holos's six parameters, 1981 to today.
+Request URL: https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M,PRECTOTCORR,RH2M,ALLSKY_SFC_SW_DWN,T2M_MIN,T2M_MAX&community=AG&longitude=-114.08203125&latitude=53.9125034103343&start=19810101&end=20261021&format=JSON
+Captured (UTC): 2026-10-21T17:43:23.432501+00:00
+Elapsed: 1.3 s
+HTTP: 200 OK
+
+Response headers:
+Content-Type: application/json
+Content-Length: 1675082
+Connection: close
+X-Amz-Cf-Pop: SEA900-P9
+Date: Wed, 21 Oct 2026 17:43:24 GMT
+x-objects-time: 0.096
+x-amzn-RequestId: 0fa7a72e-fada-4528-9964-2f5a22ca2951
+x-process-time: 0.02
+content-disposition: inline; filename=POWER_Point_Daily_19810101_20261021_053d91N_0114d08W_LST.json
+x-amzn-Remapped-content-length: 1675082
+x-data-sources: syn1deg,flashflux,srb,geosit,merra2,power
+content-language: en-US
+x-app-name: daily
+x-archive-time: 0.835
+x-amz-apigw-id: Fmv1YEnLvHcEMMQ=
+x-app-version: v2.10.0
+x-service-time: 0.953
+X-Amzn-Trace-Id: Root=1-6ad8f9bb-4a8bc092216616f147ae0ae3;Parent=3c6f0b6369660cf1;Sampled=0;Lineage=1:e29b8757:0
+Via: 1.1 b2b215a89cc2734b2940e2eb59ea4bd0.cloudfront.net (CloudFront), 1.1 38842c146ccd8f527d2de72671759d96.cloudfront.net (CloudFront)
+X-Cache: Miss from cloudfront
+X-Amz-Cf-Pop: SEA900-P9
+X-Amz-Cf-Id: MlfWuNiJ-a_B21k2iV7IiJeJfpmy0UDZrK2dgzWvurbkfXUzR7Zp8g==
