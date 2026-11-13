@@ -2296,7 +2296,7 @@ The shelterbelt timeline works similarly to the farm crop timeline. The timeline
 	-	 The data is available in other views using the exact same functionality across each instance.
 -	If you have come to this screen and then gone back to change something about your fields then you may have to reload the data to keep it up to date with your changes.  To accomplish the reload click “**Reload Data From Previous Screen**” in the upper left corner of the view.   
 -	You can change how the screen reports the yields of your fields with the drop-down menu beside “**Yield Assignment Method**” **(default is “Small area data”).**
--	Like other grids in Holos you can sort and filter each column shown.  Anything to the right of the Yield column can be edited by hand.
+-	Like other grids in Holos you can sort and filter each column shown. Which cells you can edit by hand depends on the crop and on the **Yield Assignment Method** — see **Values Holos calculates for you** below.
 
 <br>
 <p align="center">
@@ -2325,7 +2325,7 @@ The **Yield Assignment Method** drop-down menu controls where Holos gets the yie
 -	**Small area data** — *(default)* Uses Small Area Data (SAD) yields published by Statistics Canada at [open.canada.ca](https://open.canada.ca/data/en/dataset/65f1cde1-95e0-4a1d-9a1a-c45b2f83a351). SAD yields are available for most crop types and locations in Canada and are a good starting point if you do not have measured yields for your own farm. For silage crops that do not have SAD data available, Holos falls back to default silage yields.
 -	**Average Yield** — Takes the average of the yields across all years of the selected field's rotation and assigns that same average value to every year. Pick this option if you want a single uniform yield across the rotation.
 -	**Input file** — Reads yield values from a CSV file that you provide. Pick this option if you already have measured yields stored in a spreadsheet. See the **Load an Input File** section below for the required file format.
--	**Custom Yield** — Lets you enter your own yield value for each year directly in the details grid, and Holos will not overwrite what you type. Note that a hay harvest you enter sets the yield for that year under *every* method, this one included — see **Perennial Fields: Harvests, Grazing and Yields** below.
+-	**Custom Yield** — Lets you enter your own yield value for each year directly in the details grid, and Holos will not overwrite what you type. Years you leave alone keep the value that was already in the cell when you chose this method, so you only need to type the years you have measurements for. The method applies to every field on the farm. For a perennial, type the fresh standing crop at the crop's moisture content (80% by default), not the weight of the baled hay: Holos reads the number at that moisture, so a baled-hay weight would credit the field with roughly a quarter of the dry matter it grew. Hover the cell to see the dry-matter equivalent of the value you typed. Note that a hay harvest you enter sets the yield for that year under *every* method, this one included — see **Perennial Fields: Harvests, Grazing and Yields** below.
 
 <br>
 
@@ -2337,7 +2337,7 @@ Start by asking whether animals grazed the field in the year you are looking at.
 
 <br>
 <p align="center">
- <img src="../../Images/UserGuide/en/chapter8/figure8-2.svg" alt="Decision diagram. If animals grazed the field this year, grazing decides the yield and neither the Yield Assignment Method nor a hay cut sets it, though a cut is still subtracted from the carbon. If they did not, a cut decides the yield if there is one, otherwise the Yield Assignment Method supplies it, and if nothing was cut either then all of the product is returned to the soil." width="900"/>
+ <img src="../../Images/UserGuide/en/chapter8/figure8-2.svg" alt="Decision diagram. If animals grazed the field this year, Holos works the yield out from what the animals ate, or under Custom Yield uses the yield you type as the whole standing crop; a hay cut never sets it, though it is still subtracted from the carbon. If they did not, a cut decides the yield if there is one, otherwise the Yield Assignment Method supplies it, and if nothing was cut either then all of the product is returned to the soil." width="900"/>
     <br>
     <em>
 		Figure 8.2: Which situation the field is in
@@ -2352,7 +2352,7 @@ Start by asking whether animals grazed the field in the year you are looking at.
 More than one of these can be true for the same field, so Holos applies them in a fixed order. The first one that matches decides where the yield comes from:
 
 1.	**You typed over the yield** using **Advanced input editing**. Your value stands and nothing recalculates it. The cell is amber.
-2.	**The year is grazed.** Grazing decides the yield, and the **Yield Assignment Method** does not apply to that year. This holds under every method. A hay harvest entered on the same field does not set the yield for a grazed year, because a grazed field's yield stands for the whole standing crop rather than only the part that was baled.
+2.	**The year is grazed.** Holos works the yield out from what the animals ate, under every method except **Custom Yield**. Under **Custom Yield** the yield you type is used instead, and is taken to be the whole standing crop — what the animals ate plus what they left. Either way, a hay harvest entered on the same field does not set the yield for a grazed year, because a grazed field's yield stands for the whole standing crop rather than only the part that was baled.
 3.	**The year has a hay harvest.** The harvest you entered becomes the yield — under every method, not only Custom Yield. A recorded cut is the most direct measurement of what left that field that year.
 4.	**None of these.** The yield comes from the **Yield Assignment Method** you chose, or from the value you typed under Custom Yield. Its job is to fill the years you have no measurement for.
 
@@ -2390,7 +2390,7 @@ For a year with **no grazing**, the two figures below show the same two rules as
 
 ### If animals graze the field
 
--	Holos calculates the yield from the forage the animals ate, divided by the utilization rate for the grazing system — not from the yield assignment method, and not from a hay harvest if you entered one. The animals' management periods decide which years this applies to, so a field grazed in one year is not treated as grazed in the others.
+-	Holos calculates the yield from the forage the animals ate, divided by the utilization rate for the grazing system — not from the yield assignment method, and not from a hay harvest if you entered one. Under **Custom Yield** it uses the yield you type instead, taken to be the whole standing crop. The animals' management periods decide which years this applies to, so a field grazed in one year is not treated as grazed in the others.
 -	The percentage of product returned to soil is what the animals left behind, which is 100% minus the utilization rate.
 -	The **Utilization (%)** column on the Grazing tab holds that rate, and you can change it there for a single grazing entry. Holos fills it in from the crop type — 60% for tame grass, 40% for native rangeland, 50% for seeded grassland — or from your own rate if you set one under **Grazing** in the **User Settings** screen.
 -	Because the yield is the forage eaten *divided by* this rate, a rate much lower than the crop's default produces a very large yield. If a field's yields look implausible, check this column first. **Grazing utilization rate** in the **Reset Defaults** screen puts every grazing entry on the farm back to the default in one step.
@@ -2466,9 +2466,12 @@ Perennial roots are handled differently from the above-ground crop, and you do n
 
 ### Values Holos calculates for you
 
--	On the Details screen, **white cells are values you enter** and **grey cells are calculated by Holos**. For a perennial that is grazed, or that has a hay harvest under the Custom Yield method, the yield, plant carbon in product, and percentage of product returned to soil are all calculated.
+-	On the Details screen, **white cells are values you enter** and **grey cells are calculated by Holos**:
+	-	**Yield** is yours to type only under the **Custom Yield** method. Even then, a year with a hay harvest takes its yield from the harvest. A grazed year stays yours to type under Custom Yield, and the value is taken to be the whole standing crop.
+	-	**Plant carbon in product** is always calculated.
+	-	**Percentage of product returned to soil** is calculated for perennials, and yours to enter for annual crops.
 -	Hover a yield cell to see where its number came from — the harvest you entered, grazing, a regional estimate, or a value you typed.
--	To change a calculated value, turn on **Advanced input editing**. The cell turns amber to show that your value now overrides the calculation and will not be recalculated. **Reset overrides** restores the calculated values.
+-	To change a calculated value, turn on **Advanced input editing** (a checkbox on the Details screen). The setting applies to every farm, not only the one you have open. The cell turns amber to show that your value now overrides the calculation and will not be recalculated — not by the Yield Assignment Method, a hay harvest, or grazing. **Reset overrides** restores the calculated values.
 
 <br>
 
