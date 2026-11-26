@@ -218,8 +218,6 @@ The cow-calf operation (defined later on) relies on native pasture for the summe
 
 # Beef Finishing Operation
 
-Click on **View** menu item and uncheck the **Hide List of Available Components** option.
-
 Adding animal components follows the exact same approach that was used for land management components. Under the **Beef Production** category in the available components, drag and drop one **Beef Finisher** component to the **My farm** section on the right. Both **Heifers** and **Steers** will be used in our example under **Step 1**. (Users can remove a group by clicking the **X** icon to the right of the Group name if that entry if not needed).
 
 <br>
