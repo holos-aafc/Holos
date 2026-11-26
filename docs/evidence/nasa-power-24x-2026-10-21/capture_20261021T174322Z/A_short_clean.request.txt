@@ -1,0 +1,29 @@
+Description: Short request, the #499 original: 10 days of January 2020.
+Request URL: https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR&community=AG&longitude=-114.08203125&latitude=53.9125034103343&start=20200101&end=20200110&format=JSON
+Captured (UTC): 2026-10-21T17:43:22.388252+00:00
+Elapsed: 0.5 s
+HTTP: 200 OK
+
+Response headers:
+Content-Type: application/json
+Content-Length: 646
+Connection: close
+X-Amz-Cf-Pop: SEA900-P9
+Date: Wed, 21 Oct 2026 17:43:22 GMT
+x-objects-time: -0.001
+x-amzn-RequestId: e406ee79-be7c-4439-9d75-907786a07b57
+x-process-time: 0.01
+content-disposition: inline; filename=POWER_Point_Daily_20200101_20200110_053d91N_0114d08W_LST.json
+x-amzn-Remapped-content-length: 646
+x-data-sources: merra2
+content-language: en-US
+x-app-name: daily
+x-archive-time: 0.073
+x-amz-apigw-id: Fmv1QHC1vHcEH5Q=
+x-app-version: v2.10.0
+x-service-time: 0.083
+X-Amzn-Trace-Id: Root=1-6ad8f9ba-09fea19c607c128f2bfb0f45;Parent=78ab8fa5e44528b9;Sampled=0;Lineage=1:e29b8757:0
+Via: 1.1 b2b215a89cc2734b2940e2eb59ea4bd0.cloudfront.net (CloudFront), 1.1 7f26c41dda80bd7d50ccec2be87c9c3e.cloudfront.net (CloudFront)
+X-Cache: Miss from cloudfront
+X-Amz-Cf-Pop: SEA900-P9
+X-Amz-Cf-Id: 44pV1iQjwP4cwpJInQjU7QJyXwcKvbq2QE5RBpLSUsGJQGmREtyl0Q==
